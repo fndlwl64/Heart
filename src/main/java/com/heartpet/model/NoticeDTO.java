@@ -1,10 +1,8 @@
 package com.heartpet.model;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter @Setter
+@Data
 public class NoticeDTO {
     private int notice_no;
     private String notice_title;

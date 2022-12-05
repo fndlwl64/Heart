@@ -2,48 +2,36 @@ package com.heartpet.project;
 
 import com.heartpet.action.NoticeDAO;
 import com.heartpet.model.NoticeDTO;
-import com.heartpet.model.AnimalDTO;
 import com.heartpet.action.DogDAO;
-import com.heartpet.model.DogDTO;
 import com.heartpet.action.QnaDAO;
 import com.heartpet.model.QnaDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 @Controller
 public class UserController {
 	
-    //DOG
+	@Autowired
     private DogDAO dogDAO;
-    @Autowired
-    public void setDogDAO(DogDAO dogDAO){
-        this.dogDAO = dogDAO;
-    }
 
     @RequestMapping("/jsptest")
     public String jsptest(Model model){
         model.addAttribute("list",dogDAO.list());
         return "jsptest";
     }
-
+    
+    @Autowired
     private QnaDAO qnaDAO;
 
-    @Autowired
-    public void setQnaDAO(QnaDAO qnaDAO) {
-        this.qnaDAO = qnaDAO;
-    }
 
     @Autowired
-    NoticeDAO noticedao;
+    private NoticeDAO noticedao;
 
 
     @RequestMapping("/user_dog_list")
@@ -56,33 +44,29 @@ public class UserController {
     public String dog_insert() { return "animal/user_animal_insert"; }
 
     //파일 업로드 테스트
-    @RequestMapping("/user_animal_insert")
-    public String dog_insert_ok(@RequestPart List<MultipartFile> files, AnimalDTO dto,
-                                @RequestParam(value = "tag") String tag, HttpServletRequest request) throws IOException {
-
-        //path 설정 및 폴더 생성
-        String rootPath = System.getProperty("user.dir");
-        String uploadPath = "\\src\\main\\resources\\static\\upload";
-        String path = rootPath + uploadPath;
-
-        File folder = new File(path);
-
-        List<DogDTO> list = dogDAO.list();
-        for(DogDTO d : list){
-            System.out.println(d.toString());
-        }
-
-        if(!folder.exists()){ // 폴더 생성
-            folder.mkdir();
-        }
-        //tag에 따라서 강아지 또는 고양이 insert 문 사용
-
-        for (MultipartFile file : files) {
-            File toFile = new File(path+"\\"+file.getOriginalFilename());
-            file.transferTo(toFile);
-        }
-        return "redirect:/";
-    }
+	/*
+	 * @RequestMapping("/user_animal_insert") public String
+	 * dog_insert_ok(@RequestPart List<MultipartFile> files, AnimalDTO dto,
+	 * 
+	 * @RequestParam(value = "tag") String tag, HttpServletRequest request) throws
+	 * IOException {
+	 * 
+	 * //path 설정 및 폴더 생성 String rootPath = System.getProperty("user.dir"); String
+	 * uploadPath = "\\src\\main\\resources\\static\\upload"; String path = rootPath
+	 * + uploadPath;
+	 * 
+	 * File folder = new File(path);
+	 * 
+	 * List<DogDTO> list = dogDAO.list(); for(DogDTO d : list){
+	 * System.out.println(d.toString()); }
+	 * 
+	 * if(!folder.exists()){ // 폴더 생성 folder.mkdir(); } //tag에 따라서 강아지 또는 고양이 insert
+	 * 문 사용
+	 * 
+	 * for (MultipartFile file : files) { File toFile = new
+	 * File(path+"\\"+file.getOriginalFilename()); file.transferTo(toFile); } return
+	 * "redirect:/"; }
+	 */
 
     @RequestMapping("/user_support")
     public String user_support() {

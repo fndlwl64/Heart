@@ -1,11 +1,9 @@
 package com.heartpet.action;
 
 import com.heartpet.model.QnaDTO;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-@Mapper
 public interface QnaDAO {
     public List<QnaDTO> listQna();
     public int insertQna(QnaDTO dto);

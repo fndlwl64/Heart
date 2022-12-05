@@ -1,7 +1,5 @@
 package com.heartpet.action;
 
-import com.heartpet.model.UserDTO;
-
 public interface UserDAO {
 
     public String idCheck(String id);
