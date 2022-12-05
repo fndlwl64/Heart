@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="../include/user_header.jsp" />
-<link rel="stylesheet" href="resources/css/user_review.css" />
+<link rel="stylesheet" href="${path}/resources/css/user_review.css" />
 <link rel="short icon" href="#" />
 
 <%-- 리뷰 --%>
@@ -23,7 +24,7 @@
         <div class="row">
             <div class="col-8 space"></div>
             <div class="col-1 review_order d-flex">
-                <select class="form-select form-select-sm w-75" name="review_order" id="">
+                <select class="form-select form-select-sm w-75" name="review_order">
                     <option selected="selected" value="date_desc">최신순</option>
                     <option value="hit_desc">조회수순</option>
                     <option value="no_desc">번호순</option>
@@ -43,8 +44,8 @@
                <div class="row row-cols-1 row-cols-md-3 g-4">
                    <div class="col">
                        <div class="card h-100">
-                           <a href="/user_review_content">
-                               <div class="card-image" style="background-image: url('/image/heartpet_logo.png');"></div>
+                           <a href="${path}/user_review_content">
+                               <div class="card-image" style="background-image: url('${path}/resources/image/heartpet_logo.png');"></div>
                                <div class="card-body">
                                    <%-- title replace 예정 -> 서블릿에서... 아마도 --%>
                                    <div class="title-body">
@@ -57,8 +58,8 @@
                    </div>
                    <div class="col">
                        <div class="card h-100">
-                           <a href="/user_review_content">
-                               <div class="card-image" style="background-image: url('/image/dog.png');"></div>
+                           <a href="${path}/user_review_content">
+                               <div class="card-image" style="background-image: url('${path}/resources/image/dog.png');"></div>
                                <div class="card-body">
                                    <div class="title-body">
                                        <h5 class="card-title">강아지 포터를 입양한 후기 길이 테스트용 만약 이것보다 길이가 더 길어지면 어떻게 될간아러나어라넝라</h5>
@@ -70,8 +71,8 @@
                    </div>
                    <div class="col">
                        <div class="card h-100">
-                           <a href="/user_review_content">
-                               <div class="card-image" style="background-image: url('/image/dog.png');"></div>
+                           <a href="${path}/user_review_content">
+                               <div class="card-image" style="background-image: url('${path}/resources/image/dog.png');"></div>
                                <div class="card-body">
                                    <div class="title-body">
                                        <h5 class="card-title">강아지 포터를 입양한 후기 길이 테스트용 만약 이것보다 길이가 더 길어지면 어떻게 될간아러나어라넝라</h5>
@@ -83,8 +84,8 @@
                    </div>
                    <div class="col">
                        <div class="card h-100">
-                           <a href="/user_review_content">
-                               <div class="card-image" style="background-image: url('/image/potter.jpg');"></div>
+                           <a href="${path}/user_review_content">
+                               <div class="card-image" style="background-image: url('${path}/resources/image/potter.jpg');"></div>
                                <div class="card-body">
                                    <div class="title-body">
                                        <h5 class="card-title">울애긔 포터</h5>
@@ -106,7 +107,7 @@
         <div class="row">
             <div class="col-4 space"></div>
             <div class="col-4 search">
-                <form method="post" action="/search">
+                <form method="post" action="${path}/search">
                     <input type="hidden" name="page" value="${ paging.page }" />
                     <select name="field" class="form-select d-inline align-middle w-25">
                         <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>

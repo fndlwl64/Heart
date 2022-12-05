@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="../include/user_header.jsp" />
-<link rel="stylesheet" href="resources/css/user_qna.css" />
+<link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
 <link rel="short icon" href="#" />
 
 <%-- 글쓰기 --%>
@@ -16,7 +17,7 @@
     </div>
 
     <div>
-        <form action="/user_qna_insert_ok" method="post" enctype="multipart/form-data">
+        <form action="${path}/user_qna_insert_ok" method="post" enctype="multipart/form-data">
         <table class="table align-middle">
             <tr class="border-top">
                 <th class="table-light col-1">카테고리</th>
