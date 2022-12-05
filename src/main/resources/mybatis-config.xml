@@ -6,7 +6,6 @@
 	
 	<!-- Alias 설정 : 별칭 설정 -->
 	<typeAliases>
-		<typeAlias alias="dao" type="com.heartpet.model.BoardDAO"/>
 	</typeAliases>	
 
 </configuration>

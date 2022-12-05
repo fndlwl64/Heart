@@ -1,6 +1,5 @@
 package com.heartpet.action;
 
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserDAOImpl implements UserDAO {
 

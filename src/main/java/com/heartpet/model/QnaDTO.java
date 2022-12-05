@@ -1,10 +1,8 @@
 package com.heartpet.model;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter @Setter
+@Data
 public class QnaDTO {
 
     private int board_no;
