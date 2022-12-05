@@ -1,6 +1,5 @@
 package com.heartpet.action;
 
-import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.DogDTO;
 
 import java.util.List;
