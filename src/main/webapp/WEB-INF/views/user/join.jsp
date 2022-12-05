@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<link rel="stylesheet" href="css/sign_in_up.css">
-<script src="js/signin_up.js"></script>
+<link rel="stylesheet" href="resources/css/sign_in_up.css">
+<script src="resources/js/signin_up.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <jsp:include page="../include/user_header.jsp" />
 
     <div class="container">
+    
 
         <div class="title">
         <h3> HeartPet 회원가입 </h3>

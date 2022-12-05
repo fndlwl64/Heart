@@ -5,8 +5,7 @@
 
 <body>
 <div class="d-flex justify-content-center">
-    <form action="/user_dog
-    _insert" method="post" enctype="multipart/form-data">
+    <form action="/user_dog_insert" method="post" enctype="multipart/form-data">
         <table class="table">
             <tr>
                 <th>종류</th>

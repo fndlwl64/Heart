@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="qList" value="${ qnaList }" />
 <jsp:include page="../include/user_header.jsp" />
-<link rel="stylesheet" href="/css/user_qna.css" />
+<link rel="stylesheet" href="resources/css/user_qna.css" />
 <link rel="short icon" href="#" />
 
 
