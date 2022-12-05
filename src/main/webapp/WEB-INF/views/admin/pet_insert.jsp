@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <jsp:include page="../include/admin_header.jsp" />
+<script src="resources/js/admin.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
-<script src="/js/admin.js"></script>
 <body>
 <br><br>
 <div class="div1" align="center">
