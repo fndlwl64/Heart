@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	
+	<!-- Alias 설정 : 별칭 설정 -->
+	<typeAliases>
+		<typeAlias alias="dao" type="com.heartpet.model.BoardDAO"/>
+	</typeAliases>	
+
+</configuration>
+
+
