@@ -37,11 +37,11 @@
                                         로그인
                                     </a>
                                 </li>
-                                <li><a href="/join">회원가입</a></li>
+                                <li><a href="${pageContext.request.contextPath}/join">회원가입</a></li>
                             </c:if>
                             <c:if test="${!empty list}">
-                                <li><a href="/mypage">마이페이지</a></li>
-                                <li><a href="/user_logout">로그아웃</a></li>
+                                <li><a href="${pageContext.request.contextPath}/mypage">마이페이지</a></li>
+                                <li><a href="${pageContext.request.contextPath}/user_logout">로그아웃</a></li>
                             </c:if>
                         </ul>
                     </div>
@@ -49,18 +49,18 @@
                 <div class="nav-bar justify-content-center">
                     <div class="nav-links">
                         <ul>
-                            <li><a href="/user_notice">공지&안내</a></li>
+                            <li><a href="${pageContext.request.contextPath}/user_notice">공지&안내</a></li>
                             <%-- 무료입소 부분 확인 필요 --%>
                             
-                            <li><a href="/user_animal_insert">무료입소</a></li>
+                            <li><a href="${pageContext.request.contextPath}/user_animal_insert">무료입소</a></li>
 
                             <li class="dropdown">
                                 <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     무료입양
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/user_dog_list">강아지보기</a></li>
-                                    <li><a class="dropdown-item" href="/user_cat_list">고양이보기</a></li>
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user_dog_list">강아지보기</a></li>
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user_cat_list">고양이보기</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -68,8 +68,8 @@
                                     문의하기
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/user_fnq_list">FAQ</a></li>
-                                    <li><a class="dropdown-item" href="/user_qna_list">문의글</a></li>
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user_fnq_list">FAQ</a></li>
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user_qna_list">문의글</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -77,11 +77,11 @@
                                     입양후기
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="/user_review_list">강아지리뷰</a></li>
-                                    <li><a class="dropdown-item" href="/user_review_list">고양이리뷰</a></li>
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user_review_list">강아지리뷰</a></li>
+                                    <li><a class="dropdown-item" href="${pageContext.request.contextPath}/user_review_list">고양이리뷰</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/user_support">후원하기</a></li>
+                            <li><a href="${pageContext.request.contextPath}/user_support">후원하기</a></li>
                         </ul>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                             <ul>
                                 <li><a data-bs-toggle="modal" data-bs-target="#findId">아이디찾기</a></li>
                                 <li><a data-bs-toggle="modal" data-bs-target="#findPwd">비밀번호찾기</a></li>
-                                <li><a href="/join">회원가입</a></li>
+                                <li><a href="${pageContext.request.contextPath}/join">회원가입</a></li>
                             </ul>
                         </div>
                         <div class="modal-footer">
@@ -125,7 +125,7 @@
                             <h1 class="modal-title fs-5" id="findIdLabel">HeartPet 로그인</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form class="login_form" method="post" action="/user_find_id">
+                        <form class="login_form" method="post" action="${pageContext.request.contextPath}/user_find_id">
                             <div class="modal-body">
                                 <input class="login_text" name="user_name" placeholder="이름">
                                 <span class="name_check"></span>
