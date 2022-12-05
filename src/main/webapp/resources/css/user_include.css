@@ -1,0 +1,198 @@
+. {
+    margin: 0px;
+    padding: 0px;
+    background-color: white;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 17px;
+
+}
+
+/* header-logo */
+.wrap .h-wrap .header-logo {
+    border: 0px;
+    text-align: center;
+    display: grid;
+    padding: 20px;
+}
+
+/* header-space */
+.wrap .h-wrap .header-logo .space {
+}
+
+/* header-image 중앙 이미지 */
+.wrap .h-wrap .header-logo .header-image {
+}
+
+.wrap .h-wrap .header-logo .header-image img {
+    height: 100px;
+}
+
+/* header-nav */
+.wrap .h-wrap .header-logo .header-nav {
+    justify-content: flex-end;
+}
+
+.wrap .h-wrap .header-logo .header-nav ul {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+}
+
+.wrap .h-wrap .header-logo .header-nav ul li {
+    list-style: none;
+}
+
+.wrap .h-wrap .header-logo .header-nav ul li a {
+    text-decoration: none;
+    color: gray;
+    padding: 1rem 1.5rem;
+    display: block;
+}
+
+.wrap .h-wrap .header-logo .header-nav ul li a:hover {
+    color: black;
+}
+
+.wrap .h-wrap .header-logo a {
+}
+
+
+/* nav-bar */
+.wrap .h-wrap .nav-bar {
+    display: grid;
+    align-items: center;
+}
+
+.wrap .h-wrap .nav-bar .nav-links {
+}
+
+.wrap .h-wrap .nav-bar .nav-links > ul {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+}
+
+.wrap .h-wrap .nav-bar .nav-links > ul > li {
+    list-style: none;
+}
+
+.wrap .h-wrap .nav-bar .nav-links > ul > li > a {
+    text-decoration: none;
+    color: black;
+    padding: 1rem 3rem;
+    display: block;
+    border-bottom: 1px solid white;
+
+}
+
+.wrap .h-wrap .nav-bar .nav-links > ul > li > a:hover {
+    color: gray;
+    border-bottom: 1px solid lightgray;
+}
+
+.wrap .h-wrap .modal .modal-content .modal-body {
+    margin: auto;
+}
+
+.wrap .h-wrap .modal .modal-content .modal-body .login_text {
+    display: block;
+    margin: auto;
+    width: 200px;
+    outline: none;
+    padding: 2%;
+    padding-left: 4%;
+    margin-bottom: 3%;
+    font-size: 15px;
+}
+
+.wrap .h-wrap .modal .modal-content .modal-body .login_btn {
+    background-color: #000000;
+    color: #ffffff;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    width: 200px;
+}
+
+.wrap .h-wrap .modal .modal-content .modal-body > ul {
+    padding-left: 0;
+    margin-bottom: 0;
+    margin-top: 3%;
+}
+
+.wrap .h-wrap .modal .modal-content .modal-body > ul > li {
+    list-style: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 0 20px;
+    font-weight: bold;
+}
+
+.wrap .h-wrap .modal .modal-content .modal-body > ul > li > a {
+    text-decoration: none;
+    color: black;
+}
+
+.wrap .h-wrap .modal .modal-content .modal-body > ul > li > a:hover {
+    color: #FD86B0;
+}
+
+
+.wrap .h-wrap .modal .modal-content .modal-footer {
+    justify-content: center;
+}
+
+/* footer */
+.footer {
+    display: grid;
+    background-color: lightgray;
+    font-size: 13px;
+    color: #545a62;
+}
+
+.footer .row {
+    padding: 1rem;
+}
+
+.footer .footer-info {
+
+}
+
+.footer .footer-info ul {
+    margin: 0;
+    padding: 0;
+}
+
+.footer .footer-info p {
+    margin: 0;
+
+}
+
+.footer .footer-info ul li {
+    display: inline-block;
+    list-style: none;
+
+}
+
+.footer .footer-info ul li a {
+    font-size: 12px;
+    text-decoration: none;
+    color: #3C4048;
+    font-weight: 450;
+    font-size: 14px;
+
+}
+
+.footer .footer-info ul li a:hover {
+    color: gray;
+}
+
+.footer .footer-info span {
+}
+
+.footer .footer-info .copyright {
+}
+

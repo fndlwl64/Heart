@@ -1,0 +1,80 @@
+/* 전체 div */
+.container {
+    text-align: center;
+    margin: auto;
+    width: 85%;
+}
+
+/* admin/user_content.jsp 테이블 태그 */
+.container .userinfo {
+    width: 50%;
+    margin: auto;
+}
+/* admin/cat&dog_content.jsp 테이블 태그 */
+.container .petinfo {
+    width: 60%;
+    margin: auto;
+}
+/* admin/notice_content.jsp  */
+.container .noticeinfo {
+    width: 60%;
+    margin: auto;
+}
+
+/* admin/_view.jsp 목록 버튼 */
+.container .listbtn {
+    background-color: #000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* admin/_list.jsp 검색 결과 테이블 태그 */
+.container .searched_list {
+    width: 75%;
+    text-align: center;
+    margin: auto;
+}
+
+/* admin/ _list.jsp -> 검색 폼 */
+.container .search_form {
+}
+
+/* admin/ _list.jsp -> 검색 폼 div 태그 */
+.container .search_form .form_box {
+    border: 1px solid #545a62;
+    width: 60%;
+    margin: auto;
+    padding: 2%;
+    display: inline-block;
+    border-radius: 5px;
+}
+/* admin/ _list.jsp -> 검색 폼 div 태그 검색 버튼 영역 */
+.container .search_form .form_box .form_box_search {
+    display: block;
+}
+/* admin/ _list.jsp -> 검색 폼 div 태그 검색 버튼 */
+.container .search_form .form_box .btn.searchbtn {
+    background: url(../image/ico-search.png) no-repeat 7px center;
+    background-color: #6c757d;
+    color: white;
+    padding-left: 25px;
+}
+/* admin/ _list.jsp -> 검색 폼 div 태그 '중성화' */
+.container .search_form .form_box .Dneutered{
+    padding: 0 3%;
+}
+/* admin/ _list.jsp -> 검색 폼 div 태그 '크기' */
+.container .search_form .form_box .size {
+    padding: 0 1%;
+}
+
+/* admin/ _list.jsp -> 검색 폼 밑 div */
+.container .lists {}
+
+/* admin/ _list.jsp -> 검색 폼 밑 테이블 a 링크 밑줄 제거 */
+.container .lists .table td a {
+    text-decoration: none;
+}
+
+

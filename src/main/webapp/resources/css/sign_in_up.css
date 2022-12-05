@@ -1,0 +1,46 @@
+.container {
+    text-align: center;
+}
+
+.container .title {
+    font-weight: bold;
+    border-bottom: 2px solid #545a62;
+    width: 30%;
+    margin: auto;
+    margin-bottom: 1%;
+}
+
+.container .join_div {
+    width: 80%;
+    margin: auto;
+}
+
+.container .join_div .join_form {
+    width: 60%;
+    margin: auto;
+}
+
+.container .join_div .join_form .join_table {
+    margin: auto;
+}
+
+.container .join_div .join_form .join_table th {
+    text-align: left;
+}
+
+.container .join_div .join_form .text {
+    margin: 5px;
+    border: none;
+    border-bottom: 1px solid #6c757d;
+}
+
+.container .join_div .join_form .text:focus {
+    outline: none;
+}
+
+.container .join_div .join_form .search_zipcode {
+    font-size: 14px;
+    border-radius: 7px;
+    border: none;
+    padding: 5px;
+}

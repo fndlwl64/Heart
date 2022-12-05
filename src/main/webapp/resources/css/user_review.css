@@ -1,0 +1,192 @@
+.review-section {
+    display: grid;
+}
+
+.review-section .space {
+}
+
+.review-section .title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.review-section .title h2 {
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* 정렬 */
+.review_section .review_order {
+    justify-content: right;
+    margin-bottom: 1rem;
+}
+
+.review-section .title h6 {
+    font-weight: bold;
+}
+
+/* review_list - review-card */
+.review-section .review-card a {
+    text-decoration: none;
+    color: black;
+    overflow: hidden;
+}
+
+.review-section .review-card .card {
+    border: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.review-section .review-card .card .card-image {
+    background-repeat: no-repeat;
+    background-color: white;
+    background-position: center;
+    background-size: cover;
+    height: 245px;
+}
+
+.review-section .review-card .card-body {
+    height: 90px;
+}
+
+.review-section .review-card .card-body .card-title {
+    font-size: 18px;
+}
+.review-section .review-card .card-body h7 {
+    font-size: 11px;
+    color: #545a62;
+}
+
+.card-body .title-body {
+    height: 42px;
+}
+
+.space-add {
+    height: 1rem;
+}
+
+/* review-content */
+.review-content {
+    width: 50%;
+    margin: auto;
+    padding: 1rem;
+}
+
+.review-content .content-header {
+}
+.review-content .content-header h3 {
+    padding-top: 1rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.review-content .content-header .header-info {
+    font-size: 14px;
+    color: #3C4048;
+}
+
+.review-content .content-header .header-info > ul {
+    list-style: none;
+}
+
+.review-content .content-header .header-info > ul > li {
+    color: dimgray;
+}
+
+.review-content .content-header .header-info .content-hit {
+}
+
+.review-content .content-header .header-info > ul > li > img {
+    width: 50px;
+    height: 50px;
+    clip-path: circle(50% at 50% 50%);
+
+}
+
+.review-content .content-header .header-info > ul > li > a {
+    text-decoration: none;
+}
+
+.review-content .content-header hr {
+    width: 95%;
+    margin: auto;
+}
+
+.header-info #id {
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+}
+
+.header-info #reply {
+    font-size: 16px;
+    color: black;
+    float: right;
+    padding-top: 1rem;
+    padding-right: 2rem;
+}
+
+.review-content .content-body {
+    display: flex;
+    padding: 1rem 2rem;
+    min-height: 400px;
+    max-height: 600px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+.review-content .content-body .review-image {
+    height: 500px;
+    overflow: hidden;
+}
+
+.review-content .content-body .review-image > img {
+    height: 100%;
+}
+
+.review-content .content-body .review-text {
+    text-align: left;
+}
+
+.review-content .content-buttons {
+    text-align: right;
+}
+
+/* review_content - reply */
+.reply-table {
+    width: 100%;
+    margin-bottom: 1rem;
+    text-align: center;
+    font-size: 15px;
+}
+
+#content-reply {
+    text-align: right;
+}
+#content-reply > button {
+    margin-top: 0.5rem;
+}
+
+/* space-add */
+.space-add {
+    height: 2rem;
+}
+
+/* review-insert */
+.insert-table {
+    margin: auto;
+    width: 50%;
+    min-width: 700px;
+    text-align: center;
+    font-size: 15px;
+}
+
+/* btn-insert */
+.review-section .btn-insert {
+    padding-right: 1rem;
+    text-align: right;
+}
+

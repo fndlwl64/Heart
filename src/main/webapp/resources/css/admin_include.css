@@ -1,0 +1,109 @@
+@charset "UTF-8";
+/* include/admin_header.jsp에서 사용하는 css*/
+.div_header .lis {
+	display: inline-block;
+	font-weight: bold;
+	margin-left: 20px;
+	margin-right: 20px;
+	font-size: 17px;
+	color: black;
+}
+
+.div_header .lis a{
+	text-decoration: none;
+	color: black;
+}
+
+.div_header .lis:hover {
+	cursor: pointer;
+	opacity: 50%;
+	text-decoration-line: underline;
+}
+
+.div_header .logo {
+	width: 300px;
+	height: 100px;
+}
+
+.div_header .logo:hover {
+	cursor: pointer;
+}
+/* admin/admin_main을 제외한 나머지 페이지 */
+.div1 {
+	width: 50%;
+	margin: auto;
+}
+
+.div1 .table {
+	width: 800px;
+	text-align: center;
+	background-color: white;
+}
+
+.div1 .table .sp2 {
+	color: black;
+}
+
+.div1 .table .input1 {
+	text-align: center;
+	background-color: white;
+}
+
+.div1 #update_btn {
+	background-color: black;
+	color: white;
+	width: 100px;
+	height: 40px;
+}
+
+.div1 #update_btn:hover {
+	opacity: 80%;
+
+}
+
+.div1 .table .logo {
+	width: 300px;
+	height: 100px;
+}
+
+.div1 .table .preview {
+	width: 100px;
+	height: 100px;
+	border: 0px;
+}
+
+.div1 .table .logo:hover {
+	cursor: pointer;
+	opacity: 80%;
+}
+
+.div1 .div2 .image-upload{
+	display: inline-block;
+}
+
+.div1 .div2 .image-upload .logo {
+	width: 300px;
+	height: 100px;
+}
+
+.div1 .div2 .image-upload .logo:hover {
+	cursor: pointer;
+	opacity: 80%;
+}
+
+.div1 .div2 .preview {
+	width: 100px;
+	height: 100px;
+	margin-left: 100px;
+	margin-right: 100px;
+}
+.div1 .table .image-upload .file_input {
+	display: none;
+}
+.div1 .div2 .image-upload .file_input {
+	display: none;
+}
+
+
+
+

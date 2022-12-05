@@ -1,0 +1,9 @@
+.notice-board .table{
+    width: 60%;
+    text-align: center;
+}
+
+.notice-board .notice_content {
+    text-decoration: none;
+    color: gray;
+}
