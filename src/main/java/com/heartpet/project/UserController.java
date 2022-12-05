@@ -56,7 +56,7 @@ public class UserController {
     public String dog_insert() { return "animal/user_animal_insert"; }
 
     //파일 업로드 테스트
-    @PostMapping("/user_animal_insert")
+    @RequestMapping("/user_animal_insert")
     public String dog_insert_ok(@RequestPart List<MultipartFile> files, AnimalDTO dto,
                                 @RequestParam(value = "tag") String tag, HttpServletRequest request) throws IOException {
 
