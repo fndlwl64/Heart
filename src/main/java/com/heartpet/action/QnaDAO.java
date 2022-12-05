@@ -1,6 +1,6 @@
-package com.heartpet.project.action;
+package com.heartpet.action;
 
-import com.heartpet.project.model.QnaDTO;
+import com.heartpet.model.QnaDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

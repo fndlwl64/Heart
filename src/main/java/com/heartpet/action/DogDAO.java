@@ -1,7 +1,7 @@
-package com.heartpet.project.action;
+package com.heartpet.action;
 
-import com.heartpet.project.model.AnimalDTO;
-import com.heartpet.project.model.DogDTO;
+import com.heartpet.model.AnimalDTO;
+import com.heartpet.model.DogDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

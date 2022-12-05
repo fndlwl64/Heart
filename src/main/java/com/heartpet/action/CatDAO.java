@@ -1,4 +1,4 @@
-package com.heartpet.project.action;
+package com.heartpet.action;
 
 import org.apache.ibatis.annotations.Mapper;
 

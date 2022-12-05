@@ -1,6 +1,6 @@
-package com.heartpet.project.action;
+package com.heartpet.action;
 
-import com.heartpet.project.model.UserDTO;
+import com.heartpet.model.UserDTO;
 
 public interface UserDAO {
 
