@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="qList" value="${ qnaList }" />
 <jsp:include page="../include/user_header.jsp" />
-<link rel="stylesheet" href="resources/css/user_qna.css" />
+<link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
 <link rel="short icon" href="#" />
 
 
@@ -53,7 +54,7 @@
                 <tr>
                     <td>${ list.board_no }</td>
                     <td>${ list.board_category }</td>
-                    <td class="left-align"><a class="d-block qna-a-link" href="/user_qna_content">${ list.board_title }</a></td>
+                    <td class="left-align"><a class="d-block qna-a-link" href="${path}/user_qna_content">${ list.board_title }</a></td>
                     <td>${ list.board_id }</td>
                     <td>${ list.board_title }</td>
                     <td>${ list.board_hit }</td>
@@ -73,7 +74,7 @@
         <div class="row">
             <div class="col-3 space"></div>
             <div class="col-6 title btn-insert">
-                <button type="button" class="btn btn-primary" onclick="location.href='/user_qna_insert'">
+                <button type="button" class="btn btn-primary" onclick="location.href='${path}/user_qna_insert'">
                     <i class="bi bi-pencil"></i> 작성하기</button>
             </div>
             <div class="col-3 space"></div>

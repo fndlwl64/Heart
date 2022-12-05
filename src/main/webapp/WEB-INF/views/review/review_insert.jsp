@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="../include/user_header.jsp" />
-<link rel="stylesheet" href="resources/css/user_review.css" />
+<link rel="stylesheet" href="${path}/resources/css/user_review.css" />
 <link rel="short icon" href="#" />
 
 <%-- 글쓰기 --%>
@@ -16,7 +17,7 @@
     </div>
 
     <div>
-        <form action="" method="post">
+        <form action="${path}/" method="post">
             <input type="hidden" name="dog_name" value="${ dog_name }">
             <input type="hidden" name="board_id" value="${ board_id }">
             <table class="table align-middle insert-table">

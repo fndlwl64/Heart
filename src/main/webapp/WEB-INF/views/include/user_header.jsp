@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-4 header-space"></div>
                     <div class="col-4 header-image">
-                        <a href="${path}/"><img src="${path}/logo/heartpet_logo_words.png" alt="HeartPet" /></a>
+                        <a href="${path}/"><img src="${path}/resources/logo/heartpet_logo_words.png" alt="HeartPet" /></a>
                     </div>
                     <div class="col-4 header-nav">
                         <ul>
