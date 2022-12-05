@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,16 +16,17 @@
 </head>
 <body>
 	<div align="center" class="div_header">
-		<a href="<%=request.getContextPath() %>/admin_main"><img class ="logo" src="resources/image/heartpet_logo.png" /></a>
+				
+		<a href="${path}/admin_main"><img class ="logo" src="resources/image/heartpet_logo.png" /></a>
 		<ul>
-			<li class="lis"><a href="<%=request.getContextPath() %>/user_list">회원관리</a></li>
-			<li class="lis"><a href="<%=request.getContextPath() %>/user_dog_list_list">유기견관리</a></li>
-			<li class="lis"><a href="<%=request.getContextPath() %>/cat_list">유기묘관리</a></li>
-			<li class="lis"><a href="<%=request.getContextPath() %>/adoptreg_list">입양관리</a></li>
-			<li class="lis"><a href="<%=request.getContextPath() %>/support_list">후원관리</a></li>
-			<li class="lis"><a href="<%=request.getContextPath() %>/notice_list">공지사항관리</a></li>
-			<li class="lis"><a href="<%=request.getContextPath() %>/board_list">Q&A관리</a></li>
-			<li class="lis"><a href="<%=request.getContextPath() %>/user_review_list">후기관리</a></li>
+			<li class="lis"><a href="${path}/user_list">회원관리</a></li>
+			<li class="lis"><a href="${path}/user_dog_list_list">유기견관리</a></li>
+			<li class="lis"><a href="${path}/cat_list">유기묘관리</a></li>
+			<li class="lis"><a href="${path}/adoptreg_list">입양관리</a></li>
+			<li class="lis"><a href="${path}/support_list">후원관리</a></li>
+			<li class="lis"><a href="${path}/notice_list">공지사항관리</a></li>
+			<li class="lis"><a href="${path}/board_list">Q&A관리</a></li>
+			<li class="lis"><a href="${path}/user_review_list">후기관리</a></li>
 		</ul>
 	</div>
 </body>
