@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <jsp:include page="../include/admin_header.jsp" />
-<link rel="stylesheet" href="css/admin_include.css">
+<link rel="stylesheet" href="resources/css/admin_include.css">
 <script src="/js/admin.js"></script>
 <body>
 <br><br>
