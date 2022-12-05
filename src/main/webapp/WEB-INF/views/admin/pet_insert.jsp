@@ -2,7 +2,7 @@
 		 pageEncoding="UTF-8"%>
 <jsp:include page="../include/admin_header.jsp" />
 <link rel="stylesheet" href="css/admin_include.css">
-<script src="/js/admin.js"></script>
+<script src="resources/js/admin.js"></script>
 <body>
 <br><br>
 <div class="div1" align="center">
