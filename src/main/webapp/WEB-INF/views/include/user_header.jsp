@@ -50,11 +50,8 @@
                 <div class="nav-bar justify-content-center">
                     <div class="nav-links">
                         <ul>
-                            <li><a href="${path}/user_notice">공지&안내</a></li>
-                            <%-- 무료입소 부분 확인 필요 --%>
-                            
+                            <li><a href="${path}/user_notice">공지&안내</a></li>                            
                             <li><a href="${path}/user_animal_insert">무료입소</a></li>
-
                             <li class="dropdown">
                                 <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     무료입양
@@ -73,15 +70,7 @@
                                     <li><a class="dropdown-item" href="${path}/user_qna_list">문의글</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    입양후기
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="${path}/user_review_list">강아지리뷰</a></li>
-                                    <li><a class="dropdown-item" href="${path}/user_review_list">고양이리뷰</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="${path}/user_review_list">입양후기</a></li>
                             <li><a href="${path}/user_support">후원하기</a></li>
                         </ul>
                     </div>
@@ -97,7 +86,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form class="login_form" method="post" action="/login">
+                            <form class="login_form" method="post" action="${path}/login">
                                 <input class="login_text" name="user_id" placeholder="아이디">
                                 <span class="idcheck"></span>
                                 <input class="login_text" type="password" name="user_pwd" placeholder="비밀번호">
@@ -134,7 +123,6 @@
                                 <input type="submit" class="btn login_btn" value="아이디 찾기">
                             </div>
                             <div class="modal-footer">
-
                             </div>
                         </form>
                     </div>
@@ -160,7 +148,6 @@
                     </div>
                 </div>
             </div>
-
         </header>
     </div>
 

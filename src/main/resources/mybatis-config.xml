@@ -3,11 +3,11 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "https://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-	
 	<!-- Alias 설정 : 별칭 설정 -->
 	<typeAliases>
+		<typeAlias type="com.heartpet.model.QnaDTO" alias="QnaDTO"/>
+		<typeAlias type="com.heartpet.action.QnaDAO" alias="QnaDAO"/>
 	</typeAliases>	
-
 </configuration>
 
 

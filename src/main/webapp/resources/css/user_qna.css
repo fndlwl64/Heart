@@ -1,25 +1,32 @@
-.qna_section {
+.qna-section {
     display: grid;
 }
 
-.qna_section .space {
+.qna-section .space {
 }
 
-.qna_section .title {
+.qna-section .title {
     font-size: 2rem;
     font-weight: bold;
     margin-left: 10px;
     margin-bottom: 10px;
 }
 
+/* 총 게시물 */
+.qna-section .total-data {
+	align-items: flex-end;
+	margin-bottom: 0.5rem;
+	font-size: 14px;
+}
+
 /* qna : 정렬 */
-.qna_section .qna_order {
+.qna-section .qna_order {
     justify-content: right;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 /* qna : 글쓰기 버튼 btn-insert */
-.qna_section .btn-insert {
+.qna-section .btn-insert {
     padding-right: 1rem;
     text-align: right;
 }

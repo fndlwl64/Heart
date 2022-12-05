@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="../include/user_header.jsp" />
@@ -20,9 +21,11 @@
         </div>
     </div>
 
-    <div class="review_section">
+	<!-- 정렬 -->
+    <div class="review-section">
         <div class="row">
-            <div class="col-8 space"></div>
+            <div class="col-3 space"></div>
+            <div class="col-5 total-data d-flex"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
             <div class="col-1 review_order d-flex">
                 <select class="form-select form-select-sm w-75" name="review_order">
                     <option selected="selected" value="date_desc">최신순</option>
