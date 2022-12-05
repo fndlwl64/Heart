@@ -4,6 +4,8 @@ import com.heartpet.model.QnaDTO;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 public class QnaDAOImpl implements QnaDAO {
 
     @Autowired
