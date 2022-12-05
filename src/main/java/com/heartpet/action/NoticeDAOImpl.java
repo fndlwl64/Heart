@@ -1,6 +1,6 @@
-package com.heartpet.project.action;
+package com.heartpet.action;
 
-import com.heartpet.project.model.NoticeDTO;
+import com.heartpet.model.NoticeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

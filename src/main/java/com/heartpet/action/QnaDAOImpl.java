@@ -1,7 +1,6 @@
-package com.heartpet.project.action;
+package com.heartpet.action;
 
-import com.heartpet.project.model.QnaDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.heartpet.model.QnaDTO;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.heartpet.model;
+package com.heartpet.action;
 
 public interface BoardDAO {
 	
