@@ -1,7 +1,9 @@
 package com.heartpet.project;
 
 import com.heartpet.action.NoticeDAO;
+import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.NoticeDTO;
+import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.DogDAO;
 import com.heartpet.action.QnaDAO;
 import com.heartpet.model.QnaDTO;
@@ -18,11 +20,12 @@ import java.util.List;
 public class UserController {
 	
 	@Autowired
-    private DogDAO dogDAO;
+    private AnimalDAO animalDAO;
 
     @RequestMapping("/jsptest")
     public String jsptest(Model model){
-        model.addAttribute("list",dogDAO.list());
+        model.addAttribute("list",animalDAO.list());
+
         return "jsptest";
     }
     
@@ -41,7 +44,7 @@ public class UserController {
     @RequestMapping ("/user_animal_insert")
     public String dog_insert() { return "animal/user_animal_insert"; }
 
-    //파일 업로드 테스트
+    //�뙆�씪 �뾽濡쒕뱶 �뀒�뒪�듃
 	/*
 	 * @RequestMapping("/user_animal_insert") public String
 	 * dog_insert_ok(@RequestPart List<MultipartFile> files, AnimalDTO dto,
@@ -49,7 +52,7 @@ public class UserController {
 	 * @RequestParam(value = "tag") String tag, HttpServletRequest request) throws
 	 * IOException {
 	 * 
-	 * //path 설정 및 폴더 생성 String rootPath = System.getProperty("user.dir"); String
+	 * //path �꽕�젙 諛� �뤃�뜑 �깮�꽦 String rootPath = System.getProperty("user.dir"); String
 	 * uploadPath = "\\src\\main\\resources\\static\\upload"; String path = rootPath
 	 * + uploadPath;
 	 * 
@@ -58,8 +61,8 @@ public class UserController {
 	 * List<DogDTO> list = dogDAO.list(); for(DogDTO d : list){
 	 * System.out.println(d.toString()); }
 	 * 
-	 * if(!folder.exists()){ // 폴더 생성 folder.mkdir(); } //tag에 따라서 강아지 또는 고양이 insert
-	 * 문 사용
+	 * if(!folder.exists()){ // �뤃�뜑 �깮�꽦 folder.mkdir(); } //tag�뿉 �뵲�씪�꽌 媛뺤븘吏� �삉�뒗 怨좎뼇�씠 insert
+	 * 臾� �궗�슜
 	 * 
 	 * for (MultipartFile file : files) { File toFile = new
 	 * File(path+"\\"+file.getOriginalFilename()); file.transferTo(toFile); } return

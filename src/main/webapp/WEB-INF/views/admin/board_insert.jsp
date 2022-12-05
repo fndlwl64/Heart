@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.request.contextPath}" />	 
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +9,7 @@
 	<title>Insert title here</title>
 </head>
 <script src="/js/admin.js"></script>
-<link rel="stylesheet" href="resources/css/admin_include.css">
+<link rel="stylesheet" href="${path }/resources/css/admin_include.css">
 <body>
 <jsp:include page="../include/admin_header.jsp" />
 <br><br>
