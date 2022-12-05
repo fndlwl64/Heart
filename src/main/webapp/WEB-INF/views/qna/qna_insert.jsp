@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="../include/user_header.jsp" />
-<link rel="stylesheet" href="/css/user_qna.css" />
+<link rel="stylesheet" href="resources/css/user_qna.css" />
 <link rel="short icon" href="#" />
 
 <%-- 글쓰기 --%>

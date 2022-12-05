@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <% pageContext.setAttribute("newline", "\n"); %>
 <jsp:include page="../include/user_header.jsp" />
-<link rel="stylesheet" href="/css/user_qna.css" />
+<link rel="stylesheet" href="resources/css/user_qna.css" />
 <link rel="short icon" href="#" />
 
 <%-- 문의글 상세 보기 --%>

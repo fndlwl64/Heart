@@ -7,7 +7,7 @@
 	<title>Insert title here</title>
 </head>
 <script src="resources/js/admin.js"></script>
-<link rel="stylesheet" href="css/admin_include.css">
+<link rel="stylesheet" href="resources/css/admin_include.css">
 <body>
 <jsp:include page="../include/admin_header.jsp" />
 <br><br>
