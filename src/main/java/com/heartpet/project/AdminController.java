@@ -1,4 +1,4 @@
-package com.heartpet.project.controller;
+package com.heartpet.project;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
