@@ -3,7 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="../include/user_header.jsp" />
 <link rel="short icon" href="#" />
-<link rel="stylesheet" href="css/notice.css">
+<link rel="stylesheet" href="resources/css/notice.css">
 <%-- 여기서부터 작성 --%>
 <div class="notice-board">
     <div align="center">
