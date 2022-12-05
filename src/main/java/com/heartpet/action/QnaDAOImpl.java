@@ -4,16 +4,19 @@ import com.heartpet.model.QnaDTO;
 
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class QnaDAOImpl implements QnaDAO {
-
-    @Autowired
-    QnaDAO qnaDAO;
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
 
     @Override
     public List<QnaDTO> listQna() {
-        return qnaDAO.listQna();
+        return this.sqlSession.selectList("qna_list");
     }
 
     @Override

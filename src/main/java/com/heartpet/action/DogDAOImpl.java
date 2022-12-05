@@ -1,14 +1,19 @@
 package com.heartpet.action;
 
 import com.heartpet.model.DogDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class DogDAOImpl implements DogDAO {
-    @Autowired
-    DogDAO dogDAO;
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+    
     @Override
     public int insert(DogDTO testDTO) {
         return 0;
@@ -22,12 +27,11 @@ public class DogDAOImpl implements DogDAO {
     @Override
     public void delete(int id) {
 
-
     }
 
     @Override
     public List<DogDTO> list() {
-        return dogDAO.list();
+        return null;
     }
 
     @Override
