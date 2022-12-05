@@ -13,6 +13,8 @@ public class QnaReplyDTO {
     private String reply_board_title;
     private String reply_board_content;
     private String reply_board_secret;
+    private String reply_board_regdate;
+    private String reply_board_update;
     private String reply_board_img1;
     private String reply_board_img2;
 

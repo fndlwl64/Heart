@@ -17,10 +17,17 @@
     margin-bottom: 1rem;
 }
 
+/* 총 게시물 */
+.review-section .total-data {
+	align-items: flex-end;
+	margin-bottom: 0.5rem;
+	font-size: 14px;
+}
+
 /* 정렬 */
-.review_section .review_order {
+.review-section .review_order {
     justify-content: right;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .review-section .title h6 {

@@ -29,10 +29,8 @@ public class UserController {
     @Autowired
     private QnaDAO qnaDAO;
 
-
     @Autowired
     private NoticeDAO noticedao;
-
 
     @RequestMapping("/user_dog_list")
     public String dog_list() { return "animal/dog/user_dog_list"; }
@@ -79,6 +77,14 @@ public class UserController {
         model.addAttribute("qnaList", qnaList);
         return "qna/qna_list";
     }
+    
+    @RequestMapping("/user_qna_search")
+    public String user_qna_search(Model model, String keyword, String field) {
+    	List<QnaDTO> qnaList = this.qnaDAO.searchQna(field, keyword);
+    	model.addAttribute("qnaList", qnaList);
+    	return "qna/qna_list";
+    }
+    
 
     @RequestMapping("/user_qna_insert")
     public String user_qna_insert() { return "qna/qna_insert"; }
