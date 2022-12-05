@@ -14,16 +14,16 @@
 </head>
 <body>
 	<div align="center" class="div_header">
-		<a href="/admin_main"><img class ="logo" src="image/heartpet_logo.png" /></a>
+		<a href="<%=request.getContextPath() %>/admin_main"><img class ="logo" src="resources/image/heartpet_logo.png" /></a>
 		<ul>
-			<li class="lis"><a href="/user_list">회원관리</a></li>
-			<li class="lis"><a href="/user_dog_list_list">유기견관리</a></li>
-			<li class="lis"><a href="/cat_list">유기묘관리</a></li>
-			<li class="lis"><a href="/adoptreg_list">입양관리</a></li>
-			<li class="lis"><a href="/support_list">후원관리</a></li>
-			<li class="lis"><a href="/notice_list">공지사항관리</a></li>
-			<li class="lis"><a href="/board_list">Q&A관리</a></li>
-			<li class="lis"><a href="/user_review_list">후기관리</a></li>
+			<li class="lis"><a href="<%=request.getContextPath() %>/user_list">회원관리</a></li>
+			<li class="lis"><a href="<%=request.getContextPath() %>/user_dog_list_list">유기견관리</a></li>
+			<li class="lis"><a href="<%=request.getContextPath() %>/cat_list">유기묘관리</a></li>
+			<li class="lis"><a href="<%=request.getContextPath() %>/adoptreg_list">입양관리</a></li>
+			<li class="lis"><a href="<%=request.getContextPath() %>/support_list">후원관리</a></li>
+			<li class="lis"><a href="<%=request.getContextPath() %>/notice_list">공지사항관리</a></li>
+			<li class="lis"><a href="<%=request.getContextPath() %>/board_list">Q&A관리</a></li>
+			<li class="lis"><a href="<%=request.getContextPath() %>/user_review_list">후기관리</a></li>
 		</ul>
 	</div>
 </body>
