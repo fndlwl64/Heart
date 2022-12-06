@@ -139,23 +139,23 @@ public class UserController {
     @RequestMapping("/login")
     public String login(@RequestParam("user_id")String id, @RequestParam("user_pwd")String pwd, HttpServletResponse response, HttpServletRequest request) throws IOException {
     	
-    	Map<String, Object> map = new HashMap<String, Object>();
+    	PrintWriter out = response.getWriter();
     	
+    	Map<String, Object> map = new HashMap<String, Object>();
     	map.put("id", id);
     	map.put("pwd", pwd);
     	
     	int check = userDAO.idCheck(id);
     	
-    	PrintWriter out = response.getWriter();
-    	
     	if(check == 1) {
-    		String res = userDAO.login(map);
-    		
-    		map.values();
-    		
+    		int res = userDAO.login(map);
+    		UserDTO dto = userDAO.getUserInfo(id);
+    		String user_number = dto.getUser_no();
+    		    		
     		HttpSession session = request.getSession();
     		
     		session.setAttribute("session_id", id);
+    		session.setAttribute("session_no", user_number);
     		
     		out.println("<script>");
 			out.println("alert('로그인 되었습니다!');");
@@ -172,9 +172,8 @@ public class UserController {
     }
     
     @RequestMapping("/kakao_login")
-    public void login(@RequestParam("paramId")String id, @RequestParam("paramName")String name, @RequestParam("paramEmail")String email, HttpServletRequest request, HttpServletResponse response) throws IOException{
+    public void login(@RequestParam("paramId")String id, @RequestParam("paramName")String name, HttpServletRequest request, HttpServletResponse response) throws IOException{
     	
-    	System.out.println("여기");
     	PrintWriter out = response.getWriter();
     	int check = userDAO.idCheck(id);
     	
@@ -189,7 +188,6 @@ public class UserController {
     		Map<String, Object> map = new HashMap<String, Object>();
     		map.put("id", id);
     		map.put("name", name);
-    		map.put("email", email);
     		
     		int res = userDAO.kakaoInsert(map);
     		
