@@ -263,6 +263,7 @@ public class UserController {
     public String notice_content(@RequestParam("no") int no, Model model) {
     	NoticeDTO dto = this.noticedao.getNotice(no);
     	model.addAttribute("Cont", dto);
+    	noticedao.readCount(no);
     	return "notice/notice_content";
     }
 }
