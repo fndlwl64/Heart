@@ -1,7 +1,9 @@
 package com.heartpet.project;
 
 import com.heartpet.action.NoticeDAO;
+import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.NoticeDTO;
+import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.DogDAO;
 import com.heartpet.action.QnaDAO;
 import com.heartpet.action.UserDAO;
@@ -11,7 +13,10 @@ import com.heartpet.model.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
@@ -24,9 +29,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 @Controller
 public class UserController {
-	
+
 	@Autowired
     private DogDAO dogDAO;
 	
@@ -42,45 +50,10 @@ public class UserController {
     @Autowired
     private QnaDAO qnaDAO;
 
-
     @Autowired
     private NoticeDAO noticedao;
 
-
-    @RequestMapping("/user_dog_list")
-    public String dog_list() { return "animal/dog/user_dog_list"; }
-
-    @RequestMapping("/user_dog_content")
-    public String dog_content() { return "animal/dog/user_dog_content"; }
-
-    @RequestMapping ("/user_animal_insert")
-    public String dog_insert() { return "animal/user_animal_insert"; }
-
-    //파일 업로드 테스트
-	/*
-	 * @RequestMapping("/user_animal_insert") public String
-	 * dog_insert_ok(@RequestPart List<MultipartFile> files, AnimalDTO dto,
-	 * 
-	 * @RequestParam(value = "tag") String tag, HttpServletRequest request) throws
-	 * IOException {
-	 * 
-	 * //path 설정 및 폴더 생성 String rootPath = System.getProperty("user.dir"); String
-	 * uploadPath = "\\src\\main\\resources\\static\\upload"; String path = rootPath
-	 * + uploadPath;
-	 * 
-	 * File folder = new File(path);
-	 * 
-	 * List<DogDTO> list = dogDAO.list(); for(DogDTO d : list){
-	 * System.out.println(d.toString()); }
-	 * 
-	 * if(!folder.exists()){ // 폴더 생성 folder.mkdir(); } //tag에 따라서 강아지 또는 고양이 insert
-	 * 문 사용
-	 * 
-	 * for (MultipartFile file : files) { File toFile = new
-	 * File(path+"\\"+file.getOriginalFilename()); file.transferTo(toFile); } return
-	 * "redirect:/"; }
-	 */
-
+   
     @RequestMapping("/user_support")
     public String user_support() {
         return "support/support";
@@ -92,28 +65,62 @@ public class UserController {
         model.addAttribute("qnaList", qnaList);
         return "qna/qna_list";
     }
-
+    
+    @RequestMapping("/user_qna_search")
+    public String user_qna_search(Model model, String keyword, String field) {
+    	List<QnaDTO> qnaList = this.qnaDAO.searchQna(field, keyword);
+    	model.addAttribute("qnaList", qnaList);
+    	return "qna/qna_list";
+    }
+    
     @RequestMapping("/user_qna_insert")
-    public String user_qna_insert() { return "qna/qna_insert"; }
-
-    @RequestMapping("/user_qna_insert_ok")
-    public String user_qna_insert_ok() {
-
-        return "qna/qna_list";
+    public String user_qna_insert() { 
+    	return "qna/qna_insert";
+    }
+    
+    @RequestMapping(value = "/user_qna_insert_ok", method = RequestMethod.POST)
+    // binding한 결과가 result에 담김
+    public void user_qna_insert_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response) throws IOException {
+		// 에러 있는지 검사
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+    	if(result.hasErrors()) {
+    		// 에러를 List로 저장
+            System.out.println(qnaDto.toString());
+			List<ObjectError> errors = result.getAllErrors();
+			for(ObjectError error : errors) {
+				if(error.getDefaultMessage().equals("title")) { out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>"); break; }
+				else if(error.getDefaultMessage().equals("content")) { out.println("<script>alert('글 내용이 없습니다.'); history.back(); </script>"); break; }
+				else if(error.getDefaultMessage().equals("password")) { out.println("<script>alert('글 비밀번호를 입력해주세요.'); history.back(); </script>"); break; }
+				else if(error.getDefaultMessage().equals("regexp")) { out.println("<script>alert('비밀번호는 6자 이상 10자 이하의 숫자 및 영문자로 구성되어야 합니다. 다시 입력해주세요.'); history.back(); </script>"); break; }
+			}
+    	}else {
+        	int check = this.qnaDAO.insertQna(qnaDto);
+    		if(check > 0) {
+    			out.println("<script>alert('글이 성공적으로 등록되었습니다.'); location.href='/user_qna_list'; </script>");
+    		}else {
+    			out.println("<script>alert('글 등록을 실패했습니다.'); history.back(); </script>");
+    		}
+    	}
     }
 
     @RequestMapping("/user_qna_update")
     public String user_qna_update() { return "qna/qna_update"; }
 
     @RequestMapping("/user_qna_content")
-    public String user_qna_content() { return "qna/qna_content"; }
+    public String user_qna_content(@RequestParam("board_no") int board_no, Model model) { 
+    	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
+    	this.qnaDAO.hitQna(board_no);
+    	model.addAttribute("qnaContent", qnaContent);
+    	return "qna/qna_content"; 
+    }
 
     @RequestMapping("/user_fnq_list")
     public String user_fnq_list() { return "qna/fnq_list"; }
 
     @RequestMapping("/user_notice")
     public String notice(Model model) {
-        List<NoticeDTO> list = noticedao.getNoticeList();
+        List<NoticeDTO> list = noticedao.getNoticeList();    
         model.addAttribute("List", list);
         return "notice/notice_list";
     }
@@ -257,5 +264,11 @@ public class UserController {
     public String mypage_grade_list() {
         return "mypage/mypage_grade_list";
     }
-
+  
+    @RequestMapping("/user_notice_content")
+    public String notice_content(@RequestParam("no") int no, Model model) {
+    	NoticeDTO dto = this.noticedao.getNotice(no);
+    	model.addAttribute("Cont", dto);
+    	return "notice/notice_content";
+    }
 }

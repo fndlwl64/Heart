@@ -8,7 +8,7 @@
 
 <%-- 글쓰기 --%>
 <div id="qna-contents" class="qna-contents">
-    <div class="qna_section">
+    <div class="qna-section">
         <div class="row">
             <div class="col-3 space"></div>
             <div class="col-6 title">문의글 작성하기</div>
@@ -18,39 +18,49 @@
 
     <div>
         <form action="${path}/user_qna_insert_ok" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="board_id" value="${ board_id }" />
         <table class="table align-middle">
             <tr class="border-top">
                 <th class="table-light col-1">카테고리</th>
                 <td class="col-2"><%-- db 확인 필요 --%>
-                    <select class="form-select" name="board_category" id="">
-                        <option value="adoption" selected="selected">입양</option>
-                        <option value="admission">입소</option>
-                        <option value="support">후원</option>
-                        <option value="etc">기타</option>
+                    <select class="form-select" name="board_category">
+                        <option value="입양" selected="selected">입양</option>
+                        <option value="입소">입소</option>
+                        <option value="후원">후원</option>
+                        <option value="기타">기타</option>
                     </select>
                 </td>
                 <th class="table-light col-1">작성자</th>
-                <td class="col-3"><input type="text" class="form-control" name="board_id" value="${ board_id }" disabled="disabled"></td>
-                <th class="table-light col-1"><label><input class="form-check-input col-1" type="checkbox" name="board_secret" checked="checked"> 비밀글</label></th>
+                <td class="col-2"><input type="text" class="form-control" value="${ board_id }" disabled="disabled"></td>
+                <th class="table-light col-1">
+                <label><input class="form-check-input col-1" type="checkbox" value="Y" name="board_secret" checked="checked"> 비밀글</label>
+                </th>
             </tr>
             <tr>
                 <th class="table-light">제목</th>
-                <td colspan="4"><input type="text" class="form-control" name="board_title" required="required"></td>
+                <td colspan="4">
+                <input type="text" class="form-control" name="board_title" required="required">
+                </td>
             </tr>
             <tr>
                 <th class="table-light">내용</th>
-                <td colspan="4"><textarea name="board_content" class="form-control" cols="30" rows="10"></textarea></td>
+                <td colspan="4">
+                <textarea name="board_content" class="form-control" cols="30" rows="10"></textarea>
+                </td>
             </tr>
             <tr>
-                <td colspan="5">
+                <th class="table-light">글 비밀번호</th>
+				<td class="col-2"><input type="password" class="form-control" name="board_pwd" required="required">
+				</td>
+				<th class="table-light">이미지</th>
+                <td colspan="2">
                     <div class="d-flex align-middle">
                         <input type="file" class="form-control" name="board_img" accept="image/gif, image/jpeg, image/png" multiple>
                     </div>
                 </td>
             </tr>
         </table>
-
-        <div class="qna_section">
+        <div class="qna-section">
             <div class="row">
                 <div class="col-3 space"></div>
                 <div class="col-6 title btn-insert">

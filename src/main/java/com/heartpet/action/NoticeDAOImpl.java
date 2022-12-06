@@ -17,12 +17,13 @@ public class NoticeDAOImpl implements NoticeDAO{
 
 	@Override
 	public List<NoticeDTO> getNoticeList() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.sqlSession.selectList("notice_list");
 	}
 
-	/*
-	 * @Override public List<NoticeDTO> getNoticeList() { return
-	 * this.sqlSession.getNoticeList(); }
-	 */
+	@Override
+	public NoticeDTO getNotice(int no) {
+		return this.sqlSession.selectOne("notice_content", no);
+	}
+
+
 }

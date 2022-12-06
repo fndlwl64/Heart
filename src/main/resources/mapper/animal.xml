@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="AnimalDAO">
+	<select id="list" resultType="AnimalDTO">
+		select * from heartpet_animal
+	</select>	
+	<insert id="insert" parameterType="AnimalDTO">
+		<selectKey resultType="int" keyProperty="animal_no" order="BEFORE">
+			select count(animal_no)+1 from heartpet_animal
+		</selectKey>
+		insert into heartpet_animal 
+			values
+			(#{animal_no},
+			#{animal_name},
+			#{animal_species},
+			#{animal_gender},
+			#{animal_neutered},
+			#{animal_vaccination},
+			#{animal_age},
+			#{animal_place},
+			#{animal_size},
+			#{animal_weight},
+			#{animal_caution},
+			#{animal_img1},
+			#{animal_img2},
+			#{animal_img3},
+			#{animal_status},
+			#{animal_tag},
+			sysdate,
+			''
+			)
+	</insert>
+</mapper>

@@ -138,11 +138,11 @@
 <%--메인 페이지--%>
 <div class="d-flex justify-content-center">
     <%--강아지 정보 폼--%>
-    <form action="/user_dog_content" method="post">
+    <form action="<%=request.getContextPath() %>/user_dog_content" method="post">
         <div class="row row-cols-4">
             <div class="col">
                 <div class="d-inline-block text-center">
-                    <input class="img-fluid" type="image" src="/upload/Copied.jpg">
+                    <input class="img-fluid" type="image" src="<%=request.getContextPath()%>/resources/upload/5e823a66-c742-4ac2-821e-021ae51335c5.jpg">
                     <div>정보</div>
                 </div>
             </div>

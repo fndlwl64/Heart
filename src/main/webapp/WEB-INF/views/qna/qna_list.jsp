@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="qList" value="${ qnaList }" />
@@ -10,7 +11,7 @@
 
 <%-- qna list --%>
 <div id="qna-contents" class="qna-contents">
-    <div class="qna_section">
+    <div class="qna-section">
         <div class="row">
             <div class="col-3 space"></div>
             <div class="col-6 title">QnA</div>
@@ -19,9 +20,10 @@
     </div>
 
     <%-- 정렬 --%>
-    <div class="qna_section">
+    <div class="qna-section">
         <div class="row">
-            <div class="col-8 space"></div>
+        	<div class="col-3 space"></div>
+            <div class="col-5 total-data d-flex"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
             <div class="col-1 qna_order d-flex">
                 <select class="form-select form-select-sm w-75" name="qna_order" id="">
                     <option selected="selected" value="date_desc">최신순</option>
@@ -35,18 +37,17 @@
 
     <%-- 아코디언 --%>
     <!-- 문의하기 -->
-
     <div class="qna-board">
         <table class="table table-bordered">
             <thead>
-            <tr class="table-light">
-                <th scope="col" class="col-1">No</th>
-                <th scope="col" class="col-2">카테고리</th>
-                <th scope="col" class="col-4">제목</th>
-                <th scope="col" class="col-2">글쓴이</th>
-                <th scope="col" class="col-2">작성시간</th>
-                <th scope="col" class="col-1">Hit</th>
-            </tr>
+	            <tr class="table-light">
+	                <th scope="col" class="col-1">No</th>
+	                <th scope="col" class="col-2">카테고리</th>
+	                <th scope="col" class="col-4">제목</th>
+	                <th scope="col" class="col-2">글쓴이</th>
+	                <th scope="col" class="col-2">작성일</th>
+	                <th scope="col" class="col-1">Hit</th>
+	            </tr>
             </thead>
             <tbody>
             <c:if test="${ not empty qList }">
@@ -54,9 +55,9 @@
                 <tr>
                     <td>${ list.board_no }</td>
                     <td>${ list.board_category }</td>
-                    <td class="left-align"><a class="d-block qna-a-link" href="${path}/user_qna_content">${ list.board_title }</a></td>
+                    <td class="left-align"><a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }">${ list.board_title }</a></td>
                     <td>${ list.board_id }</td>
-                    <td>${ list.board_title }</td>
+                    <td>${ list.board_regdate.substring(0,10) }</td>
                     <td>${ list.board_hit }</td>
                 </tr>
                 </c:forEach>
@@ -70,7 +71,7 @@
         </table>
     </div>
 
-    <div class="qna_section">
+    <div class="qna-section">
         <div class="row">
             <div class="col-3 space"></div>
             <div class="col-6 title btn-insert">
@@ -82,11 +83,11 @@
     </div>
 
     <%-- search --%>
-    <div class="qna_section">
+    <div class="qna-section">
         <div class="row">
             <div class="col-4 space"></div>
             <div class="col-4 search">
-                <form method="post" action="/search">
+                <form method="post" action="${ path }/user_qna_list">
                     <input type="hidden" name="page" value="${ paging.page }" />
                     <select name="field" class="form-select d-inline align-middle w-25">
                         <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
