@@ -1,8 +1,12 @@
 package com.heartpet.action;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.heartpet.model.UserDTO;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
@@ -11,12 +15,23 @@ public class UserDAOImpl implements UserDAO {
 	private SqlSessionTemplate sqlSession;
 
     @Override
-    public String idCheck(String id) {
-        return null;
+    public int idCheck(String id) {
+        return this.sqlSession.selectOne("id_check", id);
     }
 
     @Override
-    public int KakaoInsert(String id, String name, String email) {
-        return 0;
+    public int kakaoInsert(Map<String, Object> map) {
+		return this.sqlSession.insert("kakao_insert", map);
     }
+
+	@Override
+	public int join(UserDTO dto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public String login(Map<String, Object> map) {
+		return this.sqlSession.selectOne("login", map);
+	}
 }

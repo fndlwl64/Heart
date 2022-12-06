@@ -70,62 +70,70 @@ function sample6_execDaumPostcode() {
     });
 }
 
-// 카카오 api 사용
-Kakao.init('b6f75c3aa40a005f012dbe14f5ac031e');
-Kakao.isInitialized();
-console.log(Kakao.isInitialized());
+$(function() {
+	// 카카오 api 사용
+	Kakao.init('b6f75c3aa40a005f012dbe14f5ac031e');
+	Kakao.isInitialized();
+	console.log(Kakao.isInitialized());
+	
+	// 카카오 로그인 api
+	Kakao.Auth.createLoginButton({
+	    container: '#kakao-login-btn',
+	    success: function(authObj) {
+	        Kakao.API.request({
+	            url: '/v2/user/me',
+	            success: function(result) {
+	                id = "K"+result.id
+	                nickname = result.properties.nickname
+	                kakao_account = result.kakao_account
+	                email ="kakaoUser@kakao.com";
+	                if(typeof kakao_account != 'undefined'){
+	                    email = kakao_account.email;
+	                }else if(name.equals('')) {
+	                    name = '카카오회원';
+	                }
+	                console.log('아이디 :'+id, '이름 :'+nickname, '이메일 :'+email);
+	
+	                $.ajax({
+	                    type: "POST",
+	                    contentType:  "application/x-www-form-urlencoded;charset=UTF-8",
+	                    url: "/project/kakao_login",
+	                    data: {
+	                        paramId : id,
+	                        paramName : nickname,
+	                        paramEmail : email
+	                    },
+	                    dataType: "text",
+	                    success: function(data) {
+	                    	if(data != null) {
+	                    		console.log("카카오 로그인 성공");
+	                        	alert('로그인 되었습니다!');
+	                        	window.location.reload();
+	                    		
+	                    	}else {
+	                    		alert('로그인 실패ㅠ');
+	                    	}
+	                    },
+	                    error: function(e) {
+	                        console.log("ajax fail", error);
+	                    }
+	                });
+	
+	            },
+	            fail: function(error) {
+	                alert(
+	                    'login success, but failed to request user information: ' +
+	                    JSON.stringify(error)
+	                );
+	            }
+	        })
+	    },
+	    fail: function(err) {
+	        alert('failed to login: ' + JSON.stringify(err));
+	    }
+	})
 
-// 카카오 로그인 api
-Kakao.Auth.createLoginButton({
-    container: '#kakao-login-btn',
-    success: function(authObj) {
-        Kakao.API.request({
-            url: '/v2/user/me',
-            success: function(result) {
-                id = "K"+result.id
-                nickname = result.properties.nickname
-                kakao_account = result.kakao_account
-                email ="kakaoUser@kakao.com";
-                if(typeof kakao_account != 'undefined'){
-                    email = kakao_account.email;
-                }else if(name.equals('')) {
-                    name = '카카오회원';
-                }
-                console.log('아이디 :'+id, '이름 :'+nickname, '이메일 :'+email);
-
-                $.ajax({
-                    type: "GET",
-                    contentType: "application/x-www-form-urlencoded charset=utf-8",
-                    url: "/login",
-                    data: {
-                        paramId : id,
-                        paramName : nickname,
-                        paramEmail : email
-                    },
-                    dataType: 'json',
-                    cache: false,
-                    success: function (data) {
-                        alert('로그인 되었습니다');
-                        window.location.reload();
-                    },
-                    error: function (e) {
-                        console.log("ajax fail", error);
-                    }
-                });
-
-            },
-            fail: function(error) {
-                alert(
-                    'login success, but failed to request user information: ' +
-                    JSON.stringify(error)
-                )
-            },
-        })
-    },
-    fail: function(err) {
-        alert('failed to login: ' + JSON.stringify(err))
-    },
-})
+});
 
 /*displayToken()
 function displayToken() {
