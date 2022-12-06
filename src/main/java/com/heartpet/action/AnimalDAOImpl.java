@@ -34,7 +34,12 @@ public class AnimalDAOImpl implements AnimalDAO{
 	@Override
 	public List<AnimalDTO> list() {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("list", sqlSession);
+		return sqlSession.selectList("list");
+	}
+
+	@Override
+	public List<AnimalDTO> listTag(String animal_tag) {
+		return sqlSession.selectList("listTag", animal_tag);
 	}
 
 	@Override

@@ -9,6 +9,7 @@ public interface AnimalDAO {
     public int update(AnimalDTO dto);
     public void delete(int id);
     public List<AnimalDTO> list();
+    public List<AnimalDTO> listTag(String animal_tag);
     public AnimalDTO content(int id);
     public List<AnimalDTO> search();
 }

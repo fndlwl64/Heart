@@ -38,6 +38,7 @@ public class UserController {
 	@Autowired
     private DogDAO dogDAO;
 	
+
 	@Autowired
 	private UserDAO userDAO;
 
