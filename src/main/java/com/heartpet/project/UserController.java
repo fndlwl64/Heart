@@ -100,12 +100,21 @@ public class UserController {
     }
 
     @RequestMapping("/user_qna_update")
-    public String user_qna_update() { return "qna/qna_update"; }
+    public String user_qna_update(@RequestParam("board_no") int board_no, Model model) {
+    	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
+    	model.addAttribute("qnaContent", qnaContent);
+    	return "qna/qna_update"; 
+    }
+    
+    @RequestMapping("/user_qna_update_ok")
+    public void user_qna_update_ok() {
+    	
+    }
 
     @RequestMapping("/user_qna_content")
     public String user_qna_content(@RequestParam("board_no") int board_no, Model model) { 
-    	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
     	this.qnaDAO.hitQna(board_no);
+    	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
     	model.addAttribute("qnaContent", qnaContent);
     	return "qna/qna_content"; 
     }
