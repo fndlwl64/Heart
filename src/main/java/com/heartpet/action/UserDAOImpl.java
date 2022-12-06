@@ -31,7 +31,12 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public String login(Map<String, Object> map) {
+	public int login(Map<String, Object> map) {
 		return this.sqlSession.selectOne("login", map);
+	}
+
+	@Override
+	public UserDTO getUserInfo(String id) {
+		return this.sqlSession.selectOne("userInfo", id);
 	}
 }

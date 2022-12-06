@@ -13,7 +13,9 @@ public interface UserDAO {
     
     public int join(UserDTO dto);
     
-    public String login(Map<String, Object> map);
+    public int login(Map<String, Object> map);
+    
+    public UserDTO getUserInfo(String id);
 
 
 }
