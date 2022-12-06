@@ -3,6 +3,7 @@ package com.heartpet.project;
 import com.heartpet.action.NoticeDAO;
 import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.NoticeDTO;
+import com.heartpet.model.PageDTO;
 import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.DogDAO;
 import com.heartpet.action.QnaDAO;
@@ -38,7 +39,6 @@ public class UserController {
 	@Autowired
     private DogDAO dogDAO;
 	
-
 	@Autowired
 	private UserDAO userDAO;
 
@@ -47,16 +47,39 @@ public class UserController {
 
     @Autowired
     private NoticeDAO noticedao;
+    
+    // 한 페이지당 보여질 게시물의 수
+    private final int rowsize = 3;
+
+    // 전체 게시물의 수
+    private int totalRecord = 0;
 
     @RequestMapping("/user_support")
     public String user_support() {
         return "support/support";
     }
 
+    // 검색 기능 구현 중
     @RequestMapping("/user_qna_list")
-    public String user_qna_list(Model model) {
-        List<QnaDTO> qnaList = this.qnaDAO.listQna();
+    public String user_qna_list(@RequestParam String field, @RequestParam String keyword, @RequestParam int page, Model model) {
+    	
+    	if(field == null) field = "";
+    	if(keyword == null) keyword = "";
+    	
+    	int currentPage = 1;
+    	if(page > 1) { currentPage = page; }
+    	
+    	totalRecord = this.qnaDAO.listQnaCount(field, keyword);
+    	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+    	
+        List<QnaDTO> qnaList = this.qnaDAO.listQna(paging.getStartNo(), paging.getEndNo(), field, keyword);
+        
         model.addAttribute("qnaList", qnaList);
+        model.addAttribute("total", totalRecord);
+        model.addAttribute("paging", paging);
+        model.addAttribute("field", field);
+        model.addAttribute("keyword", keyword);
+
         return "qna/qna_list";
     }
     
