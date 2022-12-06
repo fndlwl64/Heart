@@ -24,15 +24,17 @@
                 <th class="table-light col-1">카테고리</th>
                 <td class="col-2"><%-- db 확인 필요 --%>
                     <select class="form-select" name="board_category">
-                        <option value="adoption" selected="selected">입양</option>
-                        <option value="admission">입소</option>
-                        <option value="support">후원</option>
-                        <option value="etc">기타</option>
+                        <option value="입양" selected="selected">입양</option>
+                        <option value="입소">입소</option>
+                        <option value="후원">후원</option>
+                        <option value="기타">기타</option>
                     </select>
                 </td>
                 <th class="table-light col-1">작성자</th>
                 <td class="col-2"><input type="text" class="form-control" value="${ board_id }" disabled="disabled"></td>
-                <th class="table-light col-1"><label><input class="form-check-input col-1" type="checkbox" name="board_secret" checked="checked"> 비밀글</label></th>
+                <th class="table-light col-1">
+                <label><input class="form-check-input col-1" type="checkbox" value="Y" name="board_secret" checked="checked"> 비밀글</label>
+                </th>
             </tr>
             <tr>
                 <th class="table-light">제목</th>

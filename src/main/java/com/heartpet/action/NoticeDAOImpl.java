@@ -25,5 +25,11 @@ public class NoticeDAOImpl implements NoticeDAO{
 		return this.sqlSession.selectOne("notice_content", no);
 	}
 
+	@Override
+	public int readCount(int no) {
+		System.out.println("aa");
+		return this.sqlSession.update("notice_read", no);
+		
+	}
 
 }

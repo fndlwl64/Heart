@@ -5,7 +5,7 @@ create table heartpet_board (
     board_hit number(5) default 0,
     board_title varchar2(1000),
     board_content varchar2(2000),
-    board_secret varchar2(1),
+    board_secret varchar2(2) default 'N',
     board_pwd varchar2(20),
     board_regdate date,
     board_update date,
