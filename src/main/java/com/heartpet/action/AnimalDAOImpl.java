@@ -44,8 +44,7 @@ public class AnimalDAOImpl implements AnimalDAO{
 
 	@Override
 	public AnimalDTO content(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("content", id);
 	}
 
 	@Override

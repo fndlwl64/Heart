@@ -143,13 +143,16 @@
                 </div>
             </div> --%>
 		<c:forEach var="dto" items="${dogList}">
-			
-				<div class="col">
-					<div class="d-inline-block text-center">
-						<a href="<%=request.getContextPath() %>/user_dog_content?no=${dto.getAnimal_no()}"><img  class="img-fluid" src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a>
-	
-					</div>
+
+			<div class="col">
+				<div class="d-inline-block text-center">
+					<a
+						href="<%=request.getContextPath() %>/user_dog_content?no=${dto.getAnimal_no()}"><img
+						class="img-fluid"
+						src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a>
+
 				</div>
+			</div>
 
 		</c:forEach>
 	</div>
