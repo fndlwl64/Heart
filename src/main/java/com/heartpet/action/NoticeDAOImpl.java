@@ -17,8 +17,12 @@ public class NoticeDAOImpl implements NoticeDAO{
 
 	@Override
 	public List<NoticeDTO> getNoticeList() {
-		
 		return this.sqlSession.selectList("notice_list");
+	}
+
+	@Override
+	public NoticeDTO getNotice(int no) {
+		return this.sqlSession.selectOne("notice_content", no);
 	}
 
 
