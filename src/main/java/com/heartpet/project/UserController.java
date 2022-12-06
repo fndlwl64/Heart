@@ -27,7 +27,6 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
 	
-	
     
     @Autowired
     private QnaDAO qnaDAO;
@@ -59,12 +58,11 @@ public class UserController {
     public String user_qna_insert() { 
     	return "qna/qna_insert";
     }
-
     
     @RequestMapping(value = "/user_qna_insert_ok", method = RequestMethod.POST)
     // binding한 결과가 result에 담김
     public void user_qna_insert_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response) throws IOException {
-		// 에러가 있는지 검사
+		// 에러 있는지 검사
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
     	if(result.hasErrors()) {
@@ -91,14 +89,19 @@ public class UserController {
     public String user_qna_update() { return "qna/qna_update"; }
 
     @RequestMapping("/user_qna_content")
-    public String user_qna_content() { return "qna/qna_content"; }
+    public String user_qna_content(@RequestParam("board_no") int board_no, Model model) { 
+    	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
+    	this.qnaDAO.hitQna(board_no);
+    	model.addAttribute("qnaContent", qnaContent);
+    	return "qna/qna_content"; 
+    }
 
     @RequestMapping("/user_fnq_list")
     public String user_fnq_list() { return "qna/fnq_list"; }
 
     @RequestMapping("/user_notice")
     public String notice(Model model) {
-        List<NoticeDTO> list = noticedao.getNoticeList();
+        List<NoticeDTO> list = noticedao.getNoticeList();    
         model.addAttribute("List", list);
         return "notice/notice_list";
     }
