@@ -89,7 +89,7 @@ public class UserController {
 
     @RequestMapping("/user_notice")
     public String notice(Model model) {
-        List<NoticeDTO> list = noticedao.getNoticeList();
+        List<NoticeDTO> list = this.noticedao.getNoticeList();
         model.addAttribute("List", list);
         return "notice/notice_list";
     }
@@ -113,7 +113,6 @@ public class UserController {
 
     @RequestMapping("/login")
     public void login(@RequestParam("paramId")String id, @RequestParam("paramName")String name, @RequestParam("paramEmail")String email){
-
     }
 
     @RequestMapping("/user_mypage_adoptreg_list")
