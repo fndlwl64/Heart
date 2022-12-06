@@ -46,6 +46,6 @@ public class QnaDAOImpl implements QnaDAO {
 
     @Override
     public List<QnaDTO> searchQna(String field, String keyword) {
-        return null;
+        return this.sqlSession.selectList(field, keyword, null);
     }
 }
