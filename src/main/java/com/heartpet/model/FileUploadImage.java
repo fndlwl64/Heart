@@ -49,10 +49,6 @@ public class FileUploadImage {
 				return false;
 			}
 		}
-		
 		return true;
-		
-		
 	}
-
 }
