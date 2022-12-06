@@ -80,7 +80,7 @@ public class UserController {
     	}else {
         	int check = this.qnaDAO.insertQna(qnaDto);
     		if(check > 0) {
-    			out.println("<script>alert('글이 성공적으로 등록되었습니다.'); location.href='/user_qna_content?board_no="+qnaDto.getBoard_no()+"'; </script>");
+    			out.println("<script>alert('글이 성공적으로 등록되었습니다.'); location.href='/user_qna_list'; </script>");
     		}else {
     			out.println("<script>alert('글 등록을 실패했습니다.'); history.back(); </script>");
     		}
