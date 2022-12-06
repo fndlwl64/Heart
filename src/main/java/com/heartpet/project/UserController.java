@@ -92,7 +92,6 @@ public class UserController {
 
     @RequestMapping("/login")
     public void login(@RequestParam("paramId")String id, @RequestParam("paramName")String name, @RequestParam("paramEmail")String email){
-
     }
 
     @RequestMapping("/user_mypage_adoptreg_list")
@@ -124,6 +123,7 @@ public class UserController {
     public String notice_content(@RequestParam("no") int no, Model model) {
     	NoticeDTO dto = this.noticedao.getNotice(no);
     	model.addAttribute("Cont", dto);
+    	noticedao.readCount(no);
     	return "notice/notice_content";
     }
 }
