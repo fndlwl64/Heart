@@ -3,8 +3,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.heartpet.action.AnimalDAO">
-	<select id="list" resultType="com.heartpet.model.AnimalDTO">
+<mapper namespace="AnimalDAO">
+	<select id="list" resultType="AnimalDTO">
 		select * from heartpet_animal
 	</select>	
 </mapper>
