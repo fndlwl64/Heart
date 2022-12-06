@@ -9,4 +9,5 @@ public interface NoticeDAO {
 
     public List<NoticeDTO> getNoticeList();
     public NoticeDTO getNotice(int no);
+    public int readCount(int no);
 }

@@ -72,7 +72,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-center mx-5 px-5">
-        <form action="" method="post">
+        <form action="get_animal" method="post">
             <input type="submit" class="btn btn-primary" value="입양하기">
         </form>
     </div>

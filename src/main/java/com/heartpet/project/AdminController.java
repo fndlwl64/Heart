@@ -6,11 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AdminController {
 
-    @RequestMapping("/join")
-    public String join() {
-        return "user/join";
-    }
-
     /*관리자 상단바에서 페이지 이동*/
     @RequestMapping("/user_list")
     public String user_list() {

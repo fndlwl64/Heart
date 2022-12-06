@@ -14,7 +14,7 @@
 
 <div class="mypage_header">
     <div>
-        <br><h1 class="mypage"><a id="mypage_a" href="/user_mypage_wish_list">My Page</a><a class="adopt_a" href="/user_mypage_adoptreg_list"><span id="adopt_span">입양대기목록<button id="adopt_btn" value="1"><span id="adopt_span2">1</span></button></span></a></h1>
+        <br><h1 class="mypage"><a id="mypage_a" href="/user_mypage_wish_list">My Page</a><a class="adopt_a" href="${path }/user_mypage_adoptreg_list"><span id="adopt_span">입양대기목록<button id="adopt_btn" value="1"><span id="adopt_span2">1</span></button></span></a></h1>
     </div>
     <br>
     <div class="mypage_header_mid">
