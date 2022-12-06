@@ -26,7 +26,7 @@ public class QnaDAOImpl implements QnaDAO {
 
     @Override
     public QnaDTO contentQna(int board_no) {
-        return null;
+        return this.sqlSession.selectOne("qna_content", board_no);
     }
 
     @Override

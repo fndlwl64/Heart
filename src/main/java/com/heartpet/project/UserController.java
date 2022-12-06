@@ -78,14 +78,18 @@ public class UserController {
     public String user_qna_update() { return "qna/qna_update"; }
 
     @RequestMapping("/user_qna_content")
-    public String user_qna_content() { return "qna/qna_content"; }
+    public String user_qna_content(@RequestParam("board_no") int board_no, Model model) { 
+    	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
+    	model.addAttribute("qnaContent", qnaContent);
+    	return "qna/qna_content"; 
+    }
 
     @RequestMapping("/user_fnq_list")
     public String user_fnq_list() { return "qna/fnq_list"; }
 
     @RequestMapping("/user_notice")
     public String notice(Model model) {
-        List<NoticeDTO> list = noticedao.getNoticeList();
+        List<NoticeDTO> list = this.noticedao.getNoticeList();
         model.addAttribute("List", list);
         return "notice/notice_list";
     }
@@ -109,7 +113,6 @@ public class UserController {
 
     @RequestMapping("/login")
     public void login(@RequestParam("paramId")String id, @RequestParam("paramName")String name, @RequestParam("paramEmail")String email){
-
     }
 
     @RequestMapping("/user_mypage_adoptreg_list")
