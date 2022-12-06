@@ -2,7 +2,9 @@ package com.heartpet.action;
 
 import com.heartpet.model.QnaDTO;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +17,13 @@ public class QnaDAOImpl implements QnaDAO {
 	private SqlSessionTemplate sqlSession;
 
     @Override
-    public List<QnaDTO> listQna() {
-        return this.sqlSession.selectList("qna_list");
+    public List<QnaDTO> listQna(int startNo, int endNo, String field, String keyword) {
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("startNo", startNo);
+    	map.put("endNo", endNo);
+    	map.put("field", field);
+    	map.put("keyword", keyword);
+        return this.sqlSession.selectList("qna_list", map);
     }
 
     @Override
@@ -49,4 +56,12 @@ public class QnaDAOImpl implements QnaDAO {
     public List<QnaDTO> searchQna(String field, String keyword) {
         return this.sqlSession.selectList(field, keyword, null);
     }
+
+	@Override
+	public int listQnaCount(String field, String keyword) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("field", field);
+		map.put("keyword", keyword);		
+		return this.sqlSession.selectOne("qna_count", map);
+	}
 }
