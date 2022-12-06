@@ -22,7 +22,7 @@
 		insert into heartpet_board values (#{ board_no }, #{ board_category }, #{ board_id }, default, #{ board_title },
 		#{ board_content }, #{ board_secret }, #{ board_pwd }, sysdate, '', '', '')
 	</insert>
-	<update id="qna_hit" parameterType="board_no">
+	<update id="qna_hit" parameterType="int">
 		update heartpet_board set board_hit = board_hit + 1 where board_no = #{ board_no }
 	</update>
 	<update id="qna_update" parameterType="int">
