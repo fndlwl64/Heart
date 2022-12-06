@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-4 header-nav">
                         <ul>
-                            <c:if test="${empty list}">
+                            <c:if test="${empty session_id}">
                                 <li>
                                     <a data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         로그인
@@ -40,8 +40,9 @@
                                 </li>
                                 <li><a href="${path}/join">회원가입</a></li>
                             </c:if>
-                            <c:if test="${!empty list}">
-                                <li><a href="${path}/mypage">마이페이지</a></li>
+                            
+                            <c:if test="${!empty session_id}">
+                                <li><a href="${path}/user_mypage_wish_list">마이페이지</a></li>
                                 <li><a href="${path}/user_logout">로그아웃</a></li>
                             </c:if>
                         </ul>

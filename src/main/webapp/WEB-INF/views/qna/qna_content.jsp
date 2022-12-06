@@ -54,6 +54,8 @@
                     </div>
                 </div>
             </div>
+            
+            
 
             <%-- 댓글쓰기 // 아직 DB 없음 --%>
             <form action="" method="post">
@@ -69,9 +71,11 @@
             </form>
 
             <div class="content-buttons">
-                <%-- 내 글인 경우 --%>
+            	<!-- 글 쓴 사람이 나이면 -->
+                <c:if test="" >
                 <button type="button" class="btn btn-success" onclick="location.href='${path}/user_qna_update?board_no=${ list.board_no }'"><i class="bi bi-eraser"></i> 수정</button>
                 <button type="button" class="btn btn-danger" onclick="location.href=''"><i class="bi bi-trash3"></i> 삭제</button>
+                </c:if>
                 <%-- 여기까지 --%>
                 <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
             </div>
