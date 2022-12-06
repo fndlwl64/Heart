@@ -6,7 +6,10 @@
 <mapper namespace="AnimalDAO">
 	<select id="list" resultType="AnimalDTO">
 		select * from heartpet_animal
-	</select>	
+	</select>
+	<select id="listTag" resultType="AnimalDTO">
+		select * from heartpet_animal where animal_tag = #{animal_tag}
+	</select>		
 	<insert id="insert" parameterType="AnimalDTO">
 		<selectKey resultType="int" keyProperty="animal_no" order="BEFORE">
 			select count(animal_no)+1 from heartpet_animal

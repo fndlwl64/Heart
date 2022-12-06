@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>HeartPet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="short icon" href="#">
+    <link rel="short icon" href="temp">
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="${path}/resources/js/main.js"></script>
