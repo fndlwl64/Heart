@@ -34,7 +34,6 @@ public class UserController {
     @Autowired
     private NoticeDAO noticedao;
 
-   
     @RequestMapping("/user_support")
     public String user_support() {
         return "support/support";
@@ -67,7 +66,6 @@ public class UserController {
 		PrintWriter out = response.getWriter();
     	if(result.hasErrors()) {
     		// 에러를 List로 저장
-            System.out.println(qnaDto.toString());
 			List<ObjectError> errors = result.getAllErrors();
 			for(ObjectError error : errors) {
 				if(error.getDefaultMessage().equals("title")) { out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>"); break; }
@@ -92,9 +90,28 @@ public class UserController {
     	return "qna/qna_update"; 
     }
     
-    @RequestMapping("/user_qna_update_ok")
-    public void user_qna_update_ok() {
+    @RequestMapping(value = "/user_qna_update_ok", method = RequestMethod.POST)
+    public void user_qna_update_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+    	QnaDTO qnaContent = this.qnaDAO.contentQna(qnaDto.getBoard_no());
     	
+    	// 비번 check
+    	if(!qnaDto.getBoard_pwd().equals(qnaContent.getBoard_pwd())) { out.println("<script>alert('비밀번호를 다시 확인해주세요.'); history.back(); </script>"); }
+    	// 유효성 검사
+    	if(result.hasErrors()) {
+			List<ObjectError> errors = result.getAllErrors();
+			for(ObjectError error : errors) {
+				if(error.getDefaultMessage().equals("title")) { out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>"); break; }
+				else if(error.getDefaultMessage().equals("content")) { out.println("<script>alert('글 내용이 없습니다.'); history.back(); </script>"); break; }
+				else if(error.getDefaultMessage().equals("password")) { out.println("<script>alert('글 비밀번호를 입력해주세요.'); history.back(); </script>"); break; }
+				else if(error.getDefaultMessage().equals("regexp")) { out.println("<script>alert('비밀번호는 6자 이상 10자 이하의 숫자 및 영문자로 구성되어야 합니다. 다시 입력해주세요.'); history.back(); </script>"); break; }
+			}
+    	}else {   		        			
+        	int check = this.qnaDAO.insertQna(qnaDto);        	
+    		if(check > 0) { out.println("<script>alert('글이 성공적으로 수정되었습니다.'); location.href='/user_qna_list'; </script>"); }
+    		else { out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>"); }
+    	}    	
     }
 
     @RequestMapping("/user_qna_content")

@@ -5,14 +5,12 @@
 <mapper namespace="QnaDAO">
 	<select id="qna_list" resultType="QnaDTO">
 		select * from heartpet_board
-<!-- 		 <choose>
+		 <choose>
             <when test="field.equalsIgnoreCase('title') and keyword != ''">where board_title like '%' || #{keyword} || '%'</when>
             <when test="field.equalsIgnoreCase('cont') and keyword != ''">where board_cont like '%' || #{keyword} || '%'</when>
             <when test="field.equalsIgnoreCase('writer') and keyword != ''">where board_writer like '%' || #{keyword} || '%'</when>
-         </choose> -->
-         <!-- 수정중 -->
+         </choose>
 	</select>
-	
 	<update id="qna_hit" parameterType="int">
 		update heartpet_board set board_hit = board_hit + 1 where board_no = #{ board_no }
 	</update>
@@ -27,7 +25,9 @@
 		#{ board_content }, #{ board_secret }, #{ board_pwd }, sysdate, '', '', '')
 	</insert>
 	<update id="qna_update" parameterType="int">
-		update heartpet_board set board_title = #{ board_title }, board_content = #{ board_content }, board_title = #{ board_title }
+		update heartpet_board set board_category = #{ board_category }, board_title = #{ board_title }, board_content = #{ board_content }, 
+		board_secret = #{ board_secret }, board_update = sysdate, board_img1 = #{ board_img1 }, board_img2 = #{ board_img2 } where board_no = #{ board_no }
+		  
 	</update>
 	
 </mapper>
