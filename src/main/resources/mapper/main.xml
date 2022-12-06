@@ -3,7 +3,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="QnaDAO">
-	<select id="qna_list" parameterMap="java.util.Map" resultType="QnaDTO">
+	<!-- <select id="qna_list" parameterMap="java.util.Map" resultType="QnaDTO">
 		select * from heartpet_board order by board_no
 		 <choose>
             <when test="field.equals('title') and keyword != ''">where board_title like '%' || #{keyword} || '%'</when>
@@ -12,6 +12,6 @@
          </choose>
 	</select>
 	<select id="">
-	</select>
+	</select> -->
 </mapper>
 

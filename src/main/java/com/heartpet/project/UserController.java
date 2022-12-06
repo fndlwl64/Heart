@@ -44,30 +44,6 @@ public class UserController {
     @RequestMapping ("/user_animal_insert")
     public String dog_insert() { return "animal/user_animal_insert"; }
 
-    //�뙆�씪 �뾽濡쒕뱶 �뀒�뒪�듃
-	/*
-	 * @RequestMapping("/user_animal_insert") public String
-	 * dog_insert_ok(@RequestPart List<MultipartFile> files, AnimalDTO dto,
-	 * 
-	 * @RequestParam(value = "tag") String tag, HttpServletRequest request) throws
-	 * IOException {
-	 * 
-	 * //path �꽕�젙 諛� �뤃�뜑 �깮�꽦 String rootPath = System.getProperty("user.dir"); String
-	 * uploadPath = "\\src\\main\\resources\\static\\upload"; String path = rootPath
-	 * + uploadPath;
-	 * 
-	 * File folder = new File(path);
-	 * 
-	 * List<DogDTO> list = dogDAO.list(); for(DogDTO d : list){
-	 * System.out.println(d.toString()); }
-	 * 
-	 * if(!folder.exists()){ // �뤃�뜑 �깮�꽦 folder.mkdir(); } //tag�뿉 �뵲�씪�꽌 媛뺤븘吏� �삉�뒗 怨좎뼇�씠 insert
-	 * 臾� �궗�슜
-	 * 
-	 * for (MultipartFile file : files) { File toFile = new
-	 * File(path+"\\"+file.getOriginalFilename()); file.transferTo(toFile); } return
-	 * "redirect:/"; }
-	 */
 
     @RequestMapping("/user_support")
     public String user_support() {

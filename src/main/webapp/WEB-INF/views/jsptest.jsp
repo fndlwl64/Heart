@@ -5,7 +5,7 @@
 
 <body>
 <c:forEach var="dto" items="${list}">
-    <p>${dto.animal_name}</p>
+    <p>${dto.toString()}</p>
 </c:forEach>
 </body>
 </html>
