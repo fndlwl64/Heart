@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="list" value="${ qnaContent }" />
+<c:set var="page" value="${ paging }" />
 <% pageContext.setAttribute("newline", "\n"); %>
 <jsp:include page="../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
@@ -20,15 +22,15 @@
     <div>
         <div class="border qna-content">
             <div class="content-header">
-                <div><h3>${ title } 제목</h3></div>
+                <div><h3>${ list.board_title }</h3></div>
                 <div class="header-info">
                     <ul>
                         <li class="d-inline"><img src="${path}/resources/image/heartpet_logo.png" alt=""></li>
                         <li class="d-inline">
-                            <a href="${path}/mypage"><span id="id">${ id } 아이디</span></a>
+                            <a href="${path}/mypage"><span id="id">${ list.board_id }</span></a>
                             <a id="reply" href="#"><i class="bi bi-card-list"></i> 댓글 0</a>
                         </li>
-                        <li class="d-block">${ date } 2022-12-02 조회 ${ hit } 5</li>
+                        <li class="d-block">${ list.board_regdate.substring(0,10) } 조회 ${ list.board_hit }</li>
                     </ul>
                 </div>
                 <hr>
@@ -37,10 +39,17 @@
                 <div id="content-scroll">
                     <div class="content-body">
                         <div class="qna-image shadow-sm my-3 bg-body rounded">
-                            <img src="${path}/resources/image/potter.jpg" class="rounded mx-auto d-block" alt="qna_image">
+                        	<c:choose>
+                        	<c:when test="${ not empty list.board_img1 }">
+                            <img src="${path}/resources/image/${ list.board_img1 }" class="rounded mx-auto d-block" alt="qna_image">
+                            </c:when>
+                            <c:when test="${ not empty list.board_img2 }">
+                            <img src="${path}/resources/image/${ list.board_img2 }" class="rounded mx-auto d-block" alt="qna_image">
+                            </c:when>
+                            </c:choose>
                         </div>
                         <div class="qna-text mb-3">
-                            ${ fn:replace(cont.board_cont, newline, '<br/>') } 문의 드립니다.... 강아지가 비실비실해요 데려올 때부터 이상했던 것 같아요
+                            ${ fn:replace(list.board_content, newline, '<br/>') } 
                         </div>
                     </div>
                 </div>
@@ -61,10 +70,10 @@
 
             <div class="content-buttons">
                 <%-- 내 글인 경우 --%>
-                <button type="submit" class="btn btn-success" onclick="location.href='${path}/user_qna_update'"><i class="bi bi-eraser"></i> 수정</button>
-                <button type="submit" class="btn btn-danger" onclick="location.href=''"><i class="bi bi-trash3"></i> 삭제</button>
+                <button type="button" class="btn btn-success" onclick="location.href='${path}/user_qna_update?board_no=${ list.board_no }'"><i class="bi bi-eraser"></i> 수정</button>
+                <button type="button" class="btn btn-danger" onclick="location.href=''"><i class="bi bi-trash3"></i> 삭제</button>
                 <%-- 여기까지 --%>
-                <button type="submit" class="btn btn-dark" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
+                <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
             </div>
         </div>
     </div>

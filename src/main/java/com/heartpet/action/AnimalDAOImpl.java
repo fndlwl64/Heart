@@ -16,8 +16,7 @@ public class AnimalDAOImpl implements AnimalDAO{
 
 	@Override
 	public int insert(AnimalDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("insert", dto);
 	}
 
 	@Override
