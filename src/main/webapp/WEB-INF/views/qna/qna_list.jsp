@@ -90,7 +90,6 @@
                 <form method="post" action="${ path }/user_qna_list">
                     <input type="hidden" name="page" value="${ paging.page }" />
                     <select name="field" class="form-select d-inline align-middle w-25">
-                    
                         <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
                         <option value="adoption"<c:if test="${ field eq 'adoption' }">selected="selected"</c:if>>입양</option>
                         <option value="process"<c:if test="${ field eq 'process' }">selected="selected"</c:if>>절차</option>

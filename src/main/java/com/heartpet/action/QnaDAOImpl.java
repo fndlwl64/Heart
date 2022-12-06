@@ -21,22 +21,27 @@ public class QnaDAOImpl implements QnaDAO {
 
     @Override
     public int insertQna(QnaDTO dto) {
-        return 0;
+        return this.sqlSession.insert("qna_insert", dto);
     }
 
     @Override
     public QnaDTO contentQna(int board_no) {
         return this.sqlSession.selectOne("qna_content", board_no);
     }
+    
+    @Override
+    public int hitQna(int board_no) {
+        return this.sqlSession.update("qna_hit", board_no);
+	}
 
     @Override
     public int updateQna(QnaDTO dto) {
-        return 0;
+        return this.sqlSession.update("qna_update", dto);
     }
 
     @Override
     public int deleteQna(int board_no) {
-        return 0;
+        return this.sqlSession.delete("qna_delete", board_no);
     }
 
     @Override
