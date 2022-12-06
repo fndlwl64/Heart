@@ -57,7 +57,8 @@
                     <td>${ list.board_category }</td>
                     <td class="left-align">
                     <a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }">
-                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if> ${ list.board_title }</a></td>
+                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if> ${ list.board_title }
+                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if></a></td>
                     <td>${ list.board_id }</td>
                     <td>${ list.board_regdate.substring(0,10) }</td>
                     <td>${ list.board_hit }</td>

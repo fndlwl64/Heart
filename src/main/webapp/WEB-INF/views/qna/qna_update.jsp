@@ -18,7 +18,9 @@
     </div>
 
     <div>
-        <form action="${ path }/user_qna_update_ok" method="post" enctype="multipart/form-data">
+        <form name="updateForm" action="${ path }/user_qna_update_ok" method="post" enctype="multipart/form-data" >
+        	<input type="hidden" name="board_no" value="${ list.board_no }" />
+        	<input type="hidden" name="board_id" value="${ list.board_id }" />
             <table class="table align-middle">
                 <tr class="border-top">
                     <th class="table-light col-1">카테고리</th>
@@ -46,15 +48,15 @@
                     <td colspan="4"><textarea name="board_content" class="form-control" cols="30" rows="10">${ list.board_content }</textarea></td>
                 </tr>
                 <tr>
-                    <td colspan="5">
-                        <div class="d-flex align-middle">
-                        <!-- 나중에 이미지 수정... 있으면 이름 뜨게?>  -->
-                        	<c:if test="${ not empty list.board_img1 || not empty list.board_img2 }">                        	
-                        	</c:if>
-                            <input type="file" class="form-control mx-1 w-50" name="board_img1" accept="image/gif, image/jpeg, image/png" >
-                            <input type="file" class="form-control w-50" name="board_img2" accept="image/gif, image/jpeg, image/png" >
-                        </div>
-                    </td>
+                    <th class="table-light">글 비밀번호</th>
+					<td class="col-2"><input type="password" class="form-control" name="board_pwd" required="required">
+					</td>
+					<th class="table-light">이미지</th>
+	                <td colspan="2">
+	                    <div class="d-flex align-middle">
+	                        <input type="file" class="form-control" name="board_img" accept="image/gif, image/jpeg, image/png" multiple>
+	                    </div>
+                	</td>
                 </tr>
             </table>
 
