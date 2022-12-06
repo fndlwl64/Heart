@@ -17,7 +17,7 @@
 	</select>
 	<insert id="qna_insert" parameterType="QnaDTO">
 		<selectKey resultType="int" keyProperty="board_no" order="BEFORE">
-			select max(board_no)+1 from board
+			select max(board_no)+1 from heartpet_board
 		</selectKey>
 		insert into heartpet_board values (#{ board_no }, #{ board_category }, #{ board_id }, default, #{ board_title },
 		#{ board_content }, #{ board_secret }, #{ board_pwd }, sysdate, '', '', '')
