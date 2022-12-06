@@ -27,15 +27,7 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
 	
-	@Autowired
-    private AnimalDAO animalDAO;
-
-    @RequestMapping("/jsptest")
-    public String jsptest(Model model){
-        model.addAttribute("list",animalDAO.list());
-
-        return "jsptest";
-    }
+	
     
     @Autowired
     private QnaDAO qnaDAO;
@@ -43,16 +35,7 @@ public class UserController {
     @Autowired
     private NoticeDAO noticedao;
 
-    @RequestMapping("/user_dog_list")
-    public String dog_list() { return "animal/dog/user_dog_list"; }
-
-    @RequestMapping("/user_dog_content")
-    public String dog_content() { return "animal/dog/user_dog_content"; }
-
-    @RequestMapping ("/user_animal_insert")
-    public String dog_insert() { return "animal/user_animal_insert"; }
-
-
+   
     @RequestMapping("/user_support")
     public String user_support() {
         return "support/support";
@@ -111,18 +94,14 @@ public class UserController {
     public String user_qna_update() { return "qna/qna_update"; }
 
     @RequestMapping("/user_qna_content")
-    public String user_qna_content(@RequestParam("board_no") int board_no, Model model) { 
-    	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
-    	model.addAttribute("qnaContent", qnaContent);
-    	return "qna/qna_content"; 
-    }
+    public String user_qna_content() { return "qna/qna_content"; }
 
     @RequestMapping("/user_fnq_list")
     public String user_fnq_list() { return "qna/fnq_list"; }
 
     @RequestMapping("/user_notice")
     public String notice(Model model) {
-        List<NoticeDTO> list = this.noticedao.getNoticeList();
+        List<NoticeDTO> list = noticedao.getNoticeList();
         model.addAttribute("List", list);
         return "notice/notice_list";
     }
@@ -146,6 +125,7 @@ public class UserController {
 
     @RequestMapping("/login")
     public void login(@RequestParam("paramId")String id, @RequestParam("paramName")String name, @RequestParam("paramEmail")String email){
+
     }
 
     @RequestMapping("/user_mypage_adoptreg_list")
@@ -173,4 +153,10 @@ public class UserController {
         return "mypage/mypage_grade_list";
     }
 
+    @RequestMapping("/user_notice_content")
+    public String notice_content(@RequestParam("no") int no, Model model) {
+    	NoticeDTO dto = this.noticedao.getNotice(no);
+    	model.addAttribute("Cont", dto);
+    	return "notice/notice_content";
+    }
 }

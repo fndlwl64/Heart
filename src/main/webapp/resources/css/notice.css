@@ -1,3 +1,8 @@
+.notice-board {
+	height: 800px;
+
+}
+
 .notice-board .table{
     width: 60%;
     text-align: center;
@@ -6,4 +11,44 @@
 .notice-board .notice_content {
     text-decoration: none;
     color: gray;
+}
+
+.notice-board .notice_content {
+	border: solid 1px lightgray;
+	width: 60%;
+	height: auto;
+}
+
+.notice-board .notice_content .sp_content1 {
+	font-size: 25px;
+	margin: 30px;
+	float: left;
+	color: black;
+}
+
+.notice-board .notice_content .sp_content2 {
+	float: right;
+	margin: 20px;
+	color: gray;
+}
+
+.notice-board .notice_content .sp_content3 {
+	float: left;
+	margin: 30px;
+	color: black;
+}
+
+.notice-board .table a{
+    text-decoration: none;
+}
+
+.notice-board .notice_content .notice_content_mid {
+	display: block;
+	clear: both;
+	margin: 30px;
+} 
+
+.notice-board .notice_content .notice_content_mid button{
+	border-color: gray;
+	margin: 50px;
 }
