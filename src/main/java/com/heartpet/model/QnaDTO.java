@@ -22,8 +22,7 @@ public class QnaDTO {
     private String board_secret;
 
     @NotBlank(message = "password")
-    @Size(min = 6, max = 10, message = "length")
-    @Pattern(regexp="/^[A-Za-z0-9]$/", message = "regexp")
+    @Pattern(regexp="/^[A-Za-z0-9]{6,10}$/", message = "regexp")
     private String board_pwd;
     
     private String board_regdate;
