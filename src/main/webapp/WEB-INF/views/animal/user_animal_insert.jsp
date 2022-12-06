@@ -5,7 +5,7 @@
 
 <body>
 <div class="d-flex justify-content-center">
-    <form action="/user_animal_insert" method="post" enctype="multipart/form-data" onsubmit="return submitOption();">
+    <form action="<%=request.getContextPath() %>/user_animal_insert" method="post" enctype="multipart/form-data" onsubmit="return submitOption();">
         <table class="table">
             <tr>
                 <th>종류</th>
