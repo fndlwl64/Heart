@@ -4,7 +4,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="../include/user_header.jsp" />
 <link rel="short icon" href="#" />
-<link rel="stylesheet" href="${path}/resources/css/notice.css">
+<link rel="stylesheet" href="${path }/resources/css/notice.css">
 <%-- 여기서부터 작성 --%>
 <div class="notice-board">
     <div align="center">

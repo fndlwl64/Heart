@@ -21,7 +21,7 @@ public class AnimalDTO {
     private String animal_img1;
     private String animal_img2;
     private String animal_img3;
-    private String animal_stauts;
+    private String animal_status;
     private String animal_tag;	
     private String animal_regdate;
     private String animal_update;

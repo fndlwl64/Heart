@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.AnimalDAO;
+import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.FileUploadImage;
 
 import lombok.Data;
@@ -37,13 +38,16 @@ public class AnimalController {
 		return "jsptest";
 	}
 
-	@RequestMapping("/user_dog_list")
-	public String dog_list() {
+	@RequestMapping(value = "/user_dog_list" , method = RequestMethod.GET)
+	public String dog_list(Model model) {
+		model.addAttribute("dogList", animalDAO.listTag("dog"));
 		return "animal/dog/user_dog_list";
 	}
 
-	@RequestMapping("/user_dog_content")
-	public String dog_content() {
+	@RequestMapping(value = "/user_dog_content", method = RequestMethod.GET)
+	public String dog_content(@RequestParam("no") int no) {
+		System.out.println("===========================");
+		System.out.println(no);
 		return "animal/dog/user_dog_content";
 	}
 
@@ -53,11 +57,19 @@ public class AnimalController {
 	}
 
 	@RequestMapping(value = "/user_animal_insert", method = RequestMethod.POST)
-	public String dog_insert_ok(@RequestParam("files") List<MultipartFile> files, HttpServletRequest request)
+	public String dog_insert_ok(@RequestParam("files") List<MultipartFile> files, HttpServletRequest request
+			, AnimalDTO animalDTO)
 			throws IllegalStateException, IOException {
-
+		System.out.println(animalDTO.toString());
 		FileUploadImage upload = new FileUploadImage();
-		upload.upload(request, files);
+		String[] images = upload.uploadAnimalImg(request, files);
+		animalDTO.setAnimal_img1(images[0]);
+		animalDTO.setAnimal_img2(images[1]);
+		animalDTO.setAnimal_img3(images[2]);
+		
+		animalDTO.setAnimal_status("입양 대기");
+		
+		animalDAO.insert(animalDTO);
 
 		return "redirect:/";
 	}

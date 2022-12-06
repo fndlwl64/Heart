@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heartpet.action.UserDAO">
+	
+	<select id="id_check" parameterType="String" resultType="int">
+		SELECT COUNT(USER_ID) FROM HEARTPET_USER WHERE USER_ID = #{id}
+	</select>
+	
+	<insert id="kakao_insert" parameterType="map">
+	<selectKey resultType="int" keyProperty="user_no" order="BEFORE">select max(user_no) from heartpet_user</selectKey> 
+		INSERT INTO HEARTPET_USER VALUES (#{user_no}+1, #{id}, 'kakao1234', #{name}, default, #{email}, '', '', '', default, '' )
+	</insert>
+	
+	<select id="login" parameterType="map">
+		SELECT USER_ID, USER_PWD FROM HEARTPET_USER WHERE USER_ID = #{id}
+	</select>
+	
+</mapper>

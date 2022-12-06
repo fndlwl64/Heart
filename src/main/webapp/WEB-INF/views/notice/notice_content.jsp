@@ -10,6 +10,7 @@
 <div class="notice-board">
 	<div align="center">
 		<h2>공지사항</h2>
+		<h2>${dto.getNotice_hit() }</h2>
 		<div class="notice_content">
 			<div>
 				<p><span class="sp_content1">${dto.getNotice_title()}</span><span class="sp_content2">게시일 : ${dto.getNotice_date().substring(0,10) }</span></p>
