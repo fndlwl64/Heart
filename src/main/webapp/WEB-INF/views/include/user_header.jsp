@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-4 header-nav">
                         <ul>
-                            <c:if test="${empty list}">
+                            <c:if test="${empty session_id}">
                                 <li>
                                     <a data-bs-toggle="modal" data-bs-target="#exampleModal">
                                         로그인
@@ -40,8 +40,9 @@
                                 </li>
                                 <li><a href="${path}/join">회원가입</a></li>
                             </c:if>
-                            <c:if test="${!empty list}">
-                                <li><a href="${path}/mypage">마이페이지</a></li>
+                            
+                            <c:if test="${!empty session_id}">
+                                <li><a href="${path}/user_mypage_wish_list">마이페이지</a></li>
                                 <li><a href="${path}/user_logout">로그아웃</a></li>
                             </c:if>
                         </ul>
@@ -97,7 +98,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form class="login_form" method="post" action="/login">
+                            <form class="login_form" method="post" action="${path }/login">
                                 <input class="login_text" name="user_id" placeholder="아이디">
                                 <span class="idcheck"></span>
                                 <input class="login_text" type="password" name="user_pwd" placeholder="비밀번호">
