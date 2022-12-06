@@ -41,12 +41,6 @@ public class UserController {
 	@Autowired
 	private UserDAO userDAO;
 
-    @RequestMapping("/jsptest")
-    public String jsptest(Model model){
-        model.addAttribute("list",dogDAO.list());
-        return "jsptest";
-    }
-    
     @Autowired
     private QnaDAO qnaDAO;
 
