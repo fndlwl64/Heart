@@ -46,6 +46,9 @@
                             <c:when test="${ not empty list.board_img2 }">
                             <img src="${path}/resources/image/${ list.board_img2 }" class="rounded mx-auto d-block" alt="qna_image">
                             </c:when>
+                            <c:otherwise>
+                            <img src="${path}/resources/image/dog.png" class="rounded mx-auto d-block" alt="qna_image">
+                            </c:otherwise>
                             </c:choose>
                         </div>
                         <div class="qna-text mb-3">
@@ -54,6 +57,8 @@
                     </div>
                 </div>
             </div>
+            
+            
 
             <%-- 댓글쓰기 // 아직 DB 없음 --%>
             <form action="" method="post">
