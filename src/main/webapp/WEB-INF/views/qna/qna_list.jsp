@@ -55,7 +55,7 @@
                 <tr>
                     <td>${ list.board_no }</td>
                     <td>${ list.board_category }</td>
-                    <td class="left-align"><a class="d-block qna-a-link" href="${path}/user_qna_content">${ list.board_title }</a></td>
+                    <td class="left-align"><a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }">${ list.board_title }</a></td>
                     <td>${ list.board_id }</td>
                     <td>${ list.board_regdate.substring(0,10) }</td>
                     <td>${ list.board_hit }</td>
