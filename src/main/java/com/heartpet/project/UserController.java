@@ -72,13 +72,10 @@ public class UserController {
             System.out.println(qnaDto.toString());
 			List<ObjectError> errors = result.getAllErrors();
 			for(ObjectError error : errors) {
-				switch (error.getDefaultMessage()) {
-				case "title": out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>"); break;
-				case "content": out.println("<script>alert('글 내용이 없습니다.'); history.back(); </script>"); break;
-				case "password": out.println("<script>alert('글 비밀번호를 입력해주세요.'); history.back(); </script>"); break;
-				case "length": out.println("<script>alert('비밀번호는 6자 이상 10자 이하여야 합니다.'); history.back(); </script>"); break;
-				case "regexp": out.println("<script>alert('비밀번호는 숫자 및 영문자로 구성되어야 합니다. 다시 입력해주세요.'); history.back(); </script>"); break;
-				}
+				if(error.getDefaultMessage().equals("title")) { out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>"); break; }
+				else if(error.getDefaultMessage().equals("content")) { out.println("<script>alert('글 내용이 없습니다.'); history.back(); </script>"); break; }
+				else if(error.getDefaultMessage().equals("password")) { out.println("<script>alert('글 비밀번호를 입력해주세요.'); history.back(); </script>"); break; }
+				else if(error.getDefaultMessage().equals("regexp")) { out.println("<script>alert('비밀번호는 6자 이상 10자 이하의 숫자 및 영문자로 구성되어야 합니다. 다시 입력해주세요.'); history.back(); </script>"); break; }
 			}
     	}else {
         	int check = this.qnaDAO.insertQna(qnaDto);
