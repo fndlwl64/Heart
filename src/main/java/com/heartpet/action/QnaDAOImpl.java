@@ -31,6 +31,7 @@ public class QnaDAOImpl implements QnaDAO {
     
     @Override
     public int hitQna(int board_no) {
+    	System.out.println("안뇽");
         return this.sqlSession.update("qna_hit", board_no);
 	}
 

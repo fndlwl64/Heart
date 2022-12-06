@@ -7,7 +7,7 @@
 <% pageContext.setAttribute("newline", "\n"); %>
 <jsp:include page="../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
-<link rel="short icon" href="#" />
+<link rel="short icon" href="temp" />
 
 <%-- 문의글 상세 보기 --%>
 <div id="qna-contents" class="qna-contents">
@@ -46,10 +46,13 @@
                             <c:when test="${ not empty list.board_img2 }">
                             <img src="${path}/resources/image/${ list.board_img2 }" class="rounded mx-auto d-block" alt="qna_image">
                             </c:when>
+                            <c:otherwise>
+                            <img src="${path}/resources/image/dog.png" class="rounded mx-auto d-block" alt="qna_image">               
+                            </c:otherwise>
                             </c:choose>
                         </div>
                         <div class="qna-text mb-3">
-                            ${ fn:replace(list.board_content, newline, '<br/>') } 
+                            ${ list.board_content.replace(newline, '<br/>') } 
                         </div>
                     </div>
                 </div>
@@ -72,10 +75,8 @@
 
             <div class="content-buttons">
             	<!-- 글 쓴 사람이 나이면 -->
-                <c:if test="" >
                 <button type="button" class="btn btn-success" onclick="location.href='${path}/user_qna_update?board_no=${ list.board_no }'"><i class="bi bi-eraser"></i> 수정</button>
                 <button type="button" class="btn btn-danger" onclick="location.href=''"><i class="bi bi-trash3"></i> 삭제</button>
-                </c:if>
                 <%-- 여기까지 --%>
                 <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
             </div>

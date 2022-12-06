@@ -6,7 +6,7 @@
 <c:set var="qList" value="${ qnaList }" />
 <jsp:include page="../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
-<link rel="short icon" href="#" />
+<link rel="short icon" href="temp" />
 
 
 <%-- qna list --%>
@@ -55,7 +55,9 @@
                 <tr>
                     <td>${ list.board_no }</td>
                     <td>${ list.board_category }</td>
-                    <td class="left-align"><a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }">${ list.board_title }</a></td>
+                    <td class="left-align">
+                    <a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }">
+                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if> ${ list.board_title }</a></td>
                     <td>${ list.board_id }</td>
                     <td>${ list.board_regdate.substring(0,10) }</td>
                     <td>${ list.board_hit }</td>
