@@ -160,4 +160,10 @@ public class UserController {
         return "mypage/mypage_grade_list";
     }
 
+    @RequestMapping("/user_notice_content")
+    public String notice_content(@RequestParam("no") int no, Model model) {
+    	NoticeDTO dto = this.noticedao.getNotice(no);
+    	model.addAttribute("Cont", dto);
+    	return "notice/notice_content";
+    }
 }

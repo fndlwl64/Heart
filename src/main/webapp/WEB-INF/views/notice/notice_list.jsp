@@ -13,20 +13,22 @@
             <tr class="table-light">
                 <th>글 No.</th>
                 <th>공지제목</th>
+                <th>게시일</th>
                 <th>조회수</th>
             </tr>
             <c:if test="${!empty List}">
                 <c:forEach items="${List }" var="dto">
             <tr>
                 <td>${dto.getNotice_no()}</td>
-                <td>${dto.getNotice_title() }</td>
+                <td><a href="${path }/user_notice_content?no=${dto.getNotice_no() }">${dto.getNotice_title() }</a></td>
+                <td>${dto.getNotice_date().substring(0, 10) }</td>
                 <td>${dto.getNotice_hit() }</td>
             </tr>
                 </c:forEach>
             </c:if>
         </table>
         <c:if test="${empty List}">
-            <h3>안떠</h3>
+            <h3>공지사항이없습니다.</h3>
         </c:if>
     </div>
 </div>

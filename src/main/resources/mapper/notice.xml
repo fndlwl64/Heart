@@ -6,4 +6,7 @@
 	<select id="notice_list" resultType="com.heartpet.model.NoticeDTO">
 		select * from heartpet_notice
 	</select>	
+	<select id="notice_content" parameterType="int" resultType="com.heartpet.model.NoticeDTO">
+		select * from heartpet_notice where notice_no = #{no}
+	</select>	
 </mapper>
