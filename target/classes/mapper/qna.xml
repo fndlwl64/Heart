@@ -10,6 +10,7 @@
             <when test="field.equalsIgnoreCase('cont') and keyword != ''">where board_cont like '%' || #{keyword} || '%'</when>
             <when test="field.equalsIgnoreCase('writer') and keyword != ''">where board_writer like '%' || #{keyword} || '%'</when>
          </choose> -->
+         <!-- 수정중 -->
 	</select>
 	<select id="qna_content" parameterType="int" resultType="QnaDTO">
 		select * from heartpet_board where board_no = #{board_no}
