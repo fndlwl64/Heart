@@ -345,7 +345,7 @@ public class UserController {
     }
     @RequestMapping("/user_mypage_support_list")
     public String mypage_support_list() {
-        return "mypage/mypage_support_list";
+        return "user/mypage/mypage_support_list";
     }
     @RequestMapping("/user_mypage_grade_list")
     public String mypage_grade_list() {
