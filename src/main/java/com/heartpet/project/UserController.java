@@ -1,6 +1,7 @@
 package com.heartpet.project;
 
 import com.heartpet.action.NoticeDAO;
+
 import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.NoticeDTO;
 import com.heartpet.model.PageDTO;
@@ -57,7 +58,7 @@ public class UserController {
 
     @RequestMapping("/user_support")
     public String user_support() {
-        return "support/support";
+        return "user/support/support";
     }
 
     // 검색 기능 구현 중
@@ -80,12 +81,12 @@ public class UserController {
 		model.addAttribute("field", field); 
 		model.addAttribute("keyword", keyword);	
 		
-        return "qna/qna_list";
+        return "user/qna/qna_list";
     }
     
     @RequestMapping("/user_qna_insert")
     public String user_qna_insert() { 
-    	return "qna/qna_insert";
+    	return "user/qna/qna_insert";
     }
     
     @RequestMapping(value = "/user_qna_insert_ok", method = RequestMethod.POST)
@@ -114,7 +115,7 @@ public class UserController {
     public String user_qna_update(@RequestParam("board_no") int board_no, Model model) {
     	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
     	model.addAttribute("qnaContent", qnaContent);
-    	return "qna/qna_update"; 
+    	return "user/qna/qna_update"; 
     }
     
     @RequestMapping(value = "/user_qna_update_ok", method = RequestMethod.POST)
@@ -146,7 +147,7 @@ public class UserController {
     	this.qnaDAO.hitQna(board_no);
     	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
     	model.addAttribute("qnaContent", qnaContent);
-    	return "qna/qna_content"; 
+    	return "user/qna/qna_content"; 
     }
 
     @RequestMapping("/user_fnq_list")
@@ -156,24 +157,24 @@ public class UserController {
     public String notice(Model model) {
         List<NoticeDTO> list = noticedao.getNoticeList();    
         model.addAttribute("List", list);
-        return "notice/notice_list";
+        return "user/notice/notice_list";
     }
 
     @RequestMapping("/user_review_list")
-    public String user_review_list() { return "review/review_list"; }
+    public String user_review_list() { return "user/review/review_list"; }
 
     @RequestMapping("/user_review_insert")
-    public String user_review_insert() { return "review/review_insert"; }
+    public String user_review_insert() { return "user/review/review_insert"; }
 
     @RequestMapping("/user_review_content")
-    public String user_review_content() { return "review/review_content"; }
+    public String user_review_content() { return "user/review/review_content"; }
 
     @RequestMapping("/user_review_update")
-    public String review_update() { return "review/review_update"; }
+    public String review_update() { return "user/review/review_update"; }
 
     @RequestMapping("/user_mypage_wish_list")
     public String mypage_wish_list() {
-        return "mypage/mypage_wish_list";
+        return "user/mypage/mypage_wish_list";
     }
     
     @RequestMapping("/login")
@@ -295,7 +296,7 @@ public class UserController {
     
     @RequestMapping("/join")
     public String join() {
-        return "user/join";
+        return "user/user/join";
     }
     
     @RequestMapping(value="/joinOk")
@@ -328,19 +329,19 @@ public class UserController {
 
     @RequestMapping("/user_mypage_adoptreg_list")
     public String mypage_adoptreg_list() {
-        return "mypage/mypage_adopt_reg_list";
+        return "user/mypage/mypage_adopt_reg_list";
     }
     @RequestMapping("/user_mypage_adoptcomplet_list")
     public String mypage_adoptcomplet_list() {
-        return "mypage/mypage_adopt_complet_list";
+        return "user/mypage/mypage_adopt_complet_list";
     }
     @RequestMapping("/user_mypage_user_update")
     public String mypage_user_update() {
-        return "mypage/mypage_user_update";
+        return "user/mypage/mypage_user_update";
     }
     @RequestMapping("/user_mypage_user_delete")
     public String mypage_user_delete() {
-        return "mypage/mypage_user_delete";
+        return "user/mypage/mypage_user_delete";
     }
     @RequestMapping("/user_mypage_support_list")
     public String mypage_support_list() {
@@ -348,7 +349,7 @@ public class UserController {
     }
     @RequestMapping("/user_mypage_grade_list")
     public String mypage_grade_list() {
-        return "mypage/mypage_grade_list";
+        return "user/mypage/mypage_grade_list";
     }
   
     @RequestMapping("/user_notice_content")
@@ -356,6 +357,6 @@ public class UserController {
     	NoticeDTO dto = this.noticedao.getNotice(no);
     	model.addAttribute("Cont", dto);
     	noticedao.readCount(no);
-    	return "notice/notice_content";
+    	return "user/notice/notice_content";
     }
 }
