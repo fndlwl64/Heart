@@ -1,6 +1,7 @@
 package com.heartpet.project;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -11,10 +12,7 @@ public class AdminController {
     public String user_list() {
         return "admin/user_list";
     }
-    @RequestMapping("/dog_list")
-    public String dog_list() {
-        return "admin/dog_list";
-    }
+    
     @RequestMapping("/cat_list")
     public String cat_list() {
         return "admin/cat_list";

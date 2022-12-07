@@ -45,28 +45,24 @@ public class AnimalController {
 	}
 
 	@RequestMapping(value = "/user_dog_list" , method = RequestMethod.GET)
-	public String dog_list(Model model) {
+	public String user_dog_list(Model model) {
 		model.addAttribute("dogList", animalDAO.listTag("dog"));
-		return "animal/dog/user_dog_list";
+		return "user/animal/dog/user_dog_list";
 	}
 
 	@RequestMapping(value = "/user_dog_content", method = RequestMethod.GET)
-	public String dog_content(@RequestParam("no") int no, Model model) {
-		System.out.println("===========================");
-		
-		System.out.println(FileSystemView.getFileSystemView().getDefaultDirectory().toString());
-		System.out.println(request.getSession().getServletContext().getContext("/upload").getRealPath(""));
-		//model.addAttribute(null, model);
-		return "animal/dog/user_dog_content";
+	public String user_dog_content(@RequestParam("no") int no, Model model) {
+		model.addAttribute("dto", animalDAO.content(no));
+		return "user/animal/dog/user_dog_content";
 	}
 
 	@RequestMapping(value = "/user_animal_insert", method = RequestMethod.GET)
-	public String dog_insert() {
-		return "animal/user_animal_insert";
+	public String user_dog_insert() {
+		return "user/animal/user_animal_insert";
 	}
 
 	@RequestMapping(value = "/user_animal_insert", method = RequestMethod.POST)
-	public String dog_insert_ok(@RequestParam("files") List<MultipartFile> files, HttpServletRequest request
+	public String user_dog_insert_ok(@RequestParam("files") List<MultipartFile> files, HttpServletRequest request
 			, AnimalDTO animalDTO)
 			throws IllegalStateException, IOException {
 		System.out.println(animalDTO.toString());
@@ -82,5 +78,11 @@ public class AnimalController {
 
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/admin_dog_list")
+    public String admin_dog_list(Model model) {
+    	model.addAttribute("dogList", animalDAO.listTag("dog"));
+        return "admin/animal/dog/admin_dog_list";
+    }
 
 }
