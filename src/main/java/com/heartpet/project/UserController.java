@@ -41,9 +41,6 @@ public class UserController {
 	private UserDAO userDAO;
 
     @Autowired
-    private QnaDAO qnaDAO;
-
-    @Autowired
     private NoticeDAO noticedao;
     
     // 한 페이지당 보여질 게시물의 수
@@ -57,116 +54,12 @@ public class UserController {
         return "user/support/support";
     }
 
-    // 검색 기능 구현 중
-    @RequestMapping("/user_qna_list")
-    public String user_qna_list(@RequestParam(required = false) String field, @RequestParam(required = false) String keyword, @RequestParam(defaultValue = "0") int page, Model model) {
-    	if(field == null) { field = ""; }
-       	if(keyword == null) { keyword = ""; }
-    	
-		int currentPage = 1;	// 현재 페이지 변수
-		if(page != 0) { currentPage = page; }
-    	
-    	totalRecord = this.qnaDAO.listQnaCount(field, keyword);
-    	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-    	
-        List<QnaDTO> qnaList = this.qnaDAO.listQna(paging.getStartNo(), paging.getEndNo(), field, keyword);
-        
-        model.addAttribute("qnaList", qnaList);
-        model.addAttribute("total", totalRecord);
-        model.addAttribute("paging", paging);		
-		model.addAttribute("field", field); 
-		model.addAttribute("keyword", keyword);	
-		
-        return "user/qna/qna_list";
-    }
-    
-    @RequestMapping("/user_qna_insert")
-    public String user_qna_insert() { 
-    	return "user/qna/qna_insert";
-    }
-    
-    @RequestMapping(value = "/user_qna_insert_ok", method = RequestMethod.POST)
-    public void user_qna_insert_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-    	if(result.hasErrors()) { // 에러를 List로 저장
-			List<ObjectError> errors = result.getAllErrors();
-			for(ObjectError error : errors) {
-				if(error.getDefaultMessage().equals("title")) { out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>"); break; }
-				else if(error.getDefaultMessage().equals("content")) { out.println("<script>alert('글 내용이 없습니다.'); history.back(); </script>"); break; }
-				else if(error.getDefaultMessage().equals("password")) { out.println("<script>alert('글 비밀번호를 입력해주세요.'); history.back(); </script>"); break; }
-				else if(error.getDefaultMessage().equals("regexp")) { out.println("<script>alert('비밀번호는 6자 이상 10자 이하의 숫자 및 영문자로 구성되어야 합니다. 다시 입력해주세요.'); history.back(); </script>"); break; }
-			}
-    	}else {
-        	int check = this.qnaDAO.insertQna(qnaDto);
-    		if(check > 0) {
-    			out.println("<script>alert('글이 성공적으로 등록되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>");
-    		}else {
-    			out.println("<script>alert('글 등록을 실패했습니다.'); history.back(); </script>");
-    		}
-    	}
-    }
-
-    @RequestMapping("/user_qna_update")
-    public String user_qna_update(@RequestParam("board_no") int board_no, Model model) {
-    	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
-    	model.addAttribute("qnaContent", qnaContent);
-    	return "user/qna/qna_update"; 
-    }
-    
-    @RequestMapping(value = "/user_qna_update_ok", method = RequestMethod.POST)
-    public void user_qna_update_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
-    	QnaDTO qnaContent = this.qnaDAO.contentQna(qnaDto.getBoard_no());
-    	
-    	// 비번 check
-    	if(!qnaDto.getBoard_pwd().equals(qnaContent.getBoard_pwd())) { out.println("<script>alert('비밀번호를 다시 확인해주세요.'); history.back(); </script>"); }
-    	// 유효성 검사
-    	if(result.hasErrors()) {
-			List<ObjectError> errors = result.getAllErrors();
-			for(ObjectError error : errors) {
-				if(error.getDefaultMessage().equals("title")) { out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>"); break; }
-				else if(error.getDefaultMessage().equals("content")) { out.println("<script>alert('글 내용이 없습니다.'); history.back(); </script>"); break; }
-				else if(error.getDefaultMessage().equals("password")) { out.println("<script>alert('글 비밀번호를 입력해주세요.'); history.back(); </script>"); break; }
-				else if(error.getDefaultMessage().equals("regexp")) { out.println("<script>alert('비밀번호는 6자 이상 10자 이하의 숫자 및 영문자로 구성되어야 합니다. 다시 입력해주세요.'); history.back(); </script>"); break; }
-			}
-    	}else {   		        			
-        	int check = this.qnaDAO.insertQna(qnaDto);        	
-    		if(check > 0) { out.println("<script>alert('글이 성공적으로 수정되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>"); }
-    		else { out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>"); }
-    	}    	
-    }
-
-    @RequestMapping("/user_qna_content")
-    public String user_qna_content(@RequestParam("board_no") int board_no, Model model) { 
-    	this.qnaDAO.hitQna(board_no);
-    	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
-    	model.addAttribute("qnaContent", qnaContent);
-    	return "user/qna/qna_content"; 
-    }
-
-    @RequestMapping("/user_fnq_list")
-    public String user_fnq_list() { return "qna/fnq_list"; }
-
     @RequestMapping("/user_notice")
     public String notice(Model model) {
         List<NoticeDTO> list = noticedao.getNoticeList();    
         model.addAttribute("List", list);
         return "user/notice/notice_list";
     }
-
-    @RequestMapping("/user_review_list")
-    public String user_review_list() { return "user/review/review_list"; }
-
-    @RequestMapping("/user_review_insert")
-    public String user_review_insert() { return "user/review/review_insert"; }
-
-    @RequestMapping("/user_review_content")
-    public String user_review_content() { return "user/review/review_content"; }
-
-    @RequestMapping("/user_review_update")
-    public String review_update() { return "user/review/review_update"; }
 
     @RequestMapping("/user_mypage_wish_list")
     public String mypage_wish_list() {
