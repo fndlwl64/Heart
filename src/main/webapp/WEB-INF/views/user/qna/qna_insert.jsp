@@ -4,25 +4,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
-
-<script>
-
-$(function() {	
-	
-    $('input[type=checkbox][name=board_secret]').change(function() {
-        if (this.checked) {
-        	$('input[type=hidden][name=board_secret]').attr('disabled', true);
-            console.log(this);
-        	console.log(typeof this.value);
-        }else {
-        	$('input[type=hidden][name=board_secret]').attr('disabled', false);
-            console.log(this);
-        	console.log(typeof this.value);
-        }
-    });
-}) 
- 
-</script>
+<script src="${path}/resources/js/user_qna_insert.js"></script>
 
 <%-- 글쓰기 --%>
 <div id="qna-contents" class="qna-contents">

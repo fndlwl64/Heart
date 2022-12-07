@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.heartpet.action.QnaDAO;
+import com.heartpet.model.FnqDTO;
 import com.heartpet.model.PageDTO;
 import com.heartpet.model.QnaDTO;
 
@@ -144,7 +145,27 @@ public class UserQnaController {
     // FNQ_LIST
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/user_fnq_list")
-    public String user_fnq_list() { return "user/qna/fnq_list"; }
+    public String user_fnq_list(@RequestParam(required = false) String field, @RequestParam(required = false) String keyword, @RequestParam(defaultValue = "0") int page, Model model) { 
+    	
+    	if(field == null) { field = ""; }
+       	if(keyword == null) { keyword = ""; }
+    	
+		int currentPage = 1;	// 현재 페이지 변수
+		if(page != 0) { currentPage = page; }
+    	
+    	totalRecord = this.qnaDAO.listQnaCount(field, keyword);
+    	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+    	
+        List<FnqDTO> fnqList = this.qnaDAO.listFnq(paging.getStartNo(), paging.getEndNo(), field, keyword);
+        
+        model.addAttribute("qnaList", fnqList);
+        model.addAttribute("total", totalRecord);
+        model.addAttribute("paging", paging);		
+		model.addAttribute("field", field); 
+		model.addAttribute("keyword", keyword);	
+        
+    	return "user/qna/fnq_list"; 
+    }
 
 
 }
