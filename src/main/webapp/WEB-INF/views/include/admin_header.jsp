@@ -29,7 +29,7 @@
 		<a href="${path}/admin_main"><img class ="logo" src="resources/image/heartpet_logo.png" /></a>
 		<ul>
 			<li class="lis"><a href="${path}/user_list">회원관리</a></li>
-			<li class="lis"><a href="${path}/admin_dog_list">유기견관리</a></li>
+			<li class="lis"><a href="${path}/dog_list">유기견관리</a></li>
 			<li class="lis"><a href="${path}/cat_list">유기묘관리</a></li>
 			<li class="lis"><a href="${path}/adoptreg_list">입양관리</a></li>
 			<li class="lis"><a href="${path}/support_list">후원관리</a></li>

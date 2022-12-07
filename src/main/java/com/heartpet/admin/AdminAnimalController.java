@@ -38,10 +38,10 @@ public class AdminAnimalController {
 	private HttpServletRequest request;
 
 	// ADMIN
-	@RequestMapping("/admin_dog_list")
+	@RequestMapping("/dog_list")
 	public String admin_dog_list(Model model) {
 		model.addAttribute("dogList", animalDAO.listTag("dog"));
-		return "admin/animal/dog/admin_dog_list";
+		return "admin/animal/dog/dog_list";
 	}
 
 	@RequestMapping("/cat_list")
@@ -54,9 +54,31 @@ public class AdminAnimalController {
 		return "admin/pet_update";
 	}
 
-	@RequestMapping("/pet_insert")
-	public String pet_insert() {
-		return "admin/animal/pet_insert";
+	@RequestMapping(value = "/dog_insert", method = RequestMethod.GET)
+	public String animal_insert() {
+		return "admin/animal/dog/dog_insert";
+	}
+	@RequestMapping(value = "/dog_insert", method = RequestMethod.POST)
+	public String user_dog_insert_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO)
+			throws IllegalStateException, IOException {
+		System.out.println(animalDTO.toString());
+		FileUploadImage upload = new FileUploadImage();
+		String[] images = upload.uploadAnimalImg(request, files);
+		animalDTO.setAnimal_img1(images[0]);
+		animalDTO.setAnimal_img2(images[1]);
+		animalDTO.setAnimal_img3(images[2]);
+		
+		animalDTO.setAnimal_status("입양 대기");
+		
+		animalDAO.insert(animalDTO);
+
+		return "redirect:/dog_list";
+	}
+	
+	@RequestMapping("/dog_delete")
+	public String dog_delete(@RequestParam("no") int no) {
+		animalDAO.delete(no);
+		return "redirect:/dog_list";
 	}
 	
 	@RequestMapping("/cat_view")

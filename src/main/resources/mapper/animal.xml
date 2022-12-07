@@ -15,7 +15,7 @@
 	</select>		
 	<insert id="insert" parameterType="AnimalDTO">
 		<selectKey resultType="int" keyProperty="animal_no" order="BEFORE">
-			select count(animal_no)+1 from heartpet_animal
+			select max(animal_no)+1 from heartpet_animal
 		</selectKey>
 		insert into heartpet_animal 
 			values
@@ -39,4 +39,7 @@
 			''
 			)
 	</insert>
+	<delete id="delete">
+		delete from heartpet_animal where animal_no = #{animal_no}
+	</delete>
 </mapper>

@@ -27,7 +27,7 @@ public class AnimalDAOImpl implements AnimalDAO{
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
+		sqlSession.delete("delete", id);
 		
 	}
 
