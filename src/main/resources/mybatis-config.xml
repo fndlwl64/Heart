@@ -3,6 +3,12 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "https://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+    	<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	
 	<!-- Alias 설정 : 별칭 설정 -->
 	<typeAliases>
 		<typeAlias type="com.heartpet.model.QnaDTO" alias="QnaDTO"/>
@@ -10,6 +16,7 @@
 		<typeAlias type="com.heartpet.action.AnimalDAO" alias="AnimalDAO"/>
 		<typeAlias type="com.heartpet.model.AnimalDTO" alias="AnimalDTO"/>
 	</typeAliases>	
+	
+	
 </configuration>
-
 

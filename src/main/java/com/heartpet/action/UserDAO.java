@@ -11,11 +11,12 @@ public interface UserDAO {
 
     public int kakaoInsert(Map<String, Object> map);
     
-    public int join(UserDTO dto);
+    public int join(Map<String, Object> map);
     
-    public int login(Map<String, Object> map);
-    
+    public String login(String id);
+         
     public UserDTO getUserInfo(String id);
+    
 
 
 }
