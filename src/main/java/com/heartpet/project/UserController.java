@@ -39,9 +39,6 @@ import javax.validation.Valid;
 public class UserController {
 
 	@Autowired
-    private DogDAO dogDAO;
-	
-	@Autowired
 	private UserDAO userDAO;
 
     @Autowired
