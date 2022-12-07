@@ -62,14 +62,14 @@ public class UserController {
     	
     	if(check == 1) {
     		    		
-    		System.out.println(admin_check+"여기까지");
+    		System.out.println(admin_check+"여기까지 / id"+id);
     		if(admin_check == 1) {
     			// 관리자 아이디 로그인 => 관리자 페이지로 이동
     			if(pwd.equals(check_pwd)) {
     				HttpSession session = request.getSession();
-    				
     				session.setAttribute("session_admin_id", id);
-    				return "admin/user_list";
+    				
+    				return "admin/user/user_list";
     			}else {
     				out.println("<script>");
     				out.println("alert('비밀번호가 틀렸습니다!!');");

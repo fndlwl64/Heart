@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../include/admin_header.jsp"/>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<jsp:include page="../../include/admin_header.jsp"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,7 +73,7 @@
 
     <br>
     <%-- 목록 버튼만 : 수정,삭제,등록은 list.jsp에서  --%>
-    <button class="listbtn" onclick="location.href='/user_list'">목록</button>
+    <button class="listbtn" onclick="location.href='${path}/user_list'">목록</button>
 
 </div>
 
