@@ -298,18 +298,16 @@ public class UserController {
         return "user/join";
     }
     
-    @RequestMapping(value="/joinOk", produces="text/plain;charset=UTF-8")
-    public void joinOk(UserDTO dto, @RequestParam("addr1")String ad1, @RequestParam("addr2")String ad2, @RequestParam("addr3")String ad3, HttpServletRequest request,HttpServletResponse response) throws IOException {
+    @RequestMapping(value="/joinOk")
+    public void joinOk(UserDTO dto, HttpServletRequest request,HttpServletResponse response) throws IOException {
     	request.setCharacterEncoding("UTF-8");
     	response.setContentType("text/html; charset=utf-8");
-    	
-    	Map<String, Object> map = new HashMap<String, Object>();
-    	map.put("dto", dto);
-    	map.put("addr", ad1+ad3+ad2);
-    	
+    	    	    	
     	//System.out.println("값 확인 : "+dto.getUser_grade()+", "+dto.getUser_dogexp()+", "+(ad1+ad3+ad2));
+    	//System.out.println("값 확인 : "+dto.getUser_id()+", "+dto.getUser_pwd()+", "+dto.getUser_email());
+    	//System.out.println("값 확인 : "+dto.getUser_name()+", "+dto.getUser_phone()+", "+dto.getUser_addr());
     	
-    	int res = userDAO.join(map);
+    	int res = userDAO.join(dto);
     	
     	PrintWriter out = response.getWriter();
     	

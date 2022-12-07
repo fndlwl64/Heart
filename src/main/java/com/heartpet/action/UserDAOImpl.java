@@ -25,8 +25,8 @@ public class UserDAOImpl implements UserDAO {
     }
 
 	@Override
-	public int join(Map<String, Object> map) {
-		return this.sqlSession.insert("join", map);
+	public int join(UserDTO dto) {
+		return this.sqlSession.insert("join", dto);
 	}
 
 	@Override
