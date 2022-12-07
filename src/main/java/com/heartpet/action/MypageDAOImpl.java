@@ -28,10 +28,23 @@ public class MypageDAOImpl implements MypageDAO{
 	}
 
 	@Override
-	public List<UserDTO> UserInfo() {
+	public UserDTO UserInfo() {
 		
-		return this.sqlSession.selectList("user_info");
+		return this.sqlSession.selectOne("user_info");
 	}
+
+	@Override
+	public int AnimalRegCount() {
+		// TODO Auto-generated method stub
+		return this.sqlSession.selectOne("reg_count");
+	}
+
+	@Override
+	public int ReviewCount() {
+		// TODO Auto-generated method stub
+		return this.sqlSession.selectOne("review_count");
+	}
+	
 
 
 }
