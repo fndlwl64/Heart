@@ -60,6 +60,17 @@ public class UserQnaController {
     }
     
     ////////////////////////////////////////////////////////////////////////////////////
+    // QNA_CONTENT
+    ////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping("/user_qna_content")
+    public String user_qna_content(@RequestParam("board_no") int board_no, Model model) { 
+    	this.qnaDAO.hitQna(board_no);
+    	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
+    	model.addAttribute("qnaContent", qnaContent);
+    	return "user/qna/qna_content"; 
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////////
     // QNA_INSERT
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/user_qna_insert")
@@ -130,15 +141,20 @@ public class UserQnaController {
     	}    	
     }
     
+    
     ////////////////////////////////////////////////////////////////////////////////////
-    // QNA_CONTENT
+    // QNA_DELETE
     ////////////////////////////////////////////////////////////////////////////////////
-    @RequestMapping("/user_qna_content")
-    public String user_qna_content(@RequestParam("board_no") int board_no, Model model) { 
-    	this.qnaDAO.hitQna(board_no);
+    @RequestMapping("/user_qna_delete")
+    public void user_qna_delete(@RequestParam("board_no") int board_no, @RequestParam("board_pwd") String board_pwd, HttpServletResponse response, HttpServletRequest request) throws IOException { 
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
     	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
-    	model.addAttribute("qnaContent", qnaContent);
-    	return "user/qna/qna_content"; 
+    	if(!qnaContent.getBoard_pwd().equals(board_pwd)) { out.println("<script>alert('비밀번호를 다시 확인해주세요.'); history.back(); </script>"); }
+    	
+    	int check = this.qnaDAO.deleteQna(board_no);
+    	if(check > 0) { out.println("<script>alert('글이 성공적으로 삭제되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>"); }
+		else { out.println("<script>alert('글 삭제 실패!'); history.back(); </script>"); }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
