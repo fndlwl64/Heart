@@ -36,8 +36,9 @@
                     <td><a class="table_a" href="#">후기</a></td>
                 </tr>
                 <tr>
-                    <td><a class="table_b" href="${path }/user_mypage_grade_list">1등급</a></td>
-                    <td><a class="table_b" href="${path }/user_mypage_support_list">30000</a></td>
+                	<c:set var="dto" value="${uList }"/>
+                    <td><a class="table_b" href="${path }/user_mypage_grade_list">${dto.getUser_grade() }등급</a></td>
+                    <td><a class="table_b" href="${path }/user_mypage_support_list">${Sum }</a></td>
                     <td><a class="table_b" href="#">0</a></td>
                 </tr>
             </table>
