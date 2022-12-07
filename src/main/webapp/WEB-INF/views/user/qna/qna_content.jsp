@@ -5,7 +5,7 @@
 <c:set var="list" value="${ qnaContent }" />
 <c:set var="page" value="${ paging }" />
 <% pageContext.setAttribute("newline", "\n"); %>
-<jsp:include page="../include/user_header.jsp" />
+<jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
 <link rel="short icon" href="temp" />
 
@@ -86,4 +86,4 @@
     <div class="space-add"></div>
 
 </div>
-<jsp:include page="../include/user_footer.jsp" />
+<jsp:include page="../../include/user_footer.jsp" />
