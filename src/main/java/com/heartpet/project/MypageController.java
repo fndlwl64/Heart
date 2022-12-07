@@ -20,31 +20,61 @@ public class MypageController {
     @RequestMapping("/user_mypage_wish_list")
     public String mypage_wish_list(Model model) {
     	int sum = mypagedao.SumSupport();
+    	UserDTO user_list = mypagedao.UserInfo();
+    	int regcount = mypagedao.AnimalRegCount();
+    	int review_count = mypagedao.ReviewCount();
     	model.addAttribute("Sum", sum);
+    	model.addAttribute("uList", user_list);
+    	model.addAttribute("Count", regcount);
+    	model.addAttribute("review_Count", review_count);
         return "user/mypage/mypage_wish_list";
     }
     @RequestMapping("/user_mypage_adoptreg_list")
     public String mypage_adoptreg_list(Model model) {
     	int sum = mypagedao.SumSupport();
+    	UserDTO user_list = mypagedao.UserInfo();
+    	int regcount = mypagedao.AnimalRegCount();
+    	int review_count = mypagedao.ReviewCount();
     	model.addAttribute("Sum", sum);
+    	model.addAttribute("uList", user_list);
+    	model.addAttribute("Count", regcount);
+    	model.addAttribute("review_Count", review_count);
         return "user/mypage/mypage_adopt_reg_list";
     }
     @RequestMapping("/user_mypage_adoptcomplet_list")
     public String mypage_adoptcomplet_list(Model model) {
     	int sum = mypagedao.SumSupport();
+    	UserDTO user_list = mypagedao.UserInfo();
+    	int regcount = mypagedao.AnimalRegCount();
+    	int review_count = mypagedao.ReviewCount();
     	model.addAttribute("Sum", sum);
+    	model.addAttribute("uList", user_list);
+    	model.addAttribute("Count", regcount);
+    	model.addAttribute("review_Count", review_count);
         return "user/mypage/mypage_adopt_complet_list";
     }
     @RequestMapping("/user_mypage_user_update")
     public String mypage_user_update(Model model) {
     	int sum = mypagedao.SumSupport();
+    	UserDTO user_list = mypagedao.UserInfo();
+    	int regcount = mypagedao.AnimalRegCount();
+    	int review_count = mypagedao.ReviewCount();
     	model.addAttribute("Sum", sum);
+    	model.addAttribute("uList", user_list);
+    	model.addAttribute("Count", regcount);
+    	model.addAttribute("review_Count", review_count);
         return "user/mypage/mypage_user_update";
     }
     @RequestMapping("/user_mypage_user_delete")
     public String mypage_user_delete(Model model) {
     	int sum = mypagedao.SumSupport();
+    	UserDTO user_list = mypagedao.UserInfo();
+    	int regcount = mypagedao.AnimalRegCount();
+    	int review_count = mypagedao.ReviewCount();
     	model.addAttribute("Sum", sum);
+    	model.addAttribute("uList", user_list);
+    	model.addAttribute("Count", regcount);
+    	model.addAttribute("review_Count", review_count);
         return "user/mypage/mypage_user_delete";
     }
     
@@ -53,10 +83,14 @@ public class MypageController {
     public String mypage_support_list(Model model) {
     	List<Mypage_SupportDTO> list = mypagedao.getSupportList();
     	int sum = mypagedao.SumSupport();
-    	List<UserDTO> user_list = mypagedao.UserInfo();
+    	UserDTO user_list = mypagedao.UserInfo();
+    	int reg_count = mypagedao.AnimalRegCount();
+    	int review_count = mypagedao.ReviewCount();
     	model.addAttribute("List", list);
     	model.addAttribute("Sum", sum);
     	model.addAttribute("uList", user_list);
+    	model.addAttribute("Count", reg_count);
+    	model.addAttribute("review_Count", review_count);
         return "user/mypage/mypage_support_list";
     }
     

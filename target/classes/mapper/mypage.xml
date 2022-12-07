@@ -12,4 +12,11 @@
 	<select id="user_info" parameterType="String" resultType="com.heartpet.model.UserDTO">
 		select * from heartpet_user where user_id ='user'
 	</select>
+	<select id="reg_count" parameterType="String" resultType="int">
+		select count(*) from heartpet_adopt_reg where adopt_reg_userid = 'user' and adopt_reg_adoptdate is null
+	</select>
+	<select id="review_count" parameterType="String" resultType="int">
+		select count(*) from heartpet_review where review_id = 'user1'
+	</select>
+	
 </mapper>

@@ -12,7 +12,11 @@ public interface MypageDAO {
 	// 마이페이지에서 후원금액 합을 불러오는 메서드
 	public int SumSupport();
 	// 마이페이지에서 회원 정보를 불러오는 메서드
-	public List<UserDTO> UserInfo(); 
+	public UserDTO UserInfo();
+	// 마이페이지에서 회원이 입양대기하고 있는 목록 개수를 불러오는 메서드
+	public int AnimalRegCount();
+	// 마이페이지에서 회원이 작성한 리뷰 개수를 불러오는 메서드
+	public int ReviewCount();
 	
 	
 
