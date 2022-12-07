@@ -150,7 +150,7 @@
 						href="<%=request.getContextPath() %>/user_dog_content?no=${dto.getAnimal_no()}"><img
 						class="img-fluid"
 						src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a>
-
+					<span class="text-center">${dto.getAnimal_name() }</span>
 				</div>
 			</div>
 
