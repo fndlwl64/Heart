@@ -89,13 +89,10 @@ public class UserController {
     }
     
     @RequestMapping(value = "/user_qna_insert_ok", method = RequestMethod.POST)
-    // binding한 결과가 result에 담김
     public void user_qna_insert_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
-		// 에러 있는지 검사
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-    	if(result.hasErrors()) {
-    		// 에러를 List로 저장
+    	if(result.hasErrors()) { // 에러를 List로 저장
 			List<ObjectError> errors = result.getAllErrors();
 			for(ObjectError error : errors) {
 				if(error.getDefaultMessage().equals("title")) { out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>"); break; }
