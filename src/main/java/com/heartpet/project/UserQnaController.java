@@ -22,7 +22,7 @@ import com.heartpet.model.PageDTO;
 import com.heartpet.model.QnaDTO;
 
 @Controller
-public class QnaController {
+public class UserQnaController {
 
     @Autowired
     private QnaDAO qnaDAO;
@@ -33,8 +33,9 @@ public class QnaController {
     // 전체 게시물의 수
     private int totalRecord = 0;
     
-
-    // 검색 기능 구현 중
+    ////////////////////////////////////////////////////////////////////////////////////
+    // QNA_LIST
+    ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/user_qna_list")
     public String user_qna_list(@RequestParam(required = false) String field, @RequestParam(required = false) String keyword, @RequestParam(defaultValue = "0") int page, Model model) {
     	if(field == null) { field = ""; }
@@ -57,11 +58,17 @@ public class QnaController {
         return "user/qna/qna_list";
     }
     
+    ////////////////////////////////////////////////////////////////////////////////////
+    // QNA_INSERT
+    ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/user_qna_insert")
     public String user_qna_insert() { 
     	return "user/qna/qna_insert";
     }
     
+    ////////////////////////////////////////////////////////////////////////////////////
+    // QNA_INSERT_OK
+    ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/user_qna_insert_ok", method = RequestMethod.POST)
     public void user_qna_insert_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
@@ -84,6 +91,9 @@ public class QnaController {
     	}
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////
+    // QNA_UPDATE
+    ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/user_qna_update")
     public String user_qna_update(@RequestParam("board_no") int board_no, Model model) {
     	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
@@ -91,6 +101,9 @@ public class QnaController {
     	return "user/qna/qna_update"; 
     }
     
+    ////////////////////////////////////////////////////////////////////////////////////
+    // QNA_UPDATE_OK
+    ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/user_qna_update_ok", method = RequestMethod.POST)
     public void user_qna_update_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
@@ -98,7 +111,8 @@ public class QnaController {
     	QnaDTO qnaContent = this.qnaDAO.contentQna(qnaDto.getBoard_no());
     	
     	// 비번 check
-    	if(!qnaDto.getBoard_pwd().equals(qnaContent.getBoard_pwd())) { out.println("<script>alert('비밀번호를 다시 확인해주세요.'); history.back(); </script>"); }
+    	if(!qnaDto.getBoard_pwd().equals(qnaContent.getBoard_pwd())) { out.println("<script>alert('비밀번호를 다시 확인해주세요.'); history.back(); </script>"); } 
+    	
     	// 유효성 검사
     	if(result.hasErrors()) {
 			List<ObjectError> errors = result.getAllErrors();
@@ -114,7 +128,10 @@ public class QnaController {
     		else { out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>"); }
     	}    	
     }
-
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    // QNA_CONTENT
+    ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/user_qna_content")
     public String user_qna_content(@RequestParam("board_no") int board_no, Model model) { 
     	this.qnaDAO.hitQna(board_no);
@@ -123,8 +140,11 @@ public class QnaController {
     	return "user/qna/qna_content"; 
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////
+    // FNQ_LIST
+    ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/user_fnq_list")
-    public String user_fnq_list() { return "qna/fnq_list"; }
+    public String user_fnq_list() { return "user/qna/fnq_list"; }
 
 
 }
