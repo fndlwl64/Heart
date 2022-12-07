@@ -95,8 +95,7 @@
         <div class="row">
             <div class="col-4 space"></div>
             <div class="col-4 search">
-                <form method="post" action="${ path }/user_qna_list">
-                    <input type="hidden" name="page" value="${ paging.page }" />
+                <form method="get" action="${ path }/user_qna_list?field=${ field }&keyword=${ keyword }">
                     <select name="field" class="form-select d-inline align-middle w-25">
                         <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
                         <option value="title"<c:if test="${ field eq 'title' }">selected="selected"</c:if>>제목</option>
