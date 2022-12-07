@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,13 +62,12 @@ public class UserController {
 
     // 검색 기능 구현 중
     @RequestMapping("/user_qna_list")
-    public String user_qna_list(@RequestParam String field, @RequestParam String keyword, @RequestParam int page, Model model) {
+    public String user_qna_list(@RequestParam(required = false) String field, @RequestParam(required = false) String keyword, @RequestParam(defaultValue = "0") int page, Model model) {
+    	if(field == null) { field = ""; }
+       	if(keyword == null) { keyword = ""; }
     	
-    	if(field == null) field = "";
-    	if(keyword == null) keyword = "";
-    	
-    	int currentPage = 1;
-    	if(page > 1) { currentPage = page; }
+		int currentPage = 1;	// 현재 페이지 변수
+		if(page != 0) { currentPage = page; }
     	
     	totalRecord = this.qnaDAO.listQnaCount(field, keyword);
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
@@ -76,18 +76,11 @@ public class UserController {
         
         model.addAttribute("qnaList", qnaList);
         model.addAttribute("total", totalRecord);
-        model.addAttribute("paging", paging);
-        model.addAttribute("field", field);
-        model.addAttribute("keyword", keyword);
-
+        model.addAttribute("paging", paging);		
+		model.addAttribute("field", field); 
+		model.addAttribute("keyword", keyword);	
+		
         return "qna/qna_list";
-    }
-    
-    @RequestMapping("/user_qna_search")
-    public String user_qna_search(Model model, String keyword, String field) {
-    	List<QnaDTO> qnaList = this.qnaDAO.searchQna(field, keyword);
-    	model.addAttribute("qnaList", qnaList);
-    	return "qna/qna_list";
     }
     
     @RequestMapping("/user_qna_insert")
@@ -97,7 +90,7 @@ public class UserController {
     
     @RequestMapping(value = "/user_qna_insert_ok", method = RequestMethod.POST)
     // binding한 결과가 result에 담김
-    public void user_qna_insert_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response) throws IOException {
+    public void user_qna_insert_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		// 에러 있는지 검사
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -113,7 +106,7 @@ public class UserController {
     	}else {
         	int check = this.qnaDAO.insertQna(qnaDto);
     		if(check > 0) {
-    			out.println("<script>alert('글이 성공적으로 등록되었습니다.'); location.href='/user_qna_list'; </script>");
+    			out.println("<script>alert('글이 성공적으로 등록되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>");
     		}else {
     			out.println("<script>alert('글 등록을 실패했습니다.'); history.back(); </script>");
     		}
@@ -128,7 +121,7 @@ public class UserController {
     }
     
     @RequestMapping(value = "/user_qna_update_ok", method = RequestMethod.POST)
-    public void user_qna_update_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response) throws IOException {
+    public void user_qna_update_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
     	QnaDTO qnaContent = this.qnaDAO.contentQna(qnaDto.getBoard_no());
@@ -146,7 +139,7 @@ public class UserController {
 			}
     	}else {   		        			
         	int check = this.qnaDAO.insertQna(qnaDto);        	
-    		if(check > 0) { out.println("<script>alert('글이 성공적으로 수정되었습니다.'); location.href='/user_qna_list'; </script>"); }
+    		if(check > 0) { out.println("<script>alert('글이 성공적으로 수정되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>"); }
     		else { out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>"); }
     	}    	
     }
