@@ -126,6 +126,34 @@ $(function() {
 	        alert('failed to login: ' + JSON.stringify(err));
 	    }
 	});
+	
+	
+	// 네이버 로그인 api
+	const naverLogin = new naver.LoginWithNaverId(
+			{
+				clientId: "fw7rzSQL46p95xisWWtm",
+				callbackUrl: "/project/",
+				loginButton: {color: "green", type: 2, height: 40}
+			}
+		);
+ 	naverLogin.init();
+ 	
+ 	naverLogin.getLoginStatus(function(status) {
+      if (status) {
+          const nickName=naverLogin.user.getNickName();
+          const age=naverLogin.user.getAge();
+          const birthday=naverLogin.user.getBirthday();
+
+        //닉네임을 선택하지 않으면 선택창으로 돌아갑니다.
+          if(nickName===null||nickName===undefined ){ 
+            alert("별명이 필요합니다. 정보제공을 동의해주세요.");
+            naverLogin.reprompt(); 
+            return ;  
+         }else{
+          setLoginStatus(); //모든 필수 정보 제공 동의하면 실행하는 함수
+         }
+      }
+    });
 
 });
 

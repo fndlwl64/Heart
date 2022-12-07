@@ -8,10 +8,10 @@
 		select * from heartpet_animal where animal_no = #{animal_no}
 	</select>
 	<select id="list" resultType="AnimalDTO">
-		select * from heartpet_animal
+		select * from heartpet_animal order by animal_no desc
 	</select>
 	<select id="listTag" resultType="AnimalDTO">
-		select * from heartpet_animal where animal_tag = #{animal_tag}
+		select * from heartpet_animal where animal_tag = #{animal_tag} order by animal_no desc
 	</select>		
 	<insert id="insert" parameterType="AnimalDTO">
 		<selectKey resultType="int" keyProperty="animal_no" order="BEFORE">

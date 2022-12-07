@@ -3,11 +3,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="QnaDAO">
+
+	<!-- 
+	////////////////////////////////////////////////////////////////////////////////////////////  
+	// QNA
+	////////////////////////////////////////////////////////////////////////////////////////////  	
+	-->
 	<sql id="qna_select">
 		select * from heartpet_board 
 	</sql>
 	<select id="qna_list" parameterType="hashMap" resultType="QnaDTO">
-		select * from (select b.*, row_number() over(order by board_no desc) rnum from heartpet_board b 
+		<![CDATA[select * from (select b.*, row_number() over(order by board_no desc) rnum from heartpet_board b ]]>
 		<where>
 		 <choose>
             <when test="field.equals('allSearch') and keyword != ''"> (board_title like '%' || #{keyword} || '%') or (board_content like '%' || #{keyword} || '%') or (board_category like '%' || #{keyword} || '%') or (board_id like '%' || #{keyword} || '%')</when>
@@ -62,5 +68,33 @@
 		delete from heartpet_board where board_no = #{ board_no }
 	</delete>
 	
+	<!-- 
+	////////////////////////////////////////////////////////////////////////////////////////////  
+	// FNQ
+	////////////////////////////////////////////////////////////////////////////////////////////  	
+	-->
+	<select id="fnq_count" parameterType="hashMap" resultType="int">
+		select count(*) from heartpet_fnq
+		<where>
+	 	<choose>
+	 		<when test="field == '' and keyword == ''"></when>
+			<when test="field.equals('allSearch') and keyword != ''"> (fnq_question like '%' || #{keyword} || '%') or (fnq_answer like '%' || #{keyword} || '%')</when>
+			<when test="field.equals('question') and keyword != ''"> fnq_question like '%' || #{keyword} || '%'</when>
+			<when test="field.equals('answer') and keyword != ''"> fnq_answer like '%' || #{keyword} || '%'</when>
+		</choose>
+        </where>
+	</select>
+	
+	<select id="fnq_list" parameterType="hashMap" resultType="FnqDTO">
+		<![CDATA[select * from (select b.*, row_number() over(order by fnq_no desc) rnum from heartpet_fnq b ]]>
+		<where>
+		 <choose>
+			<when test="field.equals('allSearch') and keyword != ''"> (fnq_question like '%' || #{keyword} || '%') or (fnq_answer like '%' || #{keyword} || '%')</when>
+			<when test="field.equals('question') and keyword != ''"> fnq_question like '%' || #{keyword} || '%'</when>
+			<when test="field.equals('answer') and keyword != ''"> fnq_answer like '%' || #{keyword} || '%'</when>
+         </choose>
+         </where>
+         <![CDATA[) where rnum >= #{startNo} and rnum <= #{endNo}]]>
+	</select>
 </mapper>
 

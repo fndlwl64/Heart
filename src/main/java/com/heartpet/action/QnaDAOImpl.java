@@ -1,5 +1,6 @@
 package com.heartpet.action;
 
+import com.heartpet.model.FnqDTO;
 import com.heartpet.model.QnaDTO;
 
 import java.util.HashMap;
@@ -25,6 +26,14 @@ public class QnaDAOImpl implements QnaDAO {
     	map.put("keyword", keyword);
         return this.sqlSession.selectList("qna_list", map);
     }
+    
+	@Override
+	public int listQnaCount(String field, String keyword) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("field", field);
+		map.put("keyword", keyword);		
+		return this.sqlSession.selectOne("qna_count", map);
+	}
 
     @Override
     public int insertQna(QnaDTO dto) {
@@ -50,12 +59,24 @@ public class QnaDAOImpl implements QnaDAO {
     public int deleteQna(int board_no) {
         return this.sqlSession.delete("qna_delete", board_no);
     }
+	
+	@Override
+	public List<FnqDTO> listFnq(int startNo, int endNo, String field, String keyword) {
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("startNo", startNo);
+    	map.put("endNo", endNo);
+    	map.put("field", field);
+    	map.put("keyword", keyword);
+        return this.sqlSession.selectList("fnq_list", map);
+    }
 
 	@Override
-	public int listQnaCount(String field, String keyword) {
+	public int listFnqCount(String field, String keyword) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("field", field);
 		map.put("keyword", keyword);		
-		return this.sqlSession.selectOne("qna_count", map);
+		return this.sqlSession.selectOne("fnq_count", map);
 	}
+	
+	
 }
