@@ -7,7 +7,7 @@
 		select * from heartpet_board 
 	</sql>
 	<select id="qna_list" parameterType="hashMap" resultType="QnaDTO">
-		select * from (select b.*, row_number() over(order by board_no desc) rnum from heartpet_board b 
+		<![CDATA[select * from (select b.*, row_number() over(order by board_no desc) rnum from heartpet_board b ]]>
 		<where>
 		 <choose>
             <when test="field.equals('allSearch') and keyword != ''"> (board_title like '%' || #{keyword} || '%') or (board_content like '%' || #{keyword} || '%') or (board_category like '%' || #{keyword} || '%') or (board_id like '%' || #{keyword} || '%')</when>

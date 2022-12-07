@@ -7,7 +7,7 @@
 
 <%-- fnq list --%>
 <div id="qna-contents" class="qna-contents">
-    <div class="qna_section">
+    <div class="qna-section">
         <div class="row">
             <div class="col-3 space"></div>
             <div class="col-6 title">FAQ</div>
@@ -88,7 +88,7 @@
     <br>
 
     <%-- search --%>
-    <div class="qna_section">
+    <div class="qna-section">
         <div class="row">
             <div class="col-4 space"></div>
             <div class="col-4 search">
