@@ -10,22 +10,6 @@
 <c:set var="keyword" value="${ keyword }" />
 <c:set var="link_address" value="${pageContext.request.contextPath}/user_fnq_list" />
 
-<script>
-$(document).ready(function() {
-    $("#accordion-button").click(function() {
-        if (this.checked) {
-        	$('input[type=hidden][name=board_secret]').attr('disabled', true);
-            console.log(this);
-        	console.log(typeof this.value);
-        }else {
-        	$('input[type=hidden][name=board_secret]').attr('disabled', false);
-            console.log(this);
-        	console.log(typeof this.value);
-        }
-    });
-}) 
-</script>
-
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
 
@@ -59,14 +43,14 @@ $(document).ready(function() {
     <!-- FAQ -->
     <div class="accordion accordion-flush" id="accordionFlushExample">
     	<c:if test="${ not empty fList }">
-    	<c:forEach items="${ fList }" var="list" varStatus="status">
+    	<c:forEach items="${ fList }" var="list" varStatus="status" >
         <div class="accordion-item">
-            <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">
+            <h2 class="accordion-header" id="flush-heading${ status.count }">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${ status.count }" aria-expanded="false" aria-controls="flush-collapse${ status.count }">
                     ${ list.fnq_question }
                 </button>
             </h2>
-            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div id="flush-collapse${ status.count }" class="accordion-collapse collapse" aria-labelledby="flush-heading${ status.count }" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                     ${ list.fnq_answer }
                 </div>
