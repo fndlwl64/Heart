@@ -68,7 +68,7 @@ public class UserController {
     			if(pwd.equals(check_pwd)) {
     				HttpSession session = request.getSession();
     				
-    				session.setAttribute("session_id", id);
+    				session.setAttribute("session_admin_id", id);
     				return "admin/user_list";
     			}else {
     				out.println("<script>");
