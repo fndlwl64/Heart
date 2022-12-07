@@ -25,13 +25,17 @@ public class UserDAOImpl implements UserDAO {
     }
 
 	@Override
-	public int join(UserDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int join(Map<String, Object> map) {
+		return this.sqlSession.insert("join", map);
 	}
 
 	@Override
-	public String login(Map<String, Object> map) {
-		return this.sqlSession.selectOne("login", map);
+	public String login(String id) {
+		return this.sqlSession.selectOne("login", id);
+	}
+
+	@Override
+	public UserDTO getUserInfo(String id) {
+		return this.sqlSession.selectOne("userInfo", id);
 	}
 }

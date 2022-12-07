@@ -3,6 +3,7 @@ package com.heartpet.project;
 import com.heartpet.action.NoticeDAO;
 import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.NoticeDTO;
+import com.heartpet.model.PageDTO;
 import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.DogDAO;
 import com.heartpet.action.QnaDAO;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,25 +48,39 @@ public class UserController {
 
     @Autowired
     private NoticeDAO noticedao;
+    
+    // 한 페이지당 보여질 게시물의 수
+    private final int rowsize = 3;
 
-   
+    // 전체 게시물의 수
+    private int totalRecord = 0;
+
     @RequestMapping("/user_support")
     public String user_support() {
         return "support/support";
     }
 
+    // 검색 기능 구현 중
     @RequestMapping("/user_qna_list")
-    public String user_qna_list(Model model) {
-        List<QnaDTO> qnaList = this.qnaDAO.listQna();
+    public String user_qna_list(@RequestParam(required = false) String field, @RequestParam(required = false) String keyword, @RequestParam(defaultValue = "0") int page, Model model) {
+    	if(field == null) { field = ""; }
+       	if(keyword == null) { keyword = ""; }
+    	
+		int currentPage = 1;	// 현재 페이지 변수
+		if(page != 0) { currentPage = page; }
+    	
+    	totalRecord = this.qnaDAO.listQnaCount(field, keyword);
+    	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+    	
+        List<QnaDTO> qnaList = this.qnaDAO.listQna(paging.getStartNo(), paging.getEndNo(), field, keyword);
+        
         model.addAttribute("qnaList", qnaList);
+        model.addAttribute("total", totalRecord);
+        model.addAttribute("paging", paging);		
+		model.addAttribute("field", field); 
+		model.addAttribute("keyword", keyword);	
+		
         return "qna/qna_list";
-    }
-    
-    @RequestMapping("/user_qna_search")
-    public String user_qna_search(Model model, String keyword, String field) {
-    	List<QnaDTO> qnaList = this.qnaDAO.searchQna(field, keyword);
-    	model.addAttribute("qnaList", qnaList);
-    	return "qna/qna_list";
     }
     
     @RequestMapping("/user_qna_insert")
@@ -74,13 +90,12 @@ public class UserController {
     
     @RequestMapping(value = "/user_qna_insert_ok", method = RequestMethod.POST)
     // binding한 결과가 result에 담김
-    public void user_qna_insert_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response) throws IOException {
+    public void user_qna_insert_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		// 에러 있는지 검사
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
     	if(result.hasErrors()) {
     		// 에러를 List로 저장
-            System.out.println(qnaDto.toString());
 			List<ObjectError> errors = result.getAllErrors();
 			for(ObjectError error : errors) {
 				if(error.getDefaultMessage().equals("title")) { out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>"); break; }
@@ -91,7 +106,7 @@ public class UserController {
     	}else {
         	int check = this.qnaDAO.insertQna(qnaDto);
     		if(check > 0) {
-    			out.println("<script>alert('글이 성공적으로 등록되었습니다.'); location.href='/user_qna_list'; </script>");
+    			out.println("<script>alert('글이 성공적으로 등록되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>");
     		}else {
     			out.println("<script>alert('글 등록을 실패했습니다.'); history.back(); </script>");
     		}
@@ -99,12 +114,40 @@ public class UserController {
     }
 
     @RequestMapping("/user_qna_update")
-    public String user_qna_update() { return "qna/qna_update"; }
+    public String user_qna_update(@RequestParam("board_no") int board_no, Model model) {
+    	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
+    	model.addAttribute("qnaContent", qnaContent);
+    	return "qna/qna_update"; 
+    }
+    
+    @RequestMapping(value = "/user_qna_update_ok", method = RequestMethod.POST)
+    public void user_qna_update_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+    	QnaDTO qnaContent = this.qnaDAO.contentQna(qnaDto.getBoard_no());
+    	
+    	// 비번 check
+    	if(!qnaDto.getBoard_pwd().equals(qnaContent.getBoard_pwd())) { out.println("<script>alert('비밀번호를 다시 확인해주세요.'); history.back(); </script>"); }
+    	// 유효성 검사
+    	if(result.hasErrors()) {
+			List<ObjectError> errors = result.getAllErrors();
+			for(ObjectError error : errors) {
+				if(error.getDefaultMessage().equals("title")) { out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>"); break; }
+				else if(error.getDefaultMessage().equals("content")) { out.println("<script>alert('글 내용이 없습니다.'); history.back(); </script>"); break; }
+				else if(error.getDefaultMessage().equals("password")) { out.println("<script>alert('글 비밀번호를 입력해주세요.'); history.back(); </script>"); break; }
+				else if(error.getDefaultMessage().equals("regexp")) { out.println("<script>alert('비밀번호는 6자 이상 10자 이하의 숫자 및 영문자로 구성되어야 합니다. 다시 입력해주세요.'); history.back(); </script>"); break; }
+			}
+    	}else {   		        			
+        	int check = this.qnaDAO.insertQna(qnaDto);        	
+    		if(check > 0) { out.println("<script>alert('글이 성공적으로 수정되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>"); }
+    		else { out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>"); }
+    	}    	
+    }
 
     @RequestMapping("/user_qna_content")
     public String user_qna_content(@RequestParam("board_no") int board_no, Model model) { 
-    	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
     	this.qnaDAO.hitQna(board_no);
+    	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
     	model.addAttribute("qnaContent", qnaContent);
     	return "qna/qna_content"; 
     }
@@ -139,64 +182,93 @@ public class UserController {
     @RequestMapping("/login")
     public String login(@RequestParam("user_id")String id, @RequestParam("user_pwd")String pwd, HttpServletResponse response, HttpServletRequest request) throws IOException {
     	
-    	Map<String, Object> map = new HashMap<String, Object>();
-    	
-    	map.put("id", id);
-    	map.put("pwd", pwd);
+    	response.setContentType("text/html; charset=utf-8");
+    	request.setCharacterEncoding("utf-8");
     	
     	int check = userDAO.idCheck(id);
+    	
+    	String check_pwd = userDAO.login(id);
     	
     	PrintWriter out = response.getWriter();
     	
     	if(check == 1) {
-    		String res = userDAO.login(map);
-    		
-    		map.values();
-    		
-    		HttpSession session = request.getSession();
-    		
-    		session.setAttribute("session_id", id);
-    		
-    		out.println("<script>");
-			out.println("alert('로그인 되었습니다!');");
-			out.println("location.href='"+request.getContextPath()+"'");
-			out.println("</script>");
+    		    		
+    		if(pwd.equals(check_pwd)) {
+    			UserDTO dto = userDAO.getUserInfo(id);
+    			
+	    		String user_number = dto.getUser_no();
+	    		    		
+	    		HttpSession session = request.getSession();
+	    		
+	    		session.setAttribute("session_id", id);
+	    		session.setAttribute("session_no", user_number);
+	    			    		
+	    		out.println("<script>");
+				out.println("alert('로그인 되었습니다!');");
+				out.println("location.href='"+request.getContextPath()+"'");
+				out.println("</script>");
+				
+				System.out.println("세션id: "+id+", 세션no: "+user_number);
+	    	}else {
+	    		out.println("<script>");
+				out.println("alert('비밀번호가 틀렸습니다!!');");
+				out.println("history.back();");
+				out.println("</script>");
+	    	}
     	}else {
     		out.println("<script>");
-			out.println("alert('가입되지 않은 아이디입니다ㅠ');");
+			out.println("alert('가입되지 않은 아이디입니다.');");
 			out.println("location.href='"+request.getContextPath()+"'");
 			out.println("</script>");
     	}
-    	
     	return "main";
     }
     
     @RequestMapping("/kakao_login")
-    public void login(@RequestParam("paramId")String id, @RequestParam("paramName")String name, @RequestParam("paramEmail")String email, HttpServletRequest request, HttpServletResponse response) throws IOException{
+    public void login(@RequestParam("paramId")String id, @RequestParam("paramName")String name, HttpServletRequest request, HttpServletResponse response) throws IOException{
     	
-    	System.out.println("여기");
     	PrintWriter out = response.getWriter();
     	int check = userDAO.idCheck(id);
     	
     	if(check == 1) {
-			
-			 HttpSession session = request.getSession();
-			 session.setAttribute("session_id", id);
-			 System.out.println("아이디 존재 => 카카오 로그인 성공");
     		
+    		UserDTO dto = userDAO.getUserInfo(id);
+    		String user_no = dto.getUser_no();
+    		
+			HttpSession session = request.getSession();
+			session.setAttribute("session_id", id);
+			session.setAttribute("session_no", user_no);
+			
+			out.println("<script>");
+			out.println("alert('로그인 되었습니다!');");
+			out.println("location.href='"+request.getContextPath()+"'");
+			out.println("</script>");
+			
+			System.out.println("아이디 존재 => 카카오 로그인 성공");
+			System.out.println("세션id: "+id+", 세션no: "+user_no);
     	}else {
     		
     		Map<String, Object> map = new HashMap<String, Object>();
     		map.put("id", id);
     		map.put("name", name);
-    		map.put("email", email);
     		
     		int res = userDAO.kakaoInsert(map);
     		
     		if(res>0) {
+    			UserDTO dto = userDAO.getUserInfo(id);
+        		String user_no = dto.getUser_no();
+        		
     			HttpSession session = request.getSession();
-        		session.setAttribute("session_id", id);    		
+        		session.setAttribute("session_id", id);    
+        		session.setAttribute("session_no", user_no);
+        		
+        		out.println("<script>");
+				out.println("alert('로그인 되었습니다!');");
+				out.println("location.href='"+request.getContextPath()+"'");
+				out.println("</script>");
+        		
         		System.out.println("아이디 없음 => 카카오 계정 가입 성공");
+        		System.out.println("세션id: "+id+", 세션no: "+user_no);
     		}else {
     			out.println("<script>");
     			out.println("alert('가입 실패ㅠ');");
@@ -219,6 +291,8 @@ public class UserController {
 		out.println("alert('로그아웃 되었습니다!');");
 		out.println("location.href='"+request.getContextPath()+"'");
 		out.println("</script>");
+		
+		System.out.println("로그아웃 완료");
 		 
     }
     
@@ -227,11 +301,34 @@ public class UserController {
         return "user/join";
     }
     
-    @RequestMapping("/joinOk")
-    public String joinOk(UserDTO dto, @RequestParam("addr1")String ad1, @RequestParam("addr2")String ad2, @RequestParam("addr2")String ad3) {
+    @RequestMapping(value="/joinOk", produces="text/plain;charset=UTF-8")
+    public void joinOk(UserDTO dto, @RequestParam("addr1")String ad1, @RequestParam("addr2")String ad2, @RequestParam("addr3")String ad3, HttpServletRequest request,HttpServletResponse response) throws IOException {
+    	request.setCharacterEncoding("UTF-8");
+    	response.setContentType("text/html; charset=utf-8");
     	
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("dto", dto);
+    	map.put("addr", ad1+ad3+ad2);
     	
-    	return "main";
+    	//System.out.println("값 확인 : "+dto.getUser_grade()+", "+dto.getUser_dogexp()+", "+(ad1+ad3+ad2));
+    	
+    	int res = userDAO.join(map);
+    	
+    	PrintWriter out = response.getWriter();
+    	
+    	if(res>0) {
+    		out.println("<script>");
+    		out.println("alert('회원가입이 완료되었습니다!');");
+    		out.println("location.href='"+request.getContextPath()+"'");
+    		out.println("</script>");
+    		System.out.println("회원가입 완료");
+    	}else {
+    		out.println("<script>");
+    		out.println("alert('회원가입에 실패했습니다');");
+    		out.println("history.back()");
+    		out.println("</script>");
+    		System.out.println("회원가입 실패");
+    	}
     }
 
     @RequestMapping("/user_mypage_adoptreg_list")

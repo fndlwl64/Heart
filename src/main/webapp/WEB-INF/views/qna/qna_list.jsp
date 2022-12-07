@@ -4,10 +4,12 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="qList" value="${ qnaList }" />
+<c:set var="total" value="${ total }" />
+<c:set var="paging" value="${ paging }" />
+<c:set var="field" value="${ field }" />
+<c:set var="keyword" value="${ keyword }" />
 <jsp:include page="../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
-<link rel="short icon" href="#" />
-
 
 <%-- qna list --%>
 <div id="qna-contents" class="qna-contents">
@@ -55,7 +57,12 @@
                 <tr>
                     <td>${ list.board_no }</td>
                     <td>${ list.board_category }</td>
-                    <td class="left-align"><a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }">${ list.board_title }</a></td>
+                    <td class="left-align">
+	                    <a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }">
+	                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if> ${ list.board_title }
+	                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
+	                    </a>
+                    </td>
                     <td>${ list.board_id }</td>
                     <td>${ list.board_regdate.substring(0,10) }</td>
                     <td>${ list.board_hit }</td>
@@ -91,9 +98,10 @@
                     <input type="hidden" name="page" value="${ paging.page }" />
                     <select name="field" class="form-select d-inline align-middle w-25">
                         <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
-                        <option value="adoption"<c:if test="${ field eq 'adoption' }">selected="selected"</c:if>>입양</option>
-                        <option value="process"<c:if test="${ field eq 'process' }">selected="selected"</c:if>>절차</option>
-                        <option value="support"<c:if test="${ field eq 'support' }">selected="selected"</c:if>>후원</option>
+                        <option value="title"<c:if test="${ field eq 'title' }">selected="selected"</c:if>>제목</option>
+                        <option value="content"<c:if test="${ field eq 'content' }">selected="selected"</c:if>>내용</option>
+                        <option value="category"<c:if test="${ field eq 'category' }">selected="selected"</c:if>>카테고리</option>
+                        <option value="id"<c:if test="${ field eq 'id' }">selected="selected"</c:if>>작성자</option>
                     </select>
                     <input type="text" class="form-control d-inline align-middle w-50" name="keyword" value="${ keyword }" />
                     <button type="submit" class="btn btn-dark d-inline align-middle"><i class="bi bi-search"></i> 검색</button>

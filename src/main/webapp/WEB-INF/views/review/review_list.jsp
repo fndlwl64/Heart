@@ -5,7 +5,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_review.css" />
-<link rel="short icon" href="#" />
+<link rel="short icon" href="temp" />
 
 <%-- 리뷰 --%>
 <%-- review list --%>
