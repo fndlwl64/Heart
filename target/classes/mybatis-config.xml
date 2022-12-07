@@ -5,10 +5,9 @@
 <configuration>
 
 	<settings>
-		<setting name="cacheEnabled" value="false" />
-    	<setting name="jdbcTypeForNull" value="NULL" />
-	</settings>
-	
+        <setting name="jdbcTypeForNull" value="NULL"/>
+    </settings>
+
 	<!-- Alias 설정 : 별칭 설정 -->
 	<typeAliases>
 		<typeAlias type="com.heartpet.model.QnaDTO" alias="QnaDTO"/>

@@ -308,7 +308,7 @@ public class UserController {
         return "user/join";
     }
     
-    @RequestMapping("/joinOk")
+    @RequestMapping(value="/joinOk", produces="text/plain;charset=UTF-8")
     public void joinOk(UserDTO dto, @RequestParam("addr1")String ad1, @RequestParam("addr2")String ad2, @RequestParam("addr3")String ad3, HttpServletRequest request,HttpServletResponse response) throws IOException {
     	request.setCharacterEncoding("UTF-8");
     	response.setContentType("text/html; charset=utf-8");
@@ -317,9 +317,11 @@ public class UserController {
     	map.put("dto", dto);
     	map.put("addr", ad1+ad3+ad2);
     	
-    	PrintWriter out = response.getWriter();
+    	//System.out.println("값 확인 : "+dto.getUser_grade()+", "+dto.getUser_dogexp()+", "+(ad1+ad3+ad2));
     	
     	int res = userDAO.join(map);
+    	
+    	PrintWriter out = response.getWriter();
     	
     	if(res>0) {
     		out.println("<script>");
@@ -334,7 +336,6 @@ public class UserController {
     		out.println("</script>");
     		System.out.println("회원가입 실패");
     	}
-    	
     }
 
     @RequestMapping("/user_mypage_adoptreg_list")
