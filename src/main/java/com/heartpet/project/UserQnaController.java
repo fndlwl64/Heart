@@ -153,12 +153,12 @@ public class UserQnaController {
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 0) { currentPage = page; }
     	
-    	totalRecord = this.qnaDAO.listQnaCount(field, keyword);
+    	totalRecord = this.qnaDAO.listFnqCount(field, keyword);
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
     	
         List<FnqDTO> fnqList = this.qnaDAO.listFnq(paging.getStartNo(), paging.getEndNo(), field, keyword);
         
-        model.addAttribute("qnaList", fnqList);
+        model.addAttribute("fnqList", fnqList);
         model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
 		model.addAttribute("field", field); 
