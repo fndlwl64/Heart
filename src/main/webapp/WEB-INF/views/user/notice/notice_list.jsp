@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> --%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<jsp:include page="../include/user_header.jsp" />
+<jsp:include page="../../include/user_header.jsp" />
 <link rel="short icon" href="temp" />
 <link rel="stylesheet" href="${path }/resources/css/notice.css">
 <%-- 여기서부터 작성 --%>
@@ -32,4 +32,4 @@
         </c:if>
     </div>
 </div>
-<jsp:include page="../include/user_footer.jsp" />
+<jsp:include page="../../include/user_footer.jsp" />
