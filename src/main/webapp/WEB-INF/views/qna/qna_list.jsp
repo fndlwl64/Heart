@@ -10,8 +10,6 @@
 <c:set var="keyword" value="${ keyword }" />
 <jsp:include page="../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
-<link rel="short icon" href="temp" />
-
 
 <%-- qna list --%>
 <div id="qna-contents" class="qna-contents">

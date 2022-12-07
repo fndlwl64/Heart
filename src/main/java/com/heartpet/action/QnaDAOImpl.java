@@ -38,7 +38,6 @@ public class QnaDAOImpl implements QnaDAO {
     
     @Override
     public int hitQna(int board_no) {
-    	System.out.println("안뇽");
         return this.sqlSession.update("qna_hit", board_no);
 	}
 
@@ -50,11 +49,6 @@ public class QnaDAOImpl implements QnaDAO {
     @Override
     public int deleteQna(int board_no) {
         return this.sqlSession.delete("qna_delete", board_no);
-    }
-
-    @Override
-    public List<QnaDTO> searchQna(String field, String keyword) {
-        return this.sqlSession.selectList(field, keyword, null);
     }
 
 	@Override
