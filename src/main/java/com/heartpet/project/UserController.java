@@ -40,31 +40,14 @@ public class UserController {
 	@Autowired
 	private UserDAO userDAO;
 
-    @Autowired
-    private NoticeDAO noticedao;
-    
+
     // 한 페이지당 보여질 게시물의 수
     private final int rowsize = 3;
 
     // 전체 게시물의 수
     private int totalRecord = 0;
 
-    @RequestMapping("/user_support")
-    public String user_support() {
-        return "user/support/support";
-    }
 
-    @RequestMapping("/user_notice")
-    public String notice(Model model) {
-        List<NoticeDTO> list = noticedao.getNoticeList();    
-        model.addAttribute("List", list);
-        return "user/notice/notice_list";
-    }
-
-    @RequestMapping("/user_mypage_wish_list")
-    public String mypage_wish_list() {
-        return "user/mypage/mypage_wish_list";
-    }
     
     @RequestMapping("/login")
     public String login(@RequestParam("user_id")String id, @RequestParam("user_pwd")String pwd, HttpServletResponse response, HttpServletRequest request) throws IOException {
@@ -216,36 +199,4 @@ public class UserController {
     	}
     }
 
-    @RequestMapping("/user_mypage_adoptreg_list")
-    public String mypage_adoptreg_list() {
-        return "user/mypage/mypage_adopt_reg_list";
-    }
-    @RequestMapping("/user_mypage_adoptcomplet_list")
-    public String mypage_adoptcomplet_list() {
-        return "user/mypage/mypage_adopt_complet_list";
-    }
-    @RequestMapping("/user_mypage_user_update")
-    public String mypage_user_update() {
-        return "user/mypage/mypage_user_update";
-    }
-    @RequestMapping("/user_mypage_user_delete")
-    public String mypage_user_delete() {
-        return "user/mypage/mypage_user_delete";
-    }
-    @RequestMapping("/user_mypage_support_list")
-    public String mypage_support_list() {
-        return "user/mypage/mypage_support_list";
-    }
-    @RequestMapping("/user_mypage_grade_list")
-    public String mypage_grade_list() {
-        return "user/mypage/mypage_grade_list";
-    }
-  
-    @RequestMapping("/user_notice_content")
-    public String notice_content(@RequestParam("no") int no, Model model) {
-    	NoticeDTO dto = this.noticedao.getNotice(no);
-    	model.addAttribute("Cont", dto);
-    	noticedao.readCount(no);
-    	return "user/notice/notice_content";
-    }
 }

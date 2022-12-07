@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heartpet.action.MypageDAO">
+	<select id="support_list" parameterType="String" resultType="com.heartpet.model.Mypage_SupportDTO">
+		select * from heartpet_support where support_userid = 'user'
+	</select>
+ 	<select id="support_sum" parameterType="String" resultType="int">
+		select sum(support_price) from heartpet_support where support_userid ='user'
+	</select>
+	<select id="user_info" parameterType="String" resultType="com.heartpet.model.UserDTO">
+		select * from heartpet_user where user_id ='user'
+	</select>
+</mapper>

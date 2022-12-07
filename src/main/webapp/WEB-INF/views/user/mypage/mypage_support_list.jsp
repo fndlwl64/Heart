@@ -36,8 +36,8 @@
                     <td><a class="table_a" href="#">후기</a></td>
                 </tr>
                 <tr>
-                    <td><a class="table_b" href="${path }/user_mypage_grade_list">1등급</a></td>
-                    <td><a class="table_b" href="${path }/user_mypage_support_list">30000</a></td>
+                    <td><a class="table_b" href="${path }/user_mypage_grade_list">${uList.user_grade}등급</a></td>
+                    <td><a class="table_b" href="${path }/user_mypage_support_list">${Sum }</a></td>
                     <td><a class="table_b" href="#">0</a></td>
                 </tr>
             </table>
@@ -57,17 +57,28 @@
     </div>
     <div id="my_cont2" class="mypage_cont">
         <div align="center">
+        	
             <table class="table">
                 <tr>
                     <th class="table-secondary"><span class="sp2">후원금액</span></th>
                     <th class="table-secondary"><span class="sp2">후원일자</span></th>
 
                 </tr>
-                <tr>
-                    <td>50000</td>
-                    <td>2022-12-05</td>
-                </tr>
+                <c:if test="${!empty List}">
+                <c:forEach items="${List }" var="dto">
+            <tr>
+                <td>${dto.getSupport_price()}</td>
+                <td>${dto.getSupport_date().substring(0,10) }</td>
+            </tr>
+                </c:forEach>
+            <tr>
+            	<td colspan="2">후원금액 합계 : ${Sum }</td>
+            </tr>
+            </c:if>
             </table>
+            <c:if test="${empty List}">
+            	<h3>후원내역이 없습니다.</h3>
+      		</c:if>
         </div>
     </div>
     <div class="mypage_bottom">
