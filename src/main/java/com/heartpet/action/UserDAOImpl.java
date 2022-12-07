@@ -38,4 +38,10 @@ public class UserDAOImpl implements UserDAO {
 	public UserDTO getUserInfo(String id) {
 		return this.sqlSession.selectOne("userInfo", id);
 	}
+
+	@Override
+	public int adminCheck(String id) {
+		return this.sqlSession.selectOne("admin_check", id);
+	}
+
 }

@@ -68,40 +68,51 @@ public class UserController {
     
     @RequestMapping("/login")
     public String login(@RequestParam("user_id")String id, @RequestParam("user_pwd")String pwd, HttpServletResponse response, HttpServletRequest request) throws IOException {
-    	
     	response.setContentType("text/html; charset=utf-8");
-    	request.setCharacterEncoding("utf-8");
     	
     	int check = userDAO.idCheck(id);
-    	
+    	int admin_check = userDAO.adminCheck(id);
     	String check_pwd = userDAO.login(id);
+    	System.out.println(check+"/"+admin_check+"/"+check_pwd);
     	
     	PrintWriter out = response.getWriter();
     	
     	if(check == 1) {
     		    		
-    		if(pwd.equals(check_pwd)) {
-    			UserDTO dto = userDAO.getUserInfo(id);
+    		System.out.println(admin_check+"여기까지");
+    		if(admin_check == 1) {
     			
-	    		String user_number = dto.getUser_no();
-	    		    		
-	    		HttpSession session = request.getSession();
-	    		
-	    		session.setAttribute("session_id", id);
-	    		session.setAttribute("session_no", user_number);
-	    			    		
-	    		out.println("<script>");
-				out.println("alert('로그인 되었습니다!');");
-				out.println("location.href='"+request.getContextPath()+"'");
-				out.println("</script>");
-				
-				System.out.println("세션id: "+id+", 세션no: "+user_number);
-	    	}else {
-	    		out.println("<script>");
-				out.println("alert('비밀번호가 틀렸습니다!!');");
-				out.println("history.back();");
-				out.println("</script>");
-	    	}
+    			if(pwd.equals(check_pwd)) {
+    				return "admin/user_list";
+    			}else {
+    				out.println("<script>");
+    				out.println("alert('비밀번호가 틀렸습니다!!');");
+    				out.println("history.back();");
+    				out.println("</script>");
+    			}
+    			    			
+    		}else {
+    			if(pwd.equals(check_pwd)) {
+        			UserDTO dto = userDAO.getUserInfo(id);
+        			  		
+    	    		HttpSession session = request.getSession();
+    	    		
+    	    		session.setAttribute("session_id", id);
+    	    			    		
+    	    		out.println("<script>");
+    				out.println("alert('로그인 되었습니다!');");
+    				out.println("location.href='"+request.getContextPath()+"'");
+    				out.println("</script>");
+    				
+    				System.out.println("세션id: "+id);
+    	    	}else {
+    	    		out.println("<script>");
+    				out.println("alert('비밀번호가 틀렸습니다!!');");
+    				out.println("history.back();");
+    				out.println("</script>");
+    	    	}
+			}    		    		
+    		
     	}else {
     		out.println("<script>");
 			out.println("alert('가입되지 않은 아이디입니다.');");
@@ -120,11 +131,9 @@ public class UserController {
     	if(check == 1) {
     		
     		UserDTO dto = userDAO.getUserInfo(id);
-    		String user_no = dto.getUser_no();
     		
 			HttpSession session = request.getSession();
 			session.setAttribute("session_id", id);
-			session.setAttribute("session_no", user_no);
 			
 			out.println("<script>");
 			out.println("alert('로그인 되었습니다!');");
@@ -132,7 +141,7 @@ public class UserController {
 			out.println("</script>");
 			
 			System.out.println("아이디 존재 => 카카오 로그인 성공");
-			System.out.println("세션id: "+id+", 세션no: "+user_no);
+			System.out.println("세션id: "+id);
     	}else {
     		
     		Map<String, Object> map = new HashMap<String, Object>();
@@ -143,11 +152,9 @@ public class UserController {
     		
     		if(res>0) {
     			UserDTO dto = userDAO.getUserInfo(id);
-        		String user_no = dto.getUser_no();
         		
     			HttpSession session = request.getSession();
         		session.setAttribute("session_id", id);    
-        		session.setAttribute("session_no", user_no);
         		
         		out.println("<script>");
 				out.println("alert('로그인 되었습니다!');");
@@ -155,7 +162,7 @@ public class UserController {
 				out.println("</script>");
         		
         		System.out.println("아이디 없음 => 카카오 계정 가입 성공");
-        		System.out.println("세션id: "+id+", 세션no: "+user_no);
+        		System.out.println("세션id: "+id);
     		}else {
     			out.println("<script>");
     			out.println("alert('가입 실패ㅠ');");
