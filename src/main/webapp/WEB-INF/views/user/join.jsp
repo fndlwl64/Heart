@@ -48,7 +48,7 @@
                     <tr>
                         <th>등급</th>
                         <td>
-                            <input class="text" name="user_grade" type="radio" checked disabled> 일반 회원
+                            <input class="text" name="user_grade" type="radio" value="3" checked> 일반 회원
                             <span class="grade"></span>
                         </td>
                     </tr>
@@ -83,15 +83,18 @@
                     <tr>
                         <th>반려동물경험</th>
                         <td>
-                            <input class="text" name="user_dogexp" type="radio"> 유
-                            <input class="text" name="user_dogexp" type="radio"> 무
+                            <input class="text" name="user_dogexp" type="radio" value="Y"> 유
+                            <input class="text" name="user_dogexp" type="radio" value="N"> 무
                             <span class="dogexp"></span>
                         </td>
                     </tr>
 
                 </table>
+                
+                <br /><br />
 
-                <input class="btn btn-secondary" type="button" value="가입">
+                <input class="btn btn-secondary" type="submit" value="가입">
+                <input class="btn btn-outline-secondary" type="reset" value="취소">
 
             </form>
 

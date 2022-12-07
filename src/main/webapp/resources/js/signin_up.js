@@ -86,13 +86,8 @@ $(function() {
 	                id = "K"+result.id
 	                nickname = result.properties.nickname
 	                kakao_account = result.kakao_account
-	                email ="kakaoUser@kakao.com";
-	                if(typeof kakao_account != 'undefined'){
-	                    email = kakao_account.email;
-	                }else if(name.equals('')) {
-	                    name = '카카오회원';
-	                }
-	                console.log('아이디 :'+id, '이름 :'+nickname, '이메일 :'+email);
+	               
+	                console.log('아이디 :'+id, '이름 :'+nickname);
 	
 	                $.ajax({
 	                    type: "POST",
@@ -100,8 +95,7 @@ $(function() {
 	                    url: "/project/kakao_login",
 	                    data: {
 	                        paramId : id,
-	                        paramName : nickname,
-	                        paramEmail : email
+	                        paramName : nickname
 	                    },
 	                    dataType: "text",
 	                    success: function(data) {
@@ -115,7 +109,7 @@ $(function() {
 	                    	}
 	                    },
 	                    error: function(e) {
-	                        console.log("ajax fail", error);
+	                        console.log("ajax fail", e);
 	                    }
 	                });
 	
@@ -126,12 +120,12 @@ $(function() {
 	                    JSON.stringify(error)
 	                );
 	            }
-	        })
+	        });
 	    },
 	    fail: function(err) {
 	        alert('failed to login: ' + JSON.stringify(err));
 	    }
-	})
+	});
 
 });
 

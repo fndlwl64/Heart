@@ -4,6 +4,9 @@
 
 
 <mapper namespace="AnimalDAO">
+	<select id="content" resultType="AnimalDTO">
+		select * from heartpet_animal where anima_no = #{animal_no}
+	</select>
 	<select id="list" resultType="AnimalDTO">
 		select * from heartpet_animal
 	</select>

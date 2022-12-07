@@ -2,11 +2,15 @@ package com.heartpet.project;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.swing.filechooser.FileSystemView;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +34,8 @@ public class AnimalController {
 
 	@Autowired
 	private AnimalDAO animalDAO;
+	@Autowired
+	HttpServletRequest request;
 
 	@RequestMapping("/jsptest")
 	public String jsptest(Model model) {
@@ -45,9 +51,12 @@ public class AnimalController {
 	}
 
 	@RequestMapping(value = "/user_dog_content", method = RequestMethod.GET)
-	public String dog_content(@RequestParam("no") int no) {
+	public String dog_content(@RequestParam("no") int no, Model model) {
 		System.out.println("===========================");
-		System.out.println(no);
+		
+		System.out.println(FileSystemView.getFileSystemView().getDefaultDirectory().toString());
+		System.out.println(request.getSession().getServletContext().getContext("/upload").getRealPath(""));
+		//model.addAttribute(null, model);
 		return "animal/dog/user_dog_content";
 	}
 
