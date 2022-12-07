@@ -39,9 +39,6 @@ import javax.validation.Valid;
 public class UserController {
 
 	@Autowired
-    private DogDAO dogDAO;
-	
-	@Autowired
 	private UserDAO userDAO;
 
     @Autowired
@@ -296,7 +293,7 @@ public class UserController {
     
     @RequestMapping("/join")
     public String join() {
-        return "user/user/join";
+        return "user/join";
     }
     
     @RequestMapping(value="/joinOk")
@@ -306,7 +303,7 @@ public class UserController {
     	    	    	
     	//System.out.println("값 확인 : "+dto.getUser_grade()+", "+dto.getUser_dogexp()+", "+(ad1+ad3+ad2));
     	//System.out.println("값 확인 : "+dto.getUser_id()+", "+dto.getUser_pwd()+", "+dto.getUser_email());
-    	//System.out.println("값 확인 : "+dto.getUser_name()+", "+dto.getUser_phone()+", "+dto.getUser_addr());
+    	System.out.println("값 확인 : "+dto.getUser_name()+", "+dto.getUser_phone()+", "+dto.getUser_addr());
     	
     	int res = userDAO.join(dto);
     	

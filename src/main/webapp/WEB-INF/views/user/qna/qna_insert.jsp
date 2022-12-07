@@ -4,7 +4,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
-<link rel="short icon" href="temp" />
 
 <script>
 
