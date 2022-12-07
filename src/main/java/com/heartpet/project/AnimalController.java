@@ -65,7 +65,7 @@ public class AnimalController {
 		animalDTO.setAnimal_img2(images[1]);
 		animalDTO.setAnimal_img3(images[2]);
 		
-		animalDTO.setAnimal_status("입양 대기");
+		animalDTO.setAnimal_status("입양 신청");
 		
 		animalDAO.insert(animalDTO);
 

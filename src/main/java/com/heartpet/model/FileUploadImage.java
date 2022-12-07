@@ -79,8 +79,7 @@ public class FileUploadImage {
 //				File toFile = new File(rootPath + "/" + imgs[i]);
 //				file.transferTo(toFile);
 				File otherFile = new File(otherPath + "/" + imgs[i]);
-				File path = new File(otherFile+imgs[i]);
-				file.transferTo(path);
+				file.transferTo(otherFile);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 
