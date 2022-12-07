@@ -7,7 +7,6 @@
 <% pageContext.setAttribute("newline", "\n"); %>
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
-<link rel="short icon" href="temp" />
 
 <%-- 문의글 상세 보기 --%>
 <div id="qna-contents" class="qna-contents">

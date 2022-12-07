@@ -4,7 +4,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_review.css" />
-<link rel="short icon" href="temp" />
 
 <%-- 글쓰기 --%>
 <div id="review-contents" class="review-contents">
