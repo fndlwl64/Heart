@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
@@ -45,7 +44,7 @@
 					<li class="lis"><a href="${path}/support_list">후원관리</a></li>
 					<li class="lis"><a href="${path}/notice_list">공지사항관리</a></li>
 					<li class="lis"><a href="${path}/board_list">Q&A관리</a></li>
-					<li class="lis"><a href="${path}/user_review_list">후기관리</a></li>
+					<li class="lis"><a href="${path}/review_list">후기관리</a></li>
 				</ul>
 			</div>
 		</div>

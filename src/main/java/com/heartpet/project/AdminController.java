@@ -10,11 +10,11 @@ public class AdminController {
     /*관리자 상단바에서 페이지 이동*/
 	@RequestMapping("/admin_main")
 	public String admin_main() {
-		return "admin/user_list";
+		return "admin/user/user_list";
 	}
     @RequestMapping("/user_list")
     public String user_list() {
-        return "admin/user_list";
+        return "admin/user/user_list";
     }
     @RequestMapping("/adoptreg_list")
     public String adoptreg_list() {
@@ -60,7 +60,7 @@ public class AdminController {
     }
     @RequestMapping("/user_update")
     public String user_update() {
-        return "admin/user_update";
+        return "admin/user/user_update";
     }
     /*관리자 리스트에서 등록하기*/
     @RequestMapping("/adoptreg_insert")
@@ -85,7 +85,7 @@ public class AdminController {
     }
     @RequestMapping("/user_insert")
     public String user_insert() {
-        return "admin/user_insert";
+        return "admin/user/user_insert";
     }
 
     /*관리자 리스트에서 상세정보보기*/
@@ -96,6 +96,12 @@ public class AdminController {
     }
     @RequestMapping("/user_view")
     public String user_view() {
-        return "admin/user_view";
+        return "admin/user/user_content";
+    }
+    
+    // 관리자 리스트에서 삭제하기
+    @RequestMapping("/user_delete")
+    public void user_delete() {
+    	
     }
 }
