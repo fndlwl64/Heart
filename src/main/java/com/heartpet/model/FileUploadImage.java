@@ -62,8 +62,7 @@ public class FileUploadImage {
 //		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload");
 		String otherPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath()
 				+ "/GitHub/Heart/src/main/webapp/resources/upload";
-		System.out.println("=============");
-		System.out.println(otherPath);
+		
 		String[] imgs = {"","",""};
 		int i = 0;
 	
@@ -80,7 +79,8 @@ public class FileUploadImage {
 //				File toFile = new File(rootPath + "/" + imgs[i]);
 //				file.transferTo(toFile);
 				File otherFile = new File(otherPath + "/" + imgs[i]);
-				file.transferTo(otherFile);
+				File path = new File(otherFile+imgs[i]);
+				file.transferTo(path);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 

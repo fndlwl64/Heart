@@ -54,9 +54,8 @@ public class AnimalController {
 	public String dog_content(@RequestParam("no") int no, Model model) {
 		System.out.println("===========================");
 		
-		
 		System.out.println(FileSystemView.getFileSystemView().getDefaultDirectory().toString());
-		System.out.println(this.getClass().getResource("").getPath());
+		System.out.println(request.getSession().getServletContext().getContext("/upload").getRealPath(""));
 		//model.addAttribute(null, model);
 		return "animal/dog/user_dog_content";
 	}
