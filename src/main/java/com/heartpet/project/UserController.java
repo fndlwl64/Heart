@@ -6,7 +6,6 @@ import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.NoticeDTO;
 import com.heartpet.model.PageDTO;
 import com.heartpet.action.AnimalDAO;
-import com.heartpet.action.DogDAO;
 import com.heartpet.action.QnaDAO;
 import com.heartpet.action.UserDAO;
 import com.heartpet.model.QnaDTO;
