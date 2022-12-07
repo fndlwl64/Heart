@@ -24,19 +24,31 @@
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="${path}/resources/icon/favicon_144x144.png" />
 </head>
 <body>
-	<div align="center" class="div_header">
-				
-		<a href="${path}/admin_main"><img class ="logo" src="resources/image/heartpet_logo.png" /></a>
-		<ul>
-			<li class="lis"><a href="${path}/user_list">회원관리</a></li>
-			<li class="lis"><a href="${path}/dog_list">유기견관리</a></li>
-			<li class="lis"><a href="${path}/cat_list">유기묘관리</a></li>
-			<li class="lis"><a href="${path}/adoptreg_list">입양관리</a></li>
-			<li class="lis"><a href="${path}/support_list">후원관리</a></li>
-			<li class="lis"><a href="${path}/notice_list">공지사항관리</a></li>
-			<li class="lis"><a href="${path}/board_list">Q&A관리</a></li>
-			<li class="lis"><a href="${path}/user_review_list">후기관리</a></li>
-		</ul>
+	<div class="header-logo">
+		<div class="row div_header">
+			<div class="col-4 space"></div>		
+			<div class="col-4 header-logo">
+				<a href="${path}/admin_main"><img class="logo" src="${path}/resources/logo/heartpet_logo_words.png" alt="HeartPet" /></a>
+			</div>
+			<div class="col-4 header-nav">
+	            <ul>
+	            	<li><a href="${path}/">홈</a></li>
+	                <li><a href="${path}/user_logout">로그아웃</a></li>
+	            </ul>
+            </div>
+			<div class="nav-bar justify-content-center">
+				<ul>
+					<li class="lis"><a href="${path}/user_list">회원관리</a></li>
+					<li class="lis"><a href="${path}/dog_list">유기견관리</a></li>
+					<li class="lis"><a href="${path}/cat_list">유기묘관리</a></li>
+					<li class="lis"><a href="${path}/adoptreg_list">입양관리</a></li>
+					<li class="lis"><a href="${path}/support_list">후원관리</a></li>
+					<li class="lis"><a href="${path}/notice_list">공지사항관리</a></li>
+					<li class="lis"><a href="${path}/board_list">Q&A관리</a></li>
+					<li class="lis"><a href="${path}/user_review_list">후기관리</a></li>
+				</ul>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

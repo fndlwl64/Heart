@@ -140,9 +140,9 @@ $(function() {
  	
  	naverLogin.getLoginStatus(function(status) {
       if (status) {
-          const nickName=naverLogin.user.getNickName();
-          const age=naverLogin.user.getAge();
-          const birthday=naverLogin.user.getBirthday();
+          const nickName = naverLogin.user.getNickName();
+          const age = naverLogin.user.getAge();
+          const birthday = naverLogin.user.getBirthday();
 
         //닉네임을 선택하지 않으면 선택창으로 돌아갑니다.
           if(nickName===null||nickName===undefined ){ 

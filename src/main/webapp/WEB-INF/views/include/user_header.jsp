@@ -58,6 +58,7 @@
                                 <li><a href="${path}/user_mypage_wish_list">마이페이지</a></li>
                                 <li><a href="${path}/user_logout">로그아웃</a></li>
                             </c:if>
+                            
                         </ul>
                     </div>
                 </div>

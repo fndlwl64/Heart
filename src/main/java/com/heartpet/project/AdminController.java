@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
     /*관리자 상단바에서 페이지 이동*/
+	@RequestMapping("/admin_main")
+	public String admin_main() {
+		return "admin/user_list";
+	}
     @RequestMapping("/user_list")
     public String user_list() {
         return "admin/user_list";

@@ -1,5 +1,38 @@
 @charset "UTF-8";
 /* include/admin_header.jsp에서 사용하는 css*/
+
+.header-logo {
+	border: 0px;
+    text-align: center;
+    display: grid;
+    padding: 20px;
+}
+
+.header-nav {
+	justify-content: flex-end;
+}
+
+.header-nav ul {
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+}
+
+.header-nav ul li {
+    list-style: none;
+}
+
+.header-nav ul li a {
+    text-decoration: none;
+    color: gray;
+    padding: 1rem 1.5rem;
+    display: block;
+}
+
+.header-nav ul li a:hover {
+    color: black;
+}
+
 .div_header .lis {
 	display: inline-block;
 	font-weight: bold;
@@ -21,7 +54,7 @@
 }
 
 .div_header .logo {
-	width: 300px;
+	text-align: center;
 	height: 100px;
 }
 

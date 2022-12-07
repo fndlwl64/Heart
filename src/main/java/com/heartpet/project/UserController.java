@@ -66,6 +66,9 @@ public class UserController {
     		if(admin_check == 1) {
     			// 관리자 아이디 로그인 => 관리자 페이지로 이동
     			if(pwd.equals(check_pwd)) {
+    				HttpSession session = request.getSession();
+    				
+    				session.setAttribute("session_admin_id", id);
     				return "admin/user_list";
     			}else {
     				out.println("<script>");
