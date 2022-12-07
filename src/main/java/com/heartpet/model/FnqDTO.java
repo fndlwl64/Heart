@@ -6,6 +6,7 @@ import lombok.Data;
 public class FnqDTO {
 	
 	private int fnq_no;
+	private String fnq_category;
 	private String fnq_question;
 	private String fnq_answer;
 	

@@ -8,7 +8,7 @@
 	<typeAliases>
 		<typeAlias type="com.heartpet.model.QnaDTO" alias="QnaDTO"/>
 		<typeAlias type="com.heartpet.action.QnaDAO" alias="QnaDAO"/>
-		<typeAlias type="com.heartpet.action.FnqDTO" alias="FnqDTO"/>
+		<typeAlias type="com.heartpet.model.FnqDTO" alias="FnqDTO"/>
 		<typeAlias type="com.heartpet.action.AnimalDAO" alias="AnimalDAO"/>
 		<typeAlias type="com.heartpet.model.AnimalDTO" alias="AnimalDTO"/>
 		<typeAlias type="com.heartpet.model.UserDTO" alias="UserDTO"/>

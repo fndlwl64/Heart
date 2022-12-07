@@ -58,6 +58,9 @@
         </div>
         </c:forEach>
         </c:if>
+        <c:if test="${ empty fList }">
+        	No data
+        </c:if>
     </div>
     <br>
 
@@ -66,13 +69,13 @@
         <div class="row">
             <div class="col-4 space"></div>
             <div class="col-4 search">
-                <form method="post" action="${path}/search">
+                <form method="post" action="${path}/user_fnq_list">
                     <input type="hidden" name="page" value="${ paging.page }" />
                     <select name="field" class="form-select d-inline align-middle w-25">
                         <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
-                        <option value="adoption"<c:if test="${ field eq 'adoption' }">selected="selected"</c:if>>입양</option>
-                        <option value="process"<c:if test="${ field eq 'process' }">selected="selected"</c:if>>절차</option>
-                        <option value="support"<c:if test="${ field eq 'support' }">selected="selected"</c:if>>후원</option>
+                        <option value="category"<c:if test="${ field eq 'category' }">selected="selected"</c:if>>카테고리</option>
+                        <option value="question"<c:if test="${ field eq 'question' }">selected="selected"</c:if>>질문</option>
+                        <option value="answer"<c:if test="${ field eq 'answer' }">selected="selected"</c:if>>답변</option>
                     </select>
                     <input type="text" class="form-control d-inline align-middle w-50" name="keyword" value="${ keyword }" />
                     <button type="submit" class="btn btn-dark align-middle d-inline"><i class="bi bi-search"></i> 검색</button>

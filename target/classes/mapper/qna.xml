@@ -78,7 +78,8 @@
 		<where>
 	 	<choose>
 	 		<when test="field == '' and keyword == ''"></when>
-			<when test="field.equals('allSearch') and keyword != ''"> (fnq_question like '%' || #{keyword} || '%') or (fnq_answer like '%' || #{keyword} || '%')</when>
+			<when test="field.equals('allSearch') and keyword != ''"> (fnq_category like '%' || #{keyword} || '%') or (fnq_question like '%' || #{keyword} || '%') or (fnq_answer like '%' || #{keyword} || '%')</when>
+			<when test="field.equals('category') and keyword != ''"> fnq_category like '%' || #{keyword} || '%'</when>
 			<when test="field.equals('question') and keyword != ''"> fnq_question like '%' || #{keyword} || '%'</when>
 			<when test="field.equals('answer') and keyword != ''"> fnq_answer like '%' || #{keyword} || '%'</when>
 		</choose>
@@ -89,7 +90,9 @@
 		<![CDATA[select * from (select b.*, row_number() over(order by fnq_no desc) rnum from heartpet_fnq b ]]>
 		<where>
 		 <choose>
-			<when test="field.equals('allSearch') and keyword != ''"> (fnq_question like '%' || #{keyword} || '%') or (fnq_answer like '%' || #{keyword} || '%')</when>
+	 		<when test="field == '' and keyword == ''"></when>
+			<when test="field.equals('allSearch') and keyword != ''"> (fnq_category like '%' || #{keyword} || '%') or (fnq_question like '%' || #{keyword} || '%') or (fnq_answer like '%' || #{keyword} || '%')</when>
+			<when test="field.equals('category') and keyword != ''"> fnq_category like '%' || #{keyword} || '%'</when>
 			<when test="field.equals('question') and keyword != ''"> fnq_question like '%' || #{keyword} || '%'</when>
 			<when test="field.equals('answer') and keyword != ''"> fnq_answer like '%' || #{keyword} || '%'</when>
          </choose>
