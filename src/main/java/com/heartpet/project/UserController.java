@@ -81,7 +81,7 @@ public class UserController {
     		    		
     		System.out.println(admin_check+"여기까지");
     		if(admin_check == 1) {
-    			
+    			// 관리자 아이디 로그인 => 관리자 페이지로 이동
     			if(pwd.equals(check_pwd)) {
     				return "admin/user_list";
     			}else {
@@ -90,7 +90,7 @@ public class UserController {
     				out.println("history.back();");
     				out.println("</script>");
     			}
-    			    			
+    		// 회원 아이디 로그인	    			
     		}else {
     			if(pwd.equals(check_pwd)) {
         			UserDTO dto = userDAO.getUserInfo(id);
