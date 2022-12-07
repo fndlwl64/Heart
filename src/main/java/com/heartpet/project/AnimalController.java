@@ -37,12 +37,8 @@ public class AnimalController {
 	@Autowired
 	HttpServletRequest request;
 
-	@RequestMapping("/jsptest")
-	public String jsptest(Model model) {
-		model.addAttribute("list", animalDAO.list());
 
-		return "jsptest";
-	}
+	//USER
 
 	@RequestMapping(value = "/user_dog_list" , method = RequestMethod.GET)
 	public String user_dog_list(Model model) {
@@ -79,6 +75,8 @@ public class AnimalController {
 		return "redirect:/";
 	}
 	
+	
+	//ADMIN
 	@RequestMapping("/admin_dog_list")
     public String admin_dog_list(Model model) {
     	model.addAttribute("dogList", animalDAO.listTag("dog"));
