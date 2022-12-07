@@ -11,7 +11,6 @@ public interface QnaDAO {
     public int hitQna(int board_no);
     public int updateQna(QnaDTO dto);
     public int deleteQna(int board_no);
-    public List<QnaDTO> searchQna(String field, String keyword);
     public int listQnaCount(String field, String keyword);
 
 }

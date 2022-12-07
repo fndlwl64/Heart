@@ -27,7 +27,6 @@ public class NoticeDAOImpl implements NoticeDAO{
 
 	@Override
 	public int readCount(int no) {
-		System.out.println("aa");
 		return this.sqlSession.update("notice_read", no);
 		
 	}

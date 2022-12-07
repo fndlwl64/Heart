@@ -13,7 +13,7 @@
 
 <div class="mypage_header">
     <div>
-        <br><h1 class="mypage"><a id="mypage_a" href="/user_mypage_wish_list">My Page</a><a class="adopt_a" href="${path }/user_mypage_adoptreg_list"><span id="adopt_span">입양대기목록<button id="adopt_btn" value="1"><span id="adopt_span2">1</span></button></span></a></h1>
+        <br><h1 class="mypage"><a id="mypage_a" href="${path }/user_mypage_wish_list">My Page</a><a class="adopt_a" href="${path }/user_mypage_adoptreg_list"><span id="adopt_span">입양대기목록<button id="adopt_btn" value="1"><span id="adopt_span2">1</span></button></span></a></h1>
     </div>
     <br>
     <div class="mypage_header_mid">
@@ -57,17 +57,22 @@
     </div>
     <div id="my_cont2" class="mypage_cont">
         <div align="center">
-            <table class="table">
-                <tr>
-                    <th class="table-secondary"><span class="sp2">후원금액</span></th>
-                    <th class="table-secondary"><span class="sp2">후원일자</span></th>
-
-                </tr>
-                <tr>
-                    <td>50000</td>
-                    <td>2022-12-05</td>
-                </tr>
-            </table>
+            <h3>입양대기목록</h3>
+            <ul class="my_cont_ul">
+                <li><img class="my_cont_img"src="${path }/resources/image/dog.png"></li>
+                <li>강아지종</li>
+                <li>입양예정일</li>
+            </ul>
+            <ul class="my_cont_ul">
+                <li><img class="my_cont_img" src="${path }/resources/image/dog.png"></li>
+                <li>강아지종</li>
+                <li>입양예정일</li>
+            </ul>
+            <ul class="my_cont_ul">
+                <li><img class="my_cont_img" src="${path }/resources/image/dog.png"></li>
+                <li>강아지종</li>
+                <li>입양예정일</li>
+            </ul>
         </div>
     </div>
     <div class="mypage_bottom">

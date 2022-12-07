@@ -13,7 +13,7 @@
 
 <div class="mypage_header">
     <div>
-        <br><h1 class="mypage"><a id="mypage_a" href="/user_mypage_wish_list">My Page</a><a class="adopt_a" href="${path }/user_mypage_adoptreg_list"><span id="adopt_span">입양대기목록<button id="adopt_btn" value="1"><span id="adopt_span2">1</span></button></span></a></h1>
+        <br><h1 class="mypage"><a id="mypage_a" href="${path }/user_mypage_wish_list">My Page</a><a class="adopt_a" href="${path }/user_mypage_adoptreg_list"><span id="adopt_span">입양대기목록<button id="adopt_btn" value="1"><span id="adopt_span2">1</span></button></span></a></h1>
     </div>
     <br>
     <div class="mypage_header_mid">
@@ -55,24 +55,29 @@
             <li><a href="${path }/user_mypage_user_delete" class="my_a">회원탈퇴</a></li>
         </ul>
     </div>
-    <div id="my_cont2" class="mypage_cont">
-        <div align="center">
-            <h3>입양대기목록</h3>
-            <ul class="my_cont_ul">
-                <li><img class="my_cont_img"src="${path }/resources/image/dog.png"></li>
-                <li>강아지종</li>
-                <li>입양예정일</li>
-            </ul>
-            <ul class="my_cont_ul">
-                <li><img class="my_cont_img" src="${path }/resources/image/dog.png"></li>
-                <li>강아지종</li>
-                <li>입양예정일</li>
-            </ul>
-            <ul class="my_cont_ul">
-                <li><img class="my_cont_img" src="${path }/resources/image/dog.png"></li>
-                <li>강아지종</li>
-                <li>입양예정일</li>
-            </ul>
+    <div id="my_cont5" class="mypage_cont">
+        <div class="row g-3 align-items-center" style=" margin-top: 210px; margin-left: 800px; margin-right: 800px;">
+            <form method="post" action="<%=request.getContextPath()%>/send.do">
+                <div class="mb-3">
+                    <label for="receiver" class="col-form-label">이메일 인증</label>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" id="receiver" name="receiver" value="soopwe2@naver.com" class="form-control" aria-describedby="passwordHelpInline" readonly="readonly" /><br>
+                    <input class="btn btn-primary" id="submit" type="submit"  value="인증번호발송">
+                </div>
+
+                <div class="mb-3">
+                    <%--랜덤으로 임의의 숫자 5자리를 생성하는 메서드작성--%>
+                    <%! public int getRandom(){
+                        int random = 0;
+                        random = (int)Math.floor((Math.random()*(99999-10000+1)))+10000;
+                        return random;
+                    }
+                    %>
+                    <input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>" />
+                </div>
+            </form>
         </div>
     </div>
     <div class="mypage_bottom">

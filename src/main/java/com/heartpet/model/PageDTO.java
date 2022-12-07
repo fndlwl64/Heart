@@ -2,7 +2,6 @@ package com.heartpet.model;
 
 import lombok.Data;
 
-// 페이징 처리시 작업 할 내용을 설정하는 개체
 @Data
 public class PageDTO {
 
@@ -27,7 +26,8 @@ public class PageDTO {
 
     // 검색 페이징 처리 인자 생성자
     public PageDTO(int page, int rowsize, int totalRecord, String field, String keyword) {
-        this.page = page;
+        
+    	this.page = page;
         this.rowsize = rowsize;
         this.totalRecord = totalRecord;
         this.field = field;

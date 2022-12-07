@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <jsp:include page="../../../include/user_header.jsp"/>
+
 
 <body>
 <div class="d-flex justify-content-center">
@@ -93,3 +95,4 @@
 </body>
 
 <jsp:include page="../../../include/user_footer.jsp"/>
+

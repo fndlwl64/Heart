@@ -6,6 +6,25 @@
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
 <link rel="short icon" href="temp" />
 
+<script>
+
+$(function() {	
+	
+    $('input[type=checkbox][name=board_secret]').change(function() {
+        if (this.checked) {
+        	$('input[type=hidden][name=board_secret]').attr('disabled', true);
+            console.log(this);
+        	console.log(typeof this.value);
+        }else {
+        	$('input[type=hidden][name=board_secret]').attr('disabled', false);
+            console.log(this);
+        	console.log(typeof this.value);
+        }
+    });
+}) 
+ 
+</script>
+
 <%-- 글쓰기 --%>
 <div id="qna-contents" class="qna-contents">
     <div class="qna-section">
@@ -33,7 +52,8 @@
                 <th class="table-light col-1">작성자</th>
                 <td class="col-2"><input type="text" class="form-control" value="${ board_id }" disabled="disabled"></td>
                 <th class="table-light col-1">
-                <label><input class="form-check-input col-1" type="checkbox" value="Y" name="board_secret" checked="checked"> 비밀글</label>
+                <label><input class="form-check-input col-1" type="checkbox" name="board_secret" value="Y" checked="checked"> 비밀글</label>
+                <input type="hidden" name="board_secret" value="N" disabled="disabled" />
                 </th>
             </tr>
             <tr>

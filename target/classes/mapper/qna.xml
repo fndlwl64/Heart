@@ -6,8 +6,8 @@
 	<sql id="qna_select">
 		select * from heartpet_board 
 	</sql>
-	<select id="qna_list" parameterType="java.util.Map" resultType="QnaDTO">
-		<include refid="qna_select" />
+	<select id="qna_list" parameterType="hashMap" resultType="QnaDTO">
+		select * from (select b.*, row_number() over(order by board_no desc) rnum from heartpet_board b 
 		<where>
 		 <choose>
             <when test="field.equals('allSearch') and keyword != ''"> (board_title like '%' || #{keyword} || '%') or (board_content like '%' || #{keyword} || '%') or (board_category like '%' || #{keyword} || '%') or (board_id like '%' || #{keyword} || '%')</when>
@@ -17,25 +17,47 @@
             <when test="field.equals('id') and keyword != ''"> board_id like '%' || #{keyword} || '%'</when>
          </choose>
          </where>
-         order by board_no desc
+         <![CDATA[) where rnum >= #{startNo} and rnum <= #{endNo}]]>
 	</select>
+	
 	<update id="qna_hit" parameterType="int">
 		update heartpet_board set board_hit = board_hit + 1 where board_no = #{ board_no }
 	</update>
 	<select id="qna_content" parameterType="int" resultType="QnaDTO">
-		<include refid="qna_select" /> where board_no = #{board_no}
+		<include refid="qna_select" /> where board_no = #{ board_no }
 	</select>
+	
+	<!-- 게시글 개수 -->
+	<select id="qna_count" parameterType="hashMap" resultType="int">
+		select count(*) from heartpet_board
+		<where>
+	 	<choose>
+	 		<when test="field == '' and keyword == ''"></when>
+			<when test="field.equals('allSearch') and keyword != ''"> (board_title like '%' || #{keyword} || '%') or (board_content like '%' || #{keyword} || '%') or (board_category like '%' || #{keyword} || '%') or (board_id like '%' || #{keyword} || '%')</when>
+			<when test="field.equals('title') and keyword != ''"> board_title like '%' || #{keyword} || '%'</when>
+			<when test="field.equals('content') and keyword != ''"> board_content like '%' || #{keyword} || '%'</when>
+			<when test="field.equals('category') and keyword != ''"> board_category like '%' || #{keyword} || '%'</when>
+			<when test="field.equals('id') and keyword != ''"> board_id like '%' || #{keyword} || '%'</when>
+		</choose>
+        </where>
+	</select>
+	
+	<!-- insert -->
 	<insert id="qna_insert" parameterType="QnaDTO">
 		<selectKey resultType="int" keyProperty="board_no" order="BEFORE">
 			select max(board_no)+1 from heartpet_board
 		</selectKey>
 		insert into heartpet_board values (#{ board_no }, #{ board_category }, #{ board_id }, default, #{ board_title },
-		#{ board_content }, #{ board_secret }, #{ board_pwd }, sysdate, '', '', '')
+		#{ board_content },  #{ board_secret }, #{ board_pwd }, sysdate, '', '', '')
 	</insert>
+	
+	<!-- update -->
 	<update id="qna_update" parameterType="int">
 		update heartpet_board set board_category = #{ board_category }, board_title = #{ board_title }, board_content = #{ board_content }, 
 		board_secret = #{ board_secret }, board_update = sysdate, board_img1 = #{ board_img1 }, board_img2 = #{ board_img2 } where board_no = #{ board_no }
 	</update>
+	
+	<!-- delete -->
 	<delete id="qna_delete" parameterType="int">
 		delete from heartpet_board where board_no = #{ board_no }
 	</delete>

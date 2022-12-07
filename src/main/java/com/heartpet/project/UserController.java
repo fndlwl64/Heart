@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,13 +62,12 @@ public class UserController {
 
     // 검색 기능 구현 중
     @RequestMapping("/user_qna_list")
-    public String user_qna_list(@RequestParam String field, @RequestParam String keyword, @RequestParam int page, Model model) {
+    public String user_qna_list(@RequestParam(required = false) String field, @RequestParam(required = false) String keyword, @RequestParam(defaultValue = "0") int page, Model model) {
+    	if(field == null) { field = ""; }
+       	if(keyword == null) { keyword = ""; }
     	
-    	if(field == null) field = "";
-    	if(keyword == null) keyword = "";
-    	
-    	int currentPage = 1;
-    	if(page > 1) { currentPage = page; }
+		int currentPage = 1;	// 현재 페이지 변수
+		if(page != 0) { currentPage = page; }
     	
     	totalRecord = this.qnaDAO.listQnaCount(field, keyword);
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
@@ -76,18 +76,11 @@ public class UserController {
         
         model.addAttribute("qnaList", qnaList);
         model.addAttribute("total", totalRecord);
-        model.addAttribute("paging", paging);
-        model.addAttribute("field", field);
-        model.addAttribute("keyword", keyword);
-
+        model.addAttribute("paging", paging);		
+		model.addAttribute("field", field); 
+		model.addAttribute("keyword", keyword);	
+		
         return "qna/qna_list";
-    }
-    
-    @RequestMapping("/user_qna_search")
-    public String user_qna_search(Model model, String keyword, String field) {
-    	List<QnaDTO> qnaList = this.qnaDAO.searchQna(field, keyword);
-    	model.addAttribute("qnaList", qnaList);
-    	return "qna/qna_list";
     }
     
     @RequestMapping("/user_qna_insert")
@@ -96,13 +89,10 @@ public class UserController {
     }
     
     @RequestMapping(value = "/user_qna_insert_ok", method = RequestMethod.POST)
-    // binding한 결과가 result에 담김
-    public void user_qna_insert_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response) throws IOException {
-		// 에러 있는지 검사
+    public void user_qna_insert_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-    	if(result.hasErrors()) {
-    		// 에러를 List로 저장
+    	if(result.hasErrors()) { // 에러를 List로 저장
 			List<ObjectError> errors = result.getAllErrors();
 			for(ObjectError error : errors) {
 				if(error.getDefaultMessage().equals("title")) { out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>"); break; }
@@ -113,7 +103,7 @@ public class UserController {
     	}else {
         	int check = this.qnaDAO.insertQna(qnaDto);
     		if(check > 0) {
-    			out.println("<script>alert('글이 성공적으로 등록되었습니다.'); location.href='/user_qna_list'; </script>");
+    			out.println("<script>alert('글이 성공적으로 등록되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>");
     		}else {
     			out.println("<script>alert('글 등록을 실패했습니다.'); history.back(); </script>");
     		}
@@ -128,7 +118,7 @@ public class UserController {
     }
     
     @RequestMapping(value = "/user_qna_update_ok", method = RequestMethod.POST)
-    public void user_qna_update_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response) throws IOException {
+    public void user_qna_update_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
     	QnaDTO qnaContent = this.qnaDAO.contentQna(qnaDto.getBoard_no());
@@ -146,7 +136,7 @@ public class UserController {
 			}
     	}else {   		        			
         	int check = this.qnaDAO.insertQna(qnaDto);        	
-    		if(check > 0) { out.println("<script>alert('글이 성공적으로 수정되었습니다.'); location.href='/user_qna_list'; </script>"); }
+    		if(check > 0) { out.println("<script>alert('글이 성공적으로 수정되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>"); }
     		else { out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>"); }
     	}    	
     }
@@ -308,18 +298,18 @@ public class UserController {
         return "user/join";
     }
     
-    @RequestMapping("/joinOk")
-    public void joinOk(UserDTO dto, @RequestParam("addr1")String ad1, @RequestParam("addr2")String ad2, @RequestParam("addr3")String ad3, HttpServletRequest request,HttpServletResponse response) throws IOException {
+    @RequestMapping(value="/joinOk")
+    public void joinOk(UserDTO dto, HttpServletRequest request,HttpServletResponse response) throws IOException {
     	request.setCharacterEncoding("UTF-8");
     	response.setContentType("text/html; charset=utf-8");
+    	    	    	
+    	//System.out.println("값 확인 : "+dto.getUser_grade()+", "+dto.getUser_dogexp()+", "+(ad1+ad3+ad2));
+    	//System.out.println("값 확인 : "+dto.getUser_id()+", "+dto.getUser_pwd()+", "+dto.getUser_email());
+    	//System.out.println("값 확인 : "+dto.getUser_name()+", "+dto.getUser_phone()+", "+dto.getUser_addr());
     	
-    	Map<String, Object> map = new HashMap<String, Object>();
-    	map.put("dto", dto);
-    	map.put("addr", ad1+ad3+ad2);
+    	int res = userDAO.join(dto);
     	
     	PrintWriter out = response.getWriter();
-    	
-    	int res = userDAO.join(map);
     	
     	if(res>0) {
     		out.println("<script>");
@@ -334,7 +324,6 @@ public class UserController {
     		out.println("</script>");
     		System.out.println("회원가입 실패");
     	}
-    	
     }
 
     @RequestMapping("/user_mypage_adoptreg_list")

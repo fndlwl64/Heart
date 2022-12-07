@@ -9,12 +9,11 @@
 <script src="resources/js/mypage.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet" href="resources/css/mypage.css"/>
-
 <%-- 여기서부터 작성 --%>
 
 <div class="mypage_header">
     <div>
-        <br><h1 class="mypage"><a id="mypage_a" href="/user_mypage_wish_list">My Page</a><a class="adopt_a" href="${path }/user_mypage_adoptreg_list"><span id="adopt_span">입양대기목록<button id="adopt_btn" value="1"><span id="adopt_span2">1</span></button></span></a></h1>
+        <br><h1 class="mypage"><a id="mypage_a" href="${path }/user_mypage_wish_list">My Page</a><a class="adopt_a" href="${path }/user_mypage_adoptreg_list"><span id="adopt_span">입양대기목록<button id="adopt_btn" value="1"><span id="adopt_span2">1</span></button></span></a></h1>
     </div>
     <br>
     <div class="mypage_header_mid">
@@ -56,41 +55,27 @@
             <li><a href="${path }/user_mypage_user_delete" class="my_a">회원탈퇴</a></li>
         </ul>
     </div>
-    <div id="my_cont4" class="mypage_cont">
+    <div id="my_cont3" class="mypage_cont">
         <div align="center">
-            <form>
-                <h3>회원정보변경</h3>
-                <table class="table">
-                    <tr>
-                        <th class="table-secondary"><span class="sp2">아이디</span></th>
-                        <td><input class ="input1" type="text" value="user"></td>
-                    </tr>
-                    <tr>
-                        <th class="table-secondary"><span class="sp2">이름</span></th>
-                        <td><input class ="input1" type="text" value="홍길동"></td>
-                    </tr>
-                    <tr>
-                        <th class="table-secondary"><span class="sp2">이메일</span></th>
-                        <td><input class ="input1" type="text" value="abcd@naver.com"></td>
-                    </tr>
-                    <tr>
-                        <th class="table-secondary"><span class="sp2">연락처</span></th>
-                        <td><input class ="input1" type="text" value="010-1234-5678"></td>
-                    </tr>
-                    <tr>
-                        <th class="table-secondary"><span class="sp2">주소</span></th>
-                        <td><input class ="input1" type="text" value="서울"></td>
-                    </tr>
-                    <tr>
-                        <th class="table-secondary"><span class="sp2">반려동물경험</span></th>
-                        <td><input class ="input1" type="text" value="Y"></td>
-                    </tr>
-                </table>
-                <br>
-                <input class="btn btn-primary" id="update_btn" type="submit" value="변경" align="center">
-            </form>
+            <h3>입양완료목록</h3>
+            <ul class="my_cont_ul">
+                <li><img class="my_cont_img" src="${path }/resources/image/dog.png"></li>
+                <li>강아지종</li>
+                <li>입양완료일</li>
+            </ul>
+            <ul class="my_cont_ul">
+                <li><img class="my_cont_img" src="${path }/resources/image/dog.png"></li>
+                <li>강아지종</li>
+                <li>입양완료일</li>
+            </ul>
+            <ul class="my_cont_ul">
+                <li><img class="my_cont_img" src="${path }/resources/image/dog.png"></li>
+                <li>강아지종</li>
+                <li>입양완료일</li>
+            </ul>
         </div>
     </div>
+
     <div class="mypage_bottom">
 
     </div>

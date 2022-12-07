@@ -8,7 +8,9 @@
     <meta charset="UTF-8">
     <title>HeartPet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="short icon" href="temp" />    
+
+    <link rel="short icon" href="temp">
+
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="${path}/resources/js/main.js"></script>
@@ -60,15 +62,15 @@
                 <div class="nav-bar justify-content-center">
                     <div class="nav-links">
                         <ul>
-                            <li><a href="${path}/user_notice">공지&안내</a></li>                            
-                            <li><a href="${path}/user_animal_insert">무료입소</a></li>
+                            <li><a href="${path}/useruser_notice">공지&안내</a></li>                            
+                            <li><a href="${path}/user/user_animal_insert">무료입소</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     무료입양
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="${path}/user_dog_list">강아지보기</a></li>
-                                    <li><a class="dropdown-item" href="${path}/user_cat_list">고양이보기</a></li>
+                                    <li><a class="dropdown-item" href="${path}/user/user_dog_list">강아지보기</a></li>
+                                    <li><a class="dropdown-item" href="${path}/user/user_cat_list">고양이보기</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -76,12 +78,12 @@
                                     문의하기
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="${path}/user_fnq_list">FAQ</a></li>
-                                    <li><a class="dropdown-item" href="${path}/user_qna_list">문의글</a></li>
+                                    <li><a class="dropdown-item" href="${path}/user/user_fnq_list">FAQ</a></li>
+                                    <li><a class="dropdown-item" href="${path}/user/user_qna_list">문의글</a></li>
                                 </ul>
                             </li>
-                            <li><a href="${path}/user_review_list">입양후기</a></li>
-                            <li><a href="${path}/user_support">후원하기</a></li>
+                            <li><a href="${path}/user/user_review_list">입양후기</a></li>
+                            <li><a href="${path}/user/user_support">후원하기</a></li>
                         </ul>
                     </div>
                 </div>
