@@ -48,7 +48,7 @@
                     <tr>
                         <th>등급</th>
                         <td>
-                            <input class="text" name="user_grade" type="radio" value="3" checked> 일반 회원
+                            <input class="text" name="user_grade" type="radio" value=3 checked> 일반 회원
                             <span class="grade"></span>
                         </td>
                     </tr>
@@ -74,9 +74,9 @@
                         <td>
                             <input class="text zipcode" type="text" id="sample6_postcode" placeholder="우편번호">
                             <input class="search_zipcode" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                            <input class="text addr1" name="addr1" type="text" id="sample6_address" placeholder="주소"><br>
-                            <input class="text addr3" name="addr2" type="text" id="sample6_detailAddress" placeholder="상세주소">
-                            <input class="text addr2" name="addr3" type="text" id="sample6_extraAddress" placeholder="참고항목">
+                            <input class="text addr1" name="user_addr" type="text" id="sample6_address" placeholder="주소"><br>
+                            <input class="text addr3" name="user_addr" type="text" id="sample6_detailAddress" placeholder="상세주소">
+                            <input class="text addr2" name="user_addr" type="text" id="sample6_extraAddress" placeholder="참고항목">
                         </td>
                     </tr>
 
