@@ -35,9 +35,7 @@ public class AnimalController {
 	@Autowired
 	private AnimalDAO animalDAO;
 	@Autowired
-	HttpServletRequest request;
-
-
+	private HttpServletRequest request;
 	//USER
 
 	@RequestMapping(value = "/user_dog_list" , method = RequestMethod.GET)
@@ -58,8 +56,7 @@ public class AnimalController {
 	}
 
 	@RequestMapping(value = "/user_animal_insert", method = RequestMethod.POST)
-	public String user_dog_insert_ok(@RequestParam("files") List<MultipartFile> files, HttpServletRequest request
-			, AnimalDTO animalDTO)
+	public String user_dog_insert_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO)
 			throws IllegalStateException, IOException {
 		System.out.println(animalDTO.toString());
 		FileUploadImage upload = new FileUploadImage();
@@ -75,12 +72,4 @@ public class AnimalController {
 		return "redirect:/";
 	}
 	
-	
-	//ADMIN
-	@RequestMapping("/admin_dog_list")
-    public String admin_dog_list(Model model) {
-    	model.addAttribute("dogList", animalDAO.listTag("dog"));
-        return "admin/animal/dog/admin_dog_list";
-    }
-
 }
