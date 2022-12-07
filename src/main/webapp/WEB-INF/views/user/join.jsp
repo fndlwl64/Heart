@@ -48,7 +48,7 @@
                     <tr>
                         <th>등급</th>
                         <td>
-                            <input class="text" name="user_grade" type="radio" value="3" checked disabled> 일반 회원
+                            <input class="text" name="user_grade" type="radio" value="3" checked> 일반 회원
                             <span class="grade"></span>
                         </td>
                     </tr>

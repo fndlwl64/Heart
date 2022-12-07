@@ -23,7 +23,7 @@
 	
 	<insert id="join" parameterType="map">
 		<selectKey resultType="int" keyProperty="user_no" order="BEFORE">select max(user_no) from heartpet_user</selectKey>
-		INSERT INTO HEARTPET_USER VALUES(#{user_no}+1, #{user_id}, #{user_pwd}, #{user_name}, #{user_grade}, #{user_email}, #{user_phone}, #{addr}, '', 0, #{user_dogexp})
+		INSERT INTO HEARTPET_USER VALUES (#{user_no}+1, #{user_id}, #{user_pwd}, #{user_name}, default, #{user_email}, #{user_phone}, #{addr}, #{user_image}, default, #{user_dogexp})
 	</insert>
 	
 </mapper>
