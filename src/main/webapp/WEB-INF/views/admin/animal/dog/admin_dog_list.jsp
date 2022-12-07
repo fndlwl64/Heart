@@ -19,6 +19,11 @@
 	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 	crossorigin="anonymous"></script>
 <script src="${path}resources/js/main.js"></script>
+<c:set var="qList" value="${ qnaList }" />
+<c:set var="total" value="${ total }" />
+<c:set var="paging" value="${ paging }" />
+<c:set var="field" value="${ field }" />
+<c:set var="keyword" value="${ keyword }" />
 </head>
 <body>
 
@@ -50,8 +55,7 @@
 		<button class="btn btn-success insertbtn"
 			onclick="location.href='${path}/pet_insert'">등록</button>
 
-		<br>
-		<br>
+		<br> <br>
 
 		<%-- 검색 결과 테이블 : 일련번호 클릭 시 해당 동물 상세 정보 페이지로 이동 --%>
 		<div class="lists">
@@ -88,7 +92,7 @@
 
 		<br>
 		<%-- 페이징처리 --%>
-		<nav aria-label="Page navigation example">
+		<!-- <nav aria-label="Page navigation example">
 			<ul class="pagination justify-content-center">
 				<li class="page-item disabled"><a class="page-link">Previous</a>
 				</li>
@@ -97,7 +101,9 @@
 				<li class="page-item"><a class="page-link" href="#">3</a></li>
 				<li class="page-item"><a class="page-link" href="#">Next</a></li>
 			</ul>
-		</nav>
+		</nav> -->
+
+		<jsp:include page="../../../include/pagination.jsp" />
 
 		<%-- 삭제 모달 --%>
 		<div class="modal fade" id="exampleModal" tabindex="-1"

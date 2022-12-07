@@ -56,7 +56,7 @@ public class AdminAnimalController {
 
 	@RequestMapping("/pet_insert")
 	public String pet_insert() {
-		return "admin/pet_insert";
+		return "admin/animal/pet_insert";
 	}
 	
 	@RequestMapping("/cat_view")

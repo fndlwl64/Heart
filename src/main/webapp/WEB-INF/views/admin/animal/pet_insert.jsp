@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
-<jsp:include page="../include/admin_header.jsp" />
+<jsp:include page="../../include/admin_header.jsp" />
 <script src="resources/js/admin.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <body>
@@ -60,11 +60,11 @@
                 <td><input type="number" name="animal_age" class="form-control" id="age"></td>
             </tr>
             <tr>
-                <th>발견 장소</th>
+                <th class="table-secondary">발견 장소</th>
                 <td><input type="text" name="animal_place" class="form-control" id="place"></td>
             </tr>
             <tr>
-                <th>크기</th>
+                <th class="table-secondary">크기</th>
                 <td>
                     <select name="animal_size" class="form-select" id="size">
                     	<option value=""></option>
@@ -75,15 +75,15 @@
                 </td>
             </tr>
             <tr>
-                <th>무게</th>
+                <th class="table-secondary">무게</th>
                 <td><input type="number" name="animal_weight" class="form-control" id="weight"></td>
             </tr>
             <tr>
-                <th>상세 내용</th>
+                <th class="table-secondary">상세 내용</th>
                 <td><textarea name="animal_caution" class="form-control" id="content"></textarea></td>
             </tr>
             <tr>
-                <th>첨부 이미지</th>
+                <th class="table-secondary">첨부 이미지</th>
                 <td><input type="file" name="files" id="files" class="form-control" accept="image/gif, image/jpeg, image/png"
                            onchange="fileOption();" multiple></td>
             </tr>
