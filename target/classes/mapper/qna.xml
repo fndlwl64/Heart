@@ -12,6 +12,8 @@
 	<sql id="qna_select">
 		select * from heartpet_board 
 	</sql>
+	
+	<!-- list -->
 	<select id="qna_list" parameterType="hashMap" resultType="QnaDTO">
 		<![CDATA[select * from (select b.*, row_number() over(order by board_no desc) rnum from heartpet_board b ]]>
 		<where>
@@ -26,6 +28,7 @@
          <![CDATA[) where rnum >= #{startNo} and rnum <= #{endNo}]]>
 	</select>
 	
+	<!-- content : 게시글 개수 -->
 	<update id="qna_hit" parameterType="int">
 		update heartpet_board set board_hit = board_hit + 1 where board_no = #{ board_no }
 	</update>
@@ -33,7 +36,7 @@
 		<include refid="qna_select" /> where board_no = #{ board_no }
 	</select>
 	
-	<!-- 게시글 개수 -->
+	<!-- count : 게시글 개수 -->
 	<select id="qna_count" parameterType="hashMap" resultType="int">
 		select count(*) from heartpet_board
 		<where>
@@ -54,7 +57,7 @@
 			select max(board_no)+1 from heartpet_board
 		</selectKey>
 		insert into heartpet_board values (#{ board_no }, #{ board_category }, #{ board_id }, default, #{ board_title },
-		#{ board_content },  #{ board_secret }, #{ board_pwd }, sysdate, '', '', '')
+		#{ board_content }, #{ board_secret }, #{ board_pwd }, sysdate, '', '', '')
 	</insert>
 	
 	<!-- update -->
