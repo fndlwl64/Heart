@@ -53,8 +53,8 @@
                             </c:if>
                             
                             <c:if test="${!empty session_id}">
-                                <li><a href="${path}/user_mypage_wish_list">마이페이지</a></li>
-                                <li><a href="${path}/user_logout">로그아웃</a></li>
+                                <li><a href="${path}/user/user_mypage_wish_list">마이페이지</a></li>
+                                <li><a href="${path}/user/user_logout">로그아웃</a></li>
                             </c:if>
                         </ul>
                     </div>
@@ -62,7 +62,7 @@
                 <div class="nav-bar justify-content-center">
                     <div class="nav-links">
                         <ul>
-                            <li><a href="${path}/useruser_notice">공지&안내</a></li>                            
+                            <li><a href="${path}/user/user_notice">공지&안내</a></li>                            
                             <li><a href="${path}/user/user_animal_insert">무료입소</a></li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">

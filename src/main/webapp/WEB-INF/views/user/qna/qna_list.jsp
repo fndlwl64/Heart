@@ -8,7 +8,7 @@
 <c:set var="paging" value="${ paging }" />
 <c:set var="field" value="${ field }" />
 <c:set var="keyword" value="${ keyword }" />
-<jsp:include page="../include/user_header.jsp" />
+<jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
 
 <%-- qna list --%>
@@ -165,4 +165,4 @@
 
 </div>
 
-<jsp:include page="../include/user_footer.jsp" />
+<jsp:include page="../../include/user_footer.jsp" />
