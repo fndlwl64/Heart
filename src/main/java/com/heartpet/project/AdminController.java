@@ -12,11 +12,6 @@ public class AdminController {
     public String user_list() {
         return "admin/user_list";
     }
-    
-    @RequestMapping("/cat_list")
-    public String cat_list() {
-        return "admin/cat_list";
-    }
     @RequestMapping("/adoptreg_list")
     public String adoptreg_list() {
         return "admin/adoptreg_list";
@@ -47,10 +42,6 @@ public class AdminController {
     public String board_update() {
         return "admin/board_update";
     }
-    @RequestMapping("/pet_update")
-    public String pet_update() {
-        return "admin/pet_update";
-    }
     @RequestMapping("/notice_update")
     public String notice_update() {
         return "admin/notice_update";
@@ -76,10 +67,6 @@ public class AdminController {
     public String board_insert() {
         return "admin/board_insert";
     }
-    @RequestMapping("/pet_insert")
-    public String pet_insert() {
-        return "admin/pet_insert";
-    }
     @RequestMapping("/notice_insert")
     public String notice_insert() {
         return "admin/notice_insert";
@@ -98,14 +85,7 @@ public class AdminController {
     }
 
     /*관리자 리스트에서 상세정보보기*/
-    @RequestMapping("/cat_view")
-    public String cat_view() {
-        return "admin/cat_view";
-    }
-    @RequestMapping("/dog_view")
-    public String dog_view() {
-        return "admin/dog_view";
-    }
+    
     @RequestMapping("/notice_view")
     public String notice_view() {
         return "admin/notice_view";
