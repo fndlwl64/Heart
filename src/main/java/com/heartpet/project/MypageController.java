@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.heartpet.action.MypageDAO;
 import com.heartpet.model.Mypage_SupportDTO;
 import com.heartpet.model.UserDTO;
+import com.heartpet.model.WishVO;
 
 @Controller
 public class MypageController {
@@ -35,10 +36,12 @@ public class MypageController {
     	UserDTO user_list = mypagedao.UserInfo(user_id);
     	int regcount = mypagedao.AnimalRegCount(user_id);
     	int review_count = mypagedao.ReviewCount(user_id);
+    	List<WishVO> wish_list = mypagedao.getWishList(user_id);
     	model.addAttribute("Sum", sum);
     	model.addAttribute("uList", user_list);
     	model.addAttribute("Count", regcount);
     	model.addAttribute("review_Count", review_count);
+    	model.addAttribute("wList", wish_list);
         return "user/mypage/mypage_wish_list";
     }
     
@@ -51,10 +54,12 @@ public class MypageController {
     	UserDTO user_list = mypagedao.UserInfo(user_id);
     	int regcount = mypagedao.AnimalRegCount(user_id);
     	int review_count = mypagedao.ReviewCount(user_id);
+    	List<WishVO> wish_list = mypagedao.getAdoptList(user_id);
     	model.addAttribute("Sum", sum);
     	model.addAttribute("uList", user_list);
     	model.addAttribute("Count", regcount);
     	model.addAttribute("review_Count", review_count);
+    	model.addAttribute("aList", wish_list);
         return "user/mypage/mypage_adopt_reg_list";
     }
     
@@ -67,10 +72,12 @@ public class MypageController {
     	UserDTO user_list = mypagedao.UserInfo(user_id);
     	int regcount = mypagedao.AnimalRegCount(user_id);
     	int review_count = mypagedao.ReviewCount(user_id);
+    	List<WishVO> wish_list = mypagedao.getAdoptComList(user_id);
     	model.addAttribute("Sum", sum);
     	model.addAttribute("uList", user_list);
     	model.addAttribute("Count", regcount);
     	model.addAttribute("review_Count", review_count);
+    	model.addAttribute("aList", wish_list);
         return "user/mypage/mypage_adopt_complet_list";
     }
     
@@ -78,13 +85,13 @@ public class MypageController {
     public String mypage_user_update(Model model, HttpServletRequest request) {
     	HttpSession session = request.getSession();
     	String user_id = (String)session.getAttribute("session_id");
-    	
+
     	int sum = mypagedao.SumSupport(user_id);
-    	UserDTO dto = mypagedao.UserInfo(user_id);
+    	UserDTO user_list = mypagedao.UserInfo(user_id);
     	int regcount = mypagedao.AnimalRegCount(user_id);
     	int review_count = mypagedao.ReviewCount(user_id);
     	model.addAttribute("Sum", sum);
-    	model.addAttribute("uList", dto);
+    	model.addAttribute("uList", user_list);
     	model.addAttribute("Count", regcount);
     	model.addAttribute("review_Count", review_count);
         return "user/mypage/mypage_user_update";
