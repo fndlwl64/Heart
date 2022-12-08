@@ -57,7 +57,7 @@
 			animal_img3 = #{animal_img3},
 			animal_status = #{animal_status},
 			animal_update = sysdate
-		where animal_no = #{animal_no}
+		where #{animal_no}
 	</update>
 	<delete id="delete">
 		delete from heartpet_animal where animal_no = #{animal_no}

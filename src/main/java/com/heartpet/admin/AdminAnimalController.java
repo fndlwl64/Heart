@@ -31,7 +31,6 @@ import lombok.ToString;
 
 @Controller
 public class AdminAnimalController {
-
 	@Autowired
 	private AnimalDAO animalDAO;
 	@Autowired
@@ -49,9 +48,15 @@ public class AdminAnimalController {
 		return "admin/cat_list";
 	}
 
-	@RequestMapping("/pet_update")
-	public String pet_update() {
-		return "admin/pet_update";
+	@RequestMapping(value = "/dog_update", method = RequestMethod.GET)
+	public String pet_update(@RequestParam("no") int no,Model model) {
+		model.addAttribute("content",animalDAO.content(no));
+		return "admin/animal/dog/dog_update";
+	}
+	@RequestMapping(value = "/dog_update", method = RequestMethod.POST)
+	public String pet_update_ok(AnimalDTO animalDTO) {
+		animalDAO.update(animalDTO);
+		return "redirect:/dog_list";
 	}
 
 	@RequestMapping(value = "/dog_insert", method = RequestMethod.GET)

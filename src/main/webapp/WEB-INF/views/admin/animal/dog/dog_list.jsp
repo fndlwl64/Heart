@@ -89,7 +89,7 @@
 						<td>${dto.animal_status }</td>
 						<td>
 							<button class="btn btn-primary"
-								onclick="location.href='${path}/pet_update'">수정</button>
+								onclick="location.href='${path}/dog_update?no=${dto.animal_no }'">수정</button>
 							<button class="btn btn-secondary" data-bs-toggle="modal"
 								data-bs-target="#exampleModal"
 								onclick="location.href='${path}/dog_delete?no=${dto.animal_no }'">삭제</button>
