@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ import com.heartpet.model.FnqDTO;
 import com.heartpet.model.PageDTO;
 import com.heartpet.model.QnaDTO;
 
+/*String user_id = (String)session.getAttribute("session_id");
+*/
 @Controller
 public class UserQnaController {
 
@@ -59,15 +62,36 @@ public class UserQnaController {
         return "user/qna/qna_list";
     }
     
+    
     ////////////////////////////////////////////////////////////////////////////////////
-    // QNA_CONTENT
+    // QNA_CONTENT - 비밀글 기능 구현
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/user_qna_content")
-    public String user_qna_content(@RequestParam("board_no") int board_no, Model model) { 
-    	this.qnaDAO.hitQna(board_no);
+    public String user_qna_content(@RequestParam("board_no") int board_no, HttpServletResponse response, HttpServletRequest request, Model model) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+    	HttpSession session = request.getSession();
+    	PrintWriter out = response.getWriter();
+    	
+    	// 로그인 여부 체크
+    	if(session.getAttribute("session_id") == null || session.getAttribute("session_id") == "" ) {
+    		out.println("<script> alert('로그인이 필요합니다.'); location.href='"+request.getContextPath()+"/'; </script>");
+    	}
+    	
     	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
+    	String session_id = (String)session.getAttribute("session_id");
+    	
+    	// 비밀글 여부 체크
+    	// 비밀글 Y -> 아이디 체크
+    	// 비밀글 N -> 접근 O
+    	if(qnaContent.getBoard_secret().equals("Y")) {
+        	if(!session_id.equals(qnaContent.getBoard_id())) { // 작성자 확인
+        		out.println("<script> alert('비밀글입니다.'); history.back(); </script>"); 
+        		out.flush();
+        	}
+    	}
+    	this.qnaDAO.hitQna(board_no);
     	model.addAttribute("qnaContent", qnaContent);
-    	return "user/qna/qna_content"; 
+    	return "user/qna/qna_content";  		
     }
     
     ////////////////////////////////////////////////////////////////////////////////////
@@ -76,7 +100,7 @@ public class UserQnaController {
     @RequestMapping("/user_qna_insert")
     public String user_qna_insert() { 
     	return "user/qna/qna_insert";
-    }
+    }    
     
     ////////////////////////////////////////////////////////////////////////////////////
     // QNA_INSERT_OK
