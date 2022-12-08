@@ -44,7 +44,7 @@ public class MypageDAOImpl implements MypageDAO{
 	@Override
 	public int ReviewCount(String id) {
 		// TODO Auto-generated method stub
-		return this.sqlSession.selectOne("review_count", id);
+		return this.sqlSession.selectOne("mypage_review_count", id);
 	}
 
 	@Override

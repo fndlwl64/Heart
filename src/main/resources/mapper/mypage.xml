@@ -15,7 +15,7 @@
 	<select id="reg_count" parameterType="String" resultType="int">
 		select count(*) from heartpet_adopt_reg where adopt_reg_userid = #{id} and adopt_reg_adoptdate is null
 	</select>
-	<select id="review_count" parameterType="String" resultType="int">
+	<select id="mypage_review_count" parameterType="String" resultType="int">
 		select count(*) from heartpet_review where review_id = #{id}
 	</select>
 	<update id="user_update" parameterType="UserDTO">
