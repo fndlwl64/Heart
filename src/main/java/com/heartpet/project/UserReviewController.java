@@ -138,7 +138,8 @@ public class UserReviewController {
     ////////////////////////////////////////////////////////////////////////////////////
     // REVIEW_UPDATE
     ////////////////////////////////////////////////////////////////////////////////////
-    @RequestMapping("/user_qna_update")
+    //@RequestMapping("/user_qna_update")
+    @RequestMapping("/user_review_update")
     public String user_qna_update(@RequestParam("review_no") int review_no, Model model) {
     	ReviewDTO reviewContent = this.reviewDAO.contentReview(review_no);
     	model.addAttribute("reviewContent", reviewContent);
@@ -148,7 +149,8 @@ public class UserReviewController {
     ////////////////////////////////////////////////////////////////////////////////////
     // REVIEW_UPDATE_OK
     ////////////////////////////////////////////////////////////////////////////////////    
-    @RequestMapping(value = "/user_qna_update_ok", method = RequestMethod.POST)
+    //@RequestMapping(value = "/user_qna_update_ok", method = RequestMethod.POST)
+    @RequestMapping(value = "/user_review_update_ok", method = RequestMethod.POST)
     public void user_review_update_ok(ReviewDTO reviewDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
