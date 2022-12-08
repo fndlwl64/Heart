@@ -15,7 +15,8 @@
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="${path}/resources/js/main.js"></script>
     
-    <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+    <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     
     <link rel="shortcut icon" href="${path}/resources/icon/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="${path}/resources/icon/favicon.ico" type="image/x-icon" />
@@ -108,15 +109,18 @@
                                 <li><a href="${path}/join">회원가입</a></li>
                             </ul>
                         </div>
+                        
                         <div class="modal-footer">
                             <a id="kakao-login-btn"></a>
+                            <a id="naver_id_login"></a>
                         </div>
-                        <div id="naver_id_login"></div>
+                        
+                        <script src="${path}/resources/js/signin_up.js"></script>
                     </div>
                 </div>
             </div>
 
-            <script src="${path}/resources/js/signin_up.js"></script>
+            
 
             <%--아이디 찾기--%>
             <div class="modal fade" id="findId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
