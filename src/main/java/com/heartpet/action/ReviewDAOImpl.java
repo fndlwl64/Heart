@@ -4,9 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.heartpet.model.ReviewDTO;
@@ -14,7 +13,7 @@ import com.heartpet.model.ReviewDTO;
 @Repository
 public class ReviewDAOImpl implements ReviewDAO {
 	
-	@Inject
+	@Autowired
 	private SqlSessionTemplate sqlSession;
 
 	@Override
@@ -29,7 +28,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	@Override
 	public int listReviewCount(String field, String keyword) {
-    	Map<String, Object> map = new HashMap<String, Object>();
+    	Map<String, String> map = new HashMap<String, String>();
     	map.put("field", field);
     	map.put("keyword", keyword);
 		return this.sqlSession.selectOne("review_count", map);
@@ -41,13 +40,13 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public ReviewDTO contentReview(int board_no) {
-		return this.sqlSession.selectOne("review_content", board_no);
+	public ReviewDTO contentReview(int review_no) {
+		return this.sqlSession.selectOne("review_content", review_no);
 	}
 
 	@Override
-	public int hitReview(int board_no) {		
-		return this.sqlSession.selectOne("review_hit", board_no);
+	public int hitReview(int review_no) {		
+		return this.sqlSession.selectOne("review_hit", review_no);
 	}
 
 	@Override
@@ -56,8 +55,8 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public int deleteReview(int board_no) {
-		return this.sqlSession.delete("review_delete", board_no);
+	public int deleteReview(int review_no) {
+		return this.sqlSession.delete("review_delete", review_no);
 	}
 
 }
