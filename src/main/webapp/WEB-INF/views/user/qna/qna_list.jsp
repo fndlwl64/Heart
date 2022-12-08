@@ -113,8 +113,7 @@
     <div class="space-add"></div>
 
     <!-- 페이징 처리 부분 -->
-    <%-- 페이지 링크 처리 예정 --%>
-    
+    <%-- 페이지 링크 처리 예정 --%>    
 	<jsp:include page="../../include/pagination.jsp" />
 
     <div class="space-add"></div>
