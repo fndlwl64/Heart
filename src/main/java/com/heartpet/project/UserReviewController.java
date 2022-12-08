@@ -2,6 +2,7 @@ package com.heartpet.project;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,7 @@ public class UserReviewController {
     
     ////////////////////////////////////////////////////////////////////////////////////
     // REVIEW_LIST
-    ////////////////////////////////////////////////////////////////////////////////////	
+    ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/user_review_list")
     public String user_review_list(@RequestParam(value = "field", required = false) String field, 
     		@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(value = "page", defaultValue = "1") int page, Model model) {  
@@ -54,15 +55,7 @@ public class UserReviewController {
     			
     	// animal name 추출
     	List<ReviewDTO> reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), field, keyword);
-    	int aniamlNo[] = new int[reviewList.size()];
-    	
-    	for(int i=0; i<reviewList.size(); i++) { 
-    		aniamlNo[i] = reviewList.get(i).getReview_animal_id();
-    	}
-    	
-    	this.reviewDAO.animalReview(aniamlNo);
-    	
-    	
+
     	model.addAttribute("reviewList", reviewList);
         model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
@@ -76,20 +69,13 @@ public class UserReviewController {
     // REVIEW_CONTENT
     ////////////////////////////////////////////////////////////////////////////////////	
     @RequestMapping("/user_review_content")
-    public String user_qna_content(@RequestParam("review_no") int review_no, HttpServletResponse response, HttpServletRequest request, Model model) throws IOException {
-		response.setContentType("text/html; charset=UTF-8");
-    	HttpSession session = request.getSession();
-    	PrintWriter out = response.getWriter();
-    	
-    	// 로그인 여부 체크
-    	if(session.getAttribute("session_id") == null || session.getAttribute("session_id") == "" ) {
-    		out.println("<script> alert('로그인이 필요합니다.'); location.href='"+request.getContextPath()+"/login'; </script>");
-    	}
-    	
+    public String user_review_content(@RequestParam("review_no") int review_no, Model model) {		
     	ReviewDTO reviewContent = this.reviewDAO.contentReview(review_no);
-
+    	System.out.println("여기"+reviewContent.toString());
     	this.reviewDAO.hitReview(review_no);
+    	System.out.println("여기는요??? ////");
     	model.addAttribute("reviewContent", reviewContent);
+    	System.out.println("here");
     	return "user/review/review_content";
     }
     
@@ -114,7 +100,7 @@ public class UserReviewController {
     // REVIEW_INSERT_OK
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/user_review_insert_ok", method = RequestMethod.POST)
-    public void user_qna_insert_ok(@Valid ReviewDTO reviewDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public void user_review_insert_ok(@Valid ReviewDTO reviewDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
     	if(result.hasErrors()) { // 에러를 List로 저장
@@ -138,8 +124,8 @@ public class UserReviewController {
     ////////////////////////////////////////////////////////////////////////////////////
     // REVIEW_UPDATE
     ////////////////////////////////////////////////////////////////////////////////////
-    @RequestMapping("/user_qna_update")
-    public String user_qna_update(@RequestParam("review_no") int review_no, Model model) {
+    @RequestMapping("/user_review_update")
+    public String user_review_update(@RequestParam("review_no") int review_no, Model model) {
     	ReviewDTO reviewContent = this.reviewDAO.contentReview(review_no);
     	model.addAttribute("reviewContent", reviewContent);
     	return "user/review/review_update"; 
@@ -148,7 +134,7 @@ public class UserReviewController {
     ////////////////////////////////////////////////////////////////////////////////////
     // REVIEW_UPDATE_OK
     ////////////////////////////////////////////////////////////////////////////////////    
-    @RequestMapping(value = "/user_qna_update_ok", method = RequestMethod.POST)
+    @RequestMapping(value = "/user_review_update_ok", method = RequestMethod.POST)
     public void user_review_update_ok(ReviewDTO reviewDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();

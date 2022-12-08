@@ -46,7 +46,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 
 	@Override
 	public int hitReview(int review_no) {		
-		return this.sqlSession.selectOne("review_hit", review_no);
+		return this.sqlSession.update("review_hit", review_no);
 	}
 
 	@Override
@@ -57,11 +57,6 @@ public class ReviewDAOImpl implements ReviewDAO {
 	@Override
 	public int deleteReview(int review_no) {
 		return this.sqlSession.delete("review_delete", review_no);
-	}
-
-	@Override
-	public List<Map<String, String>> animalReview(int[] animalNo) {
-		return this.sqlSession.selectList("review_animal", animalNo);
 	}
 
 
