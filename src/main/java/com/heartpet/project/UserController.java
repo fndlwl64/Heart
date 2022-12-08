@@ -20,9 +20,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +57,7 @@ public class UserController {
 
     
     @RequestMapping("/login")
-    public String login(@RequestParam("user_id")String id, @RequestParam("user_pwd")String pwd, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public String login(@RequestParam("user_id")String id, @RequestParam("user_pwd")String pwd, Model model,HttpServletResponse response, HttpServletRequest request) throws IOException {
     	response.setContentType("text/html; charset=utf-8");
     	
     	int check = userDAO.idCheck(id);
@@ -71,6 +78,9 @@ public class UserController {
     				HttpSession session = request.getSession();
     				session.setAttribute("session_admin_id", id);
     				session.setAttribute("session_admin_name", cont.getUser_name());
+    				
+    				List<UserDTO> list = userDAO.getUserList();
+    				model.addAttribute("list", list);
     				
     				return "admin/user/user_list";
     			}else {
@@ -117,7 +127,7 @@ public class UserController {
     }
     
     @RequestMapping("/kakao_login")
-    public void login(@RequestParam("paramId")String id, @RequestParam("paramName")String name, HttpServletRequest request, HttpServletResponse response) throws IOException{
+    public void kakao(@RequestParam("paramId")String id, @RequestParam("paramName")String name, HttpServletRequest request, HttpServletResponse response) throws IOException{
     	
     	PrintWriter out = response.getWriter();
     	int check = userDAO.idCheck(id);
@@ -169,6 +179,61 @@ public class UserController {
     			out.flush();
     		}
     	}
+    }
+    
+    @RequestMapping("/naver_login")
+    public void naver(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    	//애플리케이션 클라이언트 아이디값
+    	String clientId = "fw7rzSQL46p95xisWWtm";
+        String redirectURI = URLEncoder.encode("/project/naver_logined", "UTF-8");
+        SecureRandom random = new SecureRandom();
+        String state = new BigInteger(130, random).toString();
+        String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
+             + "&client_id=" + clientId
+             + "&redirect_uri=" + redirectURI
+             + "&state=" + state;
+        session.setAttribute("state", state);
+    }
+    
+    @RequestMapping("/naver_logined")
+    public void naver_login(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    	PrintWriter out = response.getWriter();
+    	String clientId = "fw7rzSQL46p95xisWWtm";//애플리케이션 클라이언트 아이디값";
+        String clientSecret = "icCg7tQOJD";//애플리케이션 클라이언트 시크릿값";
+        String code = request.getParameter("code");
+        String state = request.getParameter("state");
+        String redirectURI = URLEncoder.encode("/project/naver_logined", "UTF-8");
+        String apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code"
+            + "&client_id=" + clientId
+            + "&client_secret=" + clientSecret
+            + "&redirect_uri=" + redirectURI
+            + "&code=" + code
+            + "&state=" + state;
+        String accessToken = "";
+        String refresh_token = "";
+        try {
+          URL url = new URL(apiURL);
+          HttpURLConnection con = (HttpURLConnection)url.openConnection();
+          con.setRequestMethod("GET");
+          int responseCode = con.getResponseCode();
+          BufferedReader br;
+          if (responseCode == 200) { // 정상 호출
+            br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+          } else {  // 에러 발생
+            br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+          }
+          String inputLine;
+          StringBuilder res = new StringBuilder();
+          while ((inputLine = br.readLine()) != null) {
+            res.append(inputLine);
+          }
+          br.close();
+          if (responseCode == 200) {
+            out.println(res.toString());
+          }
+        } catch (Exception e) {
+          // Exception 로깅
+        }
     }
     
     @RequestMapping("/user_logout")

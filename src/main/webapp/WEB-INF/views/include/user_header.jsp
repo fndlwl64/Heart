@@ -111,7 +111,7 @@
                         <div class="modal-footer">
                             <a id="kakao-login-btn"></a>
                         </div>
-                        <div id="naverIdLogin"></div>
+                        <div id="naver_id_login"></div>
                     </div>
                 </div>
             </div>
