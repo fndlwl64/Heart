@@ -33,11 +33,7 @@
         </div>
     </form>
 
-    <br>
-
-    <button class="btn btn-success insertbtn" onclick="location.href='${path}/user_insert'">등록</button>
-
-    <br><br>
+    <br><br><br>
 
     <%-- 검색 결과 테이블 --%>
     <div class="lists">
@@ -55,10 +51,10 @@
           		<tr>
 	                <td>${list.user_no}</td>
 	                <td><a href="${path}/user_view?user_id=${list.user_id}">${list.user_id}</a></td>
-	                <td>${list.user_id}</td>
+	                <td>${list.user_grade}등급</td>
 	                <td>${list.user_dogexp}</td>
 	                <td>
-	                    <button class="btn btn-primary" onclick="location.href='${path}/user_update'">수정</button>
+	                    <button class="btn btn-primary" onclick="location.href='${path}/user_update?user_id=${list.user_id }'">수정</button>
 	                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
 	                </td>
 	            </tr>
@@ -80,7 +76,7 @@
         <div id="myInput" class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">데이터 삭제</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">HeartPet 회원 삭제</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
