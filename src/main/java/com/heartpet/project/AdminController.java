@@ -1,6 +1,12 @@
 package com.heartpet.project;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -78,10 +84,17 @@ public class AdminController {
     public String support_update() {
         return "admin/support_update";
     }
+    
     @RequestMapping("/user_update")
-    public String user_update() {
-        return "admin/user/user_update";
+    public String user_update(@RequestParam("user_id")String id, Model model) {
+    	
+    	UserDTO dto = userDAO.getUserInfo(id);
+    	
+    	model.addAttribute("cont", dto);
+    	
+    	return "admin/user/user_update";
     }
+    
     /*관리자 리스트에서 등록하기*/
     @RequestMapping("/adoptreg_insert")
     public String adoptreg_insert() {
@@ -106,6 +119,15 @@ public class AdminController {
     @RequestMapping("/user_insert")
     public String user_insert() {
         return "admin/user/user_insert";
+    }
+    
+    @RequestMapping("/user_inserted")
+    public void user_inserted(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    	response.setContentType("text/html; charset=utf-8");
+    	
+    	PrintWriter out = response.getWriter();
+    	
+    	
     }
 
     /*관리자 리스트에서 상세정보보기*/

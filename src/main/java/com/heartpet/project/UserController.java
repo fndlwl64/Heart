@@ -55,19 +55,22 @@ public class UserController {
     	
     	int check = userDAO.idCheck(id);
     	int admin_check = userDAO.adminCheck(id);
+    	UserDTO cont = userDAO.getUserInfo(id);
     	String check_pwd = userDAO.login(id);
+    	
     	System.out.println(check+"/"+admin_check+"/"+check_pwd);
     	
     	PrintWriter out = response.getWriter();
     	
     	if(check == 1) {
     		    		
-    		System.out.println(admin_check+"여기까지 / id"+id);
+    		System.out.println(admin_check+"여기까지 / id :"+id);
     		if(admin_check == 1) {
     			// 관리자 아이디 로그인 => 관리자 페이지로 이동
     			if(pwd.equals(check_pwd)) {
     				HttpSession session = request.getSession();
     				session.setAttribute("session_admin_id", id);
+    				session.setAttribute("session_admin_name", cont.getUser_name());
     				
     				return "admin/user/user_list";
     			}else {
@@ -75,6 +78,7 @@ public class UserController {
     				out.println("alert('비밀번호가 틀렸습니다!!');");
     				out.println("history.back();");
     				out.println("</script>");
+    				out.flush();
     			}
     		// 회원 아이디 로그인	    			
     		}else {
@@ -84,11 +88,13 @@ public class UserController {
     	    		HttpSession session = request.getSession();
     	    		
     	    		session.setAttribute("session_id", id);
+    	    		session.setAttribute("session_name", cont.getUser_name());
     	    			    		
     	    		out.println("<script>");
     				out.println("alert('로그인 되었습니다!');");
     				out.println("location.href='"+request.getContextPath()+"'");
     				out.println("</script>");
+    				out.flush();
     				
     				System.out.println("세션id: "+id);
     	    	}else {
@@ -96,6 +102,7 @@ public class UserController {
     				out.println("alert('비밀번호가 틀렸습니다!!');");
     				out.println("history.back();");
     				out.println("</script>");
+    				out.flush();
     	    	}
 			}    		    		
     		
@@ -104,6 +111,7 @@ public class UserController {
 			out.println("alert('가입되지 않은 아이디입니다.');");
 			out.println("location.href='"+request.getContextPath()+"'");
 			out.println("</script>");
+			out.flush();
     	}
     	return "main";
     }
@@ -115,16 +123,18 @@ public class UserController {
     	int check = userDAO.idCheck(id);
     	
     	if(check == 1) {
-    		
     		UserDTO dto = userDAO.getUserInfo(id);
+    		UserDTO cont = userDAO.getUserInfo(id);
     		
 			HttpSession session = request.getSession();
 			session.setAttribute("session_id", id);
+			session.setAttribute("session_name", cont.getUser_name());
 			
 			out.println("<script>");
 			out.println("alert('로그인 되었습니다!');");
 			out.println("location.href='"+request.getContextPath()+"'");
 			out.println("</script>");
+			out.flush();
 			
 			System.out.println("아이디 존재 => 카카오 로그인 성공");
 			System.out.println("세션id: "+id);
@@ -140,12 +150,14 @@ public class UserController {
     			UserDTO dto = userDAO.getUserInfo(id);
         		
     			HttpSession session = request.getSession();
-        		session.setAttribute("session_id", id);    
+        		session.setAttribute("session_id", id);
+        		session.setAttribute("session_name", dto.getUser_name());
         		
         		out.println("<script>");
 				out.println("alert('로그인 되었습니다!');");
 				out.println("location.href='"+request.getContextPath()+"'");
 				out.println("</script>");
+				out.flush();
         		
         		System.out.println("아이디 없음 => 카카오 계정 가입 성공");
         		System.out.println("세션id: "+id);
@@ -154,6 +166,7 @@ public class UserController {
     			out.println("alert('가입 실패ㅠ');");
     			out.println("history.back()");
     			out.println("</script>");
+    			out.flush();
     		}
     	}
     }

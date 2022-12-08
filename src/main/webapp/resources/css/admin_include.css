@@ -33,6 +33,15 @@
     color: black;
 }
 
+.header-logo .nav-bar {
+	margin: auto;
+}
+
+.header-logo .nav-bar ul {
+	padding: 0;
+	margin: auto;
+}
+
 .div_header .lis {
 	display: inline-block;
 	font-weight: bold;
@@ -61,16 +70,29 @@
 .div_header .logo:hover {
 	cursor: pointer;
 }
-/* admin/admin_main을 제외한 나머지 페이지 */
 .div1 {
-	width: 50%;
+	width: 80%;
 	margin: auto;
 }
 
+.div1 form {
+	margin: auto;
+	text-align: center;
+}
+
+.div1 form .btn {
+	margin-bottom: 10%;
+}
+
 .div1 .table {
-	width: 800px;
+	width: 80%;
+	margin: auto;
 	text-align: center;
 	background-color: white;
+}
+
+.div1 .table th {
+	padding: 5px 20px;
 }
 
 .div1 .table .sp2 {
@@ -78,20 +100,42 @@
 }
 
 .div1 .table .input1 {
-	text-align: center;
 	background-color: white;
+	border: none;
+	border-bottom: 1px solid #000;
+	padding-left: 5%;
 }
 
-.div1 #update_btn {
-	background-color: black;
-	color: white;
-	width: 100px;
-	height: 40px;
+.div1 .table .input1:focus {
+	outline: none;
 }
 
-.div1 #update_btn:hover {
-	opacity: 80%;
+.div1 .table select {
+	padding: 0 10%;
+	text-align: left;
+}
 
+.div1 .table select:focus {
+	outline: none;
+}
+
+.div1 .table select option {
+	padding: 10%;
+}
+
+.div1 form {
+	text-align: center;
+	margin-bottom: 5%;
+}
+
+.div1 .addUser {
+	width: 60%;
+	margin: auto;
+	text-align: center;
+}
+
+.div1 .addUser .input1 {
+	size: 40;
 }
 
 .div1 .table .logo {
