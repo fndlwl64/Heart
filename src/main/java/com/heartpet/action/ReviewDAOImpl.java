@@ -59,5 +59,10 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return this.sqlSession.delete("review_delete", review_no);
 	}
 
+	@Override
+	public List<Integer> animalId(String session_id) {
+		return this.sqlSession.selectList("animal_id", session_id);
+	}
+
 
 }

@@ -25,10 +25,10 @@
                 <div class="header-info">
                     <ul>
                         <li class="d-inline">
-                            <img src="${path}/resources/image/heartpet_logo.png" alt="">
+                            <img src="${path}/resources/image/heartpet_logo.png" alt="user_image">
                         </li>
                         <li class="d-inline">
-                            <a href="${path}/mypage"><span id="id">${ list.review_id }</span></a>
+                            <a href="${path}/user_mypage_wish_list"><span id="id">${ list.review_id }</span></a>
                             <a id="reply" href="#"><i class="bi bi-card-list"></i> 댓글 0</a>
                         </li>
                         <li class="d-block">${ list.review_regdate } 조회 ${ list.review_hit }</li>
@@ -63,13 +63,40 @@
             </form>
 
             <div class="content-buttons">
-                <%-- 내 글인 경우 --%>
+                <c:if test="${ list.board_id eq session_id }">
                 <button type="button" class="btn btn-success" onclick="location.href='${path}/user_review_update?review_no=${ list.review_no }'"><i class="bi bi-eraser"></i> 수정</button>
-                <button type="button" class="btn btn-danger" onclick="location.href=''"><i class="bi bi-trash3"></i> 삭제</button>
-                <%-- 여기까지 --%>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteFunction"><i class="bi bi-trash3"></i> 삭제</button>
+                </c:if>
                 <button type="submit" class="btn btn-dark" onclick="location.href='${path}/user_review_list'"><i class="bi bi-card-list"></i> 목록</button>
             </div>
         </div>
+    </div>
+    
+    <%-- delete function --%>
+	<form name="pwdForm" action="${path}/user_review_delete" method="post" >
+		<input type="hidden" name="page" value="${ paging.page }" />
+		<input type="hidden" name="review_no" value="${ list.review_no }" />
+		<div class="modal fade" id="deleteFunction" tabindex="-1" aria-labelledby="deleteFunctionLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h1 class="modal-title fs-5" id="deleteFunctionLabel">글 삭제하기</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body">
+		       	<p class="mb-2 ps-1">정말 삭제하시겠습니까? <br /> 삭제 시 데이터는 복구되지 않습니다.</p>		 
+		       	<!-- 글 비밀번호?! -->
+		       	<!-- <p class="ps-1"><strong>글 비밀번호 </strong><input type="password" name="board_pwd" class="form-control d-inline w-75" /></p> -->
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">창닫기</button>
+		        <button type="reset" class="btn btn-warning" >다시입력</button>		        
+		        <button type="submit" class="btn btn-danger" >삭제하기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</form>
     </div>
 
     <div class="space-add"></div>

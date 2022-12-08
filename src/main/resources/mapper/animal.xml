@@ -62,4 +62,9 @@
 	<delete id="delete">
 		delete from heartpet_animal where animal_no = #{animal_no}
 	</delete>
+	
+	<!-- Review에서 사용 중 // Delete 금지  -->
+	<select id="animal_name" parameterType="int" resultType="String">
+		select animal_name from heartpet_animal where animal_no = #{ animal_no }
+	</select>
 </mapper>

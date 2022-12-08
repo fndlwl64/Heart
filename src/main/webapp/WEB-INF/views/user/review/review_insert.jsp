@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="aName" value="${ animalName }" />
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_review.css" />
 
@@ -17,17 +18,17 @@
 
     <div>
         <form action="${path}/" method="post">
-            <input type="hidden" name="dog_name" value="${ dog_name }">
-            <input type="hidden" name="board_id" value="${ board_id }">
+            <input type="hidden" name="dog_name" value="${ aName }">
+            <input type="hidden" name="review_id" value="${ session_id }">
             <table class="table align-middle insert-table">
                 <tr class="border-top">
                     <th class="table-light col-1">입양동물번호</th>
-                    <td class="col-2"><%-- db 확인 필요 --%>
-                        <input type="text" class="form-control" value="${ dog_name }" disabled="disabled">
+                    <td class="col-2">
+                        <input type="text" class="form-control" value="${ aName }" disabled="disabled">
                     </td>
                     <th class="table-light col-1">작성자</th>
                     <td class="col-2">
-                        <input type="text" class="form-control" value="${ board_id }" disabled="disabled">
+                        <input type="text" class="form-control" value="${ session_id }" disabled="disabled">
                     </td>
                 </tr>
                 <tr>

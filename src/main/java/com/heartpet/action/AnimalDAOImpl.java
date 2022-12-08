@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.heartpet.model.AnimalDTO;
-import com.heartpet.model.DogDTO;
 
 @Repository
 public class AnimalDAOImpl implements AnimalDAO{
@@ -52,6 +51,12 @@ public class AnimalDAOImpl implements AnimalDAO{
 		return null;
 	}
 	
-	
+	//////////////////////////////////////////////////////
+	// Review에서 사용 @남윤지
+	//////////////////////////////////////////////////////
+	@Override
+	public List<String> animalName(List<Integer> animal_no) {
+		return this.sqlSession.selectOne("animal_name", animal_no);
+	}	
 	
 }

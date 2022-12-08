@@ -24,9 +24,9 @@
                 <div><h3>${ list.board_title }</h3></div>
                 <div class="header-info">
                     <ul>
-                        <li class="d-inline"><img src="${path}/resources/image/heartpet_logo.png" alt=""></li>
+                        <li class="d-inline"><img src="${path}/resources/image/heartpet_logo.png" alt="user_image"></li>
                         <li class="d-inline">
-                            <a href="${path}/mypage"><span id="id">${ list.board_id }</span></a>
+                            <a href="${path}/user_mypage_wish_list"><span id="id">${ list.board_id }</span></a>
                             <a id="reply" href="#"><i class="bi bi-card-list"></i> 댓글 0</a>
                         </li>
                         <li class="d-block">${ list.board_regdate.substring(0,10) } 조회 ${ list.board_hit }</li>
@@ -72,10 +72,10 @@
             </form>
 
             <div class="content-buttons">
-            	<!-- 글 쓴 사람이 나이면 -->
+            	<c:if test="${ list.board_id eq session_id }">
                 <button type="button" class="btn btn-success" onclick="location.href='${path}/user_qna_update?board_no=${ list.board_no }'"><i class="bi bi-eraser"></i> 수정</button>
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteFunction"  ><i class="bi bi-trash3"></i> 삭제</button>
-                <%-- 여기까지 --%>
+                </c:if>
                 <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
             </div>
         </div>
