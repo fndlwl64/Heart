@@ -2,7 +2,6 @@ package com.heartpet.model;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -19,6 +18,7 @@ public class QnaDTO {
     
     @NotBlank(message = "content")
     private String board_content;
+    
     private String board_secret;
 
     @NotBlank(message = "password")
