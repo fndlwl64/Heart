@@ -30,56 +30,56 @@ import lombok.ToString;
 public class FileUploadImage {
 
 	public boolean upload(HttpServletRequest request, List<MultipartFile> files) {
-//		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload");
-		String otherPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath()
-				+ "/GitHub/Heart/src/main/webapp/resources/upload";
+		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload");
+//		String otherPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath()
+//				+ "/GitHub/Heart/src/main/webapp/resources/upload";
 
 		for (MultipartFile file : files) {
 			String fileRealName = file.getOriginalFilename();
-			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
-			// 랜덤으로 파일명 생성 
-			UUID uuid = UUID.randomUUID();
+//			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+//			// 랜덤으로 파일명 생성 
+//			UUID uuid = UUID.randomUUID();
 
 			
 
 			try {
-//				File toFile = new File(rootPath + "/" + uuid.toString() + fileExtension);
-//				file.transferTo(toFile);
-				File otherFile = new File(otherPath + "/" + uuid.toString() + fileExtension);
-				file.transferTo(otherFile);
+				File toFile = new File(rootPath + "/" + fileRealName);
+				file.transferTo(toFile);
+//				File otherFile = new File(otherPath + "/" + uuid.toString() + fileExtension);
+//				file.transferTo(otherFile);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 				return false;
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
-				return false;
 			}
 		}
 		return true;
 	}
 	
 	public String[] uploadAnimalImg(HttpServletRequest request, List<MultipartFile> files) {
-//		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload");
-		String otherPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath()
-				+ "/GitHub/Heart/src/main/webapp/resources/upload";
+		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload");
+//		String otherPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath()
+//				+ "upload";
 		
 		String[] imgs = {"","",""};
 		int i = 0;
 	
 		for (MultipartFile file : files) {
 			String fileRealName = file.getOriginalFilename();
-			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+			//String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
 			// 랜덤으로 파일명 생성 
-			UUID uuid = UUID.randomUUID();
+			//UUID uuid = UUID.randomUUID();
 
-			imgs[i] = uuid.toString() + fileExtension;
+			imgs[i] = fileRealName;
 			
 
 			try {
-//				File toFile = new File(rootPath + "/" + imgs[i]);
-//				file.transferTo(toFile);
-				File otherFile = new File(otherPath + "/" + imgs[i]);
-				file.transferTo(otherFile);
+				File toFile = new File(rootPath + "/" + imgs[i]);
+				file.transferTo(toFile);
+//				File otherFile = new File(otherPath + "/" + imgs[i]);
+//				file.transferTo(otherFile);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 

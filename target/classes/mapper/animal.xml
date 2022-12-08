@@ -39,6 +39,26 @@
 			''
 			)
 	</insert>
+	<update id="update" parameterType="AnimalDTO">
+		update heartpet_animal
+		set 
+			animal_name = #{animal_name},
+			animal_species = #{animal_species},
+			animal_gender = #{animal_gender},
+			animal_neutered = #{animal_neutered},
+			animal_vaccination = #{animal_vaccination},
+			animal_age = #{animal_age},
+			animal_place = #{animal_place},
+			animal_size = #{animal_size},
+			animal_weight = #{animal_weight},
+			animal_caution = #{animal_caution},
+			animal_img1 = #{animal_img1},
+			animal_img2 = #{animal_img2},
+			animal_img3 = #{animal_img3},
+			animal_status = #{animal_status},
+			animal_update = sysdate
+		where animal_no = #{animal_no}
+	</update>
 	<delete id="delete">
 		delete from heartpet_animal where animal_no = #{animal_no}
 	</delete>

@@ -70,6 +70,9 @@ function sample6_execDaumPostcode() {
     });
 }
 
+
+
+
 $(function() {
 	// 카카오 api 사용
 	Kakao.init('b6f75c3aa40a005f012dbe14f5ac031e');
@@ -126,24 +129,32 @@ $(function() {
 	        alert('failed to login: ' + JSON.stringify(err));
 	    }
 	});
-		
-	var naver_id_login = new naver_id_login("fw7rzSQL46p95xisWWtm", "/project/naver_login");
-	var state = naver_id_login.getUniqState();
-	naver_id_login.setButton("white", 2,40);
-	naver_id_login.setDomain(".service.com");
-	naver_id_login.setState(state);
-	naver_id_login.setPopup();
-	naver_id_login.init_naver_id_login();
-	
+  	
 });
 
+var naver_id_login = new naver_id_login("fw7rzSQL46p95xisWWtm", "http://localhost:8081/project/naver_login");
+var state = naver_id_login.getUniqState();
+
+naver_id_login.setButton("white", 2,40);
+naver_id_login.setDomain("http://localhost:8081/project/");
+naver_id_login.setState(state);
+naver_id_login.setPopup();
+naver_id_login.init_naver_id_login();
+
+// 접근 토큰 값 출력
+//alert(naver_id_login.oauthParams.access_token);
+
+// 네이버 사용자 프로필 조회
+naver_id_login.get_naver_userprofile("naverSignInCallback()");
+
+// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
 function naverSignInCallback() {
-	// naver_id_login.getProfileData('프로필항목명');
-	// 프로필 항목은 개발가이드를 참고하시기 바랍니다.
-	alert(naver_id_login.getProfileData('email'));
-	alert(naver_id_login.getProfileData('nickname'));
+	console.log(naver_id_login.oauthParams.access_token);
+	//alert(naver_id_login.getProfileData('email'));
+	//alert(naver_id_login.getProfileData('nickname'));
+	//alert(naver_id_login.getProfileData('age'));
+	
+	location.href="project/naver_logined?id="+naver_id_login.getProfileData('email')+"&name="+naver_id_login.getProfileData('nickname');
+    opener.parent.location.reload();
+    window.close();
 }
-
-
-
-

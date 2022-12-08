@@ -24,6 +24,11 @@ public class UserDAOImpl implements UserDAO {
     public int kakaoInsert(Map<String, Object> map) {
 		return this.sqlSession.insert("kakao_insert", map);
     }
+    
+    @Override
+	public int naverInsert(Map<String, Object> map) {
+    	return this.sqlSession.insert("naver_insert", map);
+	}
 
 	@Override
 	public int join(UserDTO dto) {
@@ -49,5 +54,7 @@ public class UserDAOImpl implements UserDAO {
 	public List<UserDTO> getUserList() {
 		return this.sqlSession.selectList("user_list");
 	}
+
+	
 
 }

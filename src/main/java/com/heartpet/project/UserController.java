@@ -181,21 +181,62 @@ public class UserController {
     	}
     }
     
-    @RequestMapping("/naver_login")
-    public void naver(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	//애플리케이션 클라이언트 아이디값
-    	String clientId = "fw7rzSQL46p95xisWWtm";
-        String redirectURI = URLEncoder.encode("/project/naver_logined", "UTF-8");
-        SecureRandom random = new SecureRandom();
-        String state = new BigInteger(130, random).toString();
-        String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code"
-             + "&client_id=" + clientId
-             + "&redirect_uri=" + redirectURI
-             + "&state=" + state;
-        session.setAttribute("state", state);
+    @RequestMapping("/naver_logined")
+    public void naver(@RequestParam("id")String id, @RequestParam("email")String email, @RequestParam("name")String name, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    	PrintWriter out = response.getWriter();
+    	int check = userDAO.idCheck(id);
+    	
+    	if(check == 1) {
+    		UserDTO dto = userDAO.getUserInfo(id);
+    		UserDTO cont = userDAO.getUserInfo(id);
+    		
+			session = request.getSession();
+			session.setAttribute("session_id", id);
+			session.setAttribute("session_name", cont.getUser_name());
+			
+			out.println("<script>");
+			out.println("alert('로그인 되었습니다!');");
+			out.println("location.href='"+request.getContextPath()+"'");
+			out.println("</script>");
+			out.flush();
+			
+			System.out.println("아이디 존재 => 네이버 로그인 성공");
+			System.out.println("세션id: "+id);
+    	}else {
+    		
+    		Map<String, Object> map = new HashMap<String, Object>();
+    		map.put("id", id);
+    		map.put("name", name);
+    		map.put("email", email);
+    		
+    		int res = userDAO.naverInsert(map);
+    		
+    		if(res>0) {
+    			UserDTO dto = userDAO.getUserInfo(id);
+        		
+    			session = request.getSession();
+        		session.setAttribute("session_id", id);
+        		session.setAttribute("session_name", dto.getUser_name());
+        		
+        		out.println("<script>");
+				out.println("alert('로그인 되었습니다!');");
+				out.println("location.href='"+request.getContextPath()+"'");
+				out.println("</script>");
+				out.flush();
+        		
+        		System.out.println("아이디 없음 => 네이버 계정 가입 성공");
+        		System.out.println("세션id: "+id);
+    		}else {
+    			out.println("<script>");
+    			out.println("alert('가입 실패ㅠ');");
+    			out.println("history.back()");
+    			out.println("</script>");
+    			out.flush();
+    		}
+    	}
     }
     
-    @RequestMapping("/naver_logined")
+    @RequestMapping("/naver_login")
     public void naver_login(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
     	PrintWriter out = response.getWriter();
     	String clientId = "fw7rzSQL46p95xisWWtm";//애플리케이션 클라이언트 아이디값";

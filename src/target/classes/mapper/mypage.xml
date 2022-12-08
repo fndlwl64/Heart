@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.heartpet.action.MypageDAO">
+	<select id="support_list" parameterType="String" resultType="com.heartpet.model.Mypage_SupportDTO">
+		select * from heartpet_support where support_userid = #{id}
+	</select>
+ 	<select id="support_sum" parameterType="String" resultType="int">
+		select NVL(sum(support_price), '0') from heartpet_support where support_userid = #{id}
+	</select>
+	<select id="user_info" parameterType="String" resultType="UserDTO">
+		select * from heartpet_user where user_id = #{id}
+	</select>
+	<select id="reg_count" parameterType="String" resultType="int">
+		select count(*) from heartpet_adopt_reg where adopt_reg_userid = #{id} and adopt_reg_adoptdate is null
+	</select>
+	<select id="mypage_review_count" parameterType="String" resultType="int">
+		select count(*) from heartpet_review where review_id = #{id}
+	</select>
+	<update id="user_update" parameterType="UserDTO">
+	 	update heartpet_user set user_id = #{user_id}, user_name = #{user_name}, user_email = #{user_email}, user_phone = #{user_phone}, user_addr = #{user_addr}, user_dogexp = #{user_dogexp} where user_id = #{user_id}
+	</update>
+	<select id="wish_list" parameterType="String" resultType="com.heartpet.model.WishVO">
+		select animal_no, animal_species, animal_gender, animal_age, animal_img1 from heartpet_animal a, heartpet_wish b where a.animal_no = b.wish_petno and wish_userid = #{id}
+	</select>
+	<select id="adopt_list" parameterType="String" resultType="com.heartpet.model.WishVO">
+		select animal_no, animal_species, animal_gender, animal_age, adopt_reg_duedate, adopt_reg_adoptdate, animal_img1 from heartpet_adopt_reg a, heartpet_animal b where b.animal_no = a.adopt_reg_dogno and adopt_reg_userid = #{id} and adopt_reg_adoptdate is null
+	</select>
+	<select id="adopt_com_list" parameterType="String" resultType="com.heartpet.model.WishVO">
+		select animal_no, animal_species, animal_gender, animal_age, adopt_reg_duedate, adopt_reg_adoptdate, animal_img1 from heartpet_adopt_reg a, heartpet_animal b where b.animal_no = a.adopt_reg_dogno and adopt_reg_userid = #{id} and adopt_reg_adoptdate is not null
+	</select>
+</mapper>

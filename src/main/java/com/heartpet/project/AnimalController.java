@@ -72,4 +72,12 @@ public class AnimalController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping("/pathtest")
+	public String pathtest() {
+		System.out.println("===============================");
+		System.out.println(FileSystemView.getFileSystemView().getDefaultDirectory().getPath());
+		System.out.println(FileSystemView.getFileSystemView().getRoots().toString());
+		return "redirect:/";
+	}
+	
 }

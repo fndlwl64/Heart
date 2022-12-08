@@ -13,6 +13,11 @@
 		INSERT INTO HEARTPET_USER VALUES (#{user_no}+1, #{id}, 'kakao1234', #{name}, default, '', '', '', '', default, '' )
 	</insert>
 	
+	<insert id="naver_insert" parameterType="map">
+		<selectKey resultType="int" keyProperty="user_no" order="BEFORE">select max(user_no) from heartpet_user</selectKey> 
+		INSERT INTO HEARTPET_USER VALUES (#{user_no}+1, #{id}, 'naver1234', #{name}, default, #{email}, '', '', '', default, '' )
+	</insert>
+	
 	<select id="login" parameterType="String" resultType="String">
 		SELECT USER_PWD FROM HEARTPET_USER WHERE USER_ID = #{id} and USER_GRADE NOT IN (5)
 	</select>
