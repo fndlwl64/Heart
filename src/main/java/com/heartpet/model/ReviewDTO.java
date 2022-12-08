@@ -7,7 +7,8 @@ public class ReviewDTO {
 
     private int review_no;
     private String review_id;
-    private String review_dog_id;
+    private int review_animal_id;
+    private String review_animal_tag;
     private int review_hit;
     private String review_title;
     private String review_content;

@@ -12,23 +12,25 @@
 	<sql id="qna_select">
 		select * from heartpet_board 
 	</sql>
-	
+	<sql id="qna_keyword">
+		like '%' || #{keyword} || '%'
+	</sql>
 	<!-- list -->
 	<select id="qna_list" parameterType="hashMap" resultType="QnaDTO">
 		<![CDATA[select * from (select b.*, row_number() over(order by board_no desc) rnum from heartpet_board b ]]>
 		<where>
 		 <choose>
-            <when test="field.equals('allSearch') and keyword != ''"> (board_title like '%' || #{keyword} || '%') or (board_content like '%' || #{keyword} || '%') or (board_category like '%' || #{keyword} || '%') or (board_id like '%' || #{keyword} || '%')</when>
-            <when test="field.equals('title') and keyword != ''"> board_title like '%' || #{keyword} || '%'</when>
-            <when test="field.equals('content') and keyword != ''"> board_content like '%' || #{keyword} || '%'</when>
-            <when test="field.equals('category') and keyword != ''"> board_category like '%' || #{keyword} || '%'</when>
-            <when test="field.equals('id') and keyword != ''"> board_id like '%' || #{keyword} || '%'</when>
+            <when test="field.equals('allSearch') and keyword != ''"> (board_title <include refid="qna_keyword" />) or (board_content <include refid="qna_keyword" />) or (board_category <include refid="qna_keyword" />) or (board_id <include refid="qna_keyword" />)</when>
+            <when test="field.equals('title') and keyword != ''"> board_title <include refid="qna_keyword" /></when>
+            <when test="field.equals('content') and keyword != ''"> board_content <include refid="qna_keyword" /></when>
+            <when test="field.equals('category') and keyword != ''"> board_category <include refid="qna_keyword" /></when>
+            <when test="field.equals('id') and keyword != ''"> board_id <include refid="qna_keyword" /></when>
          </choose>
          </where>
          <![CDATA[) where rnum >= #{startNo} and rnum <= #{endNo}]]>
 	</select>
 	
-	<!-- content : 게시글 개수 -->
+	<!-- content -->
 	<update id="qna_hit" parameterType="int">
 		update heartpet_board set board_hit = board_hit + 1 where board_no = #{ board_no }
 	</update>
@@ -37,22 +39,17 @@
 		<include refid="qna_select" /> where board_no = #{ board_no }
 	</select>
 	
-	<select id="qna_id" parameterType="int" resultType="String">
-		select board_id from heartpet_board where board_no = #{ board_no }
-	</select>
-	
-	
 	<!-- count : 게시글 개수 -->
 	<select id="qna_count" parameterType="hashMap" resultType="int">
 		select count(*) from heartpet_board
 		<where>
 	 	<choose>
 	 		<when test="field == '' and keyword == ''"></when>
-			<when test="field.equals('allSearch') and keyword != ''"> (board_title like '%' || #{keyword} || '%') or (board_content like '%' || #{keyword} || '%') or (board_category like '%' || #{keyword} || '%') or (board_id like '%' || #{keyword} || '%')</when>
-			<when test="field.equals('title') and keyword != ''"> board_title like '%' || #{keyword} || '%'</when>
-			<when test="field.equals('content') and keyword != ''"> board_content like '%' || #{keyword} || '%'</when>
-			<when test="field.equals('category') and keyword != ''"> board_category like '%' || #{keyword} || '%'</when>
-			<when test="field.equals('id') and keyword != ''"> board_id like '%' || #{keyword} || '%'</when>
+			<when test="field.equals('allSearch') and keyword != ''"> (board_title <include refid="qna_keyword" />) or (board_content <include refid="qna_keyword" />) or (board_category <include refid="qna_keyword" />) or (board_id <include refid="qna_keyword" />)</when>
+			<when test="field.equals('title') and keyword != ''"> board_title <include refid="qna_keyword" /></when>
+			<when test="field.equals('content') and keyword != ''"> board_content <include refid="qna_keyword" /></when>
+			<when test="field.equals('category') and keyword != ''"> board_category <include refid="qna_keyword" /></when>
+			<when test="field.equals('id') and keyword != ''"> board_id <include refid="qna_keyword" /></when>
 		</choose>
         </where>
 	</select>
@@ -67,9 +64,12 @@
 	</insert>
 	
 	<!-- update -->
-	<update id="qna_update" parameterType="int">
+	<update id="qna_update" parameterType="QnaDTO">
 		update heartpet_board set board_category = #{ board_category }, board_title = #{ board_title }, board_content = #{ board_content }, 
-		board_secret = #{ board_secret }, board_update = sysdate, board_img1 = #{ board_img1 }, board_img2 = #{ board_img2 } where board_no = #{ board_no }
+		board_secret = #{ board_secret }, board_update = sysdate
+		<if test="board_img1 != null">, board_img1 = #{ board_img1 } </if> 
+		<if test="board_img2 != null">, board_img2 = #{ board_img2 } </if> 
+		where board_no = #{ board_no }
 	</update>
 	
 	<!-- delete -->
@@ -87,10 +87,10 @@
 		<where>
 	 	<choose>
 	 		<when test="field == '' and keyword == ''"></when>
-			<when test="field.equals('allSearch') and keyword != ''"> (fnq_category like '%' || #{keyword} || '%') or (fnq_question like '%' || #{keyword} || '%') or (fnq_answer like '%' || #{keyword} || '%')</when>
-			<when test="field.equals('category') and keyword != ''"> fnq_category like '%' || #{keyword} || '%'</when>
-			<when test="field.equals('question') and keyword != ''"> fnq_question like '%' || #{keyword} || '%'</when>
-			<when test="field.equals('answer') and keyword != ''"> fnq_answer like '%' || #{keyword} || '%'</when>
+			<when test="field.equals('allSearch') and keyword != ''"> (fnq_category <include refid="qna_keyword" />) or (fnq_question <include refid="qna_keyword" />) or (fnq_answer <include refid="qna_keyword" />)</when>
+			<when test="field.equals('category') and keyword != ''"> fnq_category <include refid="qna_keyword" /></when>
+			<when test="field.equals('question') and keyword != ''"> fnq_question <include refid="qna_keyword" /></when>
+			<when test="field.equals('answer') and keyword != ''"> fnq_answer <include refid="qna_keyword" /></when>
 		</choose>
         </where>
 	</select>
@@ -100,10 +100,10 @@
 		<where>
 		 <choose>
 	 		<when test="field == '' and keyword == ''"></when>
-			<when test="field.equals('allSearch') and keyword != ''"> (fnq_category like '%' || #{keyword} || '%') or (fnq_question like '%' || #{keyword} || '%') or (fnq_answer like '%' || #{keyword} || '%')</when>
-			<when test="field.equals('category') and keyword != ''"> fnq_category like '%' || #{keyword} || '%'</when>
-			<when test="field.equals('question') and keyword != ''"> fnq_question like '%' || #{keyword} || '%'</when>
-			<when test="field.equals('answer') and keyword != ''"> fnq_answer like '%' || #{keyword} || '%'</when>
+			<when test="field.equals('allSearch') and keyword != ''"> (fnq_category <include refid="qna_keyword" />) or (fnq_question <include refid="qna_keyword" />) or (fnq_answer <include refid="qna_keyword" />)</when>
+			<when test="field.equals('category') and keyword != ''"> fnq_category <include refid="qna_keyword" /></when>
+			<when test="field.equals('question') and keyword != ''"> fnq_question <include refid="qna_keyword" /></when>
+			<when test="field.equals('answer') and keyword != ''"> fnq_answer <include refid="qna_keyword" /></when>
          </choose>
          </where>
          <![CDATA[) where rnum >= #{startNo} and rnum <= #{endNo}]]>

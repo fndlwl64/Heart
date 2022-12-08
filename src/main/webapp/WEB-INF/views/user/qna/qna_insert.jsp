@@ -22,7 +22,7 @@
         <table class="table align-middle">
             <tr class="border-top">
                 <th class="table-light col-1">카테고리</th>
-                <td class="col-2"><%-- db 확인 필요 --%>
+                <td class="col-2">
                     <select class="form-select" name="board_category">
                         <option value="입양" selected="selected">입양</option>
                         <option value="입소">입소</option>
@@ -31,7 +31,7 @@
                     </select>
                 </td>
                 <th class="table-light col-1">작성자</th>
-                <td class="col-2"><input type="text" class="form-control" value="${ session_id }" disabled="disabled"></td>
+                <td class="col-2"><input type="text" class="form-control-plaintext ms-2" value="${ session_id }" disabled="disabled"></td>
                 <th class="table-light col-1">
                 <label><input class="form-check-input col-1" type="checkbox" name="board_secret" value="Y" checked="checked"> 비밀글</label>
                 <input type="hidden" name="board_secret" value="N" disabled="disabled" />

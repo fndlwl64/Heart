@@ -31,7 +31,7 @@
 	</select>
 	
 	<select id="user_list" resultType="UserDTO">
-		SELECT * FROM HEARTPET_USER
+		SELECT * FROM HEARTPET_USER WHERE USER_GRADE NOT IN (1)
 	</select>
 	
 </mapper>

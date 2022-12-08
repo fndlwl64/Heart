@@ -5,6 +5,7 @@ import java.util.List;
 import com.heartpet.model.Mypage_SupportDTO;
 import com.heartpet.model.NoticeDTO;
 import com.heartpet.model.UserDTO;
+import com.heartpet.model.WishVO;
 
 public interface MypageDAO {
 	// 마이페이지 후원 금액, 일자 불러오는 리스트
@@ -24,6 +25,15 @@ public interface MypageDAO {
 	
 	// 마이페이지에서 회원정보를 수정하는 메서드
 	public int UserUpdate(UserDTO dto);
+	
+	// 마이페이지에서 관심정보를 불러오는 메서드
+	public List<WishVO> getWishList(String id);
+	
+	// 마이페이지에서 입양예정 불러오는 메서드
+	public List<WishVO> getAdoptList(String id);
+	
+	// 마이페이지에서 입양완료 불러오는 메서드
+	public List<WishVO> getAdoptComList(String id);
 	
 
 }

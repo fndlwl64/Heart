@@ -58,22 +58,21 @@
     </div>
     <div id="my_cont2" class="mypage_cont">
         <div align="center">
-            <h3>입양대기목록</h3>
-            <ul class="my_cont_ul">
-                <li><img class="my_cont_img"src="${path }/resources/image/dog.png"></li>
-                <li>강아지종</li>
-                <li>입양예정일</li>
-            </ul>
-            <ul class="my_cont_ul">
-                <li><img class="my_cont_img" src="${path }/resources/image/dog.png"></li>
-                <li>강아지종</li>
-                <li>입양예정일</li>
-            </ul>
-            <ul class="my_cont_ul">
-                <li><img class="my_cont_img" src="${path }/resources/image/dog.png"></li>
-                <li>강아지종</li>
-                <li>입양예정일</li>
-            </ul>
+        	<c:if test="${!empty aList}">
+	            <h3>입양대기목록</h3>
+	            <c:forEach items="${aList}" var="dto">
+		            <ul class="my_cont_ul">
+		                <li><img class="my_cont_img"src="${path}/resources/upload/${dto.getAnimal_img1()}"></li>
+		                <li>종류 : ${dto.getAnimal_species()}</li>
+		                <li>성별 : ${dto.getAnimal_gender()}</li>
+		                <li>나이 : ${dto.getAnimal_age()}</li>
+		                <li>입양 예정일 : ${dto.getAdopt_reg_duedate().substring(0, 10)}</li>
+		            </ul>
+	            </c:forEach>
+            </c:if>
+            <c:if test="${empty aList }">
+            	<h1>입양대기 목록이 없습니다!</h1>
+            </c:if>
         </div>
     </div>
     <div class="mypage_bottom">

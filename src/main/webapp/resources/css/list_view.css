@@ -10,6 +10,12 @@
     width: 50%;
     margin: auto;
 }
+
+.container .userinfo td {
+	text-align: left;
+	padding-left: 8%;
+}
+
 /* admin/cat&dog_content.jsp 테이블 태그 */
 .container .petinfo {
     width: 60%;
