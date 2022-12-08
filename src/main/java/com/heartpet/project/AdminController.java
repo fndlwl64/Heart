@@ -126,8 +126,7 @@ public class AdminController {
     	response.setContentType("text/html; charset=utf-8");
     	
     	PrintWriter out = response.getWriter();
-    	
-    	
+    	    	
     }
 
     /*관리자 리스트에서 상세정보보기*/

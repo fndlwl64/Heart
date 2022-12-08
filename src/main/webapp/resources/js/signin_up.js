@@ -126,70 +126,23 @@ $(function() {
 	        alert('failed to login: ' + JSON.stringify(err));
 	    }
 	});
-	
-	
-	// 네이버 로그인 api
-	const naverLogin = new naver.LoginWithNaverId(
-			{
-				clientId: "fw7rzSQL46p95xisWWtm",
-				callbackUrl: "/project/",
-				loginButton: {color: "green", type: 2, height: 40}
-			}
-		);
- 	naverLogin.init();
- 	
- 	naverLogin.getLoginStatus(function(status) {
-      if (status) {
-          const nickName = naverLogin.user.getNickName();
-          const age = naverLogin.user.getAge();
-          const birthday = naverLogin.user.getBirthday();
-
-        //닉네임을 선택하지 않으면 선택창으로 돌아갑니다.
-          if(nickName===null||nickName===undefined ){ 
-            alert("별명이 필요합니다. 정보제공을 동의해주세요.");
-            naverLogin.reprompt(); 
-            return ;  
-         }else{
-          setLoginStatus(); //모든 필수 정보 제공 동의하면 실행하는 함수
-         }
-      }
-    });
-	
-	
-	$("#input_id").on("click", function() {
 		
-	});
-	
+	var naver_id_login = new naver_id_login("fw7rzSQL46p95xisWWtm", "/project/naver_login");
+	var state = naver_id_login.getUniqState();
+	naver_id_login.setButton("white", 2,40);
+	naver_id_login.setDomain(".service.com");
+	naver_id_login.setState(state);
+	naver_id_login.setPopup();
+	naver_id_login.init_naver_id_login();
 	
 });
 
-
-
-
-/*displayToken()
-function displayToken() {
-    var token = getCookie('authorize-access-token');
-
-    if(token) {
-        Kakao.Auth.setAccessToken(token);
-        Kakao.Auth.getStatusInfo()
-            .then(function(res) {
-                if (res.status === 'connected') {
-                    document.getElementById('token-result').innerText
-                        = 'login success, token: ' + Kakao.Auth.getAccessToken();
-                }
-            })
-            .catch(function(err) {
-                Kakao.Auth.setAccessToken(null);
-            });
-    }
+function naverSignInCallback() {
+	// naver_id_login.getProfileData('프로필항목명');
+	// 프로필 항목은 개발가이드를 참고하시기 바랍니다.
+	alert(naver_id_login.getProfileData('email'));
+	alert(naver_id_login.getProfileData('nickname'));
 }
-
-function getCookie(name) {
-    var parts = document.cookie.split(name + '=');
-    if (parts.length === 2) { return parts[1].split(';')[0]; }
-}*/
-
 
 
 
