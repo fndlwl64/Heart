@@ -44,6 +44,13 @@
          </choose>
         </where>
 	</select>
+	
+	<select id="review_animal" parameterType="map" resultType="hashMap">
+		select animal_name, animal_tag from heartpet_animal where animal_no in 
+		<foreach item="aNo" collection="array" open="(" close=")" separator=", ">
+			#{ aNo }
+		</foreach>
+	</select>
  
 	
 	<!-- content -->
