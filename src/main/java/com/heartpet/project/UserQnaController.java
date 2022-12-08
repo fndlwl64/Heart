@@ -148,23 +148,27 @@ public class UserQnaController {
     	
     	// 비번 check
     	if(!qnaDto.getBoard_pwd().equals(qnaContent.getBoard_pwd())) { out.println("<script>alert('비밀번호를 다시 확인해주세요.'); history.back(); </script>"); } 
-    	
     	// 유효성 검사
+		System.out.println("안녕1");
+
     	if(result.hasErrors()) {
+    		System.out.println("안녕2");
 			List<ObjectError> errors = result.getAllErrors();
 			for(ObjectError error : errors) {
+				System.out.println("안녕3");
 				if(error.getDefaultMessage().equals("title")) { out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>"); break; }
 				else if(error.getDefaultMessage().equals("content")) { out.println("<script>alert('글 내용이 없습니다.'); history.back(); </script>"); break; }
 				else if(error.getDefaultMessage().equals("password")) { out.println("<script>alert('글 비밀번호를 입력해주세요.'); history.back(); </script>"); break; }
 				else if(error.getDefaultMessage().equals("regexp")) { out.println("<script>alert('비밀번호는 6자 이상 10자 이하의 숫자 및 영문자로 구성되어야 합니다. 다시 입력해주세요.'); history.back(); </script>"); break; }
 			}
+			System.out.println("안녕5");
+
     	}else {   		        			
-        	int check = this.qnaDAO.insertQna(qnaDto);        	
+        	int check = this.qnaDAO.updateQna(qnaDto);     
     		if(check > 0) { out.println("<script>alert('글이 성공적으로 수정되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>"); }
     		else { out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>"); }
     	}    	
     }
-    
     
     ////////////////////////////////////////////////////////////////////////////////////
     // QNA_DELETE

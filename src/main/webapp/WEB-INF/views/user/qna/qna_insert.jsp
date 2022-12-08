@@ -22,7 +22,7 @@
         <table class="table align-middle">
             <tr class="border-top">
                 <th class="table-light col-1">카테고리</th>
-                <td class="col-2"><%-- db 확인 필요 --%>
+                <td class="col-2">
                     <select class="form-select" name="board_category">
                         <option value="입양" selected="selected">입양</option>
                         <option value="입소">입소</option>

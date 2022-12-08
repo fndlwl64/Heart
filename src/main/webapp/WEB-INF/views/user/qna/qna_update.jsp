@@ -5,6 +5,7 @@
 <c:set var="list" value="${qnaContent}" />
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
+<script src="${path}/resources/js/user_qna_insert.js"></script>
 
 <%-- 글쓰기 --%>
 <div id="qna-contents" class="qna-contents">
@@ -17,25 +18,25 @@
     </div>
 
     <div>
-        <form name="updateForm" action="${ path }/user_qna_update_ok" method="post" enctype="multipart/form-data" >
+        <form action="${ path }/user_qna_update_ok" method="post" enctype="multipart/form-data" >
         	<input type="hidden" name="board_no" value="${ list.board_no }" />
         	<input type="hidden" name="board_id" value="${ list.board_id }" />
             <table class="table align-middle">
                 <tr class="border-top">
                     <th class="table-light col-1">카테고리</th>
-                    <td class="col-2"><%-- db 확인 필요 --%>
-                        <select class="form-select" name="board_category" id="">
+                    <td class="col-2">
+                        <select class="form-select" name="board_category" >
                             <option value="입양" <c:if test="${ list.board_category eq '입양' }">selected="selected"</c:if>>입양</option>
                             <option value="입소" <c:if test="${ list.board_category eq '입소' }">selected="selected"</c:if>>입소</option>
                             <option value="후원" <c:if test="${ list.board_category eq '후원' }">selected="selected"</c:if>>후원</option>
                             <option value="기타" <c:if test="${ list.board_category eq '기타' }">selected="selected"</c:if>>기타</option>
                         </select>
                     </td>
-                    <th class="table-light col-1">작성자</th>
+                    <th class="table-light col-1">작성자</th>                    
                     <td class="col-2"><input type="text" class="form-control" name="board_id" value="${ list.board_id }" disabled="disabled"></td>
                     <th class="table-light col-1">
-                    <label><input class="form-check-input col-1" type="checkbox" name="board_secret" <c:if test="${ list.board_secret eq 'Y' }">checked="checked"</c:if>> 비밀글</label>
-                    
+                    <label><input class="form-check-input col-1" type="checkbox" name="board_secret" value="Y" <c:if test="${ list.board_secret eq 'Y' }">checked="checked"</c:if>> 비밀글</label>
+                    <input type="hidden" name="board_secret" value="N" disabled="disabled" />                    
                     </th>
                 </tr>
                 <tr>
@@ -53,7 +54,8 @@
 					<th class="table-light">이미지</th>
 	                <td colspan="2">
 	                    <div class="d-flex align-middle">
-	                        <input type="file" class="form-control" name="board_img" accept="image/gif, image/jpeg, image/png" multiple>
+	                        <input type="file" class="form-control w-50" name="board_img1" accept="image/gif, image/jpeg, image/png" >
+	                        <input type="file" class="form-control w-50" name="board_img2" accept="image/gif, image/jpeg, image/png" >
 	                    </div>
                 	</td>
                 </tr>
