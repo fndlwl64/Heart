@@ -1,19 +1,39 @@
 package com.heartpet.project;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.heartpet.action.UserDAO;
+import com.heartpet.model.UserDTO;
 
 @Controller
 public class AdminController {
+	
+	@Autowired
+	private UserDAO userDAO;
 
     /*관리자 상단바에서 페이지 이동*/
 	@RequestMapping("/admin_main")
-	public String admin_main() {
+	public String admin_main(Model model) {
+		
+		List<UserDTO> list = userDAO.getUserList();
+		
+		model.addAttribute("list", list);
+		
 		return "admin/user/user_list";
 	}
+	
     @RequestMapping("/user_list")
-    public String user_list() {
+    public String user_list(Model model) {
+    	List<UserDTO> list = userDAO.getUserList();
+		
+		model.addAttribute("list", list);
+		    	
         return "admin/user/user_list";
     }
     @RequestMapping("/adoptreg_list")
@@ -95,7 +115,12 @@ public class AdminController {
         return "admin/notice_view";
     }
     @RequestMapping("/user_view")
-    public String user_view() {
+    public String user_view(@RequestParam("user_id")String id, Model model) {
+    	
+    	UserDTO dto =userDAO.getUserInfo(id);
+    	
+    	model.addAttribute("cont", dto);
+    	
         return "admin/user/user_content";
     }
     

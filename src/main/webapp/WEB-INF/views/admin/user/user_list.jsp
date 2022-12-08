@@ -49,20 +49,31 @@
                 <th class="table-secondary">반려동물경험</th>
                 <th class="table-secondary">수정/삭제</th>
             </tr>
-
-            <tr>
-                <td>1</td>
-                <td><a href="${path}/user_view">id1</a></td>
-                <td>2등급</td>
-                <td>yes</td>
-                <td>
-                    <button class="btn btn-primary" onclick="location.href='${path}/user_update'">수정</button>
-                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
-                </td>
-            </tr>
+            
+            <c:if test="${!empty list}">
+            <c:forEach items="${list }" var="list">
+          		<tr>
+	                <td>${list.user_no}</td>
+	                <td><a href="${path}/user_view?user_id=${list.user_id}">${list.user_id}</a></td>
+	                <td>${list.user_id}</td>
+	                <td>${list.user_dogexp}</td>
+	                <td>
+	                    <button class="btn btn-primary" onclick="location.href='${path}/user_update'">수정</button>
+	                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
+	                </td>
+	            </tr>
+            </c:forEach>            	
+            </c:if>
+            
+            <c:if test="${empty list}">
+            	<tr>
+            		<td colspan="5">회원이 없습니다 .... !!!!!!!</td>
+            	</tr>
+            </c:if>
 
         </table>
     </div>
+    
 
     <%-- 삭제 모달 --%>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

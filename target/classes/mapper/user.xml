@@ -30,4 +30,8 @@
 		SELECT COUNT(USER_ID) FROM HEARTPET_USER WHERE USER_ID = #{id} AND USER_GRADE = 1 
 	</select>
 	
+	<select id="user_list" resultType="UserDTO">
+		SELECT * FROM HEARTPET_USER
+	</select>
+	
 </mapper>

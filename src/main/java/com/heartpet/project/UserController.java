@@ -185,10 +185,6 @@ public class UserController {
     public void joinOk(UserDTO dto, HttpServletRequest request,HttpServletResponse response) throws IOException {
     	request.setCharacterEncoding("UTF-8");
     	response.setContentType("text/html; charset=utf-8");
-    	    	    	
-    	//System.out.println("값 확인 : "+dto.getUser_grade()+", "+dto.getUser_dogexp()+", "+(ad1+ad3+ad2));
-    	//System.out.println("값 확인 : "+dto.getUser_id()+", "+dto.getUser_pwd()+", "+dto.getUser_email());
-    	System.out.println("값 확인 : "+dto.getUser_name()+", "+dto.getUser_phone()+", "+dto.getUser_addr());
     	
     	int res = userDAO.join(dto);
     	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="../../include/admin_header.jsp"/>
 <!DOCTYPE html>
@@ -16,58 +17,55 @@
 
     <br>
     <%-- el태그로 이름 가져와 입력 --%>
-    <h2>님 정보</h2>
+    <h2>${cont.user_name}님 정보</h2>
     <br><br>
 
     <table class="table userinfo">
         <tr>
             <th class="table-secondary">회원번호</th>
-            <td>1</td>
+            <td>${cont.user_no}</td>
         </tr>
 
         <tr>
             <th class="table-secondary">아이디</th>
-            <td>id1</td>
+            <td>${cont.user_id}</td>
         </tr>
 
         <tr>
             <th class="table-secondary">이름</th>
-            <td>홍길동</td>
-        </tr>
-
-        <tr>
-            <th class="table-secondary">가입일</th>
-            <td>2022.11.30</td>
+            <td>${cont.user_name}</td>
         </tr>
 
         <tr>
             <th class="table-secondary">회원등급</th>
-            <td title="1등급 : 관리자 &#10;2등급 : 입양 등록 회원 &#10;3등급 : 일반 회원 &#10;4등급 : 블랙리스트 &#10;5등급 : 탈퇴회원">2등급</td>
+            <td title="1등급 : 관리자 &#10;2등급 : 입양 등록 회원 &#10;3등급 : 일반 회원 &#10;4등급 : 블랙리스트 &#10;5등급 : 탈퇴회원">${cont.user_grade}등급</td>
         </tr>
 
         <tr>
             <th class="table-secondary">이메일</th>
-            <td>hong1234@gmail.com</td>
+            <td>${cont.user_email}</td>
         </tr>
 
         <tr>
             <th class="table-secondary">연락처</th>
-            <td>010-1234-5678</td>
+            <td>${cont.user_phone}</td>
         </tr>
 
         <tr>
             <th class="table-secondary">주소</th>
-            <td>가나다라마바사아자차카타파하</td>
+            <td>${cont.user_addr}</td>
         </tr>
 
         <tr>
             <th class="table-secondary">후원총액</th>
-            <td>10000원</td>
+            <td>
+            	<fmt:formatNumber>${cont.user_totalprice}</fmt:formatNumber>원
+            </td>
         </tr>
 
         <tr>
             <th class="table-secondary">반려동물경험</th>
-            <td>O</td>
+            <td>${cont.user_dogexp }</td>
         </tr>
     </table>
 

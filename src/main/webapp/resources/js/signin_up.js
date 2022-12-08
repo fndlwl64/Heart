@@ -154,8 +154,17 @@ $(function() {
          }
       }
     });
-
+	
+	
+	$("#input_id").on("click", function() {
+		
+	});
+	
+	
 });
+
+
+
 
 /*displayToken()
 function displayToken() {
