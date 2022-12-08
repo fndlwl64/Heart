@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReviewDAO">
+
+	<!-- 
+	////////////////////////////////////////////////////////////////////////////////////////////  
+	// Review
+	////////////////////////////////////////////////////////////////////////////////////////////  	
+	-->
+	<sql id="review_select">
+		select * from heartpet_review 
+	</sql>
+	<sql id="review_keyword">
+		like '%' || #{keyword} || '%'
+	</sql>
+	<!-- list -->
+	<select id="review_list" parameterType="hashMap" resultType="ReviewDTO">
+		<![CDATA[select * from (select b.*, row_number() over(order by review_no desc) rnum from heartpet_review b ]]>
+		<where>
+		 <choose>
+            <when test="field.equals('allSearch') and keyword != ''"> (review_title <include refid="review_keyword" />) or (review_content <include refid="review_keyword" />) or (review_animal_tag <include refid="review_keyword" />) or (review_id <include refid="review_keyword" />)</when>
+            <when test="field.equals('category') and keyword != ''"> review_animal_tag <include refid="review_keyword" /></when>
+            <when test="field.equals('title') and keyword != ''"> review_title <include refid="review_keyword" /></when>
+            <when test="field.equals('content') and keyword != ''"> review_content <include refid="review_keyword" /></when>
+            <when test="field.equals('id') and keyword != ''"> review_id <include refid="review_keyword" /></when>
+         </choose>
+         </where>
+         <![CDATA[) where rnum >= #{startNo} and rnum <= #{endNo}]]>
+	</select>
+	
+	<!-- content : 게시글 개수 -->
+	<update id="review_hit" parameterType="int">
+		update heartpet_review set review_hit = review_hit + 1 where review_no = #{ review_no }
+	</update>
+	
+	<select id="review_content" parameterType="int" resultType="ReviewDTO">
+		<include refid="review_select" /> where review_no = #{ review_no }
+	</select>
+	
+	<!-- count : 게시글 개수 -->
+	<select id="review_count" parameterType="hashMap" resultType="int">
+		select count(*) from heartpet_review
+		<where>
+		 <choose>
+	 		<when test="field == '' and keyword == ''"></when>
+            <when test="field.equals('allSearch') and keyword != ''"> (review_title <include refid="review_keyword" />) or (review_content <include refid="review_keyword" />) or (review_animal_tag <include refid="review_keyword" />) or (review_id <include refid="review_keyword" />)</when>
+            <when test="field.equals('category') and keyword != ''"> review_animal_tag <include refid="review_keyword" /></when>
+            <when test="field.equals('title') and keyword != ''"> review_title <include refid="review_keyword" /></when>
+            <when test="field.equals('content') and keyword != ''"> review_content <include refid="review_keyword" /></when>
+            <when test="field.equals('id') and keyword != ''"> review_id <include refid="review_keyword" /></when>
+         </choose>
+        </where>
+	</select>
+	
+	<!-- insert -->
+	<insert id="review_insert" parameterType="ReviewDTO">
+		<selectKey resultType="int" keyProperty="review_no" order="BEFORE">
+			select max(review_no)+1 from heartpet_review
+		</selectKey>
+		insert into heartpet_review values (#{ review_no }, #{ review_category }, #{ review_id }, default, #{ review_title },
+		#{ review_content }, #{ review_secret }, #{ review_pwd }, sysdate, '', '', '')
+	</insert>
+	
+	<!-- update -->
+	<update id="review_update" parameterType="ReviewDTO">
+		update heartpet_review set review_category = #{ review_category }, review_title = #{ review_title }, review_content = #{ review_content }, 
+		review_secret = #{ review_secret }, review_update = sysdate
+		<if test="review_img1 != null">, review_img1 = #{ review_img1 } </if> 
+		<if test="review_img2 != null">, review_img2 = #{ review_img2 } </if> 
+		where review_no = #{ review_no }
+	</update>
+	
+	<!-- delete -->
+	<delete id="review_delete" parameterType="int">
+		delete from heartpet_review where review_no = #{ review_no }
+	</delete>
+	
+</mapper>
+
