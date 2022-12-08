@@ -1,5 +1,6 @@
 package com.heartpet.action;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -42,6 +43,11 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public int adminCheck(String id) {
 		return this.sqlSession.selectOne("admin_check", id);
+	}
+
+	@Override
+	public List<UserDTO> getUserList() {
+		return this.sqlSession.selectList("user_list");
 	}
 
 }

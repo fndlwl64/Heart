@@ -1,5 +1,6 @@
 package com.heartpet.action;
 
+import java.util.List;
 import java.util.Map;
 
 import com.heartpet.model.UserDTO;
@@ -18,6 +19,8 @@ public interface UserDAO {
     public String login(String id);
          
     public UserDTO getUserInfo(String id);
+    
+    public List<UserDTO> getUserList();
     
 
 
