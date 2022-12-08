@@ -23,8 +23,6 @@ import com.heartpet.model.FnqDTO;
 import com.heartpet.model.PageDTO;
 import com.heartpet.model.QnaDTO;
 
-/*String user_id = (String)session.getAttribute("session_id");
-*/
 @Controller
 public class UserQnaController {
 
@@ -41,7 +39,9 @@ public class UserQnaController {
     // QNA_LIST
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/user_qna_list")
-    public String user_qna_list(@RequestParam(required = false) String field, @RequestParam(required = false) String keyword, @RequestParam(defaultValue = "0") int page, Model model) {
+    public String user_qna_list(@RequestParam(value = "field", required = false) String field, 
+    		@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+    	
     	if(field == null) { field = ""; }
        	if(keyword == null) { keyword = ""; }
     	
@@ -209,6 +209,5 @@ public class UserQnaController {
         
     	return "user/qna/fnq_list"; 
     }
-
 
 }
