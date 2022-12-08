@@ -14,6 +14,8 @@ public interface UserDAO {
     
     public int kakaoInsert(Map<String, Object> map);
     
+    public int naverInsert(Map<String, Object> map);
+    
     public int join(UserDTO dto);
     
     public String login(String id);
