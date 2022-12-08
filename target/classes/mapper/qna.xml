@@ -32,9 +32,15 @@
 	<update id="qna_hit" parameterType="int">
 		update heartpet_board set board_hit = board_hit + 1 where board_no = #{ board_no }
 	</update>
+	
 	<select id="qna_content" parameterType="int" resultType="QnaDTO">
 		<include refid="qna_select" /> where board_no = #{ board_no }
 	</select>
+	
+	<select id="qna_id" parameterType="int" resultType="String">
+		select board_id from heartpet_board where board_no = #{ board_no }
+	</select>
+	
 	
 	<!-- count : 게시글 개수 -->
 	<select id="qna_count" parameterType="hashMap" resultType="int">

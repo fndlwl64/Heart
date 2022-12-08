@@ -59,6 +59,11 @@ public class QnaDAOImpl implements QnaDAO {
     public int deleteQna(int board_no) {
         return this.sqlSession.delete("qna_delete", board_no);
     }
+    
+	@Override
+	public String idQna(int board_no) {
+		return this.sqlSession.selectOne("qna_id", board_no);
+	}
 	
 	@Override
 	public List<FnqDTO> listFnq(int startNo, int endNo, String field, String keyword) {
