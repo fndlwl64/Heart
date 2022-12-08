@@ -62,7 +62,6 @@ public class UserQnaController {
         return "user/qna/qna_list";
     }
     
-    
     ////////////////////////////////////////////////////////////////////////////////////
     // QNA_CONTENT - 비밀글 기능 구현
     ////////////////////////////////////////////////////////////////////////////////////
@@ -74,7 +73,7 @@ public class UserQnaController {
     	
     	// 로그인 여부 체크
     	if(session.getAttribute("session_id") == null || session.getAttribute("session_id") == "" ) {
-    		out.println("<script> alert('로그인이 필요합니다.'); location.href='"+request.getContextPath()+"/'; </script>");
+    		out.println("<script> alert('로그인이 필요합니다.'); location.href='"+request.getContextPath()+"/login'; </script>");
     	}
     	
     	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
@@ -98,7 +97,17 @@ public class UserQnaController {
     // QNA_INSERT
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/user_qna_insert")
-    public String user_qna_insert() { 
+    public String user_qna_insert(HttpServletResponse response, HttpServletRequest request) throws IOException { 
+		response.setContentType("text/html; charset=UTF-8");
+    	HttpSession session = request.getSession();
+    	PrintWriter out = response.getWriter();
+    	
+    	// 로그인 여부 체크
+    	if(session.getAttribute("session_id") == null || session.getAttribute("session_id") == "" ) {
+    		out.println("<script> alert('로그인이 필요합니다.'); location.href='"+request.getContextPath()+"/'; </script>");
+    		out.flush();
+    	}
+    	
     	return "user/qna/qna_insert";
     }    
     
@@ -139,36 +148,26 @@ public class UserQnaController {
     
     ////////////////////////////////////////////////////////////////////////////////////
     // QNA_UPDATE_OK
-    ////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////    
     @RequestMapping(value = "/user_qna_update_ok", method = RequestMethod.POST)
-    public void user_qna_update_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public void user_qna_update_ok(QnaDTO qnaDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
     	QnaDTO qnaContent = this.qnaDAO.contentQna(qnaDto.getBoard_no());
     	
     	// 비번 check
-    	if(!qnaDto.getBoard_pwd().equals(qnaContent.getBoard_pwd())) { out.println("<script>alert('비밀번호를 다시 확인해주세요.'); history.back(); </script>"); } 
-    	// 유효성 검사
-		System.out.println("안녕1");
-
-    	if(result.hasErrors()) {
-    		System.out.println("안녕2");
-			List<ObjectError> errors = result.getAllErrors();
-			for(ObjectError error : errors) {
-				System.out.println("안녕3");
-				if(error.getDefaultMessage().equals("title")) { out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>"); break; }
-				else if(error.getDefaultMessage().equals("content")) { out.println("<script>alert('글 내용이 없습니다.'); history.back(); </script>"); break; }
-				else if(error.getDefaultMessage().equals("password")) { out.println("<script>alert('글 비밀번호를 입력해주세요.'); history.back(); </script>"); break; }
-				else if(error.getDefaultMessage().equals("regexp")) { out.println("<script>alert('비밀번호는 6자 이상 10자 이하의 숫자 및 영문자로 구성되어야 합니다. 다시 입력해주세요.'); history.back(); </script>"); break; }
-			}
-			System.out.println("안녕5");
-
-    	}else {   		        			
-        	int check = this.qnaDAO.updateQna(qnaDto);     
-    		if(check > 0) { out.println("<script>alert('글이 성공적으로 수정되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>"); }
-    		else { out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>"); }
-    	}    	
-    }
+    	if(!qnaDto.getBoard_pwd().equals(qnaContent.getBoard_pwd())) { 
+    		out.println("<script>alert('비밀번호를 다시 확인해주세요.'); history.back(); </script>"); 
+    	} 
+    	
+    	// 유효성 검사		
+    	int check = this.qnaDAO.updateQna(qnaDto);     
+		if(check > 0) { 
+			out.println("<script>alert('글이 성공적으로 수정되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>"); 
+		}else { 
+			out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>"); 
+		}
+    }    	
     
     ////////////////////////////////////////////////////////////////////////////////////
     // QNA_DELETE
