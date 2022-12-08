@@ -35,9 +35,9 @@ public class UserReviewController {
        	if(keyword == null) { keyword = ""; }
     	
 		int currentPage = 1;	// 현재 페이지 변수
-		if(page != 0) { currentPage = page; }
+		if(page != 1) { currentPage = page; }
 		
-		totalRecord = this.reviewDAO.listReviewCount(field, keyword);    	
+		totalRecord = this.reviewDAO.listReviewCount(field, keyword);
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
     			
     	List<ReviewDTO> reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), field, keyword);

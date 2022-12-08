@@ -30,15 +30,6 @@
          <![CDATA[) where rnum >= #{startNo} and rnum <= #{endNo}]]>
 	</select>
 	
-	<!-- content : 게시글 개수 -->
-	<update id="review_hit" parameterType="int">
-		update heartpet_review set review_hit = review_hit + 1 where review_no = #{ review_no }
-	</update>
-	
-	<select id="review_content" parameterType="int" resultType="ReviewDTO">
-		<include refid="review_select" /> where review_no = #{ review_no }
-	</select>
-	
 	<!-- count : 게시글 개수 -->
 	<select id="review_count" parameterType="hashMap" resultType="int">
 		select count(*) from heartpet_review
@@ -53,29 +44,42 @@
          </choose>
         </where>
 	</select>
+ 
+	
+	<!-- content -->
+<!-- 	<update id="review_hit" parameterType="int">
+		update heartpet_review set review_hit = review_hit + 1 where review_no = #{ review_no }
+	</update>
+	
+	<select id="review_content" parameterType="int" resultType="ReviewDTO">
+		<include refid="review_select" /> where review_no = #{ review_no }
+	</select> -->
+	
+
 	
 	<!-- insert -->
-	<insert id="review_insert" parameterType="ReviewDTO">
+<!-- 	<insert id="review_insert" parameterType="ReviewDTO">
 		<selectKey resultType="int" keyProperty="review_no" order="BEFORE">
 			select max(review_no)+1 from heartpet_review
 		</selectKey>
 		insert into heartpet_review values (#{ review_no }, #{ review_category }, #{ review_id }, default, #{ review_title },
 		#{ review_content }, #{ review_secret }, #{ review_pwd }, sysdate, '', '', '')
-	</insert>
+	</insert> -->
 	
 	<!-- update -->
-	<update id="review_update" parameterType="ReviewDTO">
+<!-- 	<update id="review_update" parameterType="ReviewDTO">
 		update heartpet_review set review_category = #{ review_category }, review_title = #{ review_title }, review_content = #{ review_content }, 
 		review_secret = #{ review_secret }, review_update = sysdate
 		<if test="review_img1 != null">, review_img1 = #{ review_img1 } </if> 
 		<if test="review_img2 != null">, review_img2 = #{ review_img2 } </if> 
 		where review_no = #{ review_no }
-	</update>
+	</update> -->
 	
 	<!-- delete -->
-	<delete id="review_delete" parameterType="int">
+<!-- 	<delete id="review_delete" parameterType="int">
 		delete from heartpet_review where review_no = #{ review_no }
-	</delete>
+	</delete> -->
+	
 	
 </mapper>
 
