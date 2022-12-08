@@ -59,32 +59,32 @@
     </div>
     <div id="my_cont4" class="mypage_cont">
         <div align="center">
-            <form>
+            <form method="post" action="${path }/user_mypage_user_update2">
                 <h3>회원정보변경</h3>
                 <table class="table">
                     <tr>
                         <th class="table-secondary"><span class="sp2">아이디</span></th>
-                        <td><input class ="input1" type="text" value="${dto.getUser_id()}" readonly></td>
+                        <td><input name="user_id" class ="input1" type="text" value="${dto.getUser_id()}" readonly></td>
                     </tr>
                     <tr>
                         <th class="table-secondary"><span class="sp2">이름</span></th>
-                        <td><input class ="input1" type="text" value="${dto.getUser_name()}"></td>
+                        <td><input name="user_name"class ="input1" type="text" value="${dto.getUser_name()}"></td>
                     </tr>
                     <tr>
                         <th class="table-secondary"><span class="sp2">이메일</span></th>
-                        <td><input class ="input1" type="text" value="${dto.getUser_email()}"></td>
+                        <td><input name="user_email" class ="input1" type="text" value="${dto.getUser_email()}"></td>
                     </tr>
                     <tr>
                         <th class="table-secondary"><span class="sp2">연락처</span></th>
-                        <td><input class ="input1" type="text" value="${dto.getUser_phone()}"></td>
+                        <td><input name="user_phone" class ="input1" type="text" value="${dto.getUser_phone()}"></td>
                     </tr>
                     <tr>
                         <th class="table-secondary"><span class="sp2">주소</span></th>
-                        <td><input class ="input1" type="text" value="${dto.getUser_addr()}"></td>
+                        <td><input name="user_addr" class ="input1" type="text" value="${dto.getUser_addr()}"></td>
                     </tr>
                     <tr>
                         <th class="table-secondary"><span class="sp2">반려동물경험</span></th>
-                        <td><input class ="input1" type="text" value="${dto.getUser_dogexp()}"></td>
+                        <td><input name="user_dogexp" class ="input1" type="text" value="${dto.getUser_dogexp()}"></td>
                     </tr>
                 </table>
                 <br>

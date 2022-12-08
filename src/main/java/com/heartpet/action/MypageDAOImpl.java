@@ -16,33 +16,39 @@ public class MypageDAOImpl implements MypageDAO{
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public List<Mypage_SupportDTO> getSupportList() {
+	public List<Mypage_SupportDTO> getSupportList(String id) {
 		// TODO Auto-generated method stub
-		return this.sqlSession.selectList("support_list");
+		return this.sqlSession.selectList("support_list", id);
 	}
 
 	@Override
-	public int SumSupport() {
+	public int SumSupport(String id) {
 		// TODO Auto-generated method stub
-		return this.sqlSession.selectOne("support_sum");
+		return this.sqlSession.selectOne("support_sum", id);
 	}
 
 	@Override
-	public UserDTO UserInfo() {
+	public UserDTO UserInfo(String id) {
 		
-		return this.sqlSession.selectOne("user_info");
+		return this.sqlSession.selectOne("user_info", id);
 	}
 
 	@Override
-	public int AnimalRegCount() {
+	public int AnimalRegCount(String id) {
 		// TODO Auto-generated method stub
-		return this.sqlSession.selectOne("reg_count");
+		return this.sqlSession.selectOne("reg_count", id);
 	}
 
 	@Override
-	public int ReviewCount() {
+	public int ReviewCount(String id) {
 		// TODO Auto-generated method stub
-		return this.sqlSession.selectOne("review_count");
+		return this.sqlSession.selectOne("review_count", id);
+	}
+
+	@Override
+	public int UserUpdate(UserDTO dto) {
+		// TODO Auto-generated method stub
+		return this.sqlSession.update("user_update", dto);
 	}
 	
 
