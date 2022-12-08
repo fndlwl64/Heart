@@ -165,7 +165,10 @@
 .mypage_middle .mypage_cont .my_cont_ul .my_cont_img {
     width: 200px;
     height: 200px;
-    margin: 50px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
 }
 
 .mypage_middle .mypage_cont .table {

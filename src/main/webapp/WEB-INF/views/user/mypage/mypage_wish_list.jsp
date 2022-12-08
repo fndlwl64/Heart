@@ -58,22 +58,21 @@
     </div>
     <div id="my_cont1" class="mypage_cont">
         <div align="center">
-            <h3>관심목록</h3>
-            <ul class="my_cont_ul">
-                <li><img class="my_cont_img"src="${path }/resources/image/dog.png"></li>
-                <li>강아지종</li>
-                <li>나이</li>
-            </ul>
-            <ul class="my_cont_ul">
-                <li><img class="my_cont_img" src="${path }/resources/image/dog.png"></li>
-                <li>강아지종</li>
-                <li>나이</li>
-            </ul>
-            <ul class="my_cont_ul">
-                <li><img class="my_cont_img" src="${path }/resources/image/dog.png"></li>
-                <li>강아지종</li>
-                <li>나이</li>
-            </ul>
+            
+            <c:if test="${!empty wList }">
+            	<h3>관심목록</h3>
+            	<c:forEach items="${wList }" var="dto">
+		            <ul class="my_cont_ul">
+		                <li><img class="my_cont_img"src="${path}/resources/upload/${dto.getAnimal_img1()}"></li>
+		                <li>종류 : ${dto.getAnimal_species()}</li>
+		                <li>성별 : ${dto.getAnimal_gender()}</li>
+		                <li>나이 : ${dto.getAnimal_age()}</li>
+		            </ul>
+	            </c:forEach>
+            </c:if>
+            <c:if test="${empty wList }">
+            	<h1>관심목록이 없습니다!</h1>
+            </c:if>
         </div>
     </div>
     <div class="mypage_bottom">
