@@ -63,13 +63,18 @@
 	</select> 
 	
 	<!-- insert -->
-<!-- 	<insert id="review_insert" parameterType="ReviewDTO">
+ 	<insert id="review_insert" parameterType="ReviewDTO">
 		<selectKey resultType="int" keyProperty="review_no" order="BEFORE">
 			select max(review_no)+1 from heartpet_review
 		</selectKey>
 		insert into heartpet_review values (#{ review_no }, #{ review_category }, #{ review_id }, default, #{ review_title },
 		#{ review_content }, #{ review_secret }, #{ review_pwd }, sysdate, '', '', '')
-	</insert> -->
+	</insert> 
+	
+	<!-- animal_id -->
+	<select id="animal_id" parameterType="String" resultType="list">
+		select review_animal_id from heartpet_review where review_id = #{ session_id }
+	</select>
 	
 	<!-- update -->
 <!-- 	<update id="review_update" parameterType="ReviewDTO">
@@ -81,9 +86,9 @@
 	</update> -->
 	
 	<!-- delete -->
-<!-- 	<delete id="review_delete" parameterType="int">
+ 	<delete id="review_delete" parameterType="int">
 		delete from heartpet_review where review_no = #{ review_no }
-	</delete> -->
+	</delete>
 	
 	
 </mapper>
