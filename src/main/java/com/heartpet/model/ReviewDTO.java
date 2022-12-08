@@ -17,5 +17,6 @@ public class ReviewDTO {
     private String review_img2;
     private String review_img3;
     private String review_video;
+    private String animal_name;
 
 }

@@ -9,15 +9,16 @@
 	// Review
 	////////////////////////////////////////////////////////////////////////////////////////////  	
 	-->
-	<sql id="review_select">
-		select * from heartpet_review 
+	<sql id="review_join">
+		from heartpet_review r join heartpet_animal a on r.review_animal_id = a.animal_no
 	</sql>
 	<sql id="review_keyword">
 		like '%' || #{keyword} || '%'
 	</sql>
+	
 	<!-- list -->
 	<select id="review_list" parameterType="hashMap" resultType="ReviewDTO">
-		<![CDATA[select * from (select b.*, row_number() over(order by review_no desc) rnum from heartpet_review b ]]>
+		<![CDATA[select * from (select r.*, a.animal_name, row_number() over(order by review_no desc) rnum ]]><include refid="review_join" />
 		<where>
 		 <choose>
             <when test="field.equals('allSearch') and keyword != ''"> (review_title <include refid="review_keyword" />) or (review_content <include refid="review_keyword" />) or (review_animal_tag <include refid="review_keyword" />) or (review_id <include refid="review_keyword" />)</when>
@@ -45,24 +46,21 @@
         </where>
 	</select>
 	
-	<select id="review_animal" parameterType="map" resultType="hashMap">
-		select animal_name, animal_tag from heartpet_animal where animal_no in 
-		<foreach item="aNo" collection="array" open="(" close=")" separator=", ">
-			#{ aNo }
+<!-- 	<select id="review_animal" resultType="hashMap">
+		select animal_name from heartpet_animal where animal_no in 
+		<foreach item="animalNo" collection="list" open="(" close=")" separator=", ">
+			#{ animalNo }
 		</foreach>
 	</select>
- 
+  -->
 	
 	<!-- content -->
-<!-- 	<update id="review_hit" parameterType="int">
+ 	<update id="review_hit" parameterType="int">
 		update heartpet_review set review_hit = review_hit + 1 where review_no = #{ review_no }
-	</update>
-	
+	</update>	
 	<select id="review_content" parameterType="int" resultType="ReviewDTO">
-		<include refid="review_select" /> where review_no = #{ review_no }
-	</select> -->
-	
-
+		select r.*, a.animal_name <include refid="review_join" /> where review_no = #{ review_no }
+	</select> 
 	
 	<!-- insert -->
 <!-- 	<insert id="review_insert" parameterType="ReviewDTO">

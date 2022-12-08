@@ -48,17 +48,16 @@
            <div class="col-6 review-card">
                <%-- 입양동물 --%>
 
-               <div class="row row-cols-1 row-cols-md-3 g-4">
-               <c:if test="${ not empty rList }">
-                 <c:forEach items="${ rList }" var="list">
+               <div class="row row-cols-1 row-cols-md-3 g-4">             
+                  <c:if test="${ not empty rList }">
+            	  <c:forEach items="${ rList }" var="list">
                    <div class="col">
                        <div class="card h-100">
                            <a href="${path}/user_review_content?review_no=${ list.review_no }">
                                <div class="card-image" style="background-image: url('${path}/resources/image/heartpet_logo.png');"></div>
-                               <div class="card-body">
-                                   <%-- title replace 예정 -> 서블릿에서... 아마도 --%>
+                               <div class="card-body">                              
                                    <div class="title-body">
-                                       <h5 class="card-title">강아지 이름 입양후기</h5>
+                                       <h5 class="card-title">${ list.animal_name } 입양후기</h5>                                       
                                    </div>
                                    <h7>${ list.review_regdate.substring(0,10) } 조회 ${ list.review_hit }</h7>
                                </div>
@@ -66,10 +65,10 @@
                        </div>
                    </div>
                    </c:forEach>
-                  </c:if>
-                  <c:if test="${ empty rList }">
-                  	No data
-                  </c:if>                   
+                   </c:if>
+                   <c:if test="${ empty rList }">
+                  	 No data
+                   </c:if>                   
                </div>
            </div>
        </div>
