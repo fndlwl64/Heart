@@ -92,6 +92,6 @@ public class AdminAnimalController {
     }
     @RequestMapping("/dog_view")
     public String dog_view() {
-        return "admin/dog_view";
+        return "admin/dog_content";
     }
 }
