@@ -82,6 +82,7 @@ public class AnimalController {
 		String strDate = dateFormat.format(Calendar.getInstance().getTime());
 
 		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
+		adoptRegDTO.setAdopt_reg_animalno(animalDTO.getAnimal_no());
 		adoptRegDTO.setAdopt_reg_userid(id);
 		adoptRegDTO.setAdopt_reg_appdate(strDate);
 
@@ -106,14 +107,5 @@ public class AnimalController {
 		model.addAttribute("animalList", animalDAO.listTag("cat"));
 		return "user/animal/user_animal_list";
 	}
-
-	@RequestMapping("/testdate")
-	public String testdate() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
-		String strDate = dateFormat.format(Calendar.getInstance().getTime());
-		System.out.println("=============================");
-		System.out.println(strDate);
-		return "redirect:/";
-	}
-
+	
 }

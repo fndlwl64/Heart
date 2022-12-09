@@ -4,30 +4,49 @@
 
 
 <mapper namespace="AdoptRegDAO">
+	<select id="adoptreg_list" resultType="AdoptRegDTO">
+		select * from heartpet_adopt_reg order by adopt_reg_regno desc
+	</select>	
 	<insert id="adoptreg_insert" parameterType="AdoptRegDTO">
-		<selectKey resultType="int" keyProperty="adopt_reg_regno" order="BEFORE">
+		<selectKey resultType="int" keyProperty="adopt_reg_regno"
+			order="BEFORE">
 			select max(adopt_reg_regno)+1 from heartpet_adopt_reg
 		</selectKey>
-		insert into heartpet_adopt_reg 
-			values
-			(
-			#{adopt_reg_regno} ,
-			#{adopt_reg_userid} ,
-			#{adopt_reg_animalno} ,
-			<if test="adopt_reg_duedate != null">
-				TO_DATE(#{adopt_reg_duedate}, 'YYYY-MM-DD HH24:MI:SS')  ,
-			</if>
-			<if test="adopt_reg_duedate == null">
-				'' ,
-			</if>
+		insert into heartpet_adopt_reg
+		values
+		(
+		#{adopt_reg_regno} ,
+		#{adopt_reg_userid} ,
+		#{adopt_reg_animalno} ,
+		<if test="adopt_reg_duedate != null">
+			TO_DATE(#{adopt_reg_duedate}, 'YYYY-MM-DD HH24:MI:SS') ,
+		</if>
+		<if test="adopt_reg_duedate == null">
 			'' ,
-			'' ,
-			<if test="adopt_reg_appdate != null">
-				TO_DATE(#{adopt_reg_appdate}, 'YYYY-MM-DD HH24:MI:SS')
-			</if>
-			<if test="adopt_reg_appdate == null">
-				''
-			</if>
-			)
+		</if>
+		'' ,
+		'' ,
+		<if test="adopt_reg_appdate != null">
+			TO_DATE(#{adopt_reg_appdate}, 'YYYY-MM-DD HH24:MI:SS')
+		</if>
+		<if test="adopt_reg_appdate == null">
+			''
+		</if>
+		)
 	</insert>
 </mapper>
+
+<!-- <select id="adoptreg_list" resultType="map">
+		select
+			a.adopt_reg_regno ,
+			b.animal_name ,
+			a.adopt_reg_appdate ,
+			a.adopt_reg_regdate ,
+			a.adopt_reg_duedate ,
+			a.adopt_reg_adoptdate ,
+			b.animal_status
+		from heartpet_adopt_reg a
+		join heartpet_animal b
+		on a.adopt_reg_animalno = b.animal_no
+		order by a.adopt_reg_regno desc
+	</select> -->
