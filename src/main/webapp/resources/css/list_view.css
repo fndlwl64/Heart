@@ -50,16 +50,25 @@
 /* admin/ _list.jsp -> 검색 폼 div 태그 */
 .container .search_form .form_box {
     border: 1px solid #545a62;
-    width: 60%;
+    width: 70%;
     margin: auto;
     padding: 2%;
-    display: inline-block;
     border-radius: 5px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2%;
+    
 }
 /* admin/ _list.jsp -> 검색 폼 div 태그 검색 버튼 영역 */
 .container .search_form .form_box .form_box_search {
     display: block;
 }
+
+.form_box .search-name {
+	vertical-align: middle;
+	margin: 0 2px;
+}
+
 /* admin/ _list.jsp -> 검색 폼 div 태그 검색 버튼 */
 .container .search_form .form_box .btn.searchbtn {
     background: url(../image/ico-search.png) no-repeat 7px center;
@@ -78,7 +87,8 @@
 
 /* admin/ _list.jsp -> 검색 폼 밑 div */
 .container .lists {
-	margin-bottom: 10%;
+	margin-top: 1%;
+	margin-bottom: 1%;
 	
 }
 
@@ -87,4 +97,36 @@
     text-decoration: none;
 }
 
+/* 등록하기 버튼 */
+.insert-form {
+	display: flex;
+	width: 75%;
+	margin: 0 auto;
+	justify-content: flex-end;
+	
+}
+
+.insert-form .insertbtn {
+	margin-right: 10px;
+}
+
+.qna-section {
+	display: flex;
+	width: 75%;
+	margin: 0 auto;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+/* 총 게시물 */
+.qna-section .total-data {
+	font-size: 14px;
+	margin-left: 1%;
+}
+
+/* qna : 정렬 */
+.qna-section .qna_order {
+    justify-content: right;
+    margin-right: 1%;
+}
 
