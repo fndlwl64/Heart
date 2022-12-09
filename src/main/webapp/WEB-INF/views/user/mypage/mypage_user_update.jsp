@@ -84,7 +84,7 @@
                     </tr>
                     <tr>
                         <th class="table-secondary"><span class="sp2">반려동물경험</span></th>
-                        <td><input name="user_dogexp" class ="input1" type="text" value="${dto.getUser_dogexp()}"></td>
+                        <td><input name="user_animalexp" class ="input1" type="text" value="${dto.getUser_animalexp()}"></td>
                     </tr>
                 </table>
                 <br>
