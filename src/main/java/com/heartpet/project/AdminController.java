@@ -42,10 +42,7 @@ public class AdminController {
 		    	
         return "admin/user/user_list";
     }
-    @RequestMapping("/adoptreg_list")
-    public String adoptreg_list() {
-        return "admin/adoptreg_list";
-    }
+    
     @RequestMapping("/support_list")
     public String support_list() {
         return "admin/support_list";

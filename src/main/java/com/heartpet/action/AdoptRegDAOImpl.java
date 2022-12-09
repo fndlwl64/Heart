@@ -1,6 +1,7 @@
 package com.heartpet.action;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +34,9 @@ public class AdoptRegDAOImpl implements AdoptRegDAO{
 	}
 
 	@Override
+	//public List<Map<String, Object>> list() {
 	public List<AdoptRegDTO> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("adoptreg_list");
 	}
 
 	@Override
