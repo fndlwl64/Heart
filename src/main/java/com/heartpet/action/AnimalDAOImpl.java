@@ -21,29 +21,29 @@ public class AnimalDAOImpl implements AnimalDAO{
 
 	@Override
 	public int update(AnimalDTO dto) {
-		return sqlSession.update("update", dto);
+		return sqlSession.update("animal_update", dto);
 	}
 
 	@Override
 	public void delete(int id) {
-		sqlSession.delete("delete", id);
+		sqlSession.delete("animal_delete", id);
 		
 	}
 
 	@Override
 	public List<AnimalDTO> list() {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("list");
+		return sqlSession.selectList("animal_list");
 	}
 
 	@Override
 	public List<AnimalDTO> listTag(String animal_tag) {
-		return sqlSession.selectList("listTag", animal_tag);
+		return sqlSession.selectList("animal_listTag", animal_tag);
 	}
 
 	@Override
 	public AnimalDTO content(int id) {
-		return sqlSession.selectOne("content", id);
+		return sqlSession.selectOne("animal_content", id);
 	}
 
 	@Override

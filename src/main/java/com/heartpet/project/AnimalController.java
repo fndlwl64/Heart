@@ -49,65 +49,71 @@ public class AnimalController {
 	private AdoptRegDAO adoptRegDAO;
 	@Autowired
 	private HttpServletRequest request;
-	
 
 	@RequestMapping(value = "/user_animal_content", method = RequestMethod.GET)
 	public String user_dog_content(@RequestParam("no") int no, Model model) {
 		model.addAttribute("dto", animalDAO.content(no));
 		return "user/animal/user_animal_content";
 	}
-	
-	@RequestMapping(value = "/user_dog_list" , method = RequestMethod.GET)
+
+	@RequestMapping(value = "/user_dog_list", method = RequestMethod.GET)
 	public String user_dog_list(Model model) {
 		model.addAttribute("animalList", animalDAO.listTag("dog"));
 		return "user/animal/user_animal_list";
 	}
 
-	
-
 	@RequestMapping(value = "/user_animal_insert", method = RequestMethod.GET)
-	public String user_dog_insert(Model model){
+	public String user_dog_insert(Model model) {
 		HttpSession session = request.getSession();
-		
-		String id = (String)session.getAttribute("session_id");
-		if(id != null) {
-			model.addAttribute("userDTO",userDAO.getUserInfo(id));
+
+		String id = (String) session.getAttribute("session_id");
+		if (id != null) {
+			model.addAttribute("userDTO", userDAO.getUserInfo(id));
 		}
 		return "user/animal/user_animal_insert";
 	}
 
 	@RequestMapping(value = "/user_animal_insert", method = RequestMethod.POST)
 	public String user_dog_insert_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO,
-			@RequestParam("user_id") String id)
-			throws IllegalStateException, IOException {
-		//동물 입소 신청
+			@RequestParam("user_id") String id) throws IllegalStateException, IOException {
+
+		// Adoptreg 추가
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+		String strDate = dateFormat.format(Calendar.getInstance().getTime());
+
+		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
+		adoptRegDTO.setAdopt_reg_userid(id);
+		adoptRegDTO.setAdopt_reg_appdate(strDate);
+
+		adoptRegDAO.insert(adoptRegDTO);
+
+		// 동물 입소 신청
 		FileUploadImage upload = new FileUploadImage();
 		String[] images = upload.uploadAnimalImg(request, files);
 		animalDTO.setAnimal_img1(images[0]);
 		animalDTO.setAnimal_img2(images[1]);
 		animalDTO.setAnimal_img3(images[2]);
-		
+
 		animalDTO.setAnimal_status("입소 신청");
-		
+
 		animalDAO.insert(animalDTO);
 
-		//Adoptreg 추가
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
-//		String strDate = dateFormat.format(Calendar.getInstance().getTime());
-//		
-//		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
-//		adoptRegDTO.setAdopt_reg_userid(id);
-//		adoptRegDTO.setAdopt_reg_appdate(strDate);
-//		
-//		adoptRegDAO.insert(adoptRegDTO);
-		
 		return "redirect:/";
 	}
-	
-	@RequestMapping(value = "/user_cat_list" , method = RequestMethod.GET)
+
+	@RequestMapping(value = "/user_cat_list", method = RequestMethod.GET)
 	public String user_cat_list(Model model) {
 		model.addAttribute("animalList", animalDAO.listTag("cat"));
 		return "user/animal/user_animal_list";
 	}
-	
+
+	@RequestMapping("/testdate")
+	public String testdate() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+		String strDate = dateFormat.format(Calendar.getInstance().getTime());
+		System.out.println("=============================");
+		System.out.println(strDate);
+		return "redirect:/";
+	}
+
 }

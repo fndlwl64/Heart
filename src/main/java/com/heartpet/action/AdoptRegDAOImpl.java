@@ -17,7 +17,7 @@ public class AdoptRegDAOImpl implements AdoptRegDAO{
 
 	@Override
 	public int insert(AdoptRegDTO dto) {
-		return sqlSession.insert("insert",dto);
+		return sqlSession.insert("adoptreg_insert",dto);
 	}
 
 	@Override
