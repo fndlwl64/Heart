@@ -54,6 +54,7 @@
                     <div class="col-6 title btn-insert">
                         <button type="reset" class="btn btn-warning"><i class="bi bi-pencil"></i> 다시작성</button>
                         <button type="submit" class="btn btn-dark"><i class="bi bi-save"></i> 등록하기</button>
+                        <button type="button" class="btn btn-secondary" onclick="location.href='${path}/user_review_list'"><i class="bi bi-card-list"></i> 목록으로</button>
                     </div>
                     <div class="col-3 space"></div>
                 </div>

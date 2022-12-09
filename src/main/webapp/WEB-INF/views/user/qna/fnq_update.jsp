@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="list" value="${ fnqContent }" />
 <c:set var="link_address" value="${pageContext.request.contextPath}/user_fnq_list" />
 
 <jsp:include page="../../include/user_header.jsp" />
@@ -19,29 +20,29 @@
     </div>
     
     <div>
-        <form action="${path}/user_fnq_insert_ok" method="post" enctype="application/x-www-form-urlencoded">
+        <form action="${path}/user_fnq_update_ok" method="post" enctype="application/x-www-form-urlencoded">
         <table class="table align-middle">
             <tr class="border-top">
                 <th class="table-light col-1">카테고리</th>
                 <td class="col-3">
                     <select class="form-select" name="fnq_category">
-                        <option value="입양" selected="selected">입양</option>
-                        <option value="입소">입소</option>
-                        <option value="후원">후원</option>
-                        <option value="기타">기타</option>
+                        <option value="입양" <c:if test="${ list.fnq_catergory eq '입양' }">selected="selected"</c:if>>입양</option>
+                        <option value="입소" <c:if test="${ list.fnq_catergory eq '입소' }">selected="selected"</c:if>>입소</option>
+                        <option value="후원" <c:if test="${ list.fnq_catergory eq '후원' }">selected="selected"</c:if>>후원</option>
+                        <option value="기타" <c:if test="${ list.fnq_catergory eq '기타' }">selected="selected"</c:if>>기타</option>
                     </select>
                 </td>
             </tr>
             <tr>
                 <th class="table-light">Question</th>
                 <td colspan="4">
-                	<input type="text" class="form-control" name="fnq_question" required="required">
+                	<input type="text" class="form-control" name="fnq_question" value="${ list.fnq_question }" required="required">
                 </td>
             </tr>
             <tr>
                 <th class="table-light">Answer</th>
                 <td colspan="4">
-                	<textarea class="form-control" name="fnq_answer" cols="30" rows="10" ></textarea>
+                	<textarea class="form-control" name="fnq_answer" cols="30" rows="10" >${ list.fnq_answer }</textarea>
                 </td>
             </tr>
         </table>

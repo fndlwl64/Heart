@@ -17,6 +17,9 @@ public class QnaDAOImpl implements QnaDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
+    ////////////////////////////////////////////////////////////
+    // QNA
+    ////////////////////////////////////////////////////////////
     @Override
     public List<QnaDTO> listQna(int startNo, int endNo, String field, String keyword) {
     	Map<String, Object> map = new HashMap<String, Object>();
@@ -59,7 +62,10 @@ public class QnaDAOImpl implements QnaDAO {
     public int deleteQna(int board_no) {
         return this.sqlSession.delete("qna_delete", board_no);
     }
-	
+    
+    ////////////////////////////////////////////////////////////
+    // FNQ
+    ////////////////////////////////////////////////////////////
 	@Override
 	public List<FnqDTO> listFnq(int startNo, int endNo, String field, String keyword) {
     	Map<String, Object> map = new HashMap<String, Object>();
@@ -77,6 +83,25 @@ public class QnaDAOImpl implements QnaDAO {
 		map.put("keyword", keyword);		
 		return this.sqlSession.selectOne("fnq_count", map);
 	}
-	
-	
+
+	@Override
+	public int insertFnq(FnqDTO dto) {		
+		return this.sqlSession.insert("fnq_insert", dto);
+	}
+
+	@Override
+	public int updateFnq(FnqDTO dto) {
+		return this.sqlSession.update("fnq_update", dto);
+	}
+
+	@Override
+	public int deleteFnq(int fnq_no) {
+		return this.sqlSession.delete("fnq_delete", fnq_no);
+	}
+
+	@Override
+	public FnqDTO contentFnq(int fnq_no) {
+		return this.sqlSession.selectOne("fnq_content", fnq_no);
+	}
+
 }
