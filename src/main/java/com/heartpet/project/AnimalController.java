@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,14 +19,17 @@ import javax.swing.filechooser.FileSystemView;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.heartpet.action.AdoptRegDAO;
 import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.UserDAO;
+import com.heartpet.model.AdoptRegDTO;
 import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.FileUploadImage;
 
@@ -39,9 +44,12 @@ public class AnimalController {
 	@Autowired
 	private AnimalDAO animalDAO;
 	@Autowired
-	private HttpServletRequest request;
-	@Autowired
 	private UserDAO userDAO;
+	@Autowired
+	private AdoptRegDAO adoptRegDAO;
+	@Autowired
+	private HttpServletRequest request;
+	
 
 	@RequestMapping(value = "/user_animal_content", method = RequestMethod.GET)
 	public String user_dog_content(@RequestParam("no") int no, Model model) {
@@ -69,8 +77,10 @@ public class AnimalController {
 	}
 
 	@RequestMapping(value = "/user_animal_insert", method = RequestMethod.POST)
-	public String user_dog_insert_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO)
+	public String user_dog_insert_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO,
+			@RequestParam("user_id") String id)
 			throws IllegalStateException, IOException {
+		//동물 입소 신청
 		FileUploadImage upload = new FileUploadImage();
 		String[] images = upload.uploadAnimalImg(request, files);
 		animalDTO.setAnimal_img1(images[0]);
@@ -81,6 +91,16 @@ public class AnimalController {
 		
 		animalDAO.insert(animalDTO);
 
+		//Adoptreg 추가
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+//		String strDate = dateFormat.format(Calendar.getInstance().getTime());
+//		
+//		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
+//		adoptRegDTO.setAdopt_reg_userid(id);
+//		adoptRegDTO.setAdopt_reg_appdate(strDate);
+//		
+//		adoptRegDAO.insert(adoptRegDTO);
+		
 		return "redirect:/";
 	}
 	

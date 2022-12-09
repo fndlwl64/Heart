@@ -16,41 +16,35 @@ public class AdoptRegDAOImpl implements AdoptRegDAO{
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	@Transactional
 	public int insert(AdoptRegDTO dto) {
 		return sqlSession.insert("insert",dto);
 	}
 
 	@Override
-	@Transactional
 	public int update(AdoptRegDTO dto) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	@Transactional
 	public void delete(int id) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	@Transactional
 	public List<AdoptRegDTO> list() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@Transactional
 	public AdoptRegDTO content(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	@Transactional
 	public List<AdoptRegDTO> search() {
 		// TODO Auto-generated method stub
 		return null;

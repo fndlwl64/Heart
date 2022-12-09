@@ -8,7 +8,7 @@
 <body>
 <div class="d-flex justify-content-center">
     <form action="<%=request.getContextPath() %>/user_animal_insert" method="post" enctype="multipart/form-data" onsubmit="return submitOption();">
-    	<input type="hidden" value="${userDTO.user_id }" id="user_id"/>
+    	<input type="hidden" value="${userDTO.user_id }" id="user_id" name="user_id"/>
     	<input type="hidden" value="${userDTO.user_grade }" id="user_grade"/>
         <table class="table">
             <tr>

@@ -15,45 +15,38 @@ public class AnimalDAOImpl implements AnimalDAO{
 	private SqlSessionTemplate sqlSession;
 
 	@Override
-	@Transactional
 	public int insert(AnimalDTO dto) {
-		return sqlSession.insert("insert", dto);
+		return sqlSession.insert("animal_insert", dto);
 	}
 
 	@Override
-	@Transactional
 	public int update(AnimalDTO dto) {
 		return sqlSession.update("update", dto);
 	}
 
 	@Override
-	@Transactional
 	public void delete(int id) {
 		sqlSession.delete("delete", id);
 		
 	}
 
 	@Override
-	@Transactional
 	public List<AnimalDTO> list() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("list");
 	}
 
 	@Override
-	@Transactional
 	public List<AnimalDTO> listTag(String animal_tag) {
 		return sqlSession.selectList("listTag", animal_tag);
 	}
 
 	@Override
-	@Transactional
 	public AnimalDTO content(int id) {
 		return sqlSession.selectOne("content", id);
 	}
 
 	@Override
-	@Transactional
 	public List<AnimalDTO> search() {
 		// TODO Auto-generated method stub
 		return null;
