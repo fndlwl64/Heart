@@ -177,7 +177,22 @@
 			<version>1.18.22</version>
 			<scope>provided</scope>
 		</dependency>
-
+		
+		<!-- https://mvnrepository.com/artifact/cglib/cglib -->
+		<dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib</artifactId>
+		    <version>3.2.0</version>
+		</dependency>
+		 
+		<!-- https://mvnrepository.com/artifact/cglib/cglib-nodep -->
+		<dependency>
+		    <groupId>cglib</groupId>
+		    <artifactId>cglib-nodep</artifactId>
+		    <version>3.2.0</version>
+		    <scope>test</scope>
+		</dependency>
+		
 
 		<!-- spring-dbcp 라이브러리 -->
 		<dependency>

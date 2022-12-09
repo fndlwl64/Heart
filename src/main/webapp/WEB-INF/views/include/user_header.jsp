@@ -98,10 +98,16 @@
                         </div>
                         <div class="modal-body">
                             <form class="login_form" method="post" action="${path}/login">
-                                <input class="login_text" name="user_id" placeholder="아이디">
-                                <span class="idcheck"></span>
-                                <input class="login_text" type="password" name="user_pwd" placeholder="비밀번호">
-                                <input type="submit" class="btn login_btn" value="로그인">
+                                <label for="login_id">
+	                                <input id="login_id" class="login_text" name="user_id" placeholder="아이디" onkeyup="checkId()">
+	                                <span id="idcheck"></span>
+	                                <span id="check_img"></span>
+                                </label>
+                                <br />
+                                <label for="login_pwd">
+	                                <input id="login_pwd" class="login_text" type="password" name="user_pwd" placeholder="비밀번호">
+	                                <input type="submit" id="login_btn" class="btn login_btn" value="로그인">
+                                </label>
                             </form>
                             <ul>
                                 <li><a data-bs-toggle="modal" data-bs-target="#findId">아이디찾기</a></li>
