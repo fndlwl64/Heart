@@ -53,6 +53,37 @@ public class AdminQnaController {
 		
         return "admin/qna/qna_list";
     }
+    
+    @RequestMapping("/admin_qna_content")
+    public String admin_qna_content(@RequestParam("qna_no") int qna_no, Model model) {
+        QnaDTO qnaContent = this.qnaDAO.contentQna(qna_no);
+        model.addAttribute("qnaContent", qnaContent);
+        return "admin/qna/qna_content";
+    }
+	
+    ///////////////////////////////////////////////////////////////////
+    // QNA reply form
+    ///////////////////////////////////////////////////////////////////
+    @RequestMapping("/admin_qna_reply_insert")
+    public String admin_qna_reply_insert(@RequestParam("qna_no") int qna_no) {
+    	this.qnaDAO.replyInsert(qna_no);
+    	return "admin/qna/qna_reply_insert";
+    }
+    
+    @RequestMapping("/admin_qna_reply_insert_ok")
+    public void admin_qna_reply_insert_ok() {
+    	
+    }
+	
+    @RequestMapping("/admin_qna_reply_update")
+    public String admin_qna_reply_update() {
+    	return "admin/qna/qna_reply_update";
+    }
+	
+    @RequestMapping("/admin_qna_reply_update_ok")
+    public void admin_qna_reply_update_ok() {
+    	
+    }
 	
 
 }
