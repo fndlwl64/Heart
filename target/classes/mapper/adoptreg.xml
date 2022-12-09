@@ -12,12 +12,23 @@
 			values
 			(
 			#{adopt_reg_regno} ,
-			#{adopt_reg_} ,
-			#{adopt_reg_} ,
-			#{adopt_reg_} ,
-			#{adopt_reg_} ,
-			#{adopt_reg_} ,
-			#{adopt_reg_} 
+			#{adopt_reg_userid} ,
+			#{adopt_reg_animalno} ,
+			<if test="adopt_reg_regdate != null">
+				#{adopt_reg_regdate} ,
+			</if>
+			<if test="adopt_reg_regdate == null">
+				'' ,
+			</if>
+			<if test="adopt_reg_duedate != null">
+				#{adopt_reg_duedate} ,
+			</if>
+			<if test="adopt_reg_duedate == null">
+				'' ,
+			</if>
+			
+			'' ,
+			'' 
 			)
 	</insert>
 </mapper>
