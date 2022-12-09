@@ -130,49 +130,215 @@ $(function() {
 	    }
 	});
 	
+	// 로그인 : 아이디 입력 ajax
 	$("#login_id").keyup(function() {
 		let id = $(this).val();	
 		
 		if(id == '') {
 			$("#login_id").css({
 				'border': '2px solid red',
-				'border-radius': '5px'
+				'border-radius': '3px'
 			});
 			$("#login_btn").attr("disabled", true);
-			$("#idcheck").html("<font style='color:red; font-size:13px;'>아이디를 입력하세요.</font><i class='bi bi-x-circle-fill'></i>");
+			$("#idcheck").html("<i class='bi bi-x-circle-fill'></i><font style='color:red; font-size:13px;'>아이디를 입력하세요.</font>");
 		}else {			
 			$.ajax({			
 	            contentType: "application/x-www-form-urlencoded;charset=UTF-8",
 	            type: "POST",
 	            url: "/project/id_check",
 	            data: {paramId : id},
-	            dataType: "text", 
 	            success: function(res) {
 	            	if(res == 1) {  // DB에 아이디가 존재하는 경우
-						$("#idcheck").html("<i class='bi bi-check-circle-fill'></i>");
+						$("#idcheck").html("<i class='bi bi-check-circle-fill'></i><br><font style='color:green; font-size:13px;'>아이디 확인 완료</font>");
+						$("#login_id").css({
+							'border': '2px solid green',
+							'border-radius': '3px'
+						});
 						$("#login_btn").attr("disabled", false);
 					}else {
-						$("#idcheck").html("<font style='color:red; font-size:13px;'>존재하지 않는 아이디입니다.</font><i class='bi bi-x-circle-fill'></i>");
+						$("#idcheck").html("<i class='bi bi-x-circle-fill'></i><br><font style='color:red; font-size:13px;'>존재하지 않는 아이디입니다.</font>");
+						$("#login_btn").attr("disabled", true);
+						$("#login_id").css({
+							'border': '2px solid red',
+							'border-radius': '3px'
+						});
 						$("#login_btn").attr("disabled", true);
 					}
 	            },
-	            error: function(e) {
-	            	console.log("여기");	            
+	            error: function(e) {            
 	                console.log("ajax fail", e);
 	            }
 	        });
 		}
-	
 	});
 	
-  	
+  	// 회원가입 아이디
+	$("#input_id").keyup(function() {
+		let id = $(this).val();	
+		
+		let id_pattern = /^[a-z]+[a-zA-Z0-9]{4,20}$/;
+		
+		if(id == '') {
+			console.log('아이디 공란');
+			$("#join_id").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px'>  아이디 : 5자 이상 20자 이내 대소문자, 숫자 </font>");
+			$("#input_id").css({
+				'border-bottom': '2px solid red'
+			});
+			$("#join_btn").attr("disabled", true);
+		}else {
+			if(id_pattern.test(id)) {
+				$.ajax({			
+		            contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+		            type: "POST",
+		            url: "/project/id_check",
+		            data: {paramId : id},
+		            success: function(res) {
+		            	if(res == 1) {  // DB에 아이디가 존재하는 경우
+		            		console.log('DB 존재 아이디');
+							$("#join_id").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px;'> 존재하는 아이디입니다. 다시 만들어주세요. </font>");
+							$("#input_id").css({
+								'border-bottom': '2px solid red'
+							});
+							$("#join_btn").attr("disabled", true);
+						}else {
+							console.log('사용가능한 아이디');
+							$("#join_id").html("<i class='bi bi-check-circle'></i><br><font style='color:green; font-size:13px;'> 사용가능한 아이디입니다.</font>");
+							$("#join_btn").attr("disabled", false);
+							$("#input_id").css({
+								'border-bottom': '2px solid green'
+							});
+						}
+		            },
+		            error: function(e) {            
+		                console.log("ajax fail", e);
+		            }
+		       	});
+			}else {
+				console.log('정규식 조건 위배 아이디');
+				$("#join_id").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px'>  아이디 : 5자 이상 20자 이내 대소문자, 숫자 </font>");
+				$("#input_id").css({
+					'border-bottom': '2px solid red'
+				});
+				$("#join_btn").attr("disabled", true);
+			}
+		}
+	});
+	
+	// 회원가입 비밀번호
+  	$("#input_pwd").keyup(function() {
+		let pwd = $(this).val();	
+		
+		let pwd_pattern = /^[a-zA-z0-9]{5,20}$/;
+		
+		if(pwd == '') {
+			console.log('비밀번호 공란');
+			$("#join_pwd").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px'>  비밀번호 : 5자 이상 20자 이내  </font>");
+			$("#input_pwd").css({
+				'border-bottom': '2px solid red'
+			});
+			$("#join_btn").attr("disabled", true);
+		}else {
+			if(pwd_pattern.test(pwd)) {
+				console.log('사용가능한 비밀번호');
+				$("#join_pwd").html("<i class='bi bi-check-circle'></i>");
+				$("#join_btn").attr("disabled", false);
+				$("#input_pwd").css({
+					'border-bottom': '2px solid green'
+				});
+			}else {
+				console.log('조건 위배 비밀번호');
+				$("#join_pwd").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px'>  비밀번호 : 5자 이상 20자 이내 </font>");
+				$("#input_pwd").css({
+					'border-bottom': '2px solid red'
+				});
+				$("#join_btn").attr("disabled", true);
+			}
+		}
+	});
+	
+	// 회원가입 이메일
+	$("#input_email").keyup(function() {
+		let email = $(this).val();
+		
+		let email_pattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+		
+		if(email == '') {
+			$("#join_email").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px'>이메일 형식에 맞게 작성해주세요.</font>");
+			$("#input_email").css({
+				'border-bottom': '2px solid red'
+			});
+			$("#join_btn").attr("disabled", true);
+		}else {
+			if(email_pattern.test(email)) {
+				$.ajax({			
+		            contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+		            type: "POST",
+		            url: "/project/email_check",
+		            data: {email : email},
+		            success: function(res) {
+		            	if(res == 1) {  // DB에 이메일이 존재하는 경우
+		            		console.log('DB 존재 이메일');
+							$("#join_email").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px;'> 존재하는 이메일입니다.</font>");
+							$("#input_email").css({
+								'border-bottom': '2px solid red'
+							});
+							$("#join_btn").attr("disabled", true);
+						}else {
+							console.log('사용가능한 이메일');
+							$("#join_email").html("<i class='bi bi-check-circle'></i><br><font style='color:green; font-size:13px;'> 사용가능한 이메일입니다.</font>");
+							$("#join_btn").attr("disabled", false);
+							$("#input_email").css({
+								'border-bottom': '2px solid green'
+							});
+						}
+		            },
+		            error: function(e) {            
+		                console.log("ajax fail", e);
+		            }
+		       	});
+			}else {
+				console.log('조건 위배 이메일');
+				$("#join_email").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px'>이메일 형식에 맞게 입력해주세요.</font>");
+				$("#input_email").css({
+					'border-bottom': '2px solid red'
+				});
+				$("#join_btn").attr("disabled", true);
+			}
+		}
+		
+	});
+	
+	// 회원가입 연락처
+	$("#input_phone").keyup(function() {
+		
+		let phone = $(this).val();
+		
+		if(phone == '') {
+			console.log('연락처 공란');
+			$("#join_phone").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px'>연락처 ex) 010-0000-0000</font>");
+			$("#input_phone").css({
+				'border-bottom': '2px solid red'
+			});
+			$("#join_btn").attr("disabled", true);
+		}else {
+			$("#join_phone").html("<br><font style='color:darkgray; font-size:13px'>연락처 ex) 010-0000-0000</font>");
+			$("#input_phone").css({
+				'border-bottom': '2px solid black'
+			});
+			$("#join_btn").attr("disabled", false);
+		}
+		
+	});
+	
+	let zipcode = $("#sample6_postcode").val();
+	let address = $("#sample6_detailAddress").val();
+	
+	if(zipcode == '' || address == '') {
+		$("#join_btn").attr("disabled", true);
+	}
+	
 });
 
-function checkId() {
-	
-	
-	
-}
 
 	var naver_id_login = new naver_id_login("fw7rzSQL46p95xisWWtm", "http://localhost:8081/project/naver_login");
 	var state = naver_id_login.getUniqState();
