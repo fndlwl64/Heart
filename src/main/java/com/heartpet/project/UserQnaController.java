@@ -209,5 +209,24 @@ public class UserQnaController {
         
     	return "user/qna/fnq_list"; 
     }
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    // FNQ_INSERT
+    ////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping("/user_fnq_insert")
+    public String user_fnq_insert(HttpServletResponse response, HttpServletRequest request) throws IOException { 
+		response.setContentType("text/html; charset=UTF-8");
+    	HttpSession session = request.getSession();
+    	PrintWriter out = response.getWriter();
+    	
+    	// 로그인 여부 체크
+    	if(session.getAttribute("session_admin_id") == null || session.getAttribute("session_admin_id") == "" ) {
+    		out.println("<script> alert('로그인이 필요합니다.'); location.href='"+request.getContextPath()+"/'; </script>");
+    		out.flush();
+    	}
+    	
+    	return "user/qna/fnq_insert";
+    }    
+    
 
 }
