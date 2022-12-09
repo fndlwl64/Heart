@@ -38,6 +38,7 @@ public class UserReviewController {
     // 전체 게시물의 수
     private int totalRecord = 0;
     
+    
     ////////////////////////////////////////////////////////////////////////////////////
     // REVIEW_LIST - 고양이/강아지 선택 추가
     ////////////////////////////////////////////////////////////////////////////////////
@@ -55,7 +56,7 @@ public class UserReviewController {
 		List<ReviewDTO> reviewList = null;
     	
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-    	
+
     	// animal name 추출
     	// 전체 선택
     	if(animal_tag == null) { 
