@@ -10,4 +10,9 @@ public class SupportController {
     public String user_support() {
         return "user/support/support";
     }
+	
+	@RequestMapping("/user_support_insert")
+	public String user_support_insert() {
+		return "user/support/support_insert";
+	}
 }
