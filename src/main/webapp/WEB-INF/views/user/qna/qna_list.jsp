@@ -98,9 +98,9 @@
                 <form method="get" action="${ path }/user_qna_list?field=${ field }&keyword=${ keyword }">
                     <select name="field" class="form-select d-inline align-middle w-25">
                         <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
+                        <option value="category"<c:if test="${ field eq 'category' }">selected="selected"</c:if>>카테고리</option>
                         <option value="title"<c:if test="${ field eq 'title' }">selected="selected"</c:if>>제목</option>
                         <option value="content"<c:if test="${ field eq 'content' }">selected="selected"</c:if>>내용</option>
-                        <option value="category"<c:if test="${ field eq 'category' }">selected="selected"</c:if>>카테고리</option>
                         <option value="id"<c:if test="${ field eq 'id' }">selected="selected"</c:if>>작성자</option>
                     </select>
                     <input type="text" class="form-control d-inline align-middle w-50" name="keyword" value="${ keyword }" />
@@ -113,7 +113,6 @@
     <div class="space-add"></div>
 
     <!-- 페이징 처리 부분 -->
-    <%-- 페이지 링크 처리 예정 --%>    
 	<jsp:include page="../../include/pagination.jsp" />
 
     <div class="space-add"></div>

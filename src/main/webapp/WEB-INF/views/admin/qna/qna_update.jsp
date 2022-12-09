@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+<c:set var="path" value="${pageContext.request.contextPath}" />	 
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 </head>
-<script src="resources/js/admin.js"></script>
-<link rel="stylesheet" href="resources/css/admin_include.css">
+<script src="${path}/resources/js/admin.js"></script>
+<link rel="stylesheet" href="${path }/resources/css/admin_include.css">
 <body>
-<jsp:include page="../include/admin_header.jsp" />
+<jsp:include page="../../include/admin_header.jsp" />
 <br><br>
 <div class="div1" align="center">
 	<form>
@@ -39,9 +41,9 @@
 				<td>
 					<div class="image-upload">
 						<label for="file-input1">
-							<img id="file_change1" class="logo" src="image/heartpet_logo.png"/>
+							<img id="file_change1" class="logo" src="${path }/resources/image/heartpet_logo.png"/>
 						</label>
-						<input class="file_input" id="file-input1" type="file"onchange="readURL4(this);"/>
+						<input class="file_input" id="file-input1" type="file" onchange="readURL4(this);"/>
 					</div>
 				</td>
 			</tr>
@@ -50,34 +52,14 @@
 				<td>
 					<div class="image-upload">
 						<label for="file-input2">
-							<img id="file_change2" class="logo" src="image/heartpet_logo.png"/>
+							<img id="file_change2" class="logo" src="${path }/resources/image/heartpet_logo.png"/>
 						</label>
-						<input class="file_input" id="file-input2" type="file"onchange="readURL5(this);"/>
+						<input class="file_input" id="file-input2" type="file" onchange="readURL5(this);"/>
 					</div>
 				</td>
 			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">이미지3</span></th>
-				<td>
-					<div class="image-upload">
-						<label for="file-input3">
-							<img id="file_change3" class="logo" src="image/heartpet_logo.png"/>
-						</label>
-						<input class="file_input" id="file-input3" type="file" onchange="readURL6(this);"/>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">동영상1</span></th>
-				<td>
-					<div class="image-upload">
-						<label for="file-input4">
-							<video id="file_change4" src="video/test.mp4" class="logo" controls autoplay />
-						</label>
-						<input id="file-input4" type="file" onchange="readURL7(this);"/>
-					</div>
-				</td>
-			</tr>
+
+
 		</table>
 		<br>
 		<input id="update_btn" type="submit" value="변경" align="center">
