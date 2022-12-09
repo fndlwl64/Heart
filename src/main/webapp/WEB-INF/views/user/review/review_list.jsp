@@ -25,6 +25,17 @@
             <div class="col-3 space"></div>
         </div>
     </div>
+    
+    <div class="review-section">
+        <div class="row">
+            <div class="col-3 space"></div>
+            <div class="col-6 title">
+		    	<button type="button" class="btn btn-info btn-sm dog-button"><i class="bi bi-search-heart"></i> 강아지</button>
+		    	<button type="button" class="btn btn-info btn-sm cat-button"><i class="bi bi-search-heart-fill"></i> 고양이</button>
+            </div>
+            <div class="col-3 space"></div>
+        </div>
+    </div>
 
 	<!-- 정렬 -->
     <div class="review-section">
