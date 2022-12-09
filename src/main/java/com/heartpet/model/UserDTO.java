@@ -14,5 +14,5 @@ public class UserDTO {
     private String user_addr;
     private String user_image;
     private int user_totalprice;
-    private String user_dogexp;
+    private String user_animalexp;
 }
