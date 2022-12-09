@@ -3,11 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="../../include/user_header.jsp"/>
-
+<c:set var="userDTO" value="${userDTO }"/> 
 
 <body>
 <div class="d-flex justify-content-center">
     <form action="<%=request.getContextPath() %>/user_animal_insert" method="post" enctype="multipart/form-data" onsubmit="return submitOption();">
+    	<input type="hidden" value="${userDTO.user_id }" id="user_id"/>
+    	<input type="hidden" value="${userDTO.user_grade }" id="user_grade"/>
         <table class="table">
             <tr>
                 <th>종류</th>
@@ -99,8 +101,8 @@
 
         /*동적 동물 선택 태그*/
         function optionChange(){
-            const dog = ["말티즈","푸들","포메라니안","믹스견","치와와","시츄","골든리트리버","진돗개"];
-            const cat = ["스코티시 폴드","샴","페르시안","터키시 앙고라","러시안 블루","벵갈","먼치킨","아비시니안"];
+            const dog = ["말티즈","푸들","포메라니안","믹스견","치와와","시츄","골든리트리버","진돗개","기타"];
+            const cat = ["스코티시 폴드","샴","페르시안","터키시 앙고라","러시안 블루","벵갈","먼치킨","아비시니안","기타"];
             let result;
             let tag = $('#tag').val();
             if (tag === 'cat'){
@@ -125,6 +127,15 @@
         }
         
         function  submitOption(){
+        	/* 회원 정보 */
+        	if ($('#user_id').val() == ''){
+                alert("로그인을 해주세요");
+                return false;
+            }if ($('#user_grade').val() > 2){
+                alert("회원의 등급이 낮아 입소 자격이 없습니다.");
+                return false;
+            }
+        	
         	if ($('#tag').val() == ''){
                 alert("동물 종류를 골라주세요");
                 return false;

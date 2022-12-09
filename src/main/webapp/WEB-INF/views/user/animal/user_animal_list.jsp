@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<jsp:include page="../../../include/user_header.jsp" />
-<c:set var="animalList" value=${animalList }></c:set>
+<jsp:include page="../../include/user_header.jsp" />
+<c:set var="animalList" value="${animalList }"/>
 <%--검색--%>
 <div class="d-flex justify-content-center" style="font-size: 14px">
 	<form action="search" class="validation-form" method="post">
@@ -49,8 +49,8 @@
 				<div class="input-group">
 					<select name="dog_gender" class="form-select">
 						<option value="all"></option>
-						<option value="수컷">수컷</option>
-						<option value="암컷">암컷</option>
+						<option value="male">수컷</option>
+						<option value="female">암컷</option>
 					</select> <span class="btn btn-sm btn-secondary position-relative">성별</span>
 				</div>
 			</div>
@@ -69,19 +69,37 @@
 
 			<div class="col">
 				<div class="input-group">
-					
-					<select name="dog_species" class="form-select">
-						<option value="all"></option>
-						<option value="말티즈">말티즈</option>
-						<option value="푸들">푸들</option>
-						<option value="포메라니안">포메라니안</option>
-						<option value="믹스견">믹스견</option>
-						<option value="치와와">치와와</option>
-						<option value="시츄">시츄</option>
-						<option value="골든리트리버">시츄</option>
-						<option value="진돗개">진돗개</option>
-						<option value="기타">기타</option>
-					</select> <span class="btn btn-sm btn-secondary position-relative">품종</span>
+					<c:if test="${animalList.get(0).getAnimal_tag() eq 'dog'}">
+						<select name="dog_species" class="form-select">
+							<option value="all"></option>
+							<option value="말티즈">말티즈</option>
+							<option value="푸들">푸들</option>
+							<option value="포메라니안">포메라니안</option>
+							<option value="믹스견">믹스견</option>
+							<option value="치와와">치와와</option>
+							<option value="시츄">시츄</option>
+							<option value="골든리트리버">시츄</option>
+							<option value="진돗개">진돗개</option>
+							<option value="기타">기타</option>
+						</select>
+					</c:if>
+					<c:if test="${animalList.get(0).getAnimal_tag() eq 'cat'}">
+						<select name="dog_species" class="form-select">
+							<option value="all"></option>
+							<option value="스코티시">스코티시</option>
+							<option value="폴드">폴드</option>
+							<option value="샴">샴</option>
+							<option value="페르시안">페르시안</option>
+							<option value="터키시">터키시</option>
+							<option value="앙고라">앙고라</option>
+							<option value="러시안 블루">러시안 블루</option>
+							<option value="벵갈">벵갈</option>
+							<option value="먼치킨">먼치킨</option>
+							<option value="아비시니안">아비시니안</option>
+							<option value="기타">기타</option>
+						</select>
+					</c:if>
+					 <span class="btn btn-sm btn-secondary position-relative">품종</span>
 				</div>
 			</div>
 
@@ -89,9 +107,9 @@
 				<div class="input-group">
 					<select name="dog_size" class="form-select">
 						<option value="all"></option>
-						<option value="소형견">소형견</option>
-						<option value="중형견">중형견</option>
-						<option value="대형견">대형견</option>
+						<option value="소형">소형</option>
+						<option value="중형">중형</option>
+						<option value="대형">대형</option>
 					</select> <span class="btn btn-sm btn-secondary position-relative">크기</span>
 				</div>
 			</div>
@@ -141,7 +159,7 @@
 			<div class="col">
 				<div class="d-inline-block text-center">
 					<a
-						href="<%=request.getContextPath() %>/user_dog_content?no=${dto.getAnimal_no()}"><img
+						href="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"><img
 						class="img-fluid"
 						src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a>
 					<span class="text-center">${dto.getAnimal_name() }</span>
@@ -167,5 +185,5 @@
 
 
 
-<jsp:include page="../../../include/user_footer.jsp" />
+<jsp:include page="../../include/user_footer.jsp" />
 

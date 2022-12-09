@@ -52,12 +52,12 @@
 
             <table class="table searched_list">
                 <tr>
-                    <th class="table-secondary">회원번호</th>
-                    <th class="table-secondary">회원아이디</th>
-                    <th class="table-secondary">입양등록일</th>
-                    <th class="table-secondary">입양예정일</th>
-                    <th class="table-secondary">입양완료일</th>
-                    <th class="table-secondary">수정/삭제</th>
+                    <th class="table-secondary">회원 아이디</th>
+                    <th class="table-secondary">동물 이름</th>
+                    <th class="table-secondary">입양 등록일</th>
+                    <th class="table-secondary">입양 예정일</th>
+                    <th class="table-secondary">입양 완료일</th>
+                    <th class="table-secondary">입양 상태</th>
                 </tr>
 
                 <tr>
@@ -66,10 +66,7 @@
                     <td>2022-10-28</td>
                     <td>2022-11-04</td>
                     <td>2022-11-10</td>
-                    <td>
-                        <button class="btn btn-primary" onclick="location.href='${path}/adoptreg_update'">수정</button>
-                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
-                    </td>
+                    <td></ㅋtd>
                 </tr>
             </table>
 
