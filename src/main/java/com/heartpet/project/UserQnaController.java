@@ -220,7 +220,7 @@ public class UserQnaController {
     	PrintWriter out = response.getWriter();
     	
     	// 로그인 여부 체크
-    	if(session.getAttribute("session_admin_id") == null || session.getAttribute("session_admin_id") == "" ) {
+    	if(session.getAttribute("session_id") == null || session.getAttribute("session_id") == "" ) {
     		out.println("<script> alert('로그인이 필요합니다.'); location.href='"+request.getContextPath()+"/'; </script>");
     		out.flush();
     	}
