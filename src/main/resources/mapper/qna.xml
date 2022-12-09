@@ -108,5 +108,10 @@
          </where>
          <![CDATA[) where rnum >= #{startNo} and rnum <= #{endNo}]]>
 	</select>
+	
+	<insert id="fnq_insert">
+	
+	</insert>
+	
 </mapper>
 
