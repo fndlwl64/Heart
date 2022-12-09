@@ -81,7 +81,7 @@ public class UserController {
     				HttpSession session = request.getSession();
     				session.setAttribute("session_admin_id", id);
     				session.setAttribute("session_admin_name", cont.getUser_name());
-    				
+    				    				
     				List<UserDTO> list = userDAO.getUserList();
     				model.addAttribute("list", list);
     				
@@ -102,6 +102,7 @@ public class UserController {
     	    		
     	    		session.setAttribute("session_id", id);
     	    		session.setAttribute("session_name", cont.getUser_name());
+    	    		session.setAttribute("session_grade", cont.getUser_grade());
     	    			    		
     	    		out.println("<script>");
     				out.println("alert('로그인 되었습니다!');");
@@ -131,9 +132,7 @@ public class UserController {
     
     @RequestMapping("/id_check")
     public @ResponseBody int id_check(@RequestParam("paramId") String id) {
-    	System.out.println("여기는...");
     	int check = userDAO.idCheck(id);
-    	System.out.println("아이디 체크 완료");
     	return check;
     }
     
@@ -150,6 +149,7 @@ public class UserController {
 			HttpSession session = request.getSession();
 			session.setAttribute("session_id", id);
 			session.setAttribute("session_name", cont.getUser_name());
+			session.setAttribute("session_grade", cont.getUser_grade());
 			
 			out.println("<script>");
 			out.println("alert('로그인 되었습니다!');");
@@ -173,6 +173,7 @@ public class UserController {
     			HttpSession session = request.getSession();
         		session.setAttribute("session_id", id);
         		session.setAttribute("session_name", dto.getUser_name());
+        		session.setAttribute("session_grade", 3);
         		
         		out.println("<script>");
 				out.println("alert('로그인 되었습니다!');");
@@ -204,6 +205,7 @@ public class UserController {
 			session = request.getSession();
 			session.setAttribute("session_id", id);
 			session.setAttribute("session_name", cont.getUser_name());
+			session.setAttribute("session_grade", cont.getUser_grade());
 			
 			out.println("<script>");
 			out.println("alert('로그인 되었습니다!');");
@@ -228,6 +230,7 @@ public class UserController {
     			session = request.getSession();
         		session.setAttribute("session_id", id);
         		session.setAttribute("session_name", dto.getUser_name());
+        		session.setAttribute("session_grade", 3);
         		
         		out.println("<script>");
 				out.println("alert('로그인 되었습니다!');");
@@ -322,6 +325,12 @@ public class UserController {
     		out.println("</script>");
     		System.out.println("회원가입 실패");
     	}
+    }
+    
+    @RequestMapping("/email_check")
+    public @ResponseBody int email_check(@RequestParam("email") String email) {
+    	int check = userDAO.emailCheck(email);
+    	return check;
     }
 
 }

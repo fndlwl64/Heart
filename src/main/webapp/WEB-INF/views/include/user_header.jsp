@@ -12,8 +12,7 @@
     <!-- <link rel="short icon" href="temp"> -->
 
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-    <script src="${path}/resources/js/main.js"></script>
+    
     
     <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -32,6 +31,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <link rel="stylesheet" href="${path}/resources/css/user_include.css?${time}">
+    
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="${path}/resources/js/main.js"></script>
 
 </head>
 <body>
@@ -99,7 +101,7 @@
                         <div class="modal-body">
                             <form class="login_form" method="post" action="${path}/login">
                                 <label for="login_id">
-	                                <input id="login_id" class="login_text" name="user_id" placeholder="아이디" onkeyup="checkId()">
+	                                <input id="login_id" class="login_text" name="user_id" placeholder="아이디">
 	                                <span id="idcheck"></span>
 	                                <span id="check_img"></span>
                                 </label>

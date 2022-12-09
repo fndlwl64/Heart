@@ -55,6 +55,11 @@ public class UserDAOImpl implements UserDAO {
 		return this.sqlSession.selectList("user_list");
 	}
 
+	@Override
+	public int emailCheck(String email) {
+		return this.sqlSession.selectOne("email_check", email);
+	}
+
 	
 
 }

@@ -71,20 +71,20 @@
                     <tr>
                         <th>주소</th>
                         <td>
-                            <input class="text zipcode" type="text" id="sample6_postcode" placeholder="우편번호">
+                            <input class="text zipcode" type="text" id="sample6_postcode" placeholder="우편번호" required>
                             <input id="zipcode_search" class="search_zipcode" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                            <input class="text addr" name="user_addr" type="text" id="sample6_address" placeholder="주소"><br>
-                            <input class="text addr" name="user_addr" type="text" id="sample6_detailAddress" placeholder="상세주소">
-                            <input class="text addr" name="user_addr" type="text" id="sample6_extraAddress" placeholder="참고항목">
+                            <input class="text addr" name="user_addr" type="text" id="sample6_address" placeholder="주소" required><br>
+                            <input class="text addr" name="user_addr" type="text" id="sample6_detailAddress" placeholder="상세주소" required>
+                            <input class="text addr" name="user_addr" type="text" id="sample6_extraAddress" placeholder="참고항목" required>
                         </td>
                     </tr>
 
                     <tr>
                         <th>반려동물경험</th>
                         <td>
-                            <input class="text" name="user_dogexp" type="radio" value="Y"> 유
-                            <input class="text" name="user_dogexp" type="radio" value="N"> 무
-                            <span id="join_dogexp" class="user_dogexp"></span>
+                            <input class="text" name="user_animalexp" type="radio" value="Y"> 유
+                            <input class="text" name="user_animalexp" type="radio" value="N"> 무
+                            <span id="join_animalexp" class="user_dogexp"></span>
                         </td>
                     </tr>
 
@@ -92,7 +92,7 @@
                 
                 <br /><br />
 
-                <input class="btn btn-secondary" type="submit" value="가입">
+                <input id="join_btn" class="btn btn-secondary" type="submit" value="가입">
                 <input class="btn btn-outline-secondary" type="reset" value="취소">
 
             </form>

@@ -39,4 +39,8 @@
 		SELECT * FROM HEARTPET_USER WHERE USER_GRADE NOT IN (1)
 	</select>
 	
+	<select id="email_check" parameterType="String" resultType="int">
+		SELECT COUNT(USER_EMAIL) FROM HEARTPET_USER WHERE USER_EMAIL = #{email} 
+	</select>
+	
 </mapper>

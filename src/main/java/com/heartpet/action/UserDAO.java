@@ -24,6 +24,6 @@ public interface UserDAO {
     
     public List<UserDTO> getUserList();
     
-
+    public int emailCheck(String email);
 
 }
