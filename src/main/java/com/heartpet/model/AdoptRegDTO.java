@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Data @ToString 
-public class AdoptDTO {
+public class AdoptRegDTO {
     private int adopt_reg_regno;
     private String adopt_reg_userid;
     private int adopt_reg_animalno;

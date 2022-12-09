@@ -19,6 +19,9 @@
 		<!-- User -->
 		<typeAlias type="com.heartpet.model.UserDTO" alias="UserDTO"/>
 		<typeAlias type="com.heartpet.action.UserDAO" alias="UserDAO"/>
+		<!-- AdoptReg -->
+		<typeAlias type="com.heartpet.model.AdoptRegDTO" alias="AdoptRegDTO"/>
+		<typeAlias type="com.heartpet.action.AdoptRegDAO" alias="AdoptRegDAO"/>
 	</typeAliases>	
 	
 	
