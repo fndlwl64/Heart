@@ -48,6 +48,7 @@ public class UserReviewController {
     		@RequestParam(value = "animal_tag", required = false) String animal_tag,
     		@RequestParam(value = "page", defaultValue = "1") int page, Model model) {  
     	
+    		
       	if(field == null) { field = ""; }
        	if(keyword == null) { keyword = ""; }
     	
