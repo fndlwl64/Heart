@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="list" value="${ fnqContent }" />
-<c:set var="link_address" value="${pageContext.request.contextPath}/user_fnq_list" />
+<c:set var="link_address" value="${pageContext.request.contextPath}/user_fnq_update" />
 
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
