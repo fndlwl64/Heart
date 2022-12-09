@@ -10,13 +10,31 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="dto" value="${uList }"/>
 <link rel="stylesheet" href="resources/css/mypage.css"/>
+<script type="text/javascript">
+	function checkCode(){
+		  var v1 = form2.code_check.value;
+		  var v2 = form2.code.value;
+		  if(v1!=v2){
+			   document.getElementById('checkCode').style.color = "red";
+			   document.getElementById('checkCode').innerHTML = "잘못된인증번호";
+               makeNull();
+		  }else{
+			   document.getElementById('checkCode').style.color = "blue";
+			   document.getElementById('checkCode').innerHTML = "인증되었습니다."; 
+			   makeReal();
+		  }
+		 }
+	function makeReal(){
+		var hiddenbutton = document.getElementById("hiddenbutton");
+		hiddenbutton.type="submit";
+	}
+    function makeNull(){
+		var hiddenbutton = document.getElementById("hiddenbutton");
+		hiddenbutton.type="hidden";
+	}
+</script>
 <%-- 여기서부터 작성 --%>
-<%! public int getRandom(){
-	int random = 0;
-	random = (int)Math.floor((Math.random()*(99999-10000+1)))+10000;
-	return random;
-	} 
-%>
+
 <div class="mypage_header">
     <div>
         <br><h1 class="mypage"><a id="mypage_a" href="${path }/user_mypage_wish_list">My Page</a><a class="adopt_a" href="${path }/user_mypage_adoptreg_list"><span id="adopt_span">입양대기목록<button id="adopt_btn"><span id="adopt_span2">${Count }</span></button></span></a></h1>
@@ -62,20 +80,18 @@
         </ul>
     </div>
     <div id="my_cont5" class="mypage_cont">
-        <form method="post" action="${path }/user_mypage_user_deleteCheck">
-	     <div class="mb-3">
-	   		<label for="receiver" class="col-form-label">이메일 인증</label>
-	 	 </div>
-	 	 
-		 <div class="mb-3">
-		    <input type="text" id="receiver" name="receiver" value="${dto.getUser_email() }" class="form-control" aria-describedby="passwordHelpInline" readonly="readonly" />
-		    <input class="btn btn-primary" id="submit" type="submit"  value="인증번호발송">
+        <form id="form2" method="post" action="${path }/user_logout_delete">
+			<div class="mb-3">
+	   		<label for="receiver" class="col-form-label">인증번호 확인</label>
+	 		</div>
+	 		
+	 		<div class="mb-3">
+		    <input type="text" id="code" name="code" class="form-control" onkeyup="checkCode()" placeholder="인증번호를 입력하세요."/>
+		    <div id="checkCode"></div>
+		    <input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=request.getAttribute("code")%>" />
+		    <input class="btn btn-primary" id="hiddenbutton" type="hidden" value='인증하기'/>
 		 </div>
-		 
-		 <div class="mb-3">
-		 	<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>" />
-		 </div>
-		 </form>
+		</form>
     </div>
     <div class="mypage_bottom">
 

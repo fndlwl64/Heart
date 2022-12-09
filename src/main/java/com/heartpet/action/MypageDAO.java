@@ -35,5 +35,7 @@ public interface MypageDAO {
 	// 마이페이지에서 입양완료 불러오는 메서드
 	public List<WishVO> getAdoptComList(String id);
 	
+	public int UserDelete(String id);
+	
 
 }
