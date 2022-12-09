@@ -15,6 +15,7 @@
 	<sql id="qna_keyword">
 		like '%' || #{keyword} || '%'
 	</sql>
+	
 	<!-- list -->
 	<select id="qna_list" parameterType="hashMap" resultType="QnaDTO">
 		<![CDATA[select * from (select b.*, row_number() over(order by board_no desc) rnum from heartpet_board b ]]>
@@ -82,6 +83,7 @@
 	// FNQ
 	////////////////////////////////////////////////////////////////////////////////////////////  	
 	-->
+	<!-- count : 게시글 개수 + 검색 -->
 	<select id="fnq_count" parameterType="hashMap" resultType="int">
 		select count(*) from heartpet_fnq
 		<where>
@@ -95,6 +97,7 @@
         </where>
 	</select>
 	
+	<!-- list : 검색 -->
 	<select id="fnq_list" parameterType="hashMap" resultType="FnqDTO">
 		<![CDATA[select * from (select b.*, row_number() over(order by fnq_no desc) rnum from heartpet_fnq b ]]>
 		<where>
@@ -109,9 +112,29 @@
          <![CDATA[) where rnum >= #{startNo} and rnum <= #{endNo}]]>
 	</select>
 	
-	<insert id="fnq_insert">
+	<!-- content -->
+	<select id="fnq_content" parameterType="int" resultType="FnqDTO">
+		select * from heartpet_fnq where fnq_no = #{ fnq_no }
+	</select>
 	
+	<!-- insert -->	
+	<insert id="fnq_insert" parameterType="FnqDTO">
+		<selectKey resultType="int" keyProperty="fnq_no" order="BEFORE">
+			select max(fnq_no)+1 from heartpet_fnq
+		</selectKey>
+		insert into heartpet_fnq values (#{ fnq_no }, #{ fnq_category }, #{ fnq_question }, #{ fnq_answer })
 	</insert>
+	
+	<!-- update -->
+	<update id="fnq_update" parameterType="FnqDTO">
+		update heartpet_fnq set fnq_category = #{ fnq_category }, fnq_question = #{ fnq_question }, fnq_answer = #{ fnq_answer }
+		where fnq_no = #{ fnq_no }
+	</update>
+	
+	<!-- delete -->
+	<delete id="fnq_delete" parameterType="int">
+		delete from heartpet_fnq where fnq_no = #{ fnq_no }
+	</delete>
 	
 </mapper>
 

@@ -129,7 +129,7 @@ public class UserQnaController {
     	}else {
         	int check = this.qnaDAO.insertQna(qnaDto);
     		if(check > 0) {
-    			out.println("<script>alert('글이 성공적으로 등록되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>");
+    			out.println("<script>alert('성공적으로 글이 등록되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>");
     		}else {
     			out.println("<script>alert('글 등록을 실패했습니다.'); history.back(); </script>");
     		}
@@ -150,7 +150,7 @@ public class UserQnaController {
     // QNA_UPDATE_OK
     ////////////////////////////////////////////////////////////////////////////////////    
     @RequestMapping(value = "/user_qna_update_ok", method = RequestMethod.POST)
-    public void user_qna_update_ok(QnaDTO qnaDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public void user_qna_update_ok(QnaDTO qnaDto, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
     	QnaDTO qnaContent = this.qnaDAO.contentQna(qnaDto.getBoard_no());
@@ -163,7 +163,7 @@ public class UserQnaController {
     	// 유효성 검사		
     	int check = this.qnaDAO.updateQna(qnaDto);     
 		if(check > 0) { 
-			out.println("<script>alert('글이 성공적으로 수정되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>"); 
+			out.println("<script>alert('성공적으로 글이 수정되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>"); 
 		}else { 
 			out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>"); 
 		}
@@ -180,7 +180,7 @@ public class UserQnaController {
     	if(!qnaContent.getBoard_pwd().equals(board_pwd)) { out.println("<script>alert('비밀번호를 다시 확인해주세요.'); history.back(); </script>"); }
     	
     	int check = this.qnaDAO.deleteQna(board_no);
-    	if(check > 0) { out.println("<script>alert('글이 성공적으로 삭제되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>"); }
+    	if(check > 0) { out.println("<script>alert('성공적으로 글이 삭제되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>"); }
 		else { out.println("<script>alert('글 삭제 실패!'); history.back(); </script>"); }
     }
 
@@ -220,13 +220,82 @@ public class UserQnaController {
     	PrintWriter out = response.getWriter();
     	
     	// 로그인 여부 체크
-    	if(session.getAttribute("session_id") == null || session.getAttribute("session_id") == "" ) {
+    	if(session.getAttribute("session_admin_id") == null || session.getAttribute("session_admin_id") == "" ) {
     		out.println("<script> alert('로그인이 필요합니다.'); location.href='"+request.getContextPath()+"/'; </script>");
     		out.flush();
-    	}
-    	
+    	} 
     	return "user/qna/fnq_insert";
-    }    
+    }  
     
+    ////////////////////////////////////////////////////////////////////////////////////
+    // FNQ_INSERT_OK
+    ////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping("/user_fnq_insert_ok")
+    public void user_fnq_insert_ok(@Valid FnqDTO fnqDTO, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException { 
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+    	if(result.hasErrors()) { // 에러를 List로 저장
+			List<ObjectError> errors = result.getAllErrors();
+			for(ObjectError error : errors) {
+				if(error.getDefaultMessage().equals("question")) { out.println("<script>alert('질문 내용이 없습니다.'); history.back(); </script>"); break; }
+				else if(error.getDefaultMessage().equals("answer")) { out.println("<script>alert('답변 내용이 없습니다.'); history.back(); </script>"); break; }
+			}
+    	}else {
+        	int check = this.qnaDAO.insertFnq(fnqDTO);
+    		if(check > 0) {
+    			out.println("<script>alert('성공적으로 글이 등록되었습니다.'); location.href='"+request.getContextPath()+"/user_fnq_list'; </script>");
+    		}else {
+    			out.println("<script>alert('글 등록을 실패했습니다.'); history.back(); </script>");
+    		}
+    	}
+    }  
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    // FNQ_UPDATE
+    ////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping("/user_fnq_update")
+    public String user_fnq_update(@RequestParam("fnq_no") int fnq_no, Model model) {
+    	FnqDTO fnqContent = this.qnaDAO.contentFnq(fnq_no);
+    	model.addAttribute("fnqContent", fnqContent);
+    	return "user/qna/fnq_update"; 
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    // FNQ_UPDATE_OK
+    ////////////////////////////////////////////////////////////////////////////////////    
+    @RequestMapping(value = "/user_fnq_update_ok", method = RequestMethod.POST)
+    public void user_fnq_update_ok(@Valid FnqDTO fnqDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		// 유효성 검사		
+    	if(result.hasErrors()) { // 에러를 List로 저장
+			List<ObjectError> errors = result.getAllErrors();
+			for(ObjectError error : errors) {
+				if(error.getDefaultMessage().equals("question")) { out.println("<script>alert('질문 내용이 없습니다.'); history.back(); </script>"); break; }
+				else if(error.getDefaultMessage().equals("answer")) { out.println("<script>alert('답변 내용이 없습니다.'); history.back(); </script>"); break; }
+			}
+    	}else {		
+	    	int check = this.qnaDAO.updateFnq(fnqDto);     
+			if(check > 0) { 
+				out.println("<script>alert('성공적으로 글이 수정되었습니다.'); location.href='"+request.getContextPath()+"/user_fnq_list'; </script>"); 
+			}else { 
+				out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>"); 
+			}
+    	}
+    }   
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    // FNQ_DELETE
+    ////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping("/user_fnq_delete")
+    public void user_fnq_delete(@RequestParam("fnq_no") int fnq_no, HttpServletResponse response, HttpServletRequest request) throws IOException { 
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+    	
+    	int check = this.qnaDAO.deleteFnq(fnq_no);
+    	if(check > 0) { out.println("<script>alert('성공적으로 글이 삭제되었습니다.'); location.href='"+request.getContextPath()+"/user_fnq_list'; </script>"); }
+		else { out.println("<script>alert('글 삭제 실패!'); history.back(); </script>"); }
+    }
 
 }
