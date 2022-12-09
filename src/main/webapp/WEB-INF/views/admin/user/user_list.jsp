@@ -52,7 +52,7 @@
 	                <td>${list.user_no}</td>
 	                <td><a href="${path}/user_view?user_id=${list.user_id}">${list.user_id}</a></td>
 	                <td>${list.user_grade}등급</td>
-	                <td>${list.user_dogexp}</td>
+	                <td>${list.user_animalexp}</td>
 	                <td>
 	                    <button class="btn btn-primary" onclick="location.href='${path}/user_update?user_id=${list.user_id }'">수정</button>
 	                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
