@@ -7,6 +7,7 @@
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_review.css" />
 
+
 <div id="review-contents" class="review-contents">
     <div class="review-section">
         <div class="row">

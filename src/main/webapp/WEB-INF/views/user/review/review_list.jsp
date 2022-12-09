@@ -11,6 +11,7 @@
 <c:set var="link_address" value="${pageContext.request.contextPath}/user_review_list" />
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_review.css" />
+<script src="${path}/resources/js/user_review_list.js"></script>
 
 <%-- 리뷰 --%>
 <%-- review list --%>
@@ -30,8 +31,12 @@
         <div class="row">
             <div class="col-3 space"></div>
             <div class="col-6 title">
-		    	<button type="button" class="btn btn-info btn-sm dog-button"><i class="bi bi-search-heart"></i> 강아지</button>
-		    	<button type="button" class="btn btn-info btn-sm cat-button"><i class="bi bi-search-heart-fill"></i> 고양이</button>
+            	<form action="${path}/user_review_list?animal_tag=${ animal_tag }" method="get" >
+            	<input type="hidden" name="animal_tag" />
+		    	<button type="button" class="btn btn-info btn-sm animal-button" onclick="location.href='${path}/user_review_list'"><i class="bi bi-clipboard-heart"></i> 전체</button>
+		    	<button type="submit" class="btn btn-info btn-sm animal-button" value="dog" onclick="return animalChange(this.value)"><i class="bi bi-search-heart"></i> 강아지</button>
+		    	<button type="submit" class="btn btn-info btn-sm animal-button" value="cat" onclick="return animalChange(this.value)"><i class="bi bi-search-heart-fill"></i> 고양이</button>
+		    	</form>
             </div>
             <div class="col-3 space"></div>
         </div>
