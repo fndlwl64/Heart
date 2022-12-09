@@ -151,7 +151,18 @@ public class MypageController {
     }
     
     @RequestMapping("/user_mypage_grade_list")
-    public String mypage_grade_list() {
+    public String mypage_grade_list(Model model, HttpServletRequest request) {
+    	HttpSession session = request.getSession();
+    	String user_id = (String)session.getAttribute("session_id");
+    	
+    	int sum = mypagedao.SumSupport(user_id);
+    	UserDTO user_list = mypagedao.UserInfo(user_id);
+    	int regcount = mypagedao.AnimalRegCount(user_id);
+    	int review_count = mypagedao.ReviewCount(user_id);
+    	model.addAttribute("Sum", sum);
+    	model.addAttribute("uList", user_list);
+    	model.addAttribute("Count", regcount);
+    	model.addAttribute("review_Count", review_count);
         return "user/mypage/mypage_grade_list";
     }
 }

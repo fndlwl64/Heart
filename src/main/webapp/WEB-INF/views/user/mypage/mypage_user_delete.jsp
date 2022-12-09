@@ -10,6 +10,13 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="dto" value="${uList }"/>
 <link rel="stylesheet" href="resources/css/mypage.css"/>
+<%--랜덤으로 임의의 숫자 5자리를 생성하는 메서드작성--%>
+<%! public int getRandom(){
+    int random = 0;
+    random = (int)Math.floor((Math.random()*(99999-10000+1)))+10000;
+    return random;
+}
+%>
 <%-- 여기서부터 작성 --%>
 
 <div class="mypage_header">
@@ -58,7 +65,7 @@
     </div>
     <div id="my_cont5" class="mypage_cont">
         <div class="row g-3 align-items-center" style=" margin-top: 210px; margin-left: 800px; margin-right: 800px;">
-            <form method="post" action="<%=request.getContextPath()%>/send.do">
+            <form method="post" action="${path }/user_mypage_user_update">
                 <div class="mb-3">
                     <label for="receiver" class="col-form-label">이메일 인증</label>
                 </div>
@@ -69,13 +76,6 @@
                 </div>
 
                 <div class="mb-3">
-                    <%--랜덤으로 임의의 숫자 5자리를 생성하는 메서드작성--%>
-                    <%! public int getRandom(){
-                        int random = 0;
-                        random = (int)Math.floor((Math.random()*(99999-10000+1)))+10000;
-                        return random;
-                    }
-                    %>
                     <input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>" />
                 </div>
             </form>
