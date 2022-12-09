@@ -45,14 +45,16 @@
 
 				<select name="animal_species">
 							<option value="all"></option>
-							<option value="말티즈">말티즈</option>
-							<option value="푸들">푸들</option>
-							<option value="포메라니안">포메라니안</option>
-							<option value="믹스견">믹스견</option>
-							<option value="치와와">치와와</option>
-							<option value="시츄">시츄</option>
-							<option value="골든리트리버">시츄</option>
-							<option value="진돗개">진돗개</option>
+							<option value="스코티시">스코티시</option>
+							<option value="폴드">폴드</option>
+							<option value="샴">샴</option>
+							<option value="페르시안">페르시안</option>
+							<option value="터키시">터키시</option>
+							<option value="앙고라">앙고라</option>
+							<option value="러시안 블루">러시안 블루</option>
+							<option value="벵갈">벵갈</option>
+							<option value="먼치킨">먼치킨</option>
+							<option value="아비시니안">아비시니안</option>
 							<option value="기타">기타</option>
 						</select> <label
 					class="Dneutered"><input type="checkbox" name="Dneutered">
@@ -89,7 +91,7 @@
 					<th class="table-secondary">입양 상태</th>
 					<th class="table-secondary">수정/삭제</th>
 				</tr>
-				<c:forEach var="dto" items="${dogList }">
+				<c:forEach var="dto" items="${catList }">
 					<tr>
 						<td><a href="${path}/dog_view">${dto.animal_name }</a></td>
 						<td>${dto.animal_species }</td>

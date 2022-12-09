@@ -44,8 +44,9 @@ public class AdminAnimalController {
 	}
 
 	@RequestMapping("/cat_list")
-	public String cat_list() {
-		return "admin/cat_list";
+	public String cat_list(Model model) {
+		model.addAttribute("catList", animalDAO.listTag("cat"));
+		return "admin/animal/cat/cat_list";
 	}
 
 	@RequestMapping(value = "/dog_update", method = RequestMethod.GET)
@@ -82,7 +83,18 @@ public class AdminAnimalController {
 	
 	@RequestMapping("/dog_delete")
 	public String dog_delete(@RequestParam("no") int no) {
-		animalDAO.delete(no);
+		AnimalDTO animalDTO = animalDAO.content(no);
+		
+		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload");
+		
+		File file = new File(rootPath + "/" +animalDTO.getAnimal_img1());
+		file.delete();
+		file = new File(rootPath + "/" +animalDTO.getAnimal_img2());
+		file.delete();
+		file = new File(rootPath + "/" +animalDTO.getAnimal_img3());
+		file.delete();
+ 		animalDAO.delete(no);
+		
 		return "redirect:/dog_list";
 	}
 	

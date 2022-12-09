@@ -13,4 +13,6 @@ public class AdoptDTO {
 	private String adopt_reg_regdate;
 	private String adopt_reg_duedate;
 	private String adopt_reg_adoptdate;
+	private String adopt_reg_appdate;
+	
 }
