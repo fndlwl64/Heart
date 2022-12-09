@@ -27,4 +27,9 @@ public interface QnaDAO {
     public int updateFnq(FnqDTO dto);
     public int deleteFnq(int fnq_no);
     
+    ////////////////////////////////////////////////////////////
+    // QNA-reply
+    ////////////////////////////////////////////////////////////
+	public int replyInsert(int qna_no);
+    
 }
