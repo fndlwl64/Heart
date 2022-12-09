@@ -25,11 +25,11 @@
 }
 
 /* button */
-.dog-button, .cat-button {
+.animal-button {
 	background-color: pink;
 	border: pink;
 }
-.dog-button:hover, .cat-button:hover {
+.animal-button:hover {
 	background-color: #FF9E9E;
 	border: #FF9E9E;
 }
