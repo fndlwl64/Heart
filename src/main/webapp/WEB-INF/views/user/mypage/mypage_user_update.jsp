@@ -10,7 +10,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="dto" value="${uList }"/>
 <link rel="stylesheet" href="resources/css/mypage.css"/>
-
 <%-- 여기서부터 작성 --%>
 
 <div class="mypage_header">
@@ -84,7 +83,7 @@
                     </tr>
                     <tr>
                         <th class="table-secondary"><span class="sp2">반려동물경험</span></th>
-                        <td><input name="user_dogexp" class ="input1" type="text" value="${dto.getUser_dogexp()}"></td>
+                        <td><input name="user_animalexp" class ="input1" type="text" value="${dto.getUser_animalexp()}"></td>
                     </tr>
                 </table>
                 <br>

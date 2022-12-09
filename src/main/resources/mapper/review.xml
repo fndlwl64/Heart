@@ -46,6 +46,23 @@
         </where>
 	</select>
 	
+	<!-- dog/cat list -->
+	<select id="review_animal_option" parameterType="String" resultType="ReviewDTO">
+		<![CDATA[select * from (select r.*, a.animal_name, row_number() over(order by review_no desc) rnum ]]><include refid="review_join" />
+		<where>
+			review_animal_tag = #{ animal_tag }
+         </where>
+         <![CDATA[) where rnum >= #{startNo} and rnum <= #{endNo}]]>
+	</select>
+	
+	<!-- dog/cat : 게시글 개수 -->
+	<select id="review_animal_count" parameterType="String" resultType="int">
+		select count(*) from heartpet_review
+		<where>
+			review_animal_tag = #{ animal_tag }
+         </where>
+	</select>
+	
 <!-- 	<select id="review_animal" resultType="hashMap">
 		select animal_name from heartpet_animal where animal_no in 
 		<foreach item="animalNo" collection="list" open="(" close=")" separator=", ">

@@ -38,25 +38,35 @@ public class UserReviewController {
     // 전체 게시물의 수
     private int totalRecord = 0;
     
+    
     ////////////////////////////////////////////////////////////////////////////////////
-    // REVIEW_LIST
+    // REVIEW_LIST - 고양이/강아지 선택 추가
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/user_review_list")
     public String user_review_list(@RequestParam(value = "field", required = false) String field, 
-    		@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(value = "page", defaultValue = "1") int page, Model model) {  
+    		@RequestParam(value = "keyword", required = false) String keyword, 
+    		@RequestParam(value = "animal_tag", required = false) String animal_tag,
+    		@RequestParam(value = "page", defaultValue = "1") int page, Model model) {  
     	
       	if(field == null) { field = ""; }
        	if(keyword == null) { keyword = ""; }
     	
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
-		
-		totalRecord = this.reviewDAO.listReviewCount(field, keyword);
+		List<ReviewDTO> reviewList = null;
+    	
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-    			
-    	// animal name 추출
-    	List<ReviewDTO> reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), field, keyword);
 
+    	// animal name 추출
+    	// 전체 선택
+    	if(animal_tag == null) { 
+    		totalRecord = this.reviewDAO.listReviewCount(field, keyword);
+    		reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), field, keyword);
+    	}else { // dog/cat 선택
+    		totalRecord = this.reviewDAO.listReviewCount(animal_tag);
+    		reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), animal_tag);
+    	}
+    	
     	model.addAttribute("reviewList", reviewList);
         model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		

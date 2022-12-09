@@ -70,6 +70,12 @@ public class MypageDAOImpl implements MypageDAO{
 		// TODO Auto-generated method stub
 		return this.sqlSession.selectList("adopt_com_list", id);
 	}
+
+	@Override
+	public int UserDelete(String id) {
+		// TODO Auto-generated method stub
+		return this.sqlSession.update("user_delete", id);
+	}
 	
 	
 	

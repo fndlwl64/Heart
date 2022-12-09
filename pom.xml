@@ -177,6 +177,7 @@
 			<version>1.18.22</version>
 			<scope>provided</scope>
 		</dependency>
+
 		
 		<!-- https://mvnrepository.com/artifact/cglib/cglib -->
 		<dependency>
@@ -194,12 +195,28 @@
 		</dependency>
 		
 
+
 		<!-- spring-dbcp 라이브러리 -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
+		
+		        <!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>        
+        
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${org.springframework-version}</version>
+        </dependency>
+		
 
 		<!-- Test -->
 		<dependency>
