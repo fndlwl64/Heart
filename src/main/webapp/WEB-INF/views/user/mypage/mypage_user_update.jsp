@@ -10,7 +10,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="dto" value="${uList }"/>
 <link rel="stylesheet" href="resources/css/mypage.css"/>
-
 <%-- 여기서부터 작성 --%>
 
 <div class="mypage_header">

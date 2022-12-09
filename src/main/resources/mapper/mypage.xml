@@ -30,4 +30,7 @@
 	<select id="adopt_com_list" parameterType="String" resultType="com.heartpet.model.WishVO">
 		select animal_no, animal_species, animal_gender, animal_age, adopt_reg_duedate, adopt_reg_adoptdate, animal_img1 from heartpet_adopt_reg a, heartpet_animal b where b.animal_no = a.adopt_reg_animalno and adopt_reg_userid = #{id} and adopt_reg_adoptdate is not null
 	</select>
+	<update id="user_delete" parameterType="UserDTO">
+		update heartpet_user set user_grade = 5 where user_id = #{id} 
+	</update>
 </mapper>
