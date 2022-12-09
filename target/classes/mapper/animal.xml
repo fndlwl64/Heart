@@ -4,16 +4,16 @@
 
 
 <mapper namespace="AnimalDAO">
-	<select id="content" resultType="AnimalDTO">
+	<select id="animal_content" resultType="AnimalDTO">
 		select * from heartpet_animal where animal_no = #{animal_no}
 	</select>
-	<select id="list" resultType="AnimalDTO">
+	<select id="animal_list" resultType="AnimalDTO">
 		select * from heartpet_animal order by animal_no desc
 	</select>
-	<select id="listTag" resultType="AnimalDTO">
+	<select id="animal_listTag" resultType="AnimalDTO">
 		select * from heartpet_animal where animal_tag = #{animal_tag} order by animal_no desc
 	</select>		
-	<insert id="insert" parameterType="AnimalDTO">
+	<insert id="animal_insert" parameterType="AnimalDTO">
 		<selectKey resultType="int" keyProperty="animal_no" order="BEFORE">
 			select max(animal_no)+1 from heartpet_animal
 		</selectKey>
@@ -39,7 +39,7 @@
 			''
 			)
 	</insert>
-	<update id="update" parameterType="AnimalDTO">
+	<update id="animal_update" parameterType="AnimalDTO">
 		update heartpet_animal
 		set 
 			animal_name = #{animal_name},
@@ -59,7 +59,7 @@
 			animal_update = sysdate
 		where animal_no = #{animal_no}
 	</update>
-	<delete id="delete">
+	<delete id="animal_delete">
 		delete from heartpet_animal where animal_no = #{animal_no}
 	</delete>
 	
