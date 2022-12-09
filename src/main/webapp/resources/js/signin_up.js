@@ -129,16 +129,60 @@ $(function() {
 	        alert('failed to login: ' + JSON.stringify(err));
 	    }
 	});
+	
+	$("#login_id").keyup(function() {
+		let id = $(this).val();	
+		if(id == '') {
+			$("#login_id").css({
+				'border': '2px solid red',
+				'border-radius': '5px'
+			});
+			$("#login_btn").attr("disabled", true);
+			$("#idcheck").html("<font style='color:red; font-size:13px;'>아이디를 입력하세요.</font><i class='bi bi-x-circle-fill'></i>");
+		}else {
+			$.ajax({
+	            type: "POST",
+	            contentType:  "application/x-www-form-urlencoded;charset=UTF-8",
+	            url: "/project/id_check",
+	            data: {paramId : id},
+	            success: function(res) {
+	            	if(res == 1) {  // DB에 아이디가 존재하는 경우
+						$("#idcheck").html("<i class='bi bi-check-circle-fill'></i>");
+						$("#login_btn").attr("disabled", false);
+					}else {
+						$("#idcheck").html("<font style='color:red; font-size:13px;'>존재하지 않는 아이디입니다.</font><i class='bi bi-x-circle-fill'></i>");
+						$("#login_btn").attr("disabled", true);
+					}
+	            },
+	            error: function(e) {
+	                console.log("ajax fail", e);
+	            }
+	        });
+		}
+	
+	});
+	
   	
 });
+
+function checkId() {
+	
+	
+	
+}
 
 	var naver_id_login = new naver_id_login("fw7rzSQL46p95xisWWtm", "http://localhost:8081/project/naver_login");
 	var state = naver_id_login.getUniqState();
 
 	naver_id_login.setButton("white", 2,40);
-	naver_id_login.setDomain("http://localhost:8081/project/");
+	naver_id_login.setDomain("http://localhost:8081/project/naver_login");
 	naver_id_login.setState(state);
 	naver_id_login.setPopup();
 	naver_id_login.init_naver_id_login();
+	
+	console.log('네이버 여기까진 완료');
+	
+	
+
 
 
