@@ -69,7 +69,7 @@
                 <div class="mb-3">
                     <label for="receiver" class="col-form-label">이메일 인증</label>
                 </div>
-
+	
                 <div class="mb-3">
                     <input type="text" id="receiver" name="receiver" value="soopwe2@naver.com" class="form-control" aria-describedby="passwordHelpInline" readonly="readonly" /><br>
                     <input class="btn btn-primary" id="submit" type="submit"  value="인증번호발송">
