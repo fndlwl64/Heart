@@ -132,6 +132,7 @@ $(function() {
 	
 	$("#login_id").keyup(function() {
 		let id = $(this).val();	
+		
 		if(id == '') {
 			$("#login_id").css({
 				'border': '2px solid red',
@@ -139,12 +140,13 @@ $(function() {
 			});
 			$("#login_btn").attr("disabled", true);
 			$("#idcheck").html("<font style='color:red; font-size:13px;'>아이디를 입력하세요.</font><i class='bi bi-x-circle-fill'></i>");
-		}else {
-			$.ajax({
+		}else {			
+			$.ajax({			
+	            contentType: "application/x-www-form-urlencoded;charset=UTF-8",
 	            type: "POST",
-	            contentType:  "application/x-www-form-urlencoded;charset=UTF-8",
 	            url: "/project/id_check",
 	            data: {paramId : id},
+	            dataType: "text", 
 	            success: function(res) {
 	            	if(res == 1) {  // DB에 아이디가 존재하는 경우
 						$("#idcheck").html("<i class='bi bi-check-circle-fill'></i>");
@@ -155,6 +157,7 @@ $(function() {
 					}
 	            },
 	            error: function(e) {
+	            	console.log("여기");	            
 	                console.log("ajax fail", e);
 	            }
 	        });
