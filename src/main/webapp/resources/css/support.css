@@ -1,0 +1,27 @@
+  /* support.jsp에서 사용하는 css */
+ .btn_support {
+ 	width: 60%;
+ 	height: 800px; 
+ 	background-image: url("../image/animal.png");
+ 	background-size: 100% 100%;
+ 	border: none;
+ }
+ 
+  .btn_support:hover {
+	opacity: 70%;
+ }
+ 
+ 
+ /* support_insert.jsp에서 사용하는 css */
+ 
+  .div_sup_insert {
+  	margin: 15px;
+  }
+ 
+ .div_sup_insert .support_li {
+ 	display: inline-block;
+ 	list-style: none;
+ 	margin: 15px;
+ 	
+ }
+ 

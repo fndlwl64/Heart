@@ -11,6 +11,7 @@
 <c:set var="dto" value="${uList }"/>
 <link rel="stylesheet" href="resources/css/mypage.css"/>
 <%-- 여기서부터 작성 --%>
+<!-- 랜덤으로 임의의 숫자 ６자리르 생성 （이메일 보내는 내용에 들어갈 숫자） -->
 <%! public int getRandom(){
 	int random = 0;
 	random = (int)Math.floor((Math.random()*(99999-10000+1)))+10000;
