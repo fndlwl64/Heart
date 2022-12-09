@@ -24,6 +24,16 @@
 	font-size: 14px;
 }
 
+/* button */
+.dog-button, .cat-button {
+	background-color: pink;
+	border: pink;
+}
+.dog-button:hover, .cat-button:hover {
+	background-color: #FF9E9E;
+	border: #FF9E9E;
+}
+
 /* 정렬 */
 .review-section .review_order {
     justify-content: right;

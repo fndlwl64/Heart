@@ -63,7 +63,7 @@
             </form>
 
             <div class="content-buttons">
-                <c:if test="${ list.board_id eq session_id }">
+                <c:if test="${ list.review_id eq session_id }">
                 <button type="button" class="btn btn-success" onclick="location.href='${path}/user_review_update?review_no=${ list.review_no }'"><i class="bi bi-eraser"></i> 수정</button>
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteFunction"><i class="bi bi-trash3"></i> 삭제</button>
                 </c:if>
