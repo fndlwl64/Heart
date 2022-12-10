@@ -60,7 +60,9 @@
                     <td>${ list.board_category }</td>
                     <td class="left-align">
 	                    <a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }">
-	                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if> ${ list.board_title }
+	                    <c:if test="${ list.board_title.length() gt 20 }">${ list.board_title.substring(0,20) }... </c:if>
+						<c:if test="${ list.board_title.length() lt 20 }">${ list.board_title } </c:if>
+	                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if>
 	                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
 	                    </a>
                     </td>

@@ -55,8 +55,8 @@ public class AdminQnaController {
     }
     
     @RequestMapping("/admin_qna_content")
-    public String admin_qna_content(@RequestParam("qna_no") int qna_no, Model model) {
-        QnaDTO qnaContent = this.qnaDAO.contentQna(qna_no);
+    public String admin_qna_content(@RequestParam("board_no") int board_no, Model model) {
+        QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
         model.addAttribute("qnaContent", qnaContent);
         return "admin/qna/qna_content";
     }

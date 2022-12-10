@@ -15,7 +15,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>QNA_LIST</title>
+    <title>HeartPet_Admin_QNA</title>
     <jsp:include page="../../include/admin_header.jsp" />
 	<link rel="stylesheet" href="${path}/resources/css/list_view.css" />
 	<script src="${path}/resources/js/admin_list_view.js"></script>
@@ -56,26 +56,31 @@
         
         <%-- 검색 결과 테이블 --%>
         <div class="lists">
-            <table class="table table-hover align-middle searched_list">
-                <tr>
+            <table class="table table-hover searched_list">
+                <tr>                
                     <th class="table-light col-1">No</th>
                     <th class="table-light col-1">분류</th>
                     <th class="table-light col-4">제목</th>
                     <th class="table-light col-1">작성자</th>
                     <th class="table-light col-1">조회수</th>
                     <th class="table-light col-2">작성일시</th>
-                    <th class="table-light col-2">수정/삭제</th>
+                    <th class="table-light col-2">답변 / 삭제</th>
                 </tr>
 				<c:forEach items="${ qList }" var="list">
                 <tr>
                     <td>${ list.board_no }</td>
                     <td>${ list.board_category }</td>
-                    <td>${ list.board_title }</td>
+                    <td class="list-title"><a href="${ path }/admin_qna_content?board_no=${ list.board_no }">
+                    <c:if test="${ list.board_title.length() gt 30 }">${ list.board_title.substring(0,30) }...</c:if>
+					<c:if test="${ list.board_title.length() lt 30 }">${ list.board_title }</c:if>
+                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if>
+                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
+                    </a></td>
                     <td>${ list.board_id }</td>
                     <td>${ list.board_hit }</td>
                     <td>${ list.board_regdate.substring(0,10) }</td>
                     <td>
-                        <button class="btn btn-outline-success btn-sm" onclick="location.href='${path}/admin_qna_update'">수정</button>
+                        <button class="btn btn-outline-primary btn-sm" onclick="location.href='${path}/admin_qna_reply_insert?board_no=${ list.board_no }'">답변</button>
                         <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">삭제</button>
                     </td>
                 </tr>
@@ -83,12 +88,14 @@
             </table>
         </div>
         
-        <%-- 삭제 모달 --%>
-        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <%-- 삭제 모달 // admin_list_view.js 삽입되어 있음
+        	modal-dialog-centered 삽입됨
+         --%>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div id="myInput" class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="deleteModalLabel">데이터 삭제</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">데이터 삭제</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -102,15 +109,15 @@
             </div>
         </div>
 		
-		<%-- 등록하기 버튼 --%>		
+		<%-- 답변 등록하기 버튼 --%>		
 		<div class="insert-form">
-        <button class="btn btn-primary insertbtn mb-3" onclick="location.href='${path}/user_qna_insert'"><i class="bi bi-pencil-fill"></i> 등록하기</button>
+        <button class="btn btn-primary insertbtn mb-3" onclick="location.href='${path}/admin_qna_reply_insert'"><i class="bi bi-pencil-fill"></i> 등록하기</button>
         </div>
         
         <%-- 페이징처리 --%>
 		<jsp:include page="../../include/pagination.jsp" />
-
+		
     </div>
-    
+    <div class="space"> </div>
 </body>
 </html>
