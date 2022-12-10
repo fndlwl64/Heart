@@ -1,4 +1,4 @@
-$document.ready(function () {
+$(document).ready(function () {
 
     // 삭제 모달
     const myModal = document.getElementById('exampleModal')

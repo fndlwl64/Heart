@@ -27,6 +27,17 @@
     margin: auto;
 }
 
+.container .noticeinfo .user {
+	
+}
+
+.container .noticeinfo tr .user > a {
+	font-weight: bold;
+	text-decoration: none;
+	color: black;
+	display: block;
+}
+
 /* admin/_view.jsp 목록 버튼 */
 .container .listbtn {
     background-color: #000;
@@ -41,6 +52,26 @@
     width: 75%;
     text-align: center;
     margin: auto;
+}
+
+/* vertical-align 추가 */
+.container .searched_list tr > th, td {
+	vertical-align: middle !important;
+}
+
+/* admin/_list.jsp 표 제목  */
+.container .searched_list .list-title {
+	text-align: left;
+}
+
+.container .searched_list .list-title > a {
+	display: block;
+	text-decoration: none;
+	color: black;
+}
+
+.container .searched_list .list-title > a:hover {
+ 	color: #686461;
 }
 
 /* admin/ _list.jsp -> 검색 폼 */
@@ -130,3 +161,8 @@
     margin-right: 1%;
 }
 
+/* space : 여백용 */
+.space {
+	margin: 4rem 0;
+
+}
