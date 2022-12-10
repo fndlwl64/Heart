@@ -81,7 +81,7 @@
                     <td>${ list.board_regdate.substring(0,10) }</td>
                     <td>
                         <button class="btn btn-outline-primary btn-sm" onclick="location.href='${path}/admin_qna_reply_insert?board_no=${ list.board_no }'">답변</button>
-                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal">삭제</button>
+                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
                     </td>
                 </tr>
                 </c:forEach>
