@@ -13,5 +13,5 @@ public interface AdoptRegDAO {
     public List<AdoptRegDTO> list();
     public AdoptRegDTO content(int id);
     public List<AdoptRegDTO> search();
-
+    public int count();
 }

@@ -20,7 +20,8 @@
 	crossorigin="anonymous"></script>
 
 </head>
-
+<c:set var="list" value="${adoptRegList }"></c:set>
+<c:set var="map" value="${animalMap }"></c:set><!-- 쿼리 조인을 피하기 위한 key, value를 통한 animal테이블 데이터 참조 -->
 <body>
 	<div class="container">
 
@@ -30,12 +31,13 @@
 			action="${path }/admin_adoptreg_search">
 			<div class="form_box row">
 				<div class="col">
-					<label> 입양등록일 : <input type="date" name="searchSdate"
-						title="입양등록일">
+					<label> 입소등록일 : <input type="date" name="searchSdate"
+						title="입양등록일"> <label> 입양등록일 : <input type="date"
+							name="searchSdate" title="입양등록일">
 					</label> <label> 입양예정일 : <input type="date" name="searchSdate"
-						title="입양등록일">
+							title="입양등록일">
 					</label> <label> 입양완료일 : <input type="date" name="searchSdate"
-						title="입양등록일">
+							title="입양등록일">
 					</label>
 				</div>
 
@@ -51,15 +53,14 @@
 		<button class="btn btn-success insertbtn"
 			onclick="location.href='${path }/adoptreg_insert'">등록</button>
 
-		<br>
-		<br>
+		<br> <br>
 
 		<%-- 검색 결과 테이블 --%>
 		<div class="lists">
 			<table class="table searched_list">
 				<tr>
 					<th class="table-secondary">회원 아이디</th>
-					<th class="table-secondary">동물 번호</th>
+					<th class="table-secondary">동물 이름</th>
 					<th class="table-secondary">입소 신청일</th>
 					<th class="table-secondary">입양 등록일</th>
 					<th class="table-secondary">입양 예정일</th>
@@ -68,13 +69,13 @@
 				</tr>
 				<c:forEach var="dto" items="${list }">
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>${dto.adopt_reg_userid }</td>
+						<td>${map.get(dto.adopt_reg_animalno).get(0) }</td>
+						<td>${dto.adopt_reg_appdate }</td>
+						<td>${dto.adopt_reg_regdate }</td>
+						<td>${dto.adopt_reg_duedate }</td>
+						<td>${dto.adopt_reg_adoptdate }</td>
+						<td>${map.get(dto.adopt_reg_animalno).get(1) }</td>
 					</tr>
 				</c:forEach>
 
