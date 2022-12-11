@@ -11,6 +11,12 @@
 	display: inline-block;
 }
 
+.container .total_user {
+	text-align: left;
+	margin-bottom: 1%;
+	color: #566573;
+}
+
 .container .search_form .form_box select:focus {
 	outline: none;
 }
@@ -61,9 +67,10 @@
     margin-bottom: 5%;
 }
 
+
 /* admin/_list.jsp 검색 결과 테이블 태그 */
 .container .searched_list {
-    width: 75%;
+    width: 100%;
     text-align: center;
     margin: auto;
 }
@@ -132,9 +139,10 @@
 
 /* admin/ _list.jsp -> 검색 폼 밑 div (전체 목록 테이블) */
 .container .lists {
+	margin: auto;
 	margin-top: 1%;
 	margin-bottom: 5%;
-	
+	width: 75%;
 }
 
 /* admin/ _list.jsp -> 검색 폼 밑 테이블 a 링크 밑줄 제거 */

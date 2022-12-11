@@ -28,8 +28,10 @@ public class AdminController {
 	public String admin_main(Model model) {
 		
 		List<UserDTO> list = userDAO.getUserList();
+		int total =userDAO.totalUser();
 		
 		model.addAttribute("list", list);
+		model.addAttribute("total", total);
 		
 		return "admin/user/user_list";
 	}
@@ -37,8 +39,10 @@ public class AdminController {
     @RequestMapping("/user_list")
     public String user_list(Model model) {
     	List<UserDTO> list = userDAO.getUserList();
+    	int total =userDAO.totalUser();
 		
 		model.addAttribute("list", list);
+		model.addAttribute("total", total);
 		    	
         return "admin/user/user_list";
     }
