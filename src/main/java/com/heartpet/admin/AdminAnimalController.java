@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.AdoptRegDAO;
 import com.heartpet.action.AnimalDAO;
+import com.heartpet.model.AdoptRegDTO;
 import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.FileUploadImage;
 
@@ -120,6 +121,7 @@ public class AdminAnimalController {
 	@RequestMapping("/adoptreg_list")
 	public String adoptreg_list(Model model) {
 		//model.addAttribute("adoptregList", adoptRegDAO.list());
+		//해시맵으로 조인 유사하게 구현
 		List<AnimalDTO> animalList = animalDAO.list();
 		Map<Integer, ArrayList<String>> maps = new HashMap();
 		for(AnimalDTO dto : animalList) {
@@ -128,9 +130,10 @@ public class AdminAnimalController {
 			aList.add(dto.getAnimal_status());
 			maps.put(dto.getAnimal_no(), aList);
 		}
-		System.out.println(maps);
-		model.addAttribute("list",adoptRegDAO.list());
-		System.out.println(adoptRegDAO.list().toString());
+		System.out.println(maps.toString());
+		model.addAttribute("adoptRegList",adoptRegDAO.list());
+		model.addAttribute("animalMap",maps);
+
 		return "admin/adoptreg_list";
 	}
 }

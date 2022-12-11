@@ -13,4 +13,5 @@ public interface AnimalDAO {
     public AnimalDTO content(int id);
     public List<AnimalDTO> search();
     public List<String> animalName(List<Integer> animalId);
+    public int count();
 }

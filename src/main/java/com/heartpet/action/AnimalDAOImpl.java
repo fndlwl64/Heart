@@ -52,6 +52,11 @@ public class AnimalDAOImpl implements AnimalDAO{
 		return null;
 	}
 	
+	@Override
+	public int count() {
+		return sqlSession.selectOne("animal_count");
+	}
+
 	//////////////////////////////////////////////////////
 	// Review에서 사용 @남윤지
 	//////////////////////////////////////////////////////

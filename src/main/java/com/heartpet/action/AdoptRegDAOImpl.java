@@ -51,6 +51,11 @@ public class AdoptRegDAOImpl implements AdoptRegDAO{
 		return null;
 	}
 
+	@Override
+	public int count() {
+		return 0;
+	}
+
 	
 	
 }

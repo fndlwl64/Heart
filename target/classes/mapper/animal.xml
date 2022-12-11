@@ -4,6 +4,9 @@
 
 
 <mapper namespace="AnimalDAO">
+	<select id="animal_count" resultType="int">
+		select max(animal_no) from heartpet_animal
+	</select>
 	<select id="animal_content" resultType="AnimalDTO">
 		select * from heartpet_animal where animal_no = #{animal_no}
 	</select>
