@@ -5,6 +5,16 @@
     width: 85%;
 }
 
+/* admin/user_list.jsp */
+.container .search_form .form_box .user_field {
+	width: 20%;
+	display: inline-block;
+}
+
+.container .search_form .form_box select:focus {
+	outline: none;
+}
+
 /* admin/user_content.jsp 테이블 태그 */
 .container .userinfo {
     width: 50%;
@@ -120,10 +130,10 @@
     padding: 0 1%;
 }
 
-/* admin/ _list.jsp -> 검색 폼 밑 div */
+/* admin/ _list.jsp -> 검색 폼 밑 div (전체 목록 테이블) */
 .container .lists {
 	margin-top: 1%;
-	margin-bottom: 1%;
+	margin-bottom: 5%;
 	
 }
 

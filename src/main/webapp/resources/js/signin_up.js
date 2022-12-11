@@ -140,7 +140,7 @@ $(function() {
 				'border-radius': '3px'
 			});
 			$("#login_btn").attr("disabled", true);
-			$("#idcheck").html("<i class='bi bi-x-circle-fill'></i><font style='color:red; font-size:13px;'>아이디를 입력하세요.</font>");
+			$("#idcheck").html("<i class='bi bi-x-circle-fill'></i><br><font style='color:red; font-size:13px;'>아이디를 입력하세요.</font>");
 		}else {			
 			$.ajax({			
 	            contentType: "application/x-www-form-urlencoded;charset=UTF-8",

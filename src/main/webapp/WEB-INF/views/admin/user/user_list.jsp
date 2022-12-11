@@ -22,7 +22,7 @@
     <%-- 검색 폼  --%>
     <form class="search_form" action="${path }/admin_user_search" method="post">
         <div class="form_box">
-            <select name="field">
+            <select class="form-select form-select-sm user_field" name="field">
                 <option value="id">회원 아이디</option>
                 <option value="grade">회원 등급</option>
             </select>
@@ -33,11 +33,11 @@
         </div>
     </form>
 
-    <br><br><br>
+    <br><br>
 
     <%-- 검색 결과 테이블 --%>
     <div class="lists">
-        <table class="table searched_list">
+        <table class="table table-hover searched_list">
             <tr>
                 <th class="table-secondary">회원번호</th>
                 <th class="table-secondary">회원아이디</th>
@@ -54,8 +54,8 @@
 	                <td>${list.user_grade}등급</td>
 	                <td>${list.user_animalexp}</td>
 	                <td>
-	                    <button class="btn btn-primary" onclick="location.href='${path}/user_update?user_id=${list.user_id }'">수정</button>
-	                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
+	                    <button class="btn btn-outline-primary" onclick="location.href='${path}/user_update?user_id=${list.user_id }'">수정</button>
+	                    <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
 	                </td>
 	            </tr>
             </c:forEach>            	

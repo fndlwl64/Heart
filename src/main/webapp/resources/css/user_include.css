@@ -104,7 +104,6 @@ body {
 }
 
 .wrap .h-wrap .modal .modal-content .modal-body .login_text {
-    display: block;
     margin: auto;
     width: 200px;
     outline: none;

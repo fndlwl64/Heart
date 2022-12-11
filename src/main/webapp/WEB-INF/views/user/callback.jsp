@@ -33,11 +33,12 @@
 		}
 		
 		//alert(id+"/"+email+"/"+name);
-		//console.log(id+"/"+email+"/"+name);
+		console.log(id+"/"+email+"/"+name);
 		
 		location.href="/project/naver_logined?id="+id+"&name="+name+"&email="+email;
 		opener.parent.location.reload();
 		window.close();
+		console.log(id+"/"+email+"/"+name);
 		
 	}
 </script>

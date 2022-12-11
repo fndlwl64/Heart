@@ -103,7 +103,6 @@
                                 <label for="login_id">
 	                                <input id="login_id" class="login_text" name="user_id" placeholder="아이디">
 	                                <span id="idcheck"></span>
-	                                <span id="check_img"></span>
                                 </label>
                                 <br />
                                 <label for="login_pwd">
