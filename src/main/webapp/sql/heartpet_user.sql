@@ -1,9 +1,9 @@
 create table heartpet_user(
-    user_no varchar2(10) primary key, 
+    user_no number(5) primary key, 
     user_id varchar2(20) unique, 
     user_pwd varchar2(30),
     user_name varchar2(20),
-    user_grade varchar2(20) default 'user',
+    user_grade number default 3,
     user_email varchar2(50),
     user_phone varchar2(30),
     user_addr varchar2(100),
