@@ -43,4 +43,8 @@
 		SELECT COUNT(USER_EMAIL) FROM HEARTPET_USER WHERE USER_EMAIL = #{email} 
 	</select>
 	
+	<select id="total_user" resultType="int">
+		SELECT COUNT(*) FROM HEARTPET_USER
+	</select>
+	
 </mapper>

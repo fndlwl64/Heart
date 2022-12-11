@@ -60,6 +60,11 @@ public class UserDAOImpl implements UserDAO {
 		return this.sqlSession.selectOne("email_check", email);
 	}
 
+	@Override
+	public int totalUser() {
+		return this.sqlSession.selectOne("total_user");
+	}
+
 	
 
 }

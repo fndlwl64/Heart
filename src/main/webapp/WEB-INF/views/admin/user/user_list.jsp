@@ -34,9 +34,13 @@
     </form>
 
     <br><br>
-
+	
     <%-- 검색 결과 테이블 --%>
     <div class="lists">
+	    <div class="total_user">
+			<span>총 회원 수 : ${total}명</span>
+		</div>
+	
         <table class="table table-hover searched_list">
             <tr>
                 <th class="table-secondary">회원번호</th>
