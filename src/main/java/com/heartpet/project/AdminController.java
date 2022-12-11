@@ -57,7 +57,7 @@ public class AdminController {
     }
     @RequestMapping("/review_list")
     public String review_list() {
-        return "admin/review_list";
+        return "admin/review/review_list";
     }
 
     /*관리자 리스트에서 수정하기*/

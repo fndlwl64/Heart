@@ -65,13 +65,13 @@
 
         <tr>
             <th class="table-secondary">반려동물경험</th>
-            <td>${cont.user_dogexp }</td>
+            <td>${cont.user_animalexp }</td>
         </tr>
     </table>
 
     <br>
     <%-- 목록 버튼만 : 수정,삭제,등록은 list.jsp에서  --%>
-    <button class="listbtn" onclick="location.href='${path}/user_list'">목록</button>
+    <button class="listbtn" onclick="location.href='${path}/user_list'"><i class="bi bi-card-list"></i> 목록</button>
 
 </div>
 
