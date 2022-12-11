@@ -74,7 +74,7 @@ public class UserController {
     	
     	if(check == 1) {
     		    		
-    		System.out.println(admin_check+"여기까지 / id :"+id);
+    		System.out.println(admin_check+"관리자인지 체크 / id :"+id);
     		if(admin_check == 1) {
     			// 관리자 아이디 로그인 => 관리자 페이지로 이동
     			if(pwd.equals(check_pwd)) {
@@ -194,12 +194,13 @@ public class UserController {
     }
     
     @RequestMapping("/naver_logined")
-    public void naver(@RequestParam("id")String id, @RequestParam("email")String email, @RequestParam("name")String name, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void naver(@RequestParam("id")String id, @RequestParam("name")String name, @RequestParam("email")String email, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    	
+    	System.out.println("/naver_logined : "+id+" /name : "+name+"/email : "+email);
     	PrintWriter out = response.getWriter();
     	int check = userDAO.idCheck(id);
     	
     	if(check == 1) {
-    		UserDTO dto = userDAO.getUserInfo(id);
     		UserDTO cont = userDAO.getUserInfo(id);
     		
 			session = request.getSession();
@@ -230,7 +231,7 @@ public class UserController {
     			session = request.getSession();
         		session.setAttribute("session_id", id);
         		session.setAttribute("session_name", dto.getUser_name());
-        		session.setAttribute("session_grade", 3);
+        		session.setAttribute("session_grade", dto.getUser_grade());
         		
         		out.println("<script>");
 				out.println("alert('로그인 되었습니다!');");
@@ -252,30 +253,6 @@ public class UserController {
     
     @RequestMapping("/naver_login")
     public String naver_login(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	System.out.println("가보자고");
-		/*
-		 * PrintWriter out = response.getWriter(); String clientId =
-		 * "fw7rzSQL46p95xisWWtm";//애플리케이션 클라이언트 아이디값"; String clientSecret =
-		 * "icCg7tQOJD";//애플리케이션 클라이언트 시크릿값"; String code =
-		 * request.getParameter("code"); String state = request.getParameter("state");
-		 * String redirectURI =
-		 * URLEncoder.encode("http://localhost:8081/project/naver_login", "UTF-8");
-		 * String apiURL =
-		 * "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code" +
-		 * "&client_id=" + clientId + "&client_secret=" + clientSecret +
-		 * "&redirect_uri=" + redirectURI + "&code=" + code + "&state=" + state; String
-		 * accessToken = ""; String refresh_token = ""; try { URL url = new URL(apiURL);
-		 * HttpURLConnection con = (HttpURLConnection)url.openConnection();
-		 * con.setRequestMethod("GET"); int responseCode = con.getResponseCode();
-		 * BufferedReader br; if (responseCode == 200) { // 정상 호출 br = new
-		 * BufferedReader(new InputStreamReader(con.getInputStream())); } else { // 에러
-		 * 발생 br = new BufferedReader(new InputStreamReader(con.getErrorStream())); }
-		 * String inputLine; StringBuilder res = new StringBuilder(); while ((inputLine
-		 * = br.readLine()) != null) { res.append(inputLine); } br.close(); if
-		 * (responseCode == 200) { out.println(res.toString()); } } catch (Exception e)
-		 * { // Exception 로깅 } System.out.println("accessToken : "+accessToken);
-		 * System.out.println("refresh_token : "+refresh_token);
-		 */
     	
     	return "user/callback";
     }

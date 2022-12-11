@@ -349,7 +349,7 @@ $(function() {
 	naver_id_login.setPopup();
 	naver_id_login.init_naver_id_login();
 	
-	console.log('네이버 여기까진 완료');
+	console.log('네이버 버튼 생성');
 	
 	
 
