@@ -5,6 +5,14 @@
     width: 85%;
 }
 
+._container {
+	text-align: center;
+	margin: auto;
+	width: 85%;
+	display: flex;
+	margin-top: 3%;
+}
+
 /* admin/user_list.jsp */
 .container .search_form .form_box .user_field {
 	width: 20%;
@@ -21,16 +29,61 @@
 	outline: none;
 }
 
-/* admin/user_content.jsp 테이블 태그 */
-.container .userinfo {
-    width: 50%;
-    margin: auto;
+.container .search_form .form_box .user_search {
+	display: inline-block;
+	width: 30%;
 }
 
-.container .userinfo td {
-	text-align: left;
-	padding-left: 8%;
+.container .search_form .form_box .searchbtn {
+	background-color: #000;
+	color: white;
+    
 }
+
+/* admin/user_content.jsp 테이블 태그 */
+.container ._container .wrap {
+	border: 1px solid #ABB2B9;
+	border-radius: 5px;
+	width: 45%;
+	margin: auto;
+	margin-bottom: 3%;
+	height: 300px;
+}
+
+
+.container ._container .wrap h3 {
+	text-align: left;
+	font-weight: bold;
+	padding: 4%;
+}
+
+.container ._container .wrap .user_info {
+    padding-left: 3%;
+    padding-bottom: 2%;
+    text-align: left;
+}
+
+.container ._container .wrap .user_info p {
+	margin: 0;
+}
+
+.container ._container .wrap .user_info .title {
+	background-color: #D5D8DC;
+	border: none;
+	border-radius: 5px;
+	font-weight: bold;
+	padding: 1% 3%;
+	margin: auto;
+	margin-bottom: 2%;
+	width: 50%;
+	text-align: center;
+}
+
+.container ._container .wrap .user_info .cont {
+	padding: 1% 3%;
+	margin-bottom: 2%;	 
+}
+
 
 /* admin/cat&dog_content.jsp 테이블 태그 */
 .container .petinfo {
@@ -121,13 +174,6 @@
 	margin: 0 2px;
 }
 
-/* admin/ _list.jsp -> 검색 폼 div 태그 검색 버튼 */
-.container .search_form .form_box .btn.searchbtn {
-    background: url(../image/ico-search.png) no-repeat 7px center;
-    background-color: #6c757d;
-    color: white;
-    padding-left: 25px;
-}
 /* admin/ _list.jsp -> 검색 폼 div 태그 '중성화' */
 .container .search_form .form_box .Dneutered{
     padding: 0 3%;

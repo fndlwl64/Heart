@@ -27,9 +27,10 @@
                 <option value="grade">회원 등급</option>
             </select>
 
-            <input name="keyword">
-
-            <input class="btn btn-secondary searchbtn" type="submit" value="검색">
+            <input class="form-control form-control-sm user_search" name="keyword">
+			
+			<button class="btn searchbtn" type="submit"><i class="i bi-search"></i> 검색</button>
+			
         </div>
     </form>
 

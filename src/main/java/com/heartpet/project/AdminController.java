@@ -96,6 +96,13 @@ public class AdminController {
     	return "admin/user/user_update";
     }
     
+    @RequestMapping("/user_updated")
+    public void user_updated(HttpServletResponse response) throws IOException {
+    	PrintWriter out =response.getWriter();
+    	
+    	
+    }
+    
     /*관리자 리스트에서 등록하기*/
     @RequestMapping("/adoptreg_insert")
     public String adoptreg_insert() {
@@ -143,12 +150,13 @@ public class AdminController {
     	
     	model.addAttribute("cont", dto);
     	
-        return "admin/user/user_content";
+        return "admin/user/user_view";
     }
     
     // 관리자 리스트에서 삭제하기
     @RequestMapping("/user_delete")
-    public void user_delete() {
+    public void user_delete(HttpServletResponse response, HttpServletRequest request) throws IOException {
+    	PrintWriter out = response.getWriter();
     	
     }
 }

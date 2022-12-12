@@ -17,7 +17,7 @@
 
     <br>
     <%-- el태그로 이름 가져와 입력 --%>
-    <h2>${cont.user_name}님 정보</h2>
+    <h2>${cont.user_name} 회원 정보</h2>
     <br><br>
 
     <table class="table userinfo">
