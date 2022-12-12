@@ -9,6 +9,9 @@
 <c:set var="field" value="${ field }" />
 <c:set var="keyword" value="${ keyword }" />
 <c:set var="link_address" value="${pageContext.request.contextPath}/user_qna_list" />
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
 
@@ -72,6 +75,7 @@
 						<c:if test="${ list.board_title.length() lt 20 }">${ list.board_title } </c:if>
 	                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if>
 	                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
+	                    <c:if test="${ list.board_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>	                    
 	                    </a>
                     </td>
                     <td>${ list.board_id }</td>
