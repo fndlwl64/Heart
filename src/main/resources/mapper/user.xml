@@ -44,9 +44,15 @@
 	</select>
 	
 	<select id="total_user" resultType="int">
-		SELECT COUNT(*) FROM HEARTPET_USER
+		SELECT COUNT(*) FROM HEARTPET_USER WHERE USER_GRADE NOT IN (1,5)
 	</select>
 	
+	<update id="update_num" parameterType="int">
+		UPDATE HEARTPET_USER SET USER_NO = (USER_NO - 1) WHERE USER_NO > #{no} 
+	</update>
 	
+	<delete id="delete_user" parameterType="String">
+		DELETE FROM HEARTPET_USER WHERE USER_ID = #{id}
+	</delete>
 	
 </mapper>

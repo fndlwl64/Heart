@@ -155,8 +155,9 @@ public class AdminController {
     
     // 관리자 리스트에서 삭제하기
     @RequestMapping("/user_delete")
-    public void user_delete(HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public void user_delete(@RequestParam("id")String id, HttpServletResponse response, HttpServletRequest request) throws IOException {
     	PrintWriter out = response.getWriter();
+    	int delete = userDAO.deleteuser(id);
     	
     }
 }

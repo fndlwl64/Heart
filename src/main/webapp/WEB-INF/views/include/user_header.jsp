@@ -60,6 +60,7 @@
                         </ul>
                     </div>
                 </div>
+                
                 <div class="nav-bar justify-content-center">
                     <div class="nav-links">
                         <ul>

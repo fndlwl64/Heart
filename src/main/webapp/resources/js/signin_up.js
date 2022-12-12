@@ -330,12 +330,15 @@ $(function() {
 		
 	});
 	
+	
 	let zipcode = $("#sample6_postcode").val();
 	let address = $("#sample6_detailAddress").val();
 	
 	if(zipcode == '' || address == '') {
 		$("#join_btn").attr("disabled", true);
 	}
+	
+	
 	
 });
 

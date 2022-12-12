@@ -70,6 +70,11 @@ public class UserDAOImpl implements UserDAO {
 		return this.sqlSession.delete("delete_user", id);
 	}
 
+	@Override
+	public int update_num(String no) {
+		return this.sqlSession.update("update_num", no);
+	}
+
 	
 
 }
