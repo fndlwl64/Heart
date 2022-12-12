@@ -75,10 +75,9 @@
 						<td>${dto.adopt_reg_regdate }</td>
 						<td>${dto.adopt_reg_duedate }</td>
 						<td>${dto.adopt_reg_adoptdate }</td>
-						<td><a href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }">${map.get(dto.adopt_reg_animalno).get(1) }</a></td>
+						<td><a href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }" onclick="return onclickOption(this);" class="status">${map.get(dto.adopt_reg_animalno).get(1) }</a></td>
 					</tr>
 				</c:forEach>
-
 			</table>
 
 		</div>
@@ -123,4 +122,13 @@
 
 
 </body>
+<script type="text/javascript">
+	function onclickOption(th) {
+		console.log($(th).text());
+		if($(th).text() == '입소 신청' || $(th).text() == '입양 완료'){
+			alert('관리할 사항이 없습니다.');
+			return false;
+		}
+	}
+</script>
 </html>

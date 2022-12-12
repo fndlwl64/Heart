@@ -25,17 +25,34 @@
 				<td>${content.adopt_reg_animalno }</td>
 			</tr>
 			<tr>
+				<th class="table-secondary"><span class="sp2">입소신청일</span></th>
+				<td>${content.adopt_reg_appdate }</td>
+			</tr>
+			<tr>
 				<th class="table-secondary"><span class="sp2">입양등록일</span></th>
 				<td>${content.adopt_reg_regdate }</td>
 			</tr>
 			<tr>
 				<th class="table-secondary"><span class="sp2">입양예정일</span></th>
-				<td>${content.adopt_reg_duedate }</td>
+				<td>
+					<c:if test="${empty content.adopt_reg_duedate }">
+						<input type="datetime-local" name="adopt_reg_duedate">
+					</c:if>
+					<c:if test="${not empty content.adopt_reg_duedate }">
+						${content.adopt_reg_duedate }
+					</c:if>
+				</td>
 			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">입양완료일</span></th>
-				<td>${content.adopt_reg_adoptdate }</td>
-			</tr>
+			<c:if test="${not empty content.adopt_reg_duedate }">
+				<tr>
+					<th class="table-secondary"><span class="sp2">입양완료일</span></th>
+					<td>
+						<c:if test="${empty content.adopt_reg_adoptdate }">
+							<input type="datetime-local" name="adopt_reg_adoptdate">
+						</c:if>
+					</td>
+				</tr>
+			</c:if>
 		</table>
 		<br>
 		<input id="update_btn" type="submit" value="변경" align="center">
