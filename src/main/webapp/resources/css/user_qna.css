@@ -114,8 +114,7 @@
 .qna-content .content-body {
     display: flex;
     padding: 1rem 2rem;
-    min-height: 400px;
-    max-height: 600px;
+    min-height: 600px;
     flex-wrap: wrap;
     align-content: center;
     justify-content: center;
