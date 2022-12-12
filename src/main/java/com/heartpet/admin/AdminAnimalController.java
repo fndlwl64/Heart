@@ -153,4 +153,13 @@ public class AdminAnimalController {
 
 		return "admin/adoptreg_list";
 	}
+	/*관리자 리스트에서 수정하기*/
+    @RequestMapping(value = "/adoptreg_update", method = RequestMethod.GET)
+    public String adoptreg_update(@RequestParam("adopt_reg_regno")int adopt_reg_regno, Model model) {
+    	System.out.println(adopt_reg_regno);
+    	AdoptRegDTO adoptRegDTO = adoptRegDAO.content(adopt_reg_regno);
+    	System.out.println(adoptRegDTO.toString());
+    	model.addAttribute("content",adoptRegDTO);
+        return "admin/adoptreg_update";
+    }
 }

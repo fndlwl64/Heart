@@ -40,8 +40,7 @@ public class AdoptRegDAOImpl implements AdoptRegDAO{
 
 	@Override
 	public AdoptRegDTO content(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("adoptreg_content",id);
 	}
 
 	@Override

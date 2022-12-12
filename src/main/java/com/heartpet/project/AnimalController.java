@@ -76,13 +76,15 @@ public class AnimalController {
 		animalDAO.updateStatus(animalDTO);
 		
 		// Adoptreg 추가
+		// user id 변경
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
 		String strDate = dateFormat.format(Calendar.getInstance().getTime());
 		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
+		adoptRegDTO.setAdopt_reg_userid(request.getSession().getAttribute("session_id").toString());
 		adoptRegDTO.setAdopt_reg_animalno(animal_no);
 		adoptRegDTO.setAdopt_reg_regdate(strDate);
 		adoptRegDAO.update(adoptRegDTO);
-		
+	
 		return "redirect:/";
 	}
 
