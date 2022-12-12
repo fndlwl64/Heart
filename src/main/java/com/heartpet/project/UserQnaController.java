@@ -30,7 +30,7 @@ public class UserQnaController {
     private QnaDAO qnaDAO;
     
     // 한 페이지당 보여질 게시물의 수
-    private final int rowsize = 3;
+    private final int rowsize = 10;
 
     // 전체 게시물의 수
     private int totalRecord = 0;
@@ -97,7 +97,8 @@ public class UserQnaController {
     // QNA_INSERT
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/user_qna_insert")
-    public String user_qna_insert(HttpServletResponse response, HttpServletRequest request) throws IOException { 
+    public String user_qna_insert(@RequestParam(value = "board_parentNo", defaultValue = "0") int board_parentNo, 
+    		HttpServletResponse response, HttpServletRequest request, Model model) throws IOException { 
 		response.setContentType("text/html; charset=UTF-8");
     	HttpSession session = request.getSession();
     	PrintWriter out = response.getWriter();
@@ -107,6 +108,10 @@ public class UserQnaController {
     		out.println("<script> alert('로그인이 필요합니다.'); location.href='"+request.getContextPath()+"/'; </script>");
     		out.flush();
     	}
+    	
+    	
+    	QnaDTO qnaContent = this.qnaDAO.contentQna(board_parentNo);    	
+    	model.addAttribute("qnaContent", qnaContent);
     	
     	return "user/qna/qna_insert";
     }    

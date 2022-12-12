@@ -2,6 +2,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="list" value="${ qnaContent }" />
+<c:choose>
+	<c:when test="${ not empty list }"> 
+		<c:set var="semiTitle" value="답변" />
+		<c:set var="buttonText" value="답변달기" />
+	</c:when>
+	<c:otherwise> 
+		<c:set var="semiTitle" value="문의" />	
+		<c:set var="buttonText" value="등록하기" />	
+	</c:otherwise>
+</c:choose>
+<!-- list : 부모글 -->
+<% pageContext.setAttribute("newline", "\n"); %>
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
 <script src="${path}/resources/js/user_qna_insert.js"></script>
@@ -11,7 +24,7 @@
     <div class="qna-section">
         <div class="row">
             <div class="col-3 space"></div>
-            <div class="col-6 title">문의글 작성하기</div>
+            <div class="col-6 title">${ semiTitle }글 작성하기</div>
             <div class="col-3 space"></div>
         </div>
     </div>
@@ -19,6 +32,10 @@
     <div>
         <form action="${path}/user_qna_insert_ok" method="post" enctype="multipart/form-data">
         <input type="hidden" name="board_id" value="${ session_id }" />
+        <!-- 답변글 작성인 경우 parentNo = board_no 되도록 -->
+        <c:if test="${ not empty list }">
+       	<input type="hidden" name="board_parentNo" value="${ list.board_no }" />
+        </c:if>
         <table class="table align-middle">
             <tr class="border-top">
                 <th class="table-light col-1">카테고리</th>
@@ -29,24 +46,25 @@
                         <option value="후원">후원</option>
                         <option value="기타">기타</option>
                     </select>
-                </td>
+                </td>           
                 <th class="table-light col-1">작성자</th>
                 <td class="col-2"><input type="text" class="form-control-plaintext ms-2" value="${ session_id }" disabled="disabled"></td>
                 <th class="table-light col-1">
-                <label><input class="form-check-input col-1" type="checkbox" name="board_secret" value="Y" checked="checked"> 비밀글</label>
+                <label><input class="form-check-input col-1" type="checkbox" name="board_secret" value="Y" 
+                <c:if test="${ list.board_secret eq 'Y' }">checked="checked" disabled="disabled"</c:if>> 비밀글</label>
                 <input type="hidden" name="board_secret" value="N" disabled="disabled" />
                 </th>
             </tr>
             <tr>
                 <th class="table-light">제목</th>
-                <td colspan="4">
-                <input type="text" class="form-control" name="board_title" required="required">
+                <td colspan="4">                            
+                <input type="text" class="form-control" name="board_title" value="${ list.board_title }" required="required">
                 </td>
             </tr>
             <tr>
                 <th class="table-light">내용</th>
                 <td colspan="4">
-                <textarea name="board_content" class="form-control" cols="30" rows="10"></textarea>
+                <textarea name="board_content" class="form-control" cols="30" rows="10">${ list.board_content.replace(newline, '<br/>') }<c:if test="${ not empty list.board_content }">&#10;=====================================================&#10;</c:if></textarea>
                 </td>
             </tr>
             <tr>
@@ -64,10 +82,14 @@
         <div class="qna-section">
             <div class="row">
                 <div class="col-3 space"></div>
-                <div class="col-6 title btn-insert">
-                    <button type="button" class="btn btn-secondary" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록으로</button>
-                    <button type="reset" class="btn btn-warning"><i class="bi bi-pencil"></i> 다시작성</button>
-                    <button type="submit" class="btn btn-dark"><i class="bi bi-save"></i> 등록하기</button>
+                <div class="col-6 title btn-insert d-flex justify-content-between">
+                	<div>
+                    	<button type="button" class="btn btn-dark" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
+                    </div>
+                    <div>
+	                    <button type="reset" class="btn btn-warning"><i class="bi bi-pencil"></i> 다시작성</button>
+	                    <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> ${ buttonText }</button>
+                    </div>
                 </div>
                 <div class="col-3 space"></div>
             </div>

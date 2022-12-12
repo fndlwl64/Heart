@@ -58,8 +58,16 @@
                 <tr>
                     <td>${ list.board_no }</td>
                     <td>${ list.board_category }</td>
-                    <td class="left-align">
+                    <td class="left-align">                  
 	                    <a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }">
+	                    <c:choose>
+	                    	<c:when test="${ list.level > 1 }">
+	                    		<c:forEach begin="1" end="${ list.level-1 }" step="1">
+	                    		<span style="padding-left:20px"></span>	                    		
+	                    		</c:forEach>
+	                    		<span class="badge rounded-pill text-bg-light"><i class="bi bi-arrow-return-right"></i> Re</span>
+	                    	</c:when>
+	                    </c:choose>
 	                    <c:if test="${ list.board_title.length() gt 20 }">${ list.board_title.substring(0,20) }... </c:if>
 						<c:if test="${ list.board_title.length() lt 20 }">${ list.board_title } </c:if>
 	                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if>

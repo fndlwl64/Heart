@@ -10,15 +10,34 @@
 	////////////////////////////////////////////////////////////////////////////////////////////  	
 	-->
 	<sql id="qna_select">
-		select * from heartpet_board 
+	<![CDATA[SELECT LEVEL, 
+		       board_no, 
+		       board_parentNo, 
+		       LPAD('', 4*(LEVEL-1)) || board_title as board_title,
+		       board_category,
+		       board_content,
+		       board_id,
+		       board_hit,
+		       board_secret,
+		       board_pwd, 
+		       board_regdate,
+		       board_update,
+		       board_img1,
+		       board_img2]]>
 	</sql>
 	<sql id="qna_keyword">
 		like '%' || #{keyword} || '%'
 	</sql>
+	<sql id="qna_hierarchy">
+		START WITH board_parentNo = 0
+		CONNECT BY PRIOR board_no = board_parentNo
+		ORDER SIBLINGS BY board_parentNo desc, board_no desc
+	</sql>
 	
 	<!-- list -->
 	<select id="qna_list" parameterType="hashMap" resultType="QnaDTO">
-		<![CDATA[select * from (select b.*, row_number() over(order by board_no desc) rnum from heartpet_board b ]]>
+		<include refid="qna_select" /> 
+			FROM (select b.*, row_number() over(order by board_no desc) rnum from heartpet_board b
 		<where>
 		 <choose>
             <when test="field.equals('allSearch') and keyword != ''"> (board_title <include refid="qna_keyword" />) or (board_content <include refid="qna_keyword" />) or (board_category <include refid="qna_keyword" />) or (board_id <include refid="qna_keyword" />)</when>
@@ -28,16 +47,17 @@
             <when test="field.equals('id') and keyword != ''"> board_id <include refid="qna_keyword" /></when>
          </choose>
          </where>
-         <![CDATA[) where rnum >= #{startNo} and rnum <= #{endNo}]]>
+         <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo} ]]>
+		 <include refid="qna_hierarchy" /> 
 	</select>
 	
 	<!-- content -->
 	<update id="qna_hit" parameterType="int">
 		update heartpet_board set board_hit = board_hit + 1 where board_no = #{ board_no }
-	</update>
-	
+	</update>	
 	<select id="qna_content" parameterType="int" resultType="QnaDTO">
-		<include refid="qna_select" /> where board_no = #{ board_no }
+		<include refid="qna_select" /> from heartpet_board where board_no = #{ board_no }
+		<include refid="qna_hierarchy" />
 	</select>
 	
 	<!-- count : 게시글 개수 -->
@@ -55,15 +75,19 @@
         </where>
 	</select>
 	
-	<!-- insert -->
+	<!-- 글 쓰기 : insert -->
 	<insert id="qna_insert" parameterType="QnaDTO">
 		<selectKey resultType="int" keyProperty="board_no" order="BEFORE">
 			select max(board_no)+1 from heartpet_board
 		</selectKey>
-		insert into heartpet_board values (#{ board_no }, #{ board_category }, #{ board_id }, default, #{ board_title },
+		insert into heartpet_board 
+		values (#{ board_no },
+			<if test="board_parentNo != 0"> #{ board_parentNo }, </if>
+			<if test="board_parentNo == 0"> default, </if>
+			#{ board_category }, #{ board_id }, default, #{ board_title },
 		#{ board_content }, #{ board_secret }, #{ board_pwd }, sysdate, '', '', '')
 	</insert>
-	
+		
 	<!-- update -->
 	<update id="qna_update" parameterType="QnaDTO">
 		update heartpet_board set board_category = #{ board_category }, board_title = #{ board_title }, board_content = #{ board_content }, 
