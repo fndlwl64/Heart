@@ -72,24 +72,36 @@ public class UserQnaController {
     	PrintWriter out = response.getWriter();
     	
     	// 로그인 여부 체크
-    	if(session.getAttribute("session_id") == null || session.getAttribute("session_id") == "" ) {
+    	if(session.getAttribute("session_id") == null || session.getAttribute("session_id") == "" || session.getAttribute("session_admin_id") == null || session.getAttribute("session_admin_id") == "" ) {
     		out.println("<script> alert('로그인이 필요합니다.'); location.href='"+request.getContextPath()+"/login'; </script>");
     	}
     	
-    	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
-    	String session_id = (String)session.getAttribute("session_id");
-    	
+    	QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);    	
+    	String session_id = null;
+    	if(session.getAttribute("session_id") != null) {    		
+    		session_id = (String)session.getAttribute("session_id");
+    	}else {    		
+    		session_id = (String)session.getAttribute("session_admin_id");
+    		System.out.println("여기"+session_id);
+    	}
+
+		System.out.println(session_id);
+
     	// 비밀글 여부 체크
     	// 비밀글 Y -> 아이디 체크
     	// 비밀글 N -> 접근 O
+    	// 비밀글이거나 session_id = admin
     	if(qnaContent.getBoard_secret().equals("Y")) {
-        	if(!session_id.equals(qnaContent.getBoard_id())) { // 작성자 확인
-        		if(qnaContent.getBoard_id() != "admin") {      // 작성자가 admin이 아니면		
-        			out.println("<script> alert('비밀글입니다.'); history.back(); </script>"); 
-        			out.flush();
-        		}
-        	}        	
+    		if(!session_id.equals("admin")) {
+            	if(!session_id.equals(qnaContent.getBoard_id())) { // 작성자 확인 - 아이디가 작성자와 일치하지 않을 때
+            		if(qnaContent.getBoard_id() != "admin") {      // 작성자가 admin이 아니면		
+            			out.println("<script> alert('비밀글입니다.'); history.back(); </script>"); 
+            			out.flush();
+            		}
+            	}
+    		}
     	}
+    	
     	this.qnaDAO.hitQna(board_no);
     	model.addAttribute("qnaContent", qnaContent);
     	return "user/qna/qna_content";  		
