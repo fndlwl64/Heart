@@ -6,7 +6,22 @@
 <mapper namespace="AdoptRegDAO">
 	<select id="adoptreg_list" resultType="AdoptRegDTO">
 		select * from heartpet_adopt_reg order by adopt_reg_regno desc
-	</select>	
+	</select>
+	<update id="adoptreg_update" parameterType="AdoptRegDTO">
+		update heartpet_adopt_reg set
+		<choose>
+			<when test='adopt_reg_regdate != null'>
+				adopt_reg_regdate = TO_DATE(#{adopt_reg_regdate}, 'YYYY-MM-DD HH24:MI:SS')
+			</when>
+			<when test='adopt_reg_duedate != null'>
+				adopt_reg_duedate = TO_DATE(#{adopt_reg_duedate}, 'YYYY-MM-DD HH24:MI:SS')
+			</when>
+			<when test='adopt_reg_adoptdate != null'>
+				adopt_reg_adoptdate = TO_DATE(#{adopt_reg_adoptdate}, 'YYYY-MM-DD HH24:MI:SS')
+			</when>
+		</choose>
+		where adopt_reg_animalno = #{adopt_reg_animalno}
+	</update>
 	<insert id="adoptreg_insert" parameterType="AdoptRegDTO">
 		<selectKey resultType="int" keyProperty="adopt_reg_regno"
 			order="BEFORE">
@@ -21,12 +36,7 @@
 		'' ,
 		'' ,
 		'' ,
-		<if test="adopt_reg_appdate != null">
-			TO_DATE(#{adopt_reg_appdate}, 'YYYY-MM-DD HH24:MI:SS')
-		</if>
-		<if test="adopt_reg_appdate == null">
-			''
-		</if>
+		TO_DATE(#{adopt_reg_appdate}, 'YYYY-MM-DD HH24:MI:SS')
 		)
 	</insert>
 </mapper>

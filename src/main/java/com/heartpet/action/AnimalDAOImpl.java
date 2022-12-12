@@ -23,6 +23,11 @@ public class AnimalDAOImpl implements AnimalDAO{
 	public int update(AnimalDTO dto) {
 		return sqlSession.update("animal_update", dto);
 	}
+	
+	@Override
+	public int updateStatus(AnimalDTO dto) {
+		return sqlSession.update("animal_updateStatus",dto);
+	}
 
 	@Override
 	public void delete(int id) {
@@ -39,6 +44,11 @@ public class AnimalDAOImpl implements AnimalDAO{
 	@Override
 	public List<AnimalDTO> listTag(String animal_tag) {
 		return sqlSession.selectList("animal_listTag", animal_tag);
+	}
+	
+	@Override
+	public List<AnimalDTO> listTagUser(String animal_tag) {
+		return sqlSession.selectList("animal_listTagUser",animal_tag);
 	}
 
 	@Override

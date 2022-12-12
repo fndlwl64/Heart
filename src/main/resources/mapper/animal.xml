@@ -15,6 +15,11 @@
 	</select>
 	<select id="animal_listTag" resultType="AnimalDTO">
 		select * from heartpet_animal where animal_tag = #{animal_tag} order by animal_no desc
+	</select>
+	<select id="animal_listTagUser" resultType="AnimalDTO">
+		select * from heartpet_animal
+		where animal_tag = #{animal_tag} and not animal_status = '입양 완료'
+		order by animal_no desc
 	</select>		
 	<insert id="animal_insert" parameterType="AnimalDTO">
 		<selectKey resultType="int" keyProperty="animal_no" order="BEFORE">
@@ -60,6 +65,12 @@
 			animal_img3 = #{animal_img3},
 			animal_status = #{animal_status},
 			animal_update = sysdate
+		where animal_no = #{animal_no}
+	</update>
+	<update id="animal_updateStatus" parameterType="AnimalDTO">
+		update heartpet_animal
+		set 
+			animal_status = #{animal_status}
 		where animal_no = #{animal_no}
 	</update>
 	<delete id="animal_delete">

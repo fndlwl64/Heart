@@ -130,7 +130,8 @@
         	if ($('#user_id').val() == ''){
                 alert("로그인을 해주세요");
                 return false;
-            }if ($('#user_grade').val() > 2){
+            }
+        	if ($('#user_grade').val() > 2){
                 alert("회원의 등급이 낮아 입소 자격이 없습니다.");
                 return false;
             }
