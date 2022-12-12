@@ -84,9 +84,11 @@ public class UserQnaController {
     	// 비밀글 N -> 접근 O
     	if(qnaContent.getBoard_secret().equals("Y")) {
         	if(!session_id.equals(qnaContent.getBoard_id())) { // 작성자 확인
-        		out.println("<script> alert('비밀글입니다.'); history.back(); </script>"); 
-        		out.flush();
-        	}
+        		if(qnaContent.getBoard_id() != "admin") {      // 작성자가 admin이 아니면		
+        			out.println("<script> alert('비밀글입니다.'); history.back(); </script>"); 
+        			out.flush();
+        		}
+        	}        	
     	}
     	this.qnaDAO.hitQna(board_no);
     	model.addAttribute("qnaContent", qnaContent);

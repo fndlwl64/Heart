@@ -152,6 +152,17 @@
     margin-top: 0.5rem;
 }
 
+/* qna_insert */
+.table tr .admin {
+	text-align: left;
+	padding-left: 1rem;
+} 
+
+.table tr td #admin_id {
+	color: red;
+	font-weight: bold;
+}
+
 /* fnq - accordion */
 .accordion {
     margin: auto;

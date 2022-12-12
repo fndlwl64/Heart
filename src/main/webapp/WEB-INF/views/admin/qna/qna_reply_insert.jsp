@@ -1,59 +1,93 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="path" value="${pageContext.request.contextPath}" />	 
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
-</head>
-<script src="/js/admin.js"></script>
-<link rel="stylesheet" href="${path }/resources/css/admin_include.css">
-<body>
-<jsp:include page="../../include/admin_header.jsp" />
-<br><br>
-<div class="div1" align="center">
-	<form>
-		<table class="table">
-			<tr>
-				<th class="table-secondary"><span class="sp2">아이디</span></th>
-				<td><input class ="input1" type="text"></td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">글제목</span></th>
-				<td><input class ="input1" type="text"></td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">글내용</span></th>
-				<td><textarea rows="2" cols="22"></textarea> </td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">조회수</span></th>
-				<td><input class ="input1" type="text"></td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">비밀글여부</span></th>
-				<td><input class ="input1" type="text"></td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">이미지1</span></th>
-				<td>
-					<input type="file" onchange="readURL1(this);">
-					<img class="preview" id="preview1"/>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="list" value="${ qnaContent }" />
+<!-- list : 부모글 -->
+<% pageContext.setAttribute("newline", "\n"); %>
+<jsp:include page="../../include/user_header.jsp" />
+<link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
+<script src="${path}/resources/js/user_qna_insert.js"></script>
+
+<%-- 글쓰기 --%>
+<div id="qna-contents" class="qna-contents">
+    <div class="qna-section">
+        <div class="row">
+            <div class="col-3 space"></div>
+            <div class="col-6 title">답변글 작성하기</div>
+            <div class="col-3 space"></div>
+        </div>
+    </div>
+
+    <div>
+        <form action="${path}/admin_qna_reply_insert_ok" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="board_id" value="${ session_admin_id }" />
+        <!-- 답변글 작성인 경우 parentNo = board_no 되도록 -->
+        <c:if test="${ not empty list }">
+       		<input type="hidden" name="board_parentNo" value="${ list.board_no }" />
+        </c:if>
+        <table class="table align-middle">
+            <tr class="border-top">
+                <th class="table-light col-1">카테고리</th>
+                <td class="col-2">
+                    <select class="form-select" name="board_category">
+                        <option value="입양" selected="selected">입양</option>
+                        <option value="입소">입소</option>
+                        <option value="후원">후원</option>
+                        <option value="기타">기타</option>
+                    </select>
+                </td>           
+                <th class="table-light col-1">작성자</th>
+                <td class="col-2 admin"><span id="admin_id">관리자</span></td>
+                <th class="table-light col-1">
+                <label><input class="form-check-input col-1" type="checkbox" name="board_secret" value="Y"
+                <c:if test="${ empty list.board_secret }">checked="checked"</c:if>
+                <c:if test="${ list.board_secret eq 'Y' }">checked="checked" disabled="disabled"</c:if>
+                <c:if test="${ list.board_secret eq 'N' }"></c:if>> 비밀글</label>	  
+                <input type="hidden" name="board_secret" value="N" disabled="disabled" />
+                </th>
+            </tr>
+            <tr>
+                <th class="table-light">제목</th>
+                <td colspan="4">                            
+                <input type="text" class="form-control" name="board_title" value="${ list.board_title }" required="required">
+                </td>
+            </tr>
+            <tr>
+                <th class="table-light">내용</th>
+                <td colspan="4">
+                <textarea name="board_content" class="form-control" cols="30" rows="10">${ list.board_content.replace(newline, '<br/>').replace('<br/>', '') }<c:if test="${ not empty list.board_content }">&#10;=====================================================&#10;</c:if></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-light">글 비밀번호</th>
+				<td class="col-2"><input type="password" class="form-control" name="board_pwd" required="required">
 				</td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">이미지2</span></th>
-				<td>
-					<input type="file" onchange="readURL2(this);">
-					<img class="preview" id="preview2"/>
-				</td>
-			</tr>
-		</table>
-		<br>
-		<input id="update_btn" type="submit" value="등록" align="center">
-	</form>
+				<th class="table-light">이미지</th>
+                <td colspan="2">
+                    <div class="d-flex align-middle">
+                        <input type="file" class="form-control" name="board_img" accept="image/gif, image/jpeg, image/png" multiple>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="qna-section">
+            <div class="row">
+                <div class="col-3 space"></div>
+                <div class="col-6 title btn-insert d-flex justify-content-between">
+                	<div>
+                    	<button type="button" class="btn btn-dark" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
+                    </div>
+                    <div>
+	                    <button type="reset" class="btn btn-warning"><i class="bi bi-pencil"></i> 다시작성</button>
+	                    <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> 답변하기</button>
+                    </div>
+                </div>
+                <div class="col-3 space"></div>
+            </div>
+        </div>
+        </form>
+    </div>
 </div>
-</body>
-</html>
+
+<jsp:include page="../../include/user_footer.jsp" />

@@ -6,6 +6,7 @@ import com.heartpet.model.QnaDTO;
 import java.util.List;
 
 public interface QnaDAO {	
+	
     ////////////////////////////////////////////////////////////
     // QNA
     ////////////////////////////////////////////////////////////
@@ -26,10 +27,5 @@ public interface QnaDAO {
     public int insertFnq(FnqDTO dto);
     public int updateFnq(FnqDTO dto);
     public int deleteFnq(int fnq_no);
-    
-    ////////////////////////////////////////////////////////////
-    // QNA-reply
-    ////////////////////////////////////////////////////////////
-	public int replyInsert(int qna_no);
-    
+
 }

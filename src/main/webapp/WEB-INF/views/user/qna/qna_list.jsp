@@ -50,7 +50,7 @@
 	                <th scope="col" class="col-1">No</th>
 	                <th scope="col" class="col-2">카테고리</th>
 	                <th scope="col" class="col-4">제목</th>
-	                <th scope="col" class="col-2">글쓴이</th>
+	                <th scope="col" class="col-2">작성자</th>
 	                <th scope="col" class="col-2">작성일</th>
 	                <th scope="col" class="col-1">Hit</th>
 	            </tr>
@@ -78,7 +78,8 @@
 	                    <c:if test="${ list.board_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>	                    
 	                    </a>
                     </td>
-                    <td>${ list.board_id }</td>
+                    <td><c:if test="${ list.board_id eq 'admin' }"><span id="admin_id">관리자</span></c:if>
+                    <c:if test="${ list.board_id ne 'admin' }"><span>${ list.board_id }</span></c:if></td>
                     <td>${ list.board_regdate.substring(0,10) }</td>
                     <td>${ list.board_hit }</td>
                 </tr>
