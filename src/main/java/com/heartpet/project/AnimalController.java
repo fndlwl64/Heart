@@ -64,12 +64,7 @@ public class AnimalController {
 
 	@RequestMapping(value = "/user_animal_insert", method = RequestMethod.GET)
 	public String user_dog_insert(Model model) {
-		HttpSession session = request.getSession();
 
-		String id = (String) session.getAttribute("session_id");
-		if (id != null) {
-			model.addAttribute("userDTO", userDAO.getUserInfo(id));
-		}
 		return "user/animal/user_animal_insert";
 	}
 
@@ -89,6 +84,7 @@ public class AnimalController {
 		adoptRegDAO.insert(adoptRegDTO);
 
 		// 동물 입소 신청
+		//이미지 업로드 및 animal 데이터 추가
 		FileUploadImage upload = new FileUploadImage();
 		String[] images = upload.uploadAnimalImg(request, files);
 		animalDTO.setAnimal_img1(images[0]);

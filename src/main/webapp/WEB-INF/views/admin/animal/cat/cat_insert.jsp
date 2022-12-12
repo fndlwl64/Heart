@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <body>
 	<div class="d-flex justify-content-center">
-		<form action="<%=request.getContextPath()%>/dog_insert"
+		<form action="<%=request.getContextPath()%>/cat_insert"
 			method="post" enctype="multipart/form-data"
 			onsubmit="return submitOption();">
 			<input type="hidden" name="animal_tag" value="dog">
@@ -68,7 +68,7 @@
 				</tr>
 				<tr>
 					<th class="table-secondary">무게</th>
-					<td><input type="number" name="animal_weight" min = 0
+					<td><input type="number" name="animal_weight" min = 0 step=0.1
 						class="form-control" id="weight"></td>
 				</tr>
 				<tr>
@@ -90,8 +90,8 @@
 		</form>
 	</div>
 	<script>
-		let result = [ "말티즈", "푸들", "포메라니안", "믹스견", "치와와", "시츄", "골든리트리버",
-				"진돗개" ];
+		let result = [ "스코티시", "폴드", "샴", "페르시안", "터키시", "앙고라", "러시안 블루",
+				"벵갈" ,"먼치킨","아비시니안","기타"];
 		$('#species').append('<option></option>');
 		for (let i = 0; i < result.length; i++) {
 			$('#species').append(

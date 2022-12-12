@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,27 +58,41 @@ public class AdminAnimalController {
 		return "admin/animal/cat/cat_list";
 	}
 
-	@RequestMapping(value = "/dog_update", method = RequestMethod.GET)
-	public String pet_update(@RequestParam("no") int no, Model model) {
+	@RequestMapping(value = "/animal_update", method = RequestMethod.GET)
+	public String animal_update(@RequestParam("no") int no, Model model) {
 		model.addAttribute("content", animalDAO.content(no));
-		return "admin/animal/dog/dog_update";
+		return "admin/animal/animal_update";
 	}
 
-	@RequestMapping(value = "/dog_update", method = RequestMethod.POST)
-	public String pet_update_ok(AnimalDTO animalDTO) {
+	@RequestMapping(value = "/animal_update", method = RequestMethod.POST)
+	public String animal_update_ok(AnimalDTO animalDTO) {
 		animalDAO.update(animalDTO);
-		return "redirect:/dog_list";
+		return "redirect:/admin_main";
 	}
 
-	@RequestMapping(value = "/dog_insert", method = RequestMethod.GET)
-	public String animal_insert() {
-		return "admin/animal/dog/dog_insert";
+	@RequestMapping(value = "/animal_insert", method = RequestMethod.GET)
+	public String animal_insert(@RequestParam("tag") String tag,Model model) {
+		model.addAttribute("tag",tag);
+		return "admin/animal/animal_insert";
 	}
 
-	@RequestMapping(value = "/dog_insert", method = RequestMethod.POST)
-	public String user_dog_insert_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO)
+	@RequestMapping(value = "/animal_insert", method = RequestMethod.POST)
+	public String animal_insert_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO)
 			throws IllegalStateException, IOException {
-		System.out.println(animalDTO.toString());
+
+		// Adoptreg 추가
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+		String strDate = dateFormat.format(Calendar.getInstance().getTime());
+
+		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
+		adoptRegDTO.setAdopt_reg_animalno(animalDAO.count() + 1);
+		adoptRegDTO.setAdopt_reg_userid("admin");
+		adoptRegDTO.setAdopt_reg_appdate(strDate);
+
+		adoptRegDAO.insert(adoptRegDTO);
+		
+		//동물 입소 신청하자마자 입양 가능 상태
+		//이미지 업로드 및 animal 데이터 추가
 		FileUploadImage upload = new FileUploadImage();
 		String[] images = upload.uploadAnimalImg(request, files);
 		animalDTO.setAnimal_img1(images[0]);
@@ -87,11 +103,11 @@ public class AdminAnimalController {
 
 		animalDAO.insert(animalDTO);
 
-		return "redirect:/dog_list";
+		return "redirect:/admin_main";
 	}
 
-	@RequestMapping("/dog_delete")
-	public String dog_delete(@RequestParam("no") int no) {
+	@RequestMapping("/animal_delete")
+	public String animal_delete(@RequestParam("no") int no) {
 		AnimalDTO animalDTO = animalDAO.content(no);
 
 		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload");
@@ -104,8 +120,9 @@ public class AdminAnimalController {
 		file.delete();
 		animalDAO.delete(no);
 
-		return "redirect:/dog_list";
+		return "redirect:/admin_main";
 	}
+	
 
 	@RequestMapping("/cat_view")
 	public String cat_view() {
@@ -120,19 +137,19 @@ public class AdminAnimalController {
 	// 입양관리
 	@RequestMapping("/adoptreg_list")
 	public String adoptreg_list(Model model) {
-		//model.addAttribute("adoptregList", adoptRegDAO.list());
-		//해시맵으로 조인 유사하게 구현
+		// model.addAttribute("adoptregList", adoptRegDAO.list());
+		// 해시맵으로 조인 유사하게 구현
 		List<AnimalDTO> animalList = animalDAO.list();
 		Map<Integer, ArrayList<String>> maps = new HashMap();
-		for(AnimalDTO dto : animalList) {
+		for (AnimalDTO dto : animalList) {
 			ArrayList<String> aList = new ArrayList();
 			aList.add(dto.getAnimal_name());
 			aList.add(dto.getAnimal_status());
 			maps.put(dto.getAnimal_no(), aList);
 		}
 		System.out.println(maps.toString());
-		model.addAttribute("adoptRegList",adoptRegDAO.list());
-		model.addAttribute("animalMap",maps);
+		model.addAttribute("adoptRegList", adoptRegDAO.list());
+		model.addAttribute("animalMap", maps);
 
 		return "admin/adoptreg_list";
 	}

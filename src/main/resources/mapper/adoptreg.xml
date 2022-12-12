@@ -18,12 +18,7 @@
 		#{adopt_reg_regno} ,
 		#{adopt_reg_userid} ,
 		#{adopt_reg_animalno} ,
-		<if test="adopt_reg_duedate != null">
-			TO_DATE(#{adopt_reg_duedate}, 'YYYY-MM-DD HH24:MI:SS') ,
-		</if>
-		<if test="adopt_reg_duedate == null">
-			'' ,
-		</if>
+		'' ,
 		'' ,
 		'' ,
 		<if test="adopt_reg_appdate != null">
