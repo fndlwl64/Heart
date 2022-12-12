@@ -1,14 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="../../../include/admin_header.jsp" />
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="../../include/admin_header.jsp" />
 <script src="resources/js/admin.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
+<c:set var="tag" value="${tag }"></c:set>
 <body>
 	<div class="d-flex justify-content-center">
-		<form action="<%=request.getContextPath()%>/dog_insert"
+		<form action="<%=request.getContextPath()%>/animal_insert"
 			method="post" enctype="multipart/form-data"
 			onsubmit="return submitOption();">
-			<input type="hidden" name="animal_tag" value="dog">
+			<input type="hidden" name="animal_tag" value="${tag }" id="animal_tag">
 			<table class="table">
 				<tr>
 					<th class="table-secondary">품종</th>
@@ -68,7 +70,7 @@
 				</tr>
 				<tr>
 					<th class="table-secondary">무게</th>
-					<td><input type="number" name="animal_weight" min = 0 step=0.1
+					<td><input type="number" name="animal_weight" min = 0
 						class="form-control" id="weight"></td>
 				</tr>
 				<tr>
@@ -90,8 +92,17 @@
 		</form>
 	</div>
 	<script>
-		let result = [ "말티즈", "푸들", "포메라니안", "믹스견", "치와와", "시츄", "골든리트리버",
-				"진돗개" ];
+		let dog_select = [ "말티즈", "푸들", "포메라니안", "믹스견", "치와와", "시츄", "골든리트리버",
+				"진돗개", "기타" ];
+		let cat_select = [ "스코티시", "폴드", "샴", "페르시안", "터키시", "앙고라", "러시안 블루",
+			"벵갈" ,"먼치킨","아비시니안","기타"];
+		let result = [];
+		if($('#animal_tag').val() == 'cat'){
+			result = cat_select;
+		}
+		if($('#animal_tag').val() == 'dog'){
+			result = dog_select;
+		}
 		$('#species').append('<option></option>');
 		for (let i = 0; i < result.length; i++) {
 			$('#species').append(

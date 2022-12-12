@@ -73,7 +73,7 @@
 		<br>
 
 		<button class="btn btn-success insertbtn"
-			onclick="location.href='${path}/dog_insert'">등록</button>
+			onclick="location.href='${path}/animal_insert?tag=cat'">등록</button>
 
 		<br>
 		<br>
@@ -93,7 +93,7 @@
 				</tr>
 				<c:forEach var="dto" items="${catList }">
 					<tr>
-						<td><a href="${path}/dog_view">${dto.animal_name }</a></td>
+						<td><a href="${path}/cat_view">${dto.animal_name }</a></td>
 						<td>${dto.animal_species }</td>
 						<td>${dto.animal_gender }</td>
 						<td>${dto.animal_size }</td>
@@ -102,10 +102,10 @@
 						<td>${dto.animal_status }</td>
 						<td>
 							<button class="btn btn-primary"
-								onclick="location.href='${path}/dog_update?no=${dto.animal_no }'">수정</button>
+								onclick="location.href='${path}/animal_update?no=${dto.animal_no }'">수정</button>
 							<button class="btn btn-secondary" data-bs-toggle="modal"
 								data-bs-target="#exampleModal"
-								onclick="location.href='${path}/dog_delete?no=${dto.animal_no }'">삭제</button>
+								onclick="location.href='${path}/animal_delete?no=${dto.animal_no }'">삭제</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -144,7 +144,7 @@
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Close</button>
 						<button type="button" class="btn btn-danger"
-							onclick="location.href='${path}/dog_delete?no=${dto.animal_no }'">삭제</button>
+							onclick="location.href='${path}/cat_delete?no=${dto.animal_no }'">삭제</button>
 					</div>
 				</div>
 			</div>

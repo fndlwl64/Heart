@@ -9,7 +9,7 @@
 	<br>
 	<br>
 	<div class="div1" align="center">
-		<form action="<%=request.getContextPath()%>/dog_update" method="post">
+		<form action="<%=request.getContextPath()%>/cat_update" method="post">
 			<input type="hidden" name="animal_no" value="${dto.animal_no }">
 			<input type="hidden" name="animal_img1" value="${dto.animal_img1 }">
 			<input type="hidden" name="animal_img2" value="${dto.animal_img2 }">

@@ -71,7 +71,7 @@
 		<br>
 
 		<button class="btn btn-success insertbtn"
-			onclick="location.href='${path}/dog_insert'">등록</button>
+			onclick="location.href='${path}/animal_insert?tag=dog'">등록</button>
 
 		<br>
 		<br>
@@ -100,10 +100,10 @@
 						<td>${dto.animal_status }</td>
 						<td>
 							<button class="btn btn-primary"
-								onclick="location.href='${path}/dog_update?no=${dto.animal_no }'">수정</button>
+								onclick="location.href='${path}/animal_update?no=${dto.animal_no }'">수정</button>
 							<button class="btn btn-secondary" data-bs-toggle="modal"
 								data-bs-target="#exampleModal"
-								onclick="location.href='${path}/dog_delete?no=${dto.animal_no }'">삭제</button>
+								onclick="location.href='${path}/animal_delete?no=${dto.animal_no }'">삭제</button>
 						</td>
 					</tr>
 				</c:forEach>

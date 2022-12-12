@@ -3,13 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <jsp:include page="../../include/user_header.jsp"/>
-<c:set var="userDTO" value="${userDTO }"/> 
 
 <body>
 <div class="d-flex justify-content-center">
     <form action="<%=request.getContextPath() %>/user_animal_insert" method="post" enctype="multipart/form-data" onsubmit="return submitOption();">
-    	<input type="hidden" value="${userDTO.user_id }" id="user_id" name="user_id"/>
-    	<input type="hidden" value="${userDTO.user_grade }" id="user_grade"/>
+    	<input type="hidden" value="${sessionScope.session_id }" id="user_id" name="user_id"/>
+    	<input type="hidden" value="${sessionScope.session_grade }" id="user_grade"/>
         <table class="table">
             <tr>
                 <th>종류</th>
