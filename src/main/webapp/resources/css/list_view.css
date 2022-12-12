@@ -114,6 +114,25 @@
 /* admin/_view.jsp 목록 버튼 */
 .container .listbtn {
     background-color: #000;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 5%;
+}
+
+.container .listbtn_1 {
+    background-color: #0069d9;
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-bottom: 5%;
+}
+
+.container .listbtn_2 {
+    background-color: #dc3545;
+    border: none;
     color: #fff;
     padding: 5px 10px;
     border-radius: 5px;

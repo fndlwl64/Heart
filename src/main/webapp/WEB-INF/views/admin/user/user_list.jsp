@@ -48,7 +48,7 @@
                 <th class="table-secondary">회원아이디</th>
                 <th class="table-secondary">회원등급</th>
                 <th class="table-secondary">반려동물경험</th>
-                <th class="table-secondary">수정/삭제</th>
+                <th class="table-secondary">수정</th>
             </tr>
             
             <c:if test="${!empty list}">
@@ -60,7 +60,7 @@
 	                <td>${list.user_animalexp}</td>
 	                <td>
 	                    <button class="btn btn-outline-primary" onclick="location.href='${path}/user_update?user_id=${list.user_id }'">수정</button>
-	                    <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
+	                    <!-- <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button> -->
 	                </td>
 	            </tr>
             </c:forEach>            	

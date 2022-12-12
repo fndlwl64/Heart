@@ -70,8 +70,10 @@
     </table>
 
     <br>
-    <%-- 목록 버튼만 : 수정,삭제,등록은 list.jsp에서  --%>
+    
     <button class="listbtn" onclick="location.href='${path}/user_list'"><i class="bi bi-card-list"></i> 목록</button>
+	<button class="listbtn" onclick="location.href='${path}/user_update?user_id=${cont.user_id }'"><i class="bi bi-eraser"></i> 수정</button>
+	<button class="listbtn" onclick="location.href='${path}/user_delete?user_id=${cont.user_id }'"><i class="bi bi-trash3"></i> 삭제</button>
 
 </div>
 

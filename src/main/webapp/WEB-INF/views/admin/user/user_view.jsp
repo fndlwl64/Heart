@@ -83,6 +83,9 @@
 		</div>
 	
 		<button class="listbtn" onclick="location.href='${path}/user_list'"><i class="bi bi-card-list"></i> 목록</button>
+		<button class="listbtn_1" onclick="location.href='${path}/user_update?user_id=${cont.user_id }'"><i class="bi bi-eraser"></i> 수정</button>
+		<button class="listbtn_2" onclick="location.href='${path}/user_delete?user_id=${cont.user_id }'"><i class="bi bi-trash3"></i> 삭제</button>
+		
 	
 	</div>
 	

@@ -28,6 +28,8 @@ public interface UserDAO {
     
     public int emailCheck(String email);
     
+    public int update_num(String no);
+    
     public int deleteuser(String id);
 
 }
