@@ -65,6 +65,11 @@ public class UserDAOImpl implements UserDAO {
 		return this.sqlSession.selectOne("total_user");
 	}
 
+	@Override
+	public int deleteuser(String id) {
+		return this.sqlSession.delete("delete_user", id);
+	}
+
 	
 
 }

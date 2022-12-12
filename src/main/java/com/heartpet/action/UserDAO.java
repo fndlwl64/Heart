@@ -27,5 +27,7 @@ public interface UserDAO {
     public int totalUser();
     
     public int emailCheck(String email);
+    
+    public int deleteuser(String id);
 
 }
