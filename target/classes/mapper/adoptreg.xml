@@ -4,11 +4,15 @@
 
 
 <mapper namespace="AdoptRegDAO">
+	<select id="adoptreg_content" parameterType="int" resultType="AdoptRegDTO">
+		select * from heartpet_adopt_reg where adopt_reg_regno = #{adopt_reg_regno}
+	</select>
 	<select id="adoptreg_list" resultType="AdoptRegDTO">
 		select * from heartpet_adopt_reg order by adopt_reg_regno desc
 	</select>
 	<update id="adoptreg_update" parameterType="AdoptRegDTO">
 		update heartpet_adopt_reg set
+		adopt_reg_userid = #{adopt_reg_userid},
 		<choose>
 			<when test='adopt_reg_regdate != null'>
 				adopt_reg_regdate = TO_DATE(#{adopt_reg_regdate}, 'YYYY-MM-DD HH24:MI:SS')

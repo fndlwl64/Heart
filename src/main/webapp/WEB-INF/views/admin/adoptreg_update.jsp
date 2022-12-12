@@ -9,6 +9,7 @@
 	<title>Insert title here</title>
 </head>
 <link rel="stylesheet" href="${path}/resources/css/admin_include.css">
+<c:set var="content" value="${content }"></c:set>
 <body>
 <jsp:include page="../include/admin_header.jsp" />
 <br><br>
@@ -17,23 +18,23 @@
 		<table class="table">
 			<tr>
 				<th class="table-secondary"><span class="sp2">입양회원</span></th>
-				<td><input class ="input1" type="text" value="아이디"></td>
+				<td>${content.adopt_reg_userid }</td><!-- class ="input1" -->
 			</tr>
 			<tr>
 				<th class="table-secondary"><span class="sp2">입양된유기견</span></th>
-				<td><input class ="input1" type="text" value="유기견번호[종류]"></td>
+				<td>${content.adopt_reg_animalno }</td>
 			</tr>
 			<tr>
 				<th class="table-secondary"><span class="sp2">입양등록일</span></th>
-				<td><input class ="input1" type="text" value="2022-11-30"></td>
+				<td>${content.adopt_reg_regdate }</td>
 			</tr>
 			<tr>
 				<th class="table-secondary"><span class="sp2">입양예정일</span></th>
-				<td><input class ="input1" type="text" value="2022-11-30"></td>
+				<td>${content.adopt_reg_duedate }</td>
 			</tr>
 			<tr>
 				<th class="table-secondary"><span class="sp2">입양완료일</span></th>
-				<td><input class ="input1" type="text" value="2022-11-30"></td>
+				<td>${content.adopt_reg_adoptdate }</td>
 			</tr>
 		</table>
 		<br>

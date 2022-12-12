@@ -75,7 +75,7 @@
 						<td>${dto.adopt_reg_regdate }</td>
 						<td>${dto.adopt_reg_duedate }</td>
 						<td>${dto.adopt_reg_adoptdate }</td>
-						<td>${map.get(dto.adopt_reg_animalno).get(1) }</td>
+						<td><a href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }">${map.get(dto.adopt_reg_animalno).get(1) }</a></td>
 					</tr>
 				</c:forEach>
 

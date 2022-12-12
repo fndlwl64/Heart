@@ -64,11 +64,7 @@ public class AdminController {
         return "admin/review/review_list";
     }
 
-    /*관리자 리스트에서 수정하기*/
-    @RequestMapping("/adoptreg_update")
-    public String adoptreg_update() {
-        return "admin/adoptreg_update";
-    }
+    
     @RequestMapping("/board_update")
     public String board_update() {
         return "admin/board_update";
@@ -108,6 +104,7 @@ public class AdminController {
     public String adoptreg_insert() {
         return "admin/adoptreg_insert";
     }
+    
     @RequestMapping("/board_insert")
     public String board_insert() {
         return "admin/board_insert";
