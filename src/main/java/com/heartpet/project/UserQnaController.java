@@ -109,7 +109,6 @@ public class UserQnaController {
     		out.flush();
     	}
     	
-    	
     	QnaDTO qnaContent = this.qnaDAO.contentQna(board_parentNo);    	
     	model.addAttribute("qnaContent", qnaContent);
     	

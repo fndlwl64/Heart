@@ -37,7 +37,7 @@
 	<!-- list -->
 	<select id="qna_list" parameterType="hashMap" resultType="QnaDTO">
 		<include refid="qna_select" /> 
-			FROM (select b.*, row_number() over(order by board_no desc) rnum from heartpet_board b
+			FROM (select b.*, row_number() over(order by board_no desc) rnum FROM heartpet_board b
 		<where>
 		 <choose>
             <when test="field.equals('allSearch') and keyword != ''"> (board_title <include refid="qna_keyword" />) or (board_content <include refid="qna_keyword" />) or (board_category <include refid="qna_keyword" />) or (board_id <include refid="qna_keyword" />)</when>
@@ -53,10 +53,14 @@
 	
 	<!-- content -->
 	<update id="qna_hit" parameterType="int">
-		update heartpet_board set board_hit = board_hit + 1 where board_no = #{ board_no }
+		update heartpet_board 
+			set board_hit = board_hit + 1 
+			where board_no = #{ board_no }
 	</update>	
 	<select id="qna_content" parameterType="int" resultType="QnaDTO">
-		<include refid="qna_select" /> from heartpet_board where board_no = #{ board_no }
+		<include refid="qna_select" /> 
+		FROM heartpet_board 
+		WHERE board_no = #{ board_no }
 		<include refid="qna_hierarchy" />
 	</select>
 	
@@ -78,20 +82,32 @@
 	<!-- 글 쓰기 : insert -->
 	<insert id="qna_insert" parameterType="QnaDTO">
 		<selectKey resultType="int" keyProperty="board_no" order="BEFORE">
-			select max(board_no)+1 from heartpet_board
+			SELECT max(board_no)+1 FROM heartpet_board
 		</selectKey>
-		insert into heartpet_board 
-		values (#{ board_no },
-			<if test="board_parentNo != 0"> #{ board_parentNo }, </if>
-			<if test="board_parentNo == 0"> default, </if>
-			#{ board_category }, #{ board_id }, default, #{ board_title },
-		#{ board_content }, #{ board_secret }, #{ board_pwd }, sysdate, '', '', '')
+			INSERT INTO heartpet_board 
+				VALUES (#{ board_no },
+				#{ board_parentNo },
+				#{ board_category }, 
+				#{ board_id }, 
+				default, 
+				#{ board_title },
+				#{ board_content }, 
+				#{ board_secret }, 
+				#{ board_pwd }, 
+				sysdate, 
+				'', 
+				'', 
+				'')
 	</insert>
 		
 	<!-- update -->
 	<update id="qna_update" parameterType="QnaDTO">
-		update heartpet_board set board_category = #{ board_category }, board_title = #{ board_title }, board_content = #{ board_content }, 
-		board_secret = #{ board_secret }, board_update = sysdate
+		UPDATE heartpet_board 
+			SET board_category = #{ board_category }, 
+			board_title = #{ board_title }, 
+			board_content = #{ board_content }, 
+			board_secret = #{ board_secret }, 
+			board_update = sysdate
 		<if test="board_img1 != null">, board_img1 = #{ board_img1 } </if> 
 		<if test="board_img2 != null">, board_img2 = #{ board_img2 } </if> 
 		where board_no = #{ board_no }
@@ -99,7 +115,8 @@
 	
 	<!-- delete -->
 	<delete id="qna_delete" parameterType="int">
-		delete from heartpet_board where board_no = #{ board_no }
+		delete from heartpet_board 
+			where board_no = #{ board_no }
 	</delete>
 	
 	<!-- 
