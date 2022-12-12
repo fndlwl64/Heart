@@ -54,6 +54,7 @@
                             </c:if>
                             
                             <c:if test="${!empty session_id || !empty session_admin_id}">
+                                <li><a href="${path}/user_mypage_user_update"><strong>${ session_name } <i class="bi bi-suit-heart-fill"></i></strong></a></li>
                                 <li><a href="${path}/user_mypage_wish_list">마이페이지</a></li>
                                 <li><a href="${path}/user_logout">로그아웃</a></li>
                             </c:if>

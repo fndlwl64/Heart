@@ -104,9 +104,4 @@ public class QnaDAOImpl implements QnaDAO {
 		return this.sqlSession.selectOne("fnq_content", fnq_no);
 	}
 
-	@Override
-	public int replyInsert(int qna_no) {
-		return this.sqlSession.insert("qna_reply_insert", qna_no);
-	}
-
 }

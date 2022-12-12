@@ -148,6 +148,10 @@
  	color: #686461;
 }
 
+.searched_list #admin_id {
+	color: red;
+}
+
 /* admin/ _list.jsp -> 검색 폼 */
 .container .search_form {
 }
@@ -187,7 +191,7 @@
 .container .lists {
 	margin: auto;
 	margin-top: 1%;
-	margin-bottom: 5%;
+	margin-bottom: 1%;
 	width: 75%;
 }
 
