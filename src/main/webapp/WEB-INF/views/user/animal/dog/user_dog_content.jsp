@@ -60,7 +60,7 @@
 	</div>
 	<div class="d-flex justify-content-center m-3">
 
-		<div class="form-control input-lg" readonly>이 강아지는 애교가 많습니다.</div>
+		<div class="form-control input-lg" readonly>${dto.animal_caution }</div>
 
 	</div>
 	<div class="d-flex justify-content-center mx-5 px-5">

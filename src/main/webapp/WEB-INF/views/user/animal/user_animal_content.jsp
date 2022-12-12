@@ -52,22 +52,40 @@
 				<dl class="m-2">
 					<dt class="mx-2">입양상태</dt>
 					<dd class="mx-2">${dto.animal_status }</dd>
-
 				</dl>
 			</div>
 		</div>
 	</div>
 	<div class="d-flex justify-content-center m-3">
 
-		<div class="form-control input-lg" readonly>이 강아지는 애교가 많습니다.</div>
+		<div class="form-control input-lg" readonly>${dto.animal_caution }</div>
 
 	</div>
+	<input type="hidden" id="animal_status" value="${dto.animal_status }">
 	<div class="d-flex justify-content-center mx-5 px-5">
-		<form action="get_animal" method="post">
+		<form action="user_get_animal" method="post" onsubmit="return submitOption();">
+			<input type="hidden" name="animal_no" value="${dto.animal_no }">
 			<input type="submit" class="btn btn-primary" value="입양하기">
 		</form>
 	</div>
 </div>
+<script type="text/javascript">
+	function submitOption(){
+		if ($('#user_grade').val() > 3){
+            alert("회원의 등급이 낮아 입소 자격이 없습니다.");
+            return false;
+        }
+		if($('#animal_status').val() == '입소 신청'){
+			alert('아직 입소가 완료되지 않은 상태입니다.');
+			return false;
+		}
+		if($('#animal_status').val() == '입양 대기'){
+			alert('입양 대기 중인 상태입니다.');
+			return false;
+		}
+		
+	}
+</script>
 
 
 <jsp:include page="../../include/user_footer.jsp" />

@@ -23,8 +23,7 @@ public class AdoptRegDAOImpl implements AdoptRegDAO{
 
 	@Override
 	public int update(AdoptRegDTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("adoptreg_update",dto);
 	}
 
 	@Override
