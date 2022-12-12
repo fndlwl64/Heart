@@ -11,4 +11,12 @@ $(document).ready(function() {
         	console.log(typeof this.value);
         }
     });
-}) 
+       
+    // 부모글 비밀글 시
+    if($('input[type=checkbox][name=board_secret]').attr('disabled')) {
+		$('input[type=hidden][name=board_secret]').attr('disabled', false);	
+		$('input[type=hidden][name=board_secret]').val('Y');
+	}
+	
+	
+});

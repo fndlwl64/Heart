@@ -135,7 +135,7 @@
 }
 
 .qna-content .content-buttons {
-    text-align: right;
+	justify-content: space-between;
 }
 
 /* qna_content - reply */

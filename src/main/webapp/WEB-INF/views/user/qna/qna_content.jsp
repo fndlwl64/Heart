@@ -50,6 +50,7 @@
                             </c:otherwise>
                             </c:choose>
                         </div>
+                        <br />
                         <div class="qna-text mb-3">
                             ${ list.board_content.replace(newline, '<br/>') } 
                         </div>
@@ -71,12 +72,17 @@
                 </table>
             </form>
 
-            <div class="content-buttons">
+            <div class="content-buttons d-flex">
+            	<div class="left-button">
             	<c:if test="${ list.board_id eq session_id }">
-                <button type="button" class="btn btn-success" onclick="location.href='${path}/user_qna_update?board_no=${ list.board_no }'"><i class="bi bi-eraser"></i> 수정</button>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteFunction"  ><i class="bi bi-trash3"></i> 삭제</button>
-                </c:if>
-                <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
+	                <button type="button" class="btn btn-success" onclick="location.href='${path}/user_qna_update?board_no=${ list.board_no }'"><i class="bi bi-eraser"></i> 수정</button>
+	                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteFunction"  ><i class="bi bi-trash3"></i> 삭제</button>
+	                </c:if>
+	                <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
+                </div>
+                <div class="right-button">
+                	<button type="button" class="btn btn-primary" onclick="location.href='${path}/user_qna_insert?board_parentNo=${ list.board_no }'"><i class="bi bi-arrow-return-right"></i> 답변하기</button>
+                </div>
             </div>
         </div>
     </div>
