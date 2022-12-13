@@ -149,18 +149,22 @@
                             <h1 class="modal-title fs-5" id="findIdLabel">HeartPet 로그인</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form class="login_form" method="post" action="${path}/user_find_id">
-                            <div class="modal-body">
-                                <input class="login_text" name="user_name" placeholder="이름">
-                                <span class="name_check"></span>
-                                <input class="login_text" name="user_email" placeholder="이메일">
-                                <input type="submit" class="btn login_btn" value="아이디 찾기">
-                            </div>
-                            <div class="modal-footer">
-                            </div>
-                        </form>
+                        <div class="modal-body">
+	                        <input class="login_text" id="user_name" placeholder="이름">
+	                        <span class="name_check"></span>
+	                        <input class="login_text" id="user_email" placeholder="이메일">
+	                        <button id="find_id" class="btn login_btn" onclick="idfind()">아이디 찾기</button>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
                     </div>
                 </div>
+            </div>
+            
+            <div id="id_found">
+            	<label for="span_id">
+            		<span id="found_id" class="span_id"></span>
+            	</label>
             </div>
 
             <%--비밀번호 찾기--%>

@@ -338,9 +338,20 @@ $(function() {
 		$("#join_btn").attr("disabled", true);
 	}
 	
-	
-	
 });
+
+function idfind() {
+
+	let user_name = $(this).val();
+	let user_email = $(this).val();
+	
+	$("#find_id").on("click", function() {
+		$("#id_found").css({
+			'display' : 'block'
+		});
+	});
+		
+}
 
 
 	var naver_id_login = new naver_id_login("fw7rzSQL46p95xisWWtm", "http://localhost:8081/project/naver_login");

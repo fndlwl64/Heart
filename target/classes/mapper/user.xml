@@ -59,4 +59,8 @@
 		UPDATE HEARTPET_USER SET USER_GRADE = #{user_grade}, USER_EMAIL = #{user_email}, USER_PHONE = #{user_phone}, USER_ADDR = #{user_addr}, USER_TOTALPRICE = #{user_totalprice}, USER_ANIMALEXP = #{user_animalexp} WHERE USER_ID = #{user_id}
 	</update>
 	
+	<select id="find_id" parameterType="map" resultType="String">
+		SELECT USER_ID FROM HEARTPET_USER WHERE USER_NAME = #{name} AND USER_EMAIL = #{email}
+	</select>
+	
 </mapper>
