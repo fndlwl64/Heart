@@ -47,7 +47,7 @@
 	</select>
 	
 	<!-- dog/cat list -->
-	<select id="review_animal_option" parameterType="String" resultType="ReviewDTO">
+	<select id="review_animal_option" parameterType="hashMap" resultType="ReviewDTO">
 		<![CDATA[select * from (select r.*, a.animal_name, row_number() over(order by review_no desc) rnum ]]><include refid="review_join" />
 		<where>
 			review_animal_tag = #{ animal_tag }
@@ -58,6 +58,14 @@
 	<!-- dog/cat : 게시글 개수 -->
 	<select id="review_animal_count" parameterType="String" resultType="int">
 		select count(*) from heartpet_review
+		<where>
+			review_animal_tag = #{ animal_tag }
+         </where>
+	</select>
+	
+	<!-- dog/cat 전체 리스트 페이징 x -->
+	<select id="review_total_list" parameterType="String" resultType="ReviewDTO">
+		select r.*, a.animal_name <include refid="review_join" />
 		<where>
 			review_animal_tag = #{ animal_tag }
          </where>

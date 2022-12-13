@@ -9,7 +9,10 @@
 <link rel="stylesheet" href="${path}/resources/css/main.css" />
 <jsp:include page="./include/user_header.jsp" />
 <script src="${path}/resources/js/main.js"></script>
-<link rel="short icon" href="#" />
+<c:set var="dRList" value="${ dogReviewList }" />
+<c:set var="cRList" value="${ catReviewList }" />
+<c:set var="dList" value="${ dogList }" />
+<c:set var="cList" value="${ catList }" />
 
 <div id="main-contents" class="main-contents">
 
@@ -21,19 +24,26 @@
 
     <%-- 동영상 --%>
     <div class="main-video">
-        <iframe id="video" width="100%" height="315" src="https://www.youtube.com/embed/SUUbKD0GI-Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<iframe id="video" width="100%" height="315" src="https://www.youtube.com/embed/1mjamoOVzo4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
     <%-- 강아지 list 출력 // swiper --%>
     <div class="main-title">
         <p id="heart-pet">HeartPet, </p>
-        <p>당신을 기다리고 있는 반려동물을 만나보세요</p>
+        <p>당신을 기다리고 있는 강아지를 만나보세요</p>
     </div>
     <div class="swiper dogSwiper">
         <div class="swiper-wrapper">
-            <div class="swiper-slide"><a href="${path}/user_dog_content"><img src="${path}/resources/logo/heartpet_logo.png" alt=""></a></div>
-            <div class="swiper-slide"><img src="${path}/resources/logo/heartpet_logo_words.png" alt=""></div>
-            <div class="swiper-slide">Slide 3</div>
+        	<c:forEach items="${ dList }" var="list">
+            	<div class="swiper-slide">
+            	<a href="${path}/user_animal_content?no=${ list.animal_no }">
+            	<c:choose>
+            	<c:when test="${ not empty list.animal_img1 }"><img src="${path}/resources/upload/${ list.animal_img1 }" alt="animal_img"></c:when>
+            	<c:when test="${ not empty list.animal_img2 }"><img src="${path}/resources/upload/${ list.animal_img2 }" alt="animal_img"></c:when>
+            	<c:when test="${ not empty list.animal_img3 }"><img src="${path}/resources/upload/${ list.animal_img3 }" alt="animal_img"></c:when>
+            	</c:choose>
+            	</a></div>
+            </c:forEach>
         </div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
@@ -42,30 +52,58 @@
     <div class="more">
         <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_dog_list'">더 보러가기</button>
     </div>
+    
+    <%-- 고양이 list 출력 // swiper --%>
+    <div class="main-title">
+        <p id="heart-pet">HeartPet, </p>
+        <p>당신을 기다리고 있는 고양이를 만나보세요</p>
+    </div>
+    <div class="swiper dogSwiper">
+        <div class="swiper-wrapper">
+        	<c:forEach items="${ cList }" var="list">
+            	<div class="swiper-slide">
+            	<a href="${path}/user_animal_content?no=${ list.animal_no }">
+            	<c:choose>
+            	<c:when test="${ not empty list.animal_img1 }"><img src="${path}/resources/upload/${ list.animal_img1 }" alt="animal_img"></c:when>
+            	<c:when test="${ not empty list.animal_img2 }"><img src="${path}/resources/upload/${ list.animal_img2 }" alt="animal_img"></c:when>
+            	<c:when test="${ not empty list.animal_img3 }"><img src="${path}/resources/upload/${ list.animal_img3 }" alt="animal_img"></c:when>
+            	</c:choose>
+            	</a></div>
+            </c:forEach>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="more">
+        <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_cat_list'">더 보러가기</button>
+    </div>
+    
     <%-- 입양후기 list 출력 --%>
-    <div class="main-title">Review</div>
+    <div class="main-title">HeartPet과 함께한 강아지 가족</div>
     <div class="swiper reviewSwiper">
         <div class="swiper-wrapper">
+        	<c:forEach items="${ dRList }" var="list">
             <div class="swiper-slide">
                 <a href=""><img src="${path}/resources/logo/heartpet_logo.png" /></a>
-                <span class="title">후기제목</span><br>
-                <span class="content">후기내용</span>
+                <span class="title">${ list.review_title }</span><br>
+                <span class="content">${ list.review_content }</span>
             </div>
-            <div class="swiper-slide">
-                <a href=""><img src="${path}/resources/logo/heartpet_logo_words.png" /></a>
-                <span class="title">제목</span><br>
-                <span class="content">후기내용</span>
-            </div>
+            </c:forEach>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    
+    <div class="main-title">HeartPet과 함께한 고양이 가족</div>
+    <div class="swiper reviewSwiper">
+        <div class="swiper-wrapper">
+        	<c:forEach items="${ cRList }" var="list">
             <div class="swiper-slide">
                 <a href=""><img src="${path}/resources/logo/heartpet_logo.png" /></a>
-                <span class="title">제목</span><br>
-                <span class="content">후기내용</span>
+                <span class="title">${ list.review_title }</span><br>
+                <span class="content">${ list.review_content }</span>
             </div>
-            <div class="swiper-slide">
-                <a href=""><img src="${path}/resources/logo/heartpet_logo_words.png" /></a>
-                <span class="title">제목</span><br>
-                <span class="content">후기내용</span>
-            </div>
+            </c:forEach>
         </div>
         <div class="swiper-pagination"></div>
     </div>

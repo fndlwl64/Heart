@@ -89,8 +89,7 @@ public class UserQnaController {
     	// 비밀글 여부 체크
     	// 비밀글 Y -> 아이디 체크
     	// 비밀글 N -> 접근 O
-    	// 비밀글이거나 session_id = admin
-    	
+    	// 비밀글이거나 session_id = admin    	
     	System.out.println("번호출력 " + qnaContent.getBoard_parentNo());
     	System.out.println("번호 "+board_no);
     	
@@ -108,7 +107,6 @@ public class UserQnaController {
 				}
 			}		
 		}
-		
 		
     	this.qnaDAO.hitQna(board_no);
     	model.addAttribute("qnaContent", qnaContent);

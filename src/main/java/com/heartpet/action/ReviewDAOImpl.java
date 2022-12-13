@@ -53,6 +53,11 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public int listReviewCount(String animal_tag) {
 		return this.sqlSession.selectOne("review_animal_count", animal_tag);
 	}
+
+	@Override
+	public List<ReviewDTO> listReview(String animal_tag) {
+		return this.sqlSession.selectList("review_total_list", animal_tag);
+	}
 	
 	//////////////////////////////////////////////////
 	
