@@ -4,81 +4,124 @@
 
 
 <mapper namespace="AnimalDAO">
-	<select id="animal_count" resultType="int">
-		select max(animal_no) from heartpet_animal
+	<sql id="animal_select">
+	<![CDATA[ 
+		animal_no,         
+		animal_name,       
+		animal_species,    
+		animal_gender,     
+		animal_neutered,   
+		animal_vaccination,
+		animal_age,        
+		animal_place,      
+		animal_size,       
+		animal_weight,     
+		animal_caution,    
+		animal_img1,       
+		animal_img2,       
+		animal_img3,       
+		animal_status,     
+		animal_tag        
+	]]>
+	</sql>
+	<select id="animal_count" parameterType="string" resultType="int">
+		select count(animal_no) from heartpet_animal
+		<if test="null != value and !''.equals(value)">
+		where animal_tag = #{animal_tag}
+		</if>
 	</select>
 	<select id="animal_content" resultType="AnimalDTO">
-		select * from heartpet_animal where animal_no = #{animal_no}
+		select * from
+		heartpet_animal where animal_no = #{animal_no}
 	</select>
 	<select id="animal_list" resultType="AnimalDTO">
-		select * from heartpet_animal order by animal_no desc
+		select * from
+		heartpet_animal order by animal_no desc
 	</select>
 	<select id="animal_listTag" resultType="AnimalDTO">
-		select * from heartpet_animal where animal_tag = #{animal_tag} order by animal_no desc
+		select * from
+		heartpet_animal where animal_tag = #{animal_tag} order by animal_no
+		desc
 	</select>
 	<select id="animal_listTagUser" resultType="AnimalDTO">
-		select * from heartpet_animal
-		where animal_tag = #{animal_tag} and not animal_status = '입양 완료'
+		select * from
+		heartpet_animal
+		where animal_tag = #{animal_tag} and not animal_status
+		= '입양 완료'
 		order by animal_no desc
-	</select>		
+	</select>
+	<select id="animal_listTagPaging" parameterType="hashmap" resultType="AnimalDTO">
+		select <include refid="animal_select"></include> from
+		(
+			select a.*, row_number() over(order by animal_no desc) as rnum
+    		from heartpet_animal a 
+    		where animal_tag = #{animal_tag}
+		)
+		where rnum between ${startNo} and ${endNo}
+	</select>
 	<insert id="animal_insert" parameterType="AnimalDTO">
-		<selectKey resultType="int" keyProperty="animal_no" order="BEFORE">
+		<selectKey resultType="int" keyProperty="animal_no"
+			order="BEFORE">
 			select count(animal_no)+1 from heartpet_animal
 		</selectKey>
-		insert into heartpet_animal 
-			values
-			(#{animal_no},
-			#{animal_name},
-			#{animal_species},
-			#{animal_gender},
-			#{animal_neutered},
-			#{animal_vaccination},
-			#{animal_age},
-			#{animal_place},
-			#{animal_size},
-			#{animal_weight},
-			#{animal_caution},
-			#{animal_img1},
-			#{animal_img2},
-			#{animal_img3},
-			#{animal_status},
-			#{animal_tag},
-			sysdate,
-			''
-			)
+		insert into heartpet_animal
+		values
+		(
+		#{animal_no},
+		#{animal_name},
+		#{animal_species},
+		#{animal_gender},
+		#{animal_neutered},
+		#{animal_vaccination},
+		#{animal_age},
+		#{animal_place},
+		#{animal_size},
+		#{animal_weight},
+		#{animal_caution},
+		#{animal_img1},
+		#{animal_img2},
+		#{animal_img3},
+		#{animal_status},
+		#{animal_tag},
+		sysdate,
+		''
+		)
 	</insert>
 	<update id="animal_update" parameterType="AnimalDTO">
 		update heartpet_animal
-		set 
-			animal_name = #{animal_name},
-			animal_species = #{animal_species},
-			animal_gender = #{animal_gender},
-			animal_neutered = #{animal_neutered},
-			animal_vaccination = #{animal_vaccination},
-			animal_age = #{animal_age},
-			animal_place = #{animal_place},
-			animal_size = #{animal_size},
-			animal_weight = #{animal_weight},
-			animal_caution = #{animal_caution},
-			animal_img1 = #{animal_img1},
-			animal_img2 = #{animal_img2},
-			animal_img3 = #{animal_img3},
-			animal_status = #{animal_status},
-			animal_update = sysdate
+		set
+		animal_name = #{animal_name},
+		animal_species = #{animal_species},
+		animal_gender = #{animal_gender},
+		animal_neutered = #{animal_neutered},
+		animal_vaccination = #{animal_vaccination},
+		animal_age = #{animal_age},
+		animal_place = #{animal_place},
+		animal_size = #{animal_size},
+		animal_weight = #{animal_weight},
+		animal_caution = #{animal_caution},
+		animal_img1 = #{animal_img1},
+		animal_img2 = #{animal_img2},
+		animal_img3 = #{animal_img3},
+		animal_status = #{animal_status},
+		animal_update = sysdate
 		where animal_no = #{animal_no}
 	</update>
 	<update id="animal_updateStatus" parameterType="AnimalDTO">
-		update heartpet_animal
-		set 
-			animal_status = #{animal_status}
+		update
+		heartpet_animal
+		set
+		animal_status = #{animal_status}
 		where animal_no = #{animal_no}
 	</update>
 	<delete id="animal_delete">
-		delete from heartpet_animal where animal_no = #{animal_no}
+		delete from heartpet_animal where animal_no =
+		#{animal_no}
 	</delete>
-	
-	<!-- Review에서 사용 중 // Delete 금지  -->
+
+	<!-- Review에서 사용 중 // Delete 금지 -->
 	<select id="animal_name" parameterType="int" resultType="String">
-		select animal_name from heartpet_animal where animal_no = #{ animal_no }
+		select
+		animal_name from heartpet_animal where animal_no = #{ animal_no }
 	</select>
 </mapper>

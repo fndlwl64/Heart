@@ -112,19 +112,76 @@
 
 		<br>
 		<%-- 페이징처리 --%>
-		<!-- <nav aria-label="Page navigation example">
+
+		<nav aria-label="Page navigation">
 			<ul class="pagination justify-content-center">
-				<li class="page-item disabled"><a class="page-link">Previous</a>
+
+				<!-- 처음으로 -->
+				<c:if test="${ paging.page eq 1 }">
+					<li class="page-item disabled">
+				</c:if>
+				<c:if test="${ paging.page gt 1 }">
+					<li class="page-item">
+				</c:if>
+				<a class="page-link"
+					href="${link_address}?page=1&field=${ field }&keyword=${ keyword }&tag=${tag }"
+					aria-label="First"> <span aria-hidden="true">&laquo;</span>
+				</a>
 				</li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
+
+				<!-- 이전으로 -->
+				<c:if test="${ paging.page eq 1 }">
+					<li class="page-item disabled">
+				</c:if>
+				<c:if test="${ paging.page gt paging.block }">
+					<li class="page-item">
+				</c:if>
+				<a class="page-link"
+					href="${link_address}?page=${ paging.page - 1 }&field=${ field }&keyword=${ keyword }&tag=${tag }"
+					aria-label="Previous"> <span aria-hidden="true">&lsaquo;</span>
+				</a>
+				</li>
+
+				<!-- 페이지 중간 -->
+				<c:forEach begin="${ paging.startBlock }" end="${ paging.endBlock }"
+					var="i">
+					<c:if test="${ i == paging.page }">
+						<li class="page-item active"><a class="page-link"
+							href="${link_address}?page=${ i }&field=${ field }&keyword=${ keyword }&tag=${tag }">${ i }</a></li>
+					</c:if>
+					<c:if test="${ i != paging.page }">
+						<li class="page-item"><a class="page-link"
+							href="${link_address}?page=${ i }&field=${ field }&keyword=${ keyword }&tag=${tag }">${ i }</a></li>
+					</c:if>
+				</c:forEach>
+
+				<!-- 다음으로 -->
+				<c:if test="${ paging.endBlock lt paging.allPage }">
+					<li class="page-item">
+				</c:if>
+				<c:if test="${ paging.endBlock eq paging.allPage }">
+					<li class="page-item disabled">
+				</c:if>
+				<a class="page-link"
+					href="${link_address}?page=${ paging.page + 1 }&field=${ field }&keyword=${ keyword }&tag=${tag }"
+					aria-label="Next"> <span aria-hidden="true">&rsaquo;</span>
+				</a>
+				</li>
+
+				<!-- 마지막으로 -->
+				<c:if test="${ paging.endBlock lt paging.allPage }">
+					<li class="page-item">
+				</c:if>
+				<c:if test="${ paging.endBlock eq paging.allPage }">
+					<li class="page-item disabled">
+				</c:if>
+				<a class="page-link"
+					href="${link_address}?page=${ paging.allPage }&field=${ field }&keyword=${ keyword }&tag=${tag }"
+					aria-label="Last"> <span aria-hidden="true">&raquo;</span>
+				</a>
+				</li>
 			</ul>
-		</nav> -->
-
-		<jsp:include page="../../../include/pagination.jsp" />
-
+		</nav>
 		<%-- 삭제 모달 --%>
 		<%-- <div class="modal fade" id="exampleModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
