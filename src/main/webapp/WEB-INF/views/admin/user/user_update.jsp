@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <link rel="stylesheet" href="resources/css/admin_update.css" />
 <script src="${path}/resources/js/admin_user_update.js"></script>
+<script src="${path }/resources/js/signin_up.js"></script>
     
 <body>
 	
@@ -20,7 +21,7 @@
 	
 	<br><br>
 	
-	<div class="div1">
+	<div class="container">
 	    
 	    <form method="post" action="${path}/user_updated">
 	        
@@ -37,13 +38,14 @@
 	                <th class="table-secondary">등급</th>
 	                <c:set var="grade" value="${cont.user_grade}" />
 	                <td>
+	                
 	                	<select name="user_grade" id="select_value">
-	                		<option value="">--선택--</option>
-	                		<option value="1">1등급 [관리자]</option>
-	                		<option value="2">2등급 [우수회원]</option>
-	                		<option value="3">3등급 [일반회원]</option>
-	                		<option value="4">4등급 [블랙리스트]</option>
-	                		<option value="5">5등급 [탈퇴회원]</option>
+	                		<option  value="">--선택--</option>
+	                		<option value="1" <c:if test="${cont.user_grade eq 1 }">selected</c:if>> 1등급 [관리자]</option>
+	                		<option value="2" <c:if test="${cont.user_grade eq 2 }">selected</c:if>>2등급 [우수회원]</option>
+	                		<option value="3" <c:if test="${cont.user_grade eq 3 }">selected</c:if>>3등급 [일반회원]</option>
+	                		<option value="4" <c:if test="${cont.user_grade eq 4 }">selected</c:if>>4등급 [블랙리스트]</option>
+	                		<option value="5" <c:if test="${cont.user_grade eq 5 }">selected</c:if>>5등급 [탈퇴회원]</option>
 	                	</select>
 	                </td>
 	            </tr>
@@ -70,7 +72,7 @@
 	                <th class="table-secondary">주소</th>
 	                <c:if test="${empty addr }">
 	                <td>
-		                <input class="input1 zipcode" type="text" id="sample6_postcode" placeholder="우편번호" required>
+		                <input class="input1 zipcode" name="user_addr" type="text" id="sample6_postcode" placeholder="우편번호" required>
 	                    <input id="zipcode_search" class="search_zipcode" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 	                    <input class="input1 addr" name="user_addr" type="text" id="sample6_address" placeholder="주소" required><br>
 	                    <input class="input1 addr" name="user_addr" type="text" id="sample6_detailAddress" placeholder="상세주소" required>
@@ -80,7 +82,7 @@
 	                
 	                <c:if test="${!empty addr }">
 	                <td>
-		                <input class="input1 zipcode" type="text" id="sample6_postcode" value="${fn:split(addr,',')[0]}"  >
+		                <input class="input1 zipcode" name="user_addr" type="text" id="sample6_postcode" value="${fn:split(addr,',')[0]}"  >
 	                    <input id="zipcode_search" class="search_zipcode" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 	                    <input class="input1 addr" name="user_addr" type="text" id="sample6_address" value="${fn:split(addr,',')[1]}"  ><br>
 	                    <input class="input1 addr" name="user_addr" type="text" id="sample6_detailAddress" value="${fn:split(addr,',')[2]}"  >

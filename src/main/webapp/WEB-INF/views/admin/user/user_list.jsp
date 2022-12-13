@@ -46,6 +46,7 @@
             <tr>
                 <th class="table-secondary">회원번호</th>
                 <th class="table-secondary">회원아이디</th>
+                <th class="table-secondary">회원이름</th>
                 <th class="table-secondary">회원등급</th>
                 <th class="table-secondary">반려동물경험</th>
                 <th class="table-secondary">수정</th>
@@ -56,6 +57,7 @@
           		<tr>
 	                <td>${list.user_no}</td>
 	                <td><a href="${path}/user_view?user_id=${list.user_id}">${list.user_id}</a></td>
+	                <td>${list.user_name}</td>
 	                <td>${list.user_grade}등급</td>
 	                <td>${list.user_animalexp}</td>
 	                <td>

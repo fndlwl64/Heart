@@ -71,8 +71,13 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public int update_num(String no) {
+	public int update_num(int no) {
 		return this.sqlSession.update("update_num", no);
+	}
+
+	@Override
+	public int updateuser(UserDTO dto) {
+		return this.sqlSession.update("update_user", dto);
 	}
 
 	
