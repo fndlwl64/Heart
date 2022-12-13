@@ -99,7 +99,6 @@ body {
 
 .wrap .h-wrap .modal .modal-content .modal-body label {
 	margin-bottom: 3%;
-	
 }
 
 .wrap .h-wrap .modal .modal-content .modal-body .login_text {
@@ -147,6 +146,10 @@ body {
 
 .wrap .h-wrap .modal .modal-content .modal-footer {
     justify-content: center;
+}
+
+.wrap .h-wrap .id_found {
+	display: none;
 }
 
 /* footer */

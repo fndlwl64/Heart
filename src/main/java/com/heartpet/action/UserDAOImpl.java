@@ -80,6 +80,11 @@ public class UserDAOImpl implements UserDAO {
 		return this.sqlSession.update("update_user", dto);
 	}
 
+	@Override
+	public String findid(Map<String, Object> map) {
+		return this.sqlSession.selectOne("find_id", map);
+	}
+
 	
 
 }

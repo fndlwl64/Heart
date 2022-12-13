@@ -311,5 +311,15 @@ public class UserController {
     	int check = userDAO.emailCheck(email);
     	return check;
     }
+    
+    @RequestMapping("/user_find_id")
+    public @ResponseBody String findid(@RequestParam("user_name")String name, @RequestParam("user_email")String email) {
+    	Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("name", name);
+    	map.put("email", email);
+    	
+    	String res = userDAO.findid(map);
+    	return res;
+    }
 
 }
