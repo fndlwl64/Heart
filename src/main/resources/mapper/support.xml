@@ -7,5 +7,30 @@
 		select max(support_no) from heartpet_support
 	</select>
 	
+	<select id="sup_list" parameterType="String" resultType="com.heartpet.model.SupportDTO">
+		select * from heartpet_support order by support_no desc
+	</select>
 	
+	<insert id="sup_insert" parameterType="com.heartpet.model.SupportDTO">
+		<selectKey resultType="int" keyProperty="support_no" order="BEFORE">
+			select max(support_no) from heartpet_support
+		</selectKey>
+			insert into heartpet_support values(#{support_no}+1,#{support_userid},#{support_price},#{support_date})
+	</insert>
+	
+	<update id="sup_update" parameterType="com.heartpet.model.SupportDTO">
+		update heartpet_support set support_userid = #{support_userid}, support_price = #{support_price}, support_date = #{support_date} where support_no = #{support_no}
+	</update>
+
+	<select id="sup_content" parameterType="int" resultType="com.heartpet.model.SupportDTO">
+   		select * from heartpet_support where support_no = #{no}
+   </select>
+   
+   <delete id="sup_delete" parameterType="int">
+   		delete from heartpet_support where support_no = #{no}
+   </delete>
+   
+   <update id="sup_seq" parameterType="int">
+   		<![CDATA[update heartpet_support set support_no = support_no-1 where support_no > #{no}]]>
+   </update>
 </mapper>
