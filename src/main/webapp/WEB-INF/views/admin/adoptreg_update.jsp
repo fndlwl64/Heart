@@ -10,19 +10,25 @@
 </head>
 <link rel="stylesheet" href="${path}/resources/css/admin_include.css">
 <c:set var="content" value="${content }"></c:set>
+<c:set var="foreign" value="${foreign }"></c:set>
 <body>
 <jsp:include page="../include/admin_header.jsp" />
 <br><br>
 <div class="div1" align="center">
-	<form>
+	<form action="<%=request.getContextPath() %>/adoptreg_update" , method="post">
+		<input type="hidden" name="adopt_reg_animalno" value="${content.adopt_reg_animalno }"/>
 		<table class="table">
 			<tr>
 				<th class="table-secondary"><span class="sp2">입양회원</span></th>
 				<td>${content.adopt_reg_userid }</td><!-- class ="input1" -->
 			</tr>
 			<tr>
-				<th class="table-secondary"><span class="sp2">입양된유기견</span></th>
-				<td>${content.adopt_reg_animalno }</td>
+				<th class="table-secondary"><span class="sp2">동물이름</span></th>
+				<td>${foreign.animal_name }</td>
+			</tr>
+			<tr>
+				<th class="table-secondary"><span class="sp2">입양 상태</span></th>
+				<td>${foreign.animal_status }</td>
 			</tr>
 			<tr>
 				<th class="table-secondary"><span class="sp2">입소신청일</span></th>
@@ -36,7 +42,7 @@
 				<th class="table-secondary"><span class="sp2">입양예정일</span></th>
 				<td>
 					<c:if test="${empty content.adopt_reg_duedate }">
-						<input type="datetime-local" name="adopt_reg_duedate">
+						<input type="datetime-local" name="adopt_reg_duedate" min="${content.adopt_reg_regdate }">
 					</c:if>
 					<c:if test="${not empty content.adopt_reg_duedate }">
 						${content.adopt_reg_duedate }
@@ -48,7 +54,7 @@
 					<th class="table-secondary"><span class="sp2">입양완료일</span></th>
 					<td>
 						<c:if test="${empty content.adopt_reg_adoptdate }">
-							<input type="datetime-local" name="adopt_reg_adoptdate">
+							<input type="datetime-local" name="adopt_reg_adoptdate" min="${content.adopt_reg_regdate }">
 						</c:if>
 					</td>
 				</tr>

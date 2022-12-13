@@ -51,7 +51,7 @@ public class AdoptRegDAOImpl implements AdoptRegDAO{
 
 	@Override
 	public int count() {
-		return 0;
+		return sqlSession.selectOne("adoptreg_count");
 	}
 
 	
