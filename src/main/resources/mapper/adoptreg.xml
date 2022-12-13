@@ -4,6 +4,9 @@
 
 
 <mapper namespace="AdoptRegDAO">
+	<select id="adoptreg_count" resultType="int">
+		select count(adopt_reg_regno) from heartpet_adopt_reg
+	</select>
 	<select id="adoptreg_content" parameterType="int" resultType="AdoptRegDTO">
 		select * from heartpet_adopt_reg where adopt_reg_regno = #{adopt_reg_regno}
 	</select>
@@ -12,16 +15,18 @@
 	</select>
 	<update id="adoptreg_update" parameterType="AdoptRegDTO">
 		update heartpet_adopt_reg set
-		adopt_reg_userid = #{adopt_reg_userid},
+		<if test='adopt_reg_userid != null'>
+			adopt_reg_userid = #{adopt_reg_userid},
+		</if>
 		<choose>
 			<when test='adopt_reg_regdate != null'>
 				adopt_reg_regdate = TO_DATE(#{adopt_reg_regdate}, 'YYYY-MM-DD HH24:MI:SS')
 			</when>
 			<when test='adopt_reg_duedate != null'>
-				adopt_reg_duedate = TO_DATE(#{adopt_reg_duedate}, 'YYYY-MM-DD HH24:MI:SS')
+				adopt_reg_duedate = TO_DATE(#{adopt_reg_duedate}, 'YYYY-MM-DD HH24:MI')
 			</when>
 			<when test='adopt_reg_adoptdate != null'>
-				adopt_reg_adoptdate = TO_DATE(#{adopt_reg_adoptdate}, 'YYYY-MM-DD HH24:MI:SS')
+				adopt_reg_adoptdate = TO_DATE(#{adopt_reg_adoptdate}, 'YYYY-MM-DD HH24:MI')
 			</when>
 		</choose>
 		where adopt_reg_animalno = #{adopt_reg_animalno}

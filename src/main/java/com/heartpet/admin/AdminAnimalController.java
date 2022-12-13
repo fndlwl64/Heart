@@ -19,6 +19,7 @@ import javax.swing.filechooser.FileSystemView;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,15 +28,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.AdoptRegDAO;
 import com.heartpet.action.AnimalDAO;
+import com.heartpet.action.QnaDAO;
 import com.heartpet.model.AdoptRegDTO;
 import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.FileUploadImage;
+import com.heartpet.model.PageDTO;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
+@Transactional
 @Controller
 public class AdminAnimalController {
 	@Autowired
@@ -45,6 +48,11 @@ public class AdminAnimalController {
 	@Autowired
 	private AdoptRegDAO adoptRegDAO;
 
+	// 한 페이지당 보여질 게시물의 수
+    private final int rowsize = 3;
+
+    // 전체 게시물의 수
+    private int totalRecord = 0;
 	// ADMIN
 	@RequestMapping("/dog_list")
 	public String admin_dog_list(Model model) {
@@ -136,8 +144,19 @@ public class AdminAnimalController {
 
 	// 입양관리
 	@RequestMapping("/adoptreg_list")
-	public String adoptreg_list(Model model) {
-		// model.addAttribute("adoptregList", adoptRegDAO.list());
+	public String adoptreg_list(@RequestParam(value = "field", required = false) String field, 
+    		@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(value = "page", defaultValue = "1") int page,Model model) {
+		//페이징
+		if(field == null) { field = ""; }
+       	if(keyword == null) { keyword = ""; }
+    	
+		int currentPage = 1;	// 현재 페이지 변수
+		if(page != 1) { currentPage = page; }
+    	
+    	totalRecord = adoptRegDAO.count();
+    	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+		
+		
 		// 해시맵으로 조인 유사하게 구현
 		List<AnimalDTO> animalList = animalDAO.list();
 		Map<Integer, ArrayList<String>> maps = new HashMap();
@@ -147,7 +166,13 @@ public class AdminAnimalController {
 			aList.add(dto.getAnimal_status());
 			maps.put(dto.getAnimal_no(), aList);
 		}
-		System.out.println(maps.toString());
+		
+
+        model.addAttribute("total", totalRecord);
+        model.addAttribute("paging", paging);		
+		model.addAttribute("field", field); 
+		model.addAttribute("keyword", keyword);
+
 		model.addAttribute("adoptRegList", adoptRegDAO.list());
 		model.addAttribute("animalMap", maps);
 
@@ -156,10 +181,42 @@ public class AdminAnimalController {
 	/*관리자 리스트에서 수정하기*/
     @RequestMapping(value = "/adoptreg_update", method = RequestMethod.GET)
     public String adoptreg_update(@RequestParam("adopt_reg_regno")int adopt_reg_regno, Model model) {
-    	System.out.println(adopt_reg_regno);
+
     	AdoptRegDTO adoptRegDTO = adoptRegDAO.content(adopt_reg_regno);
-    	System.out.println(adoptRegDTO.toString());
+    	AnimalDTO animalDTO = animalDAO.content(adoptRegDTO.getAdopt_reg_animalno());
+    	
     	model.addAttribute("content",adoptRegDTO);
+    	model.addAttribute("foreign",animalDTO);
         return "admin/adoptreg_update";
+    }
+    
+    @RequestMapping(value = "/adoptreg_update", method = RequestMethod.POST)
+    public String adoptreg_update(AdoptRegDTO adoptRegDTO) {
+    	
+    	if(adoptRegDTO.getAdopt_reg_duedate() != null) {//입양 예정일 등록
+    		String reg_duedate = adoptRegDTO.getAdopt_reg_duedate().replace("T", " ");
+    		adoptRegDTO.setAdopt_reg_duedate(reg_duedate);
+    		adoptRegDAO.update(adoptRegDTO);
+    	}
+    	else if(adoptRegDTO.getAdopt_reg_adoptdate() != null) {//입양 완료일 등록
+    		String reg_adoptdate = adoptRegDTO.getAdopt_reg_adoptdate().replace("T", " ");
+    		adoptRegDTO.setAdopt_reg_adoptdate(reg_adoptdate);
+    		adoptRegDAO.update(adoptRegDTO);
+    		
+    		AnimalDTO animalDTO = new AnimalDTO();
+    		animalDTO.setAnimal_status("입양 완료");
+    		animalDTO.setAnimal_no(adoptRegDTO.getAdopt_reg_animalno());
+    		animalDAO.updateStatus(animalDTO);
+    	}
+    	return "redirect:/adoptreg_list";
+    }
+    
+    @RequestMapping("/adoptreg_admission")
+    public String adoptreg_admission(@RequestParam("animal_no") int animal_no) {
+    	AnimalDTO animalDTO = new AnimalDTO();
+    	animalDTO.setAnimal_no(animal_no);
+    	animalDTO.setAnimal_status("입양 가능");
+    	animalDAO.updateStatus(animalDTO);
+    	return "redirect:/adoptreg_list";
     }
 }

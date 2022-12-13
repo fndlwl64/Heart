@@ -20,13 +20,18 @@
 	crossorigin="anonymous"></script>
 
 </head>
+<c:set var="qList" value="${ qnaList }" />
+<c:set var="total" value="${ total }" />
+<c:set var="paging" value="${ paging }" />
+<c:set var="field" value="${ field }" />
+<c:set var="keyword" value="${ keyword }" />
 <c:set var="list" value="${adoptRegList }"></c:set>
 <c:set var="map" value="${animalMap }"></c:set><!-- 쿼리 조인을 피하기 위한 key, value를 통한 animal테이블 데이터 참조 -->
 <body>
 	<div class="container">
 
-		<br>
-		<%-- 검색 폼 --%>
+		<%-- <br>
+		검색 폼
 		<form class="search_form" method="post"
 			action="${path }/admin_adoptreg_search">
 			<div class="form_box row">
@@ -54,7 +59,7 @@
 			onclick="location.href='${path }/adoptreg_insert'">등록</button>
 
 		<br> <br>
-
+ --%>
 		<%-- 검색 결과 테이블 --%>
 		<div class="lists">
 			<table class="table searched_list">
@@ -75,7 +80,7 @@
 						<td>${dto.adopt_reg_regdate }</td>
 						<td>${dto.adopt_reg_duedate }</td>
 						<td>${dto.adopt_reg_adoptdate }</td>
-						<td><a href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }" onclick="return onclickOption(this);" class="status">${map.get(dto.adopt_reg_animalno).get(1) }</a></td>
+						<td><a href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }" onclick="return onclickOption(this);" class="status" data-value="${dto.adopt_reg_animalno }">${map.get(dto.adopt_reg_animalno).get(1) }</a></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -84,16 +89,8 @@
 
 		<br>
 		<%-- 페이징처리 --%>
-		<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item disabled"><a class="page-link">Previous</a>
-				</li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
-			</ul>
-		</nav>
+		
+		<jsp:include page="../include/pagination.jsp" />
 
 		<%-- 삭제 모달 --%>
 		<div class="modal fade" id="exampleModal" tabindex="-1"
@@ -117,17 +114,25 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 
 
 </body>
 <script type="text/javascript">
+	function getContextPath() {
+	    var hostIndex = location.href.indexOf( location.host ) + location.host.length;
+	    return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
+	};
 	function onclickOption(th) {
 		console.log($(th).text());
-		if($(th).text() == '입소 신청' || $(th).text() == '입양 완료'){
+		if($(th).text() == '입양 가능' || $(th).text() == '입양 완료'){
 			alert('관리할 사항이 없습니다.');
 			return false;
+		}
+		if($(th).text() == '입소 신청' && window.confirm("입소 신청을 입양 상태로 바꾸시겠습니까?")){
+			location.href = getContextPath()+'/adoptreg_admission?animal_no='+$(th).data('value');
+			return false;
+			
 		}
 	}
 </script>
