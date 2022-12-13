@@ -28,7 +28,9 @@ public interface UserDAO {
     
     public int emailCheck(String email);
     
-    public int update_num(String no);
+    public int updateuser(UserDTO dto);
+    
+    public int update_num(int no);
     
     public int deleteuser(String id);
 

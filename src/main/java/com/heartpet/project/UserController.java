@@ -294,12 +294,14 @@ public class UserController {
     		out.println("alert('회원가입이 완료되었습니다!');");
     		out.println("location.href='"+request.getContextPath()+"'");
     		out.println("</script>");
+    		out.flush();
     		System.out.println("회원가입 완료");
     	}else {
     		out.println("<script>");
     		out.println("alert('회원가입에 실패했습니다');");
     		out.println("history.back()");
     		out.println("</script>");
+    		out.flush();
     		System.out.println("회원가입 실패");
     	}
     }

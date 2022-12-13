@@ -93,9 +93,26 @@ public class AdminController {
     }
     
     @RequestMapping("/user_updated")
-    public void user_updated(HttpServletResponse response) throws IOException {
+    public void user_updated(UserDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException {
     	PrintWriter out =response.getWriter();
+    	response.setContentType("text/html; charset=utf-8");
+    	int res = userDAO.updateuser(dto);
     	
+    	if(res>0) {
+    		System.out.println("회원 정보 수정 ㄱ");
+    		out.println("<script>");
+    		out.println("alert('회원 정보 수정 완료');");
+    		out.println("location.href='"+request.getContextPath()+"/user_view?user_id="+dto.getUser_id()+"'");
+    		out.println("</script>");
+    		out.flush();
+    	}else {
+    		System.out.println("회원 정보 수정 실패");
+    		out.println("<script>");
+    		out.println("alert('회원 정보 수정 실패');");
+    		out.println("history.back();");
+    		out.println("</script>");
+    		out.flush();
+    	}
     	
     }
     
@@ -152,9 +169,27 @@ public class AdminController {
     
     // 관리자 리스트에서 삭제하기
     @RequestMapping("/user_delete")
-    public void user_delete(@RequestParam("id")String id, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public void user_delete(@RequestParam("id")String id, @RequestParam("no") int no, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    	response.setContentType("text/html; charset=utf-8");
     	PrintWriter out = response.getWriter();
     	int delete = userDAO.deleteuser(id);
+    	
+    	if(delete>0) {
+    		userDAO.update_num(no);
+    		
+    		System.out.println("회원 정보 삭제 ㄱ");
+    		out.println("<script>");
+    		out.println("alert('회원 정보 삭제 완료');");
+    		out.println("location.href='"+request.getContextPath()+"/user_list'");
+    		out.println("</script>");
+    		out.flush();
+    	}else {
+    		out.println("<script>");
+    		out.println("alert('회원 정보 삭제 실패');");
+    		out.println("history.back()");
+    		out.println("</script>");
+    		out.flush();
+    	}
     	
     }
 }

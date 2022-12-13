@@ -15,6 +15,58 @@
 	margin-bottom: 10%;
 }
 
+/* admin/user_update.jsp */
+.container {
+	margin: auto;
+	text-align: center;
+	
+}
+
+.container form .table {
+	width: 60%;
+	margin: auto;
+}
+
+.container .table th {
+	padding: 5px 20px;
+}
+
+.container .table td {
+	text-align: left;
+	padding-left: 10%;
+}
+
+.container .table .input1 {
+	background-color: white;
+	border: none;
+	border-bottom: 1px solid #000;
+	padding-left: 5%;
+}
+
+.container .table .input1:focus {
+	outline: none;
+}
+
+.container .table select {
+	padding: 0 10%;
+	text-align: left;
+}
+
+.container .table select:focus {
+	outline: none;
+}
+
+.container .table select option {
+	padding: 10%;
+}
+
+.container .table .search_zipcode {
+	font-size: 14px;
+    border-radius: 7px;
+    border: none;
+    padding: 5px;
+}
+
 .div1 .table {
 	width: 60%;
 	margin: auto;
@@ -30,6 +82,8 @@
 	text-align: left;
 	padding-left: 10%;
 }
+
+
 
 .div1 .table .sp2 {
 	color: black;
