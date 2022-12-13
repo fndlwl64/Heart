@@ -144,19 +144,27 @@ public class AdminAnimalController {
 
 	// 입양관리
 	@RequestMapping("/adoptreg_list")
-	public String adoptreg_list(@RequestParam(value = "field", required = false) String field, 
-    		@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(value = "page", defaultValue = "1") int page,Model model) {
+	public String adoptreg_list(@RequestParam(value = "startDate", required = false) String startDate, 
+    		@RequestParam(value = "endDate", required = false) String endDate
+    		, @RequestParam(value = "adopt_tag" , required = false) String adopt_tag 
+    		, @RequestParam(value = "page", defaultValue = "1") int page,Model model) {
 		//페이징
-		if(field == null) { field = ""; }
-       	if(keyword == null) { keyword = ""; }
-    	
+		String field = ""; 
+		String keyword = "";
+		if(startDate == null) {startDate="";}
+		if(endDate == null) {endDate="";}
+		if(adopt_tag == null) {adopt_tag="";}
+
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
-    	
-    	totalRecord = adoptRegDAO.count();
+		
+    	totalRecord = adoptRegDAO.countTag(startDate, endDate,adopt_tag);
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
 		
-		
+//    	System.out.println("======================");
+//		System.out.println(adopt_tag);
+//		System.out.println(startDate);
+//		System.out.println(endDate);
 		// 해시맵으로 조인 유사하게 구현
 		List<AnimalDTO> animalList = animalDAO.list();
 		Map<Integer, ArrayList<String>> maps = new HashMap();
@@ -167,13 +175,19 @@ public class AdminAnimalController {
 			maps.put(dto.getAnimal_no(), aList);
 		}
 		
-
-        model.addAttribute("total", totalRecord);
+		List<AdoptRegDTO> list = adoptRegDAO.listPaging(paging.getStartNo(), paging.getEndNo(), startDate, endDate,adopt_tag);
+//		System.out.println("================");
+//		for(AdoptRegDTO dto : list) {
+//			System.out.println(dto.toString());
+//		}
+	
+	    model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
 		model.addAttribute("field", field); 
 		model.addAttribute("keyword", keyword);
-
-		model.addAttribute("adoptRegList", adoptRegDAO.list());
+		model.addAttribute("tag",adopt_tag);
+	
+		model.addAttribute("adoptRegList", list);
 		model.addAttribute("animalMap", maps);
 
 		return "admin/adoptreg_list";
