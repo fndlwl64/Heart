@@ -62,7 +62,7 @@
                     <td>${ list.board_no }</td>
                     <td>${ list.board_category }</td>
                     <td class="left-align">                  
-	                    <a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }">
+	                    <a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }&board_parentNo=${ list.board_parentNo }">
 	                    <c:choose>
 	                    	<c:when test="${ list.level > 1 }">
 	                    		<c:forEach begin="1" end="${ list.level-1 }" step="1">
