@@ -1,5 +1,6 @@
 package com.heartpet.action;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +40,17 @@ public class AdoptRegDAOImpl implements AdoptRegDAO{
 	}
 
 	@Override
+	public List<AdoptRegDTO> listPaging(int startNo, int endNo, String startDate, String endDate,String tag) {
+		Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("tag", tag);
+    	map.put("startDate", startDate);
+    	map.put("endDate", endDate);
+    	map.put("startNo", startNo);
+    	map.put("endNo", endNo);
+    	return this.sqlSession.selectList("adoptreg_list_paging", map);
+	}
+
+	@Override
 	public AdoptRegDTO content(int id) {
 		return sqlSession.selectOne("adoptreg_content",id);
 	}
@@ -54,6 +66,13 @@ public class AdoptRegDAOImpl implements AdoptRegDAO{
 		return sqlSession.selectOne("adoptreg_count");
 	}
 
-	
-	
+	@Override
+	public int countTag(String startDate, String endDate, String tag) {
+		Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("tag", tag);
+    	map.put("startDate", startDate);
+    	map.put("endDate", endDate);
+		return sqlSession.selectOne("adoptreg_countTag",map);
+	}
+
 }

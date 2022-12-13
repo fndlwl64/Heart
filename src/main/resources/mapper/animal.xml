@@ -23,7 +23,7 @@
 	</select>		
 	<insert id="animal_insert" parameterType="AnimalDTO">
 		<selectKey resultType="int" keyProperty="animal_no" order="BEFORE">
-			select max(animal_no)+1 from heartpet_animal
+			select count(animal_no)+1 from heartpet_animal
 		</selectKey>
 		insert into heartpet_animal 
 			values

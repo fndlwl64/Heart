@@ -4,14 +4,48 @@
 
 
 <mapper namespace="AdoptRegDAO">
+	<sql id="adoptreg_select">
+	<![CDATA[ 
+		adopt_reg_regno ,
+		adopt_reg_userid ,
+		adopt_reg_animalno ,
+		adopt_reg_regdate ,
+		adopt_reg_duedate ,
+		adopt_reg_adoptdate ,
+		adopt_reg_appdate 
+	]]>
+	</sql>
 	<select id="adoptreg_count" resultType="int">
 		select count(adopt_reg_regno) from heartpet_adopt_reg
 	</select>
-	<select id="adoptreg_content" parameterType="int" resultType="AdoptRegDTO">
-		select * from heartpet_adopt_reg where adopt_reg_regno = #{adopt_reg_regno}
+	<select id="adoptreg_countTag" parameterType="hashmap" resultType="int">
+		select count(adopt_reg_regno) from heartpet_adopt_reg 
+		<if test="!startDate.equals('') and !endDate.equals('') ">
+			where ${tag} between TO_DATE(#{startDate}, 'YYYY-MM-DD') and TO_DATE(#{endDate},'YYYY-MM-DD')
+		</if>
+	</select>
+	<select id="adoptreg_content" parameterType="int"
+		resultType="AdoptRegDTO">
+		select * from heartpet_adopt_reg where adopt_reg_regno =
+		#{adopt_reg_regno}
 	</select>
 	<select id="adoptreg_list" resultType="AdoptRegDTO">
-		select * from heartpet_adopt_reg order by adopt_reg_regno desc
+		select * from
+		heartpet_adopt_reg order by adopt_reg_regno desc
+	</select>
+	<select id="adoptreg_list_paging" parameterType="hashmap"
+		resultType="AdoptRegDTO">
+		select
+		<include refid="adoptreg_select"></include>
+		from
+		(
+		select a.*, row_number() over(order by adopt_reg_regno desc) as rnum
+		from heartpet_adopt_reg a
+		<if test="!startDate.equals('') and !endDate.equals('') ">
+			where ${tag} between TO_DATE(#{startDate}, 'YYYY-MM-DD') and TO_DATE(#{endDate},'YYYY-MM-DD')
+		</if>
+		)
+		where rnum between #{startNo} and #{endNo}
 	</select>
 	<update id="adoptreg_update" parameterType="AdoptRegDTO">
 		update heartpet_adopt_reg set
@@ -20,13 +54,16 @@
 		</if>
 		<choose>
 			<when test='adopt_reg_regdate != null'>
-				adopt_reg_regdate = TO_DATE(#{adopt_reg_regdate}, 'YYYY-MM-DD HH24:MI:SS')
+				adopt_reg_regdate = TO_DATE(#{adopt_reg_regdate},
+				'YYYY-MM-DD HH24:MI:SS')
 			</when>
 			<when test='adopt_reg_duedate != null'>
-				adopt_reg_duedate = TO_DATE(#{adopt_reg_duedate}, 'YYYY-MM-DD HH24:MI')
+				adopt_reg_duedate = TO_DATE(#{adopt_reg_duedate},
+				'YYYY-MM-DD HH24:MI')
 			</when>
 			<when test='adopt_reg_adoptdate != null'>
-				adopt_reg_adoptdate = TO_DATE(#{adopt_reg_adoptdate}, 'YYYY-MM-DD HH24:MI')
+				adopt_reg_adoptdate = TO_DATE(#{adopt_reg_adoptdate},
+				'YYYY-MM-DD HH24:MI')
 			</when>
 		</choose>
 		where adopt_reg_animalno = #{adopt_reg_animalno}
@@ -50,17 +87,8 @@
 	</insert>
 </mapper>
 
-<!-- <select id="adoptreg_list" resultType="map">
-		select
-			a.adopt_reg_regno ,
-			b.animal_name ,
-			a.adopt_reg_appdate ,
-			a.adopt_reg_regdate ,
-			a.adopt_reg_duedate ,
-			a.adopt_reg_adoptdate ,
-			b.animal_status
-		from heartpet_adopt_reg a
-		join heartpet_animal b
-		on a.adopt_reg_animalno = b.animal_no
-		order by a.adopt_reg_regno desc
-	</select> -->
+<!-- <select id="adoptreg_list" resultType="map"> select a.adopt_reg_regno 
+	, b.animal_name , a.adopt_reg_appdate , a.adopt_reg_regdate , a.adopt_reg_duedate 
+	, a.adopt_reg_adoptdate , b.animal_status from heartpet_adopt_reg a join 
+	heartpet_animal b on a.adopt_reg_animalno = b.animal_no order by a.adopt_reg_regno 
+	desc </select> -->
