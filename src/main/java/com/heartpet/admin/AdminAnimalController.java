@@ -50,13 +50,35 @@ public class AdminAnimalController {
 
 	// 한 페이지당 보여질 게시물의 수
     private final int rowsize = 3;
-
     // 전체 게시물의 수
     private int totalRecord = 0;
 	// ADMIN
 	@RequestMapping("/dog_list")
-	public String admin_dog_list(Model model) {
-		model.addAttribute("dogList", animalDAO.listTag("dog"));
+	public String admin_dog_list(@RequestParam(value = "startDate", required = false) String startDate, 
+    		@RequestParam(value = "endDate", required = false) String endDate
+    		, @RequestParam(value = "adopt_tag" , required = false) String adopt_tag 
+    		, @RequestParam(value = "page", defaultValue = "1") int page,Model model
+    		, AnimalDTO animalDTO) {
+		//페이징
+		String field = ""; 
+		String keyword = "";
+		if(startDate == null) {startDate="";}
+		if(endDate == null) {endDate="";}
+		if(adopt_tag == null) {adopt_tag="";}
+		
+		int currentPage = 1;	// 현재 페이지 변수
+		if(page != 1) { currentPage = page; }
+		
+		totalRecord = animalDAO.count("dog");
+    	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+		
+    	model.addAttribute("total", totalRecord);
+        model.addAttribute("paging", paging);		
+ 		model.addAttribute("field", field); 
+ 		model.addAttribute("keyword", keyword);
+ 		model.addAttribute("tag",adopt_tag);
+ 		
+		model.addAttribute("dogList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), "dog"));
 		return "admin/animal/dog/dog_list";
 	}
 
@@ -93,7 +115,7 @@ public class AdminAnimalController {
 		String strDate = dateFormat.format(Calendar.getInstance().getTime());
 
 		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
-		adoptRegDTO.setAdopt_reg_animalno(animalDAO.count() + 1);
+		adoptRegDTO.setAdopt_reg_animalno(animalDAO.count(null) + 1);
 		adoptRegDTO.setAdopt_reg_userid("admin");
 		adoptRegDTO.setAdopt_reg_appdate(strDate);
 
@@ -161,10 +183,6 @@ public class AdminAnimalController {
     	totalRecord = adoptRegDAO.countTag(startDate, endDate,adopt_tag);
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
 		
-//    	System.out.println("======================");
-//		System.out.println(adopt_tag);
-//		System.out.println(startDate);
-//		System.out.println(endDate);
 		// 해시맵으로 조인 유사하게 구현
 		List<AnimalDTO> animalList = animalDAO.list();
 		Map<Integer, ArrayList<String>> maps = new HashMap();
@@ -176,10 +194,7 @@ public class AdminAnimalController {
 		}
 		
 		List<AdoptRegDTO> list = adoptRegDAO.listPaging(paging.getStartNo(), paging.getEndNo(), startDate, endDate,adopt_tag);
-//		System.out.println("================");
-//		for(AdoptRegDTO dto : list) {
-//			System.out.println(dto.toString());
-//		}
+//		
 	
 	    model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		

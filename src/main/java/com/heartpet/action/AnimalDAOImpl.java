@@ -1,6 +1,8 @@
 package com.heartpet.action;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,6 @@ public class AnimalDAOImpl implements AnimalDAO{
 	@Override
 	public void delete(int id) {
 		sqlSession.delete("animal_delete", id);
-		
 	}
 
 	@Override
@@ -52,6 +53,15 @@ public class AnimalDAOImpl implements AnimalDAO{
 	}
 
 	@Override
+	public List<AnimalDTO> listPaging(int startNO, int endNo, String animal_tag) {
+		Map<String, Object> map = new HashMap<String, Object>();
+    	map.put("startNo", startNO);
+    	map.put("endNo", endNo);
+    	map.put("animal_tag", animal_tag);
+		return sqlSession.selectList("animal_listTagPaging",map);
+	}
+
+	@Override
 	public AnimalDTO content(int id) {
 		return sqlSession.selectOne("animal_content", id);
 	}
@@ -63,8 +73,8 @@ public class AnimalDAOImpl implements AnimalDAO{
 	}
 	
 	@Override
-	public int count() {
-		return sqlSession.selectOne("animal_count");
+	public int count(String animal_tag) {
+		return sqlSession.selectOne("animal_count", animal_tag);
 	}
 
 	//////////////////////////////////////////////////////

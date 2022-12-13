@@ -103,7 +103,7 @@ public class AnimalController {
 		String strDate = dateFormat.format(Calendar.getInstance().getTime());
 
 		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
-		adoptRegDTO.setAdopt_reg_animalno(animalDAO.count() + 1);
+		adoptRegDTO.setAdopt_reg_animalno(animalDAO.count(null) + 1);
 		adoptRegDTO.setAdopt_reg_userid(id);
 		adoptRegDTO.setAdopt_reg_appdate(strDate);
 
