@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="${path}/resources/css/support.css">
 <script>
 function popup(){
-	  let options = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=900, height=300, top=100,left=400";
+	  let options = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=900, height=900, top=100,left=400";
 
 	  window.open("<%=request.getContextPath() %>/user_support_insert","_blank", options);
 	}
