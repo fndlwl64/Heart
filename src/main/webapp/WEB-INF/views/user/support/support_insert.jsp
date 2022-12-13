@@ -21,13 +21,12 @@
 
 	IMP.init("imp44175061");
 	
-	 let amount2 = document.getElementById("amount2").val();
-	
 	function requestPay() {
+		  let amount2 = document.getElementById('support').value;
 	      IMP.request_pay({ 
 	          pg: "html5_inicis",
 	          pay_method: "card",
-	          merchant_uid: ${No}+1,//주문번호
+	          merchant_uid: ${No}+3,//주문번호
 	          name: "유기견 후원",
 	          amount: amount2,// 숫자타입
 	          buyer_email: "${dto.getUser_email()}",
@@ -38,6 +37,7 @@
 	      }, function (rsp) { // callback
 	          if (rsp.success) {
 	              alert('후원이 완료되었습니다.');
+	              
 	          } else {
 	        	  alert('후원실패');
 	          }
@@ -51,7 +51,6 @@
 		  return false;
 		}
 </script>
-
 </head>
 <body>
 	<div class="div_sup_insert">
@@ -68,11 +67,15 @@
 				<li class="support_li"><button>20000</button></li>
 				<li class="support_li"><button>30000</button></li>
 				<li class="support_li"><button>50000</button></li>
-				<li class="support_li"><input id="amount2" type="text" placeholder="직접입력" onkeypress='return checkNumber(event)'></li>
+				<li class="support_li"><input id="support" type="text" placeholder="직접입력" onkeypress='return checkNumber(event)'></li>
 			</ul>
-   			 <button onclick="requestPay()">결제하기</button>
 		</div>
-		
+		<div>
+			<ul>
+				<li class="support_li"><button onclick="requestPay()">결제하기</button></li>
+			</ul>
+		</div>
 	</div>
+
 </body>
 </html>

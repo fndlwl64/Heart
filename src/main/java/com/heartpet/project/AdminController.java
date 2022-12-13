@@ -47,10 +47,7 @@ public class AdminController {
         return "admin/user/user_list";
     }
     
-    @RequestMapping("/support_list")
-    public String support_list() {
-        return "admin/support_list";
-    }
+    
     @RequestMapping("/notice_list")
     public String notice_list() {
         return "admin/notice_list";
@@ -77,10 +74,7 @@ public class AdminController {
     public String review_update() {
         return "admin/review_update";
     }
-    @RequestMapping("/support_update")
-    public String support_update() {
-        return "admin/support_update";
-    }
+    
     
     @RequestMapping("/user_update")
     public String user_update(@RequestParam("user_id")String id, Model model) {
@@ -134,10 +128,7 @@ public class AdminController {
     public String review_insert() {
         return "admin/review_insert";
     }
-    @RequestMapping("/support_insert")
-    public String support_insert() {
-        return "admin/support_insert";
-    }
+    
     @RequestMapping("/user_insert")
     public String user_insert() {
         return "admin/user/user_insert";

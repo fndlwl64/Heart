@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="dto" value="${sList }"/>
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="../include/admin_header.jsp"/>
 <!DOCTYPE html>
 <html>
@@ -16,7 +19,7 @@
 
     <br>
     <%-- 검색 폼 --%>
-    <form class="search_form" method="post" action="">
+    <form class="search_form" method="post" action="${path }/support_insert_ok">
         <div class="form_box">
             <select name="field">
                 <option value="id">회원아이디</option>
@@ -31,33 +34,34 @@
 
     <br>
 
-    <button class="btn btn-success insertbtn" onclick="location.href='/support_insert'">등록</button>
+    <button class="btn btn-success insertbtn" onclick="location.href='${path }/support_insert'">등록</button>
 
     <br><br>
     <%-- 검색 결과 테이블 --%>
     <div class="lists">
-
+		
         <table class="table searched_list">
             <tr>
                 <th class="table-secondary">후원번호</th>
                 <th class="table-secondary">회원아이디</th>
-                <th class="table-secondary">회원등급</th>
                 <th class="table-secondary">후원금액</th>
                 <th class="table-secondary">후원날짜</th>
                 <th class="table-secondary">수정/삭제</th>
             </tr>
-
-            <tr>
-                <td>1</td>
-                <td>id1</td>
-                <td>2등급</td>
-                <td>20000원</td>
-                <td>2022-11-10</td>
-                <td>
-                    <button class="btn btn-primary" onclick="location.href='/user_review_update'">수정</button>
-                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
-                </td>
-            </tr>
+            <c:if test="${!empty sList }">
+				<c:forEach items="${sList }" var="dto">
+	            <tr>
+	                <td>${dto.getSupport_no() }</td>
+	                <td>${dto.getSupport_userid() }</td>
+	                <td>${dto.getSupport_price() }원</td>
+	                <td>${dto.getSupport_date().substring(0,10) }</td>
+	                <td>
+	                    <button class="btn btn-primary" onclick="location.href='${path }/support_update?no=${dto.getSupport_no()}'">수정</button>
+	                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
+	                </td>
+	            </tr>
+	            </c:forEach>
+            </c:if>
         </table>
 
     </div>
@@ -93,7 +97,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" onclick="location.href=''">삭제</button>
+                    <button type="button" class="btn btn-danger" onclick="location.href='${path }/support_delete?no=${dto.getSupport_no()}'">삭제</button>
                 </div>
             </div>
         </div>
