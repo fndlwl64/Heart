@@ -42,9 +42,7 @@ public class HomeController {
 		 * state; session.setAttribute("state", state);
 		 */
 		
-		
-		
-		return "main";
+		return "index";
 	}
 	
 }
