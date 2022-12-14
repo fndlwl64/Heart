@@ -109,6 +109,7 @@ body {
     padding-left: 4%;
     margin-bottom: 2%;
     font-size: 15px;
+    display: block;
 }
 
 .wrap .h-wrap .modal .modal-content .modal-body .login_btn {
@@ -148,8 +149,17 @@ body {
     justify-content: center;
 }
 
-.wrap .h-wrap .id_found {
+.wrap .h-wrap .modal .modal-content .modal-footer #id_found {
 	display: none;
+}
+
+.wrap .h-wrap .modal .modal-content .modal-footer #id_found .found_title {
+	font-size: 16;
+	font-weight: bold;
+}
+
+.wrap .h-wrap .modal .modal-content .modal-footer #id_found .found_title .span_id {
+	font-size: 14;
 }
 
 /* footer */

@@ -33,13 +33,26 @@ public class AdminController {
 
     /*관리자 상단바에서 페이지 이동*/
 	@RequestMapping("/admin_main")
-	public String admin_main(Model model) {
+	public String admin_main(@RequestParam(value = "field", required = false) String field, 
+    		@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 		
-		//List<UserDTO> list = userDAO.countUser(field, keyword);
-		int total =userDAO.totalUser();
+		if(field == null) { field = ""; }
+       	if(keyword == null) { keyword = ""; }
+    	
+		int currentPage = 1;	// 현재 페이지 변수
+		if(page != 1) { currentPage = page; }
+    	
+    	totalRecord = this.userDAO.countUser(field, keyword);
+    	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+    	List<UserDTO> list = userDAO.userListPaging(paging.getStartNo(), paging.getEndNo(), field, keyword);
+    	int total =userDAO.totalUser();
 		
-		//model.addAttribute("list", list);
+		model.addAttribute("list", list);
 		model.addAttribute("total", total);
+		model.addAttribute("totalRecord", totalRecord);
+		model.addAttribute("paging", paging);		
+		model.addAttribute("field", field); 
+		model.addAttribute("keyword", keyword);	
 		
 		return "admin/user/user_list";
 	}

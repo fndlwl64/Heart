@@ -330,6 +330,18 @@ $(function() {
 		
 	});
 	
+	// 아이디 찾기 
+	let id_name = $("#user_name").val();
+	let id_email = $("#user_email").val();
+	
+	if(id_name == '' || id_name == null) {
+		$("#find_id").attr("disabled", true);
+	}else if(id_email == '' || id_email == null) {
+		$("#find_id").attr("disabled", true);
+	}else {
+		$("#find_id").attr("disabled", false);
+	}
+	
 	
 	let zipcode = $("#sample6_postcode").val();
 	let address = $("#sample6_detailAddress").val();
@@ -341,16 +353,36 @@ $(function() {
 });
 
 function idfind() {
-
-	let user_name = $(this).val();
-	let user_email = $(this).val();
 	
-	$("#find_id").on("click", function() {
-		$("#id_found").css({
-			'display' : 'block'
-		});
+	$("#id_found").css({
+		'display' : 'block'
 	});
-		
+	
+	let name = $("#user_name").val();
+	let email = $("#user_email").val();
+	
+	$.ajax({			
+        contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+        type: "POST",
+        url: "/project/user_find_id",
+        data: {
+        	name : name,
+        	email : email        
+        },
+        success: function(res) {
+        	if(res.next()) {  
+        		console.log('아이디 찾음~');
+				$("#found_id").html("<br>회원님의 아이디는 <b>"+res+"</b>입니다");
+				
+			}else {
+				console.log('아이디 못찾음ㅠ');
+				$("#found_id").html("<br>해당하는 아이디를 찾지 못했습니다. 다시 확인해주세요.");
+			}
+        },
+        error: function(e) {            
+            console.log("ajax fail", e);
+        }
+   	});
 }
 
 

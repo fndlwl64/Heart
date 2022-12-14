@@ -83,7 +83,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public String findid(Map<String, Object> map) {
+	public String findid(Map<String, String> map) {
 		return this.sqlSession.selectOne("find_id", map);
 	}
 
@@ -104,6 +104,8 @@ public class UserDAOImpl implements UserDAO {
 		map.put("keyword", keyword);		
 		return this.sqlSession.selectOne("user_count", map);
 	}
+
+	
 
 	
 

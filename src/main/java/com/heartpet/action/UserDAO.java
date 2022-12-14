@@ -38,6 +38,6 @@ public interface UserDAO {
     
     public int deleteuser(String id);
     
-    public String findid(Map<String, Object> map);
+    public String findid(Map<String, String> map);
 
 }

@@ -57,8 +57,6 @@ public class UserController {
     // 전체 게시물의 수
     private int totalRecord = 0;
 
-
-    
     @RequestMapping("/login")
     public String login(@RequestParam("user_id")String id, @RequestParam("user_pwd")String pwd, Model model,HttpServletResponse response, HttpServletRequest request) throws IOException {
     	response.setContentType("text/html; charset=utf-8");
@@ -310,13 +308,16 @@ public class UserController {
     }
     
     @RequestMapping("/user_find_id")
-    public @ResponseBody String findid(@RequestParam("user_name")String name, @RequestParam("user_email")String email) {
-    	Map<String, Object> map = new HashMap<String, Object>();
+    public @ResponseBody String findid(@RequestParam("name")String name, @RequestParam("email")String email) {
+    	System.out.println("아이디 찾기 시작");
+    	
+    	Map<String, String> map = new HashMap<String, String>();
     	map.put("name", name);
     	map.put("email", email);
     	
     	String res = userDAO.findid(map);
     	return res;
     }
+    
 
 }
