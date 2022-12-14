@@ -1,5 +1,6 @@
 package com.heartpet.project;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.QnaDAO;
 import com.heartpet.model.FnqDTO;
@@ -34,7 +36,7 @@ public class UserQnaController {
 
     // 전체 게시물의 수
     private int totalRecord = 0;
-    
+        
     ////////////////////////////////////////////////////////////////////////////////////
     // QNA_LIST
     ////////////////////////////////////////////////////////////////////////////////////
@@ -140,9 +142,35 @@ public class UserQnaController {
     // QNA_INSERT_OK
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/user_qna_insert_ok", method = RequestMethod.POST)
-    public void user_qna_insert_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public void user_qna_insert_ok(@Valid QnaDTO qnaDto, BindingResult result, 
+    		MultipartFile[] files,
+    		HttpServletResponse response, HttpServletRequest request) throws IOException {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
+
+		for(MultipartFile file : files) {
+			long size = file.getSize();
+			String fileName = file.getOriginalFilename();
+			System.out.println("fileName : "+fileName);
+			System.out.println("size : "+size);
+			
+	    	// 파일 저장 경로
+	        String savePath = "/resources/qna";
+	        String realPath = request.getSession().getServletContext().getRealPath(savePath);
+	        
+	        // 업로드 폴더 체크 후 없으면 생성
+	        File dirChk = new File(realPath);
+	        if (!dirChk.exists()) {
+	        	dirChk.mkdir();
+	        }
+	        
+	        realPath += File.separator + fileName;
+	        File saveFile = new File(realPath);
+	        file.transferTo(saveFile);
+		}
+
+         
+
     	if(result.hasErrors()) { // 에러를 List로 저장
 			List<ObjectError> errors = result.getAllErrors();
 			for(ObjectError error : errors) {
