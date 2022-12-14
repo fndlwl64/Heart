@@ -70,8 +70,7 @@ public class AdminAnimalController {
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
 		
     	model.addAttribute("total", totalRecord);
-        model.addAttribute("paging", paging);		
- 		model.addAttribute("field", field);
+        model.addAttribute("paging", paging);
 		model.addAttribute("dogList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO));
 		model.addAttribute("animalDTO",animalDTO);
 
@@ -94,8 +93,7 @@ public class AdminAnimalController {
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
 		
     	model.addAttribute("total", totalRecord);
-        model.addAttribute("paging", paging);		
- 		model.addAttribute("field", field);
+        model.addAttribute("paging", paging);
  		model.addAttribute("catList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO));
 		model.addAttribute("animalDTO",animalDTO);
 
@@ -152,17 +150,17 @@ public class AdminAnimalController {
 
 	@RequestMapping("/animal_delete")
 	public String animal_delete(@RequestParam("no") int no) {
-		AnimalDTO animalDTO = animalDAO.content(no);
-
-		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload");
-
-		File file = new File(rootPath + "/" + animalDTO.getAnimal_img1());
-		file.delete();
-		file = new File(rootPath + "/" + animalDTO.getAnimal_img2());
-		file.delete();
-		file = new File(rootPath + "/" + animalDTO.getAnimal_img3());
-		file.delete();
-		animalDAO.delete(no);
+//		AnimalDTO animalDTO = animalDAO.content(no);
+//
+//		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload");
+//
+//		File file = new File(rootPath + "/" + animalDTO.getAnimal_img1());
+//		file.delete();
+//		file = new File(rootPath + "/" + animalDTO.getAnimal_img2());
+//		file.delete();
+//		file = new File(rootPath + "/" + animalDTO.getAnimal_img3());
+//		file.delete();
+//		animalDAO.delete(no);
 
 		return "redirect:/admin_main";
 	}
