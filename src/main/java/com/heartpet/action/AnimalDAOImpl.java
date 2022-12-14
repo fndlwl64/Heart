@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.heartpet.model.AnimalDTO;
 
 @Repository
-public class AnimalDAOImpl implements AnimalDAO{
+public class AnimalDAOImpl implements AnimalDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
@@ -25,10 +25,10 @@ public class AnimalDAOImpl implements AnimalDAO{
 	public int update(AnimalDTO dto) {
 		return sqlSession.update("animal_update", dto);
 	}
-	
+
 	@Override
 	public int updateStatus(AnimalDTO dto) {
-		return sqlSession.update("animal_updateStatus",dto);
+		return sqlSession.update("animal_updateStatus", dto);
 	}
 
 	@Override
@@ -46,21 +46,22 @@ public class AnimalDAOImpl implements AnimalDAO{
 	public List<AnimalDTO> listTag(String animal_tag) {
 		return sqlSession.selectList("animal_listTag", animal_tag);
 	}
-	
+
 	@Override
 	public List<AnimalDTO> listTagUser(String animal_tag) {
-		return sqlSession.selectList("animal_listTagUser",animal_tag);
+		return sqlSession.selectList("animal_listTagUser", animal_tag);
 	}
 
 	@Override
 
-	public List<AnimalDTO> listPaging(int startNO, int endNo,  AnimalDTO animalDTO) {
+	public List<AnimalDTO> listPaging(int startNO, int endNo, AnimalDTO animalDTO, String keyword) {
 
-    Map<String, Object> map = new HashMap<String, Object>();
-    	map.put("startNo", startNO);
-    	map.put("endNo", endNo);
-    	map.put("animalDTO",animalDTO);
-		return sqlSession.selectList("animal_listTagPaging",map);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startNo", startNO);
+		map.put("endNo", endNo);
+		map.put("animalDTO", animalDTO);
+		map.put("keyword", keyword);
+		return sqlSession.selectList("animal_listTagPaging", map);
 	}
 
 	@Override
@@ -73,7 +74,7 @@ public class AnimalDAOImpl implements AnimalDAO{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public int count(String animal_tag) {
 		return sqlSession.selectOne("animal_count", animal_tag);
@@ -88,8 +89,11 @@ public class AnimalDAOImpl implements AnimalDAO{
 	}
 
 	@Override
-	public int countPaging(AnimalDTO dto) {
-		return sqlSession.selectOne("animal_countPaging",dto);
-	}	
-	
+	public int countPaging(AnimalDTO dto, String keyword) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("animalDTO", dto);
+		map.put("keyword", keyword);
+		return sqlSession.selectOne("animal_countPaging", map);
+	}
+
 }

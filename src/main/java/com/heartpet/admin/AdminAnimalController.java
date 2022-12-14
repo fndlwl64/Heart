@@ -66,12 +66,12 @@ public class AdminAnimalController {
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
 
-		totalRecord = animalDAO.countPaging(animalDTO);
+		totalRecord = animalDAO.countPaging(animalDTO,keyword);
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
 		
     	model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);
-		model.addAttribute("dogList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO));
+		model.addAttribute("dogList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword));
 		model.addAttribute("animalDTO",animalDTO);
 
 		return "admin/animal/dog/dog_list";
@@ -89,12 +89,12 @@ public class AdminAnimalController {
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
 
-		totalRecord = animalDAO.countPaging(animalDTO);
+		totalRecord = animalDAO.countPaging(animalDTO,keyword);
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
 		
     	model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);
- 		model.addAttribute("catList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO));
+ 		model.addAttribute("catList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword));
 		model.addAttribute("animalDTO",animalDTO);
 
 		return "admin/animal/cat/cat_list";
