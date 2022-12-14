@@ -12,83 +12,83 @@ import com.heartpet.model.ReviewDTO;
 
 @Repository
 public class ReviewDAOImpl implements ReviewDAO {
-	
-	@Autowired
-	private SqlSessionTemplate sqlSession;
 
-	/////////////////////////////////////////////////
-	// 전체 list
-	/////////////////////////////////////////////////
-	@Override
-	public List<ReviewDTO> listReview(int startNo, int endNo, String field, String keyword) {
-    	Map<String, Object> map = new HashMap<String, Object>();
-    	map.put("startNo", startNo);
-    	map.put("endNo", endNo);
-    	map.put("field", field);
-    	map.put("keyword", keyword);
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
+    /////////////////////////////////////////////////
+    // 전체 list
+    /////////////////////////////////////////////////
+    @Override
+    public List<ReviewDTO> listReview(int startNo, int endNo, String field, String keyword) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("startNo", startNo);
+        map.put("endNo", endNo);
+        map.put("field", field);
+        map.put("keyword", keyword);
         return this.sqlSession.selectList("review_list", map);
-	}	
-	
-	@Override
-	public int listReviewCount(String field, String keyword) {
-    	Map<String, String> map = new HashMap<String, String>();
-    	map.put("field", field);
-    	map.put("keyword", keyword);
-		return this.sqlSession.selectOne("review_count", map);
-	}
-	
-	/////////////////////////////////////////////////
-	// dog/cat 선택에 따른 List 출력
-	/////////////////////////////////////////////////
-	@Override
-	public List<ReviewDTO> listReview(int startNo, int endNo, String animal_tag) {
-    	Map<String, Object> map = new HashMap<String, Object>();
-    	map.put("startNo", startNo);
-    	map.put("endNo", endNo);
-    	map.put("animal_tag", animal_tag);
+    }
+
+    @Override
+    public int listReviewCount(String field, String keyword) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("field", field);
+        map.put("keyword", keyword);
+        return this.sqlSession.selectOne("review_count", map);
+    }
+
+    /////////////////////////////////////////////////
+    // dog/cat 선택에 따른 List 출력
+    /////////////////////////////////////////////////
+    @Override
+    public List<ReviewDTO> listReview(int startNo, int endNo, String animal_tag) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("startNo", startNo);
+        map.put("endNo", endNo);
+        map.put("animal_tag", animal_tag);
         return this.sqlSession.selectList("review_animal_option", map);
-	}
-	
-	@Override
-	public int listReviewCount(String animal_tag) {
-		return this.sqlSession.selectOne("review_animal_count", animal_tag);
-	}
+    }
 
-	@Override
-	public List<ReviewDTO> listReview(String animal_tag) {
-		return this.sqlSession.selectList("review_total_list", animal_tag);
-	}
-	
-	//////////////////////////////////////////////////
-	
-	@Override
-	public int insertReview(ReviewDTO dto) {		
-		return this.sqlSession.insert("review_insert", dto);
-	}
+    @Override
+    public int listReviewCount(String animal_tag) {
+        return this.sqlSession.selectOne("review_animal_count", animal_tag);
+    }
 
-	@Override
-	public ReviewDTO contentReview(int review_no) {
-		return this.sqlSession.selectOne("review_content", review_no);
-	}
+    @Override
+    public List<ReviewDTO> listReview(String animal_tag) {
+        return this.sqlSession.selectList("review_total_list", animal_tag);
+    }
 
-	@Override
-	public int hitReview(int review_no) {		
-		return this.sqlSession.update("review_hit", review_no);
-	}
+    //////////////////////////////////////////////////
 
-	@Override
-	public int updateReview(ReviewDTO dto) {
-		return this.sqlSession.update("review_update", dto);
-	}
+    @Override
+    public int insertReview(ReviewDTO dto) {
+        return this.sqlSession.insert("review_insert", dto);
+    }
 
-	@Override
-	public int deleteReview(int review_no) {
-		return this.sqlSession.delete("review_delete", review_no);
-	}
+    @Override
+    public ReviewDTO contentReview(int review_no) {
+        return this.sqlSession.selectOne("review_content", review_no);
+    }
 
-	@Override
-	public List<Integer> animalId(String session_id) {
-		return this.sqlSession.selectList("animal_id", session_id);
-	}
+    @Override
+    public int hitReview(int review_no) {
+        return this.sqlSession.update("review_hit", review_no);
+    }
+
+    @Override
+    public int updateReview(ReviewDTO dto) {
+        return this.sqlSession.update("review_update", dto);
+    }
+
+    @Override
+    public int deleteReview(int review_no) {
+        return this.sqlSession.delete("review_delete", review_no);
+    }
+
+    @Override
+    public List<Integer> animalId(String session_id) {
+        return this.sqlSession.selectList("animal_id", session_id);
+    }
 
 }

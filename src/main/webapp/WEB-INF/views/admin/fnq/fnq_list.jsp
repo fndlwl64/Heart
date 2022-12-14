@@ -24,7 +24,7 @@
     <div class="container">
 
         <%-- 검색 폼 --%>
-        <form class="search_form" method="get" action="${path}/admin_fnq_list?field=${ field }&keyword=${ keyword }">
+        <form class="search_form" method="get" action="${path}/admin_fnq_list">
             <div class="form_box d-flex">
            		<span class="search-name">대분류</span>
                 <select name="field" class="form-select d-inline align-middle w-25">
@@ -41,7 +41,7 @@
         </form>
         
        <%-- 정렬 --%>
-       <form class="order_form" method="get" action="${path}/admin_fnq_list?order=${ order }">
+       <form class="order_form" method="get" action="${path}/admin_fnq_list">
        <div class="qna-section">
             <div class="total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
             <div class="qna_order">

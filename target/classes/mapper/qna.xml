@@ -32,13 +32,20 @@
 	<sql id="qna_hierarchy">
 		START WITH board_parentNo = 0
 		CONNECT BY PRIOR board_no = board_parentNo
-		ORDER SIBLINGS BY board_parentNo desc, board_no desc
+		ORDER SIBLINGS BY board_parentNo desc
 	</sql>
 	
 	<!-- list -->
 	<select id="qna_list" parameterType="hashMap" resultType="QnaDTO">
 		<include refid="qna_select" /> 
-			FROM (select b.*, row_number() over(order by board_no desc) rnum FROM heartpet_board b
+			FROM (select b.*, row_number() over(order by board_parentNo desc
+		 <choose>
+		 	<when test="order.equals('no_desc')">, board_no desc</when>
+		 	<when test="order.equals('date_desc')">, board_regdate desc</when>
+		 	<when test="order.equals('hit_desc')">, board_hit desc</when>
+		 	<when test="order.equals('title_desc')">, board_title desc</when>		 
+		 </choose>
+) rnum FROM heartpet_board b
 		<where>
 		 <choose>
             <when test="field.equals('allSearch') and keyword != ''"> (board_title <include refid="qna_keyword" />) or (board_content <include refid="qna_keyword" />) or (board_category <include refid="qna_keyword" />) or (board_id <include refid="qna_keyword" />)</when>

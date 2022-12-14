@@ -32,7 +32,7 @@
     <div class="container">
 
         <%-- 검색 폼 --%>
-        <form class="search_form" method="get" action="${path}/admin_qna_list?field=${ field }&keyword=${ keyword }">
+        <form class="search_form" method="get" action="${path}/admin_qna_list">
             <div class="form_box d-flex">
            		<span class="search-name">분류</span>
                 <select name="field" class="form-select d-inline align-middle w-25">
@@ -50,16 +50,19 @@
         <br>
         
        <%-- 정렬 & 게시물 수 --%>
+    <form class="order_form" method="get" action="${path}/admin_qna_list">    
        <div class="qna-section">
             <div class="total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
             <div class="qna_order">
-                <select class="form-select form-select-sm" name="qna_order" id="">
-                    <option selected="selected" value="date_desc">최신순</option>
-                    <option value="hit_desc">인기순</option>
-                    <option value="no_desc">번호순</option>
+                <select class="form-select form-select-sm" name="order" onchange="this.form.submit()">
+                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
+                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신등록순</option>
+                    <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>
+                    <option value="title_desc"<c:if test="${ order eq 'title_desc' }">selected="selected"</c:if>>가나다순</option>
                 </select>
             </div>
         </div>
+        </form>
         
         <%-- 검색 결과 테이블 --%>
         <div class="lists">
