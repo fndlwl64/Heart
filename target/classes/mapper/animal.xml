@@ -58,6 +58,9 @@
     		where animal_tag = #{animal_tag}
 		)
 		where rnum between ${startNo} and ${endNo}
+		<if test="animalDTO.getAnimal_size() != null">
+			and animal_size = #{animalDTO.getAnimal_size()}
+		</if>
 	</select>
 	<insert id="animal_insert" parameterType="AnimalDTO">
 		<selectKey resultType="int" keyProperty="animal_no"

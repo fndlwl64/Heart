@@ -6,12 +6,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>HeartPet</title>
-    <link rel="stylesheet" href="${path}/resources/css/list_view.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="${path}/resources/js/main.js"></script>
+<meta charset="UTF-8">
+<title>HeartPet</title>
+<link rel="stylesheet" href="${path}/resources/css/list_view.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+	crossorigin="anonymous"></script>
+<script src="${path}/resources/js/main.js"></script>
 
 <%-- <meta charset="UTF-8">
 <title>HeartPet</title>
@@ -39,30 +46,35 @@
 		<br> <br>
 
 		<%-- 검색 폼 --%>
-		<form class="search_form" action="${path}/admin_cat_search"
-			method="post">
+		<form class="search_form" action="${path}/dog_list" method="post">
 			<div class="form_box">
 
 				<select name="animal_species">
-							<option value="all"></option>
-							<option value="말티즈">말티즈</option>
-							<option value="푸들">푸들</option>
-							<option value="포메라니안">포메라니안</option>
-							<option value="믹스견">믹스견</option>
-							<option value="치와와">치와와</option>
-							<option value="시츄">시츄</option>
-							<option value="골든리트리버">시츄</option>
-							<option value="진돗개">진돗개</option>
-							<option value="기타">기타</option>
-						</select> <label
-					class="Dneutered"><input type="checkbox" name="Dneutered">
-					중성화</label> <label class="size"><input type="radio" name="size"
-					ondblclick="this.checked=false"> 대</label> <label class="size"><input
-					type="radio" name="size" ondblclick="this.checked=false"> 중</label>
-
-				<label class="size"><input type="radio" name="size"
-					ondblclick="this.checked=false"> 소</label> <input
-					class="btn searchbtn" type="submit" value="검색">
+					<option value="all"></option>
+					<option value="말티즈">말티즈</option>
+					<option value="푸들">푸들</option>
+					<option value="포메라니안">포메라니안</option>
+					<option value="믹스견">믹스견</option>
+					<option value="치와와">치와와</option>
+					<option value="시츄">시츄</option>
+					<option value="골든리트리버">골든리트리버</option>
+					<option value="진돗개">진돗개</option>
+					<option value="기타">기타</option>
+				</select> 
+				<!-- <label class="Dneutered"><input type="checkbox"
+					name="animal_neutered"> 중성화</label> <label class="size"><input
+					type="radio" name="animal_size" ondblclick="this.checked=false"
+					value="대형"> 대</label> <label class="size"><input
+					type="radio" name="animal_size" ondblclick="this.checked=false"
+					value="중형"> 중</label> <label class="size"><input
+					type="radio" name="animal_size" ondblclick="this.checked=false"
+					value="소형"> 소</label> -->
+				<input type="hidden" id="YN" name="animal_neutered"/>
+				<label><input type="checkbox" id="checkYN">중성화</label> 
+				<label><input type="radio" name="animal_size" value="대형"/>대</label>
+				<label><input type="radio" name="animal_size" value="중형"/>증</label>
+				<label><input type="radio" name="animal_size" value="소형"/>소</label>
+				<input class="btn searchbtn" type="submit" value="검색">
 
 			</div>
 
@@ -73,8 +85,7 @@
 		<button class="btn btn-success insertbtn"
 			onclick="location.href='${path}/animal_insert?tag=dog'">등록</button>
 
-		<br>
-		<br>
+		<br> <br>
 
 		<%-- 검색 결과 테이블 : 일련번호 클릭 시 해당 동물 상세 정보 페이지로 이동 --%>
 		<div class="lists">
@@ -208,4 +219,17 @@
 	</div>
 
 </body>
+<script type="text/javascript">
+	$("#checkYN").change(
+		function(){
+			if($("#checkYN").is(":checked")){
+				$("#YN").val('Y');
+				console.log($("#YN").val());
+			}else{
+				$("#YN").val('N');
+				console.log($("#YN").val());
+			}
+		}
+	)
+</script>
 </html>

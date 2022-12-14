@@ -19,9 +19,12 @@
 		select count(adopt_reg_regno) from heartpet_adopt_reg
 	</select>
 	<select id="adoptreg_countTag" parameterType="hashmap" resultType="int">
-		select count(adopt_reg_regno) from heartpet_adopt_reg 
+		select count(*) from heartpet_adopt_reg 
 		<if test="!startDate.equals('') and !endDate.equals('') ">
 			where ${tag} between TO_DATE(#{startDate}, 'YYYY-MM-DD') and TO_DATE(#{endDate},'YYYY-MM-DD')
+			<!-- <![CDATA[
+			where ${tag} >= TO_DATE(#{startDate}, 'YYYY-MM-DD') and ${tag} <= TO_DATE(#{endDate},'YYYY-MM-DD')
+			]]> -->
 		</if>
 	</select>
 	<select id="adoptreg_content" parameterType="int"
