@@ -94,12 +94,16 @@ public class UserQnaController {
     	// 비밀글이거나 session_id = admin    	
     	System.out.println("번호출력 " + qnaContent.getBoard_parentNo());
     	System.out.println("번호 "+board_no);
+    	System.out.println("번호 "+board_parentNo);
     	
     	// 유저일 때
 		if(!session_id.equals("admin")) { // 유저일 때
 			if(qnaContent.getBoard_secret().equals("Y")) { // 비밀글이고
 				if(qnaContent.getBoard_id().equals("admin")) { // 작성자 아이디가 admin인데
-					if(qnaContent.getBoard_parentNo() != board_parentNo) { // 부모글이 내 글이 아니면			    	
+			    	QnaDTO parentContent = this.qnaDAO.contentQna(board_parentNo);
+			    	System.out.println("부모글 작성자 : "+parentContent.getBoard_id());
+			    	System.out.println("session_id : "+session_id);			    	
+					if(!parentContent.getBoard_id().equals(session_id)) { // 부모글의 작성자가 내가 아니면			    	
 	        			out.println("<script> alert('비밀글입니다.'); history.back(); </script>"); 
 	        			out.flush();
 					}
