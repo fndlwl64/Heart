@@ -13,7 +13,7 @@
 	<![CDATA[SELECT LEVEL, 
 		       board_no, 
 		       board_parentNo, 
-		       LPAD('', 4*(LEVEL-1)) || board_title as board_title,
+		       board_title,
 		       board_category,
 		       board_content,
 		       board_id,

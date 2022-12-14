@@ -71,13 +71,13 @@
          </where>
 	</select>
 	
-<!-- 	<select id="review_animal" resultType="hashMap">
+	<select id="review_animal" resultType="hashMap">
 		select animal_name from heartpet_animal where animal_no in 
 		<foreach item="animalNo" collection="list" open="(" close=")" separator=", ">
 			#{ animalNo }
 		</foreach>
 	</select>
-  -->
+
 	
 	<!-- content -->
  	<update id="review_hit" parameterType="int">
