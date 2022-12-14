@@ -81,7 +81,7 @@
 	                <button type="button" class="btn btn-dark" onclick="history.back()"><i class="bi bi-card-list"></i> 목록</button>
                 </div>
                 <div class="right-button">
-                	<button type="button" class="btn btn-primary" onclick="location.href='${path}/user_qna_insert?board_parentNo=${ list.board_no }'"><i class="bi bi-arrow-return-right"></i> 답변하기</button>
+                	<button type="button" class="btn btn-primary" onclick="location.href='${path}/user_qna_insert?board_parentNo=${ list.board_no }&board_group=${ list.board_group }'"><i class="bi bi-arrow-return-right"></i> 답변하기</button>
                 </div>
             </div>
         </div>
@@ -104,16 +104,15 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">창닫기</button>
-		        <button type="reset" class="btn btn-warning" >다시입력</button>		        
-		        <button type="submit" class="btn btn-danger" >삭제하기</button>
+		        <button type="reset" class="btn btn-warning">다시입력</button>		        
+		        <button type="submit" class="btn btn-danger">삭제하기</button>
 		      </div>
 		    </div>
 		  </div>
 		</div>
 	</form>
-    </div>
-
-    <div class="space-add"></div>
-
 </div>
+
+<div class="space-add"></div>
+
 <jsp:include page="../../include/user_footer.jsp" />

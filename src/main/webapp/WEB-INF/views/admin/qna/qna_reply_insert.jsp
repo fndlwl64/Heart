@@ -25,9 +25,9 @@
         <form action="${path}/admin_qna_reply_insert_ok" method="post" enctype="multipart/form-data">
         <input type="hidden" name="board_id" value="${ session_admin_id }" />
         <!-- 답변글 작성인 경우 parentNo = board_no 되도록 -->
-        <c:if test="${ not empty list }">
-       		<input type="hidden" name="board_parentNo" value="${ list.board_no }" />
-        </c:if>
+        <c:if test="${ list.level eq 1 }"><input type="hidden" name="board_group" value="${ list.board_no }" /></c:if>
+        <c:if test="${ list.level ge 2 }"><input type="hidden" name="board_group" value="${ list.board_group }" /></c:if>
+        <input type="hidden" name="board_parentNo" value="${ list.board_no }" />
         <table class="table noticeinfo mt-4">
             <tr class="border-top">
                 <th class="table-light col-1">카테고리</th>
@@ -42,11 +42,11 @@
                 <th class="table-light col-1">작성자</th>
                 	<td class="col-1 admin"><span id="admin_id">관리자</span></td>
                 <th class="table-light col-1 secret">
-                <label><input class="form-check-input" type="checkbox" name="board_secret" value="Y"
-                <c:if test="${ empty list.board_secret }">checked="checked"</c:if>
-                <c:if test="${ list.board_secret eq 'Y' }">checked="checked" disabled="disabled"</c:if>
-                <c:if test="${ list.board_secret eq 'N' }"></c:if>> 비밀글</label>	  
-                <input type="hidden" name="board_secret" value="N" disabled="disabled" />
+	                <label><input class="form-check-input" type="checkbox" name="board_secret" value="Y"
+	                <c:if test="${ empty list.board_secret }">checked="checked"</c:if>
+	                <c:if test="${ list.board_secret eq 'Y' }">checked="checked" disabled="disabled"</c:if>
+	                <c:if test="${ list.board_secret eq 'N' }"></c:if>> 비밀글</label>	  
+	                <input type="hidden" name="board_secret" value="N" disabled="disabled" />
                 </th>
             </tr>
             <tr>
@@ -78,7 +78,6 @@
 		    <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 다시작성</button>
 		    <button type="submit" class="btn btn-primary mx-1"><i class="bi bi-reply"></i> 답변달기</button>
 		</div>
-		
         </form>
     </div>
 </div>

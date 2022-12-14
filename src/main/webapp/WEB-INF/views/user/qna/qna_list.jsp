@@ -67,10 +67,10 @@
                     <td>${ list.board_category }</td>
                     <td class="left-align">     
                     	<c:if test="${ list.board_state ne 'disabled' }">            
-	                    <a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }&board_parentNo=${ list.board_parentNo }">
+	                       <a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }&board_parentNo=${ list.board_parentNo }&board_group=${ board_group }">
 	                    </c:if> 
 	                    <c:if test="${ list.board_state eq 'disabled' }">
-	                    <a class="disabled">
+	                       <a class="disabled">
 	                    </c:if>
 	                    <c:choose>
 	                    	<c:when test="${ list.level > 1 }">

@@ -11,6 +11,7 @@ public class QnaDTO {
     private int level;
     private int board_no;
     private int board_parentNo;
+    private int board_group;
     private String board_category;
     private String board_id;
     private int board_hit;
