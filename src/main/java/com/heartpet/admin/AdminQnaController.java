@@ -188,10 +188,12 @@ public class AdminQnaController {
     // FNQ_LIST
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/admin_fnq_list")
-    public String admin_fnq_list(@RequestParam(required = false) String field, @RequestParam(required = false) String keyword, @RequestParam(defaultValue = "0") int page, Model model) { 
+    public String admin_fnq_list(@RequestParam(value="field", required = false) String field, @RequestParam(value="keyword", required = false) String keyword, 
+    		@RequestParam(value = "order", required = false) String order, @RequestParam(value = "page", defaultValue = "0") int page, Model model) { 
     	
     	if(field == null) { field = ""; }
        	if(keyword == null) { keyword = ""; }
+       	if(order == null) { order = ""; }
     	
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 0) { currentPage = page; }
@@ -199,13 +201,14 @@ public class AdminQnaController {
     	totalRecord = this.qnaDAO.listFnqCount(field, keyword);
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
     	
-        List<FnqDTO> fnqList = this.qnaDAO.listFnq(paging.getStartNo(), paging.getEndNo(), field, keyword);
+        List<FnqDTO> fnqList = this.qnaDAO.listFnq(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
         
         model.addAttribute("fnqList", fnqList);
         model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
 		model.addAttribute("field", field); 
 		model.addAttribute("keyword", keyword);	
+		model.addAttribute("order", order);	
         
     	return "admin/fnq/fnq_list"; 
     }

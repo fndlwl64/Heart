@@ -24,8 +24,8 @@
 	<div class="sub-title"><h4>FNQ 수정하기</h4></div>
     
     <div>
-        <form action="${path}/user_fnq_insert_ok" method="post" enctype="application/x-www-form-urlencoded">
-        
+        <form action="${path}/admin_fnq_update_ok" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" name="fnq_no" value="${ list.fnq_no }" />
         <table class="table noticeinfo mt-4">
             <tr class="border-top">
                 <th class="table-light col-1">카테고리</th>
@@ -54,9 +54,9 @@
                 
         <%-- button  --%>
 	    <div class="buttons">
-            <button type="button" class="btn btn-secondary mx-1" onclick="location.href='${path}/admin_fnq_list'"><i class="bi bi-card-list"></i> 목록으로</button>
+            <button type="button" class="btn btn-dark mx-1" onclick="location.href='${path}/admin_fnq_list'"><i class="bi bi-card-list"></i> 목록으로</button>
             <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 다시작성</button>
-            <button type="submit" class="btn btn-dark mx-1"><i class="bi bi-save"></i> 수정하기</button>
+            <button type="submit" class="btn btn-success mx-1"><i class="bi bi-save"></i> 수정하기</button>
 		</div>
         </form>        
     </div>

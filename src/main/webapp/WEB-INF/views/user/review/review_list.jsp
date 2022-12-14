@@ -9,6 +9,7 @@
 <c:set var="field" value="${ field }" />
 <c:set var="keyword" value="${ keyword }" />
 <c:set var="link_address" value="${pageContext.request.contextPath}/user_review_list" />
+
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_review.css" />
 <script src="${path}/resources/js/user_review_list.js"></script>
@@ -97,7 +98,7 @@
         <div class="row">
             <div class="col-4 space"></div>
             <div class="col-4 search">
-                <form method="get" action="${path}/user_review_list?field=${ field }&keyword=${ keyword }">
+                <form method="get" action="${ path }/user_review_list">
                     <select name="field" class="form-select d-inline align-middle w-25">
                         <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
                         <option value="category"<c:if test="${ field eq 'category' }">selected="selected"</c:if>>구분</option>

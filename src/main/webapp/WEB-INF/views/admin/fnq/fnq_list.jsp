@@ -24,34 +24,34 @@
     <div class="container">
 
         <%-- 검색 폼 --%>
-        <form class="search_form" method="get" action="${path}/admin_qna_list?field=${ field }&keyword=${ keyword }">
+        <form class="search_form" method="get" action="${path}/admin_fnq_list?field=${ field }&keyword=${ keyword }">
             <div class="form_box d-flex">
            		<span class="search-name">대분류</span>
                 <select name="field" class="form-select d-inline align-middle w-25">
                     <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
                     <option value="category"<c:if test="${ field eq 'category' }">selected="selected"</c:if>>분류</option>
-                    <option value="title"<c:if test="${ field eq 'title' }">selected="selected"</c:if>>제목</option>
-                    <option value="content"<c:if test="${ field eq 'content' }">selected="selected"</c:if>>내용</option>
-                    <option value="id"<c:if test="${ field eq 'id' }">selected="selected"</c:if>>작성자</option>
+                    <option value="question"<c:if test="${ field eq 'question' }">selected="selected"</c:if>>질문</option>
+                    <option value="answer"<c:if test="${ field eq 'answer' }">selected="selected"</c:if>>답변</option>
                 </select>
                 <span class="search-name">검색어</span> 
                 <input name="keyword" class="form-control d-inline align-middle w-50" value="${ keyword }">
                 <button class="btn btn-dark d-inline align-middle ms-1" type="submit"><i class="bi bi-search"></i> 검색</button>
            </div>
-        </form>
         <br>
+        </form>
         
-       <%-- 정렬 & 게시물 수 --%>
+       <%-- 정렬 --%>
+       <form class="order_form" method="get" action="${path}/admin_fnq_list?order=${ order }">
        <div class="qna-section">
             <div class="total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
             <div class="qna_order">
-                <select class="form-select form-select-sm" name="qna_order" id="">
-                    <option selected="selected" value="date_desc">최신순</option>
-                    <option value="hit_desc">인기순</option>
-                    <option value="no_desc">번호순</option>
+                <select class="form-select form-select-sm" name="order" onchange="this.form.submit()">
+                    <option selected="selected" value="no_desc" <c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호순</option>
+                    <option value="question_desc" <c:if test="${ order eq 'question_desc' }">selected="selected"</c:if>>가나다순</option>
                 </select>
             </div>
         </div>
+        </form>
         
         <%-- 검색 결과 테이블 --%>
         <div class="lists">
@@ -99,7 +99,7 @@
 		
 		<%-- 답변 등록하기 버튼 --%>		
 		<div class="insert-form">
-        <button class="btn btn-primary insertbtn mb-3" onclick="location.href='${path}/admin_fnq_insert?fnq_no=${ list.fnq_no }'"><i class="bi bi-pencil-fill"></i> 등록하기</button>
+        <button class="btn btn-primary insertbtn mb-3" onclick="location.href='${path}/admin_fnq_insert'"><i class="bi bi-pencil-fill"></i> 등록하기</button>
         </div>
         
         <%-- 페이징처리 --%>

@@ -24,7 +24,7 @@
 	<div class="sub-title"><h4>FNQ 등록하기</h4></div>
     
     <div>
-        <form action="${path}/user_fnq_insert_ok" method="post" enctype="application/x-www-form-urlencoded">
+        <form action="${path}/admin_fnq_insert_ok" method="post" enctype="application/x-www-form-urlencoded">
         
         <table class="table noticeinfo mt-4">
             <tr class="border-top">

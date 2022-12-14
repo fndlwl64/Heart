@@ -46,7 +46,7 @@
     <div class="buttons">
 	    <button class="btn btn-dark mx-1" onclick="location.href='${path}/admin_fnq_list'"><i class="bi bi-card-list"></i> 목록으로</button>
 	    <button class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="bi bi-trash3"></i> 삭제하기</button>
-	    <button class="btn btn-primary mx-1" onclick="location.href='${path}/admin_fnq_update?fnq_no=${ list.fnq_no }'"><i class="bi bi-pencil-fill"></i> 수정하기</button>
+	    <button class="btn btn-success mx-1" onclick="location.href='${path}/admin_fnq_update?fnq_no=${ list.fnq_no }'"><i class="bi bi-pencil-fill"></i> 수정하기</button>
 	</div>
 	
 	  <%-- 삭제 모달 // admin_list_view.js 삽입되어 있음
