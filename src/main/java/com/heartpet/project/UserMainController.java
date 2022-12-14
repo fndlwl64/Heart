@@ -14,28 +14,27 @@ import com.heartpet.model.ReviewDTO;
 
 @Controller
 public class UserMainController {
-	
-	@Autowired
-	private ReviewDAO reviewDAO;
-	
-	@Autowired
-	private AnimalDAO animalDAO;
-	
-	@RequestMapping("/main")
-	public String main(Model model) {
-		
-		List<AnimalDTO> dogList = this.animalDAO.listTag("dog");
-		List<AnimalDTO> catList = this.animalDAO.listTag("cat");	
-		List<ReviewDTO> dogReviewList = this.reviewDAO.listReview("dog");		
-		List<ReviewDTO> catReviewList = this.reviewDAO.listReview("cat");	
-		
-		
-		model.addAttribute("dogList", dogList);
-		model.addAttribute("catList", catList);
-		model.addAttribute("dogReviewList", dogReviewList);
-		model.addAttribute("catReviewList", catReviewList);
-		
-		return "main";
-	}
+
+    @Autowired
+    private ReviewDAO reviewDAO;
+
+    @Autowired
+    private AnimalDAO animalDAO;
+
+    @RequestMapping("/main")
+    public String main(Model model) {
+
+        List<AnimalDTO> dogList = this.animalDAO.listTag("dog");
+        List<AnimalDTO> catList = this.animalDAO.listTag("cat");
+        List<ReviewDTO> dogReviewList = this.reviewDAO.listReview("dog");
+        List<ReviewDTO> catReviewList = this.reviewDAO.listReview("cat");
+
+        model.addAttribute("dogList", dogList);
+        model.addAttribute("catList", catList);
+        model.addAttribute("dogReviewList", dogReviewList);
+        model.addAttribute("catReviewList", catReviewList);
+
+        return "main";
+    }
 
 }

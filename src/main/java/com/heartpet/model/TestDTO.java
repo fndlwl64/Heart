@@ -3,7 +3,8 @@ package com.heartpet.model;
 public class TestDTO {
     private int id;
     private String name;
-    public TestDTO(int id,String name) {
+
+    public TestDTO(int id, String name) {
         this.id = id;
         this.name = name;
     }
