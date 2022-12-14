@@ -58,23 +58,28 @@ public class AdminAnimalController {
 	public String admin_dog_list(  @RequestParam(value = "adopt_tag" , required = false) String adopt_tag 
     		, @RequestParam(value = "page", defaultValue = "1") int page,Model model
     		, AnimalDTO animalDTO) {
+		
+		animalDTO.setAnimal_tag("dog");
+		
+		System.out.println("==========================");
+		System.out.println(animalDTO.toString());
+		
 		//페이징
 		String field = ""; 
 		String keyword = "";
-		System.out.println("=========================");
-		System.out.println(animalDTO.toString());
 		if(adopt_tag == null) {adopt_tag="";}
 		
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
-		
-		totalRecord = animalDAO.count("dog");
+
+		totalRecord = animalDAO.countPaging(animalDTO);
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
 		
     	model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
  		model.addAttribute("field", field);
-		model.addAttribute("dogList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), "dog",animalDTO));
+		model.addAttribute("dogList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO));
+		model.addAttribute("animalDTO",animalDTO);
 		return "admin/animal/dog/dog_list";
 	}
 

@@ -38,6 +38,9 @@
 <c:set var="paging" value="${ paging }" />
 <c:set var="field" value="${ field }" />
 <c:set var="keyword" value="${ keyword }" />
+<c:set var="dogList" value="${ dogList }"/>
+<c:set var="animalDTO" value="${ animalDTO }"/>
+<c:set var="pagingTag" value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }"/>
 </head>
 <body>
 
@@ -50,7 +53,7 @@
 			<div class="form_box">
 
 				<select name="animal_species">
-					<option value="all"></option>
+					<option value=""></option>
 					<option value="말티즈">말티즈</option>
 					<option value="푸들">푸들</option>
 					<option value="포메라니안">포메라니안</option>
@@ -135,7 +138,7 @@
 					<li class="page-item">
 				</c:if>
 				<a class="page-link"
-					href="${link_address}?page=1&field=${ field }&keyword=${ keyword }&tag=${tag }"
+					href="${link_address}?page=1&${pagingTag}"
 					aria-label="First"> <span aria-hidden="true">&laquo;</span>
 				</a>
 				</li>
@@ -148,7 +151,7 @@
 					<li class="page-item">
 				</c:if>
 				<a class="page-link"
-					href="${link_address}?page=${ paging.page - 1 }&field=${ field }&keyword=${ keyword }&tag=${tag }"
+					href="${link_address}?page=${ paging.page - 1 }&${pagingTag}"
 					aria-label="Previous"> <span aria-hidden="true">&lsaquo;</span>
 				</a>
 				</li>
@@ -158,11 +161,11 @@
 					var="i">
 					<c:if test="${ i == paging.page }">
 						<li class="page-item active"><a class="page-link"
-							href="${link_address}?page=${ i }&field=${ field }&keyword=${ keyword }&tag=${tag }">${ i }</a></li>
+							href="${link_address}?page=${ i }&${pagingTag}">${ i }</a></li>
 					</c:if>
 					<c:if test="${ i != paging.page }">
 						<li class="page-item"><a class="page-link"
-							href="${link_address}?page=${ i }&field=${ field }&keyword=${ keyword }&tag=${tag }">${ i }</a></li>
+							href="${link_address}?page=${ i }&${pagingTag}">${ i }</a></li>
 					</c:if>
 				</c:forEach>
 
@@ -174,7 +177,7 @@
 					<li class="page-item disabled">
 				</c:if>
 				<a class="page-link"
-					href="${link_address}?page=${ paging.page + 1 }&field=${ field }&keyword=${ keyword }&tag=${tag }"
+					href="${link_address}?page=${ paging.page + 1 }&${pagingTag}"
 					aria-label="Next"> <span aria-hidden="true">&rsaquo;</span>
 				</a>
 				</li>
@@ -187,7 +190,7 @@
 					<li class="page-item disabled">
 				</c:if>
 				<a class="page-link"
-					href="${link_address}?page=${ paging.allPage }&field=${ field }&keyword=${ keyword }&tag=${tag }"
+					href="${link_address}?page=${ paging.allPage }&${pagingTag}"
 					aria-label="Last"> <span aria-hidden="true">&raquo;</span>
 				</a>
 				</li>
@@ -226,8 +229,7 @@
 				$("#YN").val('Y');
 				console.log($("#YN").val());
 			}else{
-				$("#YN").val('N');
-				console.log($("#YN").val());
+				
 			}
 		}
 	)
