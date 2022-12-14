@@ -23,11 +23,11 @@
     <form class="search_form" action="${path }/admin_user_search" method="post">
         <div class="form_box">
             <select class="form-select form-select-sm user_field" name="field">
-                <option value="id">회원 아이디</option>
-                <option value="grade">회원 등급</option>
+                <option value="id"<c:if test="${field eq 'id'}">selected="selected"</c:if>>회원 아이디</option>
+                <option value="grade"<c:if test="${field eq 'grade'}">selected="selected"</c:if>>회원 등급</option>
             </select>
 
-            <input class="form-control form-control-sm user_search" name="keyword">
+            <input class="form-control form-control-sm user_search" name="${keyword }">
 			
 			<button class="btn searchbtn" type="submit"><i class="i bi-search"></i> 검색</button>
 			
@@ -44,12 +44,12 @@
 	
         <table class="table table-hover searched_list">
             <tr>
-                <th class="table-secondary">회원번호</th>
-                <th class="table-secondary">회원아이디</th>
-                <th class="table-secondary">회원이름</th>
-                <th class="table-secondary">회원등급</th>
-                <th class="table-secondary">반려동물경험</th>
-                <th class="table-secondary">수정</th>
+                <th class="table-light">회원번호</th>
+                <th class="table-light">회원아이디</th>
+                <th class="table-light">회원이름</th>
+                <th class="table-light">회원등급</th>
+                <th class="table-light">반려동물경험</th>
+                <th class="table-light">수정</th>
             </tr>
             
             <c:if test="${!empty list}">
@@ -98,7 +98,9 @@
             </div>
         </div>
     </div>
-
+    
+    <%-- 페이징처리 --%>
+	<jsp:include page="../../include/pagination.jsp" />
 
 </div>
 

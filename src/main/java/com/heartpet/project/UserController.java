@@ -81,11 +81,8 @@ public class UserController {
     				HttpSession session = request.getSession();
     				session.setAttribute("session_admin_id", id);
     				session.setAttribute("session_admin_name", cont.getUser_name());
-    				    				
-    				List<UserDTO> list = userDAO.getUserList();
-    				model.addAttribute("list", list);
-    				
-    				return "admin/user/user_list";
+    				    				    				
+    				return "admin/admin_main";
     			}else {
     				out.println("<script>");
     				out.println("alert('비밀번호가 틀렸습니다!!');");
