@@ -2,6 +2,7 @@ package com.heartpet.project;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.heartpet.action.UserDAO;
+import com.heartpet.model.PageDTO;
 import com.heartpet.model.UserDTO;
 
 @Controller
@@ -22,27 +24,47 @@ public class AdminController {
 	
 	@Autowired
 	private UserDAO userDAO;
+	
+	// 한 페이지당 보여질 게시물의 수
+    private final int rowsize = 5;
+
+    // 전체 게시물의 수
+    private int totalRecord = 0;
 
     /*관리자 상단바에서 페이지 이동*/
 	@RequestMapping("/admin_main")
 	public String admin_main(Model model) {
 		
-		List<UserDTO> list = userDAO.getUserList();
+		//List<UserDTO> list = userDAO.countUser(field, keyword);
 		int total =userDAO.totalUser();
 		
-		model.addAttribute("list", list);
+		//model.addAttribute("list", list);
 		model.addAttribute("total", total);
 		
 		return "admin/user/user_list";
 	}
 	
     @RequestMapping("/user_list")
-    public String user_list(Model model) {
-    	List<UserDTO> list = userDAO.getUserList();
+    public String user_list(@RequestParam(value = "field", required = false) String field, 
+    		@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+    	
+    	if(field == null) { field = ""; }
+       	if(keyword == null) { keyword = ""; }
+    	
+		int currentPage = 1;	// 현재 페이지 변수
+		if(page != 1) { currentPage = page; }
+    	
+    	totalRecord = this.userDAO.countUser(field, keyword);
+    	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+    	List<UserDTO> list = userDAO.userListPaging(paging.getStartNo(), paging.getEndNo(), field, keyword);
     	int total =userDAO.totalUser();
 		
 		model.addAttribute("list", list);
 		model.addAttribute("total", total);
+		model.addAttribute("totalRecord", totalRecord);
+		model.addAttribute("paging", paging);		
+		model.addAttribute("field", field); 
+		model.addAttribute("keyword", keyword);	
 		    	
         return "admin/user/user_list";
     }

@@ -3,6 +3,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="UserDAO">
+
+	<sql id="user_select">
+	<![CDATA[ 
+		SELECT USER_NO, USER_ID, USER_PWD, USER_NAME, USER_GRADE, USER_EMAIL, USER_PHONE, USER_ADDR, USER_IMAGE, USER_TOTALPRICE, USER_ANIMALEXP 
+	]]>
+	</sql>
+	
+	<sql  id="user_keyword">
+		like '%' || #{keyword} || '%'
+	</sql>
 	
 	<select id="id_check" parameterType="String" resultType="int">
 		SELECT COUNT(USER_ID) FROM HEARTPET_USER WHERE USER_ID = #{id}
@@ -35,8 +45,27 @@
 		SELECT COUNT(USER_ID) FROM HEARTPET_USER WHERE USER_ID = #{id} AND USER_GRADE = 1 
 	</select>
 	
-	<select id="user_list" resultType="UserDTO">
-		SELECT * FROM HEARTPET_USER WHERE USER_GRADE NOT IN (1) ORDER BY USER_NO DESC
+	<select id="user_list" parameterType="map" resultType="UserDTO">
+		<include refid="user_select" /> 
+			FROM (select u.*, row_number() over(order by user_no desc) rnum FROM heartpet_user u
+		<where>
+		<choose>
+	        <when test="field.equals('id') and keyword != ''"> user_id <include refid="user_keyword" /></when>
+	        <when test="field.equals('grade') and keyword != ''"> user_grade <include refid="user_keyword" /></when>
+        </choose>
+        </where>	
+        <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo} and USER_GRADE NOT IN (1) ORDER BY USER_NO DESC ]]>
+	</select>
+	
+	<select id="user_count" parameterType="map" resultType="int">
+		SELECT COUNT(*) FROM HEARTPET_USER
+		<where>
+	 	<choose>
+	 		<when test="field == '' and keyword == ''"></when>
+			<when test="field.equals('id') and keyword != ''"> USER_ID <include refid="user_keyword" /></when>
+			<when test="field.equals('grade') and keyword != ''"> USER_GRADE <include refid="user_keyword" /></when>
+		</choose>
+        </where>
 	</select>
 	
 	<select id="email_check" parameterType="String" resultType="int">

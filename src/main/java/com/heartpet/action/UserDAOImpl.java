@@ -1,5 +1,6 @@
 package com.heartpet.action;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,10 +51,11 @@ public class UserDAOImpl implements UserDAO {
 		return this.sqlSession.selectOne("admin_check", id);
 	}
 
-	@Override
-	public List<UserDTO> getUserList() {
-		return this.sqlSession.selectList("user_list");
+	@Override 
+	public List<UserDTO> getUserList() { 
+		return this.sqlSession.selectList("user_list"); 
 	}
+	 
 
 	@Override
 	public int emailCheck(String email) {
@@ -83,6 +85,24 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public String findid(Map<String, Object> map) {
 		return this.sqlSession.selectOne("find_id", map);
+	}
+
+	@Override
+	public List<UserDTO> userListPaging(int startNo, int endNo, String field, String keyword) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startNo", startNo);
+    	map.put("endNo", endNo);
+    	map.put("field", field);
+    	map.put("keyword", keyword);
+        return this.sqlSession.selectList("user_list", map);
+	}
+
+	@Override
+	public int countUser(String field, String keyword) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("field", field);
+		map.put("keyword", keyword);		
+		return this.sqlSession.selectOne("user_count", map);
 	}
 
 	
