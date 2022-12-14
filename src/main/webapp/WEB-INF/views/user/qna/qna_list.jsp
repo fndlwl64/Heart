@@ -16,23 +16,6 @@
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
 <script src="${path}/resources/js/admin_search.js"></script>
 
-<script>
-$(document).ready(function() {
-	
-	console.log("여기");
-	$('select[name=field]').change(function() {
-	let categorySelected = $('select[name=field] option:selected').val();
-		if(categorySelected == 'category') {
-			$('input[type=text][name=keyword]').css("display", "none");
-	    	$('select[name=category]').css("display", "inline");
-		}else {
-			$('input[type=text][name=keyword]').css("display", "inline");
-	    	$('select[name=category]').css("display", "none");
-		}
-	});
-});
-</script>
-
 <%-- qna list --%>
 <div id="qna-contents" class="qna-contents">
     <div class="qna-section">
@@ -50,9 +33,9 @@ $(document).ready(function() {
             <div class="col-5 total-data d-flex"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
             <div class="col-1 qna_order d-flex">
                 <select class="form-select form-select-sm w-75" name="qna_order" id="">
-                    <option selected="selected" value="date_desc">최신순</option>
-                    <option value="hit_desc">조회수순</option>
-                    <option value="no_desc">번호순</option>
+                    <option selected="selected" value="date_desc"<c:if test="${ qna_order eq 'date_desc' }">selected="selected"</c:if>>최신순</option>
+                    <option value="hit_desc"<c:if test="${ qna_order eq 'hit_desc' }">selected="selected"</c:if>>조회수순</option>
+                    <option value="no_desc"<c:if test="${ qna_order eq 'no_desc' }">selected="selected"</c:if>>번호순</option>
                 </select>
             </div>
             <div class="col-3 space"></div>

@@ -30,9 +30,9 @@
             <div class="col-5 total-data d-flex"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
             <div class="col-1 qna_order d-flex">
                 <select class="form-select form-select-sm w-75" name="qna_order" id="">
-                    <option selected="selected" value="date_desc">최신순</option>
-                    <option value="hit_desc">인기순</option>
-                    <option value="no_desc">번호순</option>
+                    <option selected="selected" value="date_desc" <c:if test="${ qna_order eq 'date_desc' }">selected="selected"</c:if>>최신순</option>
+                    <option value="hit_desc"<c:if test="${ qna_order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>
+                    <option value="no_desc"<c:if test="${ qna_order eq 'no_desc' }">selected="selected"</c:if>>번호순</option>
                 </select>
             </div>
             <div class="col-3 space"></div>
