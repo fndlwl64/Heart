@@ -53,12 +53,13 @@ public class AnimalDAOImpl implements AnimalDAO{
 	}
 
 	@Override
-	public List<AnimalDTO> listPaging(int startNO, int endNo, String animal_tag, AnimalDTO animalDTO) {
-		Map<String, Object> map = new HashMap<String, Object>();
+
+	public List<AnimalDTO> listPaging(int startNO, int endNo,  AnimalDTO animalDTO) {
+
+    Map<String, Object> map = new HashMap<String, Object>();
     	map.put("startNo", startNO);
     	map.put("endNo", endNo);
     	map.put("animalDTO",animalDTO);
-    	map.put("animal_tag", animal_tag);
 		return sqlSession.selectList("animal_listTagPaging",map);
 	}
 
@@ -84,6 +85,11 @@ public class AnimalDAOImpl implements AnimalDAO{
 	@Override
 	public List<String> animalName(List<Integer> animal_no) {
 		return this.sqlSession.selectOne("animal_name", animal_no);
+	}
+
+	@Override
+	public int countPaging(AnimalDTO dto) {
+		return sqlSession.selectOne("animal_countPaging",dto);
 	}	
 	
 }

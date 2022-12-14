@@ -26,5 +26,4 @@ public class AnimalDTO {
     private String animal_regdate;
     private String animal_update;
     
-    
 }
