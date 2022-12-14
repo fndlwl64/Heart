@@ -157,6 +157,11 @@
          </choose>
          </where>
          <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo}]]>
+       	 <choose>
+       		<when test="order == ''"></when>
+       		<when test="order.equals('no_desc')"> order by fnq_no desc </when>         
+       		<when test="order.equals('question_desc')"> order by fnq_question desc</when>         
+       	 </choose>
 	</select>
 	
 	<!-- content -->

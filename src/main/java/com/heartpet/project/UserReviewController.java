@@ -54,17 +54,19 @@ public class UserReviewController {
     	
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
+		
 		List<ReviewDTO> reviewList = null;
-    	
-    	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-
+		PageDTO paging = null;
+		
     	// animal name 추출
     	// 전체 선택
     	if(animal_tag == null) { 
     		totalRecord = this.reviewDAO.listReviewCount(field, keyword);
+    		paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
     		reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), field, keyword);
     	}else { // dog/cat 선택
     		totalRecord = this.reviewDAO.listReviewCount(animal_tag);
+    		paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
     		reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), animal_tag);
     	}
     	

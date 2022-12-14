@@ -67,12 +67,13 @@ public class QnaDAOImpl implements QnaDAO {
     // FNQ
     ////////////////////////////////////////////////////////////
 	@Override
-	public List<FnqDTO> listFnq(int startNo, int endNo, String field, String keyword) {
+	public List<FnqDTO> listFnq(int startNo, int endNo, String field, String keyword, String order) {
     	Map<String, Object> map = new HashMap<String, Object>();
     	map.put("startNo", startNo);
     	map.put("endNo", endNo);
     	map.put("field", field);
     	map.put("keyword", keyword);
+    	map.put("order", order);
         return this.sqlSession.selectList("fnq_list", map);
     }
 

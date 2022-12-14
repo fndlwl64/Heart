@@ -24,20 +24,21 @@
     </div>
     
     <%-- 정렬 --%>
+    <form class="order_form" method="get" action="${path}/user_fnq_list?order=${ order }">        	
     <div class="qna-section">
         <div class="row">
         	<div class="col-3 space"></div>
             <div class="col-5 total-data d-flex"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
             <div class="col-1 qna_order d-flex">
-                <select class="form-select form-select-sm w-75" name="qna_order" id="">
-                    <option selected="selected" value="date_desc" <c:if test="${ qna_order eq 'date_desc' }">selected="selected"</c:if>>최신순</option>
-                    <option value="hit_desc"<c:if test="${ qna_order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>
-                    <option value="no_desc"<c:if test="${ qna_order eq 'no_desc' }">selected="selected"</c:if>>번호순</option>
+                <select class="form-select form-select-sm w-75" name="order" onchange="this.form.submit()">
+                    <option selected="selected" value="no_desc" <c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호순</option>
+                    <option value="question_desc" <c:if test="${ order eq 'question_desc' }">selected="selected"</c:if>>가나다순</option>/c:if>>번호순</option>
                 </select>
             </div>
             <div class="col-3 space"></div>
         </div>
     </div>
+    </form>
 
     <%-- 아코디언 --%>
     <!-- FAQ -->
@@ -47,12 +48,12 @@
         <div class="accordion-item">
             <h2 class="accordion-header" id="flush-heading${ status.count }">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse${ status.count }" aria-expanded="false" aria-controls="flush-collapse${ status.count }">
-                    ${ list.fnq_question }
+                    <strong>Q.&nbsp;</strong> ${ list.fnq_question }
                 </button>
             </h2>
             <div id="flush-collapse${ status.count }" class="accordion-collapse collapse" aria-labelledby="flush-heading${ status.count }" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-                    ${ list.fnq_answer }
+                    <strong>A.&nbsp;</strong>${ list.fnq_answer }
                 </div>
             </div>
         </div>

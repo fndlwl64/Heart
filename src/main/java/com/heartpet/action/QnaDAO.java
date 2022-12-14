@@ -21,7 +21,7 @@ public interface QnaDAO {
     ////////////////////////////////////////////////////////////
     // FNQ
     ////////////////////////////////////////////////////////////
-	public List<FnqDTO> listFnq(int startNo, int endNo, String field, String keyword);
+	public List<FnqDTO> listFnq(int startNo, int endNo, String field, String keyword, String order);
     public int listFnqCount(String field, String keyword);
     public FnqDTO contentFnq(int fnq_no);
     public int insertFnq(FnqDTO dto);
