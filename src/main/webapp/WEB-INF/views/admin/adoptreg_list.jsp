@@ -28,6 +28,7 @@
 <c:set var="list" value="${adoptRegList }"></c:set>
 <c:set var="map" value="${animalMap }"></c:set>
 <c:set var="tag" value="${tag }"></c:set>
+<<c:set var="pagingTag" value="startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }"/>
 <!-- 쿼리 조인을 피하기 위한 key, value를 통한 animal테이블 데이터 참조 -->
 
 <body>
@@ -120,7 +121,7 @@
 					<li class="page-item">
 				</c:if>
 				<a class="page-link"
-					href="${link_address}?page=1&startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }"
+					href="${link_address}?page=1&${pagingTag}"
 					aria-label="First"> <span aria-hidden="true">&laquo;</span>
 				</a>
 				</li>
@@ -133,7 +134,7 @@
 					<li class="page-item">
 				</c:if>
 				<a class="page-link"
-					href="${link_address}?page=${ paging.page - 1 }&startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }"
+					href="${link_address}?page=${ paging.page - 1 }&${pagingTag}"
 					aria-label="Previous"> <span aria-hidden="true">&lsaquo;</span>
 				</a>
 				</li>
@@ -143,11 +144,11 @@
 					var="i">
 					<c:if test="${ i == paging.page }">
 						<li class="page-item active"><a class="page-link"
-							href="${link_address}?page=${ i }&startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }">${ i }</a></li>
+							href="${link_address}?page=${ i }&${pagingTag}">${ i }</a></li>
 					</c:if>
 					<c:if test="${ i != paging.page }">
 						<li class="page-item"><a class="page-link"
-							href="${link_address}?page=${ i }&startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }">${ i }</a></li>
+							href="${link_address}?page=${ i }&${pagingTag}">${ i }</a></li>
 					</c:if>
 				</c:forEach>
 
@@ -159,7 +160,7 @@
 					<li class="page-item disabled">
 				</c:if>
 				<a class="page-link"
-					href="${link_address}?page=${ paging.page + 1 }&startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }"
+					href="${link_address}?page=${ paging.page + 1 }&${pagingTag}"
 					aria-label="Next"> <span aria-hidden="true">&rsaquo;</span>
 				</a>
 				</li>
@@ -172,7 +173,7 @@
 					<li class="page-item disabled">
 				</c:if>
 				<a class="page-link"
-					href="${link_address}?page=${ paging.allPage }&startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }"
+					href="${link_address}?page=${ paging.allPage }&${pagingTag}"
 					aria-label="Last"> <span aria-hidden="true">&raquo;</span>
 				</a>
 				</li>

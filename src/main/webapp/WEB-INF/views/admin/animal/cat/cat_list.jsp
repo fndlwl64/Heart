@@ -6,12 +6,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>HeartPet</title>
-    <link rel="stylesheet" href="${path}/resources/css/list_view.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="${path}/resources/js/main.js"></script>
+<meta charset="UTF-8">
+<title>HeartPet</title>
+<link rel="stylesheet" href="${path}/resources/css/list_view.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+	crossorigin="anonymous"></script>
+<script src="${path}/resources/js/main.js"></script>
 
 <%-- <meta charset="UTF-8">
 <title>HeartPet</title>
@@ -31,6 +38,10 @@
 <c:set var="paging" value="${ paging }" />
 <c:set var="field" value="${ field }" />
 <c:set var="keyword" value="${ keyword }" />
+<c:set var="catList" value="${ catList }" />
+<c:set var="animalDTO" value="${ animalDTO }" />
+<c:set var="pagingTag"
+	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }" />
 </head>
 <body>
 
@@ -39,31 +50,35 @@
 		<br> <br>
 
 		<%-- 검색 폼 --%>
-		<form class="search_form" action="${path}/admin_cat_search"
-			method="post">
+		<form class="search_form" action="${path}/cat_list" method="post">
 			<div class="form_box">
-
 				<select name="animal_species">
-							<option value="all"></option>
-							<option value="스코티시">스코티시</option>
-							<option value="폴드">폴드</option>
-							<option value="샴">샴</option>
-							<option value="페르시안">페르시안</option>
-							<option value="터키시">터키시</option>
-							<option value="앙고라">앙고라</option>
-							<option value="러시안 블루">러시안 블루</option>
-							<option value="벵갈">벵갈</option>
-							<option value="먼치킨">먼치킨</option>
-							<option value="아비시니안">아비시니안</option>
-							<option value="기타">기타</option>
-						</select> <label
-					class="Dneutered"><input type="checkbox" name="Dneutered">
-					중성화</label> <label class="size"><input type="radio" name="size"
-					ondblclick="this.checked=false"> 대</label> <label class="size"><input
-					type="radio" name="size" ondblclick="this.checked=false"> 중</label>
-
-				<label class="size"><input type="radio" name="size"
-					ondblclick="this.checked=false"> 소</label> <input
+					<option value=""></option>
+					<option value="스코티시">스코티시</option>
+					<option value="폴드">폴드</option>
+					<option value="샴">샴</option>
+					<option value="페르시안">페르시안</option>
+					<option value="터키시">터키시</option>
+					<option value="앙고라">앙고라</option>
+					<option value="러시안 블루">러시안 블루</option>
+					<option value="벵갈">벵갈</option>
+					<option value="먼치킨">먼치킨</option>
+					<option value="아비시니안">아비시니안</option>
+					<option value="기타">기타</option>
+				</select>
+				<!-- <label class="Dneutered"><input type="checkbox"
+					name="animal_neutered"> 중성화</label> <label class="size"><input
+					type="radio" name="animal_size" ondblclick="this.checked=false"
+					value="대형"> 대</label> <label class="size"><input
+					type="radio" name="animal_size" ondblclick="this.checked=false"
+					value="중형"> 중</label> <label class="size"><input
+					type="radio" name="animal_size" ondblclick="this.checked=false"
+					value="소형"> 소</label> -->
+				<input type="hidden" id="YN" name="animal_neutered" /> <label><input
+					type="checkbox" id="checkYN">중성화</label> <label><input
+					type="radio" name="animal_size" value="대형" />대</label> <label><input
+					type="radio" name="animal_size" value="중형" />증</label> <label><input
+					type="radio" name="animal_size" value="소형" />소</label> <input
 					class="btn searchbtn" type="submit" value="검색">
 
 			</div>
@@ -75,8 +90,7 @@
 		<button class="btn btn-success insertbtn"
 			onclick="location.href='${path}/animal_insert?tag=cat'">등록</button>
 
-		<br>
-		<br>
+		<br> <br>
 
 		<%-- 검색 결과 테이블 : 일련번호 클릭 시 해당 동물 상세 정보 페이지로 이동 --%>
 		<div class="lists">
@@ -114,19 +128,75 @@
 
 		<br>
 		<%-- 페이징처리 --%>
-		<!-- <nav aria-label="Page navigation example">
+
+		<nav aria-label="Page navigation">
 			<ul class="pagination justify-content-center">
-				<li class="page-item disabled"><a class="page-link">Previous</a>
+
+				<!-- 처음으로 -->
+				<c:if test="${ paging.page eq 1 }">
+					<li class="page-item disabled">
+				</c:if>
+				<c:if test="${ paging.page gt 1 }">
+					<li class="page-item">
+				</c:if>
+				<a class="page-link" href="${link_address}?page=1&${pagingTag}"
+					aria-label="First"> <span aria-hidden="true">&laquo;</span>
+				</a>
 				</li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#">Next</a></li>
+
+				<!-- 이전으로 -->
+				<c:if test="${ paging.page eq 1 }">
+					<li class="page-item disabled">
+				</c:if>
+				<c:if test="${ paging.page gt paging.block }">
+					<li class="page-item">
+				</c:if>
+				<a class="page-link"
+					href="${link_address}?page=${ paging.page - 1 }&${pagingTag}"
+					aria-label="Previous"> <span aria-hidden="true">&lsaquo;</span>
+				</a>
+				</li>
+
+				<!-- 페이지 중간 -->
+				<c:forEach begin="${ paging.startBlock }" end="${ paging.endBlock }"
+					var="i">
+					<c:if test="${ i == paging.page }">
+						<li class="page-item active"><a class="page-link"
+							href="${link_address}?page=${ i }&${pagingTag}">${ i }</a></li>
+					</c:if>
+					<c:if test="${ i != paging.page }">
+						<li class="page-item"><a class="page-link"
+							href="${link_address}?page=${ i }&${pagingTag}">${ i }</a></li>
+					</c:if>
+				</c:forEach>
+
+				<!-- 다음으로 -->
+				<c:if test="${ paging.endBlock lt paging.allPage }">
+					<li class="page-item">
+				</c:if>
+				<c:if test="${ paging.endBlock eq paging.allPage }">
+					<li class="page-item disabled">
+				</c:if>
+				<a class="page-link"
+					href="${link_address}?page=${ paging.page + 1 }&${pagingTag}"
+					aria-label="Next"> <span aria-hidden="true">&rsaquo;</span>
+				</a>
+				</li>
+
+				<!-- 마지막으로 -->
+				<c:if test="${ paging.endBlock lt paging.allPage }">
+					<li class="page-item">
+				</c:if>
+				<c:if test="${ paging.endBlock eq paging.allPage }">
+					<li class="page-item disabled">
+				</c:if>
+				<a class="page-link"
+					href="${link_address}?page=${ paging.allPage }&${pagingTag}"
+					aria-label="Last"> <span aria-hidden="true">&raquo;</span>
+				</a>
+				</li>
 			</ul>
-		</nav> -->
-
-		<jsp:include page="../../../include/pagination.jsp" />
-
+		</nav>
 		<%-- 삭제 모달 --%>
 		<%-- <div class="modal fade" id="exampleModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -144,7 +214,7 @@
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Close</button>
 						<button type="button" class="btn btn-danger"
-							onclick="location.href='${path}/cat_delete?no=${dto.animal_no }'">삭제</button>
+							onclick="location.href='${path}/dog_delete?no=${dto.animal_no }'">삭제</button>
 					</div>
 				</div>
 			</div>
@@ -153,4 +223,14 @@
 	</div>
 
 </body>
+<script type="text/javascript">
+	$("#checkYN").change(function() {
+		if ($("#checkYN").is(":checked")) {
+			$("#YN").val('Y');
+			console.log($("#YN").val());
+		} else {
+
+		}
+	})
+</script>
 </html>
