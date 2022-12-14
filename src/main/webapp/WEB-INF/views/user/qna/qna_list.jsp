@@ -79,7 +79,7 @@
 	                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
 	                    <c:if test="${ list.board_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>	                    
 	                    </a>	                    
-	                    </c:if> 	               
+	                    </c:if> 	                    	               
                     </td>
                     <td><c:if test="${ list.board_id eq 'admin' }"><span id="admin_id">관리자</span></c:if>
                     <c:if test="${ list.board_id ne 'admin' }"><span>${ list.board_id }</span></c:if></td>

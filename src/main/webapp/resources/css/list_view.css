@@ -113,6 +113,22 @@
 	vertical-align: middle !important;
 }
 
+.container .noticeinfo tr .secret {
+	padding-left: 1.5rem;
+}
+
+.container .noticeinfo #admin_id {
+	color: red;
+	font-weight: bold;
+	text-align: left;
+}
+
+.container .noticeinfo tr th > label {
+	margin: 0;
+	text-align: center;
+}
+
+
 .container .noticeinfo .user {
 	
 }
