@@ -10,7 +10,7 @@ public interface QnaDAO {
     ////////////////////////////////////////////////////////////
     // QNA
     ////////////////////////////////////////////////////////////
-    public List<QnaDTO> listQna(int startNo, int endNo, String field, String keyword);
+    public List<QnaDTO> listQna(int startNo, int endNo, String field, String keyword, String order);
     public int listQnaCount(String field, String keyword);
     public int insertQna(QnaDTO dto);
     public QnaDTO contentQna(int board_no);

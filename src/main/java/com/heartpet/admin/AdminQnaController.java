@@ -44,10 +44,12 @@ public class AdminQnaController {
     @RequestMapping("/admin_qna_list")
     public String admin_qna_list(@RequestParam(value = "field", required = false) String field, 
     		@RequestParam(value = "keyword", required = false) String keyword, 
+    		@RequestParam(value = "order", required = false) String order,     		
     		@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
     	
     	if(field == null) { field = ""; }
        	if(keyword == null) { keyword = ""; }
+       	if(order == null) { order = ""; }
     	
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
@@ -55,13 +57,14 @@ public class AdminQnaController {
     	totalRecord = this.qnaDAO.listQnaCount(field, keyword);
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
     	
-        List<QnaDTO> qnaList = this.qnaDAO.listQna(paging.getStartNo(), paging.getEndNo(), field, keyword);
+        List<QnaDTO> qnaList = this.qnaDAO.listQna(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
         
         model.addAttribute("qnaList", qnaList);
         model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
 		model.addAttribute("field", field); 
 		model.addAttribute("keyword", keyword);	
+		model.addAttribute("order", order);	
 		
         return "admin/qna/qna_list";
     }

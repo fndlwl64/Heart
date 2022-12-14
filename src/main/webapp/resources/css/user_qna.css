@@ -50,6 +50,11 @@
     text-decoration: none;
 }
 
+.table .left-align .disabled {
+    text-decoration: none;
+    color: black;
+}
+
 /* qna_content */
 .qna-content {
     width: 50%;

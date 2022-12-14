@@ -27,20 +27,23 @@
     </div>
 
     <%-- 정렬 --%>
+    <form class="order_form" method="get" action="${path}/user_qna_list">    
     <div class="qna-section">
         <div class="row">
         	<div class="col-3 space"></div>
             <div class="col-5 total-data d-flex"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
             <div class="col-1 qna_order d-flex">
-                <select class="form-select form-select-sm w-75" name="order" id="">
-                    <option selected="selected" value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신순</option>
-                    <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>조회수순</option>
-                    <option value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호순</option>
+                <select class="form-select form-select-sm w-75" name="order" onchange="this.form.submit()">
+                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
+                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신등록순</option>
+                    <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>
+                    <option value="title_desc"<c:if test="${ order eq 'title_desc' }">selected="selected"</c:if>>가나다순</option>
                 </select>
             </div>
             <div class="col-3 space"></div>
         </div>
     </div>
+    </form>
 
     <%-- 아코디언 --%>
     <!-- 문의하기 -->
@@ -65,6 +68,10 @@
                     <td class="left-align">     
                     	<c:if test="${ list.board_state ne 'disabled' }">            
 	                    <a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }&board_parentNo=${ list.board_parentNo }">
+	                    </c:if> 
+	                    <c:if test="${ list.board_state eq 'disabled' }">
+	                    <a class="disabled">
+	                    </c:if>
 	                    <c:choose>
 	                    	<c:when test="${ list.level > 1 }">
 	                    		<c:forEach begin="1" end="${ list.level-1 }" step="1">
@@ -79,7 +86,7 @@
 	                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
 	                    <c:if test="${ list.board_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>	                    
 	                    </a>	                    
-	                    </c:if> 	                    	               
+	                    
                     </td>
                     <td><c:if test="${ list.board_id eq 'admin' }"><span id="admin_id">관리자</span></c:if>
                     <c:if test="${ list.board_id ne 'admin' }"><span>${ list.board_id }</span></c:if></td>

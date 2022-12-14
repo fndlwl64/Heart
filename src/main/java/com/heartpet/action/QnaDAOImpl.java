@@ -21,12 +21,13 @@ public class QnaDAOImpl implements QnaDAO {
     // QNA
     ////////////////////////////////////////////////////////////
     @Override
-    public List<QnaDTO> listQna(int startNo, int endNo, String field, String keyword) {
+    public List<QnaDTO> listQna(int startNo, int endNo, String field, String keyword, String order) {
     	Map<String, Object> map = new HashMap<String, Object>();
     	map.put("startNo", startNo);
     	map.put("endNo", endNo);
     	map.put("field", field);
     	map.put("keyword", keyword);
+    	map.put("order", order);
         return this.sqlSession.selectList("qna_list", map);
     }
     
