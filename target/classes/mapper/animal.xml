@@ -32,41 +32,50 @@
 			where animal_tag = #{animal_tag}
 		</if>
 	</select>
-	<select id="animal_countPaging" parameterType="AnimalDTO"
+	<select id="animal_countPaging" parameterType="hashmap"
 		resultType="int">
 		select count(animal_no) from heartpet_animal
 		where animal_tag =
-		#{animal_tag}
+		#{animalDTO.animal_tag}
 		<if
-			test="animal_size != null and !animal_size.equals('')"> 
-			and animal_size = #{animal_size}</if>
-		<if
-			test="animal_neutered != null and !animal_neutered.equals('')">
-			and animal_neutered = #{animal_neutered }
+			test="animalDTO.animal_size != null and !animalDTO.animal_size.equals('')">
+			and animal_size = #{animalDTO.animal_size }
 		</if>
 		<if
-			test="animal_species != null and !animal_species.equals('')">
-			and animal_species = #{animal_species }
+			test="animalDTO.animal_neutered != null and !animalDTO.animal_neutered.equals('')">
+			and animal_neutered = #{animalDTO.animal_neutered }
 		</if>
 		<if
-			test="animal_age != 0 and animal_age lt 6">
-			and animal_age between ${animal_age } -1 and ${animal_age }
+			test="animalDTO.animal_species != null and !animalDTO.animal_species.equals('')">
+			and animal_species = #{animalDTO.animal_species }
 		</if>
 		<if
-			test="animal_age == 6">
+			test="animalDTO.animal_age != 0 and animalDTO.animal_age lt 6">
+			and animal_age between ${animalDTO.animal_age } -1 and ${animalDTO.animal_age }
+		</if>
+		<if
+			test="animalDTO.animal_age == 6">
 			<![CDATA[and animal_age >= 5 ]]>
 		</if>
 		<if
-			test="animal_gender != null and !animal_gender.equals('')">
-			and animal_gender = #{animal_gender }
+			test="animalDTO.animal_gender != null and !animalDTO.animal_gender.equals('')">
+			and animal_gender = #{animalDTO.animal_gender }
 		</if>
 		<if
-			test="animal_weight != 0">
-			<![CDATA[and animal_weight >= ${animal_weight} ]]>
+			test="animalDTO.animal_weight != 0">
+			<![CDATA[and animal_weight >= ${animalDTO.animal_weight} ]]>
 		</if>
 		<if
-			test="animal_status != null and !animal_status.equals('')">
-			and animal_status = #{animal_status }
+			test="animalDTO.animal_status != null and !animalDTO.animal_status.equals('')">
+			and animal_status = #{animalDTO.animal_status}
+		</if>
+		<if
+			test="animalDTO.animal_place != null and !animalDTO.animal_place.equals('')">
+			and animal_place like '%' || #{animalDTO.animal_place } || '%'
+		</if>
+		<if
+			test="keyword != null and !keyword.equals('')">
+			and animal_place like '%' || #{keyword } || '%'
 		</if>
 	</select>
 	<select id="animal_content" resultType="AnimalDTO">
@@ -129,6 +138,14 @@
 		<if
 			test="animalDTO.animal_status != null and !animalDTO.animal_status.equals('')">
 			and animal_status = #{animalDTO.animal_status}
+		</if>
+		<if
+			test="animalDTO.animal_place != null and !animalDTO.animal_place.equals('')">
+			and animal_place like '%' || #{animalDTO.animal_place } || '%'
+		</if>
+		<if
+			test="keyword != null and !keyword.equals('')">
+			and animal_place like '%' || #{keyword } || '%'
 		</if>
 		)
 		where rnum between ${startNo} and ${endNo}

@@ -55,21 +55,20 @@ public class AnimalController {
     private int totalRecord = 0;
 
     @RequestMapping(value = "/user_dog_list")
-	public String user_dog_list( @RequestParam(value = "page", defaultValue = "1") int page,Model model
-    		, AnimalDTO animalDTO) {
+	public String user_dog_list( @RequestParam(value = "page", defaultValue = "1") int page, Model model
+    		, AnimalDTO animalDTO, @RequestParam(value = "keyword" , required = false) String keyword) {
     	animalDTO.setAnimal_tag("dog");
-    	
+
     	System.out.println("===============================");
     	System.out.println(animalDTO.toString());
 		
 		//페이징
 		String field = ""; 
-		String keyword = "";
 		
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
 
-		totalRecord = animalDAO.countPaging(animalDTO);
+		totalRecord = animalDAO.countPaging(animalDTO, keyword);
 		
 		System.out.println("=============================");
 		System.out.println("totalRecord : "+totalRecord);
@@ -79,7 +78,7 @@ public class AnimalController {
     	model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
  		model.addAttribute("field", field);
-		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO));
+		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword));
 		model.addAttribute("animalDTO",animalDTO);
 		return "user/animal/user_animal_list";
 	}

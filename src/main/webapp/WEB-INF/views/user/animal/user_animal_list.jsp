@@ -32,7 +32,7 @@
 
 			<div class="col-sm">
 				<div class="input-group">
-					<input type="text" name="animal_place_detail" placeholder="상세주소 입력"
+					<input type="text" name="keyword" placeholder="상세주소 입력"
 						class="form-control">
 				</div>
 			</div>
