@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.swing.filechooser.FileSystemView;
@@ -54,16 +55,14 @@ public class AdminAnimalController {
     private int totalRecord = 0;
 	// ADMIN
 	@RequestMapping("/dog_list")
-	public String admin_dog_list(@RequestParam(value = "startDate", required = false) String startDate, 
-    		@RequestParam(value = "endDate", required = false) String endDate
-    		, @RequestParam(value = "adopt_tag" , required = false) String adopt_tag 
+	public String admin_dog_list(  @RequestParam(value = "adopt_tag" , required = false) String adopt_tag 
     		, @RequestParam(value = "page", defaultValue = "1") int page,Model model
     		, AnimalDTO animalDTO) {
 		//페이징
 		String field = ""; 
 		String keyword = "";
-		if(startDate == null) {startDate="";}
-		if(endDate == null) {endDate="";}
+		System.out.println("=========================");
+		System.out.println(animalDTO.toString());
 		if(adopt_tag == null) {adopt_tag="";}
 		
 		int currentPage = 1;	// 현재 페이지 변수
@@ -74,11 +73,8 @@ public class AdminAnimalController {
 		
     	model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
- 		model.addAttribute("field", field); 
- 		model.addAttribute("keyword", keyword);
- 		model.addAttribute("tag",adopt_tag);
- 		
-		model.addAttribute("dogList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), "dog"));
+ 		model.addAttribute("field", field);
+		model.addAttribute("dogList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), "dog",animalDTO));
 		return "admin/animal/dog/dog_list";
 	}
 
@@ -181,6 +177,8 @@ public class AdminAnimalController {
 		if(page != 1) { currentPage = page; }
 		
     	totalRecord = adoptRegDAO.countTag(startDate, endDate,adopt_tag);
+    	System.out.println("===========================");
+    	System.out.println(adoptRegDAO.countTag(startDate, endDate,adopt_tag));
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
 		
 		// 해시맵으로 조인 유사하게 구현
@@ -201,6 +199,8 @@ public class AdminAnimalController {
 		model.addAttribute("field", field); 
 		model.addAttribute("keyword", keyword);
 		model.addAttribute("tag",adopt_tag);
+		model.addAttribute("startDate",startDate);
+		model.addAttribute("endDate",endDate);
 	
 		model.addAttribute("adoptRegList", list);
 		model.addAttribute("animalMap", maps);

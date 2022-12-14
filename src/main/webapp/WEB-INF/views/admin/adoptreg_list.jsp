@@ -23,12 +23,13 @@
 <c:set var="qList" value="${ qnaList }" />
 <c:set var="total" value="${ total }" />
 <c:set var="paging" value="${ paging }" />
-<c:set var="field" value="${ startDate }" />
-<c:set var="keyword" value="${ endDate }" />
+<c:set var="startDate" value="${ startDate }" />
+<c:set var="endDate" value="${ endDate }" />
 <c:set var="list" value="${adoptRegList }"></c:set>
 <c:set var="map" value="${animalMap }"></c:set>
 <c:set var="tag" value="${tag }"></c:set>
 <!-- 쿼리 조인을 피하기 위한 key, value를 통한 animal테이블 데이터 참조 -->
+
 <body>
 	<div class="container">
 		<br> 검색 폼
@@ -57,10 +58,10 @@
 					</label> -->
 				</div>
 				<div class="col">
-					<input type="date" name="startDate">
+					<input type="date" name="startDate" value="${startDate }">
 				</div>
 				<div class="col">
-					<input type="date" name="endDate">
+					<input type="date" name="endDate" value="${endDate }">
 				</div>
 				<div class="col form_box_div search">
 					<input class="btn btn-secondary searchbtn" type="submit" value="검색">
@@ -108,7 +109,6 @@
 
 		<br>
 		<%-- 페이징처리 --%>
-
 		<nav aria-label="Page navigation">
 			<ul class="pagination justify-content-center">
 
@@ -120,7 +120,7 @@
 					<li class="page-item">
 				</c:if>
 				<a class="page-link"
-					href="${link_address}?page=1&field=${ field }&keyword=${ keyword }&tag=${tag }"
+					href="${link_address}?page=1&startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }"
 					aria-label="First"> <span aria-hidden="true">&laquo;</span>
 				</a>
 				</li>
@@ -133,7 +133,7 @@
 					<li class="page-item">
 				</c:if>
 				<a class="page-link"
-					href="${link_address}?page=${ paging.page - 1 }&field=${ field }&keyword=${ keyword }&tag=${tag }"
+					href="${link_address}?page=${ paging.page - 1 }&startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }"
 					aria-label="Previous"> <span aria-hidden="true">&lsaquo;</span>
 				</a>
 				</li>
@@ -143,11 +143,11 @@
 					var="i">
 					<c:if test="${ i == paging.page }">
 						<li class="page-item active"><a class="page-link"
-							href="${link_address}?page=${ i }&field=${ field }&keyword=${ keyword }&tag=${tag }">${ i }</a></li>
+							href="${link_address}?page=${ i }&startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }">${ i }</a></li>
 					</c:if>
 					<c:if test="${ i != paging.page }">
 						<li class="page-item"><a class="page-link"
-							href="${link_address}?page=${ i }&field=${ field }&keyword=${ keyword }&tag=${tag }">${ i }</a></li>
+							href="${link_address}?page=${ i }&startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }">${ i }</a></li>
 					</c:if>
 				</c:forEach>
 
@@ -159,7 +159,7 @@
 					<li class="page-item disabled">
 				</c:if>
 				<a class="page-link"
-					href="${link_address}?page=${ paging.page + 1 }&field=${ field }&keyword=${ keyword }&tag=${tag }"
+					href="${link_address}?page=${ paging.page + 1 }&startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }"
 					aria-label="Next"> <span aria-hidden="true">&rsaquo;</span>
 				</a>
 				</li>
@@ -172,7 +172,7 @@
 					<li class="page-item disabled">
 				</c:if>
 				<a class="page-link"
-					href="${link_address}?page=${ paging.allPage }&field=${ field }&keyword=${ keyword }&tag=${tag }"
+					href="${link_address}?page=${ paging.allPage }&startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }"
 					aria-label="Last"> <span aria-hidden="true">&raquo;</span>
 				</a>
 				</li>
