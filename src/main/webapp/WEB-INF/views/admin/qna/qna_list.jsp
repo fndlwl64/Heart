@@ -12,6 +12,11 @@
 <c:set var="now" value="<%=new java.util.Date()%>" />
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />	
 
+<!-- modal delete Function 추가 시 data-id 검색 -> 주소값만 수정하세요....
++ admin_list_view.js include 하기 -->
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,6 +25,7 @@
     <jsp:include page="../../include/admin_header.jsp" />
 	<link rel="stylesheet" href="${path}/resources/css/list_view.css" />
 	<script src="${path}/resources/js/admin_list_view.js"></script>
+
 </head>
 <body>
     <br>
@@ -92,7 +98,7 @@
                     <td>${ list.board_regdate.substring(0,10) }</td>
                     <td>
                         <button class="btn btn-outline-primary btn-sm" onclick="location.href='${path}/admin_qna_reply_insert?board_parentNo=${ list.board_no }'">답변</button>
-                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
+                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${ path }/admin_qna_delete?board_no=${ list.board_no }">삭제</button>
                     </td>
                 </tr>
                 </c:forEach>
@@ -114,15 +120,10 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" onclick="location.href='${path}/admin_qna_delete'">삭제</button>
+                        <button type="button" class="btn btn-danger" id="deleteFunction">삭제</button>
                     </div>
                 </div>
             </div>
-        </div>
-		
-		<%-- 답변 등록하기 버튼 --%>		
-		<div class="insert-form">
-        <button class="btn btn-primary insertbtn mb-3" onclick="location.href='${path}/admin_qna_reply_insert?board_parentNo=${ list.board_no }'"><i class="bi bi-pencil-fill"></i> 등록하기</button>
         </div>
         
         <%-- 페이징처리 --%>

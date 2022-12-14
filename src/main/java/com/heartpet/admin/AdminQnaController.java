@@ -116,7 +116,7 @@ public class AdminQnaController {
     	}else {
         	int check = this.qnaDAO.insertQna(qnaDto);
     		if(check > 0) {
-    			out.println("<script>alert('성공적으로 답변글이 등록되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>");
+    			out.println("<script>alert('성공적으로 답변글이 등록되었습니다.'); location.href='"+request.getContextPath()+"/admin_qna_list'; </script>");
     		}else {
     			out.println("<script>alert('답변글 등록을 실패했습니다.'); history.back(); </script>");
     		}
@@ -162,7 +162,7 @@ public class AdminQnaController {
     	}else {
         	int check = this.qnaDAO.insertQna(qnaDto);
     		if(check > 0) {
-    			out.println("<script>alert('성공적으로 답변글이 수정되었습니다.'); location.href='"+request.getContextPath()+"/user_qna_list'; </script>");
+    			out.println("<script>alert('성공적으로 답변글이 수정되었습니다.'); location.href='"+request.getContextPath()+"/admin_qna_list'; </script>");
     		}else {
     			out.println("<script>alert('답변글 수정을 실패했습니다.'); history.back(); </script>");
     		}
@@ -170,9 +170,9 @@ public class AdminQnaController {
     }
 	
     ////////////////////////////////////////////////////////////////////////////////////
-    // QNA_REPLY_DELETE
+    // QNA_DELETE
     ////////////////////////////////////////////////////////////////////////////////////
-    @RequestMapping("/admin_qna_reply_delete")
+    @RequestMapping("/admin_qna_delete")
     public void admin_qna_reply_delete(@RequestParam("board_no") int board_no, HttpServletResponse response) throws IOException { 
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();

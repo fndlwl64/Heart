@@ -62,7 +62,8 @@
                 <tr>
                     <td>${ list.board_no }</td>
                     <td>${ list.board_category }</td>
-                    <td class="left-align">                  
+                    <td class="left-align">     
+                    	<c:if test="${ list.board_state ne 'disabled' }">            
 	                    <a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }&board_parentNo=${ list.board_parentNo }">
 	                    <c:choose>
 	                    	<c:when test="${ list.level > 1 }">
@@ -77,7 +78,8 @@
 	                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if>
 	                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
 	                    <c:if test="${ list.board_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>	                    
-	                    </a>
+	                    </a>	                    
+	                    </c:if> 	                    	               
                     </td>
                     <td><c:if test="${ list.board_id eq 'admin' }"><span id="admin_id">관리자</span></c:if>
                     <c:if test="${ list.board_id ne 'admin' }"><span>${ list.board_id }</span></c:if></td>
