@@ -80,7 +80,7 @@
                 <tr>
                     <td>${ list.board_no }</td>
                     <td>${ list.board_category }</td>
-                    <td class="list-title"><a href="${ path }/admin_qna_content?board_no=${ list.board_no }">
+                    <td class="list-title"><a href="${ path }/admin_qna_content?board_no=${ list.board_no }&board_group=${ list.board_group }">
                     <c:choose>
                     	<c:when test="${ list.level > 1 }">
                     		<c:forEach begin="1" end="${ list.level-1 }" step="1">
@@ -100,7 +100,7 @@
                     <td>${ list.board_hit }</td>
                     <td>${ list.board_regdate.substring(0,10) }</td>
                     <td>
-                        <button class="btn btn-outline-primary btn-sm" onclick="location.href='${path}/admin_qna_reply_insert?board_parentNo=${ list.board_no }'">답변</button>
+                        <button class="btn btn-outline-primary btn-sm" onclick="location.href='${path}/admin_qna_reply_insert?board_parentNo=${ list.board_no }&board_group=${ list.board_group }'">답변</button>
                         <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${ path }/admin_qna_delete?board_no=${ list.board_no }">삭제</button>
                     </td>
                 </tr>

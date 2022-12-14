@@ -13,11 +13,12 @@
 	<![CDATA[SELECT LEVEL, 
 		       board_no, 
 		       board_parentNo, 
-		       board_title,
+		       board_group,
 		       board_category,
-		       board_content,
 		       board_id,
 		       board_hit,
+		       board_title,
+		       board_content,
 		       board_secret,
 		       board_pwd, 
 		       board_regdate,
@@ -32,20 +33,13 @@
 	<sql id="qna_hierarchy">
 		START WITH board_parentNo = 0
 		CONNECT BY PRIOR board_no = board_parentNo
-		ORDER SIBLINGS BY board_parentNo desc
+		ORDER SIBLINGS BY board_group desc
 	</sql>
 	
 	<!-- list -->
 	<select id="qna_list" parameterType="hashMap" resultType="QnaDTO">
 		<include refid="qna_select" /> 
-			FROM (select b.*, row_number() over(order by board_parentNo desc
-		 <choose>
-		 	<when test="order.equals('no_desc')">, board_no desc</when>
-		 	<when test="order.equals('date_desc')">, board_regdate desc</when>
-		 	<when test="order.equals('hit_desc')">, board_hit desc</when>
-		 	<when test="order.equals('title_desc')">, board_title desc</when>		 
-		 </choose>
-) rnum FROM heartpet_board b
+			FROM (select b.*, row_number() over(order by board_no desc) rnum FROM heartpet_board b
 		<where>
 		 <choose>
             <when test="field.equals('allSearch') and keyword != ''"> (board_title <include refid="qna_keyword" />) or (board_content <include refid="qna_keyword" />) or (board_category <include refid="qna_keyword" />) or (board_id <include refid="qna_keyword" />)</when>
@@ -57,6 +51,12 @@
          </where>
          <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo} ]]>
 		 <include refid="qna_hierarchy" /> 
+         <choose>
+            <when test="order.equals('no_desc')">, board_no desc</when>
+            <when test="order.equals('date_desc')">, board_regdate desc</when>
+            <when test="order.equals('hit_desc')">, board_hit desc</when>
+            <when test="order.equals('title_desc')">, board_title desc</when>        
+         </choose>
 	</select>
 	
 	<!-- content -->
@@ -67,8 +67,8 @@
 	</update>	
 	<select id="qna_content" parameterType="int" resultType="QnaDTO">
 		<include refid="qna_select" /> 
-		FROM heartpet_board 
-			WHERE board_no = #{ board_no }
+			FROM heartpet_board 
+				WHERE board_no = #{ board_no }
 		<include refid="qna_hierarchy" />
 	</select>
 	
@@ -95,6 +95,8 @@
 			INSERT INTO heartpet_board 
 				VALUES (#{ board_no },
 				#{ board_parentNo },
+				<if test="board_parentNo == 0"> #{ board_no },</if>
+				<if test="board_parentNo != 0"> #{ board_group },</if>
 				#{ board_category }, 
 				#{ board_id }, 
 				default, 
