@@ -116,8 +116,7 @@ public class UserQnaController {
 		
     	this.qnaDAO.hitQna(board_no);
     	model.addAttribute("qnaContent", qnaContent);
-    	return "user/qna/qna_content";  
-			
+    	return "user/qna/qna_content";  			
     }
     
     ////////////////////////////////////////////////////////////////////////////////////

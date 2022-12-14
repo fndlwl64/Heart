@@ -22,6 +22,7 @@
 		       board_pwd, 
 		       board_regdate,
 		       board_update,
+		       board_state,
 		       board_img1,
 		       board_img2]]>
 	</sql>
@@ -53,20 +54,20 @@
 	
 	<!-- content -->
 	<update id="qna_hit" parameterType="int">
-		update heartpet_board 
-			set board_hit = board_hit + 1 
-			where board_no = #{ board_no }
+		UPDATE heartpet_board 
+			SET board_hit = board_hit + 1 
+			WHERE board_no = #{ board_no }
 	</update>	
 	<select id="qna_content" parameterType="int" resultType="QnaDTO">
 		<include refid="qna_select" /> 
 		FROM heartpet_board 
-		WHERE board_no = #{ board_no }
+			WHERE board_no = #{ board_no }
 		<include refid="qna_hierarchy" />
 	</select>
 	
 	<!-- count : 게시글 개수 -->
 	<select id="qna_count" parameterType="hashMap" resultType="int">
-		select count(*) from heartpet_board
+		SELECT COUNT(*) FROM heartpet_board
 		<where>
 	 	<choose>
 	 		<when test="field == '' and keyword == ''"></when>
@@ -82,7 +83,7 @@
 	<!-- 글 쓰기 : insert -->
 	<insert id="qna_insert" parameterType="QnaDTO">
 		<selectKey resultType="int" keyProperty="board_no" order="BEFORE">
-			SELECT max(board_no)+1 FROM heartpet_board
+			SELECT MAX(board_no)+1 FROM heartpet_board
 		</selectKey>
 			INSERT INTO heartpet_board 
 				VALUES (#{ board_no },
@@ -96,6 +97,7 @@
 				#{ board_pwd }, 
 				sysdate, 
 				'', 
+				default,
 				'', 
 				'')
 	</insert>
@@ -118,6 +120,8 @@
 		UPDATE heartpet_board 
 			SET board_title = '삭제된 게시글입니다.', 
 			board_content = '삭제된 게시글입니다.', 
+			board_secret = 'Y',
+			board_state = 'disabled'
 		WHERE board_no = #{ board_no }
 	</delete>
 	
@@ -128,7 +132,7 @@
 	-->
 	<!-- count : 게시글 개수 + 검색 -->
 	<select id="fnq_count" parameterType="hashMap" resultType="int">
-		select count(*) from heartpet_fnq
+		SELECT COUNT(*) FROM heartpet_fnq
 		<where>
 	 	<choose>
 	 		<when test="field == '' and keyword == ''"></when>
@@ -142,7 +146,7 @@
 	
 	<!-- list : 검색 -->
 	<select id="fnq_list" parameterType="hashMap" resultType="FnqDTO">
-		<![CDATA[select * from (select b.*, row_number() over(order by fnq_no desc) rnum from heartpet_fnq b ]]>
+		<![CDATA[SELECT * FROM (SELECT b.*, row_number() over(order by fnq_no desc) rnum FROM heartpet_fnq b ]]>
 		<where>
 		 <choose>
 	 		<when test="field == '' and keyword == ''"></when>
@@ -152,31 +156,37 @@
 			<when test="field.equals('answer') and keyword != ''"> fnq_answer <include refid="qna_keyword" /></when>
          </choose>
          </where>
-         <![CDATA[) where rnum >= #{startNo} and rnum <= #{endNo}]]>
+         <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo}]]>
 	</select>
 	
 	<!-- content -->
 	<select id="fnq_content" parameterType="int" resultType="FnqDTO">
-		select * from heartpet_fnq where fnq_no = #{ fnq_no }
+		SELECT * 
+		FROM heartpet_fnq 
+		WHERE fnq_no = #{ fnq_no }
 	</select>
 	
 	<!-- insert -->	
 	<insert id="fnq_insert" parameterType="FnqDTO">
 		<selectKey resultType="int" keyProperty="fnq_no" order="BEFORE">
-			select max(fnq_no)+1 from heartpet_fnq
+			SELECT MAX(fnq_no)+1 
+			FROM heartpet_fnq
 		</selectKey>
-		insert into heartpet_fnq values (#{ fnq_no }, #{ fnq_category }, #{ fnq_question }, #{ fnq_answer })
+		INSERT INTO heartpet_fnq 
+		VALUES (#{ fnq_no }, #{ fnq_category }, #{ fnq_question }, #{ fnq_answer })
 	</insert>
 	
 	<!-- update -->
 	<update id="fnq_update" parameterType="FnqDTO">
-		update heartpet_fnq set fnq_category = #{ fnq_category }, fnq_question = #{ fnq_question }, fnq_answer = #{ fnq_answer }
-		where fnq_no = #{ fnq_no }
+		UPDATE heartpet_fnq 
+		SET fnq_category = #{ fnq_category }, fnq_question = #{ fnq_question }, fnq_answer = #{ fnq_answer }
+		WHERE fnq_no = #{ fnq_no }
 	</update>
 	
 	<!-- delete -->
 	<delete id="fnq_delete" parameterType="int">
-		delete from heartpet_fnq where fnq_no = #{ fnq_no }
+		DELETE FROM heartpet_fnq 
+		WHERE fnq_no = #{ fnq_no }
 	</delete>
 	
 	<!-- 

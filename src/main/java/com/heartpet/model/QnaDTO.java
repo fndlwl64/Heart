@@ -29,6 +29,7 @@ public class QnaDTO {
     
     private String board_regdate;
     private String board_update;
+    private String board_state;
     private String board_img1;
     private String board_img2;
 
