@@ -53,7 +53,9 @@
 			<div class="form_box">
 
 				<select name="animal_species">
+
 					<option value=""></option>
+
 					<option value="말티즈">말티즈</option>
 					<option value="푸들">푸들</option>
 					<option value="포메라니안">포메라니안</option>
@@ -229,7 +231,7 @@
 				$("#YN").val('Y');
 				console.log($("#YN").val());
 			}else{
-				
+
 			}
 		}
 	)

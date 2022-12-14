@@ -67,6 +67,7 @@ public class AdminAnimalController {
 		//페이징
 		String field = ""; 
 		String keyword = "";
+
 		if(adopt_tag == null) {adopt_tag="";}
 		
 		int currentPage = 1;	// 현재 페이지 변수
@@ -78,8 +79,10 @@ public class AdminAnimalController {
     	model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
  		model.addAttribute("field", field);
+
 		model.addAttribute("dogList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO));
 		model.addAttribute("animalDTO",animalDTO);
+
 		return "admin/animal/dog/dog_list";
 	}
 

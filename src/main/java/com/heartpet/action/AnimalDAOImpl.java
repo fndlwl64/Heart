@@ -53,8 +53,10 @@ public class AnimalDAOImpl implements AnimalDAO{
 	}
 
 	@Override
+
 	public List<AnimalDTO> listPaging(int startNO, int endNo,  AnimalDTO animalDTO) {
-		Map<String, Object> map = new HashMap<String, Object>();
+
+    Map<String, Object> map = new HashMap<String, Object>();
     	map.put("startNo", startNO);
     	map.put("endNo", endNo);
     	map.put("animalDTO",animalDTO);

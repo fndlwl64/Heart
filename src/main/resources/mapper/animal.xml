@@ -91,7 +91,6 @@
 		</if>
 		)
 		where rnum between ${startNo} and ${endNo}
-
 	</select>
 	<insert id="animal_insert" parameterType="AnimalDTO">
 		<selectKey resultType="int" keyProperty="animal_no"
