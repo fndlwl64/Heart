@@ -25,5 +25,6 @@ public class AnimalDTO {
     private String animal_tag;	
     private String animal_regdate;
     private String animal_update;
+    private int animal_state;
     
 }

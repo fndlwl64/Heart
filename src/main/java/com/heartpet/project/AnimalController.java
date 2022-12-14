@@ -32,12 +32,13 @@ import com.heartpet.action.UserDAO;
 import com.heartpet.model.AdoptRegDTO;
 import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.FileUploadImage;
+import com.heartpet.model.PageDTO;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
+@Transactional
 @Controller
 public class AnimalController {
 
@@ -48,13 +49,42 @@ public class AnimalController {
 	@Autowired
 	private HttpServletRequest request;
 
-	@RequestMapping(value = "/user_dog_list", method = RequestMethod.GET)
-	public String user_dog_list(Model model) {
-		model.addAttribute("animalList", animalDAO.listTagUser("dog"));
+	// 한 페이지당 보여질 게시물의 수
+    private final int rowsize = 3;
+    // 전체 게시물의 수
+    private int totalRecord = 0;
+
+    @RequestMapping(value = "/user_dog_list")
+	public String user_dog_list( @RequestParam(value = "page", defaultValue = "1") int page,Model model
+    		, AnimalDTO animalDTO) {
+    	animalDTO.setAnimal_tag("dog");
+    	
+    	System.out.println("===============================");
+    	System.out.println(animalDTO.toString());
+		
+		//페이징
+		String field = ""; 
+		String keyword = "";
+		
+		int currentPage = 1;	// 현재 페이지 변수
+		if(page != 1) { currentPage = page; }
+
+		totalRecord = animalDAO.countPaging(animalDTO);
+		
+		System.out.println("=============================");
+		System.out.println("totalRecord : "+totalRecord);
+		
+    	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+		
+    	model.addAttribute("total", totalRecord);
+        model.addAttribute("paging", paging);		
+ 		model.addAttribute("field", field);
+		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO));
+		model.addAttribute("animalDTO",animalDTO);
 		return "user/animal/user_animal_list";
 	}
 
-	@RequestMapping(value = "/user_cat_list", method = RequestMethod.GET)
+	@RequestMapping(value = "/user_cat_list")
 	public String user_cat_list(Model model) {
 		model.addAttribute("animalList", animalDAO.listTagUser("cat"));
 		return "user/animal/user_animal_list";
