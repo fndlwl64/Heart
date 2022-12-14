@@ -83,10 +83,7 @@ public class AdminController {
     }
     
     
-    @RequestMapping("/notice_list")
-    public String notice_list() {
-        return "admin/notice_list";
-    }
+    
     @RequestMapping("/board_list")
     public String board_list() {
         return "admin/board_list";
@@ -101,10 +98,7 @@ public class AdminController {
     public String board_update() {
         return "admin/board_update";
     }
-    @RequestMapping("/notice_update")
-    public String notice_update() {
-        return "admin/notice_update";
-    }
+    
     @RequestMapping("/review_update")
     public String review_update() {
         return "admin/review_update";
@@ -155,10 +149,7 @@ public class AdminController {
     public String board_insert() {
         return "admin/board_insert";
     }
-    @RequestMapping("/notice_insert")
-    public String notice_insert() {
-        return "admin/notice_insert";
-    }
+    
     @RequestMapping("/review_insert")
     public String review_insert() {
         return "admin/review_insert";
@@ -179,10 +170,6 @@ public class AdminController {
 
     /*관리자 리스트에서 상세정보보기*/
     
-    @RequestMapping("/notice_view")
-    public String notice_view() {
-        return "admin/notice_view";
-    }
     @RequestMapping("/user_view")
     public String user_view(@RequestParam("user_id")String id, Model model) {
     	

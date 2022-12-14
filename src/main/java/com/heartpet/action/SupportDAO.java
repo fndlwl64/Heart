@@ -1,5 +1,6 @@
 package com.heartpet.action;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.heartpet.model.SupportDTO;
@@ -26,4 +27,7 @@ public interface SupportDAO {
 	
 	// 관리자 페이지에서 후원하기 삭제했을때 번호 당기는 메서드
 	void updateSequence(int no);
+	
+	//후원했을때 유저아이디, 금액 받아오는 메서드
+	void insertSupportPay(HashMap<String, Object> map);
 }

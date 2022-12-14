@@ -22,6 +22,9 @@
 	IMP.init("imp44175061");
 	
 	function requestPay() {
+		  let name2 = document.getElementById('sup_name').value;
+		  let phone2 = document.getElementById('sup_phone').value;
+		  let email2 = document.getElementById('sup_email').value;
 		  let amount2 = document.getElementById('support').value;
 	      IMP.request_pay({ 
 	          pg: "html5_inicis",
@@ -29,18 +32,21 @@
 	          merchant_uid: ${No}+1,//주문번호
 	          name: "유기견 후원",
 	          amount: amount2,// 숫자타입
-	          buyer_email: "${dto.getUser_email()}",
-	          buyer_name: "${dto.getUser_name()}",
-	          buyer_tel: "${dto.getUser_phone()}"
+	          buyer_email: email2,
+	          buyer_name: name2,
+	          buyer_tel: phone2
 	          /* buyer_addr: "서울특별시 강남구 신사동",
 	          buyer_postcode: "01181" */
 	      }, function (rsp) { // callback
 	          if (rsp.success) {
-	              $.ajax({
+	        	  $.ajax({
 	            	  type: "Post",
 	            	  contentType:  "application/x-www-form-urlencoded;charset=UTF-8",
-	            	  url: "/project/support_pay",
+	            	  url: "/project/support_pay2",
 	            	  data: {
+	                        paramName : name2,
+	                        paramPhone : phone2,
+	                        paramEmail : email2,
 	                        paramAmount : amount2
 	                  },
                       dataType: "text",
@@ -53,7 +59,7 @@
 	              });
 	              opener.location.reload();
 	              window.close();
-	          }else {
+	          } else {
 	        	  alert('후원실패');
 	          }
 	      });
@@ -76,14 +82,24 @@
 				<li class="support_li">세계자연기금 후원(유기동물 캠페인)</li>
 			</ul>
 		</div>
+		<div>
+			<ul>
+				<li class="support_li"><input id="sup_name" type="text" placeholder="이름"></li>
+				<li class="support_li"><input id="sup_phone" type="text" placeholder="010-0000-0000"></li>
+			</ul>
+		</div>
 		<div class="btn-group">
+			<ul>
+				<li class="support_li"><input id="sup_email" type="text" placeholder="이메일입력"></li>
+				<li class="support_li"><input type="button" value="이메일인증"></li>				
+			</ul>
+		</div>
+		<div>
 			<ul>
 				<li class="support_li"><input id="support" type="text" placeholder="후원금액입력" onkeypress='return checkNumber(event)'></li>
 				<li class="support_li"><input type="button" onclick="requestPay()" value="후원하기"></li>
 			</ul>
 		</div>
-
-
 	</div>
 
 </body>
