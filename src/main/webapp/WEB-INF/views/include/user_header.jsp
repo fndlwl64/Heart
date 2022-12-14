@@ -150,22 +150,25 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-	                        <input class="login_text" id="user_name" placeholder="이름">
-	                        <span class="name_check"></span>
-	                        <input class="login_text" id="user_email" placeholder="이메일">
-	                        <button id="find_id" class="btn login_btn" onclick="idfind()">아이디 찾기</button>
+                        	<%-- <form method="post" action="${path }/user_find_id"> --%>
+		                        <input class="login_text" id="user_name" placeholder="이름">
+		                        <span class="name_check"></span>
+		                        <input class="login_text" id="user_email" placeholder="이메일">
+		                        <button id="find_id" class="btn login_btn">아이디 찾기</button>
+	                        <%-- </form> --%>
                         </div>
                         <div class="modal-footer">
+                        	<div id="id_found">
+				            	<label class="found_title"> 
+				            		<span id="found_id" class="span_id"></span>
+				            	</label>
+				            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div id="id_found">
-            	<label for="span_id">
-            		<span id="found_id" class="span_id"></span>
-            	</label>
-            </div>
+            
 
             <%--비밀번호 찾기--%>
             <div class="modal fade" id="findPwd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
