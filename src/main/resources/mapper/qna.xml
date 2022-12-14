@@ -13,7 +13,7 @@
 	<![CDATA[SELECT LEVEL, 
 		       board_no, 
 		       board_parentNo, 
-		       LPAD('', 4*(LEVEL-1)) || board_title as board_title,
+		       board_title,
 		       board_category,
 		       board_content,
 		       board_id,
@@ -110,13 +110,16 @@
 			board_update = sysdate
 		<if test="board_img1 != null">, board_img1 = #{ board_img1 } </if> 
 		<if test="board_img2 != null">, board_img2 = #{ board_img2 } </if> 
-		where board_no = #{ board_no }
+		WHERE board_no = #{ board_no }
 	</update>
 	
 	<!-- delete -->
 	<delete id="qna_delete" parameterType="int">
-		delete from heartpet_board 
-			where board_no = #{ board_no }
+		UPDATE heartpet_board 
+			SET board_title = '삭제된 게시글입니다.', 
+			board_content = '삭제된 게시글입니다.', 
+			board_update = sysdate
+		WHERE board_no = #{ board_no }
 	</delete>
 	
 	<!-- 

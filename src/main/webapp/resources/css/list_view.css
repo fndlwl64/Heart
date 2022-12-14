@@ -40,6 +40,20 @@
     
 }
 
+/* sub-title */
+.container .sub-title {
+	display: flex;
+	margin: 1rem auto;
+	width: 60%;
+	background-color: #FDEDEC;
+	border-radius: 10px;
+}
+
+.container .sub-title > h4 {
+	font-weight: bold;
+	margin: 1rem;
+}
+
 /* admin/user_content.jsp 테이블 태그 */
 .container ._container .wrap {
 	border: 1px solid #ABB2B9;
@@ -102,6 +116,22 @@
 .container .noticeinfo .user {
 	
 }
+
+/* fnq 문의글 제목 */
+.container .noticeinfo .question {
+	text-align: left;
+	padding-left: 1.5rem;
+}
+
+.container .noticeinfo .answer {
+	text-align: left;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.container .noticeinfo .form-control-plaintext  {
+	resize: none;
+} 
 
 .container .noticeinfo tr .user > a {
 	font-weight: bold;
@@ -254,5 +284,13 @@
 /* space : 여백용 */
 .space {
 	margin: 4rem 0;
+}
+
+/* buttons : 버튼 정렬 */
+.buttons {
+	display: flex;
+	margin: 1rem auto;
+	width: 60%;
+	justify-content: flex-end;
 }
 

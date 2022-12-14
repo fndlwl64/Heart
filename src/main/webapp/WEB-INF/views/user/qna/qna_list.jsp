@@ -14,6 +14,24 @@
 
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
+<script src="${path}/resources/js/admin_search.js"></script>
+
+<script>
+$(document).ready(function() {
+	
+	console.log("여기");
+	$('select[name=field]').change(function() {
+	let categorySelected = $('select[name=field] option:selected').val();
+		if(categorySelected == 'category') {
+			$('input[type=text][name=keyword]').css("display", "none");
+	    	$('select[name=category]').css("display", "inline");
+		}else {
+			$('input[type=text][name=keyword]').css("display", "inline");
+	    	$('select[name=category]').css("display", "none");
+		}
+	});
+});
+</script>
 
 <%-- qna list --%>
 <div id="qna-contents" class="qna-contents">
@@ -110,7 +128,7 @@
         <div class="row">
             <div class="col-4 space"></div>
             <div class="col-4 search">
-                <form method="get" action="${ path }/user_qna_list?field=${ field }&keyword=${ keyword }">
+                <form method="get" action="${ path }/user_qna_list">
                     <select name="field" class="form-select d-inline align-middle w-25">
                         <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
                         <option value="category"<c:if test="${ field eq 'category' }">selected="selected"</c:if>>카테고리</option>
@@ -118,7 +136,13 @@
                         <option value="content"<c:if test="${ field eq 'content' }">selected="selected"</c:if>>내용</option>
                         <option value="id"<c:if test="${ field eq 'id' }">selected="selected"</c:if>>작성자</option>
                     </select>
-                    <input type="text" class="form-control d-inline align-middle w-50" name="keyword" value="${ keyword }" />
+                    <input type="text" class="form-control d-inline align-middle w-50" value="${ keyword }" name="keyword" />
+                    <select name="" class="form-select d-none align-middle w-50">
+                        <option value="입양"<c:if test="${ keyword eq '입양' }">selected="selected"</c:if>>입양</option>
+                        <option value="입소"<c:if test="${ keyword eq '입소' }">selected="selected"</c:if>>입소</option>
+                        <option value="후원"<c:if test="${ keyword eq '후원' }">selected="selected"</c:if>>후원</option>
+                        <option value="기타"<c:if test="${ keyword eq '기타' }">selected="selected"</c:if>>기타</option>
+                    </select>
                     <button type="submit" class="btn btn-dark d-inline align-middle"><i class="bi bi-search"></i> 검색</button>
                 </form>
             </div>
