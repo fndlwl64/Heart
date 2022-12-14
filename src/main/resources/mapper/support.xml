@@ -33,4 +33,11 @@
    <update id="sup_seq" parameterType="int">
    		<![CDATA[update heartpet_support set support_no = support_no-1 where support_no > #{no}]]>
    </update>
+   
+   <insert id="sup_pay" parameterType="hashmap">
+		<selectKey resultType="int" keyProperty="support_no" order="BEFORE">
+			select max(support_no) from heartpet_support
+		</selectKey>
+			insert into heartpet_support values(#{support_no}+1,#{userid},#{amount},sysdate)
+	</insert>
 </mapper>

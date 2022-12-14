@@ -1,5 +1,6 @@
 package com.heartpet.action;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -57,6 +58,12 @@ public class SupportDAOImpl implements SupportDAO{
 	public void updateSequence(int no) {
 		
 		this.sqlSession.update("sup_seq", no);
+		
+	}
+
+	@Override
+	public void insertSupportPay(HashMap<String, Object> map) {
+		this.sqlSession.insert("sup_pay", map);
 		
 	}
 

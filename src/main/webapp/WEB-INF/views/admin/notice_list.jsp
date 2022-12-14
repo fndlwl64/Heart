@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../include/admin_header.jsp"/>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="dto" value="${nList }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +33,7 @@
 
         <br>
 
-        <button class="btn btn-success insertbtn" onclick="location.href='/notice_insert'">등록</button>
+        <button class="btn btn-success insertbtn" onclick="location.href='${path}/notice_insert'">등록</button>
 
         <br><br>
 
@@ -44,16 +47,19 @@
                     <th class="table-secondary">조회수</th>
                     <th class="table-secondary">수정/삭제</th>
                 </tr>
-
-                <tr>
-                    <td>1</td>
-                    <td><a href="/notice_view">공지1</a></td>
-                    <td>1</td>
-                    <td>
-                        <button class="btn btn-primary" onclick="location.href='/notice_update'">수정</button>
-                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
-                    </td>
-                </tr>
+				<c:if test="${!empty nList}">
+					<c:forEach items="${nList }" var="dto">
+		                <tr>
+		                    <td>${dto.getNotice_no() }</td>
+		                    <td><a href="/notice_view">${dto.getNotice_title() }</a></td>
+		                    <td>${dto.getNotice_hit() }</td>
+		                    <td>
+		                        <button class="btn btn-primary" onclick="location.href='${path}/notice_update?no=${dto.getNotice_no() }'">수정</button>
+		                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
+		                    </td>
+		                </tr>
+                	</c:forEach>
+                </c:if>
             </table>
 
         </div>
