@@ -77,11 +77,10 @@ public class FileUploadImage {
 			String fileRealName = file.getOriginalFilename();
 			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
 			// 랜덤으로 파일명 생성 
-			UUID uuid = UUID.randomUUID();
+			UUID uuid = UUID.randomUUID(); 
 
 			imgs[i] = dateString + "/" + folderName + "/" + uuid.toString() + fileExtension;
 			
-
 			try {
 //				File toFile = new File(rootPath + "/" + imgs[i]);
 //				file.transferTo(toFile);

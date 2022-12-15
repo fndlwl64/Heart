@@ -54,7 +54,7 @@
 	        <when test="field.equals('grade') and keyword != ''"> user_grade <include refid="user_keyword" /></when>
         </choose>
         </where>	
-        <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo} and USER_GRADE NOT IN (1) ORDER BY USER_NO DESC ]]>
+        <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo} ORDER BY USER_NO DESC ]]>
 	</select>
 	
 	<select id="user_count" parameterType="map" resultType="int">

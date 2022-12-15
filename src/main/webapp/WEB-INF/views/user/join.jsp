@@ -9,7 +9,6 @@
 
     <div class="container">
     
-
         <div class="title">
         <h3> HeartPet 회원가입 </h3>
         </div>
@@ -17,8 +16,9 @@
 
         <div class="join_div">
 
-            <form class="join_form" method="post" action="${path}/joinOk">
-
+            <form class="join_form" method="post" action="${path}/joined">
+				<input type="hidden" name="user_image" />
+				
                 <table class="table join_table">
 
                     <tr>

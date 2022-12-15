@@ -35,14 +35,20 @@ body {
     justify-content: flex-end;
 }
 
+.wrap .h-wrap .header-logo .header-nav .login_section {
+	width: 60%;
+	font-size: 15px;
+	
+}
+
 .wrap .h-wrap .header-logo .header-nav ul {
     margin: 0px;
     padding: 0px;
-    display: flex;
 }
 
 .wrap .h-wrap .header-logo .header-nav ul li {
     list-style: none;
+    padding: 5px;
 }
 
 .wrap .h-wrap .header-logo .header-nav ul li a {

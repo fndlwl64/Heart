@@ -6,7 +6,7 @@ import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.NoticeDTO;
 import com.heartpet.model.PageDTO;
 import com.heartpet.action.AnimalDAO;
-import com.heartpet.action.MailService;
+import com.heartpet.model.MailService;
 import com.heartpet.action.QnaDAO;
 import com.heartpet.action.UserDAO;
 import com.heartpet.model.QnaDTO;
@@ -279,7 +279,7 @@ public class UserController {
         return "user/join";
     }
     
-    @RequestMapping(value="/joinOk")
+    @RequestMapping(value="/joined")
     public void joinOk(UserDTO dto, HttpServletRequest request,HttpServletResponse response) throws IOException {
     	request.setCharacterEncoding("UTF-8");
     	response.setContentType("text/html; charset=utf-8");

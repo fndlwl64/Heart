@@ -58,11 +58,12 @@
 	                <td>${list.user_no}</td>
 	                <td><a href="${path}/user_view?user_id=${list.user_id}">${list.user_id}</a></td>
 	                <td>${list.user_name}</td>
-	                <td>${list.user_grade}등급</td>
+	                <td id="user_list_grade">${list.user_grade}등급</td>
 	                <td>${list.user_animalexp}</td>
 	                <td>
+	                	<c:set value="${ path }/user_delete?user_no=${ list.user_no }" var="deleteAddr" />
 	                    <button class="btn btn-outline-primary" onclick="location.href='${path}/user_update?user_id=${list.user_id }'">수정</button>
-	                    <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${ path }/user_delete?user_no=${ list.user_no }">삭제</button>
+	                    <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }">삭제</button>
 	                </td>
 	            </tr>
             </c:forEach>            	
@@ -70,7 +71,7 @@
             
             <c:if test="${empty list}">
             	<tr>
-            		<td colspan="5">회원이 없습니다 .... !!!!!!!</td>
+            		<td colspan="6">해당하는 회원이 없습니다.</td>
             	</tr>
             </c:if>
 
@@ -79,25 +80,7 @@
     
 
     <%-- 삭제 모달 --%>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div id="myInput" class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">HeartPet 회원 삭제</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    해당 데이터를 삭제하시겠습니까?
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" onclick="location.href='${path}/user_delete'">삭제</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <jsp:include page="../../include/deleteModal.jsp" />
     
     <%-- 페이징처리 --%>
 	<jsp:include page="../../include/pagination.jsp" />

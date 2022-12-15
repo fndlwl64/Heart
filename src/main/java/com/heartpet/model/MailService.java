@@ -1,4 +1,4 @@
-package com.heartpet.action;
+package com.heartpet.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;

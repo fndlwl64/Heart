@@ -11,6 +11,7 @@
 	<div class="container">
 		
 		
+		
 		<a href="<%=request.getContextPath()%>/user_list">관리자 메인</a>
 		
 	</div>

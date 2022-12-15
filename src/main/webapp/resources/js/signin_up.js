@@ -74,6 +74,11 @@ function sample6_execDaumPostcode() {
 
 
 $(function() {
+
+	$('.modal').on('hidden.bs.modal', function (e) {
+		$(this).find('form')[0].reset();
+	});
+	
 	// 카카오 api 사용
 	Kakao.init('b6f75c3aa40a005f012dbe14f5ac031e');
 	Kakao.isInitialized();
@@ -140,7 +145,7 @@ $(function() {
 				'border-radius': '3px'
 			});
 			$("#login_btn").attr("disabled", true);
-			$("#idcheck").html("<i class='bi bi-x-circle-fill'></i><br><font style='color:red; font-size:13px;'>아이디를 입력하세요.</font>");
+			$("#idcheck").html("<font style='color:red; font-size:13px;'>아이디를 입력하세요. <i class='bi bi-x-circle-fill'></i></font>");
 		}else {			
 			$.ajax({			
 	            contentType: "application/x-www-form-urlencoded;charset=UTF-8",
@@ -149,14 +154,14 @@ $(function() {
 	            data: {paramId : id},
 	            success: function(res) {
 	            	if(res == 1) {  // DB에 아이디가 존재하는 경우
-						$("#idcheck").html("<i class='bi bi-check-circle-fill'></i><br><font style='color:green; font-size:13px;'>아이디 확인 완료</font>");
+						$("#idcheck").html("<font style='color:green; font-size:13px;'>아이디 확인 완료 <i class='bi bi-check-circle-fill'></i></font>");
 						$("#login_id").css({
 							'border': '2px solid green',
 							'border-radius': '3px'
 						});
 						$("#login_btn").attr("disabled", false);
 					}else {
-						$("#idcheck").html("<i class='bi bi-x-circle-fill'></i><br><font style='color:red; font-size:13px;'>존재하지 않는 아이디입니다.</font>");
+						$("#idcheck").html("<font style='color:red; font-size:13px;'>존재하지 않는 아이디입니다. <i class='bi bi-x-circle-fill'></i><br></font>");
 						$("#login_btn").attr("disabled", true);
 						$("#login_id").css({
 							'border': '2px solid red',
@@ -327,7 +332,6 @@ $(function() {
 			});
 			$("#join_btn").attr("disabled", false);
 		}
-		
 	});
 	
 	let zipcode = $("#sample6_postcode").val();
