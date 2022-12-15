@@ -68,34 +68,17 @@
                     <td>${ list.fnq_category }</td>
                     <td class="list-title"><a href="${ path }/admin_fnq_content?fnq_no=${ list.fnq_no }"><strong>Q. </strong>${ list.fnq_question }</a></td>
                     <td>
+                    	<c:set value="${ path }/user_fnq_delete?fnq_no=${ list.fnq_no }" var="deleteAddr" />
                         <button class="btn btn-outline-success btn-sm" onclick="location.href='${path}/admin_fnq_update?fnq_no=${ list.fnq_no }'">수정</button>
-                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="deleteModal" data-id="${ path }/user_fnq_delete?fnq_no=${ list.fnq_no }" >삭제</button>
+                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }" >삭제</button>
                     </td>
                 </tr>
                 </c:forEach>
             </table>
         </div>
         
-        <%-- 삭제 모달 // admin_list_view.js 삽입되어 있음
-        	modal-dialog-centered 삽입됨
-         --%>
-	    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-	        <div id="deleteInput" class="modal-dialog modal-dialog-centered">
-	            <div class="modal-content">
-	                <div class="modal-header">
-	                    <h1 class="modal-title fs-5" id="deleteModalLabel">데이터 삭제</h1>
-	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	                </div>
-	                <div class="modal-body">
-	                    해당 데이터를 삭제하시겠습니까?
-	                </div>
-	                <div class="modal-footer">
-	                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	                    <button type="button" class="btn btn-danger" id="deleteFunction">삭제</button>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
+        <%-- 삭제 모달 --%>
+		<jsp:include page="../../include/deleteModal.jsp" />
 		
 		<%-- 답변 등록하기 버튼 --%>		
 		<div class="insert-form">
