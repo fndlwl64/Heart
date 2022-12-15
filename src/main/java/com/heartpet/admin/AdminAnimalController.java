@@ -39,6 +39,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 @Transactional
 @Controller
 public class AdminAnimalController {
@@ -50,56 +51,62 @@ public class AdminAnimalController {
 	private AdoptRegDAO adoptRegDAO;
 
 	// 한 페이지당 보여질 게시물의 수
-    private final int rowsize = 3;
-    // 전체 게시물의 수
-    private int totalRecord = 0;
+	private final int rowsize = 3;
+	// 전체 게시물의 수
+	private int totalRecord = 0;
+
 	// ADMIN
 	@RequestMapping("/dog_list")
-	public String admin_dog_list( @RequestParam(value = "page", defaultValue = "1") int page,Model model
-    		, AnimalDTO animalDTO) {
-		//강아지, 삭제 포함
+	public String admin_dog_list(@RequestParam(value = "page", defaultValue = "1") int page, Model model,
+			AnimalDTO animalDTO) {
+		// 강아지, 삭제 포함
 		animalDTO.setAnimal_tag("dog");
 		animalDTO.setAnimal_state(0);
-		
-		//페이징
-		String field = ""; 
-		String keyword = "";
-		
-		int currentPage = 1;	// 현재 페이지 변수
-		if(page != 1) { currentPage = page; }
 
-		totalRecord = animalDAO.countPaging(animalDTO,keyword);
-    	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-		
-    	model.addAttribute("total", totalRecord);
-        model.addAttribute("paging", paging);
-		model.addAttribute("dogList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword));
-		model.addAttribute("animalDTO",animalDTO);
+		// 페이징
+		String field = "";
+		String keyword = "";
+
+		int currentPage = 1; // 현재 페이지 변수
+		if (page != 1) {
+			currentPage = page;
+		}
+
+		totalRecord = animalDAO.countPaging(animalDTO, keyword);
+		PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+
+		model.addAttribute("total", totalRecord);
+		model.addAttribute("paging", paging);
+		model.addAttribute("dogList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), animalDTO, keyword));
+		model.addAttribute("animalDTO", animalDTO);
 
 		return "admin/animal/dog/dog_list";
 	}
+
 // @RequestParam(value = "adopt_tag" , required = false) String adopt_tag 
 	@RequestMapping("/cat_list")
-	public String cat_list( @RequestParam(value = "page", defaultValue = "1") int page,Model model
-    		, AnimalDTO animalDTO) {
-		//고양이, 삭제 포함
+	public String cat_list(@RequestParam(value = "page", defaultValue = "1") int page, Model model,
+			AnimalDTO animalDTO) {
+		// 고양이, 삭제 포함
 		animalDTO.setAnimal_tag("cat");
 		animalDTO.setAnimal_state(0);
-		
-		//페이징
-		String field = ""; 
-		String keyword = "";
-		
-		int currentPage = 1;	// 현재 페이지 변수
-		if(page != 1) { currentPage = page; }
 
-		totalRecord = animalDAO.countPaging(animalDTO,keyword);
-    	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-		
-    	model.addAttribute("total", totalRecord);
-        model.addAttribute("paging", paging);
- 		model.addAttribute("catList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword));
-		model.addAttribute("animalDTO",animalDTO);
+		// 페이징
+		String field = "";
+		String keyword = "";
+
+		int currentPage = 1; // 현재 페이지 변수
+		if (page != 1) {
+			currentPage = page;
+		}
+
+		totalRecord = animalDAO.countPaging(animalDTO, keyword);
+		PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+
+		model.addAttribute("total", totalRecord);
+		model.addAttribute("paging", paging);
+		model.addAttribute("catList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), animalDTO, keyword));
+		model.addAttribute("animalDTO", animalDTO);
 
 		return "admin/animal/cat/cat_list";
 	}
@@ -117,8 +124,8 @@ public class AdminAnimalController {
 	}
 
 	@RequestMapping(value = "/animal_insert", method = RequestMethod.GET)
-	public String animal_insert(@RequestParam("tag") String tag,Model model) {
-		model.addAttribute("tag",tag);
+	public String animal_insert(@RequestParam("tag") String tag, Model model) {
+		model.addAttribute("tag", tag);
 		return "admin/animal/animal_insert";
 	}
 
@@ -136,14 +143,15 @@ public class AdminAnimalController {
 		adoptRegDTO.setAdopt_reg_appdate(strDate);
 
 		adoptRegDAO.insert(adoptRegDTO);
-		
-		//동물 입소 신청하자마자 입양 가능 상태
-		//이미지 업로드 및 animal 데이터 추가
+
+		// 동물 입소 신청하자마자 입양 가능 상태
+		// 이미지 업로드 및 animal 데이터 추가
 		FileUploadImage upload = new FileUploadImage();
-		String[] images = upload.uploadAnimalImg(request, files);
-		animalDTO.setAnimal_img1(images[0]);
-		animalDTO.setAnimal_img2(images[1]);
+		
+		String[] images = upload.uploadAnimalImg(request, files, "animal");
+		animalDTO.setAnimal_img1(images[0]); animalDTO.setAnimal_img2(images[1]);
 		animalDTO.setAnimal_img3(images[2]);
+		 
 
 		animalDTO.setAnimal_status("입양 가능");
 
@@ -168,7 +176,6 @@ public class AdminAnimalController {
 
 		return "redirect:/admin_main";
 	}
-	
 
 	@RequestMapping("/cat_view")
 	public String cat_view() {
@@ -182,25 +189,33 @@ public class AdminAnimalController {
 
 	// 입양관리
 	@RequestMapping("/adoptreg_list")
-	public String adoptreg_list(@RequestParam(value = "startDate", required = false) String startDate, 
-    		@RequestParam(value = "endDate", required = false) String endDate
-    		, @RequestParam(value = "adopt_tag" , required = false) String adopt_tag 
-    		, @RequestParam(value = "page", defaultValue = "1") int page,Model model) {
-		//페이징
-		String field = ""; 
+	public String adoptreg_list(@RequestParam(value = "startDate", required = false) String startDate,
+			@RequestParam(value = "endDate", required = false) String endDate,
+			@RequestParam(value = "adopt_tag", required = false) String adopt_tag,
+			@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+		// 페이징
+		String field = "";
 		String keyword = "";
-		if(startDate == null) {startDate="";}
-		if(endDate == null) {endDate="";}
-		if(adopt_tag == null) {adopt_tag="";}
+		if (startDate == null) {
+			startDate = "";
+		}
+		if (endDate == null) {
+			endDate = "";
+		}
+		if (adopt_tag == null) {
+			adopt_tag = "";
+		}
 
-		int currentPage = 1;	// 현재 페이지 변수
-		if(page != 1) { currentPage = page; }
-		
-    	totalRecord = adoptRegDAO.countTag(startDate, endDate,adopt_tag);
-    	System.out.println("===========================");
-    	System.out.println(adoptRegDAO.countTag(startDate, endDate,adopt_tag));
-    	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-		
+		int currentPage = 1; // 현재 페이지 변수
+		if (page != 1) {
+			currentPage = page;
+		}
+
+		totalRecord = adoptRegDAO.countTag(startDate, endDate, adopt_tag);
+		System.out.println("===========================");
+		System.out.println(adoptRegDAO.countTag(startDate, endDate, adopt_tag));
+		PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+
 		// 해시맵으로 조인 유사하게 구현
 		List<AnimalDTO> animalList = animalDAO.list();
 		Map<Integer, ArrayList<String>> maps = new HashMap();
@@ -210,62 +225,63 @@ public class AdminAnimalController {
 			aList.add(dto.getAnimal_status());
 			maps.put(dto.getAnimal_no(), aList);
 		}
-		
-		List<AdoptRegDTO> list = adoptRegDAO.listPaging(paging.getStartNo(), paging.getEndNo(), startDate, endDate,adopt_tag);
+
+		List<AdoptRegDTO> list = adoptRegDAO.listPaging(paging.getStartNo(), paging.getEndNo(), startDate, endDate,
+				adopt_tag);
 //		
-	
-	    model.addAttribute("total", totalRecord);
-        model.addAttribute("paging", paging);		
-		model.addAttribute("field", field); 
+
+		model.addAttribute("total", totalRecord);
+		model.addAttribute("paging", paging);
+		model.addAttribute("field", field);
 		model.addAttribute("keyword", keyword);
-		model.addAttribute("tag",adopt_tag);
-		model.addAttribute("startDate",startDate);
-		model.addAttribute("endDate",endDate);
-	
+		model.addAttribute("tag", adopt_tag);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
+
 		model.addAttribute("adoptRegList", list);
 		model.addAttribute("animalMap", maps);
 
 		return "admin/adoptreg_list";
 	}
-	/*관리자 리스트에서 수정하기*/
-    @RequestMapping(value = "/adoptreg_update", method = RequestMethod.GET)
-    public String adoptreg_update(@RequestParam("adopt_reg_regno")int adopt_reg_regno, Model model) {
 
-    	AdoptRegDTO adoptRegDTO = adoptRegDAO.content(adopt_reg_regno);
-    	AnimalDTO animalDTO = animalDAO.content(adoptRegDTO.getAdopt_reg_animalno());
-    	
-    	model.addAttribute("content",adoptRegDTO);
-    	model.addAttribute("foreign",animalDTO);
-        return "admin/adoptreg_update";
-    }
-    
-    @RequestMapping(value = "/adoptreg_update", method = RequestMethod.POST)
-    public String adoptreg_update(AdoptRegDTO adoptRegDTO) {
-    	
-    	if(adoptRegDTO.getAdopt_reg_duedate() != null) {//입양 예정일 등록
-    		String reg_duedate = adoptRegDTO.getAdopt_reg_duedate().replace("T", " ");
-    		adoptRegDTO.setAdopt_reg_duedate(reg_duedate);
-    		adoptRegDAO.update(adoptRegDTO);
-    	}
-    	else if(adoptRegDTO.getAdopt_reg_adoptdate() != null) {//입양 완료일 등록
-    		String reg_adoptdate = adoptRegDTO.getAdopt_reg_adoptdate().replace("T", " ");
-    		adoptRegDTO.setAdopt_reg_adoptdate(reg_adoptdate);
-    		adoptRegDAO.update(adoptRegDTO);
-    		
-    		AnimalDTO animalDTO = new AnimalDTO();
-    		animalDTO.setAnimal_status("입양 완료");
-    		animalDTO.setAnimal_no(adoptRegDTO.getAdopt_reg_animalno());
-    		animalDAO.updateStatus(animalDTO);
-    	}
-    	return "redirect:/adoptreg_list";
-    }
-    
-    @RequestMapping("/adoptreg_admission")
-    public String adoptreg_admission(@RequestParam("animal_no") int animal_no) {
-    	AnimalDTO animalDTO = new AnimalDTO();
-    	animalDTO.setAnimal_no(animal_no);
-    	animalDTO.setAnimal_status("입양 가능");
-    	animalDAO.updateStatus(animalDTO);
-    	return "redirect:/adoptreg_list";
-    }
+	/* 관리자 리스트에서 수정하기 */
+	@RequestMapping(value = "/adoptreg_update", method = RequestMethod.GET)
+	public String adoptreg_update(@RequestParam("adopt_reg_regno") int adopt_reg_regno, Model model) {
+
+		AdoptRegDTO adoptRegDTO = adoptRegDAO.content(adopt_reg_regno);
+		AnimalDTO animalDTO = animalDAO.content(adoptRegDTO.getAdopt_reg_animalno());
+
+		model.addAttribute("content", adoptRegDTO);
+		model.addAttribute("foreign", animalDTO);
+		return "admin/adoptreg_update";
+	}
+
+	@RequestMapping(value = "/adoptreg_update", method = RequestMethod.POST)
+	public String adoptreg_update(AdoptRegDTO adoptRegDTO) {
+
+		if (adoptRegDTO.getAdopt_reg_duedate() != null) {// 입양 예정일 등록
+			String reg_duedate = adoptRegDTO.getAdopt_reg_duedate().replace("T", " ");
+			adoptRegDTO.setAdopt_reg_duedate(reg_duedate);
+			adoptRegDAO.update(adoptRegDTO);
+		} else if (adoptRegDTO.getAdopt_reg_adoptdate() != null) {// 입양 완료일 등록
+			String reg_adoptdate = adoptRegDTO.getAdopt_reg_adoptdate().replace("T", " ");
+			adoptRegDTO.setAdopt_reg_adoptdate(reg_adoptdate);
+			adoptRegDAO.update(adoptRegDTO);
+
+			AnimalDTO animalDTO = new AnimalDTO();
+			animalDTO.setAnimal_status("입양 완료");
+			animalDTO.setAnimal_no(adoptRegDTO.getAdopt_reg_animalno());
+			animalDAO.updateStatus(animalDTO);
+		}
+		return "redirect:/adoptreg_list";
+	}
+
+	@RequestMapping("/adoptreg_admission")
+	public String adoptreg_admission(@RequestParam("animal_no") int animal_no) {
+		AnimalDTO animalDTO = new AnimalDTO();
+		animalDTO.setAnimal_no(animal_no);
+		animalDTO.setAnimal_status("입양 가능");
+		animalDAO.updateStatus(animalDTO);
+		return "redirect:/adoptreg_list";
+	}
 }
