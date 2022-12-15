@@ -51,7 +51,7 @@
 		</if>
 		<if
 			test="animalDTO.animal_age != 0 and animalDTO.animal_age lt 6">
-			and animal_age between ${animalDTO.animal_age } -1 and ${animalDTO.animal_age }
+			and animal_age between (${animalDTO.animal_age } -1) and ${animalDTO.animal_age }
 		</if>
 		<if
 			test="animalDTO.animal_age == 6">
@@ -121,7 +121,7 @@
 		</if>
 		<if
 			test="animalDTO.animal_age != 0 and animalDTO.animal_age lt 6">
-			and animal_age between ${animalDTO.animal_age } -1 and ${animalDTO.animal_age }
+			and animal_age between (${animalDTO.animal_age } -1) and ${animalDTO.animal_age }
 		</if>
 		<if
 			test="animalDTO.animal_age == 6">

@@ -8,15 +8,16 @@
 <c:set var="paging" value="${ paging }" />
 <c:set var="animalList" value="${animalList }" />
 <c:set var="animalDTO" value="${ animalDTO }"/>
-<c:set var="pagingTag" value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }"/>
+<c:set var="keyword" value="${keyword }"/>
+<c:set var="pagingTag" value="animal_size=${animalDTO.animal_size }&animal_species=${ animalDTO.animal_species}&animal_age=${animalDTO.animal_age }&animal_gender=${animalDTO.animal_gender }&animal_weight=${animalDTO.animal_weight }&animal_status=${animalDTO.animal_status }&animal_place=${animalDTO.animal_place }&keyword=${keyword }"/>
 <%--검색--%>
 <div class="d-flex justify-content-center" style="font-size: 14px">
-	<form action="<%=request.getContextPath() %>/user_dog_list" class="validation-form" method="post">
+	<form action="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list" class="validation-form" method="post">
 		<div class="row row-cols-auto form-select-sm">
 			<div class="col">
 				<div class="input-group">
 					<select name="animal_place" class="form-select">
-						<option value="all"></option>
+						<option value=""></option>
 						<option value="서울">서울특별시</option>
 						<option value="울산">울산광역시</option>
 						<option value="인천">인천광역시</option>
