@@ -202,8 +202,7 @@ public class UserQnaController {
         } else {
             int check = this.qnaDAO.insertQna(qnaDto);
             if (check > 0) {
-                out.println("<script>alert('성공적으로 글이 등록되었습니다.'); location.href='" + request.getContextPath()
-                        + "/user_qna_list'; </script>");
+                out.println("<script>alert('성공적으로 글이 등록되었습니다.'); location.href='" + request.getContextPath() + "/user_qna_list'; </script>");
             } else {
                 out.println("<script>alert('글 등록을 실패했습니다.'); history.back(); </script>");
             }

@@ -115,6 +115,7 @@ public class UserReviewController {
         // animal_name
         Map<String, Object> animal_info = this.animalDAO.animalName(animal_no);
         model.addAttribute("animal_info", animal_info);
+        model.addAttribute("animal_no", animal_no);
 
         return "user/review/review_insert";
     }
@@ -127,6 +128,7 @@ public class UserReviewController {
             HttpServletRequest request) throws IOException {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
+        
         if (result.hasErrors()) { // 에러를 List로 저장
             List<ObjectError> errors = result.getAllErrors();
             for (ObjectError error : errors) {
@@ -148,9 +150,9 @@ public class UserReviewController {
         } else {
             int check = this.reviewDAO.insertReview(reviewDto);
             if (check > 0) {
-                out.println("<script>alert('글이 성공적으로 등록되었습니다.'); location.href='" + request.getContextPath() + "/user_review_list'; </script>");
+                out.println("<script>alert('후기가 성공적으로 등록되었습니다.'); location.href='" + request.getContextPath() + "/user_review_list'; </script>");
             } else {
-                out.println("<script>alert('글 등록을 실패했습니다.'); history.back(); </script>");
+                out.println("<script>alert('후기 등록을 실패했습니다.'); history.back(); </script>");
             }
         }
     }
