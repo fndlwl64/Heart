@@ -83,11 +83,8 @@
             </c:if>
         </div>
     </div>
-
     <div class="mypage_bottom">
-
     </div>
-
 </div>
 
 <jsp:include page="../../include/user_footer.jsp" />

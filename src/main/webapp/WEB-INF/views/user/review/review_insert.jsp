@@ -6,6 +6,7 @@
 <c:set var="animal_no" value="${ animal_no }" />
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_review.css" />
+<script src="${path}/resources/js/fileCount.js"></script>
 
 <%-- 글쓰기 --%>
 <div id="review-contents" class="review-contents">
@@ -52,7 +53,7 @@
                 	<th class="table-light">이미지</th>                	
                     <td colspan="5">
                         <div class="d-flex align-middle">
-                            <input type="file" class="form-control" name="review_img" accept="image/gif, image/jpeg, image/png" multiple>
+                            <input type="file" id="files" class="form-control" name="review_img" accept="image/gif, image/jpeg, image/png" multiple="multiple" onchange="fileOption(2, this.name);">
                         </div>
                     </td>
                 </tr>
@@ -60,7 +61,7 @@
                 	<th class="table-light">동영상</th>                	
                     <td colspan="5">
                         <div class="d-flex align-middle">
-                            <input type="file" class="form-control" name="review_video" accept="image/gif, image/jpeg, image/png" multiple>
+                            <input type="file" class="form-control" name="review_video" accept="video/mp4, video/mkv, video/x-m4v, video/*">
                         </div>
                     </td>
                 </tr>

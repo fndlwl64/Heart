@@ -73,17 +73,18 @@
 			<div class="img-fluid">
 				<img id="file_change1" src="resources/upload/${dto.animal_img1 } " />
 			</div>
-			<c:if test="${not emptydto.animal_img2}">
+			<c:if test="${not empty dto.animal_img2}">
 				<div class="img-fluid">
 					<img id="file_change1" src="resources/upload/${dto.animal_img2 } " />
 				</div>
 			</c:if>
-			<c:if test="${not emptydto.animal_img3}">
+			<c:if test="${not empty dto.animal_img3}">
 				<div class="img-fluid">
 					<img id="file_change1" src="resources/upload/${dto.animal_img3 } " />
 				</div>
 			</c:if>
 		</div>
 	</div>
+	<jsp:include page="../../include/deleteModal.jsp" />
 </body>
 </html>

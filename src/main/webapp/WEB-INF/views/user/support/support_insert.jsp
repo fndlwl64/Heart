@@ -82,9 +82,6 @@
 				<li class="support_li"><input type="button" onclick="requestPay()" value="후원하기"></li>
 			</ul>
 		</div>
-
-
 	</div>
-
 </body>
 </html>

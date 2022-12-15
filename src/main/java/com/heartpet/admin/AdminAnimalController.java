@@ -118,7 +118,10 @@ public class AdminAnimalController {
 	}
 
 	@RequestMapping(value = "/animal_update", method = RequestMethod.POST)
-	public String animal_update_ok(AnimalDTO animalDTO) {
+	public String animal_update_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO) {
+		
+		FileUploadImage upload = new FileUploadImage();
+		animalDTO = upload.uploadAnimalImg(request, files, "animal", animalDTO);
 		animalDAO.update(animalDTO);
 		return "redirect:/admin_main";
 	}
@@ -162,17 +165,12 @@ public class AdminAnimalController {
 
 	@RequestMapping("/animal_delete")
 	public String animal_delete(@RequestParam("no") int no) {
-//		AnimalDTO animalDTO = animalDAO.content(no);
-//
-//		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload");
-//
-//		File file = new File(rootPath + "/" + animalDTO.getAnimal_img1());
-//		file.delete();
-//		file = new File(rootPath + "/" + animalDTO.getAnimal_img2());
-//		file.delete();
-//		file = new File(rootPath + "/" + animalDTO.getAnimal_img3());
-//		file.delete();
-//		animalDAO.delete(no);
+		AnimalDTO animalDTO = animalDAO.content(no);
+		
+		FileUploadImage upload = new FileUploadImage();
+		upload.deleteAnimalImg(request, animalDTO);
+
+		animalDAO.delete(no);
 
 		return "redirect:/admin_main";
 	}
