@@ -2,6 +2,8 @@ package com.heartpet.project;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.ReviewDAO;
+import com.heartpet.model.AdoptRegDTO;
+import com.heartpet.model.FileUploadImage;
 import com.heartpet.model.PageDTO;
 import com.heartpet.model.ReviewDTO;
 
@@ -125,10 +129,15 @@ public class UserReviewController {
     // REVIEW_INSERT_OK
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/user_review_insert_ok", method = RequestMethod.POST)
-    public void user_review_insert_ok(@RequestParam("files") List<MultipartFile> files, @Valid ReviewDTO reviewDto, BindingResult result, HttpServletResponse response,
+    public void user_review_insert_ok(@RequestParam("review_img") List<MultipartFile> review_img, 
+    		@RequestParam("review_video") List<MultipartFile> review_video, 
+    		@Valid ReviewDTO reviewDto, BindingResult result, HttpServletResponse response,
             HttpServletRequest request) throws IOException {
+    	
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+		String strDate = dateFormat.format(Calendar.getInstance().getTime());
         
         if (result.hasErrors()) { // 에러를 List로 저장
             List<ObjectError> errors = result.getAllErrors();
@@ -142,6 +151,14 @@ public class UserReviewController {
                 }
             }
         } else {
+    		FileUploadImage upload = new FileUploadImage();
+
+//    		String[] images = upload.uploadAnimalImg(request, files, "animal");
+////    		animalDTO.setAnimal_img1(images[0]);
+////    		animalDTO.setAnimal_img2(images[1]);
+////    		animalDTO.setAnimal_img3(images[2]);
+////
+//    		animalDTO.setAnimal_status("입양 가능");        	
             int check = this.reviewDAO.insertReview(reviewDto);
             if (check > 0) {
                 out.println("<script>alert('후기글이 성공적으로 등록되었습니다.'); location.href='" + request.getContextPath() + "/user_review_list'; </script>");

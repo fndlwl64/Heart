@@ -61,7 +61,7 @@
                 	<th class="table-light">동영상</th>                	
                     <td colspan="5">
                         <div class="d-flex align-middle">
-                            <input type="file" class="form-control" name="review_video" accept="image/gif, image/jpeg, image/png" multiple>
+                            <input type="file" class="form-control" name="review_video" accept="video/mp4, video/mkv, video/x-m4v, video/*">
                         </div>
                     </td>
                 </tr>
