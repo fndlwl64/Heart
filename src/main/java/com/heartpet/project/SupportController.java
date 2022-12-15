@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.heartpet.action.MypageDAO;
 import com.heartpet.action.SupportDAO;
@@ -60,7 +61,7 @@ public class SupportController {
 	}
 	
 	//회원이 후원했을때 db에 등록
-	@RequestMapping("support_pay")
+	@RequestMapping("/support_pay")
 	public void support_pay(@RequestParam("paramAmount") int amount, HttpServletRequest request) {
 		HttpSession session = request.getSession();
     	String user_id = (String)session.getAttribute("session_id");
@@ -74,7 +75,7 @@ public class SupportController {
 		
 	}
 	//비회원이 후원했을때 db에 등록
-	@RequestMapping("support_pay2")
+	@RequestMapping("/support_pay2")
 	public void support_pay2(@RequestParam("paramEmail") String email, @RequestParam("paramAmount") int amount, HttpServletRequest request) {
 		HttpSession session = request.getSession();
     	String user_id = (String)session.getAttribute("session_id");
@@ -88,8 +89,9 @@ public class SupportController {
 		
 	}
 	
-	@RequestMapping("support_emailcheck")
-	public void support_emailcheck(HttpServletRequest request) {
+	@RequestMapping("/support_emailcheck")
+	public @ResponseBody void support_emailcheck(@RequestParam("paramEmail") String receiver, @RequestParam("paramCode_check") String code, HttpServletRequest request) {
+		
 		Properties props = System.getProperties();
         props.put("mail.smtp.user", "soopwe12@gmail.com"); // 서버 아이디만 쓰기
 		props.put("mail.smtp.host", "smtp.gmail.com"); // 구글 SMTP
@@ -103,7 +105,7 @@ public class SupportController {
 		props.put("mail.smtp.ssl.protocols", "TLSv1.2");
 		
 		Authenticator auth = new MyAuthentication();
-		
+
 		//session 생성 및  MimeMessage생성
         Session session = Session.getDefaultInstance(props, auth);
         MimeMessage msg = new MimeMessage(session);
@@ -115,13 +117,13 @@ public class SupportController {
             // 이메일 발신자
             msg.setFrom(from);           
             // 이메일 수신자
-            String email = request.getParameter("receiver"); //사용자가 입력한 이메일 받아오기
-            InternetAddress to = new InternetAddress(email);         
+			/* String email = request.getParameter("receiver"); */ //사용자가 입력한 이메일 받아오기
+            InternetAddress to = new InternetAddress(receiver);         
             msg.setRecipient(Message.RecipientType.TO, to);
             // 이메일 제목
             msg.setSubject("HeartPet 후원 인증번호", "UTF-8");
             // 이메일 내용 
-            String code = request.getParameter("code_check"); //인증번호 값 받기
+			/* String code = request.getParameter("code_check"); */ //인증번호 값 받기
             request.setAttribute("code", code);
             msg.setText(code, "UTF-8");
             // 이메일 헤더 
@@ -134,4 +136,5 @@ public class SupportController {
 	            msg_e.printStackTrace();
 	        }
 	}
+	
 }

@@ -26,7 +26,7 @@
 		  let phone2 = document.getElementById('sup_phone').value;
 		  let email2 = document.getElementById('sup_email').value;
 		  let amount2 = document.getElementById('support').value;
-	      IMP.request_pay({ 
+		  IMP.request_pay({ 
 	          pg: "html5_inicis",
 	          pay_method: "card",
 	          merchant_uid: ${No}+1,//주문번호
@@ -65,12 +65,55 @@
 	      });
 	    }
 	
+	function ajax() {
+		let email2 = document.getElementById('sup_email').value;
+		let code_check = document.getElementById('code_check').value;
+		$.ajax({
+      	  type: "Post",
+      	  contentType:  "application/x-www-form-urlencoded;charset=UTF-8",
+      	  url: "/project/support_emailcheck",
+      	  data: {
+                  paramEmail : email2,
+                  paramCode_check : code_check,
+            },
+            dataType: "text",
+            success: function(data) {
+          	  alert("이메일전송완료");
+            },
+            error: function(e) {
+                console.log("후원에러", e);
+            }
+        });
+	}
+	
 	function checkNumber(event) {
 		  if(event.key >= 0 && event.key <= 9) {
 		    return true;
 		  }		  
 		  return false;
 		}
+	
+	function checkCode(){
+		  let v1 = document.getElementById('code_check').value;
+		  let v2 = document.getElementById('code').value;
+		  if(v1!=v2){
+			   document.getElementById('checkCode').style.color = "red";
+			   document.getElementById('checkCode').innerHTML = "잘못된인증번호";
+             makeNull();
+		  }else{
+			   document.getElementById('checkCode').style.color = "blue";
+			   document.getElementById('checkCode').innerHTML = "인증되었습니다."; 
+			   makeReal();
+		  }
+		 }
+	function makeReal(){
+		var hiddenbutton = document.getElementById("hiddenbutton");
+		hiddenbutton.type="submit";
+	}
+    function makeNull(){
+		var hiddenbutton = document.getElementById("hiddenbutton");
+		hiddenbutton.type="hidden";
+	}
 </script>
 </head>
 <!-- 랜덤으로 임의의 숫자 ６자리르 생성 （이메일 보내는 내용에 들어갈 숫자） -->
@@ -95,24 +138,32 @@
 				<li class="support_li"><input id="sup_phone" type="text" placeholder="010-0000-0000"></li>
 			</ul>
 		</div>
-		<form method="post" action="${path }/support_emailcheck">
+		<%-- <form method="post" action="<%= request.getContextPath() %>/support_emailcheck"> --%>
 			<div class="btn-group">
 				<ul>
 					<li class="support_li"><input id="sup_email" name="receiver" type="text" placeholder="이메일입력"></li>
-					<li class="support_li"><input type="submit" value="이메일인증"></li>				
+					<li class="support_li"><input type="button" value="이메일인증" onclick="ajax()"></li>				
 				</ul>
 			</div>
 			<div>
 				<ul>
-					<li class="support_li"><input id="sup_emailcheck" type="text" placeholder="인증번호"></li>
+					<li class="support_li">
+					<!-- <input id="sup_emailcheck" type="text" placeholder="인증번호"> -->
+					<input type="text" id="code" name="code" onkeyup="checkCode()" placeholder="인증번호를 입력하세요."/><br>
+		    		<div id="checkCode"></div>
+		    		</li>
 				</ul>
 			</div>
 			<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>" />
-		</form>
+		<!-- </form> -->
 		<div>
 			<ul>
 				<li class="support_li"><input id="support" type="text" placeholder="후원금액입력" onkeypress='return checkNumber(event)'></li>
-				<li class="support_li"><input type="button" onclick="requestPay()" value="후원하기"></li>
+				<li class="support_li">
+					<!-- <input type="button" onclick="requestPay()" value="후원하기"> -->
+					<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=request.getAttribute("code")%>" />
+		    		<input id="hiddenbutton" type="hidden" value='후원하기' onclick="requestPay()"/>
+				</li>
 			</ul>
 		</div>
 	</div>
