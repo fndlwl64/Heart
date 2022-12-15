@@ -101,19 +101,25 @@
 		</selectKey>
 		INSERT INTO heartpet_review 
 			VALUES (#{ review_no }, 
-			#{ review_category }, 
 			#{ review_id }, 
+			#{ review_animal_id }, 
+			#{ review_animal_tag }, 
 			default, 
 			#{ review_title },
 			#{ review_content }, 
-			#{ review_secret }, 
-			#{ review_pwd }, 
 			sysdate, 
-			'', 
-			'', 
-			'')
+			'',
+			'',
+			'',
+			''
+			)
 	</insert> 
-	
+	<!-- 	#{ review_img1 },
+			#{ review_img2 },
+			#{ review_img3 },
+			#{ review_video } -->
+			
+			
 	<!-- animal_id -->
 	<select id="animal_id" parameterType="String" resultType="list">
 		SELECT review_animal_id 
