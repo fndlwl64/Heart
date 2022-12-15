@@ -103,24 +103,24 @@
 					<th class="table-secondary">중성화</th>
 					<th class="table-secondary">예방접종</th>
 					<th class="table-secondary">입양 상태</th>
-					<th class="table-secondary">수정/삭제</th>
+					<!-- <th class="table-secondary">수정/삭제</th> -->
 				</tr>
 				<c:forEach var="dto" items="${catList }">
 					<tr>
-						<td><a href="${path}/cat_view">${dto.animal_name }</a></td>
+						<td><a href="${path}/animal_list">${dto.animal_name }</a></td>
 						<td>${dto.animal_species }</td>
 						<td>${dto.animal_gender }</td>
 						<td>${dto.animal_size }</td>
 						<td>${dto.animal_neutered }</td>
 						<td>${dto.animal_vaccination }</td>
 						<td>${dto.animal_status }</td>
-						<td>
+						<%-- <td>
 							<button class="btn btn-primary"
 								onclick="location.href='${path}/animal_update?no=${dto.animal_no }'">수정</button>
 							<button class="btn btn-secondary" data-bs-toggle="modal"
 								data-bs-target="#exampleModal"
 								onclick="location.href='${path}/animal_delete?no=${dto.animal_no }'">삭제</button>
-						</td>
+						</td> --%>
 					</tr>
 				</c:forEach>
 			</table>

@@ -33,20 +33,20 @@ public class FileUploadImage {
 		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload");
 //		String otherPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath()
 //				+ "/GitHub/Heart/src/main/webapp/resources/upload";
-
+		System.out.println(request.getSession().getServletContext().getRealPath("/resources/upload"));
 		for (MultipartFile file : files) {
 			String fileRealName = file.getOriginalFilename();
-//			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
 //			// 랜덤으로 파일명 생성 
-//			UUID uuid = UUID.randomUUID();
+			UUID uuid = UUID.randomUUID();
 
 			
 
 			try {
-				File toFile = new File(rootPath + "/" + fileRealName);
-				file.transferTo(toFile);
-//				File otherFile = new File(otherPath + "/" + uuid.toString() + fileExtension);
-//				file.transferTo(otherFile);
+//				File toFile = new File(rootPath + "/" + fileRealName);
+//				file.transferTo(toFile);
+				File otherFile = new File(rootPath + "/" + uuid.toString() + fileExtension);
+				file.transferTo(otherFile);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 				return false;
@@ -68,9 +68,9 @@ public class FileUploadImage {
 	
 		for (MultipartFile file : files) {
 			String fileRealName = file.getOriginalFilename();
-			//String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
 			// 랜덤으로 파일명 생성 
-			//UUID uuid = UUID.randomUUID();
+			UUID uuid = UUID.randomUUID();
 
 			imgs[i] = fileRealName;
 			
@@ -78,8 +78,8 @@ public class FileUploadImage {
 			try {
 				File toFile = new File(rootPath + "/" + imgs[i]);
 				file.transferTo(toFile);
-//				File otherFile = new File(otherPath + "/" + imgs[i]);
-//				file.transferTo(otherFile);
+				File otherFile = new File(rootPath + "/" + uuid.toString() + fileExtension);
+				file.transferTo(otherFile);
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 
@@ -90,4 +90,5 @@ public class FileUploadImage {
 		}
 		return imgs;
 	}
+	
 }

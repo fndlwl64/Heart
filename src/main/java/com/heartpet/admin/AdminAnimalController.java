@@ -57,7 +57,9 @@ public class AdminAnimalController {
 	@RequestMapping("/dog_list")
 	public String admin_dog_list( @RequestParam(value = "page", defaultValue = "1") int page,Model model
     		, AnimalDTO animalDTO) {
+		//강아지, 삭제 포함
 		animalDTO.setAnimal_tag("dog");
+		animalDTO.setAnimal_state(0);
 		
 		//페이징
 		String field = ""; 
@@ -80,7 +82,9 @@ public class AdminAnimalController {
 	@RequestMapping("/cat_list")
 	public String cat_list( @RequestParam(value = "page", defaultValue = "1") int page,Model model
     		, AnimalDTO animalDTO) {
+		//고양이, 삭제 포함
 		animalDTO.setAnimal_tag("cat");
+		animalDTO.setAnimal_state(0);
 		
 		//페이징
 		String field = ""; 
