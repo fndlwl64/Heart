@@ -158,8 +158,8 @@
 }
 
 .div1 .div2 .image-upload .logo {
-	width: 300px;
-	height: 100px;
+	width: auto;
+	height: 280px;
 }
 
 .div1 .div2 .image-upload .logo:hover {
