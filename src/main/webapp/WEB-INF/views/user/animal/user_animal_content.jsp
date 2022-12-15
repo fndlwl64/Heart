@@ -71,8 +71,8 @@
 </div>
 <script type="text/javascript">
 	function submitOption(){
-		if ($('#user_grade').val() > 3){
-            alert("회원의 등급이 낮아 입소 자격이 없습니다.");
+		if ($('#user_grade').val() < 3){
+            alert("회원의 등급이 낮아 입양 자격이 없습니다.");
             return false;
         }
 		if($('#animal_status').val() == '입소 신청'){
