@@ -157,7 +157,7 @@ public class AnimalController {
 		// 동물 입소 신청
 		// 이미지 업로드 및 animal 데이터 추가
 		FileUploadImage upload = new FileUploadImage();
-		String[] images = upload.uploadAnimalImg(request, files);
+		String[] images = upload.uploadAnimalImg(request, files,"animal");
 		animalDTO.setAnimal_img1(images[0]);
 		animalDTO.setAnimal_img2(images[1]);
 		animalDTO.setAnimal_img3(images[2]);
@@ -173,16 +173,13 @@ public class AnimalController {
 	public String test() {
 		Calendar cal = Calendar.getInstance();
 	    String dateString;
-
 	    dateString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+	    String folderName = "animal";
 	    
-	    System.out.println("====================");
-	    System.out.println(dateString);
-	    String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/"+dateString);
+	    String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/"+dateString+"/"+folderName);
 	    File file = new File(rootPath);
 	    System.out.println(rootPath);
-	    System.out.println(file.mkdir());
-	    
+	    System.out.println(file.mkdirs());
 	    
 		return "redirect:/";
 	}
