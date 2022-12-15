@@ -107,7 +107,12 @@
 				</tr>
 				<c:forEach var="dto" items="${catList }">
 					<tr>
-						<td><a href="${path}/animal_content?no=${dto.animal_no}">${dto.animal_name }</a></td>
+						<c:if test="${dto.animal_state eq 1 }">
+							<td><a href="${path}/animal_content?no=${dto.animal_no}">${dto.animal_name }</a></td>
+						</c:if>
+						<c:if test="${dto.animal_state eq 0 }">
+							<td><a class="text-danger" data-bs-toggle="modal" data-bs-target="#lockModal">${dto.animal_name }</a></td>
+						</c:if>
 						<td>${dto.animal_species }</td>
 						<td>${dto.animal_gender }</td>
 						<td>${dto.animal_size }</td>
@@ -197,28 +202,24 @@
 				</li>
 			</ul>
 		</nav>
-		<%-- 삭제 모달 --%>
-		<%-- <div class="modal fade" id="exampleModal" tabindex="-1"
+		<!-- Modal -->
+		<div class="modal fade" id="lockModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div id="myInput" class="modal-dialog">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="exampleModalLabel">데이터 삭제</h1>
+						<h1 class="modal-title fs-5" id="lockModalLabel">Caution</h1>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
-
-					<div class="modal-body">해당 데이터를 삭제하시겠습니까?</div>
-
+					<div class="modal-body">이미 삭제된 데이터입니다.</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-danger"
-							onclick="location.href='${path}/dog_delete?no=${dto.animal_no }'">삭제</button>
-					</div>
+					</div> 
 				</div>
 			</div>
-		</div> --%>
+		</div>
 
 	</div>
 

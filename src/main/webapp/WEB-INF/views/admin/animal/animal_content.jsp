@@ -3,6 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../../include/admin_header.jsp" />
 <c:set var="dto" value="${content }" />
+<c:set var="path" value="<%=request.getContextPath() %>"/>
+<script src="${path}/resources/js/admin_list_view.js"></script>
+<c:set var="deleteAddr" value="${ path }/animal_delete?no=${dto.animal_no }" />
 <script src="resources/js/admin.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <body>
@@ -63,8 +66,9 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<button type="button" onclick="location.href='<%=request.getContextPath() %>/animal_update?no=${dto.animal_no }'">수정</button>
-					<button type="button" onclick="location.href='<%=request.getContextPath() %>/animal_delete?no=${dto.animal_no }'">삭제</button>
+					<button type="button" class="btn btn-primary" onclick="location.href='<%=request.getContextPath() %>/animal_update?no=${dto.animal_no }'">수정</button>
+					<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }"><i class="bi bi-trash3"></i> 삭제</button>
+					<%-- <button type="button" onclick="location.href='<%=request.getContextPath() %>/animal_delete?no=${dto.animal_no }'">삭제</button> --%>
 				</td>
 			</tr>
 		</table>

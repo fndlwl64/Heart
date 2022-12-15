@@ -38,9 +38,10 @@
 <c:set var="paging" value="${ paging }" />
 <c:set var="field" value="${ field }" />
 <c:set var="keyword" value="${ keyword }" />
-<c:set var="dogList" value="${ dogList }"/>
-<c:set var="animalDTO" value="${ animalDTO }"/>
-<c:set var="pagingTag" value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }"/>
+<c:set var="dogList" value="${ dogList }" />
+<c:set var="animalDTO" value="${ animalDTO }" />
+<c:set var="pagingTag"
+	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }" />
 </head>
 <body>
 
@@ -65,7 +66,7 @@
 					<option value="골든리트리버">골든리트리버</option>
 					<option value="진돗개">진돗개</option>
 					<option value="기타">기타</option>
-				</select> 
+				</select>
 				<!-- <label class="Dneutered"><input type="checkbox"
 					name="animal_neutered"> 중성화</label> <label class="size"><input
 					type="radio" name="animal_size" ondblclick="this.checked=false"
@@ -74,12 +75,12 @@
 					value="중형"> 중</label> <label class="size"><input
 					type="radio" name="animal_size" ondblclick="this.checked=false"
 					value="소형"> 소</label> -->
-				<input type="hidden" id="YN" name="animal_neutered"/>
-				<label><input type="checkbox" id="checkYN">중성화</label> 
-				<label><input type="radio" name="animal_size" value="대형"/>대</label>
-				<label><input type="radio" name="animal_size" value="중형"/>증</label>
-				<label><input type="radio" name="animal_size" value="소형"/>소</label>
-				<input class="btn searchbtn" type="submit" value="검색">
+				<input type="hidden" id="YN" name="animal_neutered" /> <label><input
+					type="checkbox" id="checkYN">중성화</label> <label><input
+					type="radio" name="animal_size" value="대형" />대</label> <label><input
+					type="radio" name="animal_size" value="중형" />증</label> <label><input
+					type="radio" name="animal_size" value="소형" />소</label> <input
+					class="btn searchbtn" type="submit" value="검색">
 
 			</div>
 
@@ -107,7 +108,12 @@
 				</tr>
 				<c:forEach var="dto" items="${dogList }">
 					<tr>
-						<td><a href="${path}/animal_content?no=${dto.animal_no}">${dto.animal_name }</a></td>
+						<c:if test="${dto.animal_state eq 1 }">
+							<td><a href="${path}/animal_content?no=${dto.animal_no}">${dto.animal_name }</a></td>
+						</c:if>
+						<c:if test="${dto.animal_state eq 0 }">
+							<td><a class="text-danger" data-bs-toggle="modal" data-bs-target="#lockModal">${dto.animal_name }</a></td>
+						</c:if>
 						<td>${dto.animal_species }</td>
 						<td>${dto.animal_gender }</td>
 						<td>${dto.animal_size }</td>
@@ -139,8 +145,7 @@
 				<c:if test="${ paging.page gt 1 }">
 					<li class="page-item">
 				</c:if>
-				<a class="page-link"
-					href="${link_address}?page=1&${pagingTag}"
+				<a class="page-link" href="${link_address}?page=1&${pagingTag}"
 					aria-label="First"> <span aria-hidden="true">&laquo;</span>
 				</a>
 				</li>
@@ -198,42 +203,37 @@
 				</li>
 			</ul>
 		</nav>
-		<%-- 삭제 모달 --%>
-		<%-- <div class="modal fade" id="exampleModal" tabindex="-1"
+		<%-- 잠금 모달 --%>
+		<!-- Modal -->
+		<div class="modal fade" id="lockModal" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div id="myInput" class="modal-dialog">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="exampleModalLabel">데이터 삭제</h1>
+						<h1 class="modal-title fs-5" id="lockModalLabel">Caution</h1>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
-
-					<div class="modal-body">해당 데이터를 삭제하시겠습니까?</div>
-
+					<div class="modal-body">이미 삭제된 데이터입니다.</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-danger"
-							onclick="location.href='${path}/dog_delete?no=${dto.animal_no }'">삭제</button>
-					</div>
+					</div> 
 				</div>
 			</div>
-		</div> --%>
+		</div>
 
 	</div>
 
 </body>
 <script type="text/javascript">
-	$("#checkYN").change(
-		function(){
-			if($("#checkYN").is(":checked")){
-				$("#YN").val('Y');
-				console.log($("#YN").val());
-			}else{
+	$("#checkYN").change(function() {
+		if ($("#checkYN").is(":checked")) {
+			$("#YN").val('Y');
+			console.log($("#YN").val());
+		} else {
 
-			}
 		}
-	)
+	})
 </script>
 </html>
