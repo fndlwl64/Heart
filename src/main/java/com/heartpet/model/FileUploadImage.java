@@ -128,14 +128,9 @@ public class FileUploadImage {
 			if(i == 0 ) {deleteImg = animalDTO.getAnimal_img1();};
 			if(i == 1 ) {deleteImg = animalDTO.getAnimal_img2();};
 			if(i == 2 ) {deleteImg = animalDTO.getAnimal_img3();};
-			System.out.println(animalDTO.getAnimal_img1());
-			System.out.println(animalDTO.getAnimal_img2());
-			System.out.println(animalDTO.getAnimal_img3());
-			System.out.println("============================");
-			System.out.println(i);
+			
 			if(!deleteImg.equals("")) {
 				String deletePath = request.getSession().getServletContext().getRealPath("/resources/upload")+"/"+deleteImg;
-				System.out.println(deletePath);
 				File deleteFile = new File(deletePath);
 				System.out.println(deleteFile.delete());;
 			}
@@ -149,11 +144,6 @@ public class FileUploadImage {
 			if(i == 0 ) {animalDTO.setAnimal_img1(dateString + "/" + folderName + "/" + randomName);};
 			if(i == 1 ) {animalDTO.setAnimal_img2(dateString + "/" + folderName + "/" + randomName);};
 			if(i == 2 ) {animalDTO.setAnimal_img3(dateString + "/" + folderName + "/" + randomName);};
-			
-			System.out.println(animalDTO.getAnimal_img1());
-			System.out.println(animalDTO.getAnimal_img2());
-			System.out.println(animalDTO.getAnimal_img3());
-			System.out.println("========================");
 			//이미지 파일 생성
 			try {
 //				File toFile = new File(rootPath + "/" + imgs[i]);
