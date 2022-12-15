@@ -179,9 +179,9 @@ public class UserReviewController {
         // 유효성 검사
         int check = this.reviewDAO.updateReview(reviewDto);
         if (check > 0) {
-            out.println("<script>alert('글이 성공적으로 수정되었습니다.'); location.href='" + request.getContextPath() + "/user_review_list'; </script>");
+            out.println("<script>alert('후기글이 성공적으로 수정되었습니다.'); location.href='" + request.getContextPath() + "/user_review_list'; </script>");
         } else {
-            out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>");
+            out.println("<script>alert('후기글 수정을 실패했습니다.'); history.back(); </script>");
         }
     }
 
@@ -196,9 +196,9 @@ public class UserReviewController {
 
         int check = this.reviewDAO.deleteReview(review_no);
         if (check > 0) {
-            out.println("<script>alert('글이 성공적으로 삭제되었습니다.'); location.href='" + request.getContextPath() + "/user_review_list'; </script>");
+            out.println("<script>alert('후기글이 성공적으로 삭제되었습니다.'); location.href='" + request.getContextPath() + "/user_review_list'; </script>");
         } else {
-            out.println("<script>alert('글 삭제 실패!'); history.back(); </script>");
+            out.println("<script>alert('후기글 삭제에 실패했습니다.'); history.back(); </script>");
         }
     }
 

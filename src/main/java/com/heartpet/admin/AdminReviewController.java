@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -110,13 +111,29 @@ public class AdminReviewController {
             HttpServletRequest request) throws IOException {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
-
-        // 유효성 검사
+      
         int check = this.reviewDAO.updateReview(reviewDto);
         if (check > 0) {
-            out.println("<script>alert('글이 성공적으로 수정되었습니다.'); location.href='" + request.getContextPath() + "/admin_review_list'; </script>");
+            out.println("<script>alert('글이 성공적으로 수정됐습니다.'); location.href='" + request.getContextPath() + "/admin_review_list'; </script>");
         } else {
             out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>");
+        }
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    // REVIEW_DELETE
+    ////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping(value = "/admin_review_delete", method = RequestMethod.POST)
+    public void admin_review_delete(@RequestParam("review_no") int review_no, HttpServletResponse response,
+            HttpServletRequest request) throws IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+      
+        int check = this.reviewDAO.deleteReview(review_no);
+        if (check > 0) {
+            out.println("<script>alert('글이 성공적으로 삭제됐습니다.'); location.href='" + request.getContextPath() + "/admin_review_list'; </script>");
+        } else {
+            out.println("<script>alert('글 삭제를 실패했습니다.'); history.back(); </script>");
         }
     }
 

@@ -50,9 +50,9 @@
             <td colspan="3"><img src="${path}/resources/image/search.png"></td>
             <td colspan="3"><img src="${path}/resources/image/search.png"></td>
         </tr>
-    </table>
-
+    </table>    
     <br>
+    
     <%-- button  --%>
     <div class="buttons">
 	    <button class="btn btn-dark mx-1" onclick="location.href='${path}/admin_review_list'"><i class="bi bi-card-list"></i> 목록으로</button>
