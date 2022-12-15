@@ -5,8 +5,9 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="list" value="${ reviewContent }" />
 <jsp:include page="../../include/user_header.jsp" />
-<link rel="stylesheet" href="${path}/resources/css/user_review.css" />
+<link rel="stylesheet" href="${ path }/resources/css/user_review.css" />
 <script src="${path}/resources/js/admin_list_view.js"></script>
+<c:set var="deleteAddr" value="${ path }/user_review_delete?review_no=${ list.review_no }" />
 
 <div id="review-contents" class="review-contents">
     <div class="review-section">
@@ -66,7 +67,7 @@
             <div class="content-buttons">
                 <c:if test="${ list.review_id eq session_id }">
                 <button type="button" class="btn btn-success" onclick="location.href='${path}/user_review_update?review_no=${ list.review_no }&animal_no=${ list.review_animal_id }'"><i class="bi bi-eraser"></i> 수정</button>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ path }/user_review_delete?review_no=${ list.review_no }"><i class="bi bi-trash3"></i> 삭제</button>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }"><i class="bi bi-trash3"></i> 삭제</button>
                 </c:if>
                 <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_review_list'"><i class="bi bi-card-list"></i> 목록</button>
             </div>
@@ -74,23 +75,7 @@
     </div>
     
     <%-- delete function --%>
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div id="deleteInput" class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="deleteModalLabel">데이터 삭제</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    해당 데이터를 삭제하시겠습니까?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" id="deleteFunction">삭제</button>
-                </div>
-            </div>
-        </div>
-    </div>
+	<jsp:include page="../../include/deleteModal.jsp" />
         
 
     <div class="space-add"></div>

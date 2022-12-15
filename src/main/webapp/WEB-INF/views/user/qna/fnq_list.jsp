@@ -32,7 +32,7 @@
             <div class="col-1 qna_order d-flex">
                 <select class="form-select form-select-sm w-75" name="order" onchange="this.form.submit()">
                     <option selected="selected" value="no_desc" <c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호순</option>
-                    <option value="question_desc" <c:if test="${ order eq 'question_desc' }">selected="selected"</c:if>>가나다순</option>/c:if>>번호순</option>
+                    <option value="question_desc" <c:if test="${ order eq 'question_desc' }">selected="selected"</c:if>>가나다순</option>
                 </select>
             </div>
             <div class="col-3 space"></div>

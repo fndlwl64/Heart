@@ -91,8 +91,9 @@
                     <td>${ list.review_hit }</td>
                     <td>${ list.review_regdate.substring(0,10) }</td>
                     <td>
+                    	<c:set var="deleteAddr" value="${ path }/admin_review_delete?review_no=${ list.review_no }" />
                         <button class="btn btn-outline-success btn-sm" onclick="location.href='${path}/admin_review_update?review_no=${ list.review_no }'">수정</button>
-                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${ path }/admin_review_delete?review_no=${ list.review_no }">삭제</button>
+                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }">삭제</button>
                     </td>
                 </tr>
                 </c:forEach>
@@ -102,23 +103,7 @@
         <%-- 삭제 모달 // admin_list_view.js 삽입되어 있음
             modal-dialog-centered 삽입됨
          --%>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div id="myInput" class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">데이터 삭제</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        해당 데이터를 삭제하시겠습니까?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" id="deleteFunction">삭제</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<jsp:include page="../../include/deleteModal.jsp" />
         
         <%-- 페이징처리 --%>
         <jsp:include page="../../include/pagination.jsp" />
