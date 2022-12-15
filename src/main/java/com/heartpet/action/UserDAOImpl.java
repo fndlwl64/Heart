@@ -68,8 +68,8 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public int deleteuser(String id) {
-		return this.sqlSession.delete("delete_user", id);
+	public int deleteuser(int no) {
+		return this.sqlSession.update("delete_user", no);
 	}
 
 	@Override
@@ -103,6 +103,26 @@ public class UserDAOImpl implements UserDAO {
 		map.put("field", field);
 		map.put("keyword", keyword);		
 		return this.sqlSession.selectOne("user_count", map);
+	}
+
+	@Override
+	public String find_pwd(Map<String, String> map) {	
+		return this.sqlSession.selectOne("find_pwd", map);
+	}
+
+	@Override
+	public String pwd_email(String id) {
+		return this.sqlSession.selectOne("pwd_email", id);
+	}
+
+	@Override
+	public int id_name(String name) {
+		return this.sqlSession.selectOne("id_name", name);
+	}
+
+	@Override
+	public String id_email(Map<String, String> map) {
+		return this.sqlSession.selectOne("id_email", map);
 	}
 
 	

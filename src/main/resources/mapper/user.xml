@@ -80,9 +80,9 @@
 		UPDATE HEARTPET_USER SET USER_NO = (USER_NO - 1) WHERE USER_NO > #{no} 
 	</update>
 	
-	<delete id="delete_user" parameterType="String">
-		DELETE FROM HEARTPET_USER WHERE USER_ID = #{id}
-	</delete>
+	<update id="delete_user" parameterType="int">
+		UPDATE HEARTPET_USER SET USER_GRADE = 5 WHERE USER_NO = #{no}
+	</update>
 	
 	<update id="update_user" parameterType="UserDTO">
 		UPDATE HEARTPET_USER SET USER_GRADE = #{user_grade}, USER_EMAIL = #{user_email}, USER_PHONE = #{user_phone}, USER_ADDR = #{user_addr}, USER_TOTALPRICE = #{user_totalprice}, USER_ANIMALEXP = #{user_animalexp} WHERE USER_ID = #{user_id}
@@ -90,6 +90,22 @@
 	
 	<select id="find_id" parameterType="map" resultType="String">
 		SELECT USER_ID FROM HEARTPET_USER WHERE USER_NAME = #{name} AND USER_EMAIL = #{email}
+	</select>
+	
+	<select id="find_pwd" parameterType="map" resultType="String">
+		SELECT USER_PWD FROM HEARTPET_USER WHERE USER_ID = #{id} AND USER_EMAIL = #{email}
+	</select>
+	
+	<select id="pwd_email" parameterType="String" resultType="String">
+		SELECT USER_EMAIL FROM HEARTPET_USER WHERE USER_ID = #{id}
+	</select>
+	
+	<select id="id_name" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM HEARTPET_USER WHERE USER_NAME=#{name}
+	</select>
+	
+	<select id="id_email" parameterType="map" resultType="String">
+		SELECT USER_EMAIL FROM HEARTPET_USER WHERE USER_NAME = #{name} AND USER_EMAIL = #{email}
 	</select>
 	
 </mapper>

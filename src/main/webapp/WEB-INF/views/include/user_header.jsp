@@ -65,7 +65,10 @@
                            <c:if test="${ not empty session_id }">${ session_name }(${ session_id })</c:if> 
                            <c:if test="${ not empty session_admin_id }">${ session_admin_name }(${ session_admin_id })</c:if>                                 
                            <i class="bi bi-suit-heart-fill"></i></strong></a></li>
-                           <li><a href="${path}/user_mypage_wish_list">마이페이지</a></li>
+                           <li>
+                           		<c:if test="${!empty session_id }"><a href="${path}/user_mypage_wish_list">마이페이지</a></c:if>
+                           </li>
+                           
                            <li><a href="${path}/user_logout">로그아웃</a></li>
                         </ul>
                     </div>
@@ -151,16 +154,17 @@
                         </div>
                         <div class="modal-body">
                         	<%-- <form method="post" action="${path }/user_find_id"> --%>
-		                        <input class="login_text" id="user_name" placeholder="이름">
-		                        <span class="name_check"></span>
-		                        <input class="login_text" id="user_email" placeholder="이메일">
-		                        <button id="find_id" class="btn login_btn">아이디 찾기</button>
+		                        <input class="login_text" id="id_name" placeholder="이름">
+		                        <span id="name_check"></span>
+		                        <input class="login_text" id="id_email" placeholder="이메일">
+		                        <span id="email_check"></span>
+		                        <button id="find_id" class="btn login_btn" onclick="idfind()">아이디 찾기</button>
 	                        <%-- </form> --%>
                         </div>
                         <div class="modal-footer">
                         	<div id="id_found">
 				            	<label class="found_title"> 
-				            		<span id="found_id" class="span_id"></span>
+				            		<span id="found_id"></span>
 				            	</label>
 				            </div>
                         </div>
@@ -180,12 +184,13 @@
                         </div>
                         <form class="login_form" method="post" action="${path}/user_find_pwd">
                             <div class="modal-body">
-                                <input class="login_text" name="user_id" placeholder="아이디">
-                                <span class="name_check"></span>
-                                <input class="login_text" name="user_email" placeholder="이메일">
-                                <input type="submit" class="btn login_btn" value="비밀번호 찾기">
+                                <input id="pwd_id" class="login_text" name="user_id" placeholder="아이디">
+                                <span id="name_check"></span>
+                                <input id="pwd_email" class="login_text" name="user_email" placeholder="이메일">
+                                <span id="email_check"></span>
+                                <input type="submit" id="pwd_btn" class="btn login_btn" value="비밀번호 찾기">
                             </div>
-                        </form>
+                        </form> 
                     </div>
                 </div>
             </div>
