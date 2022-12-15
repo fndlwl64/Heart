@@ -160,5 +160,23 @@ public class FileUploadImage {
 		}
 		return animalDTO;
 	}
+	//animal 
+	public void deleteAnimalImg(HttpServletRequest request, AnimalDTO animalDTO) {
+		for(int i=0;i<3;i++) {
+			if(animalDTO.getAnimal_img1().equals("")) {//파일 없으면 스킵
+				continue;
+			}
+			String deleteImg = null;
+			if(i == 0 ) {deleteImg = animalDTO.getAnimal_img1();};
+			if(i == 1 ) {deleteImg = animalDTO.getAnimal_img2();};
+			if(i == 2 ) {deleteImg = animalDTO.getAnimal_img3();};
+			if(!deleteImg.equals("")) {
+				String deletePath = request.getSession().getServletContext().getRealPath("/resources/upload")+"/"+deleteImg;
+				File deleteFile = new File(deletePath);
+				System.out.println(deleteFile.delete());;
+			}
+		}
+		
+	}
 	
 }
