@@ -36,7 +36,7 @@
 		resultType="int">
 		select count(animal_no) from heartpet_animal
 		where animal_tag =
-		#{animalDTO.animal_tag}
+		#{animalDTO.animal_tag} and <![CDATA[ animal_state >= #{animalDTO.animal_state}]]>
 		<if
 			test="animalDTO.animal_size != null and !animalDTO.animal_size.equals('')">
 			and animal_size = #{animalDTO.animal_size }
@@ -106,7 +106,7 @@
 		(
 		select a.*, row_number() over(order by animal_no desc) as rnum
 		from heartpet_animal a
-		where animal_tag = #{animalDTO.animal_tag}
+		where animal_tag = #{animalDTO.animal_tag} and <![CDATA[ animal_state >= #{animalDTO.animal_state}]]>
 		<if
 			test="animalDTO.animal_size != null and !animalDTO.animal_size.equals('')">
 			and animal_size = #{animalDTO.animal_size }
@@ -175,7 +175,8 @@
 		#{animal_status},
 		#{animal_tag},
 		sysdate,
-		''
+		'',
+		1
 		)
 	</insert>
 	<update id="animal_update" parameterType="AnimalDTO">

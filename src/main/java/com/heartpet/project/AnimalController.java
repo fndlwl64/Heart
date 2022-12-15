@@ -57,8 +57,10 @@ public class AnimalController {
     @RequestMapping(value = "/user_dog_list")
 	public String user_dog_list( @RequestParam(value = "page", defaultValue = "1") int page, Model model
     		, AnimalDTO animalDTO, @RequestParam(value = "keyword" , required = false) String keyword) {
+    	//강아지 , 삭제되지 않은 데이터
     	animalDTO.setAnimal_tag("dog");
-
+    	animalDTO.setAnimal_state(1);
+    	System.out.println(animalDTO.getAnimal_status());
 		//페이징
 		String field = ""; 
 		
@@ -80,8 +82,10 @@ public class AnimalController {
 	@RequestMapping(value = "/user_cat_list")
 	public String user_cat_list(@RequestParam(value = "page", defaultValue = "1") int page, Model model
     		, AnimalDTO animalDTO, @RequestParam(value = "keyword" , required = false) String keyword) {
+		//고양이 , 삭제되지 않은 데이터
     	animalDTO.setAnimal_tag("cat");
-
+    	animalDTO.setAnimal_state(1);
+    	
 		//페이징
 		String field = ""; 
 		
