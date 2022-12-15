@@ -108,10 +108,10 @@
 			#{ review_title },
 			#{ review_content }, 
 			sysdate, 
-			'',
-			'',
-			'',
-			''
+			#{ review_img1 },
+			#{ review_img2 },
+			#{ review_img3 },
+			#{ review_video }
 			)
 	</insert> 
 

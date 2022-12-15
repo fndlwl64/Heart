@@ -19,7 +19,7 @@
     </div>
 
     <div>
-        <form action="${path}/user_review_insert_ok" method="post">
+        <form action="${path}/user_review_insert_ok" method="post" enctype="multipart/form-data">
             <input type="hidden" name="review_id" value="${ session_id }">
             <input type="hidden" name="review_animal_id" value="${ animal_no }">
             <input type="hidden" name="review_animal_tag" value="${ animal_info.animal_tag }">
@@ -53,7 +53,7 @@
                 	<th class="table-light">이미지</th>                	
                     <td colspan="5">
                         <div class="d-flex align-middle">
-                            <input type="file" id="files" class="form-control" name="review_img" accept="image/gif, image/jpeg, image/png" multiple="multiple" onchange="fileOption(2, this.name);">
+                            <input type="file" id="files" class="form-control" name="review_img" accept="image/gif, image/jpeg, image/png" multiple="multiple" onchange="fileOption(3, this.name);">
                         </div>
                     </td>
                 </tr>
@@ -61,7 +61,7 @@
                 	<th class="table-light">동영상</th>                	
                     <td colspan="5">
                         <div class="d-flex align-middle">
-                            <input type="file" class="form-control" name="review_video" accept="video/mp4, video/mkv, video/x-m4v, video/*">
+                            <input type="file" class="form-control" name="review_vid" accept="video/mp4, video/mkv, video/x-m4v, video/*">
                         </div>
                     </td>
                 </tr>
