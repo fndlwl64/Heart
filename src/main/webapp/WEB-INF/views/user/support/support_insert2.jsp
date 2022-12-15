@@ -73,6 +73,13 @@
 		}
 </script>
 </head>
+<!-- 랜덤으로 임의의 숫자 ６자리르 생성 （이메일 보내는 내용에 들어갈 숫자） -->
+<%! public int getRandom(){
+	int random = 0;
+	random = (int)Math.floor((Math.random()*(99999-10000+1)))+10000;
+	return random;
+	} 
+%>
 <body>
 	<div class="div_sup_insert">
 		<div>
@@ -88,12 +95,20 @@
 				<li class="support_li"><input id="sup_phone" type="text" placeholder="010-0000-0000"></li>
 			</ul>
 		</div>
-		<div class="btn-group">
-			<ul>
-				<li class="support_li"><input id="sup_email" type="text" placeholder="이메일입력"></li>
-				<li class="support_li"><input type="button" value="이메일인증"></li>				
-			</ul>
-		</div>
+		<form method="post" action="${path }/support_emailcheck">
+			<div class="btn-group">
+				<ul>
+					<li class="support_li"><input id="sup_email" name="receiver" type="text" placeholder="이메일입력"></li>
+					<li class="support_li"><input type="submit" value="이메일인증"></li>				
+				</ul>
+			</div>
+			<div>
+				<ul>
+					<li class="support_li"><input id="sup_emailcheck" type="text" placeholder="인증번호"></li>
+				</ul>
+			</div>
+			<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>" />
+		</form>
 		<div>
 			<ul>
 				<li class="support_li"><input id="support" type="text" placeholder="후원금액입력" onkeypress='return checkNumber(event)'></li>

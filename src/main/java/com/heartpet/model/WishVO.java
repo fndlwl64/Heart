@@ -12,5 +12,6 @@ public class WishVO {
 	private String animal_img1;
 	private String adopt_reg_duedate;
 	private String adopt_reg_adoptdate;
+	private String animal_status;
 	
 }

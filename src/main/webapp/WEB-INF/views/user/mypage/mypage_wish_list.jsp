@@ -63,10 +63,10 @@
             	<h3>관심목록</h3>
             	<c:forEach items="${wList }" var="dto">
 		            <ul class="my_cont_ul">
-		                <li><img class="my_cont_img"src="${path}/resources/upload/${dto.getAnimal_img1()}"></li>
-		                <li>종류 : ${dto.getAnimal_species()}</li>
-		                <li>성별 : ${dto.getAnimal_gender()}</li>
-		                <li>나이 : ${dto.getAnimal_age()}</li>
+		                <li><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><img class="my_cont_img"src="${path}/resources/upload/${dto.getAnimal_img1()}"></a></li>
+		                <li><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">종류 : ${dto.getAnimal_species()}</a></li>
+		                <li><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">성별 : ${dto.getAnimal_gender()}</a></li>
+		                <li><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">나이 : ${dto.getAnimal_age()}</a></li>
 		            </ul>
 	            </c:forEach>
             </c:if>
