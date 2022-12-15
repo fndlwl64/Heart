@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.heartpet.action.AnimalDAO;
 
@@ -105,6 +108,58 @@ public class FileUploadImage {
 		}
 		return imgs;
 	}
+	
+	////////////////////////////////////////////////////////////////////////////////
+	// FolderName / dateString 순서 변경 / insert-update 등 선택가능
+	////////////////////////////////////////////////////////////////////////////////
+    public List<String> uploadFile(HttpServletRequest request, List<MultipartFile> files, 
+            String folderName, String fileState, int fileTotal) throws IllegalStateException, IOException {        
+        // List<String> 타입으로 return 예정
+        List<String> images = new ArrayList<String>();
+        Calendar cal = Calendar.getInstance();
+        String dateString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+        String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/"+folderName + File.separator + dateString);
+        
+        System.out.println(rootPath);
+        
+        // 폴더 없으면 생성
+        File mkfile = new File(rootPath);
+        // 경로에 해당하는 directory 전체 생성
+        if (!mkfile.exists()) {
+            mkfile.mkdirs();
+        }
+        
+        System.out.println("review_video" + files.size());
+        System.out.println("review_video : " + files.toString());
+        
+        //파일 업로드
+        for(int i=0; i<files.size(); i++) {
+            // 랜덤으로 파일명 생성
+            String realName = files.get(i).getOriginalFilename();
+            System.out.println("realName : " + realName);
+
+            // .부터 확장자 분리
+            String fileExt = realName.substring(realName.lastIndexOf("."), realName.length()); 
+            System.out.println("fileExt : " + fileExt);
+
+            // insert : reviewImg_insert_1_숫자.확장자 // update : reviewImg_update_1_숫자.확장자
+            String fileRename = folderName + "_" + fileState + "_" + (i+1) + "_" + System.currentTimeMillis() + fileExt;
+            System.out.println("fileRename : " + fileRename);
+
+            // 파일 이름 DB 저장 
+            images.add(rootPath + File.separator + fileRename);
+            // 실제 파일 이동
+            files.get(i).transferTo(new File(rootPath + File.separator + fileRename));
+        }
+        
+        // 총 파일 수만큼 for문 돌림
+        for(int i=0; i<(fileTotal-files.size()); i++) {
+            images.add("");
+        }
+        return images;
+    }
+    
+    /////////////////////////////////////////////////////////////////////////////////
 	
 	//animal img update
 	public AnimalDTO uploadAnimalImg(HttpServletRequest request, List<MultipartFile> files, String folderName, AnimalDTO animalDTO) {

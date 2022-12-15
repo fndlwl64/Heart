@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 
 import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.ReviewDAO;
@@ -53,17 +55,11 @@ public class UserReviewController {
             @RequestParam(value = "animal_tag", required = false) String animal_tag,
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 
-        if (field == null) {
-            field = "";
-        }
-        if (keyword == null) {
-            keyword = "";
-        }
+        if (field == null) { field = ""; }
+        if (keyword == null) { keyword = ""; }
 
         int currentPage = 1; // 현재 페이지 변수
-        if (page != 1) {
-            currentPage = page;
-        }
+        if (page != 1) { currentPage = page; }
 
         List<ReviewDTO> reviewList = null;
         PageDTO paging = null;
@@ -130,15 +126,15 @@ public class UserReviewController {
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/user_review_insert_ok", method = RequestMethod.POST)
     public void user_review_insert_ok(@RequestParam("review_img") List<MultipartFile> review_img, 
-    		@RequestParam("review_video") List<MultipartFile> review_video, 
+            @RequestParam("review_vid") List<MultipartFile> review_vid,
     		@Valid ReviewDTO reviewDto, BindingResult result, HttpServletResponse response,
-            HttpServletRequest request) throws IOException {
+    		HttpServletRequest request) throws IOException {
     	
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
-		String strDate = dateFormat.format(Calendar.getInstance().getTime());
-        
+        System.out.println("review_video eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+review_vid.toString());
+
+
         if (result.hasErrors()) { // 에러를 List로 저장
             List<ObjectError> errors = result.getAllErrors();
             for (ObjectError error : errors) {
@@ -150,15 +146,28 @@ public class UserReviewController {
                     break;
                 }
             }
-        } else {
-    		FileUploadImage upload = new FileUploadImage();
-
-//    		String[] images = upload.uploadAnimalImg(request, files, "animal");
-////    		animalDTO.setAnimal_img1(images[0]);
-////    		animalDTO.setAnimal_img2(images[1]);
-////    		animalDTO.setAnimal_img3(images[2]);
-////
-//    		animalDTO.setAnimal_status("입양 가능");        	
+        } else { 
+    		  		
+    		// request, MultipartFile, folderName, insert/update 구분, 총 파일 개수
+    		if(review_img != null) {
+    		    FileUploadImage upload = new FileUploadImage();  
+    		    List<String> reviewImgs = upload.uploadFile(request, review_img, "review_img", "insert", 3);
+    		    if(reviewImgs.size() > 0) {
+    		        reviewDto.setReview_img1(reviewImgs.get(0));
+    		        reviewDto.setReview_img2(reviewImgs.get(1));
+    		        reviewDto.setReview_img3(reviewImgs.get(2));
+    		    }   		    
+    		}
+    		
+    		if(review_vid != null) {  
+    		    System.out.println("여기까지는 들어왔나");
+    		    FileUploadImage upload = new FileUploadImage();   		    
+    		    List<String> reviewVid = upload.uploadFile(request, review_vid, "review_video", "insert", 1); 
+    		    if(reviewVid.size() > 0) {
+    		        reviewDto.setReview_video(reviewVid.get(0));
+    		    }    		    
+    		}
+    		
             int check = this.reviewDAO.insertReview(reviewDto);
             if (check > 0) {
                 out.println("<script>alert('후기글이 성공적으로 등록되었습니다.'); location.href='" + request.getContextPath() + "/user_review_list'; </script>");
