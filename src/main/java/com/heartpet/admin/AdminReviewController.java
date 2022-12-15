@@ -26,7 +26,7 @@ public class AdminReviewController {
     private ReviewDAO reviewDAO;
 
     // 한 페이지당 보여질 게시물의 수
-    private final int rowsize = 4;
+    private final int rowsize = 10;
 
     // 전체 게시물의 수
     private int totalRecord = 0;
@@ -118,7 +118,7 @@ public class AdminReviewController {
     ////////////////////////////////////////////////////////////////////////////////////
     // REVIEW_DELETE
     ////////////////////////////////////////////////////////////////////////////////////
-    @RequestMapping(value = "/admin_review_delete", method = RequestMethod.POST)
+    @RequestMapping("/admin_review_delete")
     public void admin_review_delete(@RequestParam("review_no") int review_no, HttpServletResponse response,
             HttpServletRequest request) throws IOException {
         response.setContentType("text/html; charset=UTF-8");

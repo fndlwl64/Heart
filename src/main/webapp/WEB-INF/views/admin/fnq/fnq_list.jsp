@@ -68,7 +68,7 @@
                     <td>${ list.fnq_category }</td>
                     <td class="list-title"><a href="${ path }/admin_fnq_content?fnq_no=${ list.fnq_no }"><strong>Q. </strong>${ list.fnq_question }</a></td>
                     <td>
-                    	<c:set value="${ path }/user_fnq_delete?fnq_no=${ list.fnq_no }" var="deleteAddr" />
+                    	<c:set value="${ path }/admin_fnq_delete?fnq_no=${ list.fnq_no }" var="deleteAddr" />
                         <button class="btn btn-outline-success btn-sm" onclick="location.href='${path}/admin_fnq_update?fnq_no=${ list.fnq_no }'">수정</button>
                         <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }" >삭제</button>
                     </td>
