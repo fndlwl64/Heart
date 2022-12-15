@@ -84,9 +84,11 @@ public class AnimalDAOImpl implements AnimalDAO {
 	// Review에서 사용 @남윤지
 	//////////////////////////////////////////////////////
 	@Override
-	public List<String> animalName(List<Integer> animal_no) {
+	public Map<String, Object> animalName(int animal_no) {
 		return this.sqlSession.selectOne("animal_name", animal_no);
 	}
+	
+	//////////////////////////////////////////////////////
 
 	@Override
 	public int countPaging(AnimalDTO dto, String keyword) {
@@ -95,5 +97,7 @@ public class AnimalDAOImpl implements AnimalDAO {
 		map.put("keyword", keyword);
 		return sqlSession.selectOne("animal_countPaging", map);
 	}
+
+
 
 }

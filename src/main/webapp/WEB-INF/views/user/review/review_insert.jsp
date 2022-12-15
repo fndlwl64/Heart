@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<c:set var="aName" value="${ animalName }" />
+<c:set var="animal_name" value="${ animal_name }" />
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_review.css" />
 
@@ -18,13 +18,12 @@
 
     <div>
         <form action="${path}/" method="post">
-            <input type="hidden" name="dog_name" value="${ aName }">
             <input type="hidden" name="review_id" value="${ session_id }">
             <table class="table align-middle insert-table">
                 <tr class="border-top">
-                    <th class="table-light col-1">입양동물번호</th>
+                    <th class="table-light col-1">반려동물명</th>
                     <td class="col-2">
-                        <input type="text" class="form-control" value="${ aName }" disabled="disabled">
+                        <input type="text" class="form-control-plaintext" value="${ animal_name }" readonly="readonly">
                     </td>
                     <th class="table-light col-1">작성자</th>
                     <td class="col-2">
@@ -33,16 +32,16 @@
                 </tr>
                 <tr>
                     <th class="table-light">제목</th>
-                    <td colspan="4"><input type="text" class="form-control" name="board_title" required="required"></td>
+                    <td colspan="4"><input type="text" class="form-control" name="review_title" required="required"></td>
                 </tr>
                 <tr>
                     <th class="table-light">내용</th>
-                    <td colspan="4"><textarea name="board_content" class="form-control" cols="30" rows="10"></textarea></td>
+                    <td colspan="4"><textarea name="review_content" class="form-control" cols="30" rows="10"></textarea></td>
                 </tr>
                 <tr>
                     <td colspan="5">
                         <div class="d-flex align-middle">
-                            <input type="file" class="form-control" name="board_img" accept="image/gif, image/jpeg, image/png" multiple>
+                            <input type="file" class="form-control" name="review_img" accept="image/gif, image/jpeg, image/png" multiple>
                         </div>
                     </td>
                 </tr>
@@ -54,7 +53,7 @@
                     <div class="col-6 title btn-insert">
                         <button type="reset" class="btn btn-warning"><i class="bi bi-pencil"></i> 다시작성</button>
                         <button type="submit" class="btn btn-dark"><i class="bi bi-save"></i> 등록하기</button>
-                        <button type="button" class="btn btn-secondary" onclick="location.href='${path}/user_review_list'"><i class="bi bi-card-list"></i> 목록으로</button>
+                        <button type="button" class="btn btn-secondary" onclick="history.back()"><i class="bi bi-card-list"></i> 뒤로가기</button>
                     </div>
                     <div class="col-3 space"></div>
                 </div>
