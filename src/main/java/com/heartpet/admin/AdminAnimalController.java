@@ -147,11 +147,11 @@ public class AdminAnimalController {
 		// 동물 입소 신청하자마자 입양 가능 상태
 		// 이미지 업로드 및 animal 데이터 추가
 		FileUploadImage upload = new FileUploadImage();
-		
-		String[] images = upload.uploadAnimalImg(request, files, "animal");
-		animalDTO.setAnimal_img1(images[0]); animalDTO.setAnimal_img2(images[1]);
+
+		String[] images = upload.uploadAnimalImg(request, files,"animal");
+		animalDTO.setAnimal_img1(images[0]);
+		animalDTO.setAnimal_img2(images[1]);
 		animalDTO.setAnimal_img3(images[2]);
-		 
 
 		animalDTO.setAnimal_status("입양 가능");
 
