@@ -209,10 +209,14 @@
 		where animal_no =
 		#{animal_no}
 	</update>
-	<delete id="animal_delete">
+	<update id="animal_delete" parameterType="int">
+		update heartpet_animal set animal_state = 0 where animal_no = #{animal_no}
+	</update>
+	<!-- <delete id="animal_delete">
 		delete from heartpet_animal where animal_no =
 		#{animal_no}
-	</delete>
+	</delete> -->
+	
 	
 	<!-- 
 	/////////////////////////////////////////////////////////////

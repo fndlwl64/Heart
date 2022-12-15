@@ -85,5 +85,6 @@
 			</c:if>
 		</div>
 	</div>
+	<jsp:include page="../../include/deleteModal.jsp" />
 </body>
 </html>
