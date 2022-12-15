@@ -259,8 +259,7 @@ public class UserQnaController {
 
         int check = this.qnaDAO.deleteQna(board_no);
         if (check > 0) {
-            out.println("<script>alert('성공적으로 글이 삭제되었습니다.'); location.href='" + request.getContextPath()
-                    + "/user_qna_list'; </script>");
+            out.println("<script>alert('성공적으로 글이 삭제되었습니다.'); location.href='" + request.getContextPath() + "/user_qna_list'; </script>");
         } else {
             out.println("<script>alert('글 삭제 실패!'); history.back(); </script>");
         }
@@ -272,8 +271,8 @@ public class UserQnaController {
     @RequestMapping("/user_fnq_list")
     public String user_fnq_list(@RequestParam(value = "field", required = false) String field,
             @RequestParam(value = "keyword", required = false) String keyword,
-            @RequestParam(value = "order", required = false) String order, @RequestParam(defaultValue = "0") int page,
-            Model model) {
+            @RequestParam(value = "order", required = false) String order, 
+            @RequestParam(defaultValue = "0") int page, Model model) {
 
         if (field == null) {
             field = "";

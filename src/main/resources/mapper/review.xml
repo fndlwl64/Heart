@@ -114,12 +114,7 @@
 			''
 			)
 	</insert> 
-	<!-- 	#{ review_img1 },
-			#{ review_img2 },
-			#{ review_img3 },
-			#{ review_video } -->
-			
-			
+
 	<!-- animal_id -->
 	<select id="animal_id" parameterType="String" resultType="list">
 		SELECT review_animal_id 
@@ -130,9 +125,8 @@
 	<!-- update -->
 	<update id="review_update" parameterType="ReviewDTO">
 		UPDATE heartpet_review 
-			SET review_category = #{ review_category }, 
-			review_title = #{ review_title }, 
-			review_content = #{ review_content }, 
+			SET	review_title = #{ review_title }, 
+			review_content = #{ review_content } 
 			<if test="review_img1 != null">, review_img1 = #{ review_img1 } </if> 
 			<if test="review_img2 != null">, review_img2 = #{ review_img2 } </if> 
 			<if test="review_img3 != null">, review_img3 = #{ review_img3 } </if> 
