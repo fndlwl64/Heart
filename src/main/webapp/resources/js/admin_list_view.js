@@ -1,11 +1,11 @@
 $(document).ready(function () {
 
     // 삭제 모달
-    const myModal = document.getElementById('exampleModal')
-    const myInput = document.getElementById('myInput')
+    const deleteModal = document.getElementById('deleteModal')
+    const deleteInput = document.getElementById('deleteInput')
 
-    myModal.addEventListener('shown.bs.modal', (e) => {
-        myInput.focus();
+    deleteModal.addEventListener('shown.bs.modal', (e) => {
+        deleteInput.focus();
         let dataNo = $(e.relatedTarget).data('id');
         
         $('#deleteFunction').on("click", function() {

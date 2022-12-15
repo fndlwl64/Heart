@@ -36,18 +36,20 @@
 					<input type="text" readonly="readonly" class="form-control-plaintext px-1" value="${ list.animal_name }" />
                 </td>           
                 <th class="table-light col-1">작성자</th>
-                <td class="col-1"><input type="text" readonly="readonly" class="form-control-plaintext px-1" value="${ list.review_id }" /></td>
+                <td class="col-1">
+                	<input type="text" readonly="readonly" class="form-control-plaintext px-1" value="${ list.review_id }" />
+               	</td>
             </tr>
             <tr>
                 <th class="table-light">제목</th>
                 <td colspan="5">                            
-                <input type="text" class="form-control" name="review_title" value="${ list.review_title }" required="required">
+                	<input type="text" class="form-control" name="review_title" value="${ list.review_title }" required="required">
                 </td>
             </tr>
             <tr>
                 <th class="table-light">내용</th>
                 <td colspan="5">
-                <textarea name="review_content" class="form-control" cols="30" rows="10">${ list.review_content.replace(newline, '<br/>').replace('<br/>', '') }</textarea>
+                	<textarea name="review_content" class="form-control" cols="30" rows="10">${ list.review_content.replace(newline, '<br/>').replace('<br/>', '') }</textarea>
                 </td>
             </tr>
             <tr>
@@ -55,6 +57,14 @@
                 <td colspan="5">
                     <div class="d-flex align-middle">
                         <input type="file" class="form-control" name="review_img" accept="image/gif, image/jpeg, image/png" multiple>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+               	<th class="table-light">동영상</th>
+                <td colspan="5">
+                    <div class="d-flex align-middle">
+                        <input type="file" class="form-control" name="review_video" value="${ review_video }" accept="image/gif, image/jpeg, image/png" multiple>
                     </div>
                 </td>
             </tr>

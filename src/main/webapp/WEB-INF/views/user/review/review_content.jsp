@@ -65,8 +65,8 @@
 
             <div class="content-buttons">
                 <c:if test="${ list.review_id eq session_id }">
-                <button type="button" class="btn btn-success" onclick="location.href='${path}/user_review_update?review_no=${ list.review_no }'"><i class="bi bi-eraser"></i> 수정</button>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${ path }/user_review_delete?board_no=${ list.review_no }"><i class="bi bi-trash3"></i> 삭제</button>
+                <button type="button" class="btn btn-success" onclick="location.href='${path}/user_review_update?review_no=${ list.review_no }&animal_no=${ list.review_animal_id }'"><i class="bi bi-eraser"></i> 수정</button>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ path }/user_review_delete?review_no=${ list.review_no }"><i class="bi bi-trash3"></i> 삭제</button>
                 </c:if>
                 <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_review_list'"><i class="bi bi-card-list"></i> 목록</button>
             </div>
@@ -74,11 +74,11 @@
     </div>
     
     <%-- delete function --%>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div id="myInput" class="modal-dialog modal-dialog-centered">
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div id="deleteInput" class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">데이터 삭제</h1>
+                    <h1 class="modal-title fs-5" id="deleteModalLabel">데이터 삭제</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

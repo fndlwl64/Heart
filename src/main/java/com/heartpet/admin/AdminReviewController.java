@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.ReviewDAO;
 import com.heartpet.model.PageDTO;
 import com.heartpet.model.ReviewDTO;
@@ -26,9 +24,6 @@ public class AdminReviewController {
     
     @Autowired
     private ReviewDAO reviewDAO;
-
-    @Autowired
-    private AnimalDAO animalDAO;
 
     // 한 페이지당 보여질 게시물의 수
     private final int rowsize = 4;
