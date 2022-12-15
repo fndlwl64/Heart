@@ -168,5 +168,23 @@ public class AnimalController {
 
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/testUpload")
+	public String test() {
+		Calendar cal = Calendar.getInstance();
+	    String dateString;
+
+	    dateString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+	    
+	    System.out.println("====================");
+	    System.out.println(dateString);
+	    String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/"+dateString);
+	    File file = new File(rootPath);
+	    System.out.println(rootPath);
+	    System.out.println(file.mkdir());
+	    
+	    
+		return "redirect:/";
+	}
 
 }
