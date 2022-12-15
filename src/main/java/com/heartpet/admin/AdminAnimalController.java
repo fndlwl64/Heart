@@ -176,16 +176,22 @@ public class AdminAnimalController {
 
 		return "redirect:/admin_main";
 	}
-
-	@RequestMapping("/cat_view")
-	public String cat_view() {
-		return "admin/cat_view";
+	
+	@RequestMapping(value="/animal_content",method = RequestMethod.GET)
+	public String animal_contet(@RequestParam("no") int no,Model model) {
+		model.addAttribute("content",animalDAO.content(no));
+		return "admin/animal/animal_content";
 	}
 
-	@RequestMapping("/dog_view")
-	public String dog_view() {
-		return "admin/dog_content";
-	}
+//	@RequestMapping("/cat_view")
+//	public String cat_view() {
+//		return "admin/cat_view";
+//	}
+//
+//	@RequestMapping("/dog_view")
+//	public String dog_view() {
+//		return "admin/dog_content";
+//	}
 
 	// 입양관리
 	@RequestMapping("/adoptreg_list")
