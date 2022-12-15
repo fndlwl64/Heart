@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="list" value="${ fnqContent }"/>
-<c:set var="deleteAddr" value="${ path }/user_fnq_delete?fnq_no=${ list.fnq_no }"/>
+<c:set value="${ path }/admin_fnq_delete?fnq_no=${ list.fnq_no }" var="deleteAddr" />
 <% pageContext.setAttribute("newline", "\n"); %>
 	
 <jsp:include page="../../include/admin_header.jsp"/>
@@ -21,7 +21,7 @@
 
 <div class="container">
 
-    <div class="sub-title"><h4>문의글 상세 내용</h4></div>
+    <div class="sub-title"><h4>FNQ 상세 내용</h4></div>
     
     <table class="table noticeinfo mt-4">
         <tr>
@@ -46,7 +46,7 @@
     <%-- button  --%>
     <div class="buttons">
 	    <button class="btn btn-dark mx-1" onclick="location.href='${path}/admin_fnq_list'"><i class="bi bi-card-list"></i> 목록으로</button>
-	    <button class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr } }"><i class="bi bi-trash3"></i> 삭제하기</button>
+	    <button class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }"><i class="bi bi-trash3"></i> 삭제하기</button>
 	    <button class="btn btn-success mx-1" onclick="location.href='${path}/admin_fnq_update?fnq_no=${ list.fnq_no }'"><i class="bi bi-pencil-fill"></i> 수정하기</button>
 	</div>
 	
