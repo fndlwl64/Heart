@@ -1,87 +1,69 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="list" value="${ reviewContent }" />
+<% pageContext.setAttribute("newline", "\n"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>HeartPet_Admin_Review</title>
+    <jsp:include page="../../include/admin_header.jsp" />
+	<link rel="stylesheet" href="${path}/resources/css/list_view.css" />
+	<script src="${path}/resources/js/user_qna_insert.js"></script>
 </head>
-<script src="resources/js/admin.js"></script>
-<link rel="stylesheet" href="resources/css/admin_include.css">
-<body>
-<jsp:include page="../../include/admin_header.jsp" />
-<br><br>
-<div class="div1" align="center">
-	<form>
-		<table class="table">
-			<tr>
-				<th class="table-secondary"><span class="sp2">아이디</span></th>
-				<td><input class ="input1" type="text" value="user"></td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">글제목</span></th>
-				<td><input class ="input1" type="text" value="0"></td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">글내용</span></th>
-				<td><textarea rows="2" cols="22">어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고</textarea> </td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">조회수</span></th>
-				<td><input class ="input1" type="text" value="0"></td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">비밀글여부</span></th>
-				<td><input class ="input1" type="text" value="Y"></td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">이미지1</span></th>
-				<td>
-					<div class="image-upload">
-						<label for="file-input1">
-							<img id="file_change1" class="logo" src="image/heartpet_logo.png"/>
-						</label>
-						<input class="file_input" id="file-input1" type="file"onchange="readURL4(this);"/>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">이미지2</span></th>
-				<td>
-					<div class="image-upload">
-						<label for="file-input2">
-							<img id="file_change2" class="logo" src="image/heartpet_logo.png"/>
-						</label>
-						<input class="file_input" id="file-input2" type="file"onchange="readURL5(this);"/>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">이미지3</span></th>
-				<td>
-					<div class="image-upload">
-						<label for="file-input3">
-							<img id="file_change3" class="logo" src="image/heartpet_logo.png"/>
-						</label>
-						<input class="file_input" id="file-input3" type="file" onchange="readURL6(this);"/>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">동영상1</span></th>
-				<td>
-					<div class="image-upload">
-						<label for="file-input4">
-							<video id="file_change4" src="video/test.mp4" class="logo" controls autoplay />
-						</label>
-						<input id="file-input4" type="file" onchange="readURL7(this);"/>
-					</div>
-				</td>
-			</tr>
-		</table>
-		<br>
-		<input id="update_btn" type="submit" value="변경" align="center">
-	</form>
+
+<%-- 글쓰기 --%>
+<div class="container">
+
+    <div class="sub-title"><h4>입양후기 수정하기</h4></div>
+
+    <div>
+        <form action="${path}/admin_review_update_ok" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="review_no" value="${ list.review_no }" />
+        <table class="table noticeinfo mt-4">
+            <tr class="border-top">
+            	<th class="table-light col-1">종류</th>
+                <td class="col-1">
+					<input type="text" readonly="readonly" class="form-control-plaintext px-1"  
+					<c:if test="${ list.review_animal_tag eq 'dog' }"> value="강아지"</c:if>
+					<c:if test="${ list.review_animal_tag eq 'cat' }"> value="고양이"</c:if>/>
+                </td>    
+                <th class="table-light col-1">동물명</th>
+                <td class="col-1">
+					<input type="text" readonly="readonly" class="form-control-plaintext px-1" value="${ list.animal_name }" />
+                </td>           
+                <th class="table-light col-1">작성자</th>
+                <td class="col-1"><input type="text" readonly="readonly" class="form-control-plaintext px-1" value="${ list.review_id }" /></td>
+            </tr>
+            <tr>
+                <th class="table-light">제목</th>
+                <td colspan="5">                            
+                <input type="text" class="form-control" name="review_title" value="${ list.review_title }" required="required">
+                </td>
+            </tr>
+            <tr>
+                <th class="table-light">내용</th>
+                <td colspan="5">
+                <textarea name="review_content" class="form-control" cols="30" rows="10">${ list.review_content.replace(newline, '<br/>').replace('<br/>', '') }</textarea>
+                </td>
+            </tr>
+            <tr>
+				<th class="table-light">이미지</th>
+                <td colspan="5">
+                    <div class="d-flex align-middle">
+                        <input type="file" class="form-control" name="review_img" accept="image/gif, image/jpeg, image/png" multiple>
+                    </div>
+                </td>
+            </tr>
+        </table>
+	    <div class="buttons">
+		    <button type="button" class="btn btn-dark mx-1" onclick="location.href='${path}/admin_review_list'"><i class="bi bi-card-list"></i> 목록으로</button>
+		    <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 다시작성</button>
+		    <button type="submit" class="btn btn-success mx-1"><i class="bi bi-eraser"></i> 수정하기</button>
+		</div>
+        </form>
+    </div>
 </div>
-</body>
-</html>

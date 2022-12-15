@@ -1,69 +1,86 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
-<c:set var="path" value="${pageContext.request.contextPath}" />	 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<!-- list : 부모글 -->
+<c:set var="list" value="${ qnaContent }" />
+<% pageContext.setAttribute("newline", "\n"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>HeartPet_Admin_QNA</title>
+    <jsp:include page="../../include/admin_header.jsp" />
+	<link rel="stylesheet" href="${path}/resources/css/list_view.css" />
+	<script src="${path}/resources/js/user_qna_insert.js"></script>
 </head>
-<script src="${path}/resources/js/admin.js"></script>
-<link rel="stylesheet" href="${path }/resources/css/admin_include.css">
-<body>
-<jsp:include page="../../include/admin_header.jsp" />
-<br><br>
-<div class="div1" align="center">
-	<form>
-		<table class="table">
-			<tr>
-				<th class="table-secondary"><span class="sp2">아이디</span></th>
-				<td><input class ="input1" type="text" value="user"></td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">글제목</span></th>
-				<td><input class ="input1" type="text" value="0"></td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">글내용</span></th>
-				<td><textarea rows="2" cols="22">어쩌고 저쩌고 어쩌고 저쩌고 어쩌고 저쩌고</textarea> </td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">조회수</span></th>
-				<td><input class ="input1" type="text" value="0"></td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">비밀글여부</span></th>
-				<td><input class ="input1" type="text" value="Y"></td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">이미지1</span></th>
-				<td>
-					<div class="image-upload">
-						<label for="file-input1">
-							<img id="file_change1" class="logo" src="${path }/resources/image/heartpet_logo.png"/>
-						</label>
-						<input class="file_input" id="file-input1" type="file" onchange="readURL4(this);"/>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">이미지2</span></th>
-				<td>
-					<div class="image-upload">
-						<label for="file-input2">
-							<img id="file_change2" class="logo" src="${path }/resources/image/heartpet_logo.png"/>
-						</label>
-						<input class="file_input" id="file-input2" type="file" onchange="readURL5(this);"/>
-					</div>
-				</td>
-			</tr>
 
+<%-- 글쓰기 --%>
+<div class="container">
 
-		</table>
-		<br>
-		<input id="update_btn" type="submit" value="변경" align="center">
-	</form>
+    <div class="sub-title"><h4>답변글 작성하기</h4></div>
+
+    <div>
+        <form action="${path}/admin_qna_reply_insert_ok" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="board_id" value="${ session_admin_id }" />
+        <!-- 답변글 작성인 경우 parentNo = board_no 되도록 
+        list.level == 1 : 부모글
+        list.level >= 2 : 자식글
+        -->      
+        <c:if test="${ list.level eq 1 }"><input type="hidden" name="board_group" value="${ list.board_no }" /></c:if>
+        <c:if test="${ list.level ge 2 }"><input type="hidden" name="board_group" value="${ list.board_group }" /></c:if>
+        <input type="hidden" name="board_parentNo" value="${ list.board_no }" />
+        <table class="table noticeinfo mt-4">
+            <tr class="border-top">
+                <th class="table-light col-1">카테고리</th>
+                <td class="col-2">
+                    <select class="form-select" name="board_category">
+                        <option value="입양" selected="selected" <c:if test="${ list.board_category eq '입양' }">selected="selected"</c:if>>입양</option>
+                        <option value="입소" <c:if test="${ list.board_category eq '입소' }">selected="selected"</c:if>>입소</option>
+                        <option value="후원" <c:if test="${ list.board_category eq '후원' }">selected="selected"</c:if>>후원</option>
+                        <option value="기타" <c:if test="${ list.board_category eq '기타' }">selected="selected"</c:if>>기타</option>
+                    </select>
+                </td>           
+                <th class="table-light col-1">작성자</th>
+                	<td class="col-1 admin"><span id="admin_id">관리자</span></td>
+                <th class="table-light col-1 secret">
+	                <label><input class="form-check-input" type="checkbox" name="board_secret" value="Y"
+	                <c:if test="${ empty list.board_secret }">checked="checked"</c:if>
+	                <c:if test="${ list.board_secret eq 'Y' }">checked="checked" disabled="disabled"</c:if>
+	                <c:if test="${ list.board_secret eq 'N' }"></c:if>> 비밀글</label>	  
+	                <input type="hidden" name="board_secret" value="N" disabled="disabled" />
+                </th>
+            </tr>
+            <tr>
+                <th class="table-light">제목</th>
+                <td colspan="4">                            
+                <input type="text" class="form-control" name="board_title" value="${ list.board_title }" required="required">
+                </td>
+            </tr>
+            <tr>
+                <th class="table-light">내용</th>
+                <td colspan="4">
+                <textarea name="board_content" class="form-control" cols="30" rows="10">${ list.board_content.replace(newline, '<br/>').replace('<br/>', '') }<c:if test="${ not empty list.board_content }">&#10;=====================================================&#10;</c:if></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-light">글 비밀번호</th>
+				<td class="col-2"><input type="password" class="form-control" name="board_pwd" required="required">
+				</td>
+				<th class="table-light">이미지</th>
+                <td colspan="2">
+                    <div class="d-flex align-middle">
+                        <input type="file" class="form-control" name="board_img" accept="image/gif, image/jpeg, image/png" multiple>
+                    </div>
+                </td>
+            </tr>
+        </table>
+	    <div class="buttons">
+		    <button class="btn btn-dark mx-1" onclick="location.href='${path}/admin_qna_list'"><i class="bi bi-card-list"></i> 목록으로</button>
+		    <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 다시작성</button>
+		    <button type="submit" class="btn btn-primary mx-1"><i class="bi bi-reply"></i> 답변달기</button>
+		</div>
+        </form>
+    </div>
 </div>
-</body>
-</html>

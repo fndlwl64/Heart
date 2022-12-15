@@ -15,8 +15,6 @@
 <!-- modal delete Function 추가 시 data-id 검색 -> 주소값만 수정하세요....
 + admin_list_view.js include 하기 -->
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +72,7 @@
                     <th class="table-light col-1">작성자</th>
                     <th class="table-light col-1">조회수</th>
                     <th class="table-light col-2">작성일시</th>
-                    <th class="table-light col-2">답변 / 삭제</th>
+                    <th class="table-light col-2">수정 / 삭제</th>
                 </tr>
                 <c:forEach items="${ rList }" var="list">
                 <tr>
@@ -93,8 +91,8 @@
                     <td>${ list.review_hit }</td>
                     <td>${ list.review_regdate.substring(0,10) }</td>
                     <td>
-                        <button class="btn btn-outline-primary btn-sm" onclick="location.href='${path}/admin_review_update?review_no=${ list.review_no }">수정</button>
-                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${ path }/admin_qna_delete?review_no=${ list.review_no }">삭제</button>
+                        <button class="btn btn-outline-success btn-sm" onclick="location.href='${path}/admin_review_update?review_no=${ list.review_no }'">수정</button>
+                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${ path }/admin_review_delete?review_no=${ list.review_no }">삭제</button>
                     </td>
                 </tr>
                 </c:forEach>

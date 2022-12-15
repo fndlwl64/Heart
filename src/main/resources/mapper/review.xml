@@ -10,34 +10,36 @@
 	////////////////////////////////////////////////////////////////////////////////////////////  	
 	-->
 	<sql id="review_join">
-		from heartpet_review r join heartpet_animal a on r.review_animal_id = a.animal_no
+		FROM heartpet_review r JOIN heartpet_animal a ON r.review_animal_id = a.animal_no
 	</sql>
 	<sql id="review_keyword">
-		like '%' || #{keyword} || '%'
+		LIKE '%' || #{keyword} || '%'
 	</sql>
 	
 	<!-- list -->
 	<select id="review_list" parameterType="hashMap" resultType="ReviewDTO">
-		<![CDATA[select * from (select r.*, a.animal_name, row_number() over(order by review_no desc) rnum ]]><include refid="review_join" />
+		<![CDATA[SELECT * 
+		FROM (select r.*, a.animal_name, row_number() over(order by review_no desc) rnum ]]><include refid="review_join" />
 		<where>
 		 <choose>
-            <when test="field.equals('allSearch') and keyword != ''"> (review_title <include refid="review_keyword" />) or (review_content <include refid="review_keyword" />) or (review_animal_tag <include refid="review_keyword" />) or (review_id <include refid="review_keyword" />)</when>
+            <when test="field.equals('allSearch') and keyword != ''"> (review_title <include refid="review_keyword" />) OR (review_content <include refid="review_keyword" />) OR (review_animal_tag <include refid="review_keyword" />) OR (review_id <include refid="review_keyword" />)</when>
             <when test="field.equals('category') and keyword != ''"> review_animal_tag <include refid="review_keyword" /></when>
             <when test="field.equals('title') and keyword != ''"> review_title <include refid="review_keyword" /></when>
             <when test="field.equals('content') and keyword != ''"> review_content <include refid="review_keyword" /></when>
             <when test="field.equals('id') and keyword != ''"> review_id <include refid="review_keyword" /></when>
          </choose>
          </where>
-         <![CDATA[) where rnum >= #{startNo} and rnum <= #{endNo}]]>
+         <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo}]]>
 	</select>
 	
 	<!-- count : 게시글 개수 -->
 	<select id="review_count" parameterType="hashMap" resultType="int">
-		select count(*) from heartpet_review
+		SELECT COUNT(*) 
+			FROM heartpet_review
 		<where>
 		 <choose>
 	 		<when test="field == '' and keyword == ''"></when>
-            <when test="field.equals('allSearch') and keyword != ''"> (review_title <include refid="review_keyword" />) or (review_content <include refid="review_keyword" />) or (review_animal_tag <include refid="review_keyword" />) or (review_id <include refid="review_keyword" />)</when>
+            <when test="field.equals('allSearch') and keyword != ''"> (review_title <include refid="review_keyword" />) OR (review_content <include refid="review_keyword" />) OR (review_animal_tag <include refid="review_keyword" />) OR (review_id <include refid="review_keyword" />)</when>
             <when test="field.equals('category') and keyword != ''"> review_animal_tag <include refid="review_keyword" /></when>
             <when test="field.equals('title') and keyword != ''"> review_title <include refid="review_keyword" /></when>
             <when test="field.equals('content') and keyword != ''"> review_content <include refid="review_keyword" /></when>
@@ -48,16 +50,17 @@
 	
 	<!-- dog/cat list -->
 	<select id="review_animal_option" parameterType="hashMap" resultType="ReviewDTO">
-		<![CDATA[select * from (select r.*, a.animal_name, row_number() over(order by review_no desc) rnum ]]><include refid="review_join" />
+		<![CDATA[SELECT * 
+		FROM (SELECT r.*, a.animal_name, ROW_NUMBER() OVER(ORDER BY review_no DESC) rnum ]]><include refid="review_join" />
 		<where>
 			review_animal_tag = #{ animal_tag }
          </where>
-         <![CDATA[) where rnum >= #{startNo} and rnum <= #{endNo}]]>
+         <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo}]]>
 	</select>
 	
 	<!-- dog/cat : 게시글 개수 -->
 	<select id="review_animal_count" parameterType="String" resultType="int">
-		select count(*) from heartpet_review
+		SELECT COUNT(*) FROM heartpet_review
 		<where>
 			review_animal_tag = #{ animal_tag }
          </where>
@@ -65,56 +68,77 @@
 	
 	<!-- dog/cat 전체 리스트 페이징 x -->
 	<select id="review_total_list" parameterType="String" resultType="ReviewDTO">
-		select r.*, a.animal_name <include refid="review_join" />
+		SELECT r.*, a.animal_name <include refid="review_join" />
 		<where>
 			review_animal_tag = #{ animal_tag }
          </where>
 	</select>
 	
 	<select id="review_animal" resultType="hashMap">
-		select animal_name from heartpet_animal where animal_no in 
+		SELECT animal_name 
+			FROM heartpet_animal 
+			WHERE animal_no in 
 		<foreach item="animalNo" collection="list" open="(" close=")" separator=", ">
 			#{ animalNo }
 		</foreach>
 	</select>
-
 	
 	<!-- content -->
  	<update id="review_hit" parameterType="int">
-		update heartpet_review set review_hit = review_hit + 1 where review_no = #{ review_no }
+		UPDATE heartpet_review 
+			SET review_hit = review_hit + 1 
+			WHERE review_no = #{ review_no }
 	</update>	
 	<select id="review_content" parameterType="int" resultType="ReviewDTO">
-		select r.*, a.animal_name <include refid="review_join" /> where review_no = #{ review_no }
+		SELECT r.*, a.animal_name <include refid="review_join" /> 
+			WHERE review_no = #{ review_no }
 	</select> 
 	
 	<!-- insert -->
  	<insert id="review_insert" parameterType="ReviewDTO">
 		<selectKey resultType="int" keyProperty="review_no" order="BEFORE">
-			select max(review_no)+1 from heartpet_review
+			SELECT MAX(review_no)+1 FROM heartpet_review
 		</selectKey>
-		insert into heartpet_review values (#{ review_no }, #{ review_category }, #{ review_id }, default, #{ review_title },
-		#{ review_content }, #{ review_secret }, #{ review_pwd }, sysdate, '', '', '')
+		INSERT INTO heartpet_review 
+			VALUES (#{ review_no }, 
+			#{ review_category }, 
+			#{ review_id }, 
+			default, 
+			#{ review_title },
+			#{ review_content }, 
+			#{ review_secret }, 
+			#{ review_pwd }, 
+			sysdate, 
+			'', 
+			'', 
+			'')
 	</insert> 
 	
 	<!-- animal_id -->
 	<select id="animal_id" parameterType="String" resultType="list">
-		select review_animal_id from heartpet_review where review_id = #{ session_id }
+		SELECT review_animal_id 
+			FROM heartpet_review 
+			WHERE review_id = #{ session_id }
 	</select>
 	
 	<!-- update -->
-<!-- 	<update id="review_update" parameterType="ReviewDTO">
-		update heartpet_review set review_category = #{ review_category }, review_title = #{ review_title }, review_content = #{ review_content }, 
-		review_secret = #{ review_secret }, review_update = sysdate
-		<if test="review_img1 != null">, review_img1 = #{ review_img1 } </if> 
-		<if test="review_img2 != null">, review_img2 = #{ review_img2 } </if> 
-		where review_no = #{ review_no }
-	</update> -->
+	<update id="review_update" parameterType="ReviewDTO">
+		UPDATE heartpet_review 
+			SET review_category = #{ review_category }, 
+			review_title = #{ review_title }, 
+			review_content = #{ review_content }, 
+			<if test="review_img1 != null">, review_img1 = #{ review_img1 } </if> 
+			<if test="review_img2 != null">, review_img2 = #{ review_img2 } </if> 
+			<if test="review_img3 != null">, review_img3 = #{ review_img3 } </if> 
+			<if test="review_video != null">, review_video = #{ review_video } </if> 
+			WHERE review_no = #{ review_no }
+	</update>
 	
 	<!-- delete -->
  	<delete id="review_delete" parameterType="int">
-		delete from heartpet_review where review_no = #{ review_no }
+		DELETE FROM heartpet_review 
+			WHERE review_no = #{ review_no }
 	</delete>
-	
-	
+		
 </mapper>
 
