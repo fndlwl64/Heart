@@ -108,8 +108,7 @@
         <div class="row">
             <div class="col-3 space"></div>
             <div class="col-6 title btn-insert">
-                <button type="button" class="btn btn-primary" onclick="location.href='${path}/user_qna_insert'">
-                    <i class="bi bi-pencil"></i> 작성하기</button>
+                <button type="button" class="btn btn-primary" onclick="location.href='${path}/user_qna_insert'"><i class="bi bi-pencil"></i> 작성하기</button>
             </div>
             <div class="col-3 space"></div>
         </div>

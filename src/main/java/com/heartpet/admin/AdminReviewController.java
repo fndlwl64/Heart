@@ -1,11 +1,18 @@
 package com.heartpet.admin;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.heartpet.action.AnimalDAO;
@@ -32,7 +39,7 @@ public class AdminReviewController {
     // REVIEW_LIST - 고양이/강아지 선택 추가
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/admin_review_list")
-    public String user_review_list(@RequestParam(value = "field", required = false) String field,
+    public String admin_review_list(@RequestParam(value = "field", required = false) String field,
             @RequestParam(value = "keyword", required = false) String keyword,
             @RequestParam(value = "animal_tag", required = false) String animal_tag,
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
@@ -77,12 +84,40 @@ public class AdminReviewController {
     // REVIEW_CONTENT
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/admin_review_content")
-    public String user_review_content(@RequestParam("review_no") int review_no, Model model) {
+    public String admin_review_content(@RequestParam("review_no") int review_no, Model model) {
         ReviewDTO reviewContent = this.reviewDAO.contentReview(review_no);
         this.reviewDAO.hitReview(review_no);
         model.addAttribute("reviewContent", reviewContent);
         System.out.println("here");
         return "admin/review/review_content";
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    // REVIEW_UPDATE
+    ////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping("/admin_review_update")
+    public String admin_review_update(@RequestParam("review_no") int review_no, Model model) {
+        ReviewDTO reviewContent = this.reviewDAO.contentReview(review_no);
+        model.addAttribute("reviewContent", reviewContent);
+        return "admin/review/review_update";
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    // REVIEW_UPDATE_OK
+    ////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping(value = "/admin_review_update_ok", method = RequestMethod.POST)
+    public void admin_review_update_ok(ReviewDTO reviewDto, BindingResult result, HttpServletResponse response,
+            HttpServletRequest request) throws IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        // 유효성 검사
+        int check = this.reviewDAO.updateReview(reviewDto);
+        if (check > 0) {
+            out.println("<script>alert('글이 성공적으로 수정되었습니다.'); location.href='" + request.getContextPath() + "/admin_review_list'; </script>");
+        } else {
+            out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>");
+        }
     }
 
 }
