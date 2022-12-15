@@ -13,7 +13,7 @@
 		select * from heartpet_user where user_id = #{id}
 	</select>
 	<select id="reg_count" parameterType="String" resultType="int">
-		select count(*) from heartpet_adopt_reg where adopt_reg_userid = #{id} and adopt_reg_adoptdate is null
+		select count(*) from heartpet_adopt_reg a, heartpet_animal b where b.animal_no = a.adopt_reg_animalno and adopt_reg_userid = #{id} and animal_status = '입양 대기'
 	</select>
 	<select id="mypage_review_count" parameterType="String" resultType="int">
 		select count(*) from heartpet_review where review_id = #{id}

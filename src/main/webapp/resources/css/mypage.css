@@ -162,10 +162,9 @@
     cursor: pointer;
 }
 
-/*.mypage_middle #my_cont2, #my_cont3, #my_cont4, #my_cont5 {
-    display: none;
-
-}*/
+.mypage_middle .mypage_cont .my_cont_ul .my_cont_li{
+	display: inline-block;
+}
 
 .mypage_middle .mypage_cont .my_cont_ul {
     display: inline-block;
