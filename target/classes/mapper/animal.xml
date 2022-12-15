@@ -225,7 +225,7 @@
 		<result property="animal_species" column="animal_species" />		
 	</resultMap>
 	
-	<select id="animal_name" parameterType="int" resultType="animalMap">
+	<select id="animal_name" parameterType="int" resultMap="animalMap">
 		SELECT animal_name, animal_tag, animal_species 
 			FROM heartpet_animal 
 			WHERE animal_no = #{ animal_no }
