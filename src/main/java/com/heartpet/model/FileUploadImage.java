@@ -83,13 +83,6 @@ public class FileUploadImage {
 			
 			// 랜덤으로 파일명 생성
 			String fileRealName = file.getOriginalFilename();
-
-			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
-			// 랜덤으로 파일명 생성 
-			UUID uuid = UUID.randomUUID(); 
-
-			imgs[i] = dateString + "/" + folderName + "/" + uuid.toString() + fileExtension;
-
 			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length()); 
 			UUID uuid = UUID.randomUUID();
 			String randomName =  uuid.toString() + fileExtension;
@@ -97,7 +90,6 @@ public class FileUploadImage {
 			//이미지 1,2,3에 쓸 이미지 이름 저장 (날짜 + folderName 경로 포함)
 			imgs[i] = dateString + "/" + folderName + "/" + randomName;	
 			//이미지 파일 생성
-
 			try {
 //				File toFile = new File(rootPath + "/" + imgs[i]);
 //				file.transferTo(toFile);
