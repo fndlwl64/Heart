@@ -54,7 +54,7 @@
 					<th class="table-secondary"><span class="sp2">입양완료일</span></th>
 					<td>
 						<c:if test="${empty content.adopt_reg_adoptdate }">
-							<input type="datetime-local" name="adopt_reg_adoptdate" min="${content.adopt_reg_regdate }">
+							<input type="datetime-local" name="adopt_reg_adoptdate">
 						</c:if>
 					</td>
 				</tr>
