@@ -36,8 +36,16 @@ public interface UserDAO {
     
     public int update_num(int no);
     
-    public int deleteuser(String id);
+    public int deleteuser(int no);
+    
+    public String find_pwd(Map<String, String> map);
+    
+    public String pwd_email(String id);
     
     public String findid(Map<String, String> map);
+    
+    public int id_name(String name);
+    
+    public String id_email(Map<String, String> map);
 
 }

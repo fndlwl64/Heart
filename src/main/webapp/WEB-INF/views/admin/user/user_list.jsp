@@ -20,7 +20,7 @@
     <br>
 
     <%-- 검색 폼  --%>
-    <form class="search_form" action="${path }/user_list?field=${ field }&keyword=${ keyword }" method="post">
+    <form class="search_form" action="${path }/user_list" method="get">
         <div class="form_box">
             <select class="form-select form-select-sm user_field" name="field">
                 <option value="id"<c:if test="${field eq 'id'}">selected="selected"</c:if>>회원아이디</option>
@@ -49,7 +49,7 @@
                 <th class="table-light">회원이름</th>
                 <th class="table-light">회원등급</th>
                 <th class="table-light">반려동물경험</th>
-                <th class="table-light">수정</th>
+                <th class="table-light">수정/삭제</th>
             </tr>
             
             <c:if test="${!empty list}">
@@ -62,7 +62,7 @@
 	                <td>${list.user_animalexp}</td>
 	                <td>
 	                    <button class="btn btn-outline-primary" onclick="location.href='${path}/user_update?user_id=${list.user_id }'">수정</button>
-	                    <!-- <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button> -->
+	                    <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${ path }/user_delete?user_no=${ list.user_no }">삭제</button>
 	                </td>
 	            </tr>
             </c:forEach>            	

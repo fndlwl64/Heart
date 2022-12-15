@@ -30,5 +30,11 @@
 	<bean name="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
+	
+	<!-- smtp -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
+		<property name="host" value="stmp 도메인 주소"/> 
+	</bean>
+	
     
 </beans>

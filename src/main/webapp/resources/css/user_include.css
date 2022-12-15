@@ -155,7 +155,7 @@ body {
 
 .wrap .h-wrap .modal .modal-content .modal-footer #id_found .found_title {
 	font-size: 16;
-	font-weight: bold;
+	margin-bottom: 3%;
 }
 
 .wrap .h-wrap .modal .modal-content .modal-footer #id_found .found_title .span_id {

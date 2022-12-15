@@ -330,25 +330,126 @@ $(function() {
 		
 	});
 	
-	// 아이디 찾기 
-	let id_name = $("#user_name").val();
-	let id_email = $("#user_email").val();
-	
-	if(id_name == '' || id_name == null) {
-		$("#find_id").attr("disabled", true);
-	}else if(id_email == '' || id_email == null) {
-		$("#find_id").attr("disabled", true);
-	}else {
-		$("#find_id").attr("disabled", false);
-	}
-	
-	
 	let zipcode = $("#sample6_postcode").val();
 	let address = $("#sample6_detailAddress").val();
 	
 	if(zipcode == '' || address == '') {
 		$("#join_btn").attr("disabled", true);
 	}
+	
+	// 아이디 찾기 - 이름
+	$("#id_name").keyup(function() {
+		let name = $(this).val();	
+		
+		if(name == '') {
+			$("#find_id").attr("disabled", true);
+		}else {			
+			$.ajax({			
+	            contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+	            type: "POST",
+	            url: "/project/id_name",
+	            data: {name : name},
+	            success: function(res) {
+	            	if(res == 1) {  // DB에 이름이 존재하는 경우
+	            		$("#name_check").html("<font style='font-size:13px; color:green'>이름 확인 완료</font>");
+						$("#find_id").attr("disabled", false);
+					}else {
+						$("#name_check").html("<font style='font-size:13px; color:red'>가입되지 않은 이름입니다.</font>");
+						$("#find_id").attr("disabled", true);
+					}
+	            },
+	            error: function(e) {            
+	                console.log("ajax fail", e);
+	            }
+	        });
+		}
+	});
+	
+	// 아이디 찾기 - 메일
+	$("#id_email").keyup(function() {
+		let email = $(this).val();	
+		let name = $("#id_name").val();
+		
+		if(email == '') {
+			$("#find_id").attr("disabled", true);
+		}else {			
+			$.ajax({			
+	            contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+	            type: "POST",
+	            url: "/project/id_email_check",
+	            data: {email : email, name : name},
+	            success: function(res) {
+	            	if(res === email) {  // DB 존재
+	            		$("#email_check").html("<font style='font-size:13px; color:green'>이메일 확인 완료</font>");
+						$("#find_id").attr("disabled", false);
+					}else {
+						$("#email_check").html("<font style='font-size:13px; color:red'>위의 아이디와 일치하지 않는 이메일입니다.</font>");
+						$("#find_id").attr("disabled", true);
+					}
+	            },
+	            error: function(e) {            
+	                console.log("ajax fail", e);
+	            }
+	        });
+		}
+	});
+	
+	// 비밀번호 찾기
+	$("#pwd_id").keyup(function() {
+		let id = $(this).val();	
+		
+		if(id == '') {
+			$("#pwd_btn").attr("disabled", true);
+		}else {			
+			$.ajax({			
+	            contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+	            type: "POST",
+	            url: "/project/id_check",
+	            data: {paramId : id},
+	            success: function(res) {
+	            	if(res == 1) {  // DB에 아이디가 존재하는 경우
+	            		$("#name_check").html("<font style='font-size:13px; color:green'>아이디 확인 완료</font>");
+						$("#pwd_btn").attr("disabled", false);
+					}else {
+						$("#name_check").html("<font style='font-size:13px; color:red'>가입되지 않은 아이디입니다.</font>");
+						$("#pwd_btn").attr("disabled", true);
+					}
+	            },
+	            error: function(e) {            
+	                console.log("ajax fail", e);
+	            }
+	        });
+		}
+	});
+	
+	$("#pwd_email").keyup(function() {
+		let email = $(this).val();	
+		let id = $("#pwd_id").val();
+		
+		if(email == '') {
+			$("#pwd_btn").attr("disabled", true);
+		}else {			
+			$.ajax({			
+	            contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+	            type: "POST",
+	            url: "/project/pwd_email_check",
+	            data: {email : email, id : id},
+	            success: function(res) {
+	            	if(res === email) {  // DB 존재
+	            		$("#email_check").html("<font style='font-size:13px; color:green'>이메일 확인 완료</font>");
+						$("#pwd_btn").attr("disabled", false);
+					}else {
+						$("#email_check").html("<font style='font-size:13px; color:red'>위의 아이디와 일치하지 않는 이메일입니다.</font>");
+						$("#pwd_btn").attr("disabled", true);
+					}
+	            },
+	            error: function(e) {            
+	                console.log("ajax fail", e);
+	            }
+	        });
+		}
+	});
+	
 	
 });
 
@@ -358,31 +459,22 @@ function idfind() {
 		'display' : 'block'
 	});
 	
-	let name = $("#user_name").val();
-	let email = $("#user_email").val();
+	let name = $("#id_name").val();
+	let email = $("#id_email").val();
 	
 	$.ajax({			
         contentType: "application/x-www-form-urlencoded;charset=UTF-8",
         type: "POST",
         url: "/project/user_find_id",
-        data: {
-        	name : name,
-        	email : email        
-        },
+        data: { name : name, email : email },
         success: function(res) {
-        	if(res.next()) {  
-        		console.log('아이디 찾음~');
-				$("#found_id").html("<br>회원님의 아이디는 <b>"+res+"</b>입니다");
-				
-			}else {
-				console.log('아이디 못찾음ㅠ');
-				$("#found_id").html("<br>해당하는 아이디를 찾지 못했습니다. 다시 확인해주세요.");
-			}
+        	$("#found_id").html("<br>회원님의 아이디는 <b>"+res+"</b>입니다.");
         },
         error: function(e) {            
             console.log("ajax fail", e);
         }
    	});
+	
 }
 
 

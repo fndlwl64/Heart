@@ -6,6 +6,7 @@ import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.NoticeDTO;
 import com.heartpet.model.PageDTO;
 import com.heartpet.action.AnimalDAO;
+import com.heartpet.action.MailService;
 import com.heartpet.action.QnaDAO;
 import com.heartpet.action.UserDAO;
 import com.heartpet.model.QnaDTO;
@@ -35,6 +36,7 @@ import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.jar.Attributes.Name;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,7 +51,9 @@ public class UserController {
 
 	@Autowired
 	private UserDAO userDAO;
-
+	
+	@Autowired
+	private MailService mailService;
 
     // 한 페이지당 보여질 게시물의 수
     private final int rowsize = 3;
@@ -307,6 +311,30 @@ public class UserController {
     	return check;
     }
     
+    @RequestMapping("/pwd_email_check")
+    public @ResponseBody String pwd_email(@RequestParam("id") String id, @RequestParam("email") String email) {
+    	
+    	String check = userDAO.pwd_email(id);
+    	return check;
+    }
+    
+    @RequestMapping("/id_email_check")
+    public @ResponseBody String id_email(@RequestParam("name") String name, @RequestParam("email") String email) {
+    	Map<String, String> map = new HashMap<String, String>();
+    	map.put("name", name);
+    	map.put("email", email);    	
+    	
+    	String check = userDAO.id_email(map);
+    	return check;
+    }
+    
+    @RequestMapping("/id_name")
+    public @ResponseBody int id_name(@RequestParam("name") String name) {
+    	
+    	int check = userDAO.id_name(name);
+    	return check;
+    }
+    
     @RequestMapping("/user_find_id")
     public @ResponseBody String findid(@RequestParam("name")String name, @RequestParam("email")String email) {
     	System.out.println("아이디 찾기 시작");
@@ -319,5 +347,27 @@ public class UserController {
     	return res;
     }
     
+    @RequestMapping("/user_find_pwd")
+    public void findPwd(@RequestParam("user_id") String id,@RequestParam("user_email") String email, HttpServletResponse response) throws IOException {
+    	response.setContentType("text/html; charset=utf-8");
+    	PrintWriter out = response.getWriter();
+    	
+    	Map<String, String> map = new HashMap<String, String>();
+    	map.put("id", id);
+    	map.put("email", email);    	
+    	
+    	String pwd = userDAO.find_pwd(map);
+    	
+    	String addr = "norangcitron@gmail.com";
+		
+		String subject = "[😀😀] HEARTPET 계정의 비밀번호입니다.";
+		
+		String body = "HEARTPET 계정의 비밀번호를 알려드립니다.\r\n 회원님의 비밀번호는 \r\n "+pwd+"입니다.";
+		
+		mailService.sendEmail(email, addr, subject, body);
+    	
+    	out.println("<script> alert('메일 발송 완료. 메일 확인 요망'); history.back(); </script>");
+    	out.flush();
+    }
 
 }
