@@ -12,8 +12,7 @@
     <!-- <link rel="short icon" href="temp"> -->
 
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    
-    
+        
     <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     
@@ -43,15 +42,17 @@
             <div class="header-logo">
                 <div class="row">
                     <c:if test="${ empty session_id && empty session_admin_id }">                
-                    <div class="col-4 header-space"></div>
-                    <div class="col-4 header-image">
+                    <div class="col-5 header-space"></div>
+                    <div class="col-2 header-image">
                         <a href="${path}/"><img src="${path}/resources/logo/heartpet_logo_words.png" alt="HeartPet" /></a>
                     </div>
-                    <div class="col-4 header-nav">
-                        <ul>
-                           <li><a data-bs-toggle="modal" data-bs-target="#exampleModal">로그인</a></li>
-                           <li><a href="${path}/join">회원가입</a></li>
-                        </ul>
+                    <div class="col-5 header-nav">
+                    	<div class="login_section">
+	                        <ul class="row">
+	                           <li class="col-8"><a data-bs-toggle="modal" data-bs-target="#exampleModal">로그인</a></li>
+	                           <li class="col-4"><a href="${path}/join">회원가입</a></li>
+	                        </ul>
+                        </div>
                     </div>
                     </c:if>
                     <c:if test="${!empty session_id || !empty session_admin_id }">                
@@ -60,17 +61,15 @@
                         <a href="${path}/"><img src="${path}/resources/logo/heartpet_logo_words.png" alt="HeartPet" /></a>
                     </div>
                     <div class="col-5 header-nav">
-                        <ul>
-                           <li><a href="${path}/user_mypage_user_update"><strong>
-                           <c:if test="${ not empty session_id }">${ session_name }(${ session_id })</c:if> 
-                           <c:if test="${ not empty session_admin_id }">${ session_admin_name }(${ session_admin_id })</c:if>                                 
-                           <i class="bi bi-suit-heart-fill"></i></strong></a></li>
-                           <li>
-                           		<c:if test="${!empty session_id }"><a href="${path}/user_mypage_wish_list">마이페이지</a></c:if>
-                           </li>
-                           
-                           <li><a href="${path}/user_logout">로그아웃</a></li>
-                        </ul>
+                    	<div class="login_section">
+	                        <ul class="row">
+	                           <li class="col-8"><a href="${path}/user_mypage_user_update"><strong>
+	                           <c:if test="${ not empty session_id }">${ session_name }님</c:if> 
+	                           <c:if test="${ not empty session_admin_id }">${ session_admin_name }님</c:if>                                 
+	                           <i class="bi bi-suit-heart-fill"></i></strong></a></li>
+	                           <li class="col"><a href="${path}/user_logout">로그아웃</a></li>
+	                        </ul>
+                        </div>
                     </div>
                     </c:if>
                 </div>
