@@ -18,6 +18,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.ReviewDAO;
@@ -124,7 +125,7 @@ public class UserReviewController {
     // REVIEW_INSERT_OK
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/user_review_insert_ok", method = RequestMethod.POST)
-    public void user_review_insert_ok(@Valid ReviewDTO reviewDto, BindingResult result, HttpServletResponse response,
+    public void user_review_insert_ok(@RequestParam("files") List<MultipartFile> files, @Valid ReviewDTO reviewDto, BindingResult result, HttpServletResponse response,
             HttpServletRequest request) throws IOException {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
