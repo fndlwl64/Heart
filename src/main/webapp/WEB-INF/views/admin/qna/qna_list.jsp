@@ -101,7 +101,7 @@
                     <td>${ list.board_regdate.substring(0,10) }</td>
                     <td>
                         <button class="btn btn-outline-primary btn-sm" onclick="location.href='${path}/admin_qna_reply_insert?board_parentNo=${ list.board_no }&board_group=${ list.board_group }'">답변</button>
-                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="${ path }/admin_qna_delete?board_no=${ list.board_no }">삭제</button>
+                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ path }/admin_qna_delete?board_no=${ list.board_no }">삭제</button>
                     </td>
                 </tr>
                 </c:forEach>
@@ -111,23 +111,23 @@
         <%-- 삭제 모달 // admin_list_view.js 삽입되어 있음
         	modal-dialog-centered 삽입됨
          --%>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div id="myInput" class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">데이터 삭제</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        해당 데이터를 삭제하시겠습니까?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger" id="deleteFunction">삭제</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+	    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+	        <div id="deleteInput" class="modal-dialog modal-dialog-centered">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    <h1 class="modal-title fs-5" id="deleteModalLabel">데이터 삭제</h1>
+	                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	                </div>
+	                <div class="modal-body">
+	                    해당 데이터를 삭제하시겠습니까?
+	                </div>
+	                <div class="modal-footer">
+	                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	                    <button type="button" class="btn btn-danger" id="deleteFunction">삭제</button>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
         
         <%-- 페이징처리 --%>
 		<jsp:include page="../../include/pagination.jsp" />

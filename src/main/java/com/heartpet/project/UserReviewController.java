@@ -34,7 +34,7 @@ public class UserReviewController {
     private AnimalDAO animalDAO;
 
     // 한 페이지당 보여질 게시물의 수
-    private final int rowsize = 4;
+    private final int rowsize = 6;
 
     // 전체 게시물의 수
     private int totalRecord = 0;
@@ -138,21 +138,14 @@ public class UserReviewController {
                 } else if (error.getDefaultMessage().equals("content")) {
                     out.println("<script>alert('글 내용이 없습니다.'); history.back(); </script>");
                     break;
-                } else if (error.getDefaultMessage().equals("password")) {
-                    out.println("<script>alert('글 비밀번호를 입력해주세요.'); history.back(); </script>");
-                    break;
-                } else if (error.getDefaultMessage().equals("regexp")) {
-                    out.println(
-                            "<script>alert('비밀번호는 6자 이상 10자 이하의 숫자 및 영문자로 구성되어야 합니다. 다시 입력해주세요.'); history.back(); </script>");
-                    break;
                 }
             }
         } else {
             int check = this.reviewDAO.insertReview(reviewDto);
             if (check > 0) {
-                out.println("<script>alert('후기가 성공적으로 등록되었습니다.'); location.href='" + request.getContextPath() + "/user_review_list'; </script>");
+                out.println("<script>alert('후기글이 성공적으로 등록되었습니다.'); location.href='" + request.getContextPath() + "/user_review_list'; </script>");
             } else {
-                out.println("<script>alert('후기 등록을 실패했습니다.'); history.back(); </script>");
+                out.println("<script>alert('후기글 등록을 실패했습니다.'); history.back(); </script>");
             }
         }
     }
@@ -161,9 +154,15 @@ public class UserReviewController {
     // REVIEW_UPDATE
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/user_review_update")
-    public String user_review_update(@RequestParam("review_no") int review_no, Model model) {
+    public String user_review_update(@RequestParam("animal_no") int animal_no, @RequestParam("review_no") int review_no, Model model) {
         ReviewDTO reviewContent = this.reviewDAO.contentReview(review_no);
+        
+        // animal_name
+        Map<String, Object> animal_info = this.animalDAO.animalName(animal_no);
+        model.addAttribute("animal_info", animal_info);
+        model.addAttribute("animal_no", animal_no);
         model.addAttribute("reviewContent", reviewContent);
+        
         return "user/review/review_update";
     }
 
