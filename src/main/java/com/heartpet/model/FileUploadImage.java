@@ -93,7 +93,7 @@ public class FileUploadImage {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+			i++;
 		}
 		return imgs;
 	}

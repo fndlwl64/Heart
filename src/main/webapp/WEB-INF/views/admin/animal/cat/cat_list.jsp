@@ -107,7 +107,7 @@
 				</tr>
 				<c:forEach var="dto" items="${catList }">
 					<tr>
-						<td><a href="${path}/animal_list">${dto.animal_name }</a></td>
+						<td><a href="${path}/animal_content?no=${dto.animal_no}">${dto.animal_name }</a></td>
 						<td>${dto.animal_species }</td>
 						<td>${dto.animal_gender }</td>
 						<td>${dto.animal_size }</td>
