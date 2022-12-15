@@ -166,7 +166,8 @@ public class AdminAnimalController {
 	@RequestMapping("/animal_delete")
 	public String animal_delete(@RequestParam("no") int no) {
 		AnimalDTO animalDTO = animalDAO.content(no);
-		
+		System.out.println("==================");
+		System.out.println("delete form");
 		FileUploadImage upload = new FileUploadImage();
 		upload.deleteAnimalImg(request, animalDTO);
 

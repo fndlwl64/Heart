@@ -28,7 +28,9 @@
 <c:set var="list" value="${adoptRegList }"></c:set>
 <c:set var="map" value="${animalMap }"></c:set>
 <c:set var="tag" value="${tag }"></c:set>
-<<c:set var="pagingTag" value="startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }"/>
+<c:set var="path" value="<%=request.getContextPath() %>"/>
+<c:set var="pagingTag"
+	value="startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }" />
 <!-- 쿼리 조인을 피하기 위한 key, value를 통한 animal테이블 데이터 참조 -->
 
 <body>
@@ -49,14 +51,6 @@
 						<option value="adopt_reg_adoptdate"
 							<c:if test="${tag eq 'adopt_reg_adoptdate'}">selected</c:if>>입양완료일</option>
 					</select>
-					<!-- <label> 입소등록일 : <input type="date" name="searchSdate"
-						title="입양등록일"> <label> 입양등록일 : <input type="date"
-							name="searchSdate" title="입양등록일">
-					</label> <label> 입양예정일 : <input type="date" name="searchSdate"
-							title="입양등록일">
-					</label> <label> 입양완료일 : <input type="date" name="searchSdate"
-							title="입양등록일">
-					</label> -->
 				</div>
 				<div class="col">
 					<input type="date" name="startDate" value="${startDate }">
@@ -98,10 +92,17 @@
 						<td>${dto.adopt_reg_regdate }</td>
 						<td>${dto.adopt_reg_duedate }</td>
 						<td>${dto.adopt_reg_adoptdate }</td>
-						<td><a
-							href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }"
-							onclick="return onclickOption(this);" class="status"
-							data-value="${dto.adopt_reg_animalno }">${map.get(dto.adopt_reg_animalno).get(1) }</a></td>
+						<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입소 신청'}">
+							<td><a class="text-primary" data-bs-toggle="modal"
+								data-bs-target="#admissionModal" data-id="${path }/adoptreg_admission?animal_no=${dto.adopt_reg_animalno}">${map.get(dto.adopt_reg_animalno).get(1)}</a></td>
+						</c:if>
+						<c:if
+							test="${map.get(dto.adopt_reg_animalno).get(1) ne '입소 신청'}">
+							<td><a
+								href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }"
+								onclick="return onclickOption(this);" class="status"
+								data-value="${dto.adopt_reg_animalno }">${map.get(dto.adopt_reg_animalno).get(1) }</a></td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</table>
@@ -120,8 +121,7 @@
 				<c:if test="${ paging.page gt 1 }">
 					<li class="page-item">
 				</c:if>
-				<a class="page-link"
-					href="${link_address}?page=1&${pagingTag}"
+				<a class="page-link" href="${link_address}?page=1&${pagingTag}"
 					aria-label="First"> <span aria-hidden="true">&laquo;</span>
 				</a>
 				</li>
@@ -179,29 +179,25 @@
 				</li>
 			</ul>
 		</nav>
-
-		<%-- 삭제 모달 --%>
-		<%-- <div class="modal fade" id="exampleModal" tabindex="-1"
-			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div id="myInput" class="modal-dialog">
+		<!-- Modal -->
+		<div class="modal fade" id="admissionModal" tabindex="-1"
+			aria-labelledby="admissionModalLabel" aria-hidden="true">
+			<div id="admissionInput" class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="exampleModalLabel">데이터 삭제</h1>
+						<h1 class="modal-title fs-5" id="admissionModalLabel">입소 신청 수락</h1>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
-
-					<div class="modal-body">해당 데이터를 삭제하시겠습니까?</div>
-
+					<div class="modal-body">입소 신청을 수락하시겠습니까?</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-danger"
-							onclick="location.href='${path}/admin_adoptreg_delete'">삭제</button>
+						<button type="button" class="btn btn-danger" id="admissionFunction">수락</button>
 					</div>
 				</div>
 			</div>
-		</div>  --%>
+		</div>
 	</div>
 
 
@@ -219,12 +215,29 @@
 			alert('관리할 사항이 없습니다.');
 			return false;
 		}
-		if ($(th).text() == '입소 신청' && window.confirm("입소 신청을 입양 상태로 바꾸시겠습니까?")) {
+		/* if ($(th).text() == '입소 신청' && window.confirm("입소 신청을 입양 상태로 바꾸시겠습니까?")) {
 			location.href = getContextPath() + '/adoptreg_admission?animal_no='
 					+ $(th).data('value');
 			return false;
 
-		}
+		} */
 	}
+	$(document).ready(function () {
+
+	    // admissionModal
+	    const admissionModal = document.getElementById('admissionModal')
+	    const admissionInput = document.getElementById('admissionInput')
+
+	    admissionModal.addEventListener('shown.bs.modal', (e) => {
+	    	admissionInput.focus();
+	        let dataNo = $(e.relatedTarget).data('id');
+	        
+	        $('#admissionFunction').on("click", function() {
+	           location.href = dataNo;        
+	        });
+	    });
+		
+		
+	});
 </script>
 </html>
