@@ -118,7 +118,15 @@ public class AdminAnimalController {
 	}
 
 	@RequestMapping(value = "/animal_update", method = RequestMethod.POST)
-	public String animal_update_ok(AnimalDTO animalDTO) {
+	public String animal_update_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO) {
+		System.out.println(animalDTO.getAnimal_img1());
+		System.out.println(animalDTO.getAnimal_img2());
+		System.out.println(animalDTO.getAnimal_img3());
+		for(MultipartFile file : files) {
+			System.out.println(file.getOriginalFilename());
+		}
+		FileUploadImage upload = new FileUploadImage();
+		animalDTO = upload.uploadAnimalImg(request, files, "animal", animalDTO);
 		animalDAO.update(animalDTO);
 		return "redirect:/admin_main";
 	}
