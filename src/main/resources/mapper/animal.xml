@@ -213,10 +213,21 @@
 		delete from heartpet_animal where animal_no =
 		#{animal_no}
 	</delete>
-
-	<!-- Review에서 사용 중 // Delete 금지 -->
-	<select id="animal_name" parameterType="int" resultType="String">
-		select
-		animal_name from heartpet_animal where animal_no = #{ animal_no }
+	
+	<!-- 
+	/////////////////////////////////////////////////////////////
+	Review에서 사용 중 // 삭제 및 수정 금지 : @남윤지 : 필요 시 물어보세요...
+	/////////////////////////////////////////////////////////////
+	-->
+	<resultMap type="hashMap" id="animalMap">
+		<result property="animal_name" column="animal_name" />
+		<result property="animal_tag" column="animal_tag" />		
+		<result property="animal_species" column="animal_species" />		
+	</resultMap>
+	
+	<select id="animal_name" parameterType="int" resultType="animalMap">
+		SELECT animal_name, animal_tag, animal_species 
+			FROM heartpet_animal 
+			WHERE animal_no = #{ animal_no }
 	</select>
 </mapper>

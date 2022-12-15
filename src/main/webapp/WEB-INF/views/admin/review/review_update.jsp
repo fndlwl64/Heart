@@ -15,7 +15,7 @@
 	<script src="${path}/resources/js/user_qna_insert.js"></script>
 </head>
 
-<%-- 글쓰기 --%>
+<%-- 리뷰 수정하기 --%>
 <div class="container">
 
     <div class="sub-title"><h4>입양후기 수정하기</h4></div>

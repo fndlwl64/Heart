@@ -3,6 +3,7 @@ package com.heartpet.project;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -96,11 +97,11 @@ public class UserReviewController {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
-    // REVIEW_INSERT - myPage랑 상의 필요
+    // REVIEW_INSERT - animal_no 넘어옴
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/user_review_insert")
-    public String user_review_insert(HttpServletResponse response, HttpServletRequest request, Model model)
-            throws IOException {
+    public String user_review_insert(@RequestParam("animal_no") int animal_no, HttpServletResponse response, 
+    		HttpServletRequest request, Model model) throws IOException {
         response.setContentType("text/html; charset=UTF-8");
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
@@ -112,11 +113,8 @@ public class UserReviewController {
         }
 
         // animal_name
-        String session_id = (String) session.getAttribute("session_id");
-        List<Integer> animalId = this.reviewDAO.animalId(session_id);
-        List<String> animalName = this.animalDAO.animalName(animalId);
-
-        model.addAttribute("animalName", animalName);
+        Map<String, Object> animal_info = this.animalDAO.animalName(animal_no);
+        model.addAttribute("animal_info", animal_info);
 
         return "user/review/review_insert";
     }

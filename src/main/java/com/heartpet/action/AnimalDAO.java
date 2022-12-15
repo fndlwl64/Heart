@@ -1,6 +1,7 @@
 package com.heartpet.action;
 
 import java.util.List;
+import java.util.Map;
 
 import com.heartpet.model.AnimalDTO;
 
@@ -15,7 +16,7 @@ public interface AnimalDAO {
     public List<AnimalDTO> listPaging(int startNO, int endNo, AnimalDTO animalDTO, String keyword);
     public AnimalDTO content(int id);
     public List<AnimalDTO> search();
-    public List<String> animalName(List<Integer> animalId);
+    public Map<String, Object> animalName(int animal_no);
     public int count(String animal_tag);
     public int countPaging(AnimalDTO dto, String keyword);
 }
