@@ -83,6 +83,10 @@
 			alert('입양 대기 중인 상태입니다.');
 			return false;
 		}
+		if($('#animal_status').val() == '입양 완료'){
+			alert('이미 입양 완료된 상태입니다.')
+			return false;
+		}
 		
 	}
 </script>
