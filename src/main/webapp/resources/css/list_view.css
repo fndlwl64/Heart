@@ -15,7 +15,7 @@
 
 .container .lists .total_user span {
 	font-weight: bold;
-	color: #FD68A0;
+	/* color: #FD68A0; */
 }
 
 .container .lists .table .btn {
@@ -32,6 +32,7 @@
 	text-align: left;
 	margin-bottom: 1%;
 	color: #566573;
+	font-size: 14px;
 }
 
 .container .search_form table {
@@ -52,6 +53,10 @@
 }
 .container .search_form table .radio_grade {
 	text-align: left;
+}
+
+.container .search_form table label {
+	margin-right: 2%;
 }
 
 .container .search_form .searchbtn {

@@ -20,28 +20,24 @@
 
     <%-- 검색 폼  --%>
     <form class="search_form" action="${path }/user_list" method="get">
-
+    	<input type="hidden" name="field" />
 		<table>
        		<tr>
        			<th>회원등급</th>
        			<td colspan="3">
-       				<div name="field" class="radio_grade">
-			    		<label><input type="radio" name="user_grade" value="1"/> 1등급</label>
-			    		<label><input type="radio" name="user_grade" value="2"/> 2등급</label>
-			    		<label><input type="radio" name="user_grade" value="3"/> 3등급</label>
-			    		<label><input type="radio" name="user_grade" value="4"/> 4등급</label>
-			    		<label><input type="radio" name="user_grade" value="5"/> 5등급</label>
+       				<div class="radio_grade">
+			    		<label><input type="radio" name="user_grade" value="1" ondblclick="this.checked=false"/> 1등급</label>
+			    		<label><input type="radio" name="user_grade" value="2" ondblclick="this.checked=false"/> 2등급</label>
+			    		<label><input type="radio" name="user_grade" value="3" ondblclick="this.checked=false"/> 3등급</label>
+			    		<label><input type="radio" name="user_grade" value="4" ondblclick="this.checked=false"/> 4등급</label>
+			    		<label><input type="radio" name="user_grade" value="5" ondblclick="this.checked=false"/> 5등급</label>
 			    	</div>
        			</td>
        		</tr>
-       		
        		<tr>
-       			<th>
-       				회원아이디
-       				<input type="hidden" name="field" value="id" />
-       			</th>
+       			<th>회원아이디</th>
        			<td><input class="form-control form-control-sm user_search" name="keyword" value="${keyword }" size="10"></td>
-       			<th>반려동물경험여부</th>
+       			<th>반려동물경험</th>
        			<td>
        				<div class="radio_exp">
 			    		<label><input type="radio" name="user_animalexp" value="Y" ondblclick="this.checked=false"/> Y </label>
@@ -53,13 +49,26 @@
        	
        	<button class="btn searchbtn" type="submit"><i class='bi bi-search'></i> 검색</button>
     	
-       <%--  <div class="form_box">
-        	
+       <%-- <div class="form_box">
             <select class="form-select form-select-sm user_field" name="field">
                 <option value="id"<c:if test="${field eq 'id'}">selected="selected"</c:if>>회원아이디</option>
                 <option value="grade"<c:if test="${field eq 'grade'}">selected="selected"</c:if>>회원등급</option>
             </select>
-            <input class="form-control form-control-sm user_search" name="keyword" value="${keyword }">
+            
+            <c:if test="${field eq 'id'}">
+            	<input class="form-control form-control-sm user_search" name="keyword" value="${keyword }" size="20">	
+            </c:if>
+            
+            <c:if test="${field eq 'grade'}">
+            	<div class="radio_grade">
+		    		<label><input type="radio" name="user_grade" value="1" ondblclick="this.checked=false"/> 1등급</label>
+		    		<label><input type="radio" name="user_grade" value="2" ondblclick="this.checked=false"/> 2등급</label>
+		    		<label><input type="radio" name="user_grade" value="3" ondblclick="this.checked=false"/> 3등급</label>
+		    		<label><input type="radio" name="user_grade" value="4" ondblclick="this.checked=false"/> 4등급</label>
+		    		<label><input type="radio" name="user_grade" value="5" ondblclick="this.checked=false"/> 5등급</label>
+		    	</div>
+            </c:if>
+            
 			<button class="btn searchbtn" type="submit"><i class="i bi-search"></i> 검색</button>
 	    </div> --%>
     </form>
