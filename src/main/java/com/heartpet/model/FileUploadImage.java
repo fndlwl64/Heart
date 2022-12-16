@@ -183,10 +183,12 @@ public class FileUploadImage {
 				// 기존 파일 있을 때 삭제
 				if(origin_files.get(i) != null && !origin_files.get(i).equals("")) {
 					String deletePath = request.getSession().getServletContext().getRealPath(origin_files.get(i));
-					File deleteFile = new File(deletePath);
-					if(deleteFile.exists()) {						
-						deleteFile.delete();
-					}
+					if(deletePath != null) {
+						File deleteFile = new File(deletePath);
+						if(deleteFile.exists()) {						
+							deleteFile.delete();
+						}
+					}					
 				}				
 				// .부터 확장자 분리
 				String fileExt = realName.substring(realName.lastIndexOf("."), realName.length()); 
