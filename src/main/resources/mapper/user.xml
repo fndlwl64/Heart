@@ -49,10 +49,10 @@
 		<include refid="user_select" /> 
 			FROM (select u.*, row_number() over(order by user_no desc) rnum FROM heartpet_user u
 		<where>
-		<choose>
-	        <when test="field.equals('id') and keyword != ''"> user_id <include refid="user_keyword" /></when>
-	        <when test="field.equals('grade') and keyword != ''"> user_grade <include refid="user_keyword" /></when>
-        </choose>
+			<choose>
+		        <when test="field.equals('id') and keyword != ''"> user_id <include refid="user_keyword" /></when>
+		        <when test="field.equals('grade') and keyword != ''"> user_grade <include refid="user_keyword" /></when>
+	        </choose>
         </where>	
         <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo} ORDER BY USER_NO DESC ]]>
 	</select>
