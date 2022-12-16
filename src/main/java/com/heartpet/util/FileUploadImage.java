@@ -92,7 +92,7 @@ public class FileUploadImage {
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////
-	// uploadFile : FolderName / dateString 순서 변경 / insert-update 등 선택가능 // 이미지만 있을 때...
+	// uploadFile(insert) : FolderName / dateString 순서 변경 / insert-update 등 선택가능 
 	////////////////////////////////////////////////////////////////////////////////
     public List<String> uploadFile(HttpServletRequest request, List<MultipartFile> files, 
             String folderName, int fileTotal) throws IllegalStateException, IOException {        
@@ -141,7 +141,7 @@ public class FileUploadImage {
     }
     
 	////////////////////////////////////////////////////////////////////////////////
-	// updateFile : FolderName / dateString 순서 변경 / insert-update 등 선택가능 // 이미지만 있을 때...
+	// updateFile : FolderName / dateString 순서 변경 / insert-update 등 선택가능 
 	////////////////////////////////////////////////////////////////////////////////
     public List<String> updateFile(HttpServletRequest request, List<MultipartFile> files, 
             String folderName, List<String> origin_files, int fileTotal) throws IllegalStateException, IOException {        
@@ -172,6 +172,8 @@ public class FileUploadImage {
 						}
 					}					
 				}				
+				
+				// Rename 과정
 				// .부터 확장자 분리
 				String fileExt = realName.substring(realName.lastIndexOf("."), realName.length()); 
 				System.out.println("fileExt : " + fileExt);
@@ -188,8 +190,24 @@ public class FileUploadImage {
         return folderFiles;
     }
         
-    ////////////////////////////////////////////////////////////////////////////////////    
-
+    ////////////////////////////////////////////////////////////////////////////////
+    // deleteFile : FolderName / dateString 순서 변경 / insert-update 등 선택가능 // 이미지만 있을 때...
+    ////////////////////////////////////////////////////////////////////////////////
+    public void deleteFile(HttpServletRequest request, List<String> origin_files) {        
+        for(int i=0; i<origin_files.size(); i++) {            
+            if(origin_files.get(i) != null && !origin_files.get(i).equals("")) {
+                String deletePath = request.getSession().getServletContext().getRealPath(origin_files.get(i));
+                if(deletePath != null) {
+                    File deleteFile = new File(deletePath);
+                    if(deleteFile.exists()) {                       
+                        deleteFile.delete();
+                    }
+                }                   
+            }
+        }        
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////
 	
 	//animal img update
 	public AnimalDTO uploadAnimalImg(HttpServletRequest request, List<MultipartFile> files, String folderName, AnimalDTO animalDTO) {

@@ -61,11 +61,11 @@
 			                </c:if>                  
 	                    </div>
                 	</td>
-               </tr>
-				<tr>
+                </tr>
+                <tr>
                 	<td colspan="4">
 	                    <div class="d-grid align-middle original-image">
-	                        <input type="file" class="form-control" name="board_img" accept="image/gif, image/jpeg, image/png" >
+	                        <input type="file" class="form-control" name="board_img" accept="video/mp4, video/mkv, video/x-m4v, video/*" >
 	                        <c:if test="${ !empty list.board_img2 }">
 	                       		<p class="mt-2"><img src="${ path }${ list.board_img2 }" style="max-height: 200px;" alt="board_img" /></p>      
 			                </c:if> 
