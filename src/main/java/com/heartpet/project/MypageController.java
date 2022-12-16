@@ -120,6 +120,7 @@ public class MypageController {
     	List<WishVO> wish_list = mypagedao.getAdoptComList(user_id);
     	List<Integer> animal_no = new ArrayList<Integer>();
     	Map<String, Object> doubleCheck  = new HashMap<String, Object>();
+    	List<Map<String, Object>> sendCheck = new ArrayList<Map<String,Object>>();
     	
     	System.out.println(wish_list.size());
     	
@@ -127,16 +128,15 @@ public class MypageController {
     		animal_no.add(wish_list.get(i).getAnimal_no());
     		// animal_no 넘김쓰
     		doubleCheck = reviewDAO.mypageReviewCount(animal_no.get(i));
-    		System.out.println(doubleCheck.toString());
+    		sendCheck.add(doubleCheck);
     	}
-    	
     	
     	model.addAttribute("Sum", sum);
     	model.addAttribute("uList", user_list);
     	model.addAttribute("Count", regcount);
     	model.addAttribute("review_Count", review_count);
     	model.addAttribute("aList", wish_list);
-    	model.addAttribute("doubleCheck", doubleCheck);
+    	model.addAttribute("sendCheck", sendCheck);
 
         return "user/mypage/mypage_adopt_complet_list";
     }
