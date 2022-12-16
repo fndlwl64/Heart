@@ -125,9 +125,11 @@ public class MypageController {
     	System.out.println(wish_list.size());
     	
     	for(int i=0; i<wish_list.size(); i++) {
+    		// animal_no 받기
     		animal_no.add(wish_list.get(i).getAnimal_no());
-    		// animal_no 넘김쓰
+    		// doubleCheck - count, review_no 값 넘어옴
     		doubleCheck = reviewDAO.mypageReviewCount(animal_no.get(i));
+    		// List 형태로 send
     		sendCheck.add(doubleCheck);
     	}
     	
