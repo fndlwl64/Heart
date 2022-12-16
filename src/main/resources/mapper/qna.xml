@@ -131,7 +131,9 @@
 			SET board_title = '삭제된 게시글입니다.', 
 			board_content = '삭제된 게시글입니다.', 
 			board_secret = 'Y',
-			board_state = 'disabled'
+			board_state = 'disabled',
+			board_img1 = '',
+			board_img2 = ''
 		WHERE board_no = #{ board_no }
 	</delete>
 	

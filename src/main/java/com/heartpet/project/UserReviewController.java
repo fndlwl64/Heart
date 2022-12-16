@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -133,7 +134,6 @@ public class UserReviewController {
     	
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
-        System.out.println("review_file eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+review_file.toString());
 
         if (result.hasErrors()) { // 에러를 List로 저장
             List<ObjectError> errors = result.getAllErrors();
@@ -147,10 +147,11 @@ public class UserReviewController {
                 }
             }
         } else {     		  		
-        	//////////////////////////////////////////////////////////////////////////// 수정 중
-        	// request, MultipartFile, folderName, insert/update 구분, 총 파일 개수       	
-        	
+        	////////////////////////////////////////////////////////////////////////////
+        	// 수정 완료 : FileUploadImage.uploadFile(request, 실제 파일, 폴더명, 파일 개수)
+            //////////////////////////////////////////////////////////////////////////// 
 		    FileUploadImage upload = new FileUploadImage();
+		    
 		    // 총 파일 개수
 		    int totalFileCount = 4;
 		    List<String> reviewFiles = upload.uploadFile(request, review_file, "review_file", totalFileCount);
@@ -163,7 +164,7 @@ public class UserReviewController {
 		        System.out.println("i : " + i);
 		        if(reviewFiles.get(i) != "") {
 		              System.out.println("여기는 몇 번 들어왔나 : " + reviewFiles.get(i));
-		            String mimeType = typeCheck.contentType(reviewFiles.get(i)); // 0 img, 1 vid, 2 null, 3 null
+		            String mimeType = typeCheck.contentType(reviewFiles.get(i)); 
 		            // null 먼저 골라내기
 		            if(mimeType.contains("video")) {
 		                System.out.println("video type : "+mimeType.contains("video"));
@@ -189,7 +190,6 @@ public class UserReviewController {
 	    	}	   		    
 		    
             System.out.println("reviewDto : "+reviewDto.toString());
-
             int check = this.reviewDAO.insertReview(reviewDto);
             if (check > 0) {
                 out.println("<script>alert('후기글이 성공적으로 등록되었습니다.'); location.href='" + request.getContextPath() + "/user_review_list'; </script>");
@@ -219,17 +219,55 @@ public class UserReviewController {
     // REVIEW_UPDATE_OK
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/user_review_update_ok", method = RequestMethod.POST)
-    public void user_review_update_ok(ReviewDTO reviewDto, BindingResult result, HttpServletResponse response,
+    public void user_review_update_ok(@RequestParam("review_file") List<MultipartFile> review_file, 
+            @Valid ReviewDTO updateDto, BindingResult result, HttpServletResponse response,
             HttpServletRequest request) throws IOException {
+        
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
-
-        // 유효성 검사
-        int check = this.reviewDAO.updateReview(reviewDto);
-        if (check > 0) {
-            out.println("<script>alert('후기글이 성공적으로 수정되었습니다.'); location.href='" + request.getContextPath() + "/user_review_list'; </script>");
+        
+        if (result.hasErrors()) { // 에러를 List로 저장
+            List<ObjectError> errors = result.getAllErrors();
+            for (ObjectError error : errors) {
+                if (error.getDefaultMessage().equals("title")) {
+                    out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>");
+                    break;
+                } else if (error.getDefaultMessage().equals("content")) {
+                    out.println("<script>alert('글 내용이 없습니다.'); history.back(); </script>");
+                    break;
+                }
+            }
         } else {
-            out.println("<script>alert('후기글 수정을 실패했습니다.'); history.back(); </script>");
+            ////////////////////////////////////////////////////////////////////////////
+            // FileUploadImage.uploadFile(request, 실제 파일, 폴더명, 파일 개수)
+            //////////////////////////////////////////////////////////////////////////// 
+            // 총 파일 개수
+            int totalFileCount = 4;            
+            ReviewDTO originalContent = this.reviewDAO.contentReview(updateDto.getReview_no());
+            
+            // 기존 이미지 및 비디오 이름 가져오기
+            List<String> origin_names = new ArrayList<String>();
+            origin_names.add(originalContent.getReview_img1());
+            origin_names.add(originalContent.getReview_img2());
+            origin_names.add(originalContent.getReview_img3());
+            origin_names.add(originalContent.getReview_video());
+    
+            // 파일 업데이트
+            FileUploadImage reviewFiles = new FileUploadImage();  
+            List<String> updateFile = reviewFiles.updateFile(request, review_file, "review_file", origin_names, totalFileCount);
+            
+            updateDto.setReview_img1(updateFile.get(0));
+            updateDto.setReview_img2(updateFile.get(1));
+            updateDto.setReview_img3(updateFile.get(2));
+            updateDto.setReview_video(updateFile.get(3));
+
+            // 유효성 검사 후 update
+            int check = this.reviewDAO.updateReview(updateDto);
+            if (check > 0) {
+                out.println("<script>alert('후기글이 성공적으로 수정되었습니다.'); location.href='" + request.getContextPath() + "/user_review_list'; </script>");
+            } else {
+                out.println("<script>alert('후기글 수정을 실패했습니다.'); history.back(); </script>");
+            }
         }
     }
 
@@ -241,6 +279,17 @@ public class UserReviewController {
             HttpServletRequest request) throws IOException {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
+        
+        ReviewDTO reviewContent = this.reviewDAO.contentReview(review_no);
+        
+        List<String> origin_names = new ArrayList<String>();
+        origin_names.add(reviewContent.getReview_img1());
+        origin_names.add(reviewContent.getReview_img2());
+        origin_names.add(reviewContent.getReview_img3());
+        origin_names.add(reviewContent.getReview_video());
+        
+        FileUploadImage deleteFiles = new FileUploadImage();  
+        deleteFiles.deleteFile(request, origin_names);
 
         int check = this.reviewDAO.deleteReview(review_no);
         if (check > 0) {

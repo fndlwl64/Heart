@@ -53,18 +53,37 @@
                 </td>
             </tr>
             <tr>
-				<th class="table-light">이미지</th>
+				<th rowspan="3" class="table-light">이미지</th>
                 <td colspan="5">
-                    <div class="d-flex align-middle">
-                        <input type="file" class="form-control" name="review_img" accept="image/gif, image/jpeg, image/png" multiple>
+				    <div class="d-grid align-middle original-image">
+				        <input type="file" class="form-control" name="review_file" accept="image/gif, image/jpeg, image/png" >
+				        <c:if test="${ !empty list.review_img1 }">
+				            <p class="mt-2"><img src="${ path }${ list.review_img1 }" style="max-height: 200px;" alt="review_img" /></p>      
+				        </c:if>                  
+				    </div>
+				</td>
+				<td colspan="5">
+                    <div class="d-grid align-middle original-image">
+                        <input type="file" class="form-control" name="review_file" accept="image/gif, image/jpeg, image/png" >
+                        <c:if test="${ !empty list.review_img2 }">
+                            <p class="mt-2"><img src="${ path }${ list.review_img2 }" style="max-height: 200px;" alt="review_img" /></p>      
+                        </c:if>                  
+                    </div>
+                </td>
+                <td colspan="5">
+                    <div class="d-grid align-middle original-image">
+                        <input type="file" class="form-control" name="review_file" accept="image/gif, image/jpeg, image/png" >
+                        <c:if test="${ !empty list.review_img3 }">
+                            <p class="mt-2"><img src="${ path }${ list.review_img3 }" style="max-height: 200px;" alt="review_img" /></p>      
+                        </c:if>                  
                     </div>
                 </td>
             </tr>
             <tr>
                	<th class="table-light">동영상</th>
                 <td colspan="5">
-                    <div class="d-flex align-middle">
-                        <input type="file" class="form-control" name="review_video" value="${ review_video }" accept="image/gif, image/jpeg, image/png" multiple>
+                    <div class="d-grid align-middle original-image">
+                        <input type="file" class="form-control" name="review_file" value="${ list.review_video }" accept="video/mp4, video/mkv, video/x-m4v, video/*">
                     </div>
                 </td>
             </tr>

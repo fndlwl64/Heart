@@ -54,7 +54,7 @@
 					<th rowspan="3" class="table-light">이미지</th>
 	                <td colspan="5">
 	                    <div class="d-grid align-middle original-image">
-	                        <input type="file" class="form-control" name="review_img" accept="image/gif, image/jpeg, image/png" >
+	                        <input type="file" class="form-control" name="review_file" accept="image/gif, image/jpeg, image/png" >
 	                        <c:if test="${ !empty list.review_img1 }">
 	                       		<p class="mt-2"><img src="${ path }${ list.review_img1 }" style="max-height: 200px;" alt="board_img" /></p>      
 			                </c:if>                  
@@ -64,7 +64,7 @@
 				<tr>
                 	<td colspan="5">
 	                    <div class="d-grid align-middle original-image">
-	                        <input type="file" class="form-control" name="review_img" accept="image/gif, image/jpeg, image/png" >
+	                        <input type="file" class="form-control" name="review_file" accept="image/gif, image/jpeg, image/png" >
 	                        <c:if test="${ !empty list.review_img2 }">
 	                       		<p class="mt-2"><img src="${ path }${ list.review_img2 }" style="max-height: 200px;" alt="board_img" /></p>      
 			                </c:if> 
@@ -74,7 +74,7 @@
                 <tr>
                 	<td colspan="5">
 	                    <div class="d-grid align-middle original-image">
-	                        <input type="file" class="form-control" name="review_img" accept="image/gif, image/jpeg, image/png" >
+	                        <input type="file" class="form-control" name="review_file" accept="image/gif, image/jpeg, image/png" >
 	                        <c:if test="${ !empty list.review_img3 }">
 	                       		<p class="mt-2"><img src="${ path }${ list.review_img3 }" style="max-height: 200px;" alt="board_img" /></p>      
 			                </c:if> 
@@ -86,7 +86,7 @@
                 	<th class="table-light">동영상</th>
                     <td colspan="5">
                         <div class="d-flex align-middle">
-                            <input type="file" class="form-control" name="review_video" value="${ review_video }" accept="image/gif, image/jpeg, image/png">
+                            <input type="file" class="form-control" name="review_file" value="${ review_video }" accept="video/mp4, video/mkv, video/x-m4v, video/*">
                         </div>
                     </td>
                 </tr>
@@ -96,7 +96,7 @@
                 <div class="row">
                     <div class="col-3 space"></div>
                     <div class="col-6 title btn-insert">
-					    <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_review_list'"><i class="bi bi-card-list"></i> 목록으로</button>
+					    <button type="button" class="btn btn-dark" onclick="history.back();"><i class="bi bi-card-list"></i> 뒤로가기</button>
 					    <button type="reset" class="btn btn-warning"><i class="bi bi-pencil"></i> 다시작성</button>
 					    <button type="submit" class="btn btn-success"><i class="bi bi-eraser"></i> 수정하기</button>
                     </div>

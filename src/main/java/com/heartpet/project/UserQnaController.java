@@ -283,6 +283,13 @@ public class UserQnaController {
         if (!qnaContent.getBoard_pwd().equals(board_pwd)) {
             out.println("<script>alert('비밀번호를 다시 확인해주세요.'); history.back(); </script>");
         }
+        
+        List<String> origin_names = new ArrayList<String>();
+        origin_names.add(qnaContent.getBoard_img1());
+        origin_names.add(qnaContent.getBoard_img2());
+        
+        FileUploadImage deleteFiles = new FileUploadImage();  
+        deleteFiles.deleteFile(request, origin_names);
 
         int check = this.qnaDAO.deleteQna(board_no);
         if (check > 0) {
