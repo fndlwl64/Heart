@@ -276,6 +276,7 @@ public class UserController {
     
     @RequestMapping("/join")
     public String join() {
+    	
         return "user/join";
     }
     

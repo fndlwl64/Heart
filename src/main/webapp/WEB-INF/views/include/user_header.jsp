@@ -157,7 +157,7 @@
 		                        <span id="name_check"></span>
 		                        <input class="login_text" id="id_email" placeholder="이메일">
 		                        <span id="email_check"></span>
-		                        <button id="find_id" class="btn login_btn" onclick="idfind()">아이디 찾기</button>
+		                        <button id="find_id" class="btn login_btn" onclick="idfind()" disabled>아이디 찾기</button>
 	                        <%-- </form> --%>
                         </div>
                         <div class="modal-footer">
@@ -187,7 +187,7 @@
                                 <span id="name_check"></span>
                                 <input id="pwd_email" class="login_text" name="user_email" placeholder="이메일">
                                 <span id="email_check"></span>
-                                <input type="submit" id="pwd_btn" class="btn login_btn" value="비밀번호 찾기">
+                                <input type="submit" id="pwd_btn" class="btn login_btn" value="비밀번호 찾기" disabled>
                             </div>
                         </form> 
                     </div>

@@ -17,7 +17,8 @@
         <div class="join_div">
 
             <form class="join_form" method="post" action="${path}/joined">
-				<input type="hidden" name="user_image" />
+				<c:set var="ran"><%= java.lang.Math.round(java.lang.Math.random() * 10) %></c:set>
+				<input type="hidden" name="user_image" value="${ran}.png" />
 				
                 <table class="table join_table">
 
