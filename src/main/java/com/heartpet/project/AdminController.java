@@ -160,13 +160,6 @@ public class AdminController {
         return "admin/user/user_insert";
     }
     
-    @RequestMapping("/user_inserted")
-    public void user_inserted(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    	response.setContentType("text/html; charset=utf-8");
-    	
-    	PrintWriter out = response.getWriter();
-    	    	
-    }
 
     /*관리자 리스트에서 상세정보보기*/
     
