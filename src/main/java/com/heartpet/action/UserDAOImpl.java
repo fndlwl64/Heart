@@ -88,12 +88,13 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<UserDTO> userListPaging(int startNo, int endNo, String field, String keyword) {
+	public List<UserDTO> userListPaging(int startNo, int endNo, String field, String keyword, String user_grade) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("startNo", startNo);
     	map.put("endNo", endNo);
     	map.put("field", field);
     	map.put("keyword", keyword);
+    	map.put("user_grade", user_grade);
         return this.sqlSession.selectList("user_list", map);
 	}
 

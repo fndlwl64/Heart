@@ -139,7 +139,7 @@ public class AdminQnaController {
             }
         } else {        	
     	    FileUploadImage upload = new FileUploadImage();  
-    	    List<String> boardImgs =  upload.uploadFile(request, board_img, "qna-admin", "insert", 2);
+    	    List<String> boardImgs =  upload.uploadFile(request, board_img, "qna-admin", 2);
 
         	qnaDto.setBoard_img1(boardImgs.get(0));
         	qnaDto.setBoard_img2(boardImgs.get(1));

@@ -51,18 +51,42 @@
                    	</td>
                 </tr>
                 <tr>
-                	<th class="table-light">이미지</th>
-                    <td colspan="5">
-                        <div class="d-flex align-middle">
-                            <input type="file" class="form-control" name="review_img" value="${ review_img }" accept="image/gif, image/jpeg, image/png" multiple>
-                        </div>
-                    </td>
+					<th rowspan="3" class="table-light">이미지</th>
+	                <td colspan="5">
+	                    <div class="d-grid align-middle original-image">
+	                        <input type="file" class="form-control" name="review_img" accept="image/gif, image/jpeg, image/png" >
+	                        <c:if test="${ !empty list.review_img1 }">
+	                       		<p class="mt-2"><img src="${ path }${ list.review_img1 }" style="max-height: 200px;" alt="board_img" /></p>      
+			                </c:if>                  
+	                    </div>
+                	</td>
+               </tr>
+				<tr>
+                	<td colspan="5">
+	                    <div class="d-grid align-middle original-image">
+	                        <input type="file" class="form-control" name="review_img" accept="image/gif, image/jpeg, image/png" >
+	                        <c:if test="${ !empty list.review_img2 }">
+	                       		<p class="mt-2"><img src="${ path }${ list.review_img2 }" style="max-height: 200px;" alt="board_img" /></p>      
+			                </c:if> 
+	                    </div>
+                	</td>
                 </tr>
                 <tr>
+                	<td colspan="5">
+	                    <div class="d-grid align-middle original-image">
+	                        <input type="file" class="form-control" name="review_img" accept="image/gif, image/jpeg, image/png" >
+	                        <c:if test="${ !empty list.review_img3 }">
+	                       		<p class="mt-2"><img src="${ path }${ list.review_img3 }" style="max-height: 200px;" alt="board_img" /></p>      
+			                </c:if> 
+	                    </div>
+                	</td>
+                </tr>
+                <tr>
+                	<!-- 수정 예정 -->
                 	<th class="table-light">동영상</th>
                     <td colspan="5">
                         <div class="d-flex align-middle">
-                            <input type="file" class="form-control" name="review_video" value="${ review_video }" accept="image/gif, image/jpeg, image/png" multiple>
+                            <input type="file" class="form-control" name="review_video" value="${ review_video }" accept="image/gif, image/jpeg, image/png">
                         </div>
                     </td>
                 </tr>

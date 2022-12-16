@@ -168,6 +168,9 @@
 	font-weight: bold;
 }
 
+.table tr td .original-image {
+	justify-items: start;
+}
 /* fnq - accordion */
 .accordion {
     margin: auto;
