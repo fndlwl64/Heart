@@ -110,17 +110,18 @@ public class FileUploadImage {
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////
-	// FolderName / dateString 순서 변경 / insert-update 등 선택가능
+	// uploadFile : FolderName / dateString 순서 변경 / insert-update 등 선택가능 // 이미지만 있을 때...
 	////////////////////////////////////////////////////////////////////////////////
     public List<String> uploadFile(HttpServletRequest request, List<MultipartFile> files, 
             String folderName, String fileState, int fileTotal) throws IllegalStateException, IOException {        
         // List<String> 타입으로 return 예정
-        List<String> images = new ArrayList<String>();
+        List<String> folderFiles = new ArrayList<String>();
         Calendar cal = Calendar.getInstance();
         String dateString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
-        String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/"+folderName + File.separator + dateString);
+        String subPath = "/resources/upload/"+folderName + File.separator + dateString;
+        String rootPath = request.getSession().getServletContext().getRealPath(subPath);
         
-        System.out.println(rootPath);
+        System.out.println("rootPath : "+rootPath);
         
         // 폴더 없으면 생성
         File mkfile = new File(rootPath);
@@ -129,8 +130,8 @@ public class FileUploadImage {
             mkfile.mkdirs();
         }
         
-        System.out.println("review_video" + files.size());
-        System.out.println("review_video : " + files.toString());
+        System.out.println("review_file_size : " + files.size());
+        System.out.println("review_file : " + files.toString());
         
         //파일 업로드
         for(int i=0; i<files.size(); i++) {
@@ -144,19 +145,18 @@ public class FileUploadImage {
 
             // insert : reviewImg_insert_1_숫자.확장자 // update : reviewImg_update_1_숫자.확장자
             String fileRename = folderName + "_" + fileState + "_" + (i+1) + "_" + System.currentTimeMillis() + fileExt;
-            System.out.println("fileRename : " + fileRename);
-
+            System.out.println("fileRename : " + fileRename);            
             // 파일 이름 DB 저장 
-            images.add(rootPath + File.separator + fileRename);
+            folderFiles.add(subPath + File.separator + fileRename);            
             // 실제 파일 이동
             files.get(i).transferTo(new File(rootPath + File.separator + fileRename));
         }
         
         // 총 파일 수만큼 for문 돌림
         for(int i=0; i<(fileTotal-files.size()); i++) {
-            images.add("");
+        	folderFiles.add("");
         }
-        return images;
+        return folderFiles;
     }
     
     /////////////////////////////////////////////////////////////////////////////////

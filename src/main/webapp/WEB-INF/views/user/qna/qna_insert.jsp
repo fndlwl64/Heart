@@ -15,6 +15,7 @@
 </c:choose>
 <!-- list : 부모글 -->
 <% pageContext.setAttribute("newline", "\n"); %>
+<script src="${path}/resources/js/fileCount.js"></script>
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
 <script src="${path}/resources/js/user_qna_insert.js"></script>
@@ -78,7 +79,7 @@
 				<th class="table-light">이미지</th>
                 <td colspan="2">
                     <div class="d-flex align-middle">
-                        <input type="file" class="form-control" name="board_img" accept="image/gif, image/jpeg, image/png" multiple>
+                        <input type="file" class="form-control" name="board_img" accept="image/gif, image/jpeg, image/png" multiple onchange="fileOption(2, this.name);">
                     </div>
                 </td>
             </tr>

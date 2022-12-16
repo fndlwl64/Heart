@@ -107,8 +107,9 @@
 				sysdate, 
 				'', 
 				default,
-				'', 
-				'')
+				#{ board_img1 }, 
+				#{ board_img2 }
+				)
 	</insert>
 		
 	<!-- update -->

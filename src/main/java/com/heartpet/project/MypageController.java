@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import java.io.PrintWriter;
 import javax.mail.PasswordAuthentication;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -27,13 +29,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.MypageDAO;
+import com.heartpet.action.ReviewDAO;
 import com.heartpet.model.Mypage_SupportDTO;
 import com.heartpet.model.UserDTO;
 import com.heartpet.model.WishVO;
 
 //메일보내기위해서 구글 이메일 등록해놓는 클래스
 class MyAuthentication extends Authenticator {
+	
     
     PasswordAuthentication pa;
     
@@ -58,6 +63,9 @@ public class MypageController {
 	
 	@Autowired
 	private MypageDAO mypagedao;
+	
+	@Autowired
+	private ReviewDAO reviewDAO;
 
     @RequestMapping("/user_mypage_wish_list")
     public String mypage_wish_list(Model model, HttpServletRequest request) {
@@ -88,11 +96,23 @@ public class MypageController {
     	int regcount = mypagedao.AnimalRegCount(user_id);
     	int review_count = mypagedao.ReviewCount(user_id);
     	List<WishVO> wish_list = mypagedao.getAdoptList(user_id);
+    	List<Integer> animal_no = new ArrayList<Integer>();
+    	List<Integer> doubleCheck  = new ArrayList<Integer>();
+    	
+    	for(int i=0; i<wish_list.size(); i++) {
+    		animal_no.add(wish_list.get(i).getAnimal_no());
+    		//
+    		doubleCheck.add(reviewDAO.mypageReviewCount(animal_no.get(i)));
+    	}
+    		
+    	
+    	
     	model.addAttribute("Sum", sum);
     	model.addAttribute("uList", user_list);
     	model.addAttribute("Count", regcount);
     	model.addAttribute("review_Count", review_count);
     	model.addAttribute("aList", wish_list);
+    	model.addAttribute("doubleCheck", doubleCheck);
         return "user/mypage/mypage_adopt_reg_list";
     }
     
@@ -106,6 +126,7 @@ public class MypageController {
     	int regcount = mypagedao.AnimalRegCount(user_id);
     	int review_count = mypagedao.ReviewCount(user_id);
     	List<WishVO> wish_list = mypagedao.getAdoptComList(user_id);
+    	
     	model.addAttribute("Sum", sum);
     	model.addAttribute("uList", user_list);
     	model.addAttribute("Count", regcount);
