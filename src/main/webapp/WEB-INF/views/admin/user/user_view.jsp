@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="../../include/admin_header.jsp"/>
 <!DOCTYPE html>
@@ -20,25 +21,28 @@
 				
 				<h3>기본정보</h3>
 				
-				<div class="user_info row">
+				<div class="user_info">
 					
-					<div class="info_title col">
-						<p class="title"><i class="bi bi-list-ol"></i> 회원번호</p>
-						<p class="title"><i class="bi bi-tag"></i> 회원이름</p>
-						<p class="title"><i class="bi bi-tag"></i> 아이디</p>
-						<p class="title"><i class="bi bi-key"></i> 비밀번호</p>
-						<p class="title"><i class="bi bi-person-badge"></i> 회원등급</p>
-					</div>
-					
-					<div class="info_cont col">
-						<p class="cont"> ${cont.user_no}</p>
-						<p class="cont"> ${cont.user_name}</p>
-						<p class="cont"> ${cont.user_id}</p>
-						<p class="cont"><c:forEach begin="1" end="${cont.getUser_pwd().length() }">
-							*
-						</c:forEach></p>
-						<p class="cont"> ${cont.user_grade}</p>
-					</div>		
+					<div class="info_title">
+						<ul class="info_border">
+							<li><img class="user_img" src="${path }/resources/image/user_img/${cont.user_image}" alt="회원 랜덤 이미지" /></li>
+							<li>
+								<div>
+									<label class="title">이름</label> <span class="bold"> ${cont.user_name}</span> <br />
+									<label class="title">아이디</label> <span> ${cont.user_id}</span>
+								</div>
+							</li>
+						</ul>
+						
+						<ul class="info_border">
+							<li class="forMargin">
+								<div>
+									<label class="title">등급</label><span> ${cont.user_grade }</span> <br />
+									<label class="title">이메일</label> <span> ${cont.user_email}</span>
+								</div>
+							</li>
+						</ul>
+					</div>	
 				</div>
 				
 			</div>
@@ -47,37 +51,26 @@
 			
 				<h3>상세정보</h3>
 			
-				<div class="user_info row">
-					
-					<div class="info_title col">
-						<p class="title"><i class="bi bi-list-ol"></i> 이메일</p>
-						<p class="title"><i class="bi bi-tag"></i> 연락처</p>
-						<p class="title"><i class="bi bi-tag"></i> 주소</p>
-						<p class="title"><i class="bi bi-key"></i> 후원금액</p>
-						<p class="title"><i class="bi bi-person-badge"></i> 반려동물경험</p>
-					</div>
-					
-					<div class="info_cont col">
-						<p class="cont"> 
-							<c:if test="${empty cont.user_email }">-</c:if>
-							<c:if test="${!empty cont.user_email }">${cont.user_email }</c:if>
-						</p>
-						<p class="cont"> 
-							<c:if test="${empty cont.user_phone }">-</c:if>
-							<c:if test="${!empty cont.user_phone }">${cont.user_phone }</c:if>
-						</p>
-						<p class="cont"> 
-							<c:if test="${empty cont.user_addr }">-</c:if>
-							<c:if test="${!empty cont.user_addr }">${cont.user_addr }</c:if>
-						</p>
-						<p class="cont"> <fmt:formatNumber>${cont.user_totalprice}</fmt:formatNumber>원 </p>
-						<p class="cont"> 
-							<c:if test="${empty cont.user_animalexp }">-</c:if>
-							<c:if test="${!empty cont.user_animalexp}">${cont.user_animalexp}</c:if>
-						</p>
+				<div class="user_info">
+					<c:set var="addrlength" value="${cont.user_addr }"/>
+					<c:set var="length" value="${fn:length(addrlength)}"/>
+					<c:set var="addr" value = "${fn:substring(addrlength, 6, length-7)}" />
+					<div class="info_title">
+						<ul>
+							<li class="forMargin">
+								<div>
+									<label class="title">회원번호</label><span> ${cont.user_no }</span> <br />
+									<label class="title">연락처</label> <span> <c:if test="${empty cont.user_phone }">-</c:if>
+							<c:if test="${!empty cont.user_phone }">${cont.user_phone }</c:if> </span> <br />
+									<label class="title">주소</label> <span> <c:if test="${empty cont.user_addr }">-</c:if>
+							<c:if test="${!empty cont.user_addr }">${addr}</c:if> </span> <br />
+									<label class="title">후원금액</label> <span> <fmt:formatNumber>${cont.user_totalprice}</fmt:formatNumber>원 </span> <br />
+									<label class="title">반려동물경험</label> <span> <c:if test="${empty cont.user_animalexp }">-</c:if> ${cont.user_animalexp } </span>
+								</div>
+							</li>
+						</ul>
 					</div>
 				</div>
-			
 			</div>
 			
 		</div>
