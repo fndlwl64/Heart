@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.QnaDAO;
+import com.heartpet.model.FileUploadImage;
 import com.heartpet.model.FnqDTO;
 import com.heartpet.model.PageDTO;
 import com.heartpet.model.QnaDTO;
@@ -161,25 +162,13 @@ public class UserQnaController {
     // QNA_INSERT_OK
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/user_qna_insert_ok", method = RequestMethod.POST)
-    public void user_qna_insert_ok(@Valid QnaDTO qnaDto, BindingResult result,
+    public void user_qna_insert_ok(@RequestParam("board_img") List<MultipartFile> board_img, 
+    		@Valid QnaDTO qnaDto, BindingResult result,
             HttpServletResponse response, HttpServletRequest request) throws IOException {
+    	
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        /*
-         * for (MultipartFile file : files) { long size = file.getSize(); String
-         * fileName = file.getOriginalFilename(); System.out.println("fileName : " +
-         * fileName); System.out.println("size : " + size);
-         * 
-         * // 파일 저장 경로 String savePath = "/resources/qna"; String realPath =
-         * request.getSession().getServletContext().getRealPath(savePath);
-         * 
-         * // 업로드 폴더 체크 후 없으면 생성 File dirChk = new File(realPath); if (!dirChk.exists())
-         * { dirChk.mkdir(); }
-         * 
-         * realPath += File.separator + fileName; File saveFile = new File(realPath);
-         * file.transferTo(saveFile); }
-         */
 
         if (result.hasErrors()) { // 에러를 List로 저장
             List<ObjectError> errors = result.getAllErrors();
@@ -200,11 +189,18 @@ public class UserQnaController {
                 }
             }
         } else {
+    		// request, MultipartFile, folderName, insert/update 구분, 총 파일 개수
+		    FileUploadImage upload = new FileUploadImage();  
+		    List<String> boardImgs =  upload.uploadFile(request, board_img, "qna", "insert", 2);
+		    
+	    	qnaDto.setBoard_img1(boardImgs.get(0));
+	    	qnaDto.setBoard_img2(boardImgs.get(1));
+        	
             int check = this.qnaDAO.insertQna(qnaDto);
             if (check > 0) {
-                out.println("<script>alert('성공적으로 글이 등록되었습니다.'); location.href='" + request.getContextPath() + "/user_qna_list'; </script>");
+                out.println("<script>alert('성공적으로 게시글이 등록되었습니다.'); location.href='" + request.getContextPath() + "/user_qna_list'; </script>");
             } else {
-                out.println("<script>alert('글 등록을 실패했습니다.'); history.back(); </script>");
+                out.println("<script>alert('게시글 등록을 실패했습니다.'); history.back(); </script>");
             }
         }
     }

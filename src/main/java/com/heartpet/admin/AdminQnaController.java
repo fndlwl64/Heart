@@ -17,8 +17,10 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.QnaDAO;
+import com.heartpet.model.FileUploadImage;
 import com.heartpet.model.FnqDTO;
 import com.heartpet.model.PageDTO;
 import com.heartpet.model.QnaDTO;
@@ -113,7 +115,8 @@ public class AdminQnaController {
     // QNA_REPLY_INSERT_OK
     ///////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/admin_qna_reply_insert_ok", method = RequestMethod.POST)
-    public void admin_qna_reply_insert_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response,
+    public void admin_qna_reply_insert_ok(@RequestParam("board_img") List<MultipartFile> board_img, 
+    		@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response,
             HttpServletRequest request) throws IOException {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -134,7 +137,13 @@ public class AdminQnaController {
                     break;
                 }
             }
-        } else {
+        } else {        	
+    	    FileUploadImage upload = new FileUploadImage();  
+    	    List<String> boardImgs =  upload.uploadFile(request, board_img, "qna-admin", "insert", 2);
+
+        	qnaDto.setBoard_img1(boardImgs.get(0));
+        	qnaDto.setBoard_img2(boardImgs.get(1));
+        	
             int check = this.qnaDAO.insertQna(qnaDto);
             if (check > 0) {
                 out.println("<script>alert('성공적으로 답변글이 등록되었습니다.'); location.href='" + request.getContextPath() + "/admin_qna_list'; </script>");

@@ -125,14 +125,13 @@ public class UserReviewController {
     // REVIEW_INSERT_OK
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/user_review_insert_ok", method = RequestMethod.POST)
-    public void user_review_insert_ok(@RequestParam("review_img") List<MultipartFile> review_img, 
-            @RequestParam("review_vid") List<MultipartFile> review_vid,
+    public void user_review_insert_ok(@RequestParam("review_file") List<MultipartFile> review_file, 
     		@Valid ReviewDTO reviewDto, BindingResult result, HttpServletResponse response,
     		HttpServletRequest request) throws IOException {
     	
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
-        System.out.println("review_video eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+review_vid.toString());
+        System.out.println("review_file eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+review_file.toString());
 
 
         if (result.hasErrors()) { // 에러를 List로 저장
@@ -148,24 +147,17 @@ public class UserReviewController {
             }
         } else { 
     		  		
+        	//////////////////////////////////////////////////////////////////////////// 수정 중
     		// request, MultipartFile, folderName, insert/update 구분, 총 파일 개수
-    		if(review_img != null) {
+    		if(review_file != null) {
     		    FileUploadImage upload = new FileUploadImage();  
-    		    List<String> reviewImgs = upload.uploadFile(request, review_img, "review_img", "insert", 3);
-    		    if(reviewImgs.size() > 0) {
-    		        reviewDto.setReview_img1(reviewImgs.get(0));
-    		        reviewDto.setReview_img2(reviewImgs.get(1));
-    		        reviewDto.setReview_img3(reviewImgs.get(2));
+    		    List<String> reviewFiles = upload.uploadFile(request, review_file, "review_file", "insert", 4);
+    		    if(reviewFiles.size() > 0) {
+    		        reviewDto.setReview_img1(reviewFiles.get(0));
+    		        reviewDto.setReview_img2(reviewFiles.get(1));
+    		        reviewDto.setReview_img3(reviewFiles.get(2));
+    		        reviewDto.setReview_img3(reviewFiles.get(3));
     		    }   		    
-    		}
-    		
-    		if(review_vid != null) {  
-    		    System.out.println("여기까지는 들어왔나");
-    		    FileUploadImage upload = new FileUploadImage();   		    
-    		    List<String> reviewVid = upload.uploadFile(request, review_vid, "review_video", "insert", 1); 
-    		    if(reviewVid.size() > 0) {
-    		        reviewDto.setReview_video(reviewVid.get(0));
-    		    }    		    
     		}
     		
             int check = this.reviewDAO.insertReview(reviewDto);

@@ -91,4 +91,12 @@ public class ReviewDAOImpl implements ReviewDAO {
         return this.sqlSession.selectList("animal_id", session_id);
     }
 
+    ///////////////////////////////////////////////////////
+    // myPage 사용
+    ///////////////////////////////////////////////////////
+	@Override
+	public int mypageReviewCount(int animal_id) {
+		return this.sqlSession.selectOne("review_animal_no_count", animal_id);
+	}
+
 }

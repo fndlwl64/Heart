@@ -139,6 +139,19 @@
 		DELETE FROM heartpet_review 
 			WHERE review_no = #{ review_no }
 	</delete>
+	
+	
+		
+	<!-- 
+	///////////////////////////////////////////////////////
+	myPage - review 개수 구하기
+	///////////////////////////////////////////////////////	
+	-->
+	
+	<select id="review_animal_no_count" parameterType="int" resultType="int">
+		SELECT COUNT(review_no) FROM heartpet_review
+			WHERE review_animal_id = #{ animal_id }
+	</select>
 		
 </mapper>
 
