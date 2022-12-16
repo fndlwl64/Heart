@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="WishDAO">
+	<select id="wish_check" parameterType="WishDTO">
+		select * from heartpet_wish where wish_petno = #{wish_petno} and wish_userid = #{wish_userid};
+	</select>
+	<insert id="wish_insert" parameterType="WishDTO">
+		<selectKey resultType="int" keyProperty="wish_no"
+			order="BEFORE">
+			select max(wish_no) from heartpet_wish
+		</selectKey>
+		insert into heartpet_wish values(#{wish_no}+1,#{wish_petno},#{wish_userid})
+	</insert>
+	<delete id="wish_delete">
+		delete from heartpet_wish where wish_petno = #{wish_petno} and wish_userid = #{wish_userid}  
+	</delete>
+</mapper>

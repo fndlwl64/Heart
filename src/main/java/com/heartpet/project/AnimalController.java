@@ -21,18 +21,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.AdoptRegDAO;
 import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.UserDAO;
+import com.heartpet.action.WishDAO;
 import com.heartpet.model.AdoptRegDTO;
 import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.FileUploadImage;
 import com.heartpet.model.PageDTO;
+import com.heartpet.model.WishDTO;
 
 import lombok.Data;
 import lombok.Getter;
@@ -47,7 +51,10 @@ public class AnimalController {
 	@Autowired
 	private AdoptRegDAO adoptRegDAO;
 	@Autowired
+	private WishDAO wishDAO;
+	@Autowired
 	private HttpServletRequest request;
+	
 
 	// 한 페이지당 보여질 게시물의 수
     private final int rowsize = 3;
@@ -110,7 +117,9 @@ public class AnimalController {
 
 	@RequestMapping(value = "/user_animal_content", method = RequestMethod.GET)
 	public String user_dog_content(@RequestParam("no") int no, Model model) {
-		model.addAttribute("dto", animalDAO.content(no));
+		AnimalDTO animalDTO = animalDAO.content(no);
+		animalDTO.setAnimal_place(animalDTO.getAnimal_place().replace("\r\n", "<br>"));
+		model.addAttribute("dto", animalDTO);
 		return "user/animal/user_animal_content";
 	}
 
@@ -172,5 +181,17 @@ public class AnimalController {
 		return "redirect:/";
 	}
 	
+	@ResponseBody
+	@RequestMapping("/wish")
+	public String wish(@RequestBody WishDTO wishDTO) {
+		System.out.println(wishDTO.getWish_petno());
+		System.out.println(wishDTO.getWish_userid());
+		
+		WishDTO returnDTO = wishDAO.check(wishDTO);
+		System.out.println(returnDTO);
+		System.out.println(returnDTO.getWish_petno());
+		String result = "add";
+		return result;
+	}
 
 }
