@@ -104,7 +104,18 @@
 		<include refid="animal_select"></include>
 		from
 		(
-		select a.*, row_number() over(order by animal_no desc) as rnum
+		select a.*, row_number() 
+		<choose>
+			<when test="sort == null or sort.equals('')">
+				over(order by animal_no desc) as rnum
+			</when>
+			<when test="sort != null and sort.equals('size')">
+				over(order by decode(animal_size, '대형' , 1 , '중형' , 2 , '소형' , 3 , 4)) as rnum
+			</when>
+			<otherwise>
+				over(order by animal_${sort} desc) as rnum
+			</otherwise>
+		</choose>
 		from heartpet_animal a
 		where animal_tag = #{animalDTO.animal_tag} and <![CDATA[ animal_state >= #{animalDTO.animal_state}]]>
 		<if

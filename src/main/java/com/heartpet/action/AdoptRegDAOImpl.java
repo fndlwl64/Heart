@@ -40,13 +40,14 @@ public class AdoptRegDAOImpl implements AdoptRegDAO{
 	}
 
 	@Override
-	public List<AdoptRegDTO> listPaging(int startNo, int endNo, String startDate, String endDate,String tag) {
+	public List<AdoptRegDTO> listPaging(int startNo, int endNo, String startDate, String endDate,String tag,String sort) {
 		Map<String, Object> map = new HashMap<String, Object>();
     	map.put("tag", tag);
     	map.put("startDate", startDate);
     	map.put("endDate", endDate);
     	map.put("startNo", startNo);
     	map.put("endNo", endNo);
+    	map.put("sort", sort);
     	return this.sqlSession.selectList("adoptreg_list_paging", map);
 	}
 

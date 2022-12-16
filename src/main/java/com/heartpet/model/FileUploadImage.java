@@ -218,7 +218,6 @@ public class FileUploadImage {
 	//animal 
 	public void deleteAnimalImg(HttpServletRequest request, AnimalDTO animalDTO) {
 		for(int i=0;i<3;i++) {
-			
 			String deleteImg = null;
 			if(i == 0 ) {deleteImg = animalDTO.getAnimal_img1();};
 			if(i == 1 ) {deleteImg = animalDTO.getAnimal_img2();};

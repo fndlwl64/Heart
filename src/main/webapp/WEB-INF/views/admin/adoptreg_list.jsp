@@ -18,7 +18,7 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
 	crossorigin="anonymous"></script>
-
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 <c:set var="qList" value="${ qnaList }" />
 <c:set var="total" value="${ total }" />
@@ -28,9 +28,13 @@
 <c:set var="list" value="${adoptRegList }"></c:set>
 <c:set var="map" value="${animalMap }"></c:set>
 <c:set var="tag" value="${tag }"></c:set>
-<c:set var="path" value="<%=request.getContextPath() %>"/>
-<c:set var="pagingTag"
+<c:set var="sort" value="${sort }"/>
+<c:set var="path" value="<%=request.getContextPath()%>" />
+<c:set var="pagingSort"
 	value="startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }" />
+<c:set var="pagingTag"
+	value="startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }&sort=${sort }" />
+<input type="hidden" id="sortlink" value="<%=request.getContextPath() %>/adoptreg_list?page=${ paging.page }&${pagingSort}" />	
 <!-- 쿼리 조인을 피하기 위한 key, value를 통한 animal테이블 데이터 참조 -->
 
 <body>
@@ -64,16 +68,21 @@
 
 			</div>
 		</form>
-		<%-- 
-		<br>
 
-		<button class="btn btn-success insertbtn"
-			onclick="location.href='${path }/adoptreg_insert'">등록</button>
-
-		<br> <br>
- --%>
 		<%-- 검색 결과 테이블 --%>
 		<div class="lists">
+			<%--정렬--%>
+			<div class="d-flex justify-content-end my-2">
+				<div class="validation-form mx-2">
+					<select class="form-select form-select-sm" name="sort" id="sort">
+						<option value="">정렬</option>
+						<option value="adopt_reg_appdate" <c:if test="${sort eq 'adopt_reg_appdate'}">selected</c:if> >입소신청일</option>
+						<option value="adopt_reg_regdate" <c:if test="${sort eq 'adopt_reg_regdate'}">selected</c:if> >입양등록일</option>
+						<option value="adopt_reg_duedate" <c:if test="${sort eq 'adopt_reg_duedate'}">selected</c:if> >입양예정일</option>
+						<option value="adopt_reg_adoptdate" <c:if test="${sort eq 'adopt_reg_adoptdate'}">selected</c:if> >입양완료일</option>
+					</select>
+				</div>
+			</div>
 			<table class="table searched_list">
 				<tr>
 					<th class="table-secondary">회원 아이디</th>
@@ -94,10 +103,10 @@
 						<td>${dto.adopt_reg_adoptdate }</td>
 						<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입소 신청'}">
 							<td><a class="text-primary" data-bs-toggle="modal"
-								data-bs-target="#admissionModal" data-id="${path }/adoptreg_admission?animal_no=${dto.adopt_reg_animalno}">${map.get(dto.adopt_reg_animalno).get(1)}</a></td>
+								data-bs-target="#admissionModal"
+								data-id="${path }/adoptreg_admission?animal_no=${dto.adopt_reg_animalno}">${map.get(dto.adopt_reg_animalno).get(1)}</a></td>
 						</c:if>
-						<c:if
-							test="${map.get(dto.adopt_reg_animalno).get(1) ne '입소 신청'}">
+						<c:if test="${map.get(dto.adopt_reg_animalno).get(1) ne '입소 신청'}">
 							<td><a
 								href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }"
 								onclick="return onclickOption(this);" class="status"
@@ -185,7 +194,8 @@
 			<div id="admissionInput" class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="admissionModalLabel">입소 신청 수락</h1>
+						<h1 class="modal-title fs-5" id="admissionModalLabel">입소 신청
+							수락</h1>
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
@@ -193,7 +203,8 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-danger" id="admissionFunction">수락</button>
+						<button type="button" class="btn btn-danger"
+							id="admissionFunction">수락</button>
 					</div>
 				</div>
 			</div>
@@ -215,15 +226,8 @@
 			alert('관리할 사항이 없습니다.');
 			return false;
 		}
-		/* if ($(th).text() == '입소 신청' && window.confirm("입소 신청을 입양 상태로 바꾸시겠습니까?")) {
-			location.href = getContextPath() + '/adoptreg_admission?animal_no='
-					+ $(th).data('value');
-			return false;
-
-		} */
 	}
 	$(document).ready(function () {
-
 	    // admissionModal
 	    const admissionModal = document.getElementById('admissionModal')
 	    const admissionInput = document.getElementById('admissionInput')
@@ -236,8 +240,10 @@
 	           location.href = dataNo;        
 	        });
 	    });
-		
-		
+	});
+	$("#sort").change(function() {
+		console.log($("#sortlink").val()+'&sort='+$('select[name=sort]').val());
+		location.href = $("#sortlink").val()+'&sort='+$('select[name=sort]').val();
 	});
 </script>
 </html>
