@@ -4,32 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
-import javax.swing.filechooser.FileSystemView;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
-
-import com.heartpet.action.AnimalDAO;
 import com.heartpet.model.AnimalDTO;
-
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 @Service
 public class FileUploadImage {
@@ -131,25 +112,25 @@ public class FileUploadImage {
             mkfile.mkdirs();
         }
         
-        System.out.println("file_size : " + files.size());
-        System.out.println("file : " + files.toString());
-        
         // 파일명 생성 및 업로드
         for(int i=0; i<files.size(); i++) {
             String realName = files.get(i).getOriginalFilename();
-            System.out.println("realName : " + realName);
-
-            // .부터 확장자 분리
-            String fileExt = realName.substring(realName.lastIndexOf("."), realName.length()); 
-            System.out.println("fileExt : " + fileExt);
-
-            // insert : reviewImg_insert_1_숫자.확장자 // update : reviewImg_update_1_숫자.확장자
-            String fileRename = folderName + "_insert_" + (i+1) + "_" + System.currentTimeMillis() + fileExt;
-            System.out.println("fileRename : " + fileRename);            
-            // 파일 이름 DB 저장 
-            folderFiles.add(subPath + File.separator + fileRename);            
-            // 실제 파일 이동
+            if(realName.equals("")) { // img 하나도 안 들어오는 경우
+                folderFiles.add("");
+            }else {
+                System.out.println("realName : " + realName);    
+                // .부터 확장자 분리
+                String fileExt = realName.substring(realName.lastIndexOf("."), realName.length()); 
+                System.out.println("fileExt : " + fileExt);
+    
+                // insert : reviewImg_insert_1_숫자.확장자 // update : reviewImg_update_1_숫자.확장자
+                String fileRename = folderName + "_insert_" + (i+1) + "_" + System.currentTimeMillis() + fileExt;
+                System.out.println("fileRename : " + fileRename);            
+                // 파일 이름 DB 저장 
+                folderFiles.add(subPath + File.separator + fileRename);            
+                // 실제 파일 이동
             files.get(i).transferTo(new File(rootPath + File.separator + fileRename));
+            }
         }
         
         // 총 파일 수만큼 for문 돌림
