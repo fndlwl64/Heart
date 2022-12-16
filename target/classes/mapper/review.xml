@@ -154,8 +154,10 @@
 	</resultMap>
 	
 	<select id="review_animal_no_count" parameterType="int" resultMap="myPageReview">
-		SELECT COUNT(review_no) as count, review_no FROM heartpet_review
-			WHERE review_animal_id = #{ animal_id }
+			SELECT COUNT(review_no) as count, review_no 
+        		FROM heartpet_review
+				WHERE review_animal_id = #{ animal_id }
+	            GROUP BY review_no
 	</select>
 		
 </mapper>
