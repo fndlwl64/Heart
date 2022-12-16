@@ -147,14 +147,14 @@ public class UserReviewController {
                 }
             }
         } else {     		  		
-        	////////////////////////////////////////////////////////////////////////////
-        	// 수정 완료 : FileUploadImage.uploadFile(request, 실제 파일, 폴더명, 파일 개수)
+            ////////////////////////////////////////////////////////////////////////////
+            // 수정 완료 : FileUploadImage.uploadFile(request, 실제 파일, 폴더명, 파일 개수)
             //////////////////////////////////////////////////////////////////////////// 
 		    FileUploadImage upload = new FileUploadImage();
 		    
 		    // 총 파일 개수
 		    int totalFileCount = 4;
-		    List<String> reviewFiles = upload.uploadFile(request, review_file, "review_file", totalFileCount);
+		    List<String> reviewFiles = upload.uploadFile(request, review_file, "review", totalFileCount);
 		    
 		    // video 타입인지 check
 		    CheckMimeType typeCheck = new CheckMimeType();
@@ -254,7 +254,7 @@ public class UserReviewController {
     
             // 파일 업데이트
             FileUploadImage reviewFiles = new FileUploadImage();  
-            List<String> updateFile = reviewFiles.updateFile(request, review_file, "review_file", origin_names, totalFileCount);
+            List<String> updateFile = reviewFiles.updateFile(request, review_file, "review", origin_names, totalFileCount);
             
             updateDto.setReview_img1(updateFile.get(0));
             updateDto.setReview_img2(updateFile.get(1));

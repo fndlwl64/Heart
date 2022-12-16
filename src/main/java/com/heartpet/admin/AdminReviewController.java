@@ -2,22 +2,27 @@ package com.heartpet.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.ReviewDAO;
 import com.heartpet.model.PageDTO;
 import com.heartpet.model.ReviewDTO;
+import com.heartpet.util.FileUploadImage;
 
 @Controller
 public class AdminReviewController {
@@ -40,17 +45,11 @@ public class AdminReviewController {
             @RequestParam(value = "animal_tag", required = false) String animal_tag,
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 
-        if (field == null) {
-            field = "";
-        }
-        if (keyword == null) {
-            keyword = "";
-        }
+        if (field == null) { field = ""; }
+        if (keyword == null) { keyword = ""; }
 
         int currentPage = 1; // 현재 페이지 변수
-        if (page != 1) {
-            currentPage = page;
-        }
+        if (page != 1) { currentPage = page; }
 
         List<ReviewDTO> reviewList = null;
         PageDTO paging = null;
@@ -84,7 +83,6 @@ public class AdminReviewController {
         ReviewDTO reviewContent = this.reviewDAO.contentReview(review_no);
         this.reviewDAO.hitReview(review_no);
         model.addAttribute("reviewContent", reviewContent);
-        System.out.println("here");
         return "admin/review/review_content";
     }
     
@@ -102,16 +100,54 @@ public class AdminReviewController {
     // REVIEW_UPDATE_OK
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/admin_review_update_ok", method = RequestMethod.POST)
-    public void admin_review_update_ok(ReviewDTO reviewDto, BindingResult result, HttpServletResponse response,
+    public void admin_review_update_ok(@RequestParam("review_file") List<MultipartFile> review_file, 
+            @Valid ReviewDTO updateDto, BindingResult result, HttpServletResponse response,
             HttpServletRequest request) throws IOException {
+        
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
-      
-        int check = this.reviewDAO.updateReview(reviewDto);
-        if (check > 0) {
-            out.println("<script>alert('글이 성공적으로 수정됐습니다.'); location.href='" + request.getContextPath() + "/admin_review_list'; </script>");
+        
+        if (result.hasErrors()) { // 에러를 List로 저장
+            List<ObjectError> errors = result.getAllErrors();
+            for (ObjectError error : errors) {
+                if (error.getDefaultMessage().equals("title")) {
+                    out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>");
+                    break;
+                } else if (error.getDefaultMessage().equals("content")) {
+                    out.println("<script>alert('글 내용이 없습니다.'); history.back(); </script>");
+                    break;
+                }
+            }
         } else {
-            out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>");
+            ////////////////////////////////////////////////////////////////////////////
+            // FileUploadImage.uploadFile(request, 실제 파일, 폴더명, 파일 개수)
+            //////////////////////////////////////////////////////////////////////////// 
+            // 총 파일 개수
+            int totalFileCount = 4;            
+            ReviewDTO originalContent = this.reviewDAO.contentReview(updateDto.getReview_no());
+            
+            // 기존 이미지 및 비디오 이름 가져오기
+            List<String> origin_names = new ArrayList<String>();
+            origin_names.add(originalContent.getReview_img1());
+            origin_names.add(originalContent.getReview_img2());
+            origin_names.add(originalContent.getReview_img3());
+            origin_names.add(originalContent.getReview_video());
+    
+            // 파일 업데이트
+            FileUploadImage reviewFiles = new FileUploadImage();  
+            List<String> updateFile = reviewFiles.updateFile(request, review_file, "review", origin_names, totalFileCount);
+            
+            updateDto.setReview_img1(updateFile.get(0));
+            updateDto.setReview_img2(updateFile.get(1));
+            updateDto.setReview_img3(updateFile.get(2));
+            updateDto.setReview_video(updateFile.get(3));
+      
+            int check = this.reviewDAO.updateReview(updateDto);
+            if (check > 0) {
+                out.println("<script>alert('후기글이 성공적으로 수정됐습니다.'); location.href='" + request.getContextPath() + "/admin_review_list'; </script>");
+            } else {
+                out.println("<script>alert('후기글 수정을 실패했습니다.'); history.back(); </script>");
+            }
         }
     }
     
@@ -123,12 +159,23 @@ public class AdminReviewController {
             HttpServletRequest request) throws IOException {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
+        
+        ReviewDTO reviewContent = this.reviewDAO.contentReview(review_no);
+        
+        List<String> origin_names = new ArrayList<String>();
+        origin_names.add(reviewContent.getReview_img1());
+        origin_names.add(reviewContent.getReview_img2());
+        origin_names.add(reviewContent.getReview_img3());
+        origin_names.add(reviewContent.getReview_video());
+        
+        FileUploadImage deleteFiles = new FileUploadImage();  
+        deleteFiles.deleteFile(request, origin_names);
       
         int check = this.reviewDAO.deleteReview(review_no);
         if (check > 0) {
-            out.println("<script>alert('글이 성공적으로 삭제됐습니다.'); location.href='" + request.getContextPath() + "/admin_review_list'; </script>");
+            out.println("<script>alert('후기글이 성공적으로 삭제됐습니다.'); location.href='" + request.getContextPath() + "/admin_review_list'; </script>");
         } else {
-            out.println("<script>alert('글 삭제를 실패했습니다.'); history.back(); </script>");
+            out.println("<script>alert('후기글 삭제를 실패했습니다.'); history.back(); </script>");
         }
     }
 

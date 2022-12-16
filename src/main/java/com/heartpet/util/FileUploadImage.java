@@ -191,7 +191,7 @@ public class FileUploadImage {
     }
         
     ////////////////////////////////////////////////////////////////////////////////
-    // deleteFile : FolderName / dateString 순서 변경 / insert-update 등 선택가능 // 이미지만 있을 때...
+    // deleteFile : request, 기존 파일명
     ////////////////////////////////////////////////////////////////////////////////
     public void deleteFile(HttpServletRequest request, List<String> origin_files) {        
         for(int i=0; i<origin_files.size(); i++) {            
