@@ -45,7 +45,7 @@
 						<input type="datetime-local" name="adopt_reg_duedate">
 					</c:if>
 					<c:if test="${not empty content.adopt_reg_duedate }">
-						${content.adopt_reg_duedate }
+						<input type="datetime-local" name="adopt_reg_duedate" value="${content.adopt_reg_duedate }">
 					</c:if>
 				</td>
 			</tr>

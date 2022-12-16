@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,7 +59,7 @@ public class AdminAnimalController {
 	// ADMIN
 	@RequestMapping("/dog_list")
 	public String admin_dog_list(@RequestParam(value = "page", defaultValue = "1") int page, Model model,
-			AnimalDTO animalDTO) {
+			AnimalDTO animalDTO, @RequestParam(value = "sort", required = false) String sort) {
 		// 강아지, 삭제 포함
 		animalDTO.setAnimal_tag("dog");
 		animalDTO.setAnimal_state(0);
@@ -77,7 +78,8 @@ public class AdminAnimalController {
 
 		model.addAttribute("total", totalRecord);
 		model.addAttribute("paging", paging);
-		model.addAttribute("dogList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), animalDTO, keyword));
+		model.addAttribute("sort",sort);
+		model.addAttribute("dogList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), animalDTO, keyword,sort));
 		model.addAttribute("animalDTO", animalDTO);
 
 		return "admin/animal/dog/dog_list";
@@ -86,7 +88,7 @@ public class AdminAnimalController {
 // @RequestParam(value = "adopt_tag" , required = false) String adopt_tag 
 	@RequestMapping("/cat_list")
 	public String cat_list(@RequestParam(value = "page", defaultValue = "1") int page, Model model,
-			AnimalDTO animalDTO) {
+			AnimalDTO animalDTO, @RequestParam(value = "sort", required = false) String sort) {
 		// 고양이, 삭제 포함
 		animalDTO.setAnimal_tag("cat");
 		animalDTO.setAnimal_state(0);
@@ -105,7 +107,8 @@ public class AdminAnimalController {
 
 		model.addAttribute("total", totalRecord);
 		model.addAttribute("paging", paging);
-		model.addAttribute("catList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), animalDTO, keyword));
+		model.addAttribute("sort",sort);
+		model.addAttribute("catList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), animalDTO, keyword,sort));
 		model.addAttribute("animalDTO", animalDTO);
 
 		return "admin/animal/cat/cat_list";
@@ -197,7 +200,8 @@ public class AdminAnimalController {
 	public String adoptreg_list(@RequestParam(value = "startDate", required = false) String startDate,
 			@RequestParam(value = "endDate", required = false) String endDate,
 			@RequestParam(value = "adopt_tag", required = false) String adopt_tag,
-			@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+			@RequestParam(value = "page", defaultValue = "1") int page, Model model,
+			@RequestParam(value = "sort",required = false) String sort) {
 		// 페이징
 		String field = "";
 		String keyword = "";
@@ -217,8 +221,6 @@ public class AdminAnimalController {
 		}
 
 		totalRecord = adoptRegDAO.countTag(startDate, endDate, adopt_tag);
-		System.out.println("===========================");
-		System.out.println(adoptRegDAO.countTag(startDate, endDate, adopt_tag));
 		PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
 
 		// 해시맵으로 조인 유사하게 구현
@@ -232,7 +234,7 @@ public class AdminAnimalController {
 		}
 
 		List<AdoptRegDTO> list = adoptRegDAO.listPaging(paging.getStartNo(), paging.getEndNo(), startDate, endDate,
-				adopt_tag);
+				adopt_tag,sort);
 //		
 
 		model.addAttribute("total", totalRecord);
@@ -242,6 +244,7 @@ public class AdminAnimalController {
 		model.addAttribute("tag", adopt_tag);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
+		model.addAttribute("sort",sort);
 
 		model.addAttribute("adoptRegList", list);
 		model.addAttribute("animalMap", maps);

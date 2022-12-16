@@ -56,7 +56,8 @@ public class AnimalController {
 
     @RequestMapping(value = "/user_dog_list")
 	public String user_dog_list( @RequestParam(value = "page", defaultValue = "1") int page, Model model
-    		, AnimalDTO animalDTO, @RequestParam(value = "keyword" , required = false) String keyword) {
+    		, AnimalDTO animalDTO, @RequestParam(value = "keyword" , required = false) String keyword
+    		,@RequestParam(value="sort" , required = false) String sort) {
     	//강아지 , 삭제되지 않은 데이터
     	animalDTO.setAnimal_tag("dog");
     	animalDTO.setAnimal_state(1);
@@ -74,14 +75,15 @@ public class AnimalController {
     	model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
  		model.addAttribute("field", field);
-		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword));
+ 		model.addAttribute("sort",sort);
+		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword,sort));
 		model.addAttribute("animalDTO",animalDTO);
 		return "user/animal/user_animal_list";
 	}
 
 	@RequestMapping(value = "/user_cat_list")
 	public String user_cat_list(@RequestParam(value = "page", defaultValue = "1") int page, Model model
-    		, AnimalDTO animalDTO, @RequestParam(value = "keyword" , required = false) String keyword) {
+    		, AnimalDTO animalDTO, @RequestParam(value = "keyword" , required = false) String keyword, @RequestParam(value = "sort", required = false) String sort) {
 		//고양이 , 삭제되지 않은 데이터
     	animalDTO.setAnimal_tag("cat");
     	animalDTO.setAnimal_state(1);
@@ -99,7 +101,8 @@ public class AnimalController {
     	model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
  		model.addAttribute("field", field);
-		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword));
+ 		model.addAttribute("sort",sort);
+		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword,sort));
 		model.addAttribute("animalDTO",animalDTO);
 
 		return "user/animal/user_animal_list";

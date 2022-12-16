@@ -38,11 +38,16 @@
 <c:set var="paging" value="${ paging }" />
 <c:set var="field" value="${ field }" />
 <c:set var="keyword" value="${ keyword }" />
+<c:set var="sort" value="${sort }" />
 <c:set var="dogList" value="${ dogList }" />
 <c:set var="animalDTO" value="${ animalDTO }" />
 <c:set var="pagingTag"
+	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }&sort=${sort }" />
+<c:set var="pagingSort"
 	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }" />
 </head>
+<input type="hidden" id="sortlink"
+	value="<%=request.getContextPath() %>/dog_list?page=${ paging.page }&${pagingSort}" />
 <body>
 
 	<div class="container">
@@ -95,6 +100,19 @@
 
 		<%-- 검색 결과 테이블 : 일련번호 클릭 시 해당 동물 상세 정보 페이지로 이동 --%>
 		<div class="lists">
+			<%--정렬--%>
+			<div class="d-flex justify-content-end my-2">
+				<div class="validation-form mx-2">
+					<select class="form-select form-select-sm" name="sort" id="sort">
+						<option value="">정렬</option>
+						<option value="size"
+							<c:if test="${sort eq 'size'}">selected</c:if>>크기</option>
+						<option value="weight"
+							<c:if test="${sort eq 'weight'}">selected</c:if>>무게</option>
+						<option value="age" <c:if test="${sort eq 'age'}">selected</c:if>>나이</option>
+					</select>
+				</div>
+			</div>
 			<table class="table searched_list">
 				<tr>
 					<th class="table-secondary">이름</th>
@@ -112,7 +130,8 @@
 							<td><a href="${path}/animal_content?no=${dto.animal_no}">${dto.animal_name }</a></td>
 						</c:if>
 						<c:if test="${dto.animal_state eq 0 }">
-							<td><a class="text-danger" data-bs-toggle="modal" data-bs-target="#lockModal">${dto.animal_name }</a></td>
+							<td><a class="text-danger" data-bs-toggle="modal"
+								data-bs-target="#lockModal">${dto.animal_name }</a></td>
 						</c:if>
 						<td>${dto.animal_species }</td>
 						<td>${dto.animal_gender }</td>
@@ -218,13 +237,11 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-bs-dismiss="modal">Close</button>
-					</div> 
+					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
-
 </body>
 <script type="text/javascript">
 	$("#checkYN").change(function() {
@@ -235,5 +252,11 @@
 
 		}
 	})
+	//정렬 select
+	$("#sort").change(
+			function() {
+				location.href = $("#sortlink").val() + '&sort='
+						+ $('select[name=sort]').val();
+			});
 </script>
 </html>

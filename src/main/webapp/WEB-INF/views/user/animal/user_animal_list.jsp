@@ -9,9 +9,14 @@
 <c:set var="animalList" value="${animalList }" />
 <c:set var="animalDTO" value="${ animalDTO }" />
 <c:set var="keyword" value="${keyword }" />
+<c:set var="sort" value="${sort }" />
 <c:set var="pagingTag"
+	value="animal_size=${animalDTO.animal_size }&animal_species=${ animalDTO.animal_species}&animal_age=${animalDTO.animal_age }&animal_gender=${animalDTO.animal_gender }&animal_weight=${animalDTO.animal_weight }&animal_status=${animalDTO.animal_status }&animal_place=${animalDTO.animal_place }&keyword=${keyword }&sort=${sort }" />
+<c:set var="pagingSort"
 	value="animal_size=${animalDTO.animal_size }&animal_species=${ animalDTO.animal_species}&animal_age=${animalDTO.animal_age }&animal_gender=${animalDTO.animal_gender }&animal_weight=${animalDTO.animal_weight }&animal_status=${animalDTO.animal_status }&animal_place=${animalDTO.animal_place }&keyword=${keyword }" />
 <%--검색--%>
+<input type="hidden" id="sortlink"
+	value="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list?page=${ paging.page }&${pagingSort}" />
 <div class="d-flex justify-content-center" style="font-size: 14px">
 	<form
 		action="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list"
@@ -144,20 +149,21 @@
 
 <%--정렬--%>
 <div class="d-flex justify-content-end my-2">
-	<form class="validation-form mx-2" action="sort" method="post">
-		<select class="form-select form-select-sm" name="sort">
-			<option>정렬</option>
-			<option value="size">사이즈</option>
-			<option value="weight">무게</option>
-			<option value="age">나이</option>
+	<div class="validation-form mx-2">
+		<select class="form-select form-select-sm" name="sort" id="sort">
+			<option value="">정렬</option>
+			<option value="size" <c:if test="${sort eq 'size'}">selected</c:if>>크기</option>
+			<option value="weight"
+				<c:if test="${sort eq 'weight'}">selected</c:if>>무게</option>
+			<option value="age" <c:if test="${sort eq 'age'}">selected</c:if>>나이</option>
 		</select>
-	</form>
-	<form class="validation-form mx-2" action="" method="post">
+	</div>
+	<!-- <form class="validation-form mx-2" action="" method="post">
 		<select class="form-select form-select-sm " name="sort">
 			<option value="des">내림차순</option>
 			<option value="asc">오름차순</option>
 		</select>
-	</form>
+	</form> -->
 </div>
 
 <%--메인 페이지--%>
@@ -254,7 +260,14 @@
 		</li>
 	</ul>
 </nav>
-
+<script type="text/javascript">
+	//정렬 select
+	$("#sort").change(
+			function() {
+				location.href = $("#sortlink").val() + '&sort='
+						+ $('select[name=sort]').val();
+			});
+</script>
 
 <jsp:include page="../../include/user_footer.jsp" />
 
