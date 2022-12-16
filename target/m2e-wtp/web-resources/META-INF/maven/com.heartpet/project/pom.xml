@@ -214,6 +214,20 @@
 		    <version>0.4.8</version>
 		</dependency>
 		
+		<!-- 동영상 썸네일 추출 jcodec -->
+		<dependency>
+		    <groupId>org.jcodec</groupId>
+		    <artifactId>jcodec</artifactId>
+		    <version>0.2.5</version>
+		</dependency>
+		
+		<!-- jcodec-javase -->
+		<dependency>
+		    <groupId>org.jcodec</groupId>
+		    <artifactId>jcodec-javase</artifactId>
+		    <version>0.2.5</version>
+		</dependency>		
+		
 		<!-- spring-dbcp 라이브러리 -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>
