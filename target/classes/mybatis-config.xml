@@ -22,6 +22,9 @@
 		<!-- AdoptReg -->
 		<typeAlias type="com.heartpet.model.AdoptRegDTO" alias="AdoptRegDTO"/>
 		<typeAlias type="com.heartpet.action.AdoptRegDAO" alias="AdoptRegDAO"/>
+		<!-- Wish -->
+		<typeAlias type="com.heartpet.model.WishDTO" alias="WishDTO"/>
+		<typeAlias type="com.heartpet.action.WishDAO" alias="WishDAO"/>
 	</typeAliases>	
 	
 	

@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="../../include/user_header.jsp" />
-
+<% pageContext.setAttribute("newline", "\n"); %>
+<input type="hidden" value="<%=request.getContextPath()%>/wish" id="linkwish">
+<input type="hidden" value="<%=(String)session.getAttribute("session_id") %>" id="user_id"/>
 <div class="container">
 	<div class="d-flex justify-content-start">
 		<dl class="col mx-5">
@@ -32,13 +34,19 @@
 				<dl class="m-2">
 					<dt class="mx-2">백신접종</dt>
 					<dd class="mx-2">${dto.animal_vaccination }</dd>
-
+				</dl>
+				<dl class="m-2">
+					<dt class="mx-2">크기</dt>
+					<dd class="mx-2">${dto.animal_size }</dd>
 				</dl>
 			</div>
 			<div class="col-2 m-1">
 				<dl class="m-2">
+					<dt class="mx-2">발견장소</dt>
+					<dd class="mx-2">${dto.animal_place }</dd>
+				</dl>
+				<dl class="m-2">
 					<dt class="mx-2">중성여부</dt>
-
 					<dd class="mx-2">${dto.animal_neutered }</dd>
 				</dl>
 				<dl class="m-2">
@@ -58,13 +66,16 @@
 	</div>
 	<div class="d-flex justify-content-center m-3">
 
-		<div class="form-control input-lg" readonly>${dto.animal_caution }</div>
+		<div class="form-control input-lg" readonly>${dto.animal_caution.replace(newline,'<br>') }</div>
 
 	</div>
 	<input type="hidden" id="animal_status" value="${dto.animal_status }">
 	<div class="d-flex justify-content-center mx-5 px-5">
+		<div>
+			<button class="btn" id="wish"><i class="bi bi-star"></i></button>
+		</div>
 		<form action="user_get_animal" method="post" onsubmit="return submitOption();">
-			<input type="hidden" name="animal_no" value="${dto.animal_no }">
+			<input type="hidden" name="animal_no" id="animal_no" value="${dto.animal_no }">
 			<input type="submit" class="btn btn-primary" value="입양하기">
 		</form>
 	</div>
@@ -87,8 +98,25 @@
 			alert('이미 입양 완료된 상태입니다.')
 			return false;
 		}
-		
 	}
+	$(document).ready(function(){
+		$("#wish").on("click",function(){
+			let wishDTO = {"wish_petno" : $("#animal_no").val(), "wish_userid" : $("#user_id").val() };
+			$.ajax({
+				url : $("#linkwish").val(),
+				type : 'POST',
+				data :  JSON.stringify(wishDTO),
+				contentType: "application/json",
+				success : function(data){
+					console.log('success');
+					console.log(data);
+				}
+			})
+			
+			/* <i class="bi bi-star-fill text-warning"></i> */
+		});
+	});
+	
 </script>
 
 
