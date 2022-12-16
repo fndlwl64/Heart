@@ -1,14 +1,22 @@
 package com.heartpet.admin;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.heartpet.action.NoticeDAO;
 import com.heartpet.model.NoticeDTO;
+import com.heartpet.model.SupportDTO;
 
 @Controller
 public class AdminNoticeController {
@@ -28,13 +36,87 @@ public class AdminNoticeController {
         return "admin/notice_insert";
     }
 	
-	@RequestMapping("/notice_view")
-    public String notice_view() {
-        return "admin/notice_view";
+	@RequestMapping("/notice_insert_ok")
+	public void notice_insert_ok(NoticeDTO dto, HttpServletResponse response, HttpServletRequest request) throws IOException {
+		int check = noticedao.noticeinsert(dto);
+		
+		request.setCharacterEncoding("UTF-8");
+    	response.setContentType("text/html; charset=utf-8");
+    	
+    	PrintWriter out = response.getWriter();
+    	
+    	if(check > 0) {
+			out.println("<script>");
+			out.println("alert('공지사항 등록 성공!')");
+			out.println("location.href='"+request.getContextPath()+"/notice_list'");
+			out.println("</script>");
+		}else {
+			out.println("<script>");
+			out.println("alert('공지사항 등록 실패!')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+	}
+	
+	@RequestMapping("/notice_content")
+    public String notice_content(@RequestParam("no") int no, Model model) {
+		NoticeDTO dto = this.noticedao.getNotice(no);
+		model.addAttribute("Cont", dto);
+		
+        return "admin/notice_content";
     }
 	
 	@RequestMapping("/notice_update")
-    public String notice_update() {
+    public String notice_update(@RequestParam("no") int no, Model model) {
+		NoticeDTO dto = this.noticedao.getNotice(no);
+		model.addAttribute("Cont", dto);
+		
         return "admin/notice_update";
+    }
+	
+	@RequestMapping("/notice_update_ok")
+    public void support_update_ok(NoticeDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		int check = this.noticedao.noticeupdate(dto);
+		
+		if(check > 0) {
+			out.println("<script>");
+			out.println("alert('수정 성공!')");
+			out.println("location.href='"+request.getContextPath()+"/notice_list'");
+			out.println("</script>");
+		}else {
+			out.println("<script>");
+			out.println("alert('수정 실패!')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+		
+		
+    }
+	
+	@RequestMapping("/notice_delete")
+    public void support_delete(@RequestParam("no") int no, HttpServletResponse response, HttpServletRequest request) throws IOException {
+		int check = this.noticedao.noticedelete(no);
+		
+		request.setCharacterEncoding("UTF-8");
+    	response.setContentType("text/html; charset=utf-8");
+    	
+    	PrintWriter out = response.getWriter();
+    	
+    	if(check > 0) {
+			/* this.supportdao.updateSequence(no); */
+			out.println("<script>");
+			out.println("alert('삭제 성공!')");
+			out.println("location.href='"+request.getContextPath()+"/notice_list'");
+			out.println("</script>");
+		}else {
+			out.println("<script>");
+			out.println("alert('삭제 실패!')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
     }
 }

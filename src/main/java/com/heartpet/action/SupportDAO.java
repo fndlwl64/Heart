@@ -23,7 +23,7 @@ public interface SupportDAO {
 	public int updateSupport(SupportDTO dto);
 	
 	// 관리자 페이지에서 후원하기 삭제하는 메서드
-	public int deleteSupport(int no);
+	public int updateSupport(int no);
 	
 	// 관리자 페이지에서 후원하기 삭제했을때 번호 당기는 메서드
 	void updateSequence(int no);

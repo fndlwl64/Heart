@@ -15,4 +15,13 @@ public interface NoticeDAO {
     
     //조회수
     public int readCount(int no);
+    
+    //등록
+    public int noticeinsert(NoticeDTO dto);
+    
+    //수정
+    public int noticeupdate(NoticeDTO dto);
+    
+    //삭제
+    public int noticedelete(int no);
 }

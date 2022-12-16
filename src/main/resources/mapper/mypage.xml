@@ -4,7 +4,7 @@
 
 <mapper namespace="com.heartpet.action.MypageDAO">
 	<select id="support_list" parameterType="String" resultType="com.heartpet.model.Mypage_SupportDTO">
-		select * from heartpet_support where support_userid = #{id}
+		select * from heartpet_support where support_userid = #{id} and support_status = 1
 	</select>
  	<select id="support_sum" parameterType="String" resultType="int">
 		select NVL(sum(support_price), '0') from heartpet_support where support_userid = #{id}
