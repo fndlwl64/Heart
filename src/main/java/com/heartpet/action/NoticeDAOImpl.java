@@ -30,4 +30,22 @@ public class NoticeDAOImpl implements NoticeDAO{
 		return this.sqlSession.update("notice_read", no);
 	}
 
+	@Override
+	public int noticeinsert(NoticeDTO dto) {
+		// TODO Auto-generated method stub
+		return this.sqlSession.insert("notice_insert", dto);
+	}
+
+	@Override
+	public int noticeupdate(NoticeDTO dto) {
+		// TODO Auto-generated method stub
+		return this.sqlSession.update("notice_update", dto);
+	}
+
+	@Override
+	public int noticedelete(int no) {
+		// TODO Auto-generated method stub
+		return this.sqlSession.update("notice_delete", no);
+	}
+
 }

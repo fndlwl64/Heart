@@ -49,9 +49,9 @@ public class SupportDAOImpl implements SupportDAO{
 	}
 
 	@Override
-	public int deleteSupport(int no) {
+	public int updateSupport(int no) {
 		
-		return this.sqlSession.delete("sup_delete", no);
+		return this.sqlSession.update("sup_delete", no);
 	}
 
 	@Override

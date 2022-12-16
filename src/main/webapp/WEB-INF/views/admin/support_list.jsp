@@ -57,7 +57,7 @@
 	                <td>${dto.getSupport_date().substring(0,10) }</td>
 	                <td>
 	                    <button class="btn btn-primary" onclick="location.href='${path }/support_update?no=${dto.getSupport_no()}'">수정</button>
-	                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
+	                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${path }/support_delete?no=${dto.getSupport_no()}">삭제</button>
 	                </td>
 	            </tr>
 	            </c:forEach>
@@ -67,8 +67,13 @@
     </div>
 
     <br>
+
+    <%-- 삭제 모달 --%>
+    <jsp:include page="../include/deleteModal.jsp" />
+    
     <%-- 페이징처리 --%>
-    <nav aria-label="Page navigation example">
+    <jsp:include page="../include/pagination.jsp" />
+    <!-- <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item disabled">
                 <a class="page-link">Previous</a>
@@ -80,28 +85,8 @@
                 <a class="page-link" href="#">Next</a>
             </li>
         </ul>
-    </nav>
-
-    <%-- 삭제 모달 --%>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div id="myInput" class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">데이터 삭제</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    해당 데이터를 삭제하시겠습니까?
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-danger" onclick="location.href='${path }/support_delete?no=${dto.getSupport_no()}'">삭제</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    </nav> -->
+    
 
 </div>
 

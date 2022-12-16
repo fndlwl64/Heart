@@ -23,9 +23,21 @@ public class AdminSupportController {
 	@Autowired
 	private SupportDAO supportdao;
 	
+	// 한 페이지당 보여질 게시물의 수
+    private final int rowsize = 10;
+
+    // 전체 게시물의 수
+    private int totalRecord = 0;
+	
 	//후원리스트출력
 	@RequestMapping("/support_list")
-	public String admin_support_list(Model model) {
+	public String admin_support_list(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+		
+		int currentPage = 1; // 현재 페이지 변수
+        if (page != 1) {
+            currentPage = page;
+        }
+		
 		List<SupportDTO> support_list = supportdao.Support();
 		model.addAttribute("sList", support_list);
 		return "admin/support_list";
@@ -93,7 +105,7 @@ public class AdminSupportController {
 	
 	@RequestMapping("/support_delete")
     public void support_delete(@RequestParam("no") int no, HttpServletResponse response, HttpServletRequest request) throws IOException {
-		int check = this.supportdao.deleteSupport(no);
+		int check = this.supportdao.updateSupport(no);
 		
 		request.setCharacterEncoding("UTF-8");
     	response.setContentType("text/html; charset=utf-8");
@@ -101,7 +113,7 @@ public class AdminSupportController {
     	PrintWriter out = response.getWriter();
     	
     	if(check > 0) {
-			this.supportdao.updateSequence(no);
+			/* this.supportdao.updateSequence(no); */
 			out.println("<script>");
 			out.println("alert('삭제 성공!')");
 			out.println("location.href='"+request.getContextPath()+"/support_list'");
