@@ -70,12 +70,12 @@
 			                	<p><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">성별 : ${dto.getAnimal_gender()}</a></p>
 			                	<p><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">나이 : ${dto.getAnimal_age()}</a></p>
 			                	<p><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">입양 완료일 : ${dto.getAdopt_reg_adoptdate().substring(0, 10)}</a></p>
-			                	<c:out value="${ sendCheck[status.index][count] }" />
-			                	<c:if test="${ sendCheck[status.index][count] eq 0 }">
+			                	<c:out value="${ sendCheck[status.index].count }" />
+			                	<c:if test="${ sendCheck[status.index].count eq 0 }">
 			                		<p><a class="animal_cont" href="${path }/user_review_insert?animal_no=${dto.getAnimal_no()}"><button>후기작성</button></a></p>
 			                	</c:if>
-			                	<c:if test="${ sendCheck[status.index][count] gt 0  }">
-			                		<p><a class="animal_cont" href="${path }/user_review_content?review_no=${ sendCheck[status.index][review_no] }"><button>내가 쓴 후기보기</button></a></p>
+			                	<c:if test="${ sendCheck[status.index].count  gt 0  }">
+			                		<p><a class="animal_cont" href="${path }/user_review_content?review_no=${ sendCheck[status.index].review_no }"><button>내가 쓴 후기보기</button></a></p>
 			                	</c:if>
 			                </li>
 		 		        <c:if test="${count % 4 == 0 }">
