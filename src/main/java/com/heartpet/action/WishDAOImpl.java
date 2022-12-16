@@ -27,10 +27,10 @@ public class WishDAOImpl implements WishDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
-	public WishDTO check(WishDTO wishDTO) {
-		return sqlSession.selectOne("wish_check",wishDTO);
+	public int check(WishDTO dto) {
+		return sqlSession.selectOne("wish_check",dto);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class WishDAOImpl implements WishDAO {
 
 	@Override
 	public int insert(WishDTO dto) {
-		return sqlSession.insert("");
+		return sqlSession.insert("wish_insert",dto);
 	}
 
 	@Override
@@ -51,8 +51,7 @@ public class WishDAOImpl implements WishDAO {
 	}
 
 	@Override
-	public int delete(int wish_no) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int delete(WishDTO dto) {
+		return sqlSession.delete("wish_delete",dto);
 	}
 }

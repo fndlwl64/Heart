@@ -118,8 +118,11 @@ public class AnimalController {
 	@RequestMapping(value = "/user_animal_content", method = RequestMethod.GET)
 	public String user_dog_content(@RequestParam("no") int no, Model model) {
 		AnimalDTO animalDTO = animalDAO.content(no);
-		animalDTO.setAnimal_place(animalDTO.getAnimal_place().replace("\r\n", "<br>"));
 		model.addAttribute("dto", animalDTO);
+		WishDTO wishDTO = new WishDTO();
+		wishDTO.setWish_petno(animalDTO.getAnimal_no());
+		wishDTO.setWish_userid((String)request.getSession().getAttribute("session_id"));
+		model.addAttribute("wishCheck",wishDAO.check(wishDTO) );
 		return "user/animal/user_animal_content";
 	}
 
@@ -183,15 +186,17 @@ public class AnimalController {
 	
 	@ResponseBody
 	@RequestMapping("/wish")
-	public String wish(@RequestBody WishDTO wishDTO) {
+	public int wish(@RequestBody WishDTO wishDTO) {
 		System.out.println(wishDTO.getWish_petno());
 		System.out.println(wishDTO.getWish_userid());
-		
-		WishDTO returnDTO = wishDAO.check(wishDTO);
-		System.out.println(returnDTO);
-		System.out.println(returnDTO.getWish_petno());
-		String result = "add";
-		return result;
+		int check = wishDAO.check(wishDTO);
+		if(check > 0) {
+			wishDAO.delete(wishDTO);
+			return 0;
+		}else {
+			wishDAO.insert(wishDTO);
+			return 1;
+		}
 	}
 
 }
