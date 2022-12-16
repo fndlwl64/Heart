@@ -2,6 +2,7 @@ package com.heartpet.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -179,10 +180,13 @@ public class AdminQnaController {
     // QNA_REPLY_UPDATE_OK
     ///////////////////////////////////////////////////////////////////
     @RequestMapping("/admin_qna_reply_update_ok")
-    public void admin_qna_reply_update_ok(@Valid QnaDTO qnaDto, BindingResult result, HttpServletResponse response)
+    public void admin_qna_reply_update_ok(@RequestParam("board_img") List<MultipartFile> board_img, 
+    		@Valid QnaDTO updateDto, BindingResult result, HttpServletResponse response)
             throws IOException {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
+        QnaDTO qnaContent = this.qnaDAO.contentQna(updateDto.getBoard_no());
+
         if (result.hasErrors()) {
             List<ObjectError> errors = result.getAllErrors();
             for (ObjectError error : errors) {
@@ -201,7 +205,20 @@ public class AdminQnaController {
                 }
             }
         } else {
-            int check = this.qnaDAO.insertQna(qnaDto);
+        	
+            // 기존 이미지 이름   
+            List<String> origin_names = new ArrayList<String>();
+            origin_names.add(qnaContent.getBoard_img1());
+            origin_names.add(qnaContent.getBoard_img2());
+
+            // 파일 업데이트
+            FileUploadImage upload = new FileUploadImage();  
+            List<String> updateFile = upload.updateFile(request, board_img, "qna", origin_names, 2);
+            
+            updateDto.setBoard_img1(updateFile.get(0));
+            updateDto.setBoard_img2(updateFile.get(1));        	
+        	
+            int check = this.qnaDAO.insertQna(updateDto);
             if (check > 0) {
                 out.println("<script>alert('성공적으로 답변글이 수정되었습니다.'); location.href='" + request.getContextPath() + "/admin_qna_list'; </script>");
             } else {

@@ -21,12 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 
 import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.ReviewDAO;
-import com.heartpet.model.AdoptRegDTO;
 import com.heartpet.model.FileUploadImage;
 import com.heartpet.model.PageDTO;
 import com.heartpet.model.ReviewDTO;
@@ -145,8 +142,7 @@ public class UserReviewController {
                     break;
                 }
             }
-        } else { 
-    		  		
+        } else {     		  		
         	//////////////////////////////////////////////////////////////////////////// 수정 중
     		// request, MultipartFile, folderName, insert/update 구분, 총 파일 개수
     		if(review_file != null) {
@@ -156,7 +152,7 @@ public class UserReviewController {
     		        reviewDto.setReview_img1(reviewFiles.get(0));
     		        reviewDto.setReview_img2(reviewFiles.get(1));
     		        reviewDto.setReview_img3(reviewFiles.get(2));
-    		        reviewDto.setReview_img3(reviewFiles.get(3));
+    		        reviewDto.setReview_video(reviewFiles.get(3));
     		    }   		    
     		}
     		

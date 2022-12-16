@@ -1,6 +1,5 @@
 package com.heartpet.project;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -220,7 +219,7 @@ public class UserQnaController {
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/user_qna_update_ok", method = RequestMethod.POST)
     public void user_qna_update_ok(@RequestParam("board_img") List<MultipartFile> board_img, 
-    		QnaDTO updateDto, HttpServletResponse response, HttpServletRequest request)
+    		@Valid QnaDTO updateDto, BindingResult result, HttpServletResponse response, HttpServletRequest request)
             throws IOException, IllegalStateException {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -231,25 +230,44 @@ public class UserQnaController {
             out.println("<script>alert('비밀번호를 다시 확인해주세요.'); history.back(); </script>");
         }
         
-        // 기존 이미지 이름   
-        List<String> origin_names = new ArrayList<String>();
-        origin_names.add(qnaContent.getBoard_img1());
-        origin_names.add(qnaContent.getBoard_img2());
-
-        // 파일 업데이트
-        FileUploadImage upload = new FileUploadImage();  
-        List<String> updateFile = upload.updateFile(request, board_img, "qna", origin_names, 2);
-        
-        updateDto.setBoard_img1(updateFile.get(0));
-        updateDto.setBoard_img2(updateFile.get(1));
-
         // 유효성 검사
-        int check = this.qnaDAO.updateQna(updateDto);
-        if (check > 0) {
-            out.println("<script>alert('성공적으로 글이 수정되었습니다.'); location.href='" + request.getContextPath()
-                    + "/user_qna_list'; </script>");
-        } else {
-            out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>");
+        if (result.hasErrors()) {
+            List<ObjectError> errors = result.getAllErrors();
+            for (ObjectError error : errors) {
+                if (error.getDefaultMessage().equals("title")) {
+                    out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>");
+                    break;
+                } else if (error.getDefaultMessage().equals("content")) {
+                    out.println("<script>alert('글 내용이 없습니다.'); history.back(); </script>");
+                    break;
+                } else if (error.getDefaultMessage().equals("password")) {
+                    out.println("<script>alert('글 비밀번호를 입력해주세요.'); history.back(); </script>");
+                    break;
+                } else if (error.getDefaultMessage().equals("regexp")) {
+                    out.println("<script>alert('비밀번호는 6자 이상 10자 이하의 숫자 및 영문자로 구성되어야 합니다. 다시 입력해주세요.'); history.back(); </script>");
+                    break;
+                }
+            }
+        } else {        
+	        // 기존 이미지 이름   
+	        List<String> origin_names = new ArrayList<String>();
+	        origin_names.add(qnaContent.getBoard_img1());
+	        origin_names.add(qnaContent.getBoard_img2());
+	
+	        // 파일 업데이트
+	        FileUploadImage upload = new FileUploadImage();  
+	        List<String> updateFile = upload.updateFile(request, board_img, "qna", origin_names, 2);
+	        
+	        updateDto.setBoard_img1(updateFile.get(0));
+	        updateDto.setBoard_img2(updateFile.get(1));
+	
+	        int check = this.qnaDAO.updateQna(updateDto);
+	        if (check > 0) {
+	            out.println("<script>alert('성공적으로 글이 수정되었습니다.'); location.href='" + request.getContextPath()
+	                    + "/user_qna_list'; </script>");
+	        } else {
+	            out.println("<script>alert('글 수정을 실패했습니다.'); history.back(); </script>");
+	        }
         }
     }
 
@@ -281,7 +299,7 @@ public class UserQnaController {
     public String user_fnq_list(@RequestParam(value = "field", required = false) String field,
             @RequestParam(value = "keyword", required = false) String keyword,
             @RequestParam(value = "order", required = false) String order, 
-            @RequestParam(defaultValue = "0") int page, Model model) {
+            @RequestParam(value = "page", defaultValue = "0") int page, Model model) {
 
         if (field == null) {
             field = "";
