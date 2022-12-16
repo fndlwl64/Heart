@@ -7,7 +7,9 @@ import javax.mail.PasswordAuthentication;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -96,23 +98,13 @@ public class MypageController {
     	int regcount = mypagedao.AnimalRegCount(user_id);
     	int review_count = mypagedao.ReviewCount(user_id);
     	List<WishVO> wish_list = mypagedao.getAdoptList(user_id);
-    	List<Integer> animal_no = new ArrayList<Integer>();
-    	List<Integer> doubleCheck  = new ArrayList<Integer>();
-    	
-    	for(int i=0; i<wish_list.size(); i++) {
-    		animal_no.add(wish_list.get(i).getAnimal_no());
-    		//
-    		doubleCheck.add(reviewDAO.mypageReviewCount(animal_no.get(i)));
-    	}
-    		
-    	
-    	
+
     	model.addAttribute("Sum", sum);
     	model.addAttribute("uList", user_list);
     	model.addAttribute("Count", regcount);
     	model.addAttribute("review_Count", review_count);
     	model.addAttribute("aList", wish_list);
-    	model.addAttribute("doubleCheck", doubleCheck);
+    	
         return "user/mypage/mypage_adopt_reg_list";
     }
     
@@ -126,12 +118,23 @@ public class MypageController {
     	int regcount = mypagedao.AnimalRegCount(user_id);
     	int review_count = mypagedao.ReviewCount(user_id);
     	List<WishVO> wish_list = mypagedao.getAdoptComList(user_id);
+    	Map<String, Object> doubleCheck  = new HashMap<String, Object>();
+    	
+    	System.out.println(wish_list.size());
+    	
+    	for(int i=0; i<wish_list.size(); i++) {
+    		animal_no.add(wish_list.get(i).getAnimal_no());
+    		// animal_no 넘김쓰
+    	}
+    	
     	
     	model.addAttribute("Sum", sum);
     	model.addAttribute("uList", user_list);
     	model.addAttribute("Count", regcount);
     	model.addAttribute("review_Count", review_count);
     	model.addAttribute("aList", wish_list);
+    	model.addAttribute("doubleCheck", doubleCheck);
+
         return "user/mypage/mypage_adopt_complet_list";
     }
     

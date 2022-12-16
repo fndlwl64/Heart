@@ -1,6 +1,7 @@
 package com.heartpet.action;
 
 import java.util.List;
+import java.util.Map;
 
 import com.heartpet.model.ReviewDTO;
 
@@ -19,6 +20,6 @@ public interface ReviewDAO {
     public List<Integer> animalId(String session_id);
     
     /////////////////////////////////////////////
-    public int mypageReviewCount(int animal_id);
+    public Map<String, Object> mypageReviewCount(int animal_id);
 
 }

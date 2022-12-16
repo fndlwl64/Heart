@@ -61,7 +61,7 @@
       	  	<c:if test="${!empty aList}">
 	            <h3>입양완료목록</h3>
 	            <ul class="my_cont_ul">
-		            <c:forEach items="${aList}" var="dto">
+		            <c:forEach items="${aList}" var="dto" varStatus="status">
 		            <c:set var="count" value="${count + 1 }"/>
 			                <li class ="my_cont_li">
 			                	<a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><img class="my_cont_img" src="${path}/resources/upload/${dto.getAnimal_img1()}"></a><br>
@@ -69,12 +69,13 @@
 			                	<p><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">성별 : ${dto.getAnimal_gender()}</a></p>
 			                	<p><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">나이 : ${dto.getAnimal_age()}</a></p>
 			                	<p><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">입양 완료일 : ${dto.getAdopt_reg_adoptdate().substring(0, 10)}</a></p>
-			                <c:if test="${review_check == 1 }">	
-			                	<p><a class="animal_cont" href="${path }/user_review_insert?animal_no=${dto.getAnimal_no()}"><button>후기작성</button></a></p>
-			                </c:if>
-			                <c:if test="${review_check > 0 }">
-			                	<p><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><button>후기작성</button></a></p>
-			                </c:if>	
+			                	<c:out value="${ doubleCheck[status.index] }" />
+			                	<c:if test="${ doubleCheck[status.index] eq 0 }">
+			                		<p><a class="animal_cont" href="${path }/user_review_insert?animal_no=${dto.getAnimal_no()}"><button>후기작성</button></a></p>
+			                	</c:if>
+			                	<c:if test="${ doubleCheck[status.index] gt 0  }">
+			                		<p><a class="animal_cont" href="${path }/user_review_content?review_no=${dto.getAnimal_no()}"><button>내가 쓴 후기보기</button></a></p>
+			                	</c:if>
 			                </li>
 		 		        <c:if test="${count % 4 == 0 }">
 							<li>
