@@ -3,9 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="../../include/user_header.jsp" />
-<% pageContext.setAttribute("newline", "\n"); %>
-<input type="hidden" value="<%=request.getContextPath()%>/wish" id="linkwish">
-<input type="hidden" value="<%=(String)session.getAttribute("session_id") %>" id="user_id"/>
+<%
+pageContext.setAttribute("newline", "\n");
+%>
+<c:set var="wishCheck" value="${wishCheck }" />
+<c:set var="user_id" value='<%=(String) session.getAttribute("session_id")%>'/>
+<input type="hidden" value="<%=request.getContextPath()%>/wish"
+	id="linkwish">
+<input type="hidden"
+	value="${user_id }" id="user_id" />
 <div class="container">
 	<div class="d-flex justify-content-start">
 		<dl class="col mx-5">
@@ -71,52 +77,73 @@
 	</div>
 	<input type="hidden" id="animal_status" value="${dto.animal_status }">
 	<div class="d-flex justify-content-center mx-5 px-5">
-		<div>
-			<button class="btn" id="wish"><i class="bi bi-star"></i></button>
-		</div>
-		<form action="user_get_animal" method="post" onsubmit="return submitOption();">
-			<input type="hidden" name="animal_no" id="animal_no" value="${dto.animal_no }">
-			<input type="submit" class="btn btn-primary" value="입양하기">
+		<c:if test="${not empty user_id }">
+			<div>
+				<button class="btn" id="wish">
+					<c:if test="${wishCheck ne 0 }">
+						<i class="bi bi-star-fill text-warning"></i>'
+					</c:if>
+					<c:if test="${wishCheck eq 0 }">
+						<i class="bi bi-star"></i>
+					</c:if>
+					
+				</button>
+			</div>
+		</c:if>
+		<form action="user_get_animal" method="post"
+			onsubmit="return submitOption();">
+			<input type="hidden" name="animal_no" id="animal_no"
+				value="${dto.animal_no }"> <input type="submit"
+				class="btn btn-primary" value="입양하기">
 		</form>
 	</div>
 </div>
 <script type="text/javascript">
-	function submitOption(){
-		if ($('#user_grade').val() < 3){
-            alert("회원의 등급이 낮아 입양 자격이 없습니다.");
-            return false;
-        }
-		if($('#animal_status').val() == '입소 신청'){
+	function submitOption() {
+		if ($('#user_grade').val() < 3) {
+			alert("회원의 등급이 낮아 입양 자격이 없습니다.");
+			return false;
+		}
+		if ($('#animal_status').val() == '입소 신청') {
 			alert('아직 입소가 완료되지 않은 상태입니다.');
 			return false;
 		}
-		if($('#animal_status').val() == '입양 대기'){
+		if ($('#animal_status').val() == '입양 대기') {
 			alert('입양 대기 중인 상태입니다.');
 			return false;
 		}
-		if($('#animal_status').val() == '입양 완료'){
+		if ($('#animal_status').val() == '입양 완료') {
 			alert('이미 입양 완료된 상태입니다.')
 			return false;
 		}
 	}
-	$(document).ready(function(){
-		$("#wish").on("click",function(){
-			let wishDTO = {"wish_petno" : $("#animal_no").val(), "wish_userid" : $("#user_id").val() };
+	$(document).ready(function() {
+		$("#wish").on("click", function() {
+			let wishDTO = {
+				"wish_petno" : $("#animal_no").val(),
+				"wish_userid" : $("#user_id").val()
+			};
 			$.ajax({
 				url : $("#linkwish").val(),
 				type : 'POST',
-				data :  JSON.stringify(wishDTO),
-				contentType: "application/json",
-				success : function(data){
+				data : JSON.stringify(wishDTO),
+				contentType : "application/json",
+				success : function(data) {
 					console.log('success');
 					console.log(data);
+					if(data){
+						$("#wish").empty();
+						$("#wish").append('<i class="bi bi-star-fill text-warning"></i>');
+					}else{
+						$("#wish").empty();
+						$("#wish").append('<i class="bi bi-star"></i>');
+					}
 				}
 			})
-			
+
 			/* <i class="bi bi-star-fill text-warning"></i> */
 		});
 	});
-	
 </script>
 
 

@@ -8,10 +8,10 @@ public interface WishDAO {
 
     public List<WishDTO> list();
     public WishDTO content(int wish_no);
-    public WishDTO check(WishDTO wishDTO);
+    public int check(WishDTO dto);
     public int count();
     public int insert(WishDTO dto);
     public int update(int wish_no);
-    public int delete(int wish_no);
+    public int delete(WishDTO dto);
 
 }
