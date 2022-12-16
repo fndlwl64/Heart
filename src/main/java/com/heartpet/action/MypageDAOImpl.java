@@ -1,7 +1,8 @@
 package com.heartpet.action;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +76,11 @@ public class MypageDAOImpl implements MypageDAO{
 	public int UserDelete(String id) {
 		// TODO Auto-generated method stub
 		return this.sqlSession.update("user_delete", id);
+	}
+
+	@Override
+	public int review_count_check(HashMap<String, Object> map) {
+		return this.sqlSession.selectOne("review_check", map);
 	}
 	
 	

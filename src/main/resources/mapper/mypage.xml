@@ -33,4 +33,7 @@
 	<update id="user_delete" parameterType="UserDTO">
 		update heartpet_user set user_grade = 5 where user_id = #{id} 
 	</update>
+	<select id="review_check" parameterType="hashmap">
+		select count(*) from heartpet_review where review_id = #{id} and review_animal_id = #{no}
+	</select>
 </mapper>

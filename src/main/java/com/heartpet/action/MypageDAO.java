@@ -1,5 +1,6 @@
 package com.heartpet.action;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.heartpet.model.Mypage_SupportDTO;
@@ -35,7 +36,10 @@ public interface MypageDAO {
 	// 마이페이지에서 입양완료 불러오는 메서드
 	public List<WishVO> getAdoptComList(String id);
 	
+	// 마이페이지에서 회원 탈퇴하는 메서드
 	public int UserDelete(String id);
 	
+	// 마이페이지에서 입양완료된 동물 후기썼는지 안썼는지 체크하는 메서드
+	public int review_count_check(HashMap<String, Object> map);
 
 }
