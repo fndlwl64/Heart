@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,7 @@ import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.ReviewDAO;
 import com.heartpet.model.PageDTO;
 import com.heartpet.model.ReviewDTO;
+import com.heartpet.util.CheckMimeType;
 import com.heartpet.util.FileUploadImage;
 
 @Controller
@@ -127,14 +129,11 @@ public class UserReviewController {
     @RequestMapping(value = "/user_review_insert_ok", method = RequestMethod.POST)
     public void user_review_insert_ok(@RequestParam("review_file") List<MultipartFile> review_file, 
     		@Valid ReviewDTO reviewDto, BindingResult result, HttpServletResponse response,
-    		HttpServletRequest request) throws IOException {
+    		HttpServletRequest request) throws Exception {
     	
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
         System.out.println("review_file eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+review_file.toString());
-        
-        
-
 
         if (result.hasErrors()) { // 에러를 List로 저장
             List<ObjectError> errors = result.getAllErrors();
@@ -149,21 +148,48 @@ public class UserReviewController {
             }
         } else {     		  		
         	//////////////////////////////////////////////////////////////////////////// 수정 중
-        	// request, MultipartFile, folderName, insert/update 구분, 총 파일 개수        	
+        	// request, MultipartFile, folderName, insert/update 구분, 총 파일 개수       	
         	
-		    FileUploadImage upload = new FileUploadImage();  
-		    List<String> reviewFiles = upload.uploadFile(request, review_file, "review_file", 4);
-
-		    for(int i=0; i<reviewFiles.size(); i++) {		    	
-		    	Path vidCheck = Paths.get(reviewFiles.get(i));
-		    	String mimeType = Files.probeContentType(vidCheck);
-		    }
+		    FileUploadImage upload = new FileUploadImage();
+		    // 총 파일 개수
+		    int totalFileCount = 4;
+		    List<String> reviewFiles = upload.uploadFile(request, review_file, "review_file", totalFileCount);
 		    
-	        reviewDto.setReview_img1(reviewFiles.get(0));
-	        reviewDto.setReview_img2(reviewFiles.get(1));
-	        reviewDto.setReview_img3(reviewFiles.get(2));
-	        reviewDto.setReview_video(reviewFiles.get(3));
-    		
+		    // video 타입인지 check
+		    CheckMimeType typeCheck = new CheckMimeType();
+		    System.out.println("reviewFiles.size() : " + reviewFiles.size());
+		    
+		    for(int i=0; i<reviewFiles.size(); i++) {
+		        System.out.println("i : " + i);
+		        if(reviewFiles.get(i) != "") {
+		              System.out.println("여기는 몇 번 들어왔나 : " + reviewFiles.get(i));
+		            String mimeType = typeCheck.contentType(reviewFiles.get(i)); // 0 img, 1 vid, 2 null, 3 null
+		            // null 먼저 골라내기
+		            if(mimeType.contains("video")) {
+		                System.out.println("video type : "+mimeType.contains("video"));
+		                reviewDto.setReview_video(reviewFiles.get(i));		    	    
+		            }else if(mimeType.contains("image")) { 
+		                switch(i) { 
+		                case 0 : reviewDto.setReview_img1(reviewFiles.get(i)); break;
+		                case 1 : reviewDto.setReview_img2(reviewFiles.get(i)); break;
+		                case 2 : reviewDto.setReview_img3(reviewFiles.get(i)); break;
+		                }
+		            }
+		    	}else {	    	    
+		    	    if(StringUtils.isEmpty(reviewDto.getReview_img1()) && reviewDto.getReview_img1() != "") {
+		    	        reviewDto.setReview_img1("");
+		    	    }else if(StringUtils.isEmpty(reviewDto.getReview_img2()) && reviewDto.getReview_img2() != "") {
+		    	        reviewDto.setReview_img2("");
+		    	    }else if(StringUtils.isEmpty(reviewDto.getReview_img3()) && reviewDto.getReview_img3() != "") {
+		    	        reviewDto.setReview_img3("");
+		    	    }else if(StringUtils.isEmpty(reviewDto.getReview_video()) && reviewDto.getReview_video() != "") {
+		    	        reviewDto.setReview_video("");
+		    	    }		    	    
+		    	}
+	    	}	   		    
+		    
+            System.out.println("reviewDto : "+reviewDto.toString());
+
             int check = this.reviewDAO.insertReview(reviewDto);
             if (check > 0) {
                 out.println("<script>alert('후기글이 성공적으로 등록되었습니다.'); location.href='" + request.getContextPath() + "/user_review_list'; </script>");
