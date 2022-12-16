@@ -118,6 +118,7 @@ public class MypageController {
     	int regcount = mypagedao.AnimalRegCount(user_id);
     	int review_count = mypagedao.ReviewCount(user_id);
     	List<WishVO> wish_list = mypagedao.getAdoptComList(user_id);
+    	List<Integer> animal_no = new ArrayList<Integer>();
     	Map<String, Object> doubleCheck  = new HashMap<String, Object>();
     	
     	System.out.println(wish_list.size());
@@ -125,6 +126,8 @@ public class MypageController {
     	for(int i=0; i<wish_list.size(); i++) {
     		animal_no.add(wish_list.get(i).getAnimal_no());
     		// animal_no 넘김쓰
+    		doubleCheck = reviewDAO.mypageReviewCount(animal_no.get(i));
+    		System.out.println(doubleCheck.toString());
     	}
     	
     	
