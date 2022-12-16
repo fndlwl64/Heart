@@ -95,7 +95,7 @@ public class ReviewDAOImpl implements ReviewDAO {
     // myPage 사용
     ///////////////////////////////////////////////////////
 	@Override
-	public int mypageReviewCount(int animal_id) {
+	public Map<String, Object> mypageReviewCount(int animal_id) {
 		return this.sqlSession.selectOne("review_animal_no_count", animal_id);
 	}
 

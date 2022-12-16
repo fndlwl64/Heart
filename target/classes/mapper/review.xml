@@ -148,8 +148,13 @@
 	///////////////////////////////////////////////////////	
 	-->
 	
-	<select id="review_animal_no_count" parameterType="int" resultType="int">
-		SELECT COUNT(review_no) FROM heartpet_review
+	<resultMap type="hashMap" id="myPageReview">
+		<result property="review_no" column="review_no" />
+		<result property="count" column="count" />	
+	</resultMap>
+	
+	<select id="review_animal_no_count" parameterType="int" resultMap="myPageReview">
+		SELECT COUNT(review_no) as count, review_no FROM heartpet_review
 			WHERE review_animal_id = #{ animal_id }
 	</select>
 		
