@@ -27,9 +27,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.ReviewDAO;
-import com.heartpet.model.FileUploadImage;
 import com.heartpet.model.PageDTO;
 import com.heartpet.model.ReviewDTO;
+import com.heartpet.util.FileUploadImage;
 
 @Controller
 public class UserReviewController {

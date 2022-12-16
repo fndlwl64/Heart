@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.QnaDAO;
-import com.heartpet.model.FileUploadImage;
 import com.heartpet.model.FnqDTO;
 import com.heartpet.model.PageDTO;
 import com.heartpet.model.QnaDTO;
+import com.heartpet.util.FileUploadImage;
 
 @Controller
 public class UserQnaController {

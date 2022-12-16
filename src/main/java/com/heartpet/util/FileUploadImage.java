@@ -1,4 +1,4 @@
-package com.heartpet.model;
+package com.heartpet.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
 import com.heartpet.action.AnimalDAO;
+import com.heartpet.model.AnimalDTO;
 
 import lombok.Data;
 import lombok.Getter;
