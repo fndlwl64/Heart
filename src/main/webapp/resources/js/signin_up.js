@@ -387,7 +387,7 @@ $(function() {
 	            		$("#email_check").html("<font style='font-size:13px; color:green'>이메일 확인 완료</font>");
 						$("#find_id").attr("disabled", false);
 					}else {
-						$("#email_check").html("<font style='font-size:13px; color:red'>위의 아이디와 일치하지 않는 이메일입니다.</font>");
+						$("#email_check").html("<font style='font-size:13px; color:red'>위의 이름과 일치하지 않는 이메일입니다.</font>");
 						$("#find_id").attr("disabled", true);
 					}
 	            },
@@ -454,7 +454,16 @@ $(function() {
 		}
 	});
 	
-	
+	$('.modal').on('hidden.bs.modal', function (e) {
+		$(this).find('form')[0].reset();
+		$("#idcheck").html("");
+		$("#login_id").css({
+			'border' : '1px solid #000'
+		});
+		$("#id_name").val('');	$("#id_email").val(''); 
+		$("#name_check").html("");	$("#email_check").html("");
+	});
+		
 });
 
 function idfind() {
