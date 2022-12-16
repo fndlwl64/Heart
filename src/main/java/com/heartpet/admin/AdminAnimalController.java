@@ -33,8 +33,8 @@ import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.QnaDAO;
 import com.heartpet.model.AdoptRegDTO;
 import com.heartpet.model.AnimalDTO;
-import com.heartpet.model.FileUploadImage;
 import com.heartpet.model.PageDTO;
+import com.heartpet.util.FileUploadImage;
 
 import lombok.Data;
 import lombok.Getter;
