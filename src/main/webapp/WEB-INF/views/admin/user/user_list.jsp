@@ -17,29 +17,57 @@
 <div class="container">
 
     <br>
-    <br>
 
     <%-- 검색 폼  --%>
     <form class="search_form" action="${path }/user_list" method="get">
-        <div class="form_box">
+
+		<table>
+       		<tr>
+       			<th>회원등급</th>
+       			<td colspan="3">
+       				<div name="field" class="radio_grade">
+			    		<label><input type="radio" name="user_grade" value="1"/> 1등급</label>
+			    		<label><input type="radio" name="user_grade" value="2"/> 2등급</label>
+			    		<label><input type="radio" name="user_grade" value="3"/> 3등급</label>
+			    		<label><input type="radio" name="user_grade" value="4"/> 4등급</label>
+			    		<label><input type="radio" name="user_grade" value="5"/> 5등급</label>
+			    	</div>
+       			</td>
+       		</tr>
+       		
+       		<tr>
+       			<th>
+       				회원아이디
+       				<input type="hidden" name="field" value="id" />
+       			</th>
+       			<td><input class="form-control form-control-sm user_search" name="keyword" value="${keyword }" size="10"></td>
+       			<th>반려동물경험여부</th>
+       			<td>
+       				<div class="radio_exp">
+			    		<label><input type="radio" name="user_animalexp" value="Y" ondblclick="this.checked=false"/> Y </label>
+			    		<label><input type="radio" name="user_animalexp" value="N" ondblclick="this.checked=false"/> N </label>
+			    	</div>
+       			</td>
+       		</tr>
+       	</table>
+       	
+       	<button class="btn searchbtn" type="submit"><i class='bi bi-search'></i> 검색</button>
+    	
+       <%--  <div class="form_box">
+        	
             <select class="form-select form-select-sm user_field" name="field">
                 <option value="id"<c:if test="${field eq 'id'}">selected="selected"</c:if>>회원아이디</option>
                 <option value="grade"<c:if test="${field eq 'grade'}">selected="selected"</c:if>>회원등급</option>
             </select>
-
             <input class="form-control form-control-sm user_search" name="keyword" value="${keyword }">
-			
 			<button class="btn searchbtn" type="submit"><i class="i bi-search"></i> 검색</button>
-			
-        </div>
+	    </div> --%>
     </form>
-
-    <br><br>
 	
     <%-- 검색 결과 테이블 --%>
     <div class="lists">
 	    <div class="total_user">
-			<span>총 회원 수 : ${total}명</span>
+			<label>총 회원 <span>${total}</span>명</label>
 		</div>
 	
         <table class="table table-hover searched_list">
@@ -62,7 +90,7 @@
 	                <td>${list.user_animalexp}</td>
 	                <td>
 	                	<c:set value="${ path }/user_delete?user_no=${ list.user_no }" var="deleteAddr" />
-	                    <button class="btn btn-outline-primary" onclick="location.href='${path}/user_update?user_id=${list.user_id }'">수정</button>
+	                    <button class="btn btn-outline-success" onclick="location.href='${path}/user_update?user_id=${list.user_id }'">수정</button>
 	                    <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }">삭제</button>
 	                </td>
 	            </tr>
