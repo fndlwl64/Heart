@@ -42,7 +42,15 @@
                 <div id="content-scroll">
                     <div class="content-body">
                         <div class="review-image shadow-sm my-3 bg-body rounded">
-                            <img src="${path}/resources/image/potter.jpg" class="rounded mx-auto d-block" alt="review_image">
+                        <c:if test="${ !empty list.review_img1 }">
+				             <p class="mt-2"><img src="${ path }${ list.review_img1 }" class="rounded mx-auto d-block" style="max-height: 300px;" alt="review_img" /></p>      
+						</c:if>  
+						<c:if test="${ !empty list.review_img2 }">
+				             <p class="mt-2"><img src="${ path }${ list.review_img2 }" class="rounded mx-auto d-block" style="max-height: 300px;" alt="review_img" /></p>      
+						</c:if>
+						<c:if test="${ !empty list.review_img3 }">
+				             <p class="mt-2"><img src="${ path }${ list.review_img3 }" class="rounded mx-auto d-block" style="max-height: 300px;" alt="review_img" /></p>      
+						</c:if>
                         </div>
                         <div class="review-text mb-3">
                             ${ fn:replace(list.review_content, newline, '<br/>') }
@@ -75,8 +83,7 @@
     </div>
     
     <%-- delete function --%>
-	<jsp:include page="../../include/deleteModal.jsp" />
-        
+	<jsp:include page="../../include/deleteModal.jsp" />        
 
     <div class="space-add"></div>
 

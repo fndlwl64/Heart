@@ -3,6 +3,7 @@ package com.heartpet.project;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -183,15 +184,14 @@ public class UserQnaController {
                     out.println("<script>alert('글 비밀번호를 입력해주세요.'); history.back(); </script>");
                     break;
                 } else if (error.getDefaultMessage().equals("regexp")) {
-                    out.println(
-                            "<script>alert('비밀번호는 6자 이상 10자 이하의 숫자 및 영문자로 구성되어야 합니다. 다시 입력해주세요.'); history.back(); </script>");
+                    out.println("<script>alert('비밀번호는 6자 이상 10자 이하의 숫자 및 영문자로 구성되어야 합니다. 다시 입력해주세요.'); history.back(); </script>");
                     break;
                 }
             }
         } else {
     		// request, MultipartFile, folderName, insert/update 구분, 총 파일 개수
 		    FileUploadImage upload = new FileUploadImage();  
-		    List<String> boardImgs =  upload.uploadFile(request, board_img, "qna", "insert", 2);
+		    List<String> boardImgs =  upload.uploadFile(request, board_img, "qna", 2);
 		    
 	    	qnaDto.setBoard_img1(boardImgs.get(0));
 	    	qnaDto.setBoard_img2(boardImgs.get(1));
@@ -216,22 +216,35 @@ public class UserQnaController {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
-    // QNA_UPDATE_OK
+    // QNA_UPDATE_OK // 파일 수정
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/user_qna_update_ok", method = RequestMethod.POST)
-    public void user_qna_update_ok(QnaDTO qnaDto, HttpServletResponse response, HttpServletRequest request)
-            throws IOException {
+    public void user_qna_update_ok(@RequestParam("board_img") List<MultipartFile> board_img, 
+    		QnaDTO updateDto, HttpServletResponse response, HttpServletRequest request)
+            throws IOException, IllegalStateException {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
-        QnaDTO qnaContent = this.qnaDAO.contentQna(qnaDto.getBoard_no());
+        QnaDTO qnaContent = this.qnaDAO.contentQna(updateDto.getBoard_no());
 
         // 비번 check
-        if (!qnaDto.getBoard_pwd().equals(qnaContent.getBoard_pwd())) {
+        if (!updateDto.getBoard_pwd().equals(qnaContent.getBoard_pwd())) {
             out.println("<script>alert('비밀번호를 다시 확인해주세요.'); history.back(); </script>");
         }
+        
+        // 기존 이미지 이름   
+        List<String> origin_names = new ArrayList<String>();
+        origin_names.add(qnaContent.getBoard_img1());
+        origin_names.add(qnaContent.getBoard_img2());
+
+        // 파일 업데이트
+        FileUploadImage upload = new FileUploadImage();  
+        List<String> updateFile = upload.updateFile(request, board_img, "qna", origin_names, 2);
+        
+        updateDto.setBoard_img1(updateFile.get(0));
+        updateDto.setBoard_img2(updateFile.get(1));
 
         // 유효성 검사
-        int check = this.qnaDAO.updateQna(qnaDto);
+        int check = this.qnaDAO.updateQna(updateDto);
         if (check > 0) {
             out.println("<script>alert('성공적으로 글이 수정되었습니다.'); location.href='" + request.getContextPath()
                     + "/user_qna_list'; </script>");

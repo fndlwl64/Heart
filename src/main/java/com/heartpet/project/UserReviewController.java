@@ -151,7 +151,7 @@ public class UserReviewController {
     		// request, MultipartFile, folderName, insert/update 구분, 총 파일 개수
     		if(review_file != null) {
     		    FileUploadImage upload = new FileUploadImage();  
-    		    List<String> reviewFiles = upload.uploadFile(request, review_file, "review_file", "insert", 4);
+    		    List<String> reviewFiles = upload.uploadFile(request, review_file, "review_file", 4);
     		    if(reviewFiles.size() > 0) {
     		        reviewDto.setReview_img1(reviewFiles.get(0));
     		        reviewDto.setReview_img2(reviewFiles.get(1));

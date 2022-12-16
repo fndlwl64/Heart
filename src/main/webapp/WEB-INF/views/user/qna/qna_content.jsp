@@ -39,15 +39,12 @@
                     <div class="content-body">
                         <div class="qna-image shadow-sm my-3 bg-body rounded">
                         	<c:choose>
-                        	<c:when test="${ not empty list.board_img1 }">
-                            <img src="${path}/resources/image/${ list.board_img1 }" class="rounded mx-auto d-block" alt="qna_image">
-                            </c:when>
-                            <c:when test="${ not empty list.board_img2 }">
-                            <img src="${path}/resources/image/${ list.board_img2 }" class="rounded mx-auto d-block" alt="qna_image">
-                            </c:when>
-                            <c:otherwise>
-                            <img src="${path}/resources/image/dog.png" class="rounded mx-auto d-block" alt="qna_image">               
-                            </c:otherwise>
+	                        	<c:when test="${ not empty list.board_img1 }">
+	                            <img src="${path}${ list.board_img1 }" class="rounded mx-auto d-block" alt="qna_image">
+	                            </c:when>
+	                            <c:when test="${ not empty list.board_img2 }">
+	                            <img src="${path}${ list.board_img2 }" class="rounded mx-auto d-block" alt="qna_image">
+	                            </c:when>
                             </c:choose>
                         </div>
                         <br />

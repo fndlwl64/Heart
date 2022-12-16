@@ -49,13 +49,26 @@
                 </tr>
                 <tr>
                     <th class="table-light">글 비밀번호</th>
-					<td class="col-2"><input type="password" class="form-control" name="board_pwd" required="required">
-					</td>
-					<th class="table-light">이미지</th>
-	                <td colspan="2">
-	                    <div class="d-flex align-middle">
-	                        <input type="file" class="form-control w-50" name="board_img1" accept="image/gif, image/jpeg, image/png" >
-	                        <input type="file" class="form-control w-50" name="board_img2" accept="image/gif, image/jpeg, image/png" >
+					<td colspan="4"><input type="password" class="form-control" name="board_pwd" required="required"></td>
+				</tr>
+				<tr>
+					<th rowspan="2" class="table-light">이미지</th>
+	                <td colspan="4">
+	                    <div class="d-grid align-middle original-image">
+	                        <input type="file" class="form-control" name="board_img" accept="image/gif, image/jpeg, image/png" >
+	                        <c:if test="${ !empty list.board_img1 }">
+	                       		<p class="mt-2"><img src="${ path }${ list.board_img1 }" style="max-height: 200px;" alt="board_img" /></p>      
+			                </c:if>                  
+	                    </div>
+                	</td>
+               </tr>
+				<tr>
+                	<td colspan="4">
+	                    <div class="d-grid align-middle original-image">
+	                        <input type="file" class="form-control" name="board_img" accept="image/gif, image/jpeg, image/png" >
+	                        <c:if test="${ !empty list.board_img2 }">
+	                       		<p class="mt-2"><img src="${ path }${ list.board_img2 }" style="max-height: 200px;" alt="board_img" /></p>      
+			                </c:if> 
 	                    </div>
                 	</td>
                 </tr>
@@ -65,9 +78,9 @@
                 <div class="row">
                     <div class="col-3 space"></div>
                     <div class="col-6 title btn-insert">
+                        <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록으로</button>
                         <button type="reset" class="btn btn-warning"><i class="bi bi-pencil"></i> 다시작성</button>
-                        <button type="submit" class="btn btn-dark"><i class="bi bi-eraser"></i> 수정하기</button>
-                        <button type="button" class="btn btn-secondary" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록으로</button>
+                        <button type="submit" class="btn btn-success"><i class="bi bi-eraser"></i> 수정하기</button>
                     </div>
                     <div class="col-3 space"></div>
                 </div>

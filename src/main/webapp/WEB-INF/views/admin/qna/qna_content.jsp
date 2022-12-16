@@ -51,8 +51,14 @@
         </tr>
         <tr>
             <th class="table-light">이미지</th>
-            <td colspan="3"><img src="${path}/resources/image/search.png"></td>
-            <td colspan="3"><img src="${path}/resources/image/search.png"></td>
+            <td colspan="6">
+            <c:if test="${ !empty list.board_img1 }">
+	             <p class="mt-2"><img src="${ path }${ list.board_img1 }" style="max-height: 300px;" alt="board_img" /></p>      
+			</c:if>  
+			<c:if test="${ !empty list.board_img2 }">
+	             <p class="mt-2"><img src="${ path }${ list.board_img2 }" style="max-height: 300px;" alt="board_img" /></p>      
+			</c:if> 
+            </td>
         </tr>
     </table>
 
