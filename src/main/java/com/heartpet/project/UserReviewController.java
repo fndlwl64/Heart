@@ -2,6 +2,9 @@ package com.heartpet.project;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -129,6 +132,8 @@ public class UserReviewController {
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
         System.out.println("review_file eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+review_file.toString());
+        
+        
 
 
         if (result.hasErrors()) { // 에러를 List로 저장
@@ -144,17 +149,20 @@ public class UserReviewController {
             }
         } else {     		  		
         	//////////////////////////////////////////////////////////////////////////// 수정 중
-    		// request, MultipartFile, folderName, insert/update 구분, 총 파일 개수
-    		if(review_file != null) {
-    		    FileUploadImage upload = new FileUploadImage();  
-    		    List<String> reviewFiles = upload.uploadFile(request, review_file, "review_file", 4);
-    		    if(reviewFiles.size() > 0) {
-    		        reviewDto.setReview_img1(reviewFiles.get(0));
-    		        reviewDto.setReview_img2(reviewFiles.get(1));
-    		        reviewDto.setReview_img3(reviewFiles.get(2));
-    		        reviewDto.setReview_video(reviewFiles.get(3));
-    		    }   		    
-    		}
+        	// request, MultipartFile, folderName, insert/update 구분, 총 파일 개수        	
+        	
+		    FileUploadImage upload = new FileUploadImage();  
+		    List<String> reviewFiles = upload.uploadFile(request, review_file, "review_file", 4);
+
+		    for(int i=0; i<reviewFiles.size(); i++) {		    	
+		    	Path vidCheck = Paths.get(reviewFiles.get(i));
+		    	String mimeType = Files.probeContentType(vidCheck);
+		    }
+		    
+	        reviewDto.setReview_img1(reviewFiles.get(0));
+	        reviewDto.setReview_img2(reviewFiles.get(1));
+	        reviewDto.setReview_img3(reviewFiles.get(2));
+	        reviewDto.setReview_video(reviewFiles.get(3));
     		
             int check = this.reviewDAO.insertReview(reviewDto);
             if (check > 0) {
