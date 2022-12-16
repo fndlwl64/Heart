@@ -38,7 +38,7 @@ public class ReviewDAOImpl implements ReviewDAO {
     }
 
     /////////////////////////////////////////////////
-    // dog/cat 선택에 따른 List 출력
+    // animal_tag : dog/cat 선택에 따른 List 출력
     /////////////////////////////////////////////////
     @Override
     public List<ReviewDTO> listReview(int startNo, int endNo, String animal_tag) {
@@ -60,7 +60,6 @@ public class ReviewDAOImpl implements ReviewDAO {
     }
 
     //////////////////////////////////////////////////
-
     @Override
     public int insertReview(ReviewDTO dto) {
         return this.sqlSession.insert("review_insert", dto);
