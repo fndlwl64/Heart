@@ -31,7 +31,7 @@
         </tr>
         <tr>
             <th class="table-light">작성자</th>
-            <td class="user col-1"><a href="${ path }/admin_user_content?user_id=${ list.board_id }">${ list.board_id }</a></td>
+            <td class="user col-1"><a href="${ path }/user_view?user_id=${ list.board_id }">${ list.board_id }</a></td>
             <th class="table-light col-1">조회수</th>
             <td class="col-1">${ list.board_hit }</td>
             <th class="col-1">
@@ -62,22 +62,17 @@
         </tr>
     </table>
 
-    <br>
     <%-- button  --%>
     <div class="buttons">
 	    <button class="btn btn-dark mx-1" onclick="location.href='${path}/admin_qna_list'"><i class="bi bi-card-list"></i> 목록으로</button>
 	    <button class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }"><i class="bi bi-trash3"></i> 삭제하기</button>
 	    <button class="btn btn-primary mx-1" onclick="location.href='${path}/admin_qna_reply_insert?board_parentNo=${ list.board_no }'"><i class="bi bi-reply"></i> 답변달기</button>
 	</div>
-	
-	  <%-- 삭제 모달 // admin_list_view.js 삽입되어 있음
-	 	modal-dialog-centered 삽입됨
-	  --%>
+
 	<jsp:include page="../../include/deleteModal.jsp" />
 
 	<div class="space"></div>
 </div>
-
 
 </body>
 </html>

@@ -18,12 +18,16 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.QnaDAO;
+import com.heartpet.action.UserDAO;
 import com.heartpet.model.FnqDTO;
 import com.heartpet.model.PageDTO;
+import com.heartpet.model.QnaCommentDTO;
 import com.heartpet.model.QnaDTO;
+import com.heartpet.model.UserDTO;
 import com.heartpet.util.FileUploadImage;
 
 @Controller
@@ -31,6 +35,9 @@ public class UserQnaController {
 
     @Autowired
     private QnaDAO qnaDAO;
+    
+    @Autowired
+    private UserDAO userDAO;
 
     // 한 페이지당 보여질 게시물의 수
     private final int rowsize = 10;
@@ -47,20 +54,12 @@ public class UserQnaController {
             @RequestParam(value = "order", required = false) String order,
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 
-        if (field == null) {
-            field = "";
-        }
-        if (keyword == null) {
-            keyword = "";
-        }
-        if (order == null) {
-            order = "";
-        }
+        if (field == null) { field = ""; }
+        if (keyword == null) { keyword = ""; }
+        if (order == null) { order = ""; }
 
         int currentPage = 1; // 현재 페이지 변수
-        if (page != 1) {
-            currentPage = page;
-        }
+        if (page != 0) { currentPage = page; }
 
         totalRecord = this.qnaDAO.listQnaCount(field, keyword);
         PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
@@ -90,8 +89,7 @@ public class UserQnaController {
 
         // 로그인 여부 체크
         if ((session.getAttribute("session_id") == null || session.getAttribute("session_id") == "")
-                && (session.getAttribute("session_admin_id") == null
-                        || session.getAttribute("session_admin_id") == "")) {
+                && (session.getAttribute("session_admin_id") == null || session.getAttribute("session_admin_id") == "")) {
             out.println("<script> alert('로그인이 필요합니다.'); location.href='" + request.getContextPath() + "/'; </script>");
         }
 
@@ -131,7 +129,10 @@ public class UserQnaController {
             }
         }
 
-        this.qnaDAO.hitQna(board_no);
+        this.qnaDAO.hitQna(board_no);        
+        // 작성자 정보 함께 send
+        UserDTO userContent = this.userDAO.getUserInfo(qnaContent.getBoard_id());
+        model.addAttribute("userContent", userContent);
         model.addAttribute("qnaContent", qnaContent);
         return "user/qna/qna_content";
     }
@@ -298,6 +299,24 @@ public class UserQnaController {
             out.println("<script>alert('글 삭제 실패!'); history.back(); </script>");
         }
     }
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    // COMMENT_INSERT
+    ////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping("/user_comment_insert_ok")
+    public @ResponseBody int user_comment_list(@RequestParam("user_id") String user_id, @RequestParam("board_no") int board_no, 
+            @RequestParam("comment_content") String comment_content, HttpServletResponse response) throws IOException {
+        
+        response.setContentType("text/html; charset=UTF-8");
+        
+        QnaCommentDTO commentDto = new QnaCommentDTO();
+        commentDto.setComment_boardno(board_no);
+        commentDto.setComment_id(user_id);
+        commentDto.setComment_content(comment_content);
+        
+        int check = this.qnaDAO.insertComment(commentDto);
+        return check;
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // FNQ_LIST
@@ -308,20 +327,12 @@ public class UserQnaController {
             @RequestParam(value = "order", required = false) String order, 
             @RequestParam(value = "page", defaultValue = "0") int page, Model model) {
 
-        if (field == null) {
-            field = "";
-        }
-        if (keyword == null) {
-            keyword = "";
-        }
-        if (order == null) {
-            order = "";
-        }
+        if (field == null) { field = ""; }
+        if (keyword == null) { keyword = ""; }
+        if (order == null) { order = ""; }
 
         int currentPage = 1; // 현재 페이지 변수
-        if (page != 0) {
-            currentPage = page;
-        }
+        if (page != 0) { currentPage = page; }
 
         totalRecord = this.qnaDAO.listFnqCount(field, keyword);
         PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);

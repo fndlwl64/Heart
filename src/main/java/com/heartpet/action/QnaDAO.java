@@ -1,6 +1,7 @@
 package com.heartpet.action;
 
 import com.heartpet.model.FnqDTO;
+import com.heartpet.model.QnaCommentDTO;
 import com.heartpet.model.QnaDTO;
 
 import java.util.List;
@@ -17,6 +18,11 @@ public interface QnaDAO {
     public int hitQna(int board_no);
     public int updateQna(QnaDTO dto);
     public int deleteQna(int board_no);
+    
+    ////////////////////////////////////////////////////////////
+    // Comment
+    ////////////////////////////////////////////////////////////
+    public int insertComment(QnaCommentDTO dto);
 
     ////////////////////////////////////////////////////////////
     // FNQ

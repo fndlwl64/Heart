@@ -10,7 +10,9 @@
 	////////////////////////////////////////////////////////////////////////////////////////////  	
 	-->
     <sql id="review_join">
-        FROM heartpet_review r JOIN heartpet_animal a ON r.review_animal_id = a.animal_no
+        FROM heartpet_review r 
+        JOIN heartpet_animal a 
+        ON r.review_animal_id = a.animal_no
     </sql>
     <sql id="review_keyword">
 		LIKE '%' || #{keyword} || '%'
@@ -51,7 +53,7 @@
 	<!-- dog/cat list -->
 	<select id="review_animal_option" parameterType="hashMap" resultType="ReviewDTO">
 		SELECT * 
-		  FROM (SELECT r.*, a.animal_name, ROW_NUMBER() OVER(ORDER BY review_no DESC) rnum <include refid="review_join" />
+            FROM (SELECT r.*, a.animal_name, ROW_NUMBER() OVER(ORDER BY review_no DESC) rnum <include refid="review_join" />
 		<where>
 			review_animal_tag = #{ animal_tag }
         </where>
@@ -60,7 +62,8 @@
 	
 	<!-- dog/cat : 게시글 개수 -->
 	<select id="review_animal_count" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM heartpet_review
+		SELECT COUNT(*) 
+            FROM heartpet_review
         <where>
 			review_animal_tag = #{ animal_tag }
         </where>
@@ -77,7 +80,7 @@
 	<select id="review_animal" resultType="hashMap">
 		SELECT animal_name 
 			FROM heartpet_animal 
-			WHERE animal_no in 
+			WHERE animal_no IN 
         <foreach item="animalNo" collection="list" open="(" close=")" separator=", ">
 			#{ animalNo }
         </foreach>
@@ -111,8 +114,7 @@
 			#{ review_img1 },
 			#{ review_img2 },
 			#{ review_img3 },
-			#{ review_video }
-			)
+			#{ review_video })
 	</insert> 
 
 	<!-- animal_id -->
