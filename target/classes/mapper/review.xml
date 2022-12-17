@@ -10,7 +10,7 @@
 	////////////////////////////////////////////////////////////////////////////////////////////  	
 	-->
     <sql id="review_join">
-		FROM heartpet_review r JOIN heartpet_animal a ON r.review_animal_id = a.animal_no
+        FROM heartpet_review r JOIN heartpet_animal a ON r.review_animal_id = a.animal_no
     </sql>
     <sql id="review_keyword">
 		LIKE '%' || #{keyword} || '%'
@@ -19,7 +19,7 @@
 	<!-- list -->
 	<select id="review_list" parameterType="hashMap" resultType="ReviewDTO">
 		SELECT * 
-		FROM (select r.*, a.animal_name, row_number() over(order by review_no desc) rnum <include refid="review_join" />
+            FROM (SELECT r.*, a.animal_name, ROW_NUMBER() OVER(ORDER BY review_no DESC) rnum <include refid="review_join" />
 		<where>
 			<choose>
 				<when test="field.equals('allSearch') and keyword != ''"> (review_title <include refid="review_keyword" />) OR (review_content <include refid="review_keyword" />) OR (review_animal_tag <include refid="review_keyword" />) OR (review_id <include refid="review_keyword" />)</when>
@@ -29,13 +29,13 @@
 				<when test="field.equals('id') and keyword != ''"> review_id <include refid="review_keyword" /></when>
 			</choose>
 		</where>
-         <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo}]]>
+         <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo}]]>
 	</select>
 	
 	<!-- count : 게시글 개수 -->
 	<select id="review_count" parameterType="hashMap" resultType="int">
-		SELECT COUNT(*) 
-			FROM heartpet_review
+		SELECT COUNT(*)
+            FROM heartpet_review
         <where>
             <choose>
 				<when test="field == '' and keyword == ''"></when>
@@ -51,7 +51,7 @@
 	<!-- dog/cat list -->
 	<select id="review_animal_option" parameterType="hashMap" resultType="ReviewDTO">
 		SELECT * 
-		FROM (SELECT r.*, a.animal_name, ROW_NUMBER() OVER(ORDER BY review_no DESC) rnum <include refid="review_join" />
+		  FROM (SELECT r.*, a.animal_name, ROW_NUMBER() OVER(ORDER BY review_no DESC) rnum <include refid="review_join" />
 		<where>
 			review_animal_tag = #{ animal_tag }
         </where>
@@ -97,7 +97,7 @@
 	<!-- insert -->
  	<insert id="review_insert" parameterType="ReviewDTO">
         <selectKey resultType="int" keyProperty="review_no" order="BEFORE">
-			SELECT MAX(review_no)+1 FROM heartpet_review
+		SELECT MAX(review_no)+1 FROM heartpet_review
         </selectKey>
 		INSERT INTO heartpet_review 
 			VALUES (#{ review_no }, 
