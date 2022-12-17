@@ -1,6 +1,7 @@
 package com.heartpet.action;
 
 import com.heartpet.model.FnqDTO;
+import com.heartpet.model.QnaCommentDTO;
 import com.heartpet.model.QnaDTO;
 
 import java.util.HashMap;
@@ -63,6 +64,14 @@ public class QnaDAOImpl implements QnaDAO {
     public int deleteQna(int board_no) {
         return this.sqlSession.delete("qna_delete", board_no);
     }
+    
+    ////////////////////////////////////////////////////////////
+    // Comment
+    ////////////////////////////////////////////////////////////
+    @Override
+    public int insertComment(QnaCommentDTO dto) {
+        return this.sqlSession.insert("comment_insert", dto);
+    }
 
     ////////////////////////////////////////////////////////////
     // FNQ
@@ -105,5 +114,6 @@ public class QnaDAOImpl implements QnaDAO {
     public FnqDTO contentFnq(int fnq_no) {
         return this.sqlSession.selectOne("fnq_content", fnq_no);
     }
+
 
 }

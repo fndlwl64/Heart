@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="list" value="${ qnaContent }" />
+<c:set var="uList" value="${ userContent }" />
 <c:set var="page" value="${ paging }" />
 <% pageContext.setAttribute("newline", "\n"); %>
 <jsp:include page="../../include/user_header.jsp" />
@@ -24,7 +25,7 @@
                 <div><h3>${ list.board_title }</h3></div>
                 <div class="header-info">
                     <ul>
-                        <li class="d-inline"><img src="${path}/resources/image/heartpet_logo.png" alt="user_image"></li>
+                        <li class="d-inline"><img src="${path}/resources/image/user_img/${ uList.user_image }" alt="user_image"></li>
                         <li class="d-inline">
                             <a href="${path}/user_mypage_wish_list"><span id="id">${ list.board_id }</span></a>
                             <a id="reply" href="#"><i class="bi bi-card-list"></i> 댓글 0</a>
@@ -54,29 +55,60 @@
                 </div>
             </div>
 			
-            <%-- 댓글쓰기 // 아직 DB 없음 --%>
-            <form action="" method="post">
-                <table class="table table-bordered reply-table">
-                    <tr class="align-middle">
-                        <th class="col-2">댓글쓰기</th>
-                        <td class="col-10" id="content-reply">
-                            <textarea class="form-control" name="" id="" cols="30" rows="5" placeholder="댓글을 남겨보세요."></textarea>
-                            <button type="submit" class="btn btn-outline-primary btn-sm"><i class="bi bi-reply"></i> 댓글등록</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
+            <%-- 댓글쓰기 --%>
+			<table class="table table-bordered reply-table">
+			    <tr class="align-middle">
+			        <th class="col-2">댓글쓰기</th>
+			        <td class="col-10" id="content-reply">
+			            <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" placeholder="댓글을 남겨보세요."></textarea>
+			            <button type="button" class="btn btn-outline-primary btn-sm" onclick="commentSave(${ session_id }, ${ list.board_no }, ${ path });" ><i class="bi bi-reply"></i> 댓글등록</button>
+			        </td>
+			    </tr>
+			</table>
+			
+			<script>
 
+			function commentSave(userId, boardNo, path) {
+				
+				$.ajax({
+			        contentType : "application/x-www-form-urlencoded;charset=UTF-8",s
+					type: "post",
+					url: "/user_comment_insert_ok",
+					data : {
+	                    user_id : userId,
+	                    board_no : boardNo,
+	                    comment_content : $("#comment_content").val();
+	                },
+	                dataType : "text",
+	                success : function() {
+	                	
+	                },
+	                error : function() {
+	                	alert("Error : "+e.status);
+	                }
+	                	
+		                
+					
+				})
+			    
+			    
+			}
+			
+			</script>
+						
+
+            <%-- 작성자가 로그인한 아이디일 때 수정/삭제 버튼 활성화 --%>
             <div class="content-buttons d-flex">
             	<div class="left-button">
 					<c:if test="${ list.board_id eq session_id }">
-					<button type="button" class="btn btn-success" onclick="location.href='${path}/user_qna_update?board_no=${ list.board_no }'"><i class="bi bi-eraser"></i> 수정</button>
-					<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteFunction" ><i class="bi bi-trash3"></i> 삭제</button>
+						<button type="button" class="btn btn-success" onclick="location.href='${path}/user_qna_update?board_no=${ list.board_no }'"><i class="bi bi-eraser"></i> 수정</button>
+						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteFunction" ><i class="bi bi-trash3"></i> 삭제</button>
 					</c:if>
 	                <button type="button" class="btn btn-dark" onclick="history.back()"><i class="bi bi-card-list"></i> 목록</button>
                 </div>
                 <div class="right-button">
-                	<button type="button" class="btn btn-primary" onclick="location.href='${path}/user_qna_insert?board_parentNo=${ list.board_no }&board_group=${ list.board_group }'"><i class="bi bi-arrow-return-right"></i> 답변하기</button>
+                	<button type="button" class="btn btn-primary" onclick="location.href='${path}/user_qna_insert?board_parentNo=${ list.board_no }&board_group=${ list.board_group }'">
+                	<i class="bi bi-arrow-return-right"></i> 답변하기</button>
                 </div>
             </div>
         </div>

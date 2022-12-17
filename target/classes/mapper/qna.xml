@@ -142,7 +142,18 @@
     // COMMENT
     ////////////////////////////////////////////////////////////////////////////////////////////    
     -->
-    
+    <insert id="comment_insert" parameterType="QnaCommentDTO">
+        <selectKey resultType="int" keyProperty="comment_commentno" order="BEFORE">
+        SELECT NVL(comment_commentno, 0)+1 
+            FROM heartpet_board_comment
+        </selectKey>
+        INSERT INTO heartpet_board_comment 
+            VALUES (#{ comment_commentno },
+            #{ comment_boardno },
+            #{ comment_id },
+            #{ comment_content },
+            sysdate)
+    </insert>
     
     
 	
