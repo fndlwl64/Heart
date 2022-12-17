@@ -101,15 +101,24 @@
 						<td>${dto.adopt_reg_regdate }</td>
 						<td>${dto.adopt_reg_duedate }</td>
 						<td>${dto.adopt_reg_adoptdate }</td>
-						<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입소 신청'}">
+						<c:if test="${map.get(dto.adopt_reg_animalno).get(1) ne '입양 대기'}">
+							<td><a class="text-primary" data-bs-toggle="modal"
+								data-bs-target="#admissionModal"
+								data-id="${path }/adoptreg_admission?animal_no=${dto.adopt_reg_animalno}" data-value="${map.get(dto.adopt_reg_animalno).get(1)}" onclick="onclickOption(this);" >${map.get(dto.adopt_reg_animalno).get(1)}</a></td>
+						</c:if>
+						<%-- <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 가능'}">
 							<td><a class="text-primary" data-bs-toggle="modal"
 								data-bs-target="#admissionModal"
 								data-id="${path }/adoptreg_admission?animal_no=${dto.adopt_reg_animalno}">${map.get(dto.adopt_reg_animalno).get(1)}</a></td>
 						</c:if>
-						<c:if test="${map.get(dto.adopt_reg_animalno).get(1) ne '입소 신청'}">
+						<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 완료'}">
+							<td><a class="text-primary" data-bs-toggle="modal"
+								data-bs-target="#admissionModal"
+								data-id="${path }/adoptreg_admission?animal_no=${dto.adopt_reg_animalno}">${map.get(dto.adopt_reg_animalno).get(1)}</a></td>
+						</c:if> --%>
+						<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 대기'}">
 							<td><a
 								href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }"
-								onclick="return onclickOption(this);" class="status"
 								data-value="${dto.adopt_reg_animalno }">${map.get(dto.adopt_reg_animalno).get(1) }</a></td>
 						</c:if>
 					</tr>
@@ -220,14 +229,19 @@
 		return location.href.substring(hostIndex, location.href.indexOf('/',
 				hostIndex + 1));
 	};
-	function onclickOption(th) {
-		console.log($(th).text());
-		if ($(th).text() == '입양 가능' || $(th).text() == '입양 완료') {
-			alert('관리할 사항이 없습니다.');
-			return false;
-		}
+	function onclickOption(data) {
+		let modal_text = $(data).data("value");
+		$('.modal-title').empty();
+		$('.modal-title').append(modal_text+' 수정');
+		$('.modal-body').empty();
+		$('.modal-body').append(modal_text+'을(를) 수저하시겠습니까?');
+		
+		
+		
 	}
 	$(document).ready(function () {
+		
+		
 	    // admissionModal
 	    const admissionModal = document.getElementById('admissionModal')
 	    const admissionInput = document.getElementById('admissionInput')
