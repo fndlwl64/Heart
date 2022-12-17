@@ -9,6 +9,31 @@
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
 
+<script type="text/javascript">
+function commentSave(userId, boardNo, path) { 
+    console.log(1, userId);
+    console.log(2, boardNo);
+    console.log(3, path);
+    $.ajax({
+        contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+        type: "post",
+        url: path + "/user_comment_insert_ok",
+        data : {
+            user_id : userId,
+            board_no : boardNo,
+            comment_content : $("#comment_content").val()
+        },
+        dataType : "text",
+        success : function(data) {
+            console.log(data);      
+        },
+        error : function(e) {
+            alert("Error : "+e.status);
+        }                   
+    });          
+};
+</script> 
+
 <%-- 문의글 상세 보기 --%>
 <div id="qna-contents" class="qna-contents">
     <div class="qna_section">
@@ -61,48 +86,17 @@
 			        <th class="col-2">댓글쓰기</th>
 			        <td class="col-10" id="content-reply">
 			            <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" placeholder="댓글을 남겨보세요."></textarea>
-			            <button type="button" class="btn btn-outline-primary btn-sm" onclick="commentSave(${ session_id }, ${ list.board_no }, ${ path });" ><i class="bi bi-reply"></i> 댓글등록</button>
+			            <button type="button" class="btn btn-outline-primary btn-sm" onclick="commentSave('${ session_id }', ${ list.board_no }, '${ path }');"><i class="bi bi-reply"></i> 댓글등록</button>
 			        </td>
 			    </tr>
 			</table>
-			
-			<script>
-
-			function commentSave(userId, boardNo, path) {
-				
-				$.ajax({
-			        contentType : "application/x-www-form-urlencoded;charset=UTF-8",s
-					type: "post",
-					url: "/user_comment_insert_ok",
-					data : {
-	                    user_id : userId,
-	                    board_no : boardNo,
-	                    comment_content : $("#comment_content").val();
-	                },
-	                dataType : "text",
-	                success : function() {
-	                	
-	                },
-	                error : function() {
-	                	alert("Error : "+e.status);
-	                }
-	                	
-		                
-					
-				})
-			    
-			    
-			}
-			
-			</script>
-						
 
             <%-- 작성자가 로그인한 아이디일 때 수정/삭제 버튼 활성화 --%>
             <div class="content-buttons d-flex">
             	<div class="left-button">
 					<c:if test="${ list.board_id eq session_id }">
 						<button type="button" class="btn btn-success" onclick="location.href='${path}/user_qna_update?board_no=${ list.board_no }'"><i class="bi bi-eraser"></i> 수정</button>
-						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteFunction" ><i class="bi bi-trash3"></i> 삭제</button>
+						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteFunction"><i class="bi bi-trash3"></i> 삭제</button>
 					</c:if>
 	                <button type="button" class="btn btn-dark" onclick="history.back()"><i class="bi bi-card-list"></i> 목록</button>
                 </div>

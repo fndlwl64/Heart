@@ -18,6 +18,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.QnaDAO;
@@ -302,12 +303,11 @@ public class UserQnaController {
     ////////////////////////////////////////////////////////////////////////////////////
     // COMMENT_INSERT
     ////////////////////////////////////////////////////////////////////////////////////
-    @RequestMapping("/user_comment_insert")
-    public String user_comment_list(@RequestParam("user_id") String user_id, @RequestParam("board_no") int board_no, 
+    @RequestMapping("/user_comment_insert_ok")
+    public @ResponseBody int user_comment_list(@RequestParam("user_id") String user_id, @RequestParam("board_no") int board_no, 
             @RequestParam("comment_content") String comment_content, HttpServletResponse response) throws IOException {
         
         response.setContentType("text/html; charset=UTF-8");
-        PrintWriter out = response.getWriter();
         
         QnaCommentDTO commentDto = new QnaCommentDTO();
         commentDto.setComment_boardno(board_no);
@@ -315,9 +315,7 @@ public class UserQnaController {
         commentDto.setComment_content(comment_content);
         
         int check = this.qnaDAO.insertComment(commentDto);
-        
-        return null;
-        
+        return check;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
