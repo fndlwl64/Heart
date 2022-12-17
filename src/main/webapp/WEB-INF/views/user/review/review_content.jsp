@@ -41,17 +41,26 @@
             <div class="content" data-bs-spy="scroll" data-bs-target="#content-scroll">
                 <div id="content-scroll">
                     <div class="content-body">
-                        <div class="review-image shadow-sm my-3 bg-body rounded">
                         <c:if test="${ !empty list.review_img1 }">
-				             <p class="mt-2"><img src="${ path }${ list.review_img1 }" class="rounded mx-auto d-block" style="max-height: 300px;" alt="review_img" /></p>      
+	                        <div class="review-image shadow-sm my-2 bg-body rounded">
+					             <p class="mt-2"><img src="${ path }${ list.review_img1 }" class="rounded mx-auto d-block" style="max-height: 300px;" alt="review_img" /></p>      
+							</div>
 						</c:if>  
 						<c:if test="${ !empty list.review_img2 }">
-				             <p class="mt-2"><img src="${ path }${ list.review_img2 }" class="rounded mx-auto d-block" style="max-height: 300px;" alt="review_img" /></p>      
+	                        <div class="review-image shadow-sm my-2 bg-body rounded">						
+					             <p class="mt-2"><img src="${ path }${ list.review_img2 }" class="rounded mx-auto d-block" style="max-height: 300px;" alt="review_img" /></p>      
+	                        </div>
 						</c:if>
 						<c:if test="${ !empty list.review_img3 }">
-				             <p class="mt-2"><img src="${ path }${ list.review_img3 }" class="rounded mx-auto d-block" style="max-height: 300px;" alt="review_img" /></p>      
+	                        <div class="review-image shadow-sm my-2 bg-body rounded">   
+					             <p class="mt-2"><img src="${ path }${ list.review_img3 }" class="rounded mx-auto d-block" style="max-height: 300px;" alt="review_img" /></p>      
+	                        </div>
 						</c:if>
-                        </div>
+                        <c:if test="${ !empty list.review_video }">
+                            <div class="review-video my-2">
+                                <p class="mt-2"><video src="${ path }${ list.review_video }" height="300px" controls="controls" ></video></p>
+                            </div>  
+                        </c:if> 
                         <div class="review-text mb-3">
                             ${ fn:replace(list.review_content, newline, '<br/>') }
                         </div>

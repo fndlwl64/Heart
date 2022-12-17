@@ -49,8 +49,25 @@
         </tr>
         <tr>
             <th class="table-light">이미지</th>
-            <td colspan="3"><img src="${path}/resources/image/search.png"></td>
-            <td colspan="3"><img src="${path}/resources/image/search.png"></td>
+            <td colspan="6">
+	            <c:if test="${ !empty list.review_img1 }">
+	                 <p class="mt-2"><img src="${ path }${ list.review_img1 }" style="max-height: 300px;" alt="review_img" /></p>      
+	            </c:if>  
+	            <c:if test="${ !empty list.review_img2 }">
+	                 <p class="mt-2"><img src="${ path }${ list.review_img2 }" style="max-height: 300px;" alt="review_img" /></p>      
+	            </c:if> 
+                <c:if test="${ !empty list.review_img3 }">
+                     <p class="mt-2"><img src="${ path }${ list.review_img3 }" style="max-height: 300px;" alt="review_img" /></p>      
+                </c:if> 
+            </td>
+        </tr>
+        <tr>
+            <th class="table-light">동영상</th>
+            <td colspan="6">
+                <c:if test="${ !empty list.review_video }">
+                     <p class="mt-2"><video src="${ path }${ list.review_video }" height="300px" controls="controls" ></video></p>      
+                </c:if> 
+            </td>
         </tr>
     </table>    
     <br>

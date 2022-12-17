@@ -149,19 +149,23 @@
     display: flex;
     padding: 1rem 2rem;
     min-height: 400px;
-    max-height: 600px;
-    flex-wrap: wrap;
     align-content: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .review-content .content-body .review-image {
-    height: 500px;
     overflow: hidden;
 }
 
 .review-content .content-body .review-image > img {
     height: 100%;
+}
+
+.review-content .content-body .review-video {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
 }
 
 .review-content .content-body .review-text {
