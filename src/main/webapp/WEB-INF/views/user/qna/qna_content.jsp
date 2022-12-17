@@ -37,25 +37,23 @@
             <div class="content" data-bs-spy="scroll" data-bs-target="#content-scroll">
                 <div id="content-scroll">
                     <div class="content-body">
-                        <div class="qna-image shadow-sm my-3 bg-body rounded">
-                        	<c:choose>
-	                        	<c:when test="${ not empty list.board_img1 }">
-	                            <img src="${path}${ list.board_img1 }" class="rounded mx-auto d-block" alt="qna_image">
-	                            </c:when>
-	                            <c:when test="${ not empty list.board_img2 }">
-	                            <img src="${path}${ list.board_img2 }" class="rounded mx-auto d-block" alt="qna_image">
-	                            </c:when>
-                            </c:choose>
-                        </div>
-                        <br />
-                        <div class="qna-text mb-3">
-                            ${ list.board_content.replace(newline, '<br/>') } 
-                        </div>
+                        <c:if test="${ !empty list.board_img1 }">
+                            <div class="qna-image shadow-sm my-2 bg-body rounded">
+                                 <p class="mt-2"><img src="${ path }${ list.board_img1 }" class="rounded mx-auto d-block" style="max-height: 300px;" alt="board_img" /></p>      
+                            </div>
+                        </c:if>  
+                        <c:if test="${ !empty list.board_img2 }">
+                            <div class="qna-image shadow-sm my-2 bg-body rounded">
+                                 <p class="mt-2"><img src="${ path }${ list.board_img2 }" class="rounded mx-auto d-block" style="max-height: 300px;" alt="board_img" /></p>      
+                            </div>
+                        </c:if> 
+						<div class="qna-text mb-3">
+						    ${ list.board_content.replace(newline, '<br/>') } 
+						</div>
                     </div>
                 </div>
             </div>
-
-
+			
             <%-- 댓글쓰기 // 아직 DB 없음 --%>
             <form action="" method="post">
                 <table class="table table-bordered reply-table">
@@ -71,10 +69,10 @@
 
             <div class="content-buttons d-flex">
             	<div class="left-button">
-            	<c:if test="${ list.board_id eq session_id }">
-	                <button type="button" class="btn btn-success" onclick="location.href='${path}/user_qna_update?board_no=${ list.board_no }'"><i class="bi bi-eraser"></i> 수정</button>
-	                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteFunction" ><i class="bi bi-trash3"></i> 삭제</button>
-	                </c:if>
+					<c:if test="${ list.board_id eq session_id }">
+					<button type="button" class="btn btn-success" onclick="location.href='${path}/user_qna_update?board_no=${ list.board_no }'"><i class="bi bi-eraser"></i> 수정</button>
+					<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteFunction" ><i class="bi bi-trash3"></i> 삭제</button>
+					</c:if>
 	                <button type="button" class="btn btn-dark" onclick="history.back()"><i class="bi bi-card-list"></i> 목록</button>
                 </div>
                 <div class="right-button">
@@ -108,8 +106,9 @@
 		  </div>
 		</div>
 	</form>
-</div>
 
-<div class="space-add"></div>
+    <div class="space-add"></div>
+
+</div>
 
 <jsp:include page="../../include/user_footer.jsp" />

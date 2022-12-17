@@ -56,7 +56,7 @@
 	                    <div class="d-grid align-middle original-image">
 	                        <input type="file" class="form-control" name="review_file" accept="image/gif, image/jpeg, image/png" >
 	                        <c:if test="${ !empty list.review_img1 }">
-	                       		<p class="mt-2"><img src="${ path }${ list.review_img1 }" style="max-height: 200px;" alt="board_img" /></p>      
+	                       		<p class="mt-2"><img src="${ path }${ list.review_img1 }" style="max-height: 200px;" alt="review_img" /></p>      
 			                </c:if>                  
 	                    </div>
                 	</td>
@@ -66,7 +66,7 @@
 	                    <div class="d-grid align-middle original-image">
 	                        <input type="file" class="form-control" name="review_file" accept="image/gif, image/jpeg, image/png" >
 	                        <c:if test="${ !empty list.review_img2 }">
-	                       		<p class="mt-2"><img src="${ path }${ list.review_img2 }" style="max-height: 200px;" alt="board_img" /></p>      
+	                       		<p class="mt-2"><img src="${ path }${ list.review_img2 }" style="max-height: 200px;" alt="review_img" /></p>      
 			                </c:if> 
 	                    </div>
                 	</td>
@@ -76,7 +76,7 @@
 	                    <div class="d-grid align-middle original-image">
 	                        <input type="file" class="form-control" name="review_file" accept="image/gif, image/jpeg, image/png" >
 	                        <c:if test="${ !empty list.review_img3 }">
-	                       		<p class="mt-2"><img src="${ path }${ list.review_img3 }" style="max-height: 200px;" alt="board_img" /></p>      
+	                       		<p class="mt-2"><img src="${ path }${ list.review_img3 }" style="max-height: 200px;" alt="review_img" /></p>      
 			                </c:if> 
 	                    </div>
                 	</td>
