@@ -266,8 +266,10 @@ public class AdminAnimalController {
 
 	@RequestMapping(value = "/adoptreg_update", method = RequestMethod.POST)
 	public String adoptreg_update(AdoptRegDTO adoptRegDTO) {
-
-		if (adoptRegDTO.getAdopt_reg_duedate() != null) {// 입양 예정일 등록
+		System.out.println("========================");
+		System.out.println(adoptRegDTO.getAdopt_reg_duedate() != null);
+		System.out.println(adoptRegDTO.getAdopt_reg_adoptdate() != null);
+		if (adoptRegDTO.getAdopt_reg_duedate() != null and adoptRegDTO.getAdopt_reg_adoptdate() == null) {// 입양 예정일 등록
 			String reg_duedate = adoptRegDTO.getAdopt_reg_duedate().replace("T", " ");
 			adoptRegDTO.setAdopt_reg_duedate(reg_duedate);
 			adoptRegDAO.update(adoptRegDTO);
@@ -285,10 +287,20 @@ public class AdminAnimalController {
 	}
 
 	@RequestMapping("/adoptreg_admission")
-	public String adoptreg_admission(@RequestParam("animal_no") int animal_no) {
+	public String adoptreg_admission(@RequestParam("animal_no") int animal_no, @RequestParam("animal_status") String animal_status) {
 		AnimalDTO animalDTO = new AnimalDTO();
 		animalDTO.setAnimal_no(animal_no);
-		animalDTO.setAnimal_status("입양 가능");
+		if(animal_status.equals("입소 신청")) {
+			animalDTO.setAnimal_status("입양 가능");
+		}else if(animal_status.equals("입양 가능")) {
+			animalDTO.setAnimal_status("입소 신청");
+		}else if(animal_status.equals("입양 완료")) {
+			animalDTO.setAnimal_status("입양 대기");
+			AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
+			adoptRegDTO.setAdopt_reg_animalno(animal_no);
+			adoptRegDTO.setAdopt_reg_adoptdate("");
+			adoptRegDAO.update(adoptRegDTO);
+		}
 		animalDAO.updateStatus(animalDTO);
 		return "redirect:/adoptreg_list";
 	}
