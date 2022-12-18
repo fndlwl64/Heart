@@ -269,7 +269,7 @@ public class AdminAnimalController {
 		System.out.println("========================");
 		System.out.println(adoptRegDTO.getAdopt_reg_duedate() != null);
 		System.out.println(adoptRegDTO.getAdopt_reg_adoptdate() != null);
-		if (adoptRegDTO.getAdopt_reg_duedate() != null and adoptRegDTO.getAdopt_reg_adoptdate() == null) {// 입양 예정일 등록
+		if (adoptRegDTO.getAdopt_reg_duedate() != null && adoptRegDTO.getAdopt_reg_adoptdate() == null) {// 입양 예정일 등록
 			String reg_duedate = adoptRegDTO.getAdopt_reg_duedate().replace("T", " ");
 			adoptRegDTO.setAdopt_reg_duedate(reg_duedate);
 			adoptRegDAO.update(adoptRegDTO);
