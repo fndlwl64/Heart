@@ -1,6 +1,7 @@
 package com.heartpet.action;
 
 import com.heartpet.model.NoticeDTO;
+import com.heartpet.model.SupportDTO;
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
 public interface NoticeDAO {
 
 	//리스트
-    public List<NoticeDTO> getNoticeList();
+    //public List<NoticeDTO> getNoticeList();
     
     //상세
     public NoticeDTO getNotice(int no);
@@ -24,4 +25,10 @@ public interface NoticeDAO {
     
     //삭제
     public int noticedelete(int no);
+    
+    //후원하기 페이징
+    public List<NoticeDTO> listNotice(int startNo, int endNo, String field, String keyword);
+
+    //후원하기 페이징 전체 개수
+    public int listNoticeCount(String field, String keyword);
 }

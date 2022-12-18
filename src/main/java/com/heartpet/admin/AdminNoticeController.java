@@ -2,21 +2,19 @@ package com.heartpet.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.heartpet.action.NoticeDAO;
 import com.heartpet.model.NoticeDTO;
-import com.heartpet.model.SupportDTO;
+import com.heartpet.model.PageDTO;
 
 @Controller
 public class AdminNoticeController {
@@ -24,10 +22,45 @@ public class AdminNoticeController {
 	@Autowired
 	private NoticeDAO noticedao;
 	
+	// 한 페이지당 보여질 게시물의 수
+    private final int rowsize = 10;
+
+    // 전체 게시물의 수
+    private int totalRecord = 0;
+	
 	@RequestMapping("/notice_list")
-    public String notice_list(Model model) {
-		List<NoticeDTO> notice_list = noticedao.getNoticeList();
-		model.addAttribute("nList", notice_list);
+    public String notice_list(@RequestParam(value = "field", required = false) String field,
+			@RequestParam(value = "keyword", required = false) String keyword,
+			@RequestParam(value = "page", defaultValue = "1") int page,Model model) {
+		//List<NoticeDTO> notice_list = noticedao.getNoticeList();
+		//model.addAttribute("nList", notice_list);
+		
+		// 페이징
+		if (field == null) {
+            field = "";
+        }
+        if (keyword == null) {
+            keyword = "";
+        }
+        
+        int currentPage = 1; // 현재 페이지 변수
+        if (page != 1) {
+            currentPage = page;
+        }
+        
+        List<NoticeDTO> noticeList = null;
+        PageDTO paging= null;
+		
+        totalRecord = this.noticedao.listNoticeCount(field, keyword);
+        paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+        noticeList = this.noticedao.listNotice(paging.getStartNo(), paging.getEndNo(), field, keyword);
+        
+        model.addAttribute("noticeList", noticeList);
+        model.addAttribute("total", totalRecord);
+        model.addAttribute("paging", paging);
+        model.addAttribute("field", field);
+        model.addAttribute("keyword", keyword);
+        
         return "admin/notice_list";
     }
 	
@@ -75,7 +108,7 @@ public class AdminNoticeController {
     }
 	
 	@RequestMapping("/notice_update_ok")
-    public void support_update_ok(NoticeDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void notice_update_ok(NoticeDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException {
         
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -98,7 +131,7 @@ public class AdminNoticeController {
     }
 	
 	@RequestMapping("/notice_delete")
-    public void support_delete(@RequestParam("no") int no, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public void notice_delete(@RequestParam("no") int no, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		int check = this.noticedao.noticedelete(no);
 		
 		request.setCharacterEncoding("UTF-8");

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.heartpet.action.NoticeDAO;
 import com.heartpet.model.NoticeDTO;
+import com.heartpet.model.PageDTO;
 
 @Controller
 public class NoticeController {
@@ -17,10 +18,46 @@ public class NoticeController {
 	@Autowired
     private NoticeDAO noticedao;
 	
+	// 한 페이지당 보여질 게시물의 수
+    private final int rowsize = 10;
+
+    // 전체 게시물의 수
+    private int totalRecord = 0;
+	
 	@RequestMapping("/user_notice")
-    public String notice(Model model) {
-        List<NoticeDTO> list = noticedao.getNoticeList();    
-        model.addAttribute("List", list);
+    public String notice(@RequestParam(value = "field", required = false) String field,
+			@RequestParam(value = "keyword", required = false) String keyword,
+			@RequestParam(value = "page", defaultValue = "1") int page,Model model) {
+		
+		// 페이징
+		if (field == null) {
+            field = "";
+        }
+        if (keyword == null) {
+            keyword = "";
+        }
+        
+        int currentPage = 1; // 현재 페이지 변수
+        if (page != 1) {
+            currentPage = page;
+        }
+        
+        List<NoticeDTO> noticeList = null;
+        PageDTO paging= null;
+		
+        totalRecord = this.noticedao.listNoticeCount(field, keyword);
+        paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+        noticeList = this.noticedao.listNotice(paging.getStartNo(), paging.getEndNo(), field, keyword);
+		
+        model.addAttribute("List", noticeList);
+        model.addAttribute("total", totalRecord);
+        model.addAttribute("paging", paging);
+        model.addAttribute("field", field);
+        model.addAttribute("keyword", keyword);
+        /*
+		 * List<NoticeDTO> list = noticedao.getNoticeList(); model.addAttribute("List",
+		 * list)
+		 */;
         return "user/notice/notice_list";
     }
 

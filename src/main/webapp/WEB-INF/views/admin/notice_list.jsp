@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="dto" value="${supportList }"/>
 <jsp:include page="../include/admin_header.jsp"/>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<c:set var="dto" value="${nList }"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +40,6 @@
 
         <%-- 검색 결과 테이블 --%>
         <div class="lists">
-
             <table class="table searched_list">
                 <tr>
                     <th class="table-secondary">글번호</th>
@@ -48,10 +47,10 @@
                     <th class="table-secondary">조회수</th>
                     <th class="table-secondary">수정/삭제</th>
                 </tr>
-				<c:if test="${!empty nList}">
-					<c:forEach items="${nList }" var="dto">
+				<c:if test="${!empty noticeList}">
+					<c:forEach items="${noticeList }" var="dto">
 		                <tr>
-		                    <td>${dto.getNotice_no() }</td>
+		                    <td>${dto.getNotice_no() }111</td>
 		                    <td><a href="${path }/notice_content?no=${dto.getNotice_no()}">${dto.getNotice_title() }</a></td>
 		                    <td>${dto.getNotice_hit() }</td>
 		                    <td>
@@ -67,19 +66,7 @@
 
         <br>
         <%-- 페이징처리 --%>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+   	 	<jsp:include page="../include/pagination.jsp" />
 
         <%-- 삭제 모달 --%>
 		<jsp:include page="../include/deleteModal.jsp" />
