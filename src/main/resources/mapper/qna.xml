@@ -155,6 +155,19 @@
             sysdate)
     </insert>
     
+    <select id="comment_list" parameterType="int" resultType="QnaCommentDTO">
+        SELECT * 
+            FROM heartpet_board_comment 
+            WHERE comment_boardno = #{ board_no } 
+            ORDER BY comment_commentno
+    </select>
+        
+    <select id="comment_count">
+        SELECT COUNT(*)
+            FROM heartpet_board_comment
+            WHERE comment_boardno = #{ board_no }
+    </select>
+    
     
 	
     <!-- 

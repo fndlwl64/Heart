@@ -304,7 +304,7 @@ public class UserQnaController {
     // COMMENT_INSERT
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/user_comment_insert_ok")
-    public @ResponseBody int user_comment_list(@RequestParam("user_id") String user_id, @RequestParam("board_no") int board_no, 
+    public @ResponseBody int user_comment_insert_ok(@RequestParam("user_id") String user_id, @RequestParam("board_no") int board_no, 
             @RequestParam("comment_content") String comment_content, HttpServletResponse response) throws IOException {
         
         response.setContentType("text/html; charset=UTF-8");
@@ -316,6 +316,15 @@ public class UserQnaController {
         
         int check = this.qnaDAO.insertComment(commentDto);
         return check;
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    // COMMENT_LIST
+    ////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping("/user_comment_list")
+    public @ResponseBody List<QnaCommentDTO> user_comment_list(@RequestParam("board_no") int board_no, Model model) {
+        List<QnaCommentDTO> commentList = this.qnaDAO.listComment(board_no);        
+        return commentList;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////
