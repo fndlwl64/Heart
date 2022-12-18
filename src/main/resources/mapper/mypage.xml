@@ -3,11 +3,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.heartpet.action.MypageDAO">
-	<select id="support_list" parameterType="String" resultType="com.heartpet.model.Mypage_SupportDTO">
+	<!-- <select id="support_list" parameterType="String" resultType="com.heartpet.model.Mypage_SupportDTO">
 		select * from heartpet_support where support_userid = #{id} and support_status = 1
-	</select>
+	</select> -->
  	<select id="support_sum" parameterType="String" resultType="int">
-		select NVL(sum(support_price), '0') from heartpet_support where support_userid = #{id}
+		select NVL(sum(support_price), '0') from heartpet_support where support_userid = #{id} and support_status=1
 	</select>
 	<select id="user_info" parameterType="String" resultType="UserDTO">
 		select * from heartpet_user where user_id = #{id}
@@ -35,5 +35,19 @@
 	</update>
 	<select id="review_check" parameterType="hashmap">
 		select count(*) from heartpet_review where review_id = #{id} and review_animal_id = #{no}
+	</select>
+	
+	<!-- 페이징 유저별 후원내역 -->
+ 	<select id="support_list" parameterType="hashMap" resultType="com.heartpet.model.Mypage_SupportDTO">
+		<![CDATA[		
+		SELECT * 
+		FROM (SELECT s.*, row_number() over(order by support_no desc) rnum from heartpet_support s where support_userid = 'user' and support_status=1) 
+		WHERE rnum >= #{startNo} and rnum <= #{endNo}
+		]]>
+	</select>
+	
+	<!-- 후원 개수 -->
+ 	<select id="support_count" parameterType="hashMap" resultType="int">
+		select count(*) from heartpet_support where support_status=1 and support_userid = #{id}
 	</select>
 </mapper>

@@ -50,7 +50,7 @@
 				<c:if test="${!empty noticeList}">
 					<c:forEach items="${noticeList }" var="dto">
 		                <tr>
-		                    <td>${dto.getNotice_no() }111</td>
+		                    <td>${dto.getNotice_no() }</td>
 		                    <td><a href="${path }/notice_content?no=${dto.getNotice_no()}">${dto.getNotice_title() }</a></td>
 		                    <td>${dto.getNotice_hit() }</td>
 		                    <td>
