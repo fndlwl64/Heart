@@ -41,21 +41,14 @@
 			<tr>
 				<th class="table-secondary"><span class="sp2">입양예정일</span></th>
 				<td>
-					<c:if test="${empty content.adopt_reg_duedate }">
-						<input type="datetime-local" name="adopt_reg_duedate">
-					</c:if>
-					<c:if test="${not empty content.adopt_reg_duedate }">
-						<input type="datetime-local" name="adopt_reg_duedate" value="${content.adopt_reg_duedate }">
-					</c:if>
+					<input type="datetime-local" name="adopt_reg_duedate" value="${content.adopt_reg_duedate }">
 				</td>
 			</tr>
 			<c:if test="${not empty content.adopt_reg_duedate }">
 				<tr>
 					<th class="table-secondary"><span class="sp2">입양완료일</span></th>
 					<td>
-						<c:if test="${empty content.adopt_reg_adoptdate }">
-							<input type="datetime-local" name="adopt_reg_adoptdate">
-						</c:if>
+						<input type="datetime-local" name="adopt_reg_adoptdate">
 					</td>
 				</tr>
 			</c:if>

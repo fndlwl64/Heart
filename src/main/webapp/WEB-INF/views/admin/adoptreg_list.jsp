@@ -104,7 +104,7 @@
 						<c:if test="${map.get(dto.adopt_reg_animalno).get(1) ne '입양 대기'}">
 							<td><a class="text-primary" data-bs-toggle="modal"
 								data-bs-target="#admissionModal"
-								data-id="${path }/adoptreg_admission?animal_no=${dto.adopt_reg_animalno}" data-value="${map.get(dto.adopt_reg_animalno).get(1)}" onclick="onclickOption(this);" >${map.get(dto.adopt_reg_animalno).get(1)}</a></td>
+								data-id="${path }/adoptreg_admission?animal_no=${dto.adopt_reg_animalno}&animal_status=${map.get(dto.adopt_reg_animalno).get(1)}" data-value="${map.get(dto.adopt_reg_animalno).get(1)}" onclick="onclickOption(this);" >${map.get(dto.adopt_reg_animalno).get(1)}</a></td>
 						</c:if>
 						<%-- <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 가능'}">
 							<td><a class="text-primary" data-bs-toggle="modal"
@@ -235,9 +235,6 @@
 		$('.modal-title').append(modal_text+' 수정');
 		$('.modal-body').empty();
 		$('.modal-body').append(modal_text+'을(를) 수저하시겠습니까?');
-		
-		
-		
 	}
 	$(document).ready(function () {
 		
