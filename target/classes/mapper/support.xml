@@ -7,9 +7,9 @@
 		select max(support_no) from heartpet_support
 	</select>
 	
-	<select id="sup_list" parameterType="String" resultType="com.heartpet.model.SupportDTO">
+<!-- 	<select id="sup_list" parameterType="String" resultType="com.heartpet.model.SupportDTO">
 		select * from heartpet_support where support_status = 1 order by support_no desc
-	</select>
+	</select> -->
 	
 	<insert id="sup_insert" parameterType="com.heartpet.model.SupportDTO">
 		<selectKey resultType="int" keyProperty="support_no" order="BEFORE">
@@ -40,4 +40,17 @@
 		</selectKey>
 			insert into heartpet_support values(#{support_no}+1,#{userid},#{amount},sysdate,1)
 	</insert>
+	
+ 	<select id="sup_list" parameterType="hashMap" resultType="com.heartpet.model.SupportDTO">
+		<![CDATA[		
+		SELECT * 
+		FROM (SELECT s.*, row_number() over(order by support_no desc) rnum from heartpet_support s) 
+		WHERE rnum >= #{startNo} and rnum <= #{endNo} and support_status=1
+		]]>
+	</select>
+	
+	<!-- 후원 개수 -->
+ 	<select id="sup_count" parameterType="hashMap" resultType="int">
+		select count(*) from heartpet_support where support_status=1
+	</select>
 </mapper>

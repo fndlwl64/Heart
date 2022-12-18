@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="dto" value="${sList }"/>
+<c:set var="dto" value="${supportList }"/>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="../include/admin_header.jsp"/>
 <!DOCTYPE html>
@@ -48,8 +48,8 @@
                 <th class="table-secondary">후원날짜</th>
                 <th class="table-secondary">수정/삭제</th>
             </tr>
-            <c:if test="${!empty sList }">
-				<c:forEach items="${sList }" var="dto">
+            <c:if test="${!empty supportList }">
+				<c:forEach items="${supportList }" var="dto">
 	            <tr>
 	                <td>${dto.getSupport_no() }</td>
 	                <td>${dto.getSupport_userid() }</td>

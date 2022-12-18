@@ -2,7 +2,9 @@ package com.heartpet.action;
 
 import com.heartpet.model.NoticeDTO;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,10 @@ public class NoticeDAOImpl implements NoticeDAO{
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	@Override
-	public List<NoticeDTO> getNoticeList() {
-		return this.sqlSession.selectList("notice_list");
-	}
+	/*
+	 * @Override public List<NoticeDTO> getNoticeList() { return
+	 * this.sqlSession.selectList("notice_list"); }
+	 */
 
 	@Override
 	public NoticeDTO getNotice(int no) {
@@ -47,5 +49,25 @@ public class NoticeDAOImpl implements NoticeDAO{
 		// TODO Auto-generated method stub
 		return this.sqlSession.update("notice_delete", no);
 	}
+
+	@Override
+	public List<NoticeDTO> listNotice(int startNo, int endNo, String field, String keyword) {
+		Map<String, Object> map = new HashMap<String, Object>();
+        map.put("startNo", startNo);
+        map.put("endNo", endNo);
+        map.put("field", field);
+        map.put("keyword", keyword);
+        return this.sqlSession.selectList("notice_list", map);
+	}
+
+	@Override
+	public int listNoticeCount(String field, String keyword) {
+		Map<String, String> map = new HashMap<String, String>();
+        map.put("field", field);
+        map.put("keyword", keyword);
+        return this.sqlSession.selectOne("notice_count", map);
+	}
+	
+	
 
 }

@@ -30,5 +30,8 @@
             <h3>공지사항이없습니다.</h3>
         </c:if>
     </div>
+    
+    <%-- 페이징처리 --%>
+    <jsp:include page="../../include/pagination.jsp" />
 </div>
 <jsp:include page="../../include/user_footer.jsp" />

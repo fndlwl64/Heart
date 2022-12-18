@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.heartpet.action.SupportDAO;
+import com.heartpet.model.PageDTO;
 import com.heartpet.model.SupportDTO;
 
 @Controller
@@ -31,15 +32,40 @@ public class AdminSupportController {
 	
 	//후원리스트출력
 	@RequestMapping("/support_list")
-	public String admin_support_list(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+	public String admin_support_list(@RequestParam(value = "field", required = false) String field,
+			@RequestParam(value = "keyword", required = false) String keyword,
+			@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+		
+		// 페이징
+		if (field == null) {
+            field = "";
+        }
+        if (keyword == null) {
+            keyword = "";
+        }
 		
 		int currentPage = 1; // 현재 페이지 변수
         if (page != 1) {
             currentPage = page;
         }
-		
-		List<SupportDTO> support_list = supportdao.Support();
-		model.addAttribute("sList", support_list);
+        
+        List<SupportDTO> supportList = null;
+        PageDTO paging= null;
+        
+		totalRecord = this.supportdao.listSupportCount(field, keyword);
+        paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+        supportList = this.supportdao.listSupport(paging.getStartNo(), paging.getEndNo(), field, keyword);
+
+		/*
+		 * List<SupportDTO> support_list = supportdao.Support();
+		 * model.addAttribute("sList", support_list);
+		 */
+        model.addAttribute("supportList", supportList);
+        model.addAttribute("total", totalRecord);
+        model.addAttribute("paging", paging);
+        model.addAttribute("field", field);
+        model.addAttribute("keyword", keyword);
+        
 		return "admin/support_list";
 	}
 	
