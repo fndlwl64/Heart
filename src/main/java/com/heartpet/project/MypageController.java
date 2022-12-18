@@ -35,6 +35,8 @@ import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.MypageDAO;
 import com.heartpet.action.ReviewDAO;
 import com.heartpet.model.Mypage_SupportDTO;
+import com.heartpet.model.PageDTO;
+import com.heartpet.model.SupportDTO;
 import com.heartpet.model.UserDTO;
 import com.heartpet.model.WishVO;
 
@@ -68,6 +70,12 @@ public class MypageController {
 	
 	@Autowired
 	private ReviewDAO reviewDAO;
+	
+	// 한 페이지당 보여질 게시물의 수
+    private final int rowsize = 10;
+
+    // 전체 게시물의 수
+    private int totalRecord = 0;
 
     @RequestMapping("/user_mypage_wish_list")
     public String mypage_wish_list(Model model, HttpServletRequest request) {
@@ -178,11 +186,34 @@ public class MypageController {
     }
     
     @RequestMapping("/user_mypage_support_list")
-    public String mypage_support_list(Model model, HttpServletRequest request) {
+    public String mypage_support_list(@RequestParam(value = "field", required = false) String field,
+			@RequestParam(value = "keyword", required = false) String keyword,
+			@RequestParam(value = "page", defaultValue = "1") int page, Model model, HttpServletRequest request) {
+    	
+    	// 페이징
+		if (field == null) {
+            field = "";
+        }
+        if (keyword == null) {
+            keyword = "";
+        }
+		
+		int currentPage = 1; // 현재 페이지 변수
+        if (page != 1) {
+            currentPage = page;
+        }
+    	
     	HttpSession session = request.getSession();
     	String user_id = (String)session.getAttribute("session_id");
     	
-    	List<Mypage_SupportDTO> list = mypagedao.getSupportList(user_id);
+    	List<Mypage_SupportDTO> list = null;
+        PageDTO paging= null;
+        
+        totalRecord = this.mypagedao.listSupportCount(field, keyword, user_id);
+        paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+        list = this.mypagedao.getSupportList(paging.getStartNo(), paging.getEndNo(), field, keyword, user_id);
+    	
+		/* List<Mypage_SupportDTO> list = mypagedao.getSupportList(user_id); */
     	int sum = mypagedao.SumSupport(user_id);
     	UserDTO user_list = mypagedao.UserInfo(user_id);
     	int reg_count = mypagedao.AnimalRegCount(user_id);
@@ -192,6 +223,12 @@ public class MypageController {
     	model.addAttribute("uList", user_list);
     	model.addAttribute("Count", reg_count);
     	model.addAttribute("review_Count", review_count);
+    	
+    	model.addAttribute("total", totalRecord);
+        model.addAttribute("paging", paging);
+        model.addAttribute("field", field);
+        model.addAttribute("keyword", keyword);
+        
         return "user/mypage/mypage_support_list";
     }
     

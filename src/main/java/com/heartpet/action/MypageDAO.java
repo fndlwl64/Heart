@@ -9,8 +9,9 @@ import com.heartpet.model.UserDTO;
 import com.heartpet.model.WishVO;
 
 public interface MypageDAO {
+	
 	// 마이페이지 후원 금액, 일자 불러오는 리스트
-	public List<Mypage_SupportDTO> getSupportList(String id);
+	//public List<Mypage_SupportDTO> getSupportList(String id);
 	
 	// 마이페이지에서 후원금액 합을 불러오는 메서드
 	public int SumSupport(String id);
@@ -41,5 +42,10 @@ public interface MypageDAO {
 	
 	// 마이페이지에서 입양완료된 동물 후기썼는지 안썼는지 체크하는 메서드
 	public int review_count_check(HashMap<String, Object> map);
-
+	
+	// 마이페이지에서 후원내역 페이징까wl
+	public List<Mypage_SupportDTO> getSupportList(int startNo, int endNo, String field, String keyword, String id);
+	
+	// 마이페이지에서 후원하기 페이징 전체 개수
+    public int listSupportCount(String field, String keyword, String id);
 }

@@ -82,11 +82,14 @@
             	<h3>후원내역이 없습니다.</h3>
       		</c:if>
         </div>
+        
+        <%-- 페이징처리 --%>
+    	<jsp:include page="../../include/pagination.jsp" />
     </div>
     <div class="mypage_bottom">
 
     </div>
-
+	
 </div>
 
 <jsp:include page="../../include/user_footer.jsp" />
