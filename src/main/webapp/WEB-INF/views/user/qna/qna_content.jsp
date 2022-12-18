@@ -10,10 +10,37 @@
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
 
 <script type="text/javascript">
+
+function commentTable(boardNo, path) {
+    $.ajax({
+        contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+        type: "post",
+        url: path + "/user_comment_insert_ok",
+        data : {
+            board_no : boardNo,
+        },
+        dataType : "text",
+        success : function(check) {
+            console.log(check);   
+            if(check > 0){
+                alert('댓글이 성공적으로 등록되었습니다.');
+                commentTable(boardNo, path);
+                for(let i=0; i<check.data.length; i++) {
+                    let tableTd = '<tr>';
+                    tableTd += '<td>' + check.data[i].data + '</td>';
+                    tableTd += '</tr>';
+                $("#comment-table").append(tableTd);
+                
+            }
+        },
+        error : function(e) {
+            alert("Error : "+e.status);
+        } 
+	
+}
+
 function commentSave(userId, boardNo, path) { 
-    console.log(1, userId);
-    console.log(2, boardNo);
-    console.log(3, path);
+	
     $.ajax({
         contentType : "application/x-www-form-urlencoded;charset=UTF-8",
         type: "post",
@@ -24,8 +51,18 @@ function commentSave(userId, boardNo, path) {
             comment_content : $("#comment_content").val()
         },
         dataType : "text",
-        success : function(data) {
-            console.log(data);      
+        success : function(check) {
+            console.log(check);   
+            if(check > 0){
+            	alert('댓글이 성공적으로 등록되었습니다.');
+            	commentTable(boardNo, path);
+                for(let i=0; i<check.data.length; i++) {
+                    let tableTd = '<tr>';
+                    tableTd += '<td>' + check.data[i].data + '</td>';
+                    tableTd += '</tr>';
+            	$("#comment-table").append(tableTd);
+            	
+            }
         },
         error : function(e) {
             alert("Error : "+e.status);
@@ -81,6 +118,13 @@ function commentSave(userId, boardNo, path) {
             </div>
 			
             <%-- 댓글쓰기 --%>
+            <table class="table table-bordered" id="comment-table">
+                <tr>
+                    <th>작성자</th>
+                    <th>댓글내용</th>
+                    <th>작성시간</th>
+                </tr>
+            </table>
 			<table class="table table-bordered reply-table">
 			    <tr class="align-middle">
 			        <th class="col-2">댓글쓰기</th>

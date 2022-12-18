@@ -72,6 +72,11 @@ public class QnaDAOImpl implements QnaDAO {
     public int insertComment(QnaCommentDTO dto) {
         return this.sqlSession.insert("comment_insert", dto);
     }
+    
+    @Override
+    public List<QnaCommentDTO> listComment(int board_no) {
+        return this.sqlSession.selectList("comment_list", board_no);
+    }
 
     ////////////////////////////////////////////////////////////
     // FNQ
@@ -114,6 +119,5 @@ public class QnaDAOImpl implements QnaDAO {
     public FnqDTO contentFnq(int fnq_no) {
         return this.sqlSession.selectOne("fnq_content", fnq_no);
     }
-
 
 }
