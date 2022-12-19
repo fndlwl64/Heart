@@ -33,8 +33,8 @@
 
         <tr>
             <th class="table-secondary">이미지</th>
-            <td colspan="2"><img src="${path}/resources/image/search.png"></td>
-            <td colspan="2"><img src="${path}/resources/image/search.png"></td>
+            <td colspan="2"><img src="resources/upload/${dto.getNotice_img1() }"></td>
+            <td colspan="2"><img src="resources/upload/${dto.getNotice_img2() }"></td>
         </tr>
 
     </table>

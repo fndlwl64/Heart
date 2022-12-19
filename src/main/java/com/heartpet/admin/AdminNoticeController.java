@@ -12,9 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.heartpet.action.NoticeDAO;
 import com.heartpet.model.NoticeDTO;
 import com.heartpet.model.PageDTO;
+import com.heartpet.util.FileUploadImage;
 
 @Controller
 public class AdminNoticeController {
@@ -73,25 +76,36 @@ public class AdminNoticeController {
     }
 	
 	@RequestMapping("/notice_insert_ok")
-	public void notice_insert_ok(NoticeDTO dto, HttpServletResponse response, HttpServletRequest request) throws IOException {
-		int check = noticedao.noticeinsert(dto);
+	public void notice_insert_ok(@RequestParam("files") List<MultipartFile> files, NoticeDTO dto, HttpServletResponse response, HttpServletRequest request) throws IOException {
 		
-		request.setCharacterEncoding("UTF-8");
-    	response.setContentType("text/html; charset=utf-8");
-    	
-    	PrintWriter out = response.getWriter();
-    	
-    	if(check > 0) {
-			out.println("<script>");
-			out.println("alert('공지사항 등록 성공!')");
-			out.println("location.href='"+request.getContextPath()+"/notice_list'");
-			out.println("</script>");
-		}else {
-			out.println("<script>");
-			out.println("alert('공지사항 등록 실패!')");
-			out.println("history.back()");
-			out.println("</script>");
-		}
+		FileUploadImage upload = new FileUploadImage();
+		String[] images = upload.uploadNoticeImg(request, files,"notice");
+		dto.setNotice_img1(images[0]);
+		dto.setNotice_img2(images[1]);
+		
+		/*
+		 * noticedao.noticeinsert(dto); return "redirect:/admin/notice_list";
+		 */
+		
+		
+		 int check = noticedao.noticeinsert(dto);
+		 
+		 request.setCharacterEncoding("UTF-8");
+		 response.setContentType("text/html; charset=utf-8");
+		 
+		 PrintWriter out = response.getWriter();
+		 
+		 if(check > 0) { 
+			 out.println("<script>"); 
+			 out.println("alert('공지사항 등록 성공!')");
+			 out.println("location.href='"+request.getContextPath()+"/notice_list'");
+			 out.println("</script>"); 
+		 }else { 
+			 out.println("<script>");
+			 out.println("alert('공지사항 등록 실패!')"); 
+			 out.println("history.back()");
+			 out.println("</script>"); 
+		 }
 	}
 	
 	@RequestMapping("/notice_content")
@@ -111,8 +125,11 @@ public class AdminNoticeController {
     }
 	
 	@RequestMapping("/notice_update_ok")
-    public void notice_update_ok(NoticeDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void notice_update_ok(@RequestParam("files") List<MultipartFile> files, NoticeDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException {
         
+		FileUploadImage upload = new FileUploadImage();
+		
+		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
