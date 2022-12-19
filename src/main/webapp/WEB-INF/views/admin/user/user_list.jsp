@@ -68,8 +68,8 @@
 		    	</div>
 		    	
 		    	<div id="expSearch" class="radio_exp">
-		    		<label><input type="radio" name="user_animalexp" value="Y" ondblclick="this.checked=false"/> Y </label>
-		    		<label><input type="radio" name="user_animalexp" value="N" ondblclick="this.checked=false"/> N </label>
+		    		<label><input type="radio" name="user_animalexp" value="Y" ondblclick="this.checked=false"/> Y</label>
+		    		<label><input type="radio" name="user_animalexp" value="N" ondblclick="this.checked=false"/> N</label>
 		    	</div>
             </div>
 			<button class="btn searchbtn" type="submit"><i class="i bi-search"></i> 검색</button>
