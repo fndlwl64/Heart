@@ -41,7 +41,7 @@
  	<select id="support_list" parameterType="hashMap" resultType="com.heartpet.model.Mypage_SupportDTO">
 		<![CDATA[		
 		SELECT * 
-		FROM (SELECT s.*, row_number() over(order by support_no desc) rnum from heartpet_support s where support_userid = 'user' and support_status=1) 
+		FROM (SELECT s.*, row_number() over(order by support_no desc) rnum from heartpet_support s where support_userid = #{id} and support_status=1) 
 		WHERE rnum >= #{startNo} and rnum <= #{endNo}
 		]]>
 	</select>

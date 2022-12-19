@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="dto" value="${supportList }"/>
+<c:set var="total" value="${ total }"/>
+<c:set var="paging" value="${ paging }"/>
+<c:set var="field" value="${ field }"/>
+<c:set var="keyword" value="${ keyword }"/>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="../include/admin_header.jsp"/>
 <!DOCTYPE html>
@@ -19,14 +23,15 @@
 
     <br>
     <%-- 검색 폼 --%>
-    <form class="search_form" method="post" action="${path }/support_insert_ok">
+    <form class="search_form" method="post" action="${path }/support_list">
         <div class="form_box">
             <select name="field">
-                <option value="id">회원아이디</option>
-                <option value="grade">후원금액</option>
+            	<option value="allSearch" <c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
+                <option value="id" <c:if test="${ field eq 'id' }">selected="selected"</c:if>>회원아이디</option>
+                <option value="grade" <c:if test="${ field eq 'grade' }">selected="selected"</c:if>>후원금액</option>
             </select>
-
-            <input name="keyword">
+			<span class="search-name">검색어</span> 
+            <input name="keyword" value="${ keyword }">
 
             <input class="btn btn-secondary searchbtn" type="submit" value="검색">
         </div>
@@ -61,6 +66,9 @@
 	                </td>
 	            </tr>
 	            </c:forEach>
+            </c:if>
+            <c:if test="${empty supportList }">
+            	<h3>후원내역이 없습니다.</h3>
             </c:if>
         </table>
 
