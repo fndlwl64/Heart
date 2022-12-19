@@ -174,7 +174,7 @@ public class FileUploadImage {
         List<String> folderFiles = new ArrayList<String>();
         Calendar cal = Calendar.getInstance();
         String dateString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
-        String subPath = "/resources/upload/"+folderName + File.separator + dateString;
+        String subPath = "/resources/upload/"+folderName + "/" + dateString;
         String rootPath = request.getSession().getServletContext().getRealPath(subPath);
         
         System.out.println("rootPath : "+rootPath);
@@ -201,9 +201,9 @@ public class FileUploadImage {
                 String fileRename = folderName + "_insert_" + (i+1) + "_" + System.currentTimeMillis() + fileExt;
                 System.out.println("fileRename : " + fileRename);            
                 // 파일 이름 DB 저장 
-                folderFiles.add(subPath + File.separator + fileRename);            
+                folderFiles.add(subPath + "/" + fileRename);            
                 // 실제 파일 이동
-            files.get(i).transferTo(new File(rootPath + File.separator + fileRename));
+            files.get(i).transferTo(new File(rootPath + "/" + fileRename));
             }
         }
         
@@ -223,7 +223,7 @@ public class FileUploadImage {
         List<String> folderFiles = new ArrayList<String>();
         Calendar cal = Calendar.getInstance();
         String dateString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
-        String subPath = "/resources/upload/"+folderName + File.separator + dateString;
+        String subPath = "/resources/upload/"+folderName + "/" + dateString;
         String rootPath = request.getSession().getServletContext().getRealPath(subPath);
         
         //파일 업로드
@@ -256,9 +256,9 @@ public class FileUploadImage {
                 String fileRename = folderName + "_update_" + (i+1) + "_" + System.currentTimeMillis() + fileExt;
                 System.out.println("fileRename : " + fileRename);            
                 // 파일 이름 DB 저장 
-                folderFiles.add(subPath + File.separator + fileRename);            
+                folderFiles.add(subPath + "/" + fileRename);            
                 // 실제 파일 이동
-                files.get(i).transferTo(new File(rootPath + File.separator + fileRename));              
+                files.get(i).transferTo(new File(rootPath + "/" + fileRename));              
             }            
         }        
         return folderFiles;

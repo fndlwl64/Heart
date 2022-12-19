@@ -80,22 +80,23 @@
                     <td>${ list.board_no }</td>
                     <td>${ list.board_category }</td>
                     <td class="list-title">
-                    <a href="${ path }/admin_qna_content?board_no=${ list.board_no }&board_group=${ list.board_group }">
-	                    <c:choose>
-	                    	<c:when test="${ list.level > 1 }">
-	                    		<c:forEach begin="1" end="${ list.level-1 }" step="1">
-	                    		<span style="padding-left:20px"></span>	                    		
-	                    		</c:forEach>
-	                    		<span class="badge rounded-pill text-bg-light"><i class="bi bi-arrow-return-right"></i> Re</span>
-	                    	</c:when>
-		                </c:choose>
-	                    <c:if test="${ list.board_title.length() gt 30 }">${ list.board_title.substring(0,30) }...</c:if>
-						<c:if test="${ list.board_title.length() lt 30 }">${ list.board_title }</c:if>
-	                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if>
-	                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
-	                    <c:if test="${ list.board_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>
-	                    <c:if test="${ cList[status.index] gt 0 }"><span>[${ cList[status.index] }]</span></c:if>
-                    </a></td>
+                        <a href="${ path }/admin_qna_content?board_no=${ list.board_no }&board_group=${ list.board_group }">
+		                    <c:choose>
+		                    	<c:when test="${ list.level > 1 }">
+		                    		<c:forEach begin="1" end="${ list.level-1 }" step="1">
+		                    		<span style="padding-left:20px"></span>	                    		
+		                    		</c:forEach>
+		                    		<span class="badge rounded-pill text-bg-light"><i class="bi bi-arrow-return-right"></i> Re</span>
+		                    	</c:when>
+			                </c:choose>
+		                    <c:if test="${ list.board_title.length() gt 30 }">${ list.board_title.substring(0,30) }...</c:if>
+							<c:if test="${ list.board_title.length() lt 30 }">${ list.board_title }</c:if>
+		                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if>
+		                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
+		                    <c:if test="${ list.board_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>
+		                    <c:if test="${ cList[status.index] gt 0 }"><span>[${ cList[status.index] }]</span></c:if>
+                        </a>
+                    </td>
                     <td><c:if test="${ list.board_id eq 'admin' }"><span id="admin_id">관리자</span></c:if>
                     <c:if test="${ list.board_id ne 'admin' }"><span>${ list.board_id }</span></c:if></td>
                     <td>${ list.board_hit }</td>

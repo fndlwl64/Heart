@@ -8,7 +8,10 @@
 <c:set var="paging" value="${ paging }" />
 <c:set var="field" value="${ field }" />
 <c:set var="keyword" value="${ keyword }" />
+<c:set var="cList" value="${ commentList }" />
 <c:set var="link_address" value="${pageContext.request.contextPath}/user_review_list" />
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
 
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_review.css" />
@@ -65,22 +68,33 @@
            <div class="col-6 review-card">
                <%-- 입양동물 --%>
 
-               <div class="row row-cols-1 row-cols-md-3 g-4">             
-                  <c:if test="${ not empty rList }">
-            	  <c:forEach items="${ rList }" var="list">
-                   <div class="col">
-                       <div class="card h-100">
-                           <a href="${path}/user_review_content?review_no=${ list.review_no }">
-                               <div class="card-image" style="background-image: url('${path}/resources/image/heartpet_logo.png');"></div>
-                               <div class="card-body">                              
-                                   <div class="title-body">
-                                       <h5 class="card-title">${ list.animal_name } 입양후기</h5>                                       
-                                   </div>
-                                   <h7>${ list.review_regdate.substring(0,10) } 조회 ${ list.review_hit }</h7>
-                               </div>
-                           </a>
-                       </div>
-                   </div>
+                <div class="row row-cols-1 row-cols-md-3 g-4">             
+                    <c:if test="${ not empty rList }">
+                    <c:forEach items="${ rList }" var="list" varStatus="status">
+	                    <div class="col">
+	                        <div class="card h-100">
+	                            <a href="${path}/user_review_content?review_no=${ list.review_no }">
+	                            <c:choose>
+	                            <c:when test="${ not empty list.review_img1 }">
+	                               <div class="card-image" style="background-image: url('${ path }${ list.review_img1 }')"></div>
+	                            </c:when>
+	                            <c:when test="${ not empty list.review_img2 }">
+	                               <div class="card-image" style="background-image: url('${ path }${ list.review_img2 }')"></div>
+	                            </c:when>
+	                            <c:when test="${ not empty list.review_img3 }">
+	                               <div class="card-image" style="background-image: url('${ path }${ list.review_img3 }')"></div>
+	                            </c:when>                                                        
+	                            </c:choose>
+		                        <div class="card-body">                              
+		                            <div class="title-body">
+		                                <h5 class="card-title">${ list.animal_name } 입양후기 
+		                                <c:if test="${ cList[status.index] gt 0 }"><span>[${ cList[status.index] }]</span></c:if></h5>		                                                                                           
+		                            </div>
+		                            <h7>${ list.review_regdate.substring(0,10) } 조회 ${ list.review_hit }</h7>
+		                        </div>
+	                           </a>
+	                       </div>
+	                   </div>
                    </c:forEach>
                    </c:if>
                    <c:if test="${ empty rList }">

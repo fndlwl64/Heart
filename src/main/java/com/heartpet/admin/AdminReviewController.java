@@ -65,12 +65,19 @@ public class AdminReviewController {
             paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
             reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), animal_tag);
         }
+        
+        // 댓글수 추가
+        List<Integer> commentList = new ArrayList<Integer>();
+        for(int i=0; i<reviewList.size(); i++) {            
+            commentList.add(this.reviewDAO.countComment(reviewList.get(i).getReview_no()));
+        }
 
         model.addAttribute("reviewList", reviewList);
         model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);
         model.addAttribute("field", field);
         model.addAttribute("keyword", keyword);
+        model.addAttribute("commentList", commentList);
 
         return "admin/review/review_list";
     }

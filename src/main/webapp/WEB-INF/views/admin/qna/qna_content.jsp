@@ -103,7 +103,7 @@
         <tr class="align-middle">
             <th class="col-2">댓글쓰기</th>
             <td class="col-10" id="content-reply">
-                <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" placeholder="댓글을 남겨보세요."></textarea>
+                <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" placeholder="댓글을 남겨보세요." required="required"></textarea>
                 <button type="button" class="btn btn-outline-primary btn-sm" onclick="commentSave('${ session_admin_id }', ${ list.board_no }, '${ path }');"><i class="bi bi-reply"></i> 댓글등록</button>
             </td>
         </tr>
@@ -116,6 +116,7 @@
 	    <button class="btn btn-primary mx-1" onclick="location.href='${path}/admin_qna_reply_insert?board_parentNo=${ list.board_no }'"><i class="bi bi-reply"></i> 답변달기</button>
 	</div>
 
+    <%-- 삭제모달 --%>
 	<jsp:include page="../../include/deleteModal.jsp" />
 
 	<div class="space"></div>
