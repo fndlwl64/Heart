@@ -21,15 +21,25 @@ function commentTable(boardNo, path) {
         data : {
             board_no : boardNo
         },
-        dataType : "text",
+        dataType : "json",
         success : function(commentList) {
+        	console.log(commentList);
         	let comment = "";
-			$.each(commentList , function(index, value) {
-			  comment += '<tr><td>' + commentList[i].comment_id + '</td>';
-			  comment += '<td>' + commentList[i].comment_content + '</td>';
-			  comment += '<td>' + commentList[i].comment_regdate + '</td>';
+            console.log(commentList.length);
+         	for (let i=0; i < commentList.length; ++i) {
+        		comment += '<tr><td>' + commentList[i].comment_id + '</td>';
+                comment += '<td>' + commentList[i].comment_content + '</td>';
+                comment += '<td>' + commentList[i].comment_regdate + '</td>';
+                comment += '<td><button type="button" class="btn btn-danger btn-sm"> 삭제</button></td></tr>';
+            } 
+        
+/* 			$.each(commentList , function(index, value) {
+			  comment += '<tr><td>' + value.comment_id + '</td>';
+			  comment += '<td>' + value.comment_content + '</td>';
+			  comment += '<td>' + value.comment_regdate + '</td>';
 			  comment += '<td><button type="button" class="btn btn-danger btn-sm"> 삭제</button></td></tr>';
-			});
+			}); */
+			console.log(comment);
 			$("#comment-table").append(comment);
 		},
         error : function(e) {
@@ -54,7 +64,11 @@ function commentSave(userId, boardNo, path) {
             console.log(check);   
             if(check > 0){
             	alert('댓글이 성공적으로 등록되었습니다.');
-            	commentTable(boardNo, path);
+            	console.log(boardNo);
+            	console.log(path);            	
+            	commentTable(boardNo, path)
+            }else {
+            	alert('댓글 등록 실패')
             }
         },
         error : function(e) {
