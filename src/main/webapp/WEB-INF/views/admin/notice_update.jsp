@@ -15,7 +15,9 @@
 <jsp:include page="../include/admin_header.jsp" />
 <br><br>
 <div class="div1" align="center">
-	<form method="post" action="${path }/notice_update_ok">
+	<form method="post" action="${path }/notice_update_ok" enctype="multipart/form-data">
+		<input type="hidden" name="notice_img1" value="${dto.getNotice_img1() }">
+		<input type="hidden" name="notice_img2" value="${dto.getNotice_img2() }">
 		<table class="table">
 			<tr>
 				<th class="table-secondary"><span class="sp2">공지제목</span></th>
@@ -30,25 +32,23 @@
 				<td><input class ="input1" type="text" name="notice_hit" value="${dto.getNotice_hit() }"></td>
 			</tr>
 			<tr>
-				<th class="table-secondary"><span class="sp2">이미지1</span></th>
+				<th class="table-secondary"><span class="sp2">이미지</span></th>
 				<td>
 					<div class="image-upload">
 						<label for="file-input1">
-							<img id="file_change1" class="logo" src="image/heartpet_logo.png"/>
+							<img id="file_change1" class="logo" src="resources/upload/${dto.getNotice_img1() } "/>
 						</label>
-						<input class="file_input" id="file-input1" type="file" name="notice_img1" onchange="readURL4(this);"/>
+						<input class="file_input" id="file-input1" type="file" onchange="readURL4(this);" name="files"/>
 					</div>
-				</td>
-			</tr>
-			<tr>
-				<th class="table-secondary"><span class="sp2">이미지2</span></th>
-				<td>
-					<div class="image-upload">
-						<label for="file-input2">
-							<img id="file_change2" class="logo" src="image/heartpet_logo.png"/>
-						</label>
-						<input class="file_input" id="file-input2" type="file" name="notice_img2" onchange="readURL5(this);"/>
-					</div>
+					<c:if test="${not empty dto.getNotice_img2() }">
+						<div class="image-upload">
+							<label for="file-input2"> 
+							<img id="file_change2" class="logo" src="resources/upload/${dto.getNotice_img2() }"
+								style="max-height: 200px;" alt="notice_img" />
+							</label>
+							<input class="file_input btn" id="file-input2" type="file" onchange="readURL5(this);" name="files" />
+						</div>
+					</c:if>
 				</td>
 			</tr>
 		</table>
