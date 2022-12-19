@@ -22,11 +22,12 @@
         <form class="search_form" method="post" action="${path }/notice_update_ok">
             <div class="form_box">
                 <select name="field">
-                    <option value="title">글제목</option>
-                    <option value="cont">내용</option>
+                    <option value="allSearch" <c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
+                    <option value="title" <c:if test="${ field eq 'title' }">selected="selected"</c:if>>글제목</option>
+                    <option value="cont" <c:if test="${ field eq 'cont' }">selected="selected"</c:if>>내용</option>
                 </select>
-
-                <input name="keyword">
+				<span class="search-name">검색어</span> 
+                <input name="keyword" value="${ keyword }">
 
                 <input class="btn btn-secondary searchbtn" type="submit" value="검색">
             </div>

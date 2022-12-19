@@ -7,6 +7,10 @@
 		select * from heartpet_notice where notice_status = 1 order by notice_no desc
 	</select>	 -->
 	
+	<sql id="notice_keyword">
+		LIKE '%' || #{keyword} || '%'
+    </sql>
+	
 	<select id="notice_content" parameterType="int" resultType="com.heartpet.model.NoticeDTO">
 		select * from heartpet_notice where notice_no = #{no}
 	</select>	
@@ -31,11 +35,11 @@
 	</update>
 	
 	<select id="notice_list" parameterType="hashMap" resultType="com.heartpet.model.NoticeDTO">
-		<![CDATA[		
+				
 		SELECT * 
-		FROM (SELECT s.*, row_number() over(order by notice_no desc) rnum from heartpet_notice s) 
-		WHERE rnum >= #{startNo} and rnum <= #{endNo} and notice_status=1
-		]]>
+		FROM (SELECT s.*, row_number() over(order by notice_no desc) rnum from heartpet_notice s where notice_status=1) 
+		<![CDATA[WHERE rnum >= #{startNo} and rnum <= #{endNo}]]>
+		
 	</select>
 	
 	<!-- 공지사항 개수 -->
