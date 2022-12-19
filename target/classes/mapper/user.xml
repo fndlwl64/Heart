@@ -10,7 +10,7 @@
 	]]>
 	</sql>
 	
-	<sql  id="user_keyword">
+	<sql id="user_keyword">
 		like '%' || #{keyword} || '%'
 	</sql>
 	
@@ -50,8 +50,9 @@
 			FROM (select u.*, row_number() over(order by user_no desc) rnum FROM heartpet_user u
 		<where>
 			<choose>
-		        <when test="field.equals('') and keyword != ''"> user_id <include refid="user_keyword" /></when>
-		        
+		        <when test="field.equals('id') and keyword != ''"> user_id <include refid="user_keyword" /></when>
+		        <when test="field.equals('grade') and user_grade != 0"> user_grade = #{user_grade} </when>
+		        <when test="field.equals('animalexp') and user_animalexp != ''"> user_animalexp = #{user_animalexp} </when>
 	        </choose>
         </where>	
         <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo} ORDER BY USER_NO DESC ]]>
@@ -62,8 +63,9 @@
 		<where>
 	 	<choose>
 	 		<when test="field == '' and keyword == ''"></when>
-			<when test="field.equals('id') and keyword != ''"> USER_ID <include refid="user_keyword" /></when>
-			<when test="field.equals('grade') and keyword != ''"> USER_GRADE <include refid="user_keyword" /></when>
+			<when test="field.equals('id') and keyword != ''"> user_id <include refid="user_keyword" /></when>
+	        <when test="field.equals('grade') and user_grade != 0"> user_grade = #{user_grade} </when>
+	        <when test="field.equals('animalexp') and user_animalexp != ''"> user_animalexp = #{user_animalexp} </when>
 		</choose>
         </where>
 	</select>
