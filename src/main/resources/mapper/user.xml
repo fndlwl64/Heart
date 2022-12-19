@@ -47,7 +47,15 @@
 	
 	<select id="user_list" parameterType="map" resultType="UserDTO">
 		<include refid="user_select" /> 
-			FROM (select u.*, row_number() over(order by user_no desc) rnum FROM heartpet_user u
+			FROM (select u.*, row_number() over(
+			<choose>
+				<when test="order.equals('')"> order by user_no desc </when>
+	            <when test="order.equals('no_desc')">order by user_no DESC</when>
+	            <when test="order.equals('grade_desc')">order by user_grade DESC, user_no</when>
+	            <when test="order.equals('grade_asc')">order by user_grade, user_no</when>
+	            <when test="order.equals('name_asc')">order by user_name</when>        
+	        </choose>
+			) rnum FROM heartpet_user u
 		<where>
 			<choose>
 		        <when test="field.equals('id') and keyword != ''"> user_id <include refid="user_keyword" /></when>
@@ -55,13 +63,7 @@
 		        <when test="field.equals('animalexp') and user_animalexp != ''"> user_animalexp = #{user_animalexp} </when>
 	        </choose>
         </where>	
-        <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo} ]]>
-        <choose>
-            <when test="order.equals('no_desc')">, user_no DESC</when>
-            <when test="order.equals('grade_desc')">, user_grade DESC</when>
-            <when test="order.equals('grade_asc')">, user_grade ASC</when>
-            <when test="order.equals('name_desc')">, user_name DESC</when>        
-         </choose>
+        <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo}]]>
 	</select>
 	
 	<select id="user_count" parameterType="map" resultType="int">
