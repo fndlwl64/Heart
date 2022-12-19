@@ -31,6 +31,7 @@ public class AdminNoticeController {
 	@RequestMapping("/notice_list")
     public String notice_list(@RequestParam(value = "field", required = false) String field,
 			@RequestParam(value = "keyword", required = false) String keyword,
+			@RequestParam(value = "order", required = false) String order,
 			@RequestParam(value = "page", defaultValue = "1") int page,Model model) {
 		//List<NoticeDTO> notice_list = noticedao.getNoticeList();
 		//model.addAttribute("nList", notice_list);
@@ -53,7 +54,7 @@ public class AdminNoticeController {
 		
         totalRecord = this.noticedao.listNoticeCount(field, keyword);
         paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-        noticeList = this.noticedao.listNotice(paging.getStartNo(), paging.getEndNo(), field, keyword);
+        noticeList = this.noticedao.listNotice(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
         
         model.addAttribute("noticeList", noticeList);
         model.addAttribute("total", totalRecord);
