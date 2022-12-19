@@ -128,12 +128,11 @@ public class AdminNoticeController {
     public void notice_update_ok(@RequestParam("files") List<MultipartFile> files, NoticeDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException {
         
 		FileUploadImage upload = new FileUploadImage();
-		
+		dto = upload.uploadNoticeImg(request, files, "notice", dto);
+		int check = this.noticedao.noticeupdate(dto);
 		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
-		
-		int check = this.noticedao.noticeupdate(dto);
 		
 		if(check > 0) {
 			out.println("<script>");
