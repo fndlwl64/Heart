@@ -14,71 +14,11 @@
 $(function() {
 	let boardNo = ${ list.board_no };
 	let path = '${ path }';
-	console.log(1, boardNo);
-	console.log(2, path);
 	commentTable(boardNo, path);	
 });
 
-function commentTable(boardNo, path) {
-	console.log(1, boardNo);
-	console.log(2, path);
-    $.ajax({
-        contentType : "application/x-www-form-urlencoded;charset=UTF-8",
-        type: "post",
-        url: path + "/user_comment_list",
-        data : {
-            board_no : boardNo
-        },
-        dataType : "json",
-        success : function(commentList) {
-        	console.log(commentList);
-            $("#comment-table tr:gt(0)").remove();
-        	let comment = "";
-            console.log(commentList.length);
-         	for (let i=0; i < commentList.length; ++i) {
-        		comment += '<tr><td>' + commentList[i].comment_id + '</td>';
-                comment += '<td>' + commentList[i].comment_content + '</td>';
-                comment += '<td>' + commentList[i].comment_regdate + '</td>';
-                comment += '<td><button type="button" class="btn btn-danger btn-sm"> 삭제</button></td></tr>';
-            }
-			console.log(comment);
-			$("#comment-table").append(comment);
-		},
-        error : function(e) {
-            alert("Error : "+e.status);
-        } 
-    });
-}
-
-function commentSave(userId, boardNo, path) { 
-	
-    $.ajax({
-        contentType : "application/x-www-form-urlencoded;charset=UTF-8",
-        type: "post",
-        url: path + "/user_comment_insert_ok",
-        data : {
-            user_id : userId,
-            board_no : boardNo,
-            comment_content : $("#comment_content").val()
-        },
-        dataType : "text",
-        success : function(check) {
-            console.log(check);   
-            if(check > 0){
-            	alert('댓글이 성공적으로 등록되었습니다.');
-            	console.log(boardNo);
-            	console.log(path);            	
-            	commentTable(boardNo, path)
-            }else {
-            	alert('댓글 등록 실패')
-            }
-        },
-        error : function(e) {
-            alert("Error : "+e.status);
-        }                   
-    });          
-};
 </script> 
+<script type="text/javascript" src="${path}/resources/js/comment.js"></script>
 
 <%-- 문의글 상세 보기 --%>
 <div id="qna-contents" class="qna-contents">
@@ -188,6 +128,8 @@ function commentSave(userId, boardNo, path) {
 		  </div>
 		</div>
 	</form>
+	
+    <jsp:include page="../../include/deleteModal.jsp" />	
 
     <div class="space-add"></div>
 
