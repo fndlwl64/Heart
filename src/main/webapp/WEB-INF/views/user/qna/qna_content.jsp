@@ -5,6 +5,12 @@
 <c:set var="list" value="${ qnaContent }" />
 <c:set var="uList" value="${ userContent }" />
 <c:set var="page" value="${ paging }" />
+<c:if test="${ not empty session_admin_id }">
+    <c:set var="session_id" value="${ session_admin_id }" />
+</c:if>
+<c:if test="${ empty session_admin_id }">
+    <c:set var="session_id" value="${ session_id }" />
+</c:if>
 <% pageContext.setAttribute("newline", "\n"); %>
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
@@ -35,9 +41,9 @@ $(function() {
     });
 });
 
-</script> 
-<script type="text/javascript" src="${ path }/resources/js/comment.js"></script>
 
+</script> 
+<script type="text/javascript" src="${ path }/resources/js/qna_comment.js"></script>
 <%-- 문의글 상세 보기 --%>
 <div id="qna-contents" class="qna-contents">
     <div class="qna_section">
@@ -57,7 +63,7 @@ $(function() {
                         <li class="d-inline"><img src="${path}/resources/image/user_img/${ uList.user_image }" alt="user_image"></li>
                         <li class="d-inline">
                             <a href="${path}/user_mypage_wish_list"><span id="id">${ list.board_id }</span></a>
-                            <a id="reply" href="#"><i class="bi bi-card-list"></i> 댓글 <span id="comment-count">0</span></a>
+                            <a id="reply" href=".reply-table"><i class="bi bi-card-list"></i> 댓글 <span id="comment-count">0</span></a>
                         </li>
                         <li class="d-block">${ list.board_regdate.substring(0,10) } 조회 ${ list.board_hit }</li>
                     </ul>

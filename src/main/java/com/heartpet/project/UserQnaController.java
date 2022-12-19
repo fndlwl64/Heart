@@ -63,8 +63,13 @@ public class UserQnaController {
 
         totalRecord = this.qnaDAO.listQnaCount(field, keyword);
         PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-
-        List<QnaDTO> qnaList = this.qnaDAO.listQna(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
+        List<QnaDTO> qnaList = this.qnaDAO.listQna(paging.getStartNo(), paging.getEndNo(), field, keyword, order);  
+        
+        // 댓글수 추가
+        List<Integer> commentList = new ArrayList<Integer>();
+        for(int i=0; i<qnaList.size(); i++) {            
+            commentList.add(this.qnaDAO.countComment(qnaList.get(i).getBoard_no()));
+        }
 
         model.addAttribute("qnaList", qnaList);
         model.addAttribute("total", totalRecord);
@@ -72,6 +77,7 @@ public class UserQnaController {
         model.addAttribute("field", field);
         model.addAttribute("keyword", keyword);
         model.addAttribute("order", order);
+        model.addAttribute("commentList", commentList);
 
         return "user/qna/qna_list";
     }
@@ -303,7 +309,7 @@ public class UserQnaController {
     ////////////////////////////////////////////////////////////////////////////////////
     // COMMENT_INSERT
     ////////////////////////////////////////////////////////////////////////////////////
-    @RequestMapping("/user_comment_insert_ok")
+    @RequestMapping("/both_comment_insert_ok")
     public @ResponseBody int user_comment_insert_ok(@RequestParam("user_id") String user_id, @RequestParam("board_no") int board_no, 
             @RequestParam("comment_content") String comment_content, HttpServletResponse response) throws IOException {
         
@@ -321,7 +327,7 @@ public class UserQnaController {
     ////////////////////////////////////////////////////////////////////////////////////
     // COMMENT_LIST
     ////////////////////////////////////////////////////////////////////////////////////
-    @RequestMapping("/user_comment_list")
+    @RequestMapping("/both_comment_list")
     public @ResponseBody List<QnaCommentDTO> user_comment_list(@RequestParam("board_no") int board_no, Model model) {
         List<QnaCommentDTO> commentList = this.qnaDAO.listComment(board_no);        
         return commentList;
@@ -330,16 +336,16 @@ public class UserQnaController {
     ////////////////////////////////////////////////////////////////////////////////////
     // COMMENT_COUNT
     ////////////////////////////////////////////////////////////////////////////////////
-    @RequestMapping("/user_comment_count")
+    @RequestMapping("/both_comment_count")
     public @ResponseBody int user_comment_count(@RequestParam("board_no") int board_no) {
         int commentCount = this.qnaDAO.countComment(board_no);
         return commentCount;
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////////////
     // COMMENT_DELETE
     ////////////////////////////////////////////////////////////////////////////////////
-    @RequestMapping("/user_comment_delete")
+    @RequestMapping("/both_comment_delete")
     public @ResponseBody int user_comment_delete(@RequestParam("comment_commentno") int comment_commentno) {
         int deleteComment = this.qnaDAO.deleteComment(comment_commentno);
         System.out.println(deleteComment);

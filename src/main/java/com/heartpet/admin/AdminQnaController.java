@@ -67,8 +67,13 @@ public class AdminQnaController {
 
         totalRecord = this.qnaDAO.listQnaCount(field, keyword);
         PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-
         List<QnaDTO> qnaList = this.qnaDAO.listQna(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
+        
+        // 댓글수 추가
+        List<Integer> commentList = new ArrayList<Integer>();
+        for(int i=0; i<qnaList.size(); i++) {            
+            commentList.add(this.qnaDAO.countComment(qnaList.get(i).getBoard_no()));
+        }
 
         model.addAttribute("qnaList", qnaList);
         model.addAttribute("total", totalRecord);
@@ -76,6 +81,7 @@ public class AdminQnaController {
         model.addAttribute("field", field);
         model.addAttribute("keyword", keyword);
         model.addAttribute("order", order);
+        model.addAttribute("commentList", commentList);
 
         return "admin/qna/qna_list";
     }

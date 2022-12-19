@@ -382,3 +382,23 @@
 	justify-content: flex-end;
 }
 
+/* 댓글쓰기 */
+#comment-table {
+	width: 60%;
+	margin: 0.5rem auto;
+	
+}
+
+.reply-table {
+	width: 60%;
+	margin: 0 auto;
+}
+
+#content-reply {
+    text-align: right;
+}
+
+#content-reply > button {
+    margin-top: 0.5rem;
+}
+

@@ -8,6 +8,7 @@
 <c:set var="paging" value="${ paging }" />
 <c:set var="field" value="${ field }" />
 <c:set var="keyword" value="${ keyword }" />
+<c:set var="cList" value="${ commentList }" />
 <c:set var="link_address" value="${pageContext.request.contextPath}/user_qna_list" />
 <c:set var="now" value="<%=new java.util.Date()%>" />
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
@@ -61,7 +62,7 @@
             </thead>
             <tbody>
             <c:if test="${ not empty qList }">
-                <c:forEach var="list" items="${ qList }">
+                <c:forEach var="list" items="${ qList }" varStatus="status">
                 <tr>
                     <td>${ list.board_no }</td>
                     <td>${ list.board_category }</td>
@@ -85,8 +86,8 @@
 	                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if>
 	                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
 	                    <c:if test="${ list.board_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>	                    
-	                    </a>	                    
-	                    
+	                    <c:if test="${ cList[status.index] gt 0 }"><span>[${ cList[status.index] }]</span></c:if>	                    
+	                    </a> 
                     </td>
                     <td><c:if test="${ list.board_id eq 'admin' }"><span id="admin_id">관리자</span></c:if>
                     <c:if test="${ list.board_id ne 'admin' }"><span>${ list.board_id }</span></c:if></td>
