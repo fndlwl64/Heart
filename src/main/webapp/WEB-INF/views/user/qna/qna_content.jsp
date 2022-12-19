@@ -11,6 +11,14 @@
 
 <script type="text/javascript">
 
+$(function() {
+	let boardNo = ${ list.board_no };
+	let path = '${ path }';
+	console.log(1, boardNo);
+	console.log(2, path);
+	commentTable(boardNo, path);	
+});
+
 function commentTable(boardNo, path) {
 	console.log(1, boardNo);
 	console.log(2, path);
@@ -24,6 +32,7 @@ function commentTable(boardNo, path) {
         dataType : "json",
         success : function(commentList) {
         	console.log(commentList);
+            $("#comment-table tr:gt(0)").remove();
         	let comment = "";
             console.log(commentList.length);
          	for (let i=0; i < commentList.length; ++i) {
@@ -31,14 +40,7 @@ function commentTable(boardNo, path) {
                 comment += '<td>' + commentList[i].comment_content + '</td>';
                 comment += '<td>' + commentList[i].comment_regdate + '</td>';
                 comment += '<td><button type="button" class="btn btn-danger btn-sm"> 삭제</button></td></tr>';
-            } 
-        
-/* 			$.each(commentList , function(index, value) {
-			  comment += '<tr><td>' + value.comment_id + '</td>';
-			  comment += '<td>' + value.comment_content + '</td>';
-			  comment += '<td>' + value.comment_regdate + '</td>';
-			  comment += '<td><button type="button" class="btn btn-danger btn-sm"> 삭제</button></td></tr>';
-			}); */
+            }
 			console.log(comment);
 			$("#comment-table").append(comment);
 		},
@@ -131,6 +133,7 @@ function commentSave(userId, boardNo, path) {
 	                    <th>작성자</th>
 	                    <th>댓글내용</th>
 	                    <th>작성시간</th>
+	                    <th>삭제</th>
 	                </tr>
                 </thead>
             </table>
