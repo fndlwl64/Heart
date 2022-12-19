@@ -12,8 +12,9 @@
 <div class="notice-board">
     <div align="center">
         <h2>공지사항</h2>
-        
+        <br><br>
         <%-- 검색 폼 --%>
+        <div>
         <form class="search_form" method="post" action="${path }/user_notice">
             <div class="form_box">
                 <select name="field">
@@ -27,10 +28,25 @@
                 <input class="btn btn-secondary searchbtn" type="submit" value="검색">
             </div>
         </form>
+		</div>
 
-
-        <br><br>
+        <br>
         
+        <%-- 정렬 & 게시물 수 --%>
+        <div>
+	    <form class="order_form" method="get" action="${path}/user_notice">    
+	       <div class="qna-section">
+	            <div class="qna_order">
+	                <select class="form-select form-select-sm" name="order" onchange="this.form.submit()">
+	                   <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
+	                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신게시일순</option>
+	                    <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>조회수높은순</option>
+	                </select>
+	            </div>
+	        </div>
+	    </form>
+	    </div>
+        <br>
         <table class="table table-bordered">
             <tr class="table-light">
                 <th>글 No.</th>
@@ -53,7 +69,7 @@
             <h3>공지사항이없습니다.</h3>
         </c:if>
     </div>
-    
+    <br>
     <%-- 페이징처리 --%>
     <jsp:include page="../../include/pagination.jsp" />
 </div>

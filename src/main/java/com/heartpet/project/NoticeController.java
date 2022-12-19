@@ -37,6 +37,9 @@ public class NoticeController {
         if (keyword == null) {
             keyword = "";
         }
+        if (order == null) {
+            order = "";
+        }
         
         int currentPage = 1; // 현재 페이지 변수
         if (page != 1) {
@@ -55,10 +58,8 @@ public class NoticeController {
         model.addAttribute("paging", paging);
         model.addAttribute("field", field);
         model.addAttribute("keyword", keyword);
-        /*
-		 * List<NoticeDTO> list = noticedao.getNoticeList(); model.addAttribute("List",
-		 * list)
-		 */;
+        model.addAttribute("order", order);
+
         return "user/notice/notice_list";
     }
 

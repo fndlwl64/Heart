@@ -7,9 +7,6 @@ import java.util.List;
 
 
 public interface NoticeDAO {
-
-	//리스트
-    //public List<NoticeDTO> getNoticeList();
     
     //상세
     public NoticeDTO getNotice(int no);

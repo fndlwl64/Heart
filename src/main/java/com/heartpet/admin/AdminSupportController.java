@@ -60,10 +60,6 @@ public class AdminSupportController {
         paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
         supportList = this.supportdao.listSupport(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
 
-		/*
-		 * List<SupportDTO> support_list = supportdao.Support();
-		 * model.addAttribute("sList", support_list);
-		 */
         model.addAttribute("supportList", supportList);
         model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);
