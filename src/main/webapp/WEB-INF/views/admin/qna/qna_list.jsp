@@ -15,8 +15,6 @@
 <!-- modal delete Function 추가 시 data-id 검색 -> 주소값만 수정하세요....
 + admin_list_view.js include 하기 -->
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
