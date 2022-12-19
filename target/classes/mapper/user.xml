@@ -55,7 +55,13 @@
 		        <when test="field.equals('animalexp') and user_animalexp != ''"> user_animalexp = #{user_animalexp} </when>
 	        </choose>
         </where>	
-        <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo} ORDER BY USER_NO DESC ]]>
+        <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo} ]]>
+        <choose>
+            <when test="order.equals('no_desc')">, user_no DESC</when>
+            <when test="order.equals('grade_desc')">, user_grade DESC</when>
+            <when test="order.equals('grade_asc')">, user_grade ASC</when>
+            <when test="order.equals('name_desc')">, user_name DESC</when>        
+         </choose>
 	</select>
 	
 	<select id="user_count" parameterType="map" resultType="int">
