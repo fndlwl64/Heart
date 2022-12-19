@@ -83,24 +83,24 @@
 					</select>
 				</div>
 			</div>
-			<table class="table searched_list">
+			<table class="table table-hover searched_list">
 				<tr>
-					<th class="table-secondary">회원 아이디</th>
-					<th class="table-secondary">동물 이름</th>
-					<th class="table-secondary">입소 신청일</th>
-					<th class="table-secondary">입양 등록일</th>
-					<th class="table-secondary">입양 예정일</th>
-					<th class="table-secondary">입양 완료일</th>
-					<th class="table-secondary">입양 상태</th>
+					<th class="table-light col-1">회원 아이디</th>
+					<th class="table-light col-1">동물 이름</th>
+					<th class="table-light col-1">입소 신청일</th>
+					<th class="table-light col-1">입양 등록일</th>
+					<th class="table-light col-1">입양 예정일</th>
+					<th class="table-light col-1">입양 완료일</th>
+					<th class="table-light col-1">입양 상태</th>
 				</tr>
 				<c:forEach var="dto" items="${list }">
 					<tr>
-						<td>${dto.adopt_reg_userid }</td>
-						<td>${map.get(dto.adopt_reg_animalno).get(0) }</td>
-						<td>${dto.adopt_reg_appdate }</td>
-						<td>${dto.adopt_reg_regdate }</td>
-						<td>${dto.adopt_reg_duedate }</td>
-						<td>${dto.adopt_reg_adoptdate }</td>
+						<td class="list-title text-center">${dto.adopt_reg_userid }</td>
+						<td class="list-title text-center">${map.get(dto.adopt_reg_animalno).get(0) }</td>
+						<td class="list-title text-center">${dto.adopt_reg_appdate }</td>
+						<td class="list-title text-center">${dto.adopt_reg_regdate }</td>
+						<td class="list-title text-center">${dto.adopt_reg_duedate }</td>
+						<td class="list-title text-center">${dto.adopt_reg_adoptdate }</td>
 						<c:if test="${map.get(dto.adopt_reg_animalno).get(1) ne '입양 대기'}">
 							<td><a class="text-primary" data-bs-toggle="modal"
 								data-bs-target="#admissionModal"

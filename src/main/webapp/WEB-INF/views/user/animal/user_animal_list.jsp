@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<c:set var="path" value="${pageContext.request.contextPath}" />	
+<link rel="stylesheet" href="${path}/resources/css/web.css">
 <jsp:include page="../../include/user_header.jsp" />
 <c:set var="qList" value="${ qnaList }" />
 <c:set var="total" value="${ total }" />
@@ -177,7 +178,7 @@
 					<div class="d-inline-block text-center">
 						<a
 							href="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"><img
-							class="img-fluid"
+							class="img-fluid rounded mx-auto img-frame"
 							src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a>
 						<span class="text-center">${dto.getAnimal_name() }</span>
 					</div>
