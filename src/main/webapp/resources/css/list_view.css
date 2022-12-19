@@ -397,3 +397,8 @@
 	justify-content: flex-end;
 }
 
+/* 정렬 */
+.qna-section .qna_order {
+    justify-content: right;
+    margin-bottom: 0.5rem;
+}

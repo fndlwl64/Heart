@@ -33,8 +33,6 @@ public class AdminNoticeController {
 			@RequestParam(value = "keyword", required = false) String keyword,
 			@RequestParam(value = "order", required = false) String order,
 			@RequestParam(value = "page", defaultValue = "1") int page,Model model) {
-		//List<NoticeDTO> notice_list = noticedao.getNoticeList();
-		//model.addAttribute("nList", notice_list);
 		
 		// 페이징
 		if (field == null) {
@@ -42,6 +40,9 @@ public class AdminNoticeController {
         }
         if (keyword == null) {
             keyword = "";
+        }
+        if (order == null) {
+            order = "";
         }
         
         int currentPage = 1; // 현재 페이지 변수
@@ -61,6 +62,7 @@ public class AdminNoticeController {
         model.addAttribute("paging", paging);
         model.addAttribute("field", field);
         model.addAttribute("keyword", keyword);
+        model.addAttribute("order", order);
         
         return "admin/notice_list";
     }

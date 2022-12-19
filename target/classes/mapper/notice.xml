@@ -3,9 +3,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.heartpet.action.NoticeDAO">
-	<!-- <select id="notice_list" resultType="com.heartpet.model.NoticeDTO">
-		select * from heartpet_notice where notice_status = 1 order by notice_no desc
-	</select>	 -->
 	
 	<sql id="notice_keyword">
 		LIKE '%' || #{keyword} || '%'
@@ -37,7 +34,14 @@
   	<select id="notice_list" parameterType="hashMap" resultType="com.heartpet.model.NoticeDTO">
 				
 		SELECT * 
-		FROM (SELECT s.*, row_number() over(order by notice_no desc) rnum from heartpet_notice s 
+		FROM (SELECT s.*, row_number() over(
+		<choose>
+        	<when test="order.equals('')"> order by notice_no desc </when>
+            <when test="order.equals('no_desc')"> order by notice_no desc </when>
+            <when test="order.equals('date_desc')"> order by notice_date desc </when>
+            <when test="order.equals('hit_desc')"> order by notice_hit desc </when>     
+        </choose>
+		) rnum from heartpet_notice s 
 		WHERE notice_status = 1
 		<choose>
 			<when test="field.equals('allSearch') and keyword != ''">and (notice_title <include refid="notice_keyword" />) OR (notice_content <include refid="notice_keyword" />) and notice_status = 1</when>
