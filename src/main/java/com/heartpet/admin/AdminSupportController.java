@@ -34,6 +34,7 @@ public class AdminSupportController {
 	@RequestMapping("/support_list")
 	public String admin_support_list(@RequestParam(value = "field", required = false) String field,
 			@RequestParam(value = "keyword", required = false) String keyword,
+			@RequestParam(value = "order", required = false) String order,
 			@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 		
 		// 페이징
@@ -43,7 +44,10 @@ public class AdminSupportController {
         if (keyword == null) {
             keyword = "";
         }
-		
+        if (order == null) {
+            order = "";
+        }
+        
 		int currentPage = 1; // 현재 페이지 변수
         if (page != 1) {
             currentPage = page;
@@ -54,17 +58,14 @@ public class AdminSupportController {
         
 		totalRecord = this.supportdao.listSupportCount(field, keyword);
         paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-        supportList = this.supportdao.listSupport(paging.getStartNo(), paging.getEndNo(), field, keyword);
+        supportList = this.supportdao.listSupport(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
 
-		/*
-		 * List<SupportDTO> support_list = supportdao.Support();
-		 * model.addAttribute("sList", support_list);
-		 */
         model.addAttribute("supportList", supportList);
         model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);
         model.addAttribute("field", field);
         model.addAttribute("keyword", keyword);
+        model.addAttribute("order", order);
         
 		return "admin/support_list";
 	}

@@ -38,6 +38,19 @@
     </form>
 
     <br>
+    
+       <%-- 정렬 & 게시물 수 --%>
+    <form class="order_form" method="get" action="${path}/support_list">    
+       <div class="qna-section">
+            <div class="qna_order">
+                <select class="form-select form-select-sm" name="order" onchange="this.form.submit()">
+                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
+                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신후원순</option>
+                    <option value="price_desc"<c:if test="${ order eq 'price_desc' }">selected="selected"</c:if>>금액순</option>
+                </select>
+            </div>
+        </div>
+    </form>
 
     <button class="btn btn-success insertbtn" onclick="location.href='${path }/support_insert'">등록</button>
 
@@ -81,19 +94,7 @@
     
     <%-- 페이징처리 --%>
     <jsp:include page="../include/pagination.jsp" />
-    <!-- <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav> -->
+
     
 
 </div>

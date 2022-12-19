@@ -34,17 +34,22 @@ public class AdminController {
     /*관리자 상단바에서 페이지 이동*/
 	@RequestMapping("/admin_main")
 	public String admin_main(@RequestParam(value = "field", required = false) String field, 
-    		@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+    		@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(value = "page", defaultValue = "1") int page, 
+    		@RequestParam(value = "user_grade", required=false) Integer grade, @RequestParam(value = "user_animalexp", required=false) String exp,
+    		@RequestParam(value = "order", required=false) String order, Model model) {
 		
 		if(field == null) { field = ""; }
        	if(keyword == null) { keyword = ""; }
+       	if(grade == null) { grade = 0; }
+       	if(exp == null) { exp = ""; }
+       	if(order == null) { order = ""; }
     	
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
     	
-    	totalRecord = this.userDAO.countUser(field, keyword);
+    	totalRecord = this.userDAO.countUser(field, keyword, grade, exp);
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-    	List<UserDTO> list = userDAO.userListPaging(paging.getStartNo(), paging.getEndNo(), field, keyword);
+    	List<UserDTO> list = userDAO.userListPaging(paging.getStartNo(), paging.getEndNo(), field, keyword, grade, exp, order);
     	int total =userDAO.totalUser();
 		
 		model.addAttribute("list", list);
@@ -53,23 +58,31 @@ public class AdminController {
 		model.addAttribute("paging", paging);		
 		model.addAttribute("field", field); 
 		model.addAttribute("keyword", keyword);	
+		model.addAttribute("user_grade", grade);
+		model.addAttribute("user_animalexp", exp);
+		model.addAttribute("order", order);
 		
 		return "admin/user/user_list";
 	}
 	
     @RequestMapping("/user_list")
     public String user_list(@RequestParam(value = "field", required = false) String field, 
-    		@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+    		@RequestParam(value = "keyword", required = false) String keyword, @RequestParam(value = "page", defaultValue = "1") int page, 
+    		@RequestParam(value = "user_grade", required=false) Integer grade, @RequestParam(value = "user_animalexp", required=false) String exp,
+    		@RequestParam(value = "order", required=false) String order,Model model) {
     	
     	if(field == null) { field = ""; }
        	if(keyword == null) { keyword = ""; }
+       	if(grade == null) { grade = 0; }
+       	if(exp == null) { exp = ""; }
+       	if(order == null) { order = ""; }
     	
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
     	
-    	totalRecord = this.userDAO.countUser(field, keyword);
+    	totalRecord = this.userDAO.countUser(field, keyword, grade, exp);
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-    	List<UserDTO> list = userDAO.userListPaging(paging.getStartNo(), paging.getEndNo(), field, keyword);
+    	List<UserDTO> list = userDAO.userListPaging(paging.getStartNo(), paging.getEndNo(), field, keyword, grade, exp, order);
     	int total =userDAO.totalUser();
 		
 		model.addAttribute("list", list);
@@ -78,6 +91,9 @@ public class AdminController {
 		model.addAttribute("paging", paging);		
 		model.addAttribute("field", field); 
 		model.addAttribute("keyword", keyword);	
+		model.addAttribute("user_grade", grade);
+		model.addAttribute("user_animalexp", exp);
+		model.addAttribute("order", order);
 		    	
         return "admin/user/user_list";
     }

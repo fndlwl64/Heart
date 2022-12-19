@@ -52,3 +52,9 @@
 	border-color: gray;
 	margin: 50px;
 }
+
+/* 정렬 */
+.notice-board .qna-section {
+	display: flex;
+	width: 60%;
+}

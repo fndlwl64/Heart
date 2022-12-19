@@ -7,9 +7,6 @@ import java.util.List;
 
 
 public interface NoticeDAO {
-
-	//리스트
-    //public List<NoticeDTO> getNoticeList();
     
     //상세
     public NoticeDTO getNotice(int no);
@@ -27,7 +24,7 @@ public interface NoticeDAO {
     public int noticedelete(int no);
     
     //후원하기 페이징
-    public List<NoticeDTO> listNotice(int startNo, int endNo, String field, String keyword);
+    public List<NoticeDTO> listNotice(int startNo, int endNo, String field, String keyword, String order);
 
     //후원하기 페이징 전체 개수
     public int listNoticeCount(String field, String keyword);

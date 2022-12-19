@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="dto" value="${supportList }"/>
-<jsp:include page="../include/admin_header.jsp"/>
+<c:set var="total" value="${ total }"/>
+<c:set var="paging" value="${ paging }"/>
+<c:set var="field" value="${ field }"/>
+<c:set var="keyword" value="${ keyword }"/>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<jsp:include page="../include/admin_header.jsp"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +15,7 @@
     <link rel="stylesheet" href="resources/css/list_view.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="resources/js/main.js"></script>
+    <!-- <script src="resources/js/main.js"></script> -->
     <script src="${path}/resources/js/admin_list_view.js"></script>
 </head>
 <body>
@@ -19,7 +23,7 @@
     <div class="container">
 
         <%-- 검색 폼 --%>
-        <form class="search_form" method="post" action="${path }/notice_update_ok">
+        <form class="search_form" method="post" action="${path }/notice_list">
             <div class="form_box">
                 <select name="field">
                     <option value="allSearch" <c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
@@ -34,6 +38,19 @@
         </form>
 
         <br>
+        
+        <%-- 정렬 & 게시물 수 --%>
+	    <form class="order_form" method="get" action="${path}/notice_list">    
+	       <div class="qna-section">
+	            <div class="qna_order">
+	                <select class="form-select form-select-sm" name="order" onchange="this.form.submit()">
+	                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
+	                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신게시일순</option>
+	                    <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>조회수높은순</option>
+	                </select>
+	            </div>
+	        </div>
+	    </form>
 
         <button class="btn btn-success insertbtn" onclick="location.href='${path}/notice_insert'">등록</button>
 
@@ -46,6 +63,7 @@
                     <th class="table-secondary">글번호</th>
                     <th class="table-secondary">글제목</th>
                     <th class="table-secondary">조회수</th>
+                    <th class="table-secondary">게시일</th>
                     <th class="table-secondary">수정/삭제</th>
                 </tr>
 				<c:if test="${!empty noticeList}">
@@ -54,6 +72,7 @@
 		                    <td>${dto.getNotice_no() }</td>
 		                    <td><a href="${path }/notice_content?no=${dto.getNotice_no()}">${dto.getNotice_title() }</a></td>
 		                    <td>${dto.getNotice_hit() }</td>
+		                    <td>${dto.getNotice_date().substring(0, 10) }</td>
 		                    <td>
 		                        <button class="btn btn-primary" onclick="location.href='${path}/notice_update?no=${dto.getNotice_no() }'">수정</button>
 		                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${path }/notice_delete?no=${dto.getNotice_no()}">삭제</button>

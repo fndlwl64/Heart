@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import com.heartpet.model.AnimalDTO;
+import com.heartpet.model.NoticeDTO;
 
 @Service
 public class FileUploadImage {
@@ -280,4 +281,104 @@ public class FileUploadImage {
         }        
     }
 	
+	//animal img insert
+	public String[] uploadNoticeImg(HttpServletRequest request, List<MultipartFile> files, String folderName) {
+//		String otherPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath()
+//				+ "upload";
+		//파일 경로 + 디렉토리 생성(날짜 + folderName)
+		Calendar cal = Calendar.getInstance();
+	    String dateString;
+	    dateString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/"+dateString+"/"+folderName);
+	    File mkfile = new File(rootPath);
+	    mkfile.mkdirs();
+		
+		String[] imgs = {"","",""};
+		int i = 0;
+	
+		//파일 업로드
+		for (MultipartFile file : files) {
+			if(file.getOriginalFilename().equals("")) {//업로드할 파일 없으면 스킵
+				continue;
+			}
+			
+			// 랜덤으로 파일명 생성
+			String fileRealName = file.getOriginalFilename();
+			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length()); 
+			UUID uuid = UUID.randomUUID();
+			String randomName =  uuid.toString() + fileExtension;
+			
+			//이미지 1,2,3에 쓸 이미지 이름 저장 (날짜 + folderName 경로 포함)
+			imgs[i] = dateString + "/" + folderName + "/" + randomName;	
+			//이미지 파일 생성
+			try {
+//				File toFile = new File(rootPath + "/" + imgs[i]);
+//				file.transferTo(toFile);
+				File otherFile = new File(rootPath  + "/" + randomName);
+				file.transferTo(otherFile);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			i++;
+		}
+		return imgs;
+	}
+	
+	//animal img update
+	public NoticeDTO uploadNoticeImg(HttpServletRequest request, List<MultipartFile> files, String folderName, NoticeDTO dto) {
+//		String otherPath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath()
+//				+ "upload";
+		Calendar cal = Calendar.getInstance();
+	    String dateString;
+	    dateString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+		String rootPath = request.getSession().getServletContext().getRealPath("/resources/upload/"+dateString+"/"+folderName);
+	    File mkfile = new File(rootPath);
+	    mkfile.mkdirs();
+		
+		int i = 0;
+	
+		for (MultipartFile file : files) {
+			if(file.getOriginalFilename().equals("")) {//업로드할 파일 없으면 스킵
+				continue;
+			}
+			//기존 파일 삭제
+			String deleteImg = null;
+			if(i == 0 ) {deleteImg = dto.getNotice_img1();};
+			if(i == 1 ) {deleteImg = dto.getNotice_img2();};
+			
+			if(!deleteImg.equals("")) {
+				String deletePath = request.getSession().getServletContext().getRealPath("/resources/upload")+"/"+deleteImg;
+				File deleteFile = new File(deletePath);
+				System.out.println(deleteFile.delete());;
+			}
+			
+			// 랜덤으로 파일명 생성 
+			String fileRealName = file.getOriginalFilename();
+			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+			UUID uuid = UUID.randomUUID();
+			String randomName =  uuid.toString() + fileExtension;
+			//이미지 1,2,3에 쓸 이미지 이름 저장 (날짜 + folderName 경로 포함)
+			if(i == 0 ) {dto.setNotice_img1(dateString + "/" + folderName + "/" + randomName);};
+			if(i == 1 ) {dto.setNotice_img2(dateString + "/" + folderName + "/" + randomName);};
+		
+			
+			//이미지 파일 생성
+			try {
+//				File toFile = new File(rootPath + "/" + imgs[i]);
+//				file.transferTo(toFile);
+				File otherFile = new File(rootPath  + "/" + randomName);
+				file.transferTo(otherFile);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			i++;
+		}
+		return dto;
+	}
 }

@@ -27,6 +27,7 @@ public class NoticeController {
 	@RequestMapping("/user_notice")
     public String notice(@RequestParam(value = "field", required = false) String field,
 			@RequestParam(value = "keyword", required = false) String keyword,
+			@RequestParam(value = "order", required = false) String order,
 			@RequestParam(value = "page", defaultValue = "1") int page,Model model) {
 		
 		// 페이징
@@ -35,6 +36,9 @@ public class NoticeController {
         }
         if (keyword == null) {
             keyword = "";
+        }
+        if (order == null) {
+            order = "";
         }
         
         int currentPage = 1; // 현재 페이지 변수
@@ -47,17 +51,15 @@ public class NoticeController {
 		
         totalRecord = this.noticedao.listNoticeCount(field, keyword);
         paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-        noticeList = this.noticedao.listNotice(paging.getStartNo(), paging.getEndNo(), field, keyword);
+        noticeList = this.noticedao.listNotice(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
 		
         model.addAttribute("List", noticeList);
         model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);
         model.addAttribute("field", field);
         model.addAttribute("keyword", keyword);
-        /*
-		 * List<NoticeDTO> list = noticedao.getNoticeList(); model.addAttribute("List",
-		 * list)
-		 */;
+        model.addAttribute("order", order);
+
         return "user/notice/notice_list";
     }
 

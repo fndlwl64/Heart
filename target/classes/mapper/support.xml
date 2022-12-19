@@ -44,7 +44,14 @@
 	
     <select id="sup_list" parameterType="hashMap" resultType="com.heartpet.model.SupportDTO">
         SELECT * 
-        FROM (SELECT s.*, row_number() over(order by support_no desc) rnum from heartpet_support s
+        FROM (SELECT s.*, row_number() over(
+        <choose>
+        	<when test="order.equals('')"> order by support_no desc </when>
+            <when test="order.equals('no_desc')"> order by support_no desc </when>
+            <when test="order.equals('date_desc')"> order by support_date desc </when>
+            <when test="order.equals('price_desc')"> order by support_price desc </when>     
+        </choose>
+        ) rnum from heartpet_support s
         WHERE support_status = 1
         <choose>
             <when test="field.equals('allSearch') and keyword != ''">and (support_userid <include refid="support_keyword" />) OR (support_price <include refid="support_keyword" />) and support_status=1</when>
@@ -52,31 +59,16 @@
             <when test="field.equals('grade') and keyword != ''">and support_price <include refid="support_keyword" /> and support_status=1</when>
         </choose>
         <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo}]]>
+        
     </select>
-<!-- 	
- 	<select id="sup_list" parameterType="hashMap" resultType="com.heartpet.model.SupportDTO">
-				
-		SELECT * 
-		FROM (SELECT s.*, row_number() over(order by support_no desc) rnum from heartpet_support s
-		<where>
-			<choose>
-				<when test="field.equals('allSearch') and keyword != ''"> (support_userid <include refid="support_keyword" />) OR (support_price <include refid="support_keyword" />) and support_status=1</when>
-				<when test="field.equals('id') and keyword != ''"> support_userid <include refid="support_keyword" /> and support_status=1</when>
-				<when test="field.equals('grade') and keyword != ''"> support_price <include refid="support_keyword" /> and support_status=1</when>
-			</choose>
-		</where>
-		<![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo}]]>
-	</select>
-	 -->
+
 	<!-- 후원 개수 -->
  	<select id="sup_count" parameterType="hashMap" resultType="int">
-		select count(*) from heartpet_support
- 		<where>
+		select count(*) from heartpet_support WHERE support_status = 1
 			<choose>
-				<when test="field.equals('allSearch') and keyword != ''"> (support_userid <include refid="support_keyword" />) OR (support_price <include refid="support_keyword" />) and support_status=1</when>
-				<when test="field.equals('id') and keyword != ''"> support_userid <include refid="support_keyword" /> and support_status=1</when>
-				<when test="field.equals('grade') and keyword != ''"> support_price <include refid="support_keyword" /> and support_status=1</when>
+				<when test="field.equals('allSearch') and keyword != ''">and (support_userid <include refid="support_keyword" />) OR (support_price <include refid="support_keyword" />) and support_status=1</when>
+				<when test="field.equals('id') and keyword != ''">and support_userid <include refid="support_keyword" /> and support_status=1</when>
+				<when test="field.equals('grade') and keyword != ''">and support_price <include refid="support_keyword" /> and support_status=1</when>
 			</choose>
-		</where>
 	</select>
 </mapper>
