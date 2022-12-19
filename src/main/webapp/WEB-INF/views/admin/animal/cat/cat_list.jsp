@@ -112,15 +112,15 @@
 					</select>
 				</div>
 			</div>
-			<table class="table searched_list">
+			<table class="table table-hover searched_list">
 				<tr>
-					<th class="table-secondary">이름</th>
-					<th class="table-secondary">종</th>
-					<th class="table-secondary">성별</th>
-					<th class="table-secondary">크기</th>
-					<th class="table-secondary">중성화</th>
-					<th class="table-secondary">예방접종</th>
-					<th class="table-secondary">입양 상태</th>
+					<th class="table-light col-1">이름</th>
+					<th class="table-light col-1">종</th>
+					<th class="table-light col-1">성별</th>
+					<th class="table-light col-1">크기</th>
+					<th class="table-light col-1">중성화</th>
+					<th class="table-light col-1">예방접종</th>
+					<th class="table-light col-1">입양 상태</th>
 					<!-- <th class="table-secondary">수정/삭제</th> -->
 				</tr>
 				<c:forEach var="dto" items="${catList }">

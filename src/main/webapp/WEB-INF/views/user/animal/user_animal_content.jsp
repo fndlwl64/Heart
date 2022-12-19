@@ -126,7 +126,7 @@ pageContext.setAttribute("newline", "\n");
 			$.ajax({
 				url : $("#linkwish").val(),
 				type : 'POST',
-				data : JSON.stringify(wishDTO),
+				data : t(wishDTO),
 				contentType : "application/json",
 				success : function(data) {
 					console.log('success');
