@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="path" value="${pageContext.request.contextPath}" />	
-<link rel="stylesheet" href="${path}/resources/css/web.css">
+<c:set var="path" value="${pageContext.request.contextPath}" />
+<link rel="stylesheet" href="${path}/resources/css/user_animal_main.css">
 <jsp:include page="../../include/user_header.jsp" />
 <c:set var="qList" value="${ qnaList }" />
 <c:set var="total" value="${ total }" />
@@ -139,7 +139,19 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-6"></div>
+			<div class="col-2">
+				<div class="validation-form mx-2">
+					<select class="form-select form-select-sm" name="sort" id="sort">
+						<option value="">정렬</option>
+						<option value="size"
+							<c:if test="${sort eq 'size'}">selected</c:if>>크기</option>
+						<option value="weight"
+							<c:if test="${sort eq 'weight'}">selected</c:if>>무게</option>
+						<option value="age" <c:if test="${sort eq 'age'}">selected</c:if>>나이</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-4"></div>
 			<div class="col-4"></div>
 			<div class="col-1">
 				<button type="submit" class="btn btn-primary">Search</button>
@@ -150,15 +162,7 @@
 
 <%--정렬--%>
 <div class="d-flex justify-content-end my-2">
-	<div class="validation-form mx-2">
-		<select class="form-select form-select-sm" name="sort" id="sort">
-			<option value="">정렬</option>
-			<option value="size" <c:if test="${sort eq 'size'}">selected</c:if>>크기</option>
-			<option value="weight"
-				<c:if test="${sort eq 'weight'}">selected</c:if>>무게</option>
-			<option value="age" <c:if test="${sort eq 'age'}">selected</c:if>>나이</option>
-		</select>
-	</div>
+
 	<!-- <form class="validation-form mx-2" action="" method="post">
 		<select class="form-select form-select-sm " name="sort">
 			<option value="des">내림차순</option>
@@ -174,13 +178,15 @@
 	<div class="row row-cols-4">
 		<c:if test="${not empty animalList}">
 			<c:forEach var="dto" items="${animalList}">
-				<div class="col">
-					<div class="d-inline-block text-center">
-						<a
+				<div class="col animal">
+					<div class="d-inline-block text-center animal_wrap">
+						<%-- <a
 							href="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"><img
 							class="img-fluid rounded mx-auto img-frame"
-							src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a>
-						<span class="text-center">${dto.getAnimal_name() }</span>
+							src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a> --%>
+						<div class="rounded back_image"
+							style="background-image : url(<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()});"></div>
+						<div class="text-center animal_explan">${dto.getAnimal_name() }</div>
 					</div>
 				</div>
 			</c:forEach>
