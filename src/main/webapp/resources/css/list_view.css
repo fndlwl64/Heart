@@ -78,6 +78,21 @@
 	font-size: 14px;
 }
 
+.container .order_total {
+	width: 75%;
+	margin: auto;
+}
+
+.container .order_total .user_section {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 3%;
+}
+
+.container .order_total .user_section .user_order .order_select {
+	width: 150px;
+}
+
 /* sub-title */
 .container .sub-title {
 	display: flex;

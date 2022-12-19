@@ -24,7 +24,7 @@ public interface UserDAO {
     
     public List<UserDTO> getUserList();
     
-    public List<UserDTO> userListPaging(int startNo, int endNo, String field, String keyword, Integer grade, String exp);
+    public List<UserDTO> userListPaging(int startNo, int endNo, String field, String keyword, Integer grade, String exp, String order);
     
     public int totalUser();
     
