@@ -8,7 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.heartpet.model.QnaCommentDTO;
+import com.heartpet.model.ReviewCommentDTO;
 import com.heartpet.model.ReviewDTO;
 
 @Repository
@@ -90,28 +90,27 @@ public class ReviewDAOImpl implements ReviewDAO {
         return this.sqlSession.selectList("review_total_list", animal_tag);
     }
 
-    
     ////////////////////////////////////////////////////////////
     // Comment
     ////////////////////////////////////////////////////////////
     @Override
-    public int insertComment(QnaCommentDTO dto) {
-        return this.sqlSession.insert("qna_comment_insert", dto);
+    public int insertComment(ReviewCommentDTO dto) {
+        return this.sqlSession.insert("review_comment_insert", dto);
     }
     
     @Override
-    public List<QnaCommentDTO> listComment(int board_no) {
-        return this.sqlSession.selectList("qna_comment_list", board_no);
+    public List<ReviewCommentDTO> listComment(int review_no) {
+        return this.sqlSession.selectList("review_comment_list", review_no);
     }
     
     @Override
-    public int countComment(int board_no) {
-        return this.sqlSession.selectOne("qna_comment_count", board_no);
+    public int countComment(int review_no) {
+        return this.sqlSession.selectOne("review_comment_count", review_no);
     }
 
     @Override
     public int deleteComment(int comment_commentno) {
-        return this.sqlSession.delete("qna_comment_delete", comment_commentno);
+        return this.sqlSession.delete("review_comment_delete", comment_commentno);
     }
 
     ///////////////////////////////////////////////////////

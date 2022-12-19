@@ -25,11 +25,14 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.ReviewDAO;
 import com.heartpet.model.PageDTO;
+import com.heartpet.model.QnaCommentDTO;
+import com.heartpet.model.ReviewCommentDTO;
 import com.heartpet.model.ReviewDTO;
 import com.heartpet.util.CheckMimeType;
 import com.heartpet.util.FileUploadImage;
@@ -297,6 +300,51 @@ public class UserReviewController {
         } else {
             out.println("<script>alert('후기글 삭제에 실패했습니다.'); history.back(); </script>");
         }
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    // COMMENT_INSERT
+    ////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping("/review_comment_insert_ok")
+    public @ResponseBody int review_comment_insert_ok(@RequestParam("user_id") String user_id, @RequestParam("review_no") int review_no, 
+            @RequestParam("comment_content") String comment_content, HttpServletResponse response) throws IOException {        
+        response.setContentType("text/html; charset=UTF-8");
+        
+        ReviewCommentDTO commentDto = new ReviewCommentDTO();
+        commentDto.setComment_reviewno(review_no);
+        commentDto.setComment_id(user_id);
+        commentDto.setComment_content(comment_content);
+        
+        int check = this.reviewDAO.insertComment(commentDto);
+        return check;
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    // COMMENT_LIST
+    ////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping("/review_comment_list")
+    public @ResponseBody List<ReviewCommentDTO> review_comment_list(@RequestParam("review_no") int review_no, Model model) {
+        List<ReviewCommentDTO> commentList = this.reviewDAO.listComment(review_no);        
+        return commentList;
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    // COMMENT_COUNT
+    ////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping("/review_comment_count")
+    public @ResponseBody int review_comment_count(@RequestParam("review_no") int review_no) {
+        int commentCount = this.reviewDAO.countComment(review_no);
+        return commentCount;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////
+    // COMMENT_DELETE
+    ////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping("/review_comment_delete")
+    public @ResponseBody int review_comment_delete(@RequestParam("comment_commentno") int comment_commentno) {
+        int deleteComment = this.reviewDAO.deleteComment(comment_commentno);
+        System.out.println(deleteComment);
+        return deleteComment;
     }
 
 }

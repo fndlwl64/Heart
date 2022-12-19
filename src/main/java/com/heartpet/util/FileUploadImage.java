@@ -280,6 +280,9 @@ public class FileUploadImage {
             }
         }        
     }
+    
+    ////////////////////////////////////////////////////////////////////////////////
+
 	
 	//animal img insert
 	public String[] uploadNoticeImg(HttpServletRequest request, List<MultipartFile> files, String folderName) {
