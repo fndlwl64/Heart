@@ -18,7 +18,7 @@
 		LIKE '%' || #{keyword} || '%'
     </sql>
 	
-	<!-- list -->
+	<!-- review : list -->
 	<select id="review_list" parameterType="hashMap" resultType="ReviewDTO">
 		SELECT * 
             FROM (SELECT r.*, a.animal_name, ROW_NUMBER() OVER(ORDER BY review_no DESC) rnum <include refid="review_join" />
@@ -34,7 +34,7 @@
          <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo}]]>
 	</select>
 	
-	<!-- count : 게시글 개수 -->
+	<!-- review : count -->
 	<select id="review_count" parameterType="hashMap" resultType="int">
 		SELECT COUNT(*)
             FROM heartpet_review
@@ -50,33 +50,6 @@
         </where>
 	</select>
 	
-	<!-- dog/cat list -->
-	<select id="review_animal_option" parameterType="hashMap" resultType="ReviewDTO">
-		SELECT * 
-            FROM (SELECT r.*, a.animal_name, ROW_NUMBER() OVER(ORDER BY review_no DESC) rnum <include refid="review_join" />
-		<where>
-			review_animal_tag = #{ animal_tag }
-        </where>
-         <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo}]]>
-	</select>
-	
-	<!-- dog/cat : 게시글 개수 -->
-	<select id="review_animal_count" parameterType="String" resultType="int">
-		SELECT COUNT(*) 
-            FROM heartpet_review
-        <where>
-			review_animal_tag = #{ animal_tag }
-        </where>
-	</select>
-	
-	<!-- dog/cat 전체 리스트 페이징 x -->
-	<select id="review_total_list" parameterType="String" resultType="ReviewDTO">
-		SELECT r.*, a.animal_name <include refid="review_join" />
-        <where>
-			review_animal_tag = #{ animal_tag }
-        </where>
-	</select>
-	
 	<select id="review_animal" resultType="hashMap">
 		SELECT animal_name 
 			FROM heartpet_animal 
@@ -86,7 +59,7 @@
         </foreach>
 	</select>
 	
-	<!-- content -->
+	<!-- review : content -->
  	<update id="review_hit" parameterType="int">
 		UPDATE heartpet_review 
 			SET review_hit = review_hit + 1 
@@ -97,7 +70,7 @@
 			WHERE review_no = #{ review_no }
 	</select> 
 	
-	<!-- insert -->
+	<!-- review : insert -->
  	<insert id="review_insert" parameterType="ReviewDTO">
         <selectKey resultType="int" keyProperty="review_no" order="BEFORE">
 		SELECT MAX(review_no)+1 FROM heartpet_review
@@ -117,14 +90,14 @@
 			#{ review_video })
 	</insert> 
 
-	<!-- animal_id -->
+	<!-- review : animal_id -->
     <select id="animal_id" parameterType="String" resultType="list">
 		SELECT review_animal_id 
 			FROM heartpet_review 
 			WHERE review_id = #{ session_id }
 	</select>
 	
-	<!-- update -->
+	<!-- review : update -->
 	<update id="review_update" parameterType="ReviewDTO">
 		UPDATE heartpet_review 
 			SET	review_title = #{ review_title }, 
@@ -136,15 +109,54 @@
 			WHERE review_no = #{ review_no }
 	</update>
 	
-	<!-- delete -->
+	<!-- review : delete -->
  	<delete id="review_delete" parameterType="int">
 		DELETE FROM heartpet_review 
 			WHERE review_no = #{ review_no }
 	</delete>
 	
+    <!-- 
+    //======================================================================  
+    // Review : animal_tag
+    //======================================================================    
+    -->     	
+    <!-- review : dog/cat list -->
+    <select id="review_animal_option" parameterType="hashMap" resultType="ReviewDTO">
+        SELECT * 
+            FROM (SELECT r.*, a.animal_name, ROW_NUMBER() OVER(ORDER BY review_no DESC) rnum <include refid="review_join" />
+        <where>
+            review_animal_tag = #{ animal_tag }
+        </where>
+         <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo}]]>
+    </select>
+    
+    <!-- review : dog/cat : 게시글 개수 -->
+    <select id="review_animal_count" parameterType="String" resultType="int">
+        SELECT COUNT(*) 
+            FROM heartpet_review
+        <where>
+            review_animal_tag = #{ animal_tag }
+        </where>
+    </select>
+    
+    <!-- dog/cat 전체 리스트 페이징 x -->
+    <select id="review_total_list" parameterType="String" resultType="ReviewDTO">
+        SELECT r.*, a.animal_name <include refid="review_join" />
+        <where>
+            review_animal_tag = #{ animal_tag }
+        </where>
+    </select>
+	
+    <!-- 
+    ///////////////////////////////////////////////////////
+    // COMMENT
+    /////////////////////////////////////////////////////// 
+    --> 
+    
+	
 	<!-- 
 	///////////////////////////////////////////////////////
-	myPage - review 개수 구하기
+	// myPage - review 개수 구하기
 	///////////////////////////////////////////////////////	
 	-->	
 	<resultMap type="hashMap" id="myPageReview">

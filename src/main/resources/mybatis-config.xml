@@ -14,6 +14,7 @@
 		<!-- Review -->
 		<typeAlias type="com.heartpet.action.ReviewDAO" alias="ReviewDAO"/>
 		<typeAlias type="com.heartpet.model.ReviewDTO" alias="ReviewDTO"/>
+		<typeAlias type="com.heartpet.model.ReviewCommentDTO" alias="ReviewCommentDTO"/>
 		<!-- Animal -->
 		<typeAlias type="com.heartpet.action.AnimalDAO" alias="AnimalDAO"/>
 		<typeAlias type="com.heartpet.model.AnimalDTO" alias="AnimalDTO"/>

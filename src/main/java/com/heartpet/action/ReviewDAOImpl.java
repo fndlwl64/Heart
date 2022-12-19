@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.heartpet.model.QnaCommentDTO;
 import com.heartpet.model.ReviewDTO;
 
 @Repository
@@ -37,29 +38,6 @@ public class ReviewDAOImpl implements ReviewDAO {
         return this.sqlSession.selectOne("review_count", map);
     }
 
-    /////////////////////////////////////////////////
-    // animal_tag : dog/cat 선택에 따른 List 출력
-    /////////////////////////////////////////////////
-    @Override
-    public List<ReviewDTO> listReview(int startNo, int endNo, String animal_tag) {
-        Map<String, Object> map = new HashMap<String, Object>();
-        map.put("startNo", startNo);
-        map.put("endNo", endNo);
-        map.put("animal_tag", animal_tag);
-        return this.sqlSession.selectList("review_animal_option", map);
-    }
-
-    @Override
-    public int listReviewCount(String animal_tag) {
-        return this.sqlSession.selectOne("review_animal_count", animal_tag);
-    }
-
-    @Override
-    public List<ReviewDTO> listReview(String animal_tag) {
-        return this.sqlSession.selectList("review_total_list", animal_tag);
-    }
-
-    //////////////////////////////////////////////////
     @Override
     public int insertReview(ReviewDTO dto) {
         return this.sqlSession.insert("review_insert", dto);
@@ -88,6 +66,52 @@ public class ReviewDAOImpl implements ReviewDAO {
     @Override
     public List<Integer> animalId(String session_id) {
         return this.sqlSession.selectList("animal_id", session_id);
+    }
+    
+    //===========================================================
+    // animal_tag : dog/cat 선택에 따른 List 출력
+    //===========================================================
+    @Override
+    public List<ReviewDTO> listReview(int startNo, int endNo, String animal_tag) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("startNo", startNo);
+        map.put("endNo", endNo);
+        map.put("animal_tag", animal_tag);
+        return this.sqlSession.selectList("review_animal_option", map);
+    }
+
+    @Override
+    public int listReviewCount(String animal_tag) {
+        return this.sqlSession.selectOne("review_animal_count", animal_tag);
+    }
+
+    @Override
+    public List<ReviewDTO> listReview(String animal_tag) {
+        return this.sqlSession.selectList("review_total_list", animal_tag);
+    }
+
+    
+    ////////////////////////////////////////////////////////////
+    // Comment
+    ////////////////////////////////////////////////////////////
+    @Override
+    public int insertComment(QnaCommentDTO dto) {
+        return this.sqlSession.insert("qna_comment_insert", dto);
+    }
+    
+    @Override
+    public List<QnaCommentDTO> listComment(int board_no) {
+        return this.sqlSession.selectList("qna_comment_list", board_no);
+    }
+    
+    @Override
+    public int countComment(int board_no) {
+        return this.sqlSession.selectOne("qna_comment_count", board_no);
+    }
+
+    @Override
+    public int deleteComment(int comment_commentno) {
+        return this.sqlSession.delete("qna_comment_delete", comment_commentno);
     }
 
     ///////////////////////////////////////////////////////
