@@ -63,10 +63,14 @@
                     <div class="col-5 header-nav">
                     	<div class="login_section">
 	                        <ul class="row">
-	                           <li class="col-8"><a href="${path}/user_mypage_user_update"><strong>
-	                           <c:if test="${ not empty session_id }">${ session_name }님</c:if> 
-	                           <c:if test="${ not empty session_admin_id }">${ session_admin_name }님</c:if>                                 
-	                           <i class="bi bi-suit-heart-fill"></i></strong></a></li>
+	                        	<c:if test="${ not empty session_id }">
+									<li class="col-8"><a href="${path}/user_mypage_user_update"><strong>
+										${ session_name }님<i class="bi bi-suit-heart-fill"></i></strong></a></li>
+								</c:if> 
+								<c:if test="${ not empty session_admin_id }">
+	                           		<li class="col-8"><a href="${path}/user_list"><strong>
+	                           			${ session_admin_name }님<i class="bi bi-suit-heart-fill"></i></strong></a></li>
+	                           </c:if>
 	                           <li class="col"><a href="${path}/user_logout">로그아웃</a></li>
 	                        </ul>
                         </div>

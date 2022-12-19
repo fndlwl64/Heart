@@ -53,10 +53,10 @@
 			<div class="total_user"><label>총 회원 <span>${total}</span>명</label></div>
 			<div class="user_order">
                 <select class="form-select form-select-sm order_select" name="order" onchange="this.form.submit()">
-                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'desc' }">selected="selected"</c:if>>최신가입순</option>
-                    <option value="grade_desc"<c:if test="${ order eq 'grade_asc' }">selected="selected"</c:if>>등급낮은순</option>
-                    <option value="grade_asc"<c:if test="${ order eq 'grade_desc' }">selected="selected"</c:if>>등급높은순</option>
-                    <option value="name_desc"<c:if test="${ order eq 'name_desc' }">selected="selected"</c:if>>가나다순</option>
+                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>최신가입순</option>
+                    <option value="grade_desc"<c:if test="${ order eq 'grade_desc' }">selected="selected"</c:if>>등급낮은순</option>
+                    <option value="grade_asc"<c:if test="${ order eq 'grade_asc' }">selected="selected"</c:if>>등급높은순</option>
+                    <option value="name_asc"<c:if test="${ order eq 'name_asc' }">selected="selected"</c:if>>가나다순</option>
                 </select>
             </div>
         </div>

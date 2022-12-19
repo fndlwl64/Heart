@@ -16,9 +16,6 @@
                     <li><a href="${path}/user_qna_list">1:1문의</a></li>
                     <li><a href="#">입점 문의</a></li>
                     <li><a href="#">제휴 문의</a></li>
-                    <c:if test="${!empty session_admin_id }">
-                    	<li><a href="${path}/user_list">관리자</a></li>
-                    </c:if>
                 </ul>
                 <span>상호명 : (주)하트펫</span>
                 <span><strong>KH Final 2조</strong></span>
