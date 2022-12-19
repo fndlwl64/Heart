@@ -13,8 +13,33 @@
     <title>HeartPet_Admin_QNA</title>
     <jsp:include page="../../include/admin_header.jsp"/>
     <link rel="stylesheet" href="${path}/resources/css/list_view.css">
-    <script src="${path}/resources/js/admin_list_view.js"></script>
-</head>
+    <script>
+	    $(function() {
+	        let userId = '${ session_admin_id }';
+	        let boardNo = ${ list.board_no };
+	        let path = '${ path }';
+	        commentTable(userId, boardNo, path);    
+	        commentCount(boardNo, path);
+	        
+	        // 삭제 모달
+	        const deleteModal = document.getElementById('deleteModal')
+	        const deleteInput = document.getElementById('deleteInput')
+	
+	        deleteModal.addEventListener('shown.bs.modal', (e) => {
+	            deleteInput.focus();
+	            let commentNo = $(e.relatedTarget).data('no');
+	            let path = $(e.relatedTarget).data('path');
+	            let userId = $(e.relatedTarget).data('user');
+	            let boardNo = $(e.relatedTarget).data('boardno');
+	            
+	            $('#deleteFunction').on("click", function() {
+	                commentDelete(commentNo, path, userId, boardNo);
+	            });
+	        });
+	    });	  
+    </script>
+    <script type="text/javascript" src="${ path }/resources/js/qna_comment.js"></script>
+    </head>
 <body>
 
 <div class="container">
@@ -27,6 +52,7 @@
             <td colspan="6" class="col-6">${ list.board_title } 
 	            <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if>
 				<c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
+				<span class="badge text-bg-primary" id="comment-count"></span>
 			</td>
         </tr>
         <tr>
@@ -58,6 +84,27 @@
 			<c:if test="${ !empty list.board_img2 }">
 	             <p class="mt-2"><img src="${ path }${ list.board_img2 }" style="max-height: 300px;" alt="board_img" /></p>      
 			</c:if> 
+            </td>
+        </tr>
+    </table>
+    
+    <table class="table table-bordered" id="comment-table">
+        <thead>
+            <tr>
+                <th class="col-1">작성자</th>
+                <th class="col-5">댓글내용</th>
+                <th class="col-1">작성시간</th>
+                <th class="col-1">삭제</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <table class="table table-bordered reply-table">
+        <tr class="align-middle">
+            <th class="col-2">댓글쓰기</th>
+            <td class="col-10" id="content-reply">
+                <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" placeholder="댓글을 남겨보세요."></textarea>
+                <button type="button" class="btn btn-outline-primary btn-sm" onclick="commentSave('${ session_admin_id }', ${ list.board_no }, '${ path }');"><i class="bi bi-reply"></i> 댓글등록</button>
             </td>
         </tr>
     </table>

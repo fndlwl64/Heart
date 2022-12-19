@@ -3,7 +3,7 @@ function commentDelete(commentNo, path, userId, boardNo) {
   $.ajax({
       contentType : "application/x-www-form-urlencoded;charset=UTF-8",
       type: "post",
-      url: path + "/user_comment_delete?comment_commentno=" + commentNo,
+      url: path + "/both_comment_delete?comment_commentno=" + commentNo,
       data : {
           comment_commentno : commentNo
       },
@@ -30,7 +30,7 @@ function commentCount(boardNo, path) {
   $.ajax({
       contentType : "application/x-www-form-urlencoded;charset=UTF-8",
       type: "post",
-      url: path + "/user_comment_count",
+      url: path + "/both_comment_count",
       data : {
           board_no : boardNo
       },
@@ -50,7 +50,7 @@ function commentTable(userId, boardNo, path) {
   $.ajax({
       contentType : "application/x-www-form-urlencoded;charset=UTF-8",
       type: "post",
-      url: path + "/user_comment_list",
+      url: path + "/both_comment_list",
       data : {
           board_no : boardNo
       },
@@ -65,11 +65,15 @@ function commentTable(userId, boardNo, path) {
           console.log(commentList.length);
           for (let i=0; i<commentList.length; i++) {
               comment += '<tr><td><a>' + commentList[i].comment_id + '</a></td>';
-              comment += '<td>' + commentList[i].comment_content + '</td>';
-              comment += '<td>' + commentList[i].comment_regdate + '</td>';
+              comment += '<td style=\"text-align:left\">' + commentList[i].comment_content + '</td>';
+              comment += '<td><small>' + commentList[i].comment_regdate + '</small></td>';
               comment += '<td>';
-              if(userId == commentList[i].comment_id) {
-                  comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-boardno='+boardNo+'>삭제</button>';
+              if(userId == 'admin') {
+                   comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-boardno='+boardNo+'>삭제</button>';
+              }else {
+                  if(userId == commentList[i].comment_id) {
+                      comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-boardno='+boardNo+'>삭제</button>';
+                  }
               }
               comment += '</td></tr>';
           }
@@ -86,7 +90,7 @@ function commentSave(userId, boardNo, path) {
   $.ajax({
       contentType : "application/x-www-form-urlencoded;charset=UTF-8",
       type: "post",
-      url: path + "/user_comment_insert_ok",
+      url: path + "/both_comment_insert_ok",
       data : {
           user_id : userId,
           board_no : boardNo,
@@ -97,7 +101,7 @@ function commentSave(userId, boardNo, path) {
           console.log(check);   
           if(check > 0){
               alert('댓글이 성공적으로 등록되었습니다.');            
-              commentTable(boardNo, path);
+              commentTable(userId, boardNo, path);
               commentCount(boardNo, path);
               $("#comment_content").val('');
           }else {
