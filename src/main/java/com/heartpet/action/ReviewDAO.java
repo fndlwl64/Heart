@@ -3,7 +3,7 @@ package com.heartpet.action;
 import java.util.List;
 import java.util.Map;
 
-import com.heartpet.model.QnaCommentDTO;
+import com.heartpet.model.ReviewCommentDTO;
 import com.heartpet.model.ReviewDTO;
 
 public interface ReviewDAO {
@@ -26,9 +26,9 @@ public interface ReviewDAO {
     ////////////////////////////////////////////////////////////
     // Comment
     ////////////////////////////////////////////////////////////
-    public int insertComment(QnaCommentDTO dto);
-    public List<QnaCommentDTO> listComment(int board_no);
-    public int countComment(int board_no);
+    public int insertComment(ReviewCommentDTO dto);
+    public List<ReviewCommentDTO> listComment(int review_no);
+    public int countComment(int review_no);
     public int deleteComment(int comment_commentno);
     
     ////////////////////////////////////////////////////////////

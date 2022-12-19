@@ -151,8 +151,41 @@
     ///////////////////////////////////////////////////////
     // COMMENT
     /////////////////////////////////////////////////////// 
-    --> 
+    -->         
+    <!-- Comment : insert 댓글 입력 -->     
+    <insert id="review_comment_insert" parameterType="ReviewCommentDTO">
+        <selectKey resultType="int" keyProperty="comment_commentno" order="BEFORE">
+        SELECT NVL(MAX(comment_commentno), 0)+1 
+            FROM heartpet_review_comment
+        </selectKey>
+        INSERT INTO heartpet_review_comment 
+            VALUES (#{ comment_commentno },
+            #{ comment_reviewno },
+            #{ comment_id },
+            #{ comment_content },
+            sysdate)
+    </insert>
     
+    <!-- Comment : list 댓글 목록 --> 
+    <select id="review_comment_list" parameterType="int" resultType="ReviewCommentDTO">
+        SELECT * 
+            FROM heartpet_review_comment 
+            WHERE comment_reviewno = #{ review_no } 
+            ORDER BY comment_commentno
+    </select>
+        
+    <!-- Comment : count 댓글 개수 -->    
+    <select id="review_comment_count" parameterType="int" resultType="int">
+        SELECT COUNT(*)
+            FROM heartpet_review_comment
+            WHERE comment_reviewno = #{ review_no }
+    </select>
+    
+    <!-- Comment : delete  -->
+    <delete id="review_comment_delete" parameterType="int">
+        DELETE FROM heartpet_review_comment
+            WHERE comment_commentno = #{ comment_commentno }
+    </delete>
 	
 	<!-- 
 	///////////////////////////////////////////////////////

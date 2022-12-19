@@ -3,7 +3,7 @@ function commentDelete(commentNo, path, userId, boardNo) {
   $.ajax({
       contentType : "application/x-www-form-urlencoded;charset=UTF-8",
       type: "post",
-      url: path + "/both_comment_delete?comment_commentno=" + commentNo,
+      url: path + "/qna_comment_delete?comment_commentno=" + commentNo,
       data : {
           comment_commentno : commentNo
       },
@@ -30,7 +30,7 @@ function commentCount(boardNo, path) {
   $.ajax({
       contentType : "application/x-www-form-urlencoded;charset=UTF-8",
       type: "post",
-      url: path + "/both_comment_count",
+      url: path + "/qna_comment_count",
       data : {
           board_no : boardNo
       },
@@ -50,7 +50,7 @@ function commentTable(userId, boardNo, path) {
   $.ajax({
       contentType : "application/x-www-form-urlencoded;charset=UTF-8",
       type: "post",
-      url: path + "/both_comment_list",
+      url: path + "/qna_comment_list",
       data : {
           board_no : boardNo
       },
@@ -90,7 +90,7 @@ function commentSave(userId, boardNo, path) {
   $.ajax({
       contentType : "application/x-www-form-urlencoded;charset=UTF-8",
       type: "post",
-      url: path + "/both_comment_insert_ok",
+      url: path + "/qna_comment_insert_ok",
       data : {
           user_id : userId,
           board_no : boardNo,

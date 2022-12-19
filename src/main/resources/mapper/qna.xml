@@ -142,7 +142,6 @@
     // COMMENT
     ////////////////////////////////////////////////////////////////////////////////////////////    
     -->
-    
     <!-- Comment : insert 댓글 입력 -->     
     <insert id="qna_comment_insert" parameterType="QnaCommentDTO">
         <selectKey resultType="int" keyProperty="comment_commentno" order="BEFORE">
