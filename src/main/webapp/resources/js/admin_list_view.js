@@ -13,5 +13,42 @@ $(document).ready(function () {
         });
     });
 	
+	$("#fieldSelect").change(function() {
+		
+		var selected = $("#fieldSelect").val();
+		
+		if(selected === "grade") {
+			$("#gradeSearch").css({
+				'display' : 'block'
+			});
+			$("#keywordSearch").css({
+				'display' : 'none'
+			});
+			$("#expSearch").css({
+				'display' : 'none'
+			});
+		}else if(selected === "animalexp") {
+			$("#gradeSearch").css({
+				'display' : 'none'
+			});
+			$("#keywordSearch").css({
+				'display' : 'none'
+			});
+			$("#expSearch").css({
+				'display' : 'block'
+			});
+		}else {
+			$("#gradeSearch").css({
+				'display' : 'none'
+			});
+			$("#keywordSearch").css({
+				'display' : 'block'
+			});
+			$("#expSearch").css({
+				'display' : 'none'
+			});
+		}
+	});
+	
 	
 });

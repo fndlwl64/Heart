@@ -20,7 +20,7 @@
 
     <%-- 검색 폼  --%>
     <form class="search_form" action="${path }/user_list" method="get">
-    	<input type="hidden" name="field" />
+    	<%-- <input type="hidden" name="field" />
 		<table>
        		<tr>
        			<th>회원등급</th>
@@ -45,32 +45,35 @@
 			    	</div>
        			</td>
        		</tr>
-       	</table>
+       	</table> 
        	
-       	<button class="btn searchbtn" type="submit"><i class='bi bi-search'></i> 검색</button>
+       	<button class="btn searchbtn" type="submit"><i class='bi bi-search'></i> 검색</button> --%>
     	
-       <%-- <div class="form_box">
-            <select class="form-select form-select-sm user_field" name="field">
+      	<div class="form_box">
+            <select id="fieldSelect" class="form-select form-select-sm user_field" name="field">
                 <option value="id"<c:if test="${field eq 'id'}">selected="selected"</c:if>>회원아이디</option>
                 <option value="grade"<c:if test="${field eq 'grade'}">selected="selected"</c:if>>회원등급</option>
+                <option value="animalexp"<c:if test="${field eq 'animalexp'}">selected="selected"</c:if>>반려동물경험</option>
             </select>
-            
-            <c:if test="${field eq 'id'}">
-            	<input class="form-control form-control-sm user_search" name="keyword" value="${keyword }" size="20">	
-            </c:if>
-            
-            <c:if test="${field eq 'grade'}">
-            	<div class="radio_grade">
+           
+           	<div class="wrapper">
+	           	<input id="keywordSearch" class="form-control form-control-sm user_search" name="keyword" value="${keyword }" size="20">	
+	
+	           	<div id="gradeSearch" class="radio_grade">
 		    		<label><input type="radio" name="user_grade" value="1" ondblclick="this.checked=false"/> 1등급</label>
 		    		<label><input type="radio" name="user_grade" value="2" ondblclick="this.checked=false"/> 2등급</label>
 		    		<label><input type="radio" name="user_grade" value="3" ondblclick="this.checked=false"/> 3등급</label>
 		    		<label><input type="radio" name="user_grade" value="4" ondblclick="this.checked=false"/> 4등급</label>
 		    		<label><input type="radio" name="user_grade" value="5" ondblclick="this.checked=false"/> 5등급</label>
 		    	</div>
-            </c:if>
-            
+		    	
+		    	<div id="expSearch" class="radio_exp">
+		    		<label><input type="radio" name="user_animalexp" value="Y" ondblclick="this.checked=false"/> Y </label>
+		    		<label><input type="radio" name="user_animalexp" value="N" ondblclick="this.checked=false"/> N </label>
+		    	</div>
+            </div>
 			<button class="btn searchbtn" type="submit"><i class="i bi-search"></i> 검색</button>
-	    </div> --%>
+	    </div> 
     </form>
 	
     <%-- 검색 결과 테이블 --%>
