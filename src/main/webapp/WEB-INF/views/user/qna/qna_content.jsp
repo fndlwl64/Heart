@@ -26,18 +26,17 @@ $(function() {
         deleteInput.focus();
         let commentNo = $(e.relatedTarget).data('no');
         let path = $(e.relatedTarget).data('path');
-        let user = $(e.relatedTarget).data('user');
-        let boardNo = $(e.relatedTarget).data('boardNo');
+        let userId = $(e.relatedTarget).data('user');
+        let boardNo = $(e.relatedTarget).data('boardno');
         
         $('#deleteFunction').on("click", function() {
-        	commentDelete(commentNo, path, user, boardNo);
+        	commentDelete(commentNo, path, userId, boardNo);
         });
     });
 });
 
 //comment delete
-function commentDelete(commentNo, path, user, boardNo) {
-	
+function commentDelete(commentNo, path, userId, boardNo) {	
   $.ajax({
       contentType : "application/x-www-form-urlencoded;charset=UTF-8",
       type: "post",
@@ -49,9 +48,10 @@ function commentDelete(commentNo, path, user, boardNo) {
       success : function(check) {
           console.log(check);
           if(check > 0){
-        	  alert('성공적으로 삭제되었습니다.');
-        	  console.log(check);
-        	  commentTable(user, boardNo, path);
+        	  commentTable(userId, boardNo, path);
+        	  commentCount(boardNo, path);
+        	  $('#deleteModal').modal('hide');
+        	  $('.modal-backdrop').hide();
           }
       },
       error : function(e) {
@@ -59,7 +59,6 @@ function commentDelete(commentNo, path, user, boardNo) {
       } 
   });
 }
-
 
 //comment 수 count
 function commentCount(boardNo, path) {
@@ -107,7 +106,7 @@ function commentTable(userId, boardNo, path) {
               comment += '<td>' + commentList[i].comment_regdate + '</td>';
               comment += '<td>';
               if(userId == commentList[i].comment_id) {
-            	  comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm comment-delete\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-boardno='+commentList[i].comment_boardno+'>삭제</button>';
+            	  comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-boardno='+boardNo+'>삭제</button>';
               }
               comment += '</td></tr>';
           }
