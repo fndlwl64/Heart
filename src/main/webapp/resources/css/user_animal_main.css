@@ -1,0 +1,27 @@
+/* animal에 쓸 css */
+.justify-content-center {
+	margin: 20px;
+}
+.animal{
+	display: inline-block;
+}
+.animal_wrap {
+	display:flex;
+	flex-direction: column;
+	position : relative;
+	margin: 10px;
+}
+.back_image{
+	width: 200px;
+	height: 200px;
+	background-size:cover;
+	background-position : 50% 50%;	
+}
+.img-frame {
+	
+}
+
+.animal_explan { .jb-wrap { width:40%;
+	
+}
+

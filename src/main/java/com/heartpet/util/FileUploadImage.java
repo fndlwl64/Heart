@@ -92,121 +92,6 @@ public class FileUploadImage {
 		return imgs;
 	}
 	
-	////////////////////////////////////////////////////////////////////////////////
-	// uploadFile(insert) : FolderName / dateString 순서 변경 / insert-update 등 선택가능 
-	////////////////////////////////////////////////////////////////////////////////
-    public List<String> uploadFile(HttpServletRequest request, List<MultipartFile> files, 
-            String folderName, int fileTotal) throws IllegalStateException, IOException {        
-        // List<String> 타입으로 return 예정
-        List<String> folderFiles = new ArrayList<String>();
-        Calendar cal = Calendar.getInstance();
-        String dateString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
-        String subPath = "/resources/upload/"+folderName + File.separator + dateString;
-        String rootPath = request.getSession().getServletContext().getRealPath(subPath);
-        
-        System.out.println("rootPath : "+rootPath);
-        
-        // 폴더 없으면 생성
-        File mkfile = new File(rootPath);
-        // 경로에 해당하는 directory 전체 생성
-        if (!mkfile.exists()) {
-            mkfile.mkdirs();
-        }
-        
-        // 파일명 생성 및 업로드
-        for(int i=0; i<files.size(); i++) {
-            String realName = files.get(i).getOriginalFilename();
-            if(realName.equals("")) { // img 하나도 안 들어오는 경우
-                folderFiles.add("");
-            }else {
-                System.out.println("realName : " + realName);    
-                // .부터 확장자 분리
-                String fileExt = realName.substring(realName.lastIndexOf("."), realName.length()); 
-                System.out.println("fileExt : " + fileExt);
-    
-                // insert : reviewImg_insert_1_숫자.확장자 // update : reviewImg_update_1_숫자.확장자
-                String fileRename = folderName + "_insert_" + (i+1) + "_" + System.currentTimeMillis() + fileExt;
-                System.out.println("fileRename : " + fileRename);            
-                // 파일 이름 DB 저장 
-                folderFiles.add(subPath + File.separator + fileRename);            
-                // 실제 파일 이동
-            files.get(i).transferTo(new File(rootPath + File.separator + fileRename));
-            }
-        }
-        
-        // 총 파일 수만큼 for문 돌림
-        for(int i=0; i<(fileTotal-files.size()); i++) {
-        	folderFiles.add("");
-        }
-        return folderFiles;
-    }
-    
-	////////////////////////////////////////////////////////////////////////////////
-	// updateFile : FolderName / dateString 순서 변경 / insert-update 등 선택가능 
-	////////////////////////////////////////////////////////////////////////////////
-    public List<String> updateFile(HttpServletRequest request, List<MultipartFile> files, 
-            String folderName, List<String> origin_files, int fileTotal) throws IllegalStateException, IOException {        
-        // List<String> 타입으로 return 예정
-        List<String> folderFiles = new ArrayList<String>();
-        Calendar cal = Calendar.getInstance();
-        String dateString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
-        String subPath = "/resources/upload/"+folderName + File.separator + dateString;
-        String rootPath = request.getSession().getServletContext().getRealPath(subPath);
-        
-        //파일 업로드
-        for(int i=0; i<files.size(); i++) {
-            String realName = files.get(i).getOriginalFilename();
-            System.out.println("realName : " + realName);
-            System.out.println("origin_files.get : " + i + ":" + origin_files.get(i));
-            
-            // 업로드할 파일 없으면 원래 값 추가
-            if(realName.equals("")) {            	
-            	folderFiles.add(origin_files.get(i));
-			}else { // 업로드할 파일 있으면
-				// 기존 파일 있을 때 삭제
-				if(origin_files.get(i) != null && !origin_files.get(i).equals("")) {
-					String deletePath = request.getSession().getServletContext().getRealPath(origin_files.get(i));
-					if(deletePath != null) {
-						File deleteFile = new File(deletePath);
-						if(deleteFile.exists()) {						
-							deleteFile.delete();
-						}
-					}					
-				}				
-				
-				// Rename 과정
-				// .부터 확장자 분리
-				String fileExt = realName.substring(realName.lastIndexOf("."), realName.length()); 
-				System.out.println("fileExt : " + fileExt);
-				
-				// update : 폴더명_update_1_숫자.확장자
-				String fileRename = folderName + "_update_" + (i+1) + "_" + System.currentTimeMillis() + fileExt;
-				System.out.println("fileRename : " + fileRename);            
-				// 파일 이름 DB 저장 
-				folderFiles.add(subPath + File.separator + fileRename);            
-				// 실제 파일 이동
-				files.get(i).transferTo(new File(rootPath + File.separator + fileRename));				
-			}            
-        }        
-        return folderFiles;
-    }
-        
-    ////////////////////////////////////////////////////////////////////////////////
-    // deleteFile : request, 기존 파일명
-    ////////////////////////////////////////////////////////////////////////////////
-    public void deleteFile(HttpServletRequest request, List<String> origin_files) {        
-        for(int i=0; i<origin_files.size(); i++) {            
-            if(origin_files.get(i) != null && !origin_files.get(i).equals("")) {
-                String deletePath = request.getSession().getServletContext().getRealPath(origin_files.get(i));
-                if(deletePath != null) {
-                    File deleteFile = new File(deletePath);
-                    if(deleteFile.exists()) {                       
-                        deleteFile.delete();
-                    }
-                }                   
-            }
-        }        
-    }
     
     ////////////////////////////////////////////////////////////////////////////////
 	
@@ -279,6 +164,122 @@ public class FileUploadImage {
 		}
 		
 	}
+	
+	////////////////////////////////////////////////////////////////////////////////
+    // uploadFile(insert) : FolderName / dateString 순서 변경 / insert-update 등 선택가능 
+    ////////////////////////////////////////////////////////////////////////////////
+    public List<String> uploadFile(HttpServletRequest request, List<MultipartFile> files, 
+            String folderName, int fileTotal) throws IllegalStateException, IOException {        
+        // List<String> 타입으로 return 예정
+        List<String> folderFiles = new ArrayList<String>();
+        Calendar cal = Calendar.getInstance();
+        String dateString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+        String subPath = "/resources/upload/"+folderName + File.separator + dateString;
+        String rootPath = request.getSession().getServletContext().getRealPath(subPath);
+        
+        System.out.println("rootPath : "+rootPath);
+        
+        // 폴더 없으면 생성
+        File mkfile = new File(rootPath);
+        // 경로에 해당하는 directory 전체 생성
+        if (!mkfile.exists()) {
+            mkfile.mkdirs();
+        }
+        
+        // 파일명 생성 및 업로드
+        for(int i=0; i<files.size(); i++) {
+            String realName = files.get(i).getOriginalFilename();
+            if(realName.equals("")) { // img 하나도 안 들어오는 경우
+                folderFiles.add("");
+            }else {
+                System.out.println("realName : " + realName);    
+                // .부터 확장자 분리
+                String fileExt = realName.substring(realName.lastIndexOf("."), realName.length()); 
+                System.out.println("fileExt : " + fileExt);
+    
+                // insert : reviewImg_insert_1_숫자.확장자 // update : reviewImg_update_1_숫자.확장자
+                String fileRename = folderName + "_insert_" + (i+1) + "_" + System.currentTimeMillis() + fileExt;
+                System.out.println("fileRename : " + fileRename);            
+                // 파일 이름 DB 저장 
+                folderFiles.add(subPath + File.separator + fileRename);            
+                // 실제 파일 이동
+            files.get(i).transferTo(new File(rootPath + File.separator + fileRename));
+            }
+        }
+        
+        // 총 파일 수만큼 for문 돌림
+        for(int i=0; i<(fileTotal-files.size()); i++) {
+            folderFiles.add("");
+        }
+        return folderFiles;
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////
+    // updateFile : FolderName / dateString 순서 변경 / insert-update 등 선택가능 
+    ////////////////////////////////////////////////////////////////////////////////
+    public List<String> updateFile(HttpServletRequest request, List<MultipartFile> files, 
+            String folderName, List<String> origin_files, int fileTotal) throws IllegalStateException, IOException {        
+        // List<String> 타입으로 return 예정
+        List<String> folderFiles = new ArrayList<String>();
+        Calendar cal = Calendar.getInstance();
+        String dateString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
+        String subPath = "/resources/upload/"+folderName + File.separator + dateString;
+        String rootPath = request.getSession().getServletContext().getRealPath(subPath);
+        
+        //파일 업로드
+        for(int i=0; i<files.size(); i++) {
+            String realName = files.get(i).getOriginalFilename();
+            System.out.println("realName : " + realName);
+            System.out.println("origin_files.get : " + i + ":" + origin_files.get(i));
+            
+            // 업로드할 파일 없으면 원래 값 추가
+            if(realName.equals("")) {               
+                folderFiles.add(origin_files.get(i));
+            }else { // 업로드할 파일 있으면
+                // 기존 파일 있을 때 삭제
+                if(origin_files.get(i) != null && !origin_files.get(i).equals("")) {
+                    String deletePath = request.getSession().getServletContext().getRealPath(origin_files.get(i));
+                    if(deletePath != null) {
+                        File deleteFile = new File(deletePath);
+                        if(deleteFile.exists()) {                       
+                            deleteFile.delete();
+                        }
+                    }                   
+                }               
+                
+                // Rename 과정
+                // .부터 확장자 분리
+                String fileExt = realName.substring(realName.lastIndexOf("."), realName.length()); 
+                System.out.println("fileExt : " + fileExt);
+                
+                // update : 폴더명_update_1_숫자.확장자
+                String fileRename = folderName + "_update_" + (i+1) + "_" + System.currentTimeMillis() + fileExt;
+                System.out.println("fileRename : " + fileRename);            
+                // 파일 이름 DB 저장 
+                folderFiles.add(subPath + File.separator + fileRename);            
+                // 실제 파일 이동
+                files.get(i).transferTo(new File(rootPath + File.separator + fileRename));              
+            }            
+        }        
+        return folderFiles;
+    }
+        
+    ////////////////////////////////////////////////////////////////////////////////
+    // deleteFile : request, 기존 파일명
+    ////////////////////////////////////////////////////////////////////////////////
+    public void deleteFile(HttpServletRequest request, List<String> origin_files) {        
+        for(int i=0; i<origin_files.size(); i++) {            
+            if(origin_files.get(i) != null && !origin_files.get(i).equals("")) {
+                String deletePath = request.getSession().getServletContext().getRealPath(origin_files.get(i));
+                if(deletePath != null) {
+                    File deleteFile = new File(deletePath);
+                    if(deleteFile.exists()) {                       
+                        deleteFile.delete();
+                    }
+                }                   
+            }
+        }        
+    }
 	
 	//animal img insert
 	public String[] uploadNoticeImg(HttpServletRequest request, List<MultipartFile> files, String folderName) {
