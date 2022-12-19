@@ -70,22 +70,22 @@ public class QnaDAOImpl implements QnaDAO {
     ////////////////////////////////////////////////////////////
     @Override
     public int insertComment(QnaCommentDTO dto) {
-        return this.sqlSession.insert("comment_insert", dto);
+        return this.sqlSession.insert("qna_comment_insert", dto);
     }
     
     @Override
     public List<QnaCommentDTO> listComment(int board_no) {
-        return this.sqlSession.selectList("comment_list", board_no);
+        return this.sqlSession.selectList("qna_comment_list", board_no);
     }
     
     @Override
     public int countComment(int board_no) {
-        return this.sqlSession.selectOne("comment_count", board_no);
+        return this.sqlSession.selectOne("qna_comment_count", board_no);
     }
 
     @Override
     public int deleteComment(int comment_commentno) {
-        return this.sqlSession.delete("comment_delete", comment_commentno);
+        return this.sqlSession.delete("qna_comment_delete", comment_commentno);
     }
     
     ////////////////////////////////////////////////////////////

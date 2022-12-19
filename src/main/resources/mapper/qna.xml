@@ -144,7 +144,7 @@
     -->
     
     <!-- Comment : insert 댓글 입력 -->     
-    <insert id="comment_insert" parameterType="QnaCommentDTO">
+    <insert id="qna_comment_insert" parameterType="QnaCommentDTO">
         <selectKey resultType="int" keyProperty="comment_commentno" order="BEFORE">
         SELECT NVL(MAX(comment_commentno), 0)+1 
             FROM heartpet_board_comment
@@ -158,7 +158,7 @@
     </insert>
     
     <!-- Comment : list 댓글 목록 --> 
-    <select id="comment_list" parameterType="int" resultType="QnaCommentDTO">
+    <select id="qna_comment_list" parameterType="int" resultType="QnaCommentDTO">
         SELECT * 
             FROM heartpet_board_comment 
             WHERE comment_boardno = #{ board_no } 
@@ -166,14 +166,14 @@
     </select>
         
     <!-- Comment : count 댓글 개수 -->    
-    <select id="comment_count" parameterType="int" resultType="int">
+    <select id="qna_comment_count" parameterType="int" resultType="int">
         SELECT COUNT(*)
             FROM heartpet_board_comment
             WHERE comment_boardno = #{ board_no }
     </select>
     
     <!-- Comment : delete  -->
-    <delete id="comment_delete" parameterType="int">
+    <delete id="qna_comment_delete" parameterType="int">
         DELETE FROM heartpet_board_comment
             WHERE comment_commentno = #{ comment_commentno }
     </delete>
