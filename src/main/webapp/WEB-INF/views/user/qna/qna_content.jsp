@@ -12,13 +12,143 @@
 <script type="text/javascript">
 
 $(function() {
+	let userId = '${ session_id }';
 	let boardNo = ${ list.board_no };
 	let path = '${ path }';
-	commentTable(boardNo, path);	
+	commentTable(userId, boardNo, path);	
+ 	commentCount(boardNo, path);
+ 	
+    // 삭제 모달
+    const deleteModal = document.getElementById('deleteModal')
+    const deleteInput = document.getElementById('deleteInput')
+
+    deleteModal.addEventListener('shown.bs.modal', (e) => {
+        deleteInput.focus();
+        let commentNo = $(e.relatedTarget).data('no');
+        let path = $(e.relatedTarget).data('path');
+        let user = $(e.relatedTarget).data('user');
+        let boardNo = $(e.relatedTarget).data('boardNo');
+        
+        $('#deleteFunction').on("click", function() {
+        	commentDelete(commentNo, path, user, boardNo);
+        });
+    });
 });
 
+//comment delete
+function commentDelete(commentNo, path, user, boardNo) {
+	
+  $.ajax({
+      contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+      type: "post",
+      url: path + "/user_comment_delete?comment_commentno=" + commentNo,
+      data : {
+    	  comment_commentno : commentNo
+      },
+      dataType : "text",
+      success : function(check) {
+          console.log(check);
+          if(check > 0){
+        	  alert('성공적으로 삭제되었습니다.');
+        	  console.log(check);
+        	  commentTable(user, boardNo, path);
+          }
+      },
+      error : function(e) {
+          alert("Error : "+e.status);
+      } 
+  });
+}
+
+
+//comment 수 count
+function commentCount(boardNo, path) {
+  console.log(1, boardNo);
+  console.log(2, path);
+  $.ajax({
+      contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+      type: "post",
+      url: path + "/user_comment_count",
+      data : {
+          board_no : boardNo
+      },
+      dataType : "text",
+      success : function(commentCount) {
+          console.log(commentCount);
+          $("#comment-count").text(commentCount);
+      },
+      error : function(e) {
+          alert("Error : "+e.status);
+      } 
+  });
+}
+
+//comment 테이블 생성
+function commentTable(userId, boardNo, path) {
+  $.ajax({
+      contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+      type: "post",
+      url: path + "/user_comment_list",
+      data : {
+          board_no : boardNo
+      },
+      dataType : "json",
+      beforeSend: function(xhr, settings){
+          let aloading = "<tr class=\"comment-loading\"><td colspan=\"4\"><img src=\"resources/loading/Loading.gif\" style=\"padding: 50px 0;\" /></td></tr>";
+          $("#comment-table tbody").append(aloading);
+      },
+      success : function(commentList) {
+          $("#comment-table tr:gt(0)").remove();
+          let comment = "";
+          console.log(commentList.length);
+          for (let i=0; i<commentList.length; i++) {
+              comment += '<tr><td><a>' + commentList[i].comment_id + '</a></td>';
+              comment += '<td>' + commentList[i].comment_content + '</td>';
+              comment += '<td>' + commentList[i].comment_regdate + '</td>';
+              comment += '<td>';
+              if(userId == commentList[i].comment_id) {
+            	  comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm comment-delete\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-boardno='+commentList[i].comment_boardno+'>삭제</button>';
+              }
+              comment += '</td></tr>';
+          }
+          $("#comment-table tbody").append(comment);
+      },
+      error : function(e) {
+          alert("Error : "+e.status);
+      } 
+  });
+}
+
+//comment 저장
+function commentSave(userId, boardNo, path) {   
+  $.ajax({
+      contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+      type: "post",
+      url: path + "/user_comment_insert_ok",
+      data : {
+          user_id : userId,
+          board_no : boardNo,
+          comment_content : $("#comment_content").val()
+      },
+      dataType : "text",
+      success : function(check) {
+          console.log(check);   
+          if(check > 0){
+              alert('댓글이 성공적으로 등록되었습니다.');            
+              commentTable(boardNo, path);
+              commentCount(boardNo, path);
+              $("#comment_content").val('');
+          }else {
+              alert('댓글 등록 실패')
+          }
+      },
+      error : function(e) {
+          alert("Error : "+e.status);
+      }                   
+  });          
+};
+
 </script> 
-<script type="text/javascript" src="${path}/resources/js/comment.js"></script>
 
 <%-- 문의글 상세 보기 --%>
 <div id="qna-contents" class="qna-contents">
@@ -39,7 +169,7 @@ $(function() {
                         <li class="d-inline"><img src="${path}/resources/image/user_img/${ uList.user_image }" alt="user_image"></li>
                         <li class="d-inline">
                             <a href="${path}/user_mypage_wish_list"><span id="id">${ list.board_id }</span></a>
-                            <a id="reply" href="#"><i class="bi bi-card-list"></i> 댓글 0</a>
+                            <a id="reply" href="#"><i class="bi bi-card-list"></i> 댓글 <span id="comment-count">0</span></a>
                         </li>
                         <li class="d-block">${ list.board_regdate.substring(0,10) } 조회 ${ list.board_hit }</li>
                     </ul>
@@ -76,6 +206,7 @@ $(function() {
 	                    <th>삭제</th>
 	                </tr>
                 </thead>
+                <tbody></tbody>
             </table>
 			<table class="table table-bordered reply-table">
 			    <tr class="align-middle">
@@ -92,7 +223,7 @@ $(function() {
             	<div class="left-button">
 					<c:if test="${ list.board_id eq session_id }">
 						<button type="button" class="btn btn-success" onclick="location.href='${path}/user_qna_update?board_no=${ list.board_no }'"><i class="bi bi-eraser"></i> 수정</button>
-						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteFunction"><i class="bi bi-trash3"></i> 삭제</button>
+						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteQna"><i class="bi bi-trash3"></i> 삭제</button>
 					</c:if>
 	                <button type="button" class="btn btn-dark" onclick="history.back()"><i class="bi bi-card-list"></i> 목록</button>
                 </div>
@@ -108,11 +239,11 @@ $(function() {
 	<form name="pwdForm" action="${path}/user_qna_delete" method="post" >
 		<input type="hidden" name="page" value="${ paging.page }" />
 		<input type="hidden" name="board_no" value="${ list.board_no }" />
-		<div class="modal fade" id="deleteFunction" tabindex="-1" aria-labelledby="deleteFunctionLabel" aria-hidden="true">
+		<div class="modal fade" id="deleteQna" tabindex="-1" aria-labelledby="deleteQnaLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-dialog-centered">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <h1 class="modal-title fs-5" id="deleteFunctionLabel">글 삭제하기</h1>
+		        <h1 class="modal-title fs-5" id="deleteQnaLabel">글 삭제하기</h1>
 		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		      </div>
 		      <div class="modal-body">
