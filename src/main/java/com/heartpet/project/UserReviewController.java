@@ -2,12 +2,7 @@ package com.heartpet.project;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +26,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.ReviewDAO;
 import com.heartpet.model.PageDTO;
-import com.heartpet.model.QnaCommentDTO;
 import com.heartpet.model.ReviewCommentDTO;
 import com.heartpet.model.ReviewDTO;
 import com.heartpet.util.CheckMimeType;
@@ -81,12 +75,19 @@ public class UserReviewController {
             paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
             reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), animal_tag);
         }
-
+        
+        // 댓글수 추가
+        List<Integer> commentList = new ArrayList<Integer>();
+        for(int i=0; i<reviewList.size(); i++) {            
+            commentList.add(this.reviewDAO.countComment(reviewList.get(i).getReview_no()));
+        }
+        
         model.addAttribute("reviewList", reviewList);
         model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);
         model.addAttribute("field", field);
         model.addAttribute("keyword", keyword);
+        model.addAttribute("commentList", commentList);
 
         return "user/review/review_list";
     }

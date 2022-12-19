@@ -13,7 +13,34 @@
     <title>HeartPet_Admin_Review</title>
     <jsp:include page="../../include/admin_header.jsp"/>
     <link rel="stylesheet" href="${path}/resources/css/list_view.css">
-    <script src="${path}/resources/js/admin_list_view.js"></script>    
+    <script>
+        $(function() {
+            let userId = '${ session_admin_id }';
+            let reviewNo = ${ list.review_no };
+            let path = '${ path }';
+            commentTable(userId, reviewNo, path);    
+            commentCount(reviewNo, path);
+            
+            // 삭제 모달
+            const deleteModal = document.getElementById('deleteModal')
+            const deleteInput = document.getElementById('deleteInput')
+    
+            deleteModal.addEventListener('shown.bs.modal', (e) => {
+                deleteInput.focus();
+                let commentNo = $(e.relatedTarget).data('no');
+                let path = $(e.relatedTarget).data('path');
+                let userId = $(e.relatedTarget).data('user');
+                let reviewNo = $(e.relatedTarget).data('reviewno');
+                
+                
+                $('#deleteFunction').on("click", function() {
+                    console.log(4, reviewNo);
+                    commentDelete(commentNo, path, userId, reviewNo);
+                });
+            });
+        });   
+    </script>
+    <script type="text/javascript" src="${ path }/resources/js/review_comment.js"></script>    
 </head>
 <body>
 
@@ -24,7 +51,7 @@
     <table class="table noticeinfo mt-4">
         <tr>
             <th class="table-light col-1">제목</th>
-            <td colspan="6" class="col-6">${ list.review_title }</td>
+            <td colspan="6" class="col-6">${ list.review_title } <span class="badge text-bg-primary" id="comment-count"></span></td>
         </tr>
         <tr>
             <th class="table-light">작성자</th>
@@ -70,7 +97,28 @@
             </td>
         </tr>
     </table>    
-    <br>
+    
+    <%-- 댓글쓰기 --%>
+    <table class="table table-bordered" id="comment-table">
+        <thead>
+            <tr>
+                <th class="col-1">작성자</th>
+                <th class="col-5">댓글내용</th>
+                <th class="col-1">작성시간</th>
+                <th class="col-1">삭제</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <table class="table table-bordered reply-table">
+        <tr class="align-middle">
+            <th class="col-2">댓글쓰기</th>
+            <td class="col-10" id="content-reply">
+                <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" placeholder="댓글을 남겨보세요." required="required"></textarea>
+                <button type="button" class="btn btn-outline-primary btn-sm" onclick="commentSave('${ session_admin_id }', ${ list.review_no }, '${ path }');"><i class="bi bi-reply"></i> 댓글등록</button>
+            </td>
+        </tr>
+    </table>
     
     <%-- button  --%>
     <div class="buttons">
@@ -79,7 +127,7 @@
 	    <button class="btn btn-success mx-1" onclick="location.href='${path}/admin_review_update?review_no=${ list.review_no }&animal_no=${ list.review_animal_id }'"><i class="bi bi-pencil"></i> 수정하기</button>
 	</div>
 	
-	<!-- 삭제 모달 -->
+	<%-- 삭제모달 --%>
 	<jsp:include page="../../include/deleteModal.jsp" />
 	
 	<div class="space"></div>

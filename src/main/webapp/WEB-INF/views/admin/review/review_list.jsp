@@ -8,6 +8,7 @@
 <c:set var="paging" value="${ paging }"/>
 <c:set var="field" value="${ field }"/>
 <c:set var="keyword" value="${ keyword }"/>
+<c:set var="cList" value="${ commentList }"/>
 <c:set var="link_address" value="${pageContext.request.contextPath}/admin_review_list" />
 <c:set var="now" value="<%=new java.util.Date()%>" />
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
@@ -74,7 +75,7 @@
                     <th class="table-light col-2">작성일시</th>
                     <th class="table-light col-2">수정 / 삭제</th>
                 </tr>
-                <c:forEach items="${ rList }" var="list">
+                <c:forEach items="${ rList }" var="list" varStatus="status">
                 <tr>
                     <td>${ list.review_no }</td>
                     <td>
@@ -85,7 +86,9 @@
 	                    <a href="${ path }/admin_review_content?review_no=${ list.review_no }">
 	                    <c:if test="${ list.review_title.length() gt 30 }">${ list.review_title.substring(0,30) }...</c:if>
 	                    <c:if test="${ list.review_title.length() lt 30 }">${ list.review_title }</c:if>
-	                    <c:if test="${ list.review_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if></a>
+	                    <c:if test="${ list.review_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>
+                        <c:if test="${ cList[status.index] gt 0 }"><span>[${ cList[status.index] }]</span></c:if>
+	                    </a>
                     </td>
                     <td>${ list.review_id }</td>
                     <td>${ list.review_hit }</td>

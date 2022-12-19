@@ -4,7 +4,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="list" value="${ qnaContent }" />
 <c:set var="uList" value="${ userContent }" />
-<c:set var="page" value="${ paging }" />
 <c:if test="${ not empty session_admin_id }">
     <c:set var="session_id" value="${ session_admin_id }" />
 </c:if>
@@ -16,7 +15,6 @@
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
 
 <script type="text/javascript">
-
 $(function() {
 	let userId = '${ session_id }';
 	let boardNo = ${ list.board_no };
@@ -40,10 +38,9 @@ $(function() {
         });
     });
 });
-
-
 </script> 
 <script type="text/javascript" src="${ path }/resources/js/qna_comment.js"></script>
+
 <%-- 문의글 상세 보기 --%>
 <div id="qna-contents" class="qna-contents">
     <div class="qna_section">
@@ -106,7 +103,7 @@ $(function() {
 			    <tr class="align-middle">
 			        <th class="col-2">댓글쓰기</th>
 			        <td class="col-10" id="content-reply">
-			            <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" placeholder="댓글을 남겨보세요."></textarea>
+			            <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" placeholder="댓글을 남겨보세요." required="required"></textarea>
 			            <button type="button" class="btn btn-outline-primary btn-sm" onclick="commentSave('${ session_id }', ${ list.board_no }, '${ path }');"><i class="bi bi-reply"></i> 댓글등록</button>
 			        </td>
 			    </tr>
@@ -131,7 +128,6 @@ $(function() {
    
  	<%-- delete function --%>
 	<form name="pwdForm" action="${path}/user_qna_delete" method="post" >
-		<input type="hidden" name="page" value="${ paging.page }" />
 		<input type="hidden" name="board_no" value="${ list.board_no }" />
 		<div class="modal fade" id="deleteQna" tabindex="-1" aria-labelledby="deleteQnaLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-dialog-centered">
