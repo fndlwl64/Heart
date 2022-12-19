@@ -51,12 +51,13 @@ public class NoticeDAOImpl implements NoticeDAO{
 	}
 
 	@Override
-	public List<NoticeDTO> listNotice(int startNo, int endNo, String field, String keyword) {
+	public List<NoticeDTO> listNotice(int startNo, int endNo, String field, String keyword, String order) {
 		Map<String, Object> map = new HashMap<String, Object>();
         map.put("startNo", startNo);
         map.put("endNo", endNo);
         map.put("field", field);
         map.put("keyword", keyword);
+        map.put("order", order);
         return this.sqlSession.selectList("notice_list", map);
 	}
 

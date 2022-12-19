@@ -38,6 +38,19 @@
     </form>
 
     <br>
+    
+       <%-- 정렬 & 게시물 수 --%>
+    <form class="order_form" method="get" action="${path}/support_list">    
+       <div class="qna-section">
+            <div class="qna_order">
+                <select class="form-select form-select-sm" name="order" onchange="this.form.submit()">
+                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
+                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신후원순</option>
+                    <option value="price_desc"<c:if test="${ order eq 'price_desc' }">selected="selected"</c:if>>금액순</option>
+                </select>
+            </div>
+        </div>
+    </form>
 
     <button class="btn btn-success insertbtn" onclick="location.href='${path }/support_insert'">등록</button>
 
