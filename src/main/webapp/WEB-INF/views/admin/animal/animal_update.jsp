@@ -8,7 +8,7 @@
 <body>
 	<br>
 	<br>
-	<div class="div1" align="center">
+	<div class="container" align="center">
 		<form action="<%=request.getContextPath()%>/animal_update"
 			method="post" enctype="multipart/form-data">
 			<input type="hidden" name="animal_no" value="${dto.animal_no }">
@@ -16,15 +16,16 @@
 			<input type="hidden" name="animal_img2" value="${dto.animal_img2 }">
 			<input type="hidden" name="animal_img3" value="${dto.animal_img3 }">
 
-			<table class="table">
+			<table class="table noticeinfo mt-4">
 				<tr>
-					<th class="table-secondary"><span class="sp2">이름</span></th>
-					<td><input type="text" name="animal_name" class="input1"
-						value=${dto.animal_name }></td>
+					<th class="table-light w-25"><span class="sp2">이름</span></th>
+					<td class="w-50"><input type="text" name="animal_name"
+						class="form-control text-center" value=${dto.animal_name }></td>
 				</tr>
 				<tr>
-					<th class="table-secondary"><span class="sp2">종류</span></th>
-					<td><select name="animal_species" class="input1">
+					<th class="table-light"><span class="sp2">종류</span></th>
+					<td><select name="animal_species"
+						class="form-control text-center">
 							<option value="말티즈"
 								<c:if test="${dto.animal_species eq '말티즈'}">selected</c:if>>말티즈</option>
 							<option value="푸들"
@@ -44,8 +45,9 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th class="table-secondary"><span class="sp2">성별</span></th>
-					<td><select name="animal_gender" class="input1">
+					<th class="table-light"><span class="sp2">성별</span></th>
+					<td><select name="animal_gender"
+						class="form-control text-center">
 							<option value="male"
 								<c:if test="${dto.animal_gender eq 'male'}">selected</c:if>>수컷</option>
 							<option value="female"
@@ -53,8 +55,9 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th class="table-secondary"><span class="sp2">중성화여부</span></th>
-					<td><select name="animal_neutered" class="input1">
+					<th class="table-light"><span class="sp2">중성화여부</span></th>
+					<td><select name="animal_neutered"
+						class="form-control text-center">
 							<option value="Y"
 								<c:if test="${dto.animal_neutered eq 'Y'}">selected</c:if>>Y</option>
 							<option value="N"
@@ -62,8 +65,9 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th class="table-secondary"><span class="sp2">예방접종여부</span></th>
-					<td><select name="animal_vaccination" class="input1">
+					<th class="table-light"><span class="sp2">예방접종여부</span></th>
+					<td><select name="animal_vaccination"
+						class="form-control text-center">
 							<option value="Y"
 								<c:if test="${dto.animal_vaccination eq 'Y'}">selected</c:if>>Y</option>
 							<option value="N"
@@ -71,18 +75,19 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th class="table-secondary"><span class="sp2">나이</span></th>
-					<td><input type="number" name="animal_age" class="input1"
-						value=${dto.animal_age }></td>
+					<th class="table-light"><span class="sp2">나이</span></th>
+					<td><input type="number" name="animal_age"
+						class="form-control text-center" value=${dto.animal_age }></td>
 				</tr>
 				<tr>
-					<th class="table-secondary"><span class="sp2">발견장소</span></th>
-					<td><input type="text" name="animal_place" class="input1"
-						value=${dto.animal_place }></td>
+					<th class="table-light"><span class="sp2">발견장소</span></th>
+					<td><input type="text" name="animal_place"
+						class="form-control text-center" value=${dto.animal_place }></td>
 				</tr>
 				<tr>
-					<th class="table-secondary"><span class="sp2">크기</span></th>
-					<td><select name="animal_size" class="input1" id="size">
+					<th class="table-light"><span class="sp2">크기</span></th>
+					<td><select name="animal_size"
+						class="form-control text-center" id="size">
 							<option value="소형"
 								<c:if test="${dto.animal_size eq '소형'}">selected</c:if>>소형</option>
 							<option value="중형"
@@ -92,27 +97,56 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th class="table-secondary"><span class="sp2">무게</span></th>
-					<td><input class="input1" name="animal_weight" type="text"
-						value="${dto.animal_weight }"></td>
+					<th class="table-light"><span class="sp2">무게</span></th>
+					<td><input class="form-control text-center"
+						name="animal_weight" type="text" value="${dto.animal_weight }"></td>
 				</tr>
 				<tr>
-					<th class="table-secondary"><span class="sp2">유의사항</span></th>
+					<th class="table-light"><span class="sp2">유의사항</span></th>
 					<td><textarea rows="2" cols="22" name="animal_caution"><c:out
 								value="${dto.animal_caution }"></c:out></textarea></td>
 				</tr>
 				<tr>
-					<th class="table-secondary"><span class="sp2">입양 상태</span></th>
-					<td><input type="text" name="animal_status" class="input1"
-						value="${dto.animal_status }"></td>
+					<th class="table-light"><span class="sp2">입양 상태</span></th>
+					<td><input type="text" name="animal_status"
+						class="form-control text-center" value="${dto.animal_status }"></td>
+				</tr>
+				<tr>
+					<th class="table-light">이미지</th>
+					<td>
+						<div class="image-upload">
+							<label for="file-form-control text-center"> <img
+								id="file_change1" class="logo"
+								src="resources/upload/${dto.animal_img1 } "
+								style="max-height: 200px;" alt="review_img" />
+							</label> <input class="file_input btn" id="file-form-control text-center"
+								type="file" onchange="readURL4(this);" name="files" />
+						</div> <c:if test="${not empty dto.animal_img2 }">
+							<div class="image-upload">
+								<label for="file-input2"> <img id="file_change2"
+									class="logo" src="resources/upload/${dto.animal_img2 } "
+									style="max-height: 200px;" alt="review_img" />
+								</label> <input class="file_input btn" id="file-input2" type="file"
+									onchange="readURL5(this);" name="files" />
+							</div>
+						</c:if> <c:if test="${not empty dto.animal_img3 }">
+							<div class="image-upload">
+								<label for="file-input3"> <img id="file_change3"
+									class="logo" src="resources/upload/${dto.animal_img3 } "
+									style="max-height: 200px;" alt="review_img" />
+								</label> <input class="file_input btn" id="file-input3" type="file"
+									onchange="readURL6(this);" name="files" />
+							</div>
+						</c:if>
+					</td>
 				</tr>
 			</table>
 			<br>
 			<div class="div2">
-				<div class="image-upload">
-					<label for="file-input1"> <img id="file_change1"
+				<%-- <div class="image-upload">
+					<label for="file-form-control text-center"> <img id="file_change1"
 						class="logo" src="resources/upload/${dto.animal_img1 } " />
-					</label> <input class="file_input" id="file-input1" type="file"
+					</label> <input class="file_input" id="file-form-control text-center" type="file"
 						onchange="readURL4(this);" name="files" />
 				</div>
 				<c:if test="${not empty dto.animal_img2 }">
@@ -130,9 +164,11 @@
 						</label> <input class="file_input" id="file-input3" type="file"
 							onchange="readURL6(this);" name="files" />
 					</div>
-				</c:if>
+				</c:if> --%>
 			</div>
-			<input id="update_btn" type="submit" value="변경" align="center">
+			<button type="submit" class="btn btn-success mx-1">
+				<i class="bi bi-pencil"></i>수정
+			</button>
 		</form>
 	</div>
 </body>

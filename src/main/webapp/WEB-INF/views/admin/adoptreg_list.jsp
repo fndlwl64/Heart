@@ -234,7 +234,7 @@
 		$('.modal-title').empty();
 		$('.modal-title').append(modal_text+' 수정');
 		$('.modal-body').empty();
-		$('.modal-body').append(modal_text+'을(를) 수저하시겠습니까?');
+		$('.modal-body').append(modal_text+'을(를) 수정하시겠습니까?');
 	}
 	$(document).ready(function () {
 		
