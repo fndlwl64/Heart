@@ -198,5 +198,15 @@ public class AnimalController {
 			return 1;
 		}
 	}
+	
+	@RequestMapping("/testtag")
+	public String test() {
+		String tag = "dog";
+		List<AnimalDTO> list =  animalDAO.listTag(tag);
+		for(AnimalDTO dto : list) {
+			System.out.println(dto.toString());
+		}
+		return "redirect:/";
+	}
 
 }
