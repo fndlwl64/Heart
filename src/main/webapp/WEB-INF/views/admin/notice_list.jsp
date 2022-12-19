@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="dto" value="${supportList }"/>
+<c:set var="total" value="${ total }"/>
+<c:set var="paging" value="${ paging }"/>
+<c:set var="field" value="${ field }"/>
+<c:set var="keyword" value="${ keyword }"/>
 <jsp:include page="../include/admin_header.jsp"/>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
@@ -19,7 +23,7 @@
     <div class="container">
 
         <%-- 검색 폼 --%>
-        <form class="search_form" method="post" action="${path }/notice_update_ok">
+        <form class="search_form" method="post" action="${path }/notice_list">
             <div class="form_box">
                 <select name="field">
                     <option value="allSearch" <c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
