@@ -24,6 +24,8 @@ public interface QnaDAO {
     ////////////////////////////////////////////////////////////
     public int insertComment(QnaCommentDTO dto);
     public List<QnaCommentDTO> listComment(int board_no);
+    public int countComment(int board_no);
+    public int deleteComment(int comment_commentno);
 
     ////////////////////////////////////////////////////////////
     // FNQ

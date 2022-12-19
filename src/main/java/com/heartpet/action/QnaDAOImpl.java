@@ -77,7 +77,17 @@ public class QnaDAOImpl implements QnaDAO {
     public List<QnaCommentDTO> listComment(int board_no) {
         return this.sqlSession.selectList("comment_list", board_no);
     }
+    
+    @Override
+    public int countComment(int board_no) {
+        return this.sqlSession.selectOne("comment_count", board_no);
+    }
 
+    @Override
+    public int deleteComment(int comment_commentno) {
+        return this.sqlSession.delete("comment_delete", comment_commentno);
+    }
+    
     ////////////////////////////////////////////////////////////
     // FNQ
     ////////////////////////////////////////////////////////////

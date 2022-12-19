@@ -326,6 +326,25 @@ public class UserQnaController {
         List<QnaCommentDTO> commentList = this.qnaDAO.listComment(board_no);        
         return commentList;
     }
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    // COMMENT_COUNT
+    ////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping("/user_comment_count")
+    public @ResponseBody int user_comment_count(@RequestParam("board_no") int board_no) {
+        int commentCount = this.qnaDAO.countComment(board_no);
+        return commentCount;
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////////
+    // COMMENT_DELETE
+    ////////////////////////////////////////////////////////////////////////////////////
+    @RequestMapping("/user_comment_delete")
+    public @ResponseBody int user_comment_delete(@RequestParam("comment_commentno") int comment_commentno) {
+        int deleteComment = this.qnaDAO.deleteComment(comment_commentno);
+        System.out.println(deleteComment);
+        return deleteComment;
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////
     // FNQ_LIST
