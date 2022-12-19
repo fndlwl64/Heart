@@ -23,6 +23,18 @@
 }
 
 /* admin/user_list.jsp */
+.container .search_form .wrapper .user_search {
+	width: 250px;
+}
+
+.container .search_form .wrapper .radio_grade {
+	display: none;	
+}
+
+.container .search_form .wrapper .radio_exp {
+	display: none;
+}
+
 .container .search_form .form_box .user_field {
 	width: 20%;
 	display: inline-block;
@@ -281,12 +293,13 @@
 
 /* admin/ _list.jsp -> 검색 폼 div 태그 */
 .container .search_form .form_box {
+	display: flex;
     border: 1px solid #545a62;
     width: 70%;
     margin: auto;
     padding: 2%;
     border-radius: 5px;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     margin-top: 2%;
     
