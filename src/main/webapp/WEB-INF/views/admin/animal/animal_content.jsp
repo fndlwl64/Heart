@@ -26,66 +26,51 @@ pageContext.setAttribute("newline", "\n");
 		<table class="table noticeinfo mt-4">
 			<tr>
 				<th class="table-light col-1 w-25">이름</th>
-				<td colspan="8">${dto.animal_name }</td>
+				<td class="col-11" colspan="8">${dto.animal_name }</td>
 			</tr>
 			<tr>
-				<th class="table-light"><span class="sp2">나이</span></th>
-				<td>${dto.animal_age }</td>
-				<th class="table-light"><span class="sp2">성별</span></th>
-				<td>${dto.animal_gender }</td>
-				<th class="table-light"><span class="sp2">중성화</span></th>
-				<td>${dto.animal_neutered }</td>
-				<th class="table-light"><span class="sp2">예방접종</span></th>
-				<td>${dto.animal_vaccination }</td>
+				<th class="table-light col-1"><span class="sp2">나이</span></th>
+				<td class="col-2">${dto.animal_age }</td>
+				<th class="table-light col-1"><span class="sp2">성별</span></th>
+				<td class="col-2">${dto.animal_gender }</td>
+				<th class="table-light col-1"><span class="sp2">중성화</span></th>
+				<td class="col-2">${dto.animal_neutered }</td>
+				<th class="table-light col-1"><span class="sp2">예방접종</span></th>
+				<td class="col-2">${dto.animal_vaccination }</td>
 			<tr>
-				<th class="table-light"><span class="sp2">종류</span></th>
+				<th class="table-light col-1"><span class="sp2">종류</span></th>
 				<td colspan="3">${dto.animal_species }</td>
-				<th class="table-light"><span class="sp2">크기</span></th>
-				<td>${dto.animal_size }</td>
-				<th class="table-light"><span class="sp2">무게</span></th>
-				<td colspan="3">${dto.animal_weight }(kg)</td>
-
+				<th class="table-light col-1"><span class="sp2">크기</span></th>
+				<td class="col-1">${dto.animal_size }</td>
+				<th class="table-light col-1"><span class="sp2">무게</span></th>
+				<td>${dto.animal_weight }(kg)</td>
 			</tr>
-
 			<tr>
-				<th class="table-light"><span class="sp2">입양 상태</span></th>
-				<td colspan="3">${dto.animal_status }</td>
-				<th class="table-light"><span class="sp2">발견장소</span></th>
+				<th class="table-light col-1"><span class="sp2">입양 상태</span></th>
+				<td class="col-2">${dto.animal_status }</td>
+				<th class="table-light col-1"><span class="sp2">발견장소</span></th>
 				<td colspan="5">${dto.animal_place }</td>
 
 			</tr>
 			<tr>
 				<th class="table-light" rowspan="6"><span class="sp2">유의사항</span></th>
-				<td colspan="4" rowspan="4">${dto.animal_caution.replace(newline,'<br>') }</td>
-			</tr>
-			<tr>
-
-			</tr>
-			<tr>
-				<!-- 				<th class="table-light">이미지</th> -->
-				<td colspan="4" rowspan="4">
+				<td colspan="3">${dto.animal_caution.replace(newline,'<br>') }</td>
+				<td colspan="4">
 					<div class="img-fluid">
-						<img id="file_change1" src="resources/upload/${dto.animal_img1 } "
-							style="max-height: 300px;" alt="review_img" />
-					</div> <c:if test="${not empty dto.animal_img2}">
+						<img id="file_change1" src="resources/upload/${dto.animal_img1 }" style="max-height: 500px;" alt="review_img" />
+					</div> 
+					<c:if test="${not empty dto.animal_img2}">
 						<div class="img-fluid">
-							<img id="file_change1"
-								src="resources/upload/${dto.animal_img2 } "
-								style="max-height: 300px;" alt="review_img" />
+							<img id="file_change1" src="resources/upload/${dto.animal_img2 }" style="max-height: 500px;" alt="review_img" />
 						</div>
-					</c:if> <c:if test="${not empty dto.animal_img3}">
+					</c:if> 
+					<c:if test="${not empty dto.animal_img3}">
 						<div class="img-fluid">
-							<img id="file_change1"
-								src="resources/upload/${dto.animal_img3 } "
-								style="max-height: 300px;" alt="review_img" />
+							<img id="file_change1" src="resources/upload/${dto.animal_img3 }" style="max-height: 500px;" alt="review_img" />
 						</div>
 					</c:if>
 				</td>
 			</tr>
-			<tr>
-				<td colspan="2"></td>
-			</tr>
-
 		</table>
 		<div>
 			<button type="button" class="btn btn-success mx-1"
