@@ -179,14 +179,15 @@
 		<c:if test="${not empty animalList}">
 			<c:forEach var="dto" items="${animalList}">
 				<div class="col animal">
-					<div class="d-inline-block text-center animal_wrap">
+					<div class="d-flex flex-row text-center  p-2 alert-primary alert alert-primary animal_wrap">
+					<input type="hidden" value="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}" id="href">
 						<%-- <a
 							href="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"><img
 							class="img-fluid rounded mx-auto img-frame"
 							src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a> --%>
-						<div class="rounded back_image"
+						<div class="rounded back_image" id="back_image"
 							style="background-image : url(<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()});"></div>
-						<div class="text-center animal_explan">${dto.getAnimal_name() }</div>
+						<div class="text-center animal_explan w-50">${dto.getAnimal_name() }</div>
 					</div>
 				</div>
 			</c:forEach>
@@ -274,6 +275,12 @@
 				location.href = $("#sortlink").val() + '&sort='
 						+ $('select[name=sort]').val();
 			});
+	$(document).ready(function () {
+		  $(document).on("click", "#back_image", function () {
+		    location.href = $('#href').val();
+		  });
+		});
+	
 </script>
 
 <jsp:include page="../../include/user_footer.jsp" />

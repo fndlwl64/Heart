@@ -2,14 +2,11 @@
 .justify-content-center {
 	margin: 20px;
 }
-.animal{
-	display: inline-block;
-}
+
 .animal_wrap {
-	display:flex;
-	flex-direction: column;
 	position : relative;
 	margin: 10px;
+	background-color: $indigo-900;
 }
 .back_image{
 	width: 200px;
@@ -21,7 +18,7 @@
 	
 }
 
-.animal_explan { .jb-wrap { width:40%;
-	
+.animal_explan { 
+	font-size: x-small;
 }
 

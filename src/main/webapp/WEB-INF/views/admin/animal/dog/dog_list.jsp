@@ -83,7 +83,7 @@
 				<input type="hidden" id="YN" name="animal_neutered" /> <label><input
 					type="checkbox" id="checkYN">중성화</label> <label><input
 					type="radio" name="animal_size" value="대형" />대</label> <label><input
-					type="radio" name="animal_size" value="중형" />증</label> <label><input
+					type="radio" name="animal_size" value="중형" />중</label> <label><input
 					type="radio" name="animal_size" value="소형" />소</label> <input
 					class="btn searchbtn" type="submit" value="검색">
 
