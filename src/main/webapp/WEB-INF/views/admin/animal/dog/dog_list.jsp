@@ -58,10 +58,9 @@
 		<form class="search_form" action="${path}/dog_list" method="post">
 			<div class="form_box">
 
-				<select name="animal_species">
-
+				<select class="form-select form-select-sm w-25"
+					name="animal_species">
 					<option value=""></option>
-
 					<option value="말티즈">말티즈</option>
 					<option value="푸들">푸들</option>
 					<option value="포메라니안">포메라니안</option>
@@ -80,23 +79,24 @@
 					value="중형"> 중</label> <label class="size"><input
 					type="radio" name="animal_size" ondblclick="this.checked=false"
 					value="소형"> 소</label> -->
-				<input type="hidden" id="YN" name="animal_neutered" /> <label><input
-					type="checkbox" id="checkYN">중성화</label> <label><input
-					type="radio" name="animal_size" value="대형" />대</label> <label><input
-					type="radio" name="animal_size" value="중형" />중</label> <label><input
-					type="radio" name="animal_size" value="소형" />소</label> <input
-					class="btn searchbtn" type="submit" value="검색">
-
+				<div>
+					<label><input type="radio" name="animal_size" value="대형" />대</label>
+					<label><input type="radio" name="animal_size" value="중형" />중</label>
+					<label><input type="radio" name="animal_size" value="소형" />소</label>
+				</div>
+				<div>
+					<input type="hidden" id="YN" name="animal_neutered" /> <label><input
+						type="checkbox" id="checkYN">중성화</label>
+				</div>
+				<div>
+					<button class="btn searchbtn" type="submit">
+						<i class="bi bi-search"></i>검색
+					</button>
+				</div>
 			</div>
 
 		</form>
 
-		<br>
-
-		<button class="btn btn-success insertbtn"
-			onclick="location.href='${path}/animal_insert?tag=dog'">등록</button>
-
-		<br> <br>
 
 		<%-- 검색 결과 테이블 : 일련번호 클릭 시 해당 동물 상세 정보 페이지로 이동 --%>
 		<div class="lists">
@@ -125,21 +125,22 @@
 					<!-- <th class="table-secondary">수정/삭제</th> -->
 				</tr>
 				<c:forEach var="dto" items="${dogList }">
-					<tr>
-						<c:if test="${dto.animal_state eq 1 }">
+					<c:if test="${dto.animal_state eq 1 }">
+						<tr>
 							<td><a href="${path}/animal_content?no=${dto.animal_no}">${dto.animal_name }</a></td>
-						</c:if>
-						<c:if test="${dto.animal_state eq 0 }">
-							<td><a class="text-danger" data-bs-toggle="modal"
-								data-bs-target="#lockModal">${dto.animal_name }</a></td>
-						</c:if>
-						<td>${dto.animal_species }</td>
-						<td>${dto.animal_gender }</td>
-						<td>${dto.animal_size }</td>
-						<td>${dto.animal_neutered }</td>
-						<td>${dto.animal_vaccination }</td>
-						<td>${dto.animal_status }</td>
-						<%-- <td>
+					</c:if>
+					<c:if test="${dto.animal_state eq 0 }">
+						<tr class="table-secondary">
+						<td><a data-bs-toggle="modal"
+							data-bs-target="#lockModal">${dto.animal_name }</a></td>
+					</c:if>
+					<td>${dto.animal_species }</td>
+					<td>${dto.animal_gender }</td>
+					<td>${dto.animal_size }</td>
+					<td>${dto.animal_neutered }</td>
+					<td>${dto.animal_vaccination }</td>
+					<td>${dto.animal_status }</td>
+					<%-- <td>
 							<button class="btn btn-primary"
 								onclick="location.href='${path}/animal_update?no=${dto.animal_no }'">수정</button>
 							<button class="btn btn-secondary" data-bs-toggle="modal"
@@ -148,9 +149,13 @@
 						</td> --%>
 					</tr>
 				</c:forEach>
+				<tr>
+					<td colspan="7"><button
+							class="btn btn-success btn-sm insertbtn float-end"
+							onclick="location.href='${path}/animal_insert?tag=dog'">등록</button></td>
+				</tr>
 			</table>
 		</div>
-
 		<br>
 		<%-- 페이징처리 --%>
 
