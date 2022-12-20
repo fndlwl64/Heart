@@ -23,7 +23,7 @@ pageContext.setAttribute("newline", "\n");
 		<input type="hidden" name="animal_img2" value="${dto.animal_img2 }">
 		<input type="hidden" name="animal_img3" value="${dto.animal_img3 }">
 
-		<table class="table noticeinfo mt-4">
+		<table class="table noticeinfo mt-4 animal_table">
 			<tr>
 				<th class="table-light col-1 w-25">이름</th>
 				<td class="col-11" colspan="8">${dto.animal_name }</td>
@@ -53,20 +53,27 @@ pageContext.setAttribute("newline", "\n");
 
 			</tr>
 			<tr>
-				<th class="table-light" rowspan="6"><span class="sp2">유의사항</span></th>
+				<th class="table-light col-1"><span class="sp2">유의사항</span></th>
 				<td colspan="3">${dto.animal_caution.replace(newline,'<br>') }</td>
-				<td colspan="4">
+
+			</tr>
+			<tr>
+				<th class="table-light col-1"><span class="sp2">이미지</span>
+				<td colspan="7">
 					<div class="img-fluid">
-						<img id="file_change1" src="resources/upload/${dto.animal_img1 }" style="max-height: 500px;" alt="review_img" />
-					</div> 
-					<c:if test="${not empty dto.animal_img2}">
+						<img class="file_change1"
+							src="resources/upload/${dto.animal_img1 }" alt="review_img" />
+					</div> <c:if test="${not empty dto.animal_img2}">
+						<br>
 						<div class="img-fluid">
-							<img id="file_change1" src="resources/upload/${dto.animal_img2 }" style="max-height: 500px;" alt="review_img" />
+							<img class="file_change1"
+								src="resources/upload/${dto.animal_img2 }" alt="review_img" />
 						</div>
-					</c:if> 
-					<c:if test="${not empty dto.animal_img3}">
+					</c:if> <c:if test="${not empty dto.animal_img3}">
+						<br>
 						<div class="img-fluid">
-							<img id="file_change1" src="resources/upload/${dto.animal_img3 }" style="max-height: 500px;" alt="review_img" />
+							<img class="file_change1"
+								src="resources/upload/${dto.animal_img3 }" alt="review_img" />
 						</div>
 					</c:if>
 				</td>
