@@ -6,7 +6,7 @@
 <c:set var="field" value="${ field }"/>
 <c:set var="keyword" value="${ keyword }"/>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<jsp:include page="../include/admin_header.jsp"/>
+<jsp:include page="../../include/admin_header.jsp"/>
 <!DOCTYPE html>
 
 <html>
@@ -93,9 +93,9 @@
     </div>
     <br><br>
     <%-- 삭제 모달 --%>
-    <jsp:include page="../include/deleteModal.jsp" />
+    <jsp:include page="../../include/deleteModal.jsp" />
     <%-- 페이징처리 --%>
-    <jsp:include page="../include/pagination.jsp" />
+    <jsp:include page="../../include/pagination.jsp" />
 </div>
 </body>
 </html>
