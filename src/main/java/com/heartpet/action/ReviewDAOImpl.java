@@ -21,12 +21,13 @@ public class ReviewDAOImpl implements ReviewDAO {
     // 전체 list
     /////////////////////////////////////////////////
     @Override
-    public List<ReviewDTO> listReview(int startNo, int endNo, String field, String keyword) {
+    public List<ReviewDTO> listReview(int startNo, int endNo, String field, String keyword, String order) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("startNo", startNo);
         map.put("endNo", endNo);
         map.put("field", field);
         map.put("keyword", keyword);
+        map.put("order", order);
         return this.sqlSession.selectList("review_list", map);
     }
 
@@ -72,11 +73,12 @@ public class ReviewDAOImpl implements ReviewDAO {
     // animal_tag : dog/cat 선택에 따른 List 출력
     //===========================================================
     @Override
-    public List<ReviewDTO> listReview(int startNo, int endNo, String animal_tag) {
+    public List<ReviewDTO> listReview(int startNo, int endNo, String animal_tag, String order) {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("startNo", startNo);
         map.put("endNo", endNo);
         map.put("animal_tag", animal_tag);
+        map.put("order", order);
         return this.sqlSession.selectList("review_animal_option", map);
     }
 

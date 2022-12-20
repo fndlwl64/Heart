@@ -35,11 +35,11 @@
         <div class="row">
             <div class="col-2 space"></div>
             <div class="col-8 title">
-            	<form action="${path}/user_review_list?animal_tag=${ animal_tag }" method="get" >
+            	<form action="${path}/user_review_list" method="get" >
             	<input type="hidden" name="animal_tag" />
-		    	<button type="button" class="btn btn-info animal-button" onclick="location.href='${path}/user_review_list'"><i class="bi bi-clipboard-heart"></i> 전체</button>
-		    	<button type="submit" class="btn btn-info animal-button" value="dog" onclick="return animalChange(this.value)"><i class="bi bi-search-heart"></i> 강아지</button>
-		    	<button type="submit" class="btn btn-info animal-button" value="cat" onclick="return animalChange(this.value)"><i class="bi bi-search-heart-fill"></i> 고양이</button>
+			    	<button type="button" class="btn btn-info animal-button" onclick="location.href='${path}/user_review_list'"><i class="bi bi-clipboard-heart"></i> 전체</button>
+			    	<button type="submit" class="btn btn-info animal-button" value="dog" onclick="return animalChange(this.value)"><i class="bi bi-search-heart"></i> 강아지</button>
+			    	<button type="submit" class="btn btn-info animal-button" value="cat" onclick="return animalChange(this.value)"><i class="bi bi-search-heart-fill"></i> 고양이</button>
 		    	</form>
             </div>
             <div class="col-2 space"></div>
@@ -52,7 +52,7 @@
             <div class="col-2 space"></div>
             <div class="col-7 total-data d-flex"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
             <div class="col-1 review_order d-flex">
-                <select class="form-select form-select-sm w-75 order" name="review_order">
+                <select class="form-select form-select-sm w-75 order" name="order">
                     <option selected="selected" value="date_desc">최신순</option>
                     <option value="hit_desc">조회수순</option>
                     <option value="no_desc">번호순</option>

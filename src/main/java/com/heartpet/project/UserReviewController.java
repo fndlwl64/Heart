@@ -41,7 +41,7 @@ public class UserReviewController {
     private AnimalDAO animalDAO;
 
     // 한 페이지당 보여질 게시물의 수
-    private final int rowsize = 6;
+    private final int rowsize = 8;
 
     // 전체 게시물의 수
     private int totalRecord = 0;
@@ -53,10 +53,12 @@ public class UserReviewController {
     public String user_review_list(@RequestParam(value = "field", required = false) String field,
             @RequestParam(value = "keyword", required = false) String keyword,
             @RequestParam(value = "animal_tag", required = false) String animal_tag,
+            @RequestParam(value = "order", required = false) String order, 
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 
         if (field == null) { field = ""; }
         if (keyword == null) { keyword = ""; }
+        if (order == null) { order = ""; }
 
         int currentPage = 1; // 현재 페이지 변수
         if (page != 1) { currentPage = page; }
@@ -69,11 +71,11 @@ public class UserReviewController {
         if (animal_tag == null) {
             totalRecord = this.reviewDAO.listReviewCount(field, keyword);
             paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-            reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), field, keyword);
+            reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
         } else { // dog/cat 선택
             totalRecord = this.reviewDAO.listReviewCount(animal_tag);
             paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-            reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), animal_tag);
+            reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), animal_tag, order);
         }
         
         // 댓글수 추가
@@ -87,6 +89,7 @@ public class UserReviewController {
         model.addAttribute("paging", paging);
         model.addAttribute("field", field);
         model.addAttribute("keyword", keyword);
+        model.addAttribute("animal_tag", animal_tag);
         model.addAttribute("commentList", commentList);
 
         return "user/review/review_list";

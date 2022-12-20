@@ -11,8 +11,8 @@ public interface ReviewDAO {
     ////////////////////////////////////////////////////////////
     // Review
     ////////////////////////////////////////////////////////////
-    public List<ReviewDTO> listReview(int startNo, int endNo, String field, String keyword);
-    public List<ReviewDTO> listReview(int startNo, int endNo, String animal_tag);
+    public List<ReviewDTO> listReview(int startNo, int endNo, String field, String keyword, String order);
+    public List<ReviewDTO> listReview(int startNo, int endNo, String animal_tag, String order);
     public List<ReviewDTO> listReview(String animal_tag);
     public int listReviewCount(String field, String keyword);
     public int listReviewCount(String animal_tag);
