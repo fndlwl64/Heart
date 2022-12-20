@@ -86,10 +86,13 @@
 		select * from
 		heartpet_animal order by animal_no desc
 	</select>
+	<select id="animal_join_status" parameterType="String" resultType="Integer">
+		select animal_no from
+		heartpet_animal where animal_status = #{animal_status} order by animal_no desc 
+	</select>
 	<select id="animal_listTag" resultType="AnimalDTO">
 		select * from
-		heartpet_animal where animal_tag = #{animal_tag} order by animal_no
-		desc
+		heartpet_animal where animal_tag = #{animal_tag} order by animal_no desc
 	</select>
 	<select id="animal_listTagUser" resultType="AnimalDTO">
 		select * from
@@ -100,7 +103,7 @@
 	</select>
 	<select id="animal_listTagPaging" parameterType="hashmap"
 		resultType="AnimalDTO">
-		select
+		select 
 		<include refid="animal_select"></include>
 		from
 		(
