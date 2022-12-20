@@ -43,10 +43,12 @@ public class AdminReviewController {
     public String admin_review_list(@RequestParam(value = "field", required = false) String field,
             @RequestParam(value = "keyword", required = false) String keyword,
             @RequestParam(value = "animal_tag", required = false) String animal_tag,
+            @RequestParam(value = "order", required = false) String order,
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 
         if (field == null) { field = ""; }
         if (keyword == null) { keyword = ""; }
+        if (order == null) { order = ""; }
 
         int currentPage = 1; // 현재 페이지 변수
         if (page != 1) { currentPage = page; }
@@ -59,11 +61,11 @@ public class AdminReviewController {
         if (animal_tag == null) {
             totalRecord = this.reviewDAO.listReviewCount(field, keyword);
             paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-            reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), field, keyword);
+            reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
         } else { // dog/cat 선택
             totalRecord = this.reviewDAO.listReviewCount(animal_tag);
             paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-            reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), animal_tag);
+            reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), animal_tag, order);
         }
         
         // 댓글수 추가
@@ -77,6 +79,7 @@ public class AdminReviewController {
         model.addAttribute("paging", paging);
         model.addAttribute("field", field);
         model.addAttribute("keyword", keyword);
+        model.addAttribute("order", order);
         model.addAttribute("commentList", commentList);
 
         return "admin/review/review_list";

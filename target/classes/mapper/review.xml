@@ -32,6 +32,12 @@
 			</choose>
 		</where>
          <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo}]]>
+       	 <choose>
+       		<when test="order == ''"></when>
+       		<when test="order.equals('date_desc')"> ORDER BY review_regdate DESC </when>         
+       		<when test="order.equals('hit_desc')"> ORDER BY review_hit DESC</when>         
+       		<when test="order.equals('no_desc')"> ORDER BY review_no DESC</when>         
+       	 </choose>
 	</select>
 	
 	<!-- review : count -->
@@ -128,6 +134,12 @@
             review_animal_tag = #{ animal_tag }
         </where>
          <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo}]]>
+        <choose>
+       		<when test="order == ''"></when>
+       		<when test="order.equals('date_desc')"> ORDER BY review_regdate DESC </when>         
+       		<when test="order.equals('hit_desc')"> ORDER BY review_hit DESC</when>         
+       		<when test="order.equals('no_desc')"> ORDER BY review_no DESC</when>         
+       	 </choose>
     </select>
     
     <!-- review : dog/cat : 게시글 개수 -->
