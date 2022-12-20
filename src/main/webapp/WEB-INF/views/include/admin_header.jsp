@@ -28,7 +28,7 @@
 <body>
 	<div class="header-logo">
 		<div class="row div_header">
-			<div class="col-5 space"></div>		
+			<div class="col-5 header-space"></div>		
 			<div class="col-2 header-image">
 				<a href="${path}/admin_main"><img class="logo" src="${path}/resources/logo/heartpet_logo_admin.png" alt="HeartPet" /></a>
 			</div>

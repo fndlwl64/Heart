@@ -13,3 +13,8 @@ function submitOption() {
 		return false;
 	}
 }
+
+function popup(path){
+	  let options = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=900, height=900, top=100,left=400";
+	  window.open(path+"/user_support_insert","_blank", options);
+}

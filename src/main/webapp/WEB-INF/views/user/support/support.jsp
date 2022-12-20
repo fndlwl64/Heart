@@ -4,17 +4,12 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/support.css">
-<script>
-function popup(){
-	  let options = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=900, height=900, top=100,left=400";
-
-	  window.open("<%=request.getContextPath() %>/user_support_insert","_blank", options);
-	}
-</script>
+<script src="${path}/resources/js/support.js"></script>
 <%-- 여기서부터 작성 --%>
-
-<div align="center">
-	<button class="btn_support" type="button" onclick="popup()"></button>
+<div class="div1" align="center">
+	<br><br><br><br><br><br>
+	<h1>후원을 원하시면 아래 이미지를 눌러주세요!</h1>
+	<img class="btn_support" src="resources/image/animal.png" onclick="popup('${path}')">
 </div>
 
 <jsp:include page="../../include/user_footer.jsp" />
