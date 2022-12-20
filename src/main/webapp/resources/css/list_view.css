@@ -371,19 +371,19 @@
 	align-items: flex-end;
 }
 
-/* 총 게시물 */
+총 게시물
 .qna-section .total-data {
 	font-size: 14px;
 	margin-left: 1%;
 }
 
-/* qna : 정렬 */
+qna : 정렬
 .qna-section .qna_order {
     justify-content: right;
     margin-right: 1%;
 }
 
-/* space : 여백용 */
+space : 여백용
 .space {
 	margin: 4rem 0;
 }
