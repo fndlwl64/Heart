@@ -42,8 +42,9 @@
                     <option value="id"<c:if test="${ field eq 'id' }">selected="selected"</c:if>>작성자</option>
                 </select>
                 <span class="search-name">검색어</span> 
-                <input name="keyword" class="form-control d-inline align-middle w-50" value="${ keyword }">
+                <input name="keyword" class="form-control d-inline align-middle keyword" value="${ keyword }">
                 <button class="btn btn-dark d-inline align-middle ms-1" type="submit"><i class="bi bi-search"></i> 검색</button>
+                <button class="btn btn-light d-inline align-middle ms-1" type="submit"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
            </div>
         </form>
         <br>
@@ -58,6 +59,7 @@
                     <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신등록순</option>
                     <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>
                     <option value="title_desc"<c:if test="${ order eq 'title_desc' }">selected="selected"</c:if>>가나다순</option>
+                    <option value="comment_desc"<c:if test="${ order eq 'comment_desc' }">selected="selected"</c:if>>댓글많은순</option>
                 </select>
             </div>
         </div>

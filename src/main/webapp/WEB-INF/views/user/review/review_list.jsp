@@ -47,12 +47,13 @@
     </div>
 
 	<!-- 정렬 -->
+    <form class="order_form" method="get" action="${path}/user_review_list">
     <div class="review-section">
         <div class="row">
             <div class="col-2 space"></div>
             <div class="col-7 total-data d-flex"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
             <div class="col-1 review_order d-flex">
-                <select class="form-select form-select-sm w-75 order" name="order">
+                <select class="form-select form-select-sm w-75 order" name="order" onchange="this.form.submit()">
                     <option selected="selected" value="date_desc">최신순</option>
                     <option value="hit_desc">조회수순</option>
                     <option value="no_desc">번호순</option>
@@ -61,6 +62,8 @@
             <div class="col-2 space"></div>
         </div>
     </div>
+	</form>
+    
 
     <div class="review-section">
        <div class="row">
