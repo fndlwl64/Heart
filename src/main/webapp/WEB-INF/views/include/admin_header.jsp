@@ -28,17 +28,20 @@
 <body>
 	<div class="header-logo">
 		<div class="row div_header">
-			<div class="col-4 space"></div>		
-			<div class="col-4 header-logo">
-				<a href="${path}/admin_main"><img class="logo" src="${path}/resources/logo/heartpet_logo_words.png" alt="HeartPet" /></a>
+			<div class="col-5 space"></div>		
+			<div class="col-2 header-image">
+				<a href="${path}/admin_main"><img class="logo" src="${path}/resources/logo/heartpet_logo_admin.png" alt="HeartPet" /></a>
 			</div>
-			<div class="col-4 header-nav">
-	            <ul>
-	            	<li><a href="${path}/">홈</a></li>
-	                <li><a href="${path}/user_logout">로그아웃</a></li>
-	            </ul>
+			<div class="col-5 header-nav">			
+               	<div class="login-section">
+					<ul class="row">
+					   <li class="col-4 login-location"><a href="${path}/">홈</a></li>
+					   <li class="col-4 join-location"><a class="login-title" href="${path}/user_logout">로그아웃</a></li>
+					</ul>
+                </div>
             </div>
-			<div class="nav-bar justify-content-center">
+            <!-- nav-bar -->
+			<div class="nav-bar navbar-dark bg-dark justify-content-center">
 				<div class="nav-links">
 					<ul>
 						<li><a href="${path}/user_list">회원관리</a></li>
