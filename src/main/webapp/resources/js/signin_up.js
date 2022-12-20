@@ -488,7 +488,7 @@ function idfind() {
 	var naver_id_login = new naver_id_login("fw7rzSQL46p95xisWWtm", "http://localhost:8081/project/naver_login");
 	var state = naver_id_login.getUniqState();
 
-	naver_id_login.setButton("white", 2,40);
+	naver_id_login.setButton("green", 6,48);
 	naver_id_login.setDomain("http://localhost:8081/project/naver_login");
 	naver_id_login.setState(state);
 	naver_id_login.setPopup();
