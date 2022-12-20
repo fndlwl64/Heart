@@ -19,21 +19,21 @@
 	<form method="post" action="${path }/notice_update_ok" enctype="multipart/form-data">
 		<input type="hidden" name="notice_img1" value="${dto.getNotice_img1() }">
 		<input type="hidden" name="notice_img2" value="${dto.getNotice_img2() }">
-		<table class="table">
+		<table class="table noticeinfo mt-4">
 			<tr>
-				<th class="table-secondary"><span class="sp2">공지제목</span></th>
-				<td><input class ="input1" type="text" name="notice_title" value="${dto.getNotice_title() }"></td>
+				<th class="table-light col-1"><span class="sp2">공지제목</span></th>
+				<td><input class="form-control" type="text" name="notice_title" value="${dto.getNotice_title() }"></td>
 			</tr>
 			<tr>
-				<th class="table-secondary"><span class="sp2">글내용</span></th>
-				<td><textarea rows="2" cols="22" name="notice_content">${dto.getNotice_content() }</textarea> </td>
+				<th class="table-light"><span class="sp2">글내용</span></th>
+				<td><textarea rows="2" cols="22" class="form-control" name="notice_content">${dto.getNotice_content() }</textarea> </td>
 			</tr>
 			<tr>
-				<th class="table-secondary"><span class="sp2">조회수</span></th>
-				<td><input class ="input1" type="text" name="notice_hit" value="${dto.getNotice_hit() }"></td>
+				<th class="table-light"><span class="sp2">조회수</span></th>
+				<td><input class="form-control" type="text" name="notice_hit" value="${dto.getNotice_hit() }"></td>
 			</tr>
 			<tr>
-				<th class="table-secondary"><span class="sp2">이미지</span></th>
+				<th class="table-light"><span class="sp2">이미지</span></th>
 				<td>
 					<div class="image-upload">
 						<label for="file-input1">
@@ -54,8 +54,10 @@
 			</tr>
 		</table>
 		<br>
-		<input type="hidden" name="notice_no" value="${dto.getNotice_no() }">
-		<input id="update_btn" type="submit" value="변경">
+		<input type="hidden" name="notice_no" value="${dto.getNotice_no() }">		
+		<button type="button" class="btn btn-secondary mx-1" onclick="location.href='${path}/notice_list'"><i class="bi bi-card-list"></i> 목록</button>
+        <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
+        <button id="update_btn" type="submit" class="btn btn-dark mx-1"><i class="bi bi-save"></i> 변경</button>
 	</form>
 </div>
 </body>

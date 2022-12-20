@@ -17,29 +17,32 @@
 <br><br>
 <div class="div1" align="center">
 	<form method="post" enctype="multipart/form-data" action="${path }/notice_insert_ok" onsubmit="return submitOption();">
-		<table class="table">
-			<tr>
-				<th class="table-secondary"><span class="sp2">공지제목</span></th>
-				<td><input id="notice_title" class ="input1" type="text" name="notice_title"></td>
+		<table class="table noticeinfo mt-4">
+			<tr class="border-top">
+				<th class="table-light col-1"><span class="sp2">공지제목</span></th>
+				<td><input id="notice_title" class="form-control" type="text" name="notice_title"></td>
 			</tr>
 			<tr>
-				<th class="table-secondary"><span class="sp2">글내용</span></th>
-				<td><textarea id="notice_content" rows="2" cols="22" name="notice_content"></textarea> </td>
+				<th class="table-light col-1"><span class="sp2">글내용</span></th>
+				<td><textarea id="notice_content" class="form-control" rows="2" cols="22" name="notice_content"></textarea> </td>
 			</tr>
 			<tr>
-				<th class="table-secondary"><span class="sp2">조회수</span></th>
-				<td><input id="notice_hit" class ="input1" type="text" name="notice_hit"></td>
+				<th class="table-light col-1"><span class="sp2">조회수</span></th>
+				<td><input id="notice_hit" class="form-control" type="text" name="notice_hit"></td>
 			</tr>
 			<tr>
-				<th class="table-secondary"><span class="sp2">첨부이미지(2개)</span></th>
+				<th class="table-light col-1"><span class="sp2">첨부<br>이미지</span></th>
 				<td>
-					<input type="file" name="files" id="files" 
+					<input type="file" name="files" id="files" class="form-control" 
 					accept="image/gif, image/jpeg, image/png" onchange="fileOption();" multiple>
 				</td>
 			</tr>
 		</table>
 		<br>
-		<input id="insert_btn" type="submit" value="등록" align="center">
+		
+		<button type="button" class="btn btn-secondary mx-1" onclick="location.href='${path}/notice_list'"><i class="bi bi-card-list"></i> 목록</button>
+        <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
+        <button id="insert_btn" type="submit" class="btn btn-dark mx-1"><i class="bi bi-save"></i> 등록</button>
 	</form>
 </div>
 </body>
