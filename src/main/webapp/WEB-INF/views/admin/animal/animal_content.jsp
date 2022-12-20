@@ -14,10 +14,8 @@ pageContext.setAttribute("newline", "\n");
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <link rel="stylesheet" href="resources/css/admin_animal.css">
 <body>
-	<br>
-	<br>
+	
 	<div class="div1" align="center">
-
 		<input type="hidden" name="animal_no" value="${dto.animal_no }">
 		<input type="hidden" name="animal_img1" value="${dto.animal_img1 }">
 		<input type="hidden" name="animal_img2" value="${dto.animal_img2 }">
@@ -79,7 +77,7 @@ pageContext.setAttribute("newline", "\n");
 				</td>
 			</tr>
 		</table>
-		<div>
+		<div class="animal_button">
 			<button type="button" class="btn btn-success mx-1"
 				onclick="location.href='<%=request.getContextPath() %>/animal_update?no=${dto.animal_no }'">
 				<i class="bi bi-pencil"></i>수정
