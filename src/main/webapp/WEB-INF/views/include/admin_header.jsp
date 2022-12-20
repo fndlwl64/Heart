@@ -17,6 +17,7 @@
 	
     <link rel="shortcut icon" href="${path}/resources/icon/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="${path}/resources/icon/favicon.ico" type="image/x-icon" />
+    <style> @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap'); </style>    
  
     <link rel="shortcut icon" type="image/x-icon" href="${path}/resources/icon/favicon_72x72.png" />
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="${path}/resources/icon/favicon_57x57.png" />

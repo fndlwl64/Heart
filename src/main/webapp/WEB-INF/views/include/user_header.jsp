@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% long time = System.currentTimeMillis(); %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +30,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <link rel="stylesheet" href="${path}/resources/css/user_include.css?${time}">
-    
+    <style> @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap'); </style>
+        
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="${path}/resources/js/main.js"></script>
 
@@ -66,13 +66,15 @@
 		                        <ul class="row">
 		                        	<c:if test="${ not empty session_id }">
 										<li class="col-4 login-location">
-										<img class="user-image" src="${path}/resources/logo/heartpet_logo_words.png" alt="HeartPet" />
-										<a class="login-title" href="${path}/user_mypage_user_update"><strong>${ session_name }님</strong></a></li>
+										<a class="login-title" href="${path}/user_mypage_user_update">
+										<img class="user-image" src="${path}/resources/image/user_img/${ session_image }" alt="user_img" />
+										<strong>${ session_name }님</strong></a></li>
 									</c:if> 
 									<c:if test="${ not empty session_admin_id }">
 		                           		<li class="col-4 login-location">
-		                           		<img class="user-image" src="${path}/resources/logo/heartpet_logo_words.png" alt="HeartPet" />
-		                           		<a class="login-title" href="${path}/user_list"><strong>${ session_admin_name }님</strong></a></li>
+		                           		<a class="login-title" href="${path}/user_list">
+		                           		<img class="user-image" src="${path}/resources/image/user_img/${ session_admin_image }" alt="admin_img" />
+		                           		<strong>${ session_admin_name }님</strong></a></li>
 		                           </c:if>
 		                           <li class="col-2"><a class="login-title" href="${path}/user_logout">로그아웃</a></li>
 		                        </ul>

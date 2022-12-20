@@ -83,6 +83,7 @@ public class UserController {
     				HttpSession session = request.getSession();
     				session.setAttribute("session_admin_id", id);
     				session.setAttribute("session_admin_name", cont.getUser_name());
+    				session.setAttribute("session_admin_image", cont.getUser_image());
     				    				    				
     				return "admin/admin_main";
     			}else {
@@ -102,6 +103,7 @@ public class UserController {
     	    		session.setAttribute("session_id", id);
     	    		session.setAttribute("session_name", cont.getUser_name());
     	    		session.setAttribute("session_grade", cont.getUser_grade());
+    	    		session.setAttribute("session_image", cont.getUser_image());
     	    			    		
     	    		out.println("<script>");
     				out.println("alert('로그인 되었습니다!');");

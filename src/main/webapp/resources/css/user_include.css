@@ -5,9 +5,8 @@
 }
 
 body {
-    font-family: 'Noto Sans KR', sans-serif;
+	font-family: 'Gowun Dodum', sans-serif;	
     font-size: 17px;
-
 }
 
 /* header-logo */
@@ -63,6 +62,30 @@ body {
 }
 
 .wrap .h-wrap .header-logo a {
+}
+
+/* user-header */
+.header-logo .login-section {
+	
+}
+
+.header-logo .login-section .login-location {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.header-logo .login-section .login-title {	
+	color: rgba(0,0,0,.5);
+	font-weight: bold;
+	padding-left: 0.5rem !important;
+}
+
+.header-logo .login-section .login-location .user-image {
+    width: 30px;
+    height: 30px;
+    clip-path: circle(50% at 50% 50%);
+	
 }
 
 /* nav-bar */
