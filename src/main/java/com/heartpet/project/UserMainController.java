@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.ReviewDAO;
+import com.heartpet.action.UserDAO;
 import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.ReviewDTO;
+import com.heartpet.model.UserDTO;
 
 @Controller
 public class UserMainController {
@@ -20,6 +22,7 @@ public class UserMainController {
 
     @Autowired
     private AnimalDAO animalDAO;
+    
 
     @RequestMapping("/main")
     public String main(Model model) {
@@ -36,5 +39,6 @@ public class UserMainController {
 
         return "main";
     }
+    
 
 }
