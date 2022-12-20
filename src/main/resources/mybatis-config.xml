@@ -3,7 +3,9 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "https://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-    
+	<settings>
+	    <setting name="callSettersOnNulls" value="true"/>
+	</settings>
 	<!-- Alias 설정 : 별칭 설정 -->
 	<typeAliases>
 		<!-- QnA -->
@@ -28,7 +30,5 @@
 		<typeAlias type="com.heartpet.model.WishDTO" alias="WishDTO"/>
 		<typeAlias type="com.heartpet.action.WishDAO" alias="WishDAO"/>
 	</typeAliases>	
-	
-	
 </configuration>
 

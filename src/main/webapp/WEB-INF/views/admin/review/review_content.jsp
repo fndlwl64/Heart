@@ -32,9 +32,7 @@
                 let userId = $(e.relatedTarget).data('user');
                 let reviewNo = $(e.relatedTarget).data('reviewno');
                 
-                
                 $('#deleteFunction').on("click", function() {
-                    console.log(4, reviewNo);
                     commentDelete(commentNo, path, userId, reviewNo);
                 });
             });

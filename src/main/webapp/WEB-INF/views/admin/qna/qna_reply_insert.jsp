@@ -25,8 +25,8 @@
         <form action="${path}/admin_qna_reply_insert_ok" method="post" enctype="multipart/form-data">
         <input type="hidden" name="board_id" value="${ session_admin_id }" />
         <!-- 답변글 작성인 경우 parentNo = board_no 되도록 
-        list.level == 1 : 부모글
-        list.level >= 2 : 자식글
+				list.level == 1 : 부모글
+				list.level >= 2 : 자식글
         -->      
         <c:if test="${ list.level eq 1 }"><input type="hidden" name="board_group" value="${ list.board_no }" /></c:if>
         <c:if test="${ list.level ge 2 }"><input type="hidden" name="board_group" value="${ list.board_group }" /></c:if>
