@@ -26,6 +26,7 @@ body {
 
 .header-nav ul li {
     list-style: none;
+    padding: 5px;
 }
 
 .header-nav ul li a {
@@ -52,7 +53,7 @@ body {
 
 .header-logo .login-section .login-location {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: flex-start;
 	align-items: center;
 	color: white;
 }
