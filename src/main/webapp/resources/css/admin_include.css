@@ -2,7 +2,7 @@
 /* include/admin_header.jsp에서 사용하는 css*/
 
 body {
-	font-family: 'Gowun Dodum', sans-serif;	
+	font-family: 'Gowun Dodum', sans-serif !important;	
     font-size: 17px;
 }
 

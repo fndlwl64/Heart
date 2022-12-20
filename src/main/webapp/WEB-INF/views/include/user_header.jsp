@@ -51,7 +51,7 @@
 	                    	<div class="login-section">
 		                        <ul class="row">
 		                           <li class="col-4 login-location"><a class="login-title" data-bs-toggle="modal" data-bs-target="#exampleModal">로그인</a></li>
-		                           <li class="col-2"><a class="login-title" href="${path}/join">회원가입</a></li>
+		                           <li class="col-4 join-location"><a class="login-title" href="${path}/join">회원가입</a></li>
 		                        </ul>
 	                        </div>
 	                    </div>
@@ -66,17 +66,19 @@
 		                        <ul class="row">
 		                        	<c:if test="${ not empty session_id }">
 										<li class="col-4 login-location">
-										<a class="login-title" href="${path}/user_mypage_user_update">
-										<img class="user-image" src="${path}/resources/image/user_img/${ session_image }" alt="user_img" />
-										<strong>${ session_name }님</strong></a></li>
+											<a class="login-title" href="${path}/user_mypage_user_update">
+											<img class="user-image" src="${path}/resources/image/user_img/${ session_image }" alt="user_img" />
+											<strong>${ session_name }님</strong></a>
+										</li>
 									</c:if> 
 									<c:if test="${ not empty session_admin_id }">
 		                           		<li class="col-4 login-location">
-		                           		<a class="login-title" href="${path}/user_list">
-		                           		<img class="user-image" src="${path}/resources/image/user_img/${ session_admin_image }" alt="admin_img" />
-		                           		<strong>${ session_admin_name }님</strong></a></li>
+			                           		<a class="login-title" href="${path}/user_list">
+			                           		<img class="user-image" src="${path}/resources/image/user_img/${ session_admin_image }" alt="admin_img" />
+			                           		<strong>${ session_admin_name }님</strong></a>
+		                           		</li>
 		                           </c:if>
-		                           <li class="col-2"><a class="login-title" href="${path}/user_logout">로그아웃</a></li>
+		                           <li class="col-4 join-location"><a class="login-title" href="${path}/user_logout">로그아웃</a></li>
 		                        </ul>
 	                        </div>
 	                    </div>

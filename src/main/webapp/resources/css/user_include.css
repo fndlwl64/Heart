@@ -6,6 +6,7 @@
 
 body {
 	font-family: 'Gowun Dodum', sans-serif;	
+	font-weight: 400;
     font-size: 17px;
 }
 
@@ -14,7 +15,8 @@ body {
     border: 0px;
     text-align: center;
     display: grid;
-    padding: 20px;
+    padding-top: 2rem;
+    padding-bottom: 0.5rem;
 }
 
 /* header-space */
@@ -79,13 +81,25 @@ body {
 	color: rgba(0,0,0,.5);
 	font-weight: bold;
 	padding-left: 0.5rem !important;
+	padding-right: 2rem !important;
 }
 
 .header-logo .login-section .login-location .user-image {
     width: 30px;
     height: 30px;
     clip-path: circle(50% at 50% 50%);
-	
+}
+
+.header-logo .login-section .join-location {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+/* dropdown */
+.dropdown-item {
+	text-align: center;
+	font-weight: bold;
 }
 
 /* nav-bar */
@@ -95,6 +109,7 @@ body {
 }
 
 .wrap .h-wrap .nav-bar .nav-links {
+	font-weight: bold;
 }
 
 .wrap .h-wrap .nav-bar .nav-links > ul {
