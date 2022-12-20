@@ -67,13 +67,13 @@ public class AdminSupportController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("order", order);
         
-		return "admin/support_list";
+		return "admin/support/support_list";
 	}
 	
 	//후원등록하는 페이지로 이동
 	@RequestMapping("/support_insert")
     public String support_insert() {
-        return "admin/support_insert";
+        return "admin/support/support_insert";
     }
 	
 	//후원등록하기
@@ -104,7 +104,7 @@ public class AdminSupportController {
         SupportDTO dto = this.supportdao.supportCont(no);
         
         model.addAttribute("Modify", dto);
-		return "admin/support_update";
+		return "admin/support/support_update";
     }
 	
 	@RequestMapping("/support_update_ok")
