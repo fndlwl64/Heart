@@ -36,7 +36,7 @@
                	<div class="login-section">
 					<ul class="row">
 					   <li class="col-2 login-location"></li>
-					   <li class="col-2 login-location"><a href="${path}/"><i class="bi bi-house"></i> 홈</a></li>
+					   <li class="col-2 login-location"><a href="${path}/"><i class="bi bi-house-heart"></i> 사이트</a></li>
 					   <li class="col-4 join-location"><a class="login-title" href="${path}/user_logout">로그아웃</a></li>
 					</ul>
                 </div>
@@ -57,10 +57,10 @@
 				        </li>
 						<li><a href="${path}/adoptreg_list">입양관리</a></li>
 						<li><a href="${path}/support_list">후원관리</a></li>
-						<li><a href="${path}/notice_list">공지사항관리</a></li>
+						<li><a href="${path}/notice_list">공지관리</a></li>
 						<li class="dropdown">
                             <a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                문의사항관리
+                                문의관리
                             </a>
 		                    <ul class="dropdown-menu">
 		                        <li><a class="dropdown-item" href="${path}/admin_qna_list">Q&A관리</a></li>

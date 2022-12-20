@@ -47,17 +47,28 @@ body {
 }
 
 /* 홈/로그아웃 */
+.header-logo .login-section {
+}
+
 .header-logo .login-section > a {
 	color: white;
 }
 
 .header-logo .login-section .login-location {
 	display: flex;
-	justify-content: flex-start;
+	justify-content: space-between;
 	align-items: center;
 	color: white;
 }
 
+.header-logo .login-section .login-location > a {	
+	
+}
+
+.header-logo .login-section .login-location .bi {
+	font-size: 20px;
+	
+}
 .header-logo .login-section .join-location {
 	display: flex;
 	justify-content: flex-start;
@@ -104,6 +115,11 @@ body {
     color: gray;
 	border-bottom: 1px solid lightgray;
     
+}
+
+/* dropdown */
+.dropdown-item {
+	font-weight: bold;
 }
 
 /* 중앙이미지 */
