@@ -135,8 +135,8 @@ body {
 }
 
 .wrap .h-wrap .nav-bar .nav-links > ul > li > a:hover {
-    color: gray;
-    border-bottom: 1px solid lightgray;
+    color: #413F42;
+    box-shadow: rgb(204, 204, 204, 0.4) 0px 3px;
 }
 
 .wrap .h-wrap .modal .modal-content .modal-body {

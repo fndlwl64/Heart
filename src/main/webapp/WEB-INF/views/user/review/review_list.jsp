@@ -22,53 +22,53 @@
 <div id="review-contents" class="review-contents">
     <div class="review-section">
         <div class="row">
-            <div class="col-3 space"></div>
-            <div class="col-6 title">
+            <div class="col-2 space"></div>
+            <div class="col-8 title">
                 <h2>하트펫 family</h2>
                 <h6>하트펫을 통해 반려동물을 만나 가족이 된 이야기를 들어보세요.</h6>
             </div>
-            <div class="col-3 space"></div>
+            <div class="col-2 space"></div>
         </div>
     </div>
     
     <div class="review-section">
         <div class="row">
-            <div class="col-3 space"></div>
-            <div class="col-6 title">
+            <div class="col-2 space"></div>
+            <div class="col-8 title">
             	<form action="${path}/user_review_list?animal_tag=${ animal_tag }" method="get" >
             	<input type="hidden" name="animal_tag" />
-		    	<button type="button" class="btn btn-info btn-sm animal-button" onclick="location.href='${path}/user_review_list'"><i class="bi bi-clipboard-heart"></i> 전체</button>
-		    	<button type="submit" class="btn btn-info btn-sm animal-button" value="dog" onclick="return animalChange(this.value)"><i class="bi bi-search-heart"></i> 강아지</button>
-		    	<button type="submit" class="btn btn-info btn-sm animal-button" value="cat" onclick="return animalChange(this.value)"><i class="bi bi-search-heart-fill"></i> 고양이</button>
+		    	<button type="button" class="btn btn-info animal-button" onclick="location.href='${path}/user_review_list'"><i class="bi bi-clipboard-heart"></i> 전체</button>
+		    	<button type="submit" class="btn btn-info animal-button" value="dog" onclick="return animalChange(this.value)"><i class="bi bi-search-heart"></i> 강아지</button>
+		    	<button type="submit" class="btn btn-info animal-button" value="cat" onclick="return animalChange(this.value)"><i class="bi bi-search-heart-fill"></i> 고양이</button>
 		    	</form>
             </div>
-            <div class="col-3 space"></div>
+            <div class="col-2 space"></div>
         </div>
     </div>
 
 	<!-- 정렬 -->
     <div class="review-section">
         <div class="row">
-            <div class="col-3 space"></div>
-            <div class="col-5 total-data d-flex"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
+            <div class="col-2 space"></div>
+            <div class="col-7 total-data d-flex"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
             <div class="col-1 review_order d-flex">
-                <select class="form-select form-select-sm w-75" name="review_order">
+                <select class="form-select form-select-sm w-75 order" name="review_order">
                     <option selected="selected" value="date_desc">최신순</option>
                     <option value="hit_desc">조회수순</option>
                     <option value="no_desc">번호순</option>
                 </select>
             </div>
-            <div class="col-3 space"></div>
+            <div class="col-2 space"></div>
         </div>
     </div>
 
     <div class="review-section">
        <div class="row">
-           <div class="col-3 space"></div>
-           <div class="col-6 review-card">
+           <div class="col-2 space"></div>
+           <div class="col-8 review-card">
+           
                <%-- 입양동물 --%>
-
-                <div class="row row-cols-1 row-cols-md-3 g-4">             
+                <div class="row row-cols-1 row-cols-md-4 g-4">             
                     <c:if test="${ not empty rList }">
                     <c:forEach items="${ rList }" var="list" varStatus="status">
 	                    <div class="col">
@@ -88,7 +88,7 @@
 		                        <div class="card-body">                              
 		                            <div class="title-body">
 		                                <h5 class="card-title">${ list.animal_name } 입양후기 
-		                                <c:if test="${ cList[status.index] gt 0 }"><span>[${ cList[status.index] }]</span></c:if></h5>		                                                                                           
+		                                <c:if test="${ cList[status.index] gt 0 }"><span class="comment-count">[${ cList[status.index] }]</span></c:if></h5>		                                                                                           
 		                            </div>
 		                            <h7>${ list.review_regdate.substring(0,10) } 조회 ${ list.review_hit }</h7>
 		                        </div>

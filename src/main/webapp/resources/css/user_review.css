@@ -20,14 +20,17 @@
 /* 총 게시물 */
 .review-section .total-data {
 	align-items: flex-end;
+	margin-left: 1rem;
 	margin-bottom: 0.5rem;
 	font-size: 14px;
+	font-weight: bold;
 }
 
 /* button */
 .animal-button {
 	background-color: pink;
 	border: pink;
+	font-weight: bold;
 }
 .animal-button:hover {
 	background-color: #FF9E9E;
@@ -36,8 +39,12 @@
 
 /* 정렬 */
 .review-section .review_order {
-    justify-content: right;
     margin-bottom: 0.5rem;
+}
+
+.review-section .review_order .order {
+	min-width: 80px;
+	font-weight: bold;
 }
 
 .review-section .title h6 {
@@ -45,6 +52,10 @@
 }
 
 /* review_list - review-card */
+.review-section .review-card {
+	
+}
+
 .review-section .review-card a {
     text-decoration: none;
     color: black;
@@ -64,6 +75,7 @@
     height: 245px;
 }
 
+
 .review-section .review-card .card-body {
     height: 90px;
 }
@@ -78,6 +90,11 @@
 
 .card-body .title-body {
     height: 42px;
+}
+
+.card-body .title-body .comment-count {
+	color:  #ff4d4d;
+	font-weight: bold;
 }
 
 .space-add {
