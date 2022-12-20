@@ -71,3 +71,9 @@
 	float: right;
 	clear: both;
 }
+
+/* notice content에서 이미지 크기 고정으로 지정 */
+.container .table .list_img{
+	width: 150px;
+	height: 150px;
+}
