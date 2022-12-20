@@ -185,15 +185,6 @@ public class AdminAnimalController {
 		return "admin/animal/animal_content";
 	}
 
-//	@RequestMapping("/cat_view")
-//	public String cat_view() {
-//		return "admin/cat_view";
-//	}
-//
-//	@RequestMapping("/dog_view")
-//	public String dog_view() {
-//		return "admin/dog_content";
-//	}
 
 	// 입양관리
 	@RequestMapping("/adoptreg_list")
@@ -201,6 +192,7 @@ public class AdminAnimalController {
 			@RequestParam(value = "endDate", required = false) String endDate,
 			@RequestParam(value = "adopt_tag", required = false) String adopt_tag,
 			@RequestParam(value = "page", defaultValue = "1") int page, Model model,
+			@RequestParam(value = "animal_status", required = false) String animal_status,
 			@RequestParam(value = "sort",required = false) String sort) {
 		// 페이징
 		String field = "";
@@ -244,12 +236,13 @@ public class AdminAnimalController {
 		model.addAttribute("tag", adopt_tag);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
+		model.addAttribute("animal_status",animal_status);
 		model.addAttribute("sort",sort);
 
 		model.addAttribute("adoptRegList", list);
 		model.addAttribute("animalMap", maps);
 
-		return "admin/adoptreg_list";
+		return "admin/adoptreg/adoptreg_list";
 	}
 
 	/* 관리자 리스트에서 수정하기 */
@@ -261,7 +254,7 @@ public class AdminAnimalController {
 
 		model.addAttribute("content", adoptRegDTO);
 		model.addAttribute("foreign", animalDTO);
-		return "admin/adoptreg_update";
+		return "admin/adoptreg/adoptreg_update";
 	}
 
 	@RequestMapping(value = "/adoptreg_update", method = RequestMethod.POST)
