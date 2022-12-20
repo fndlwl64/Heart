@@ -56,7 +56,7 @@ body {
     text-decoration: none;
     color: gray;
     padding: 1rem 1rem;
-    display: block;
+    display: block;    
 }
 
 .wrap .h-wrap .header-logo .header-nav ul li a:hover {
@@ -77,16 +77,20 @@ body {
 }
 
 .header-logo .login-section .login-title {	
-	color: rgba(0,0,0,.5);
 	font-weight: bold;
+	height : 60px;
 	padding-left: 0.5rem !important;
 	padding-right: 2rem !important;
 }
 
-.header-logo .login-section .login-location .user-image {
+.header-logo .login-section .user-image {
     width: 30px;
     height: 30px;
     clip-path: circle(50% at 50% 50%);
+    vertical-align: middle;
+}
+
+.login-title > span {
 }
 
 .header-logo .login-section .join-location {
