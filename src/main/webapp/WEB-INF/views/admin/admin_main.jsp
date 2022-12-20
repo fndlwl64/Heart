@@ -21,19 +21,23 @@
 		<h3>HEARTPET 관리자 페이지</h3>
 		
 		<div class="btns">
+			
 			<ul>
-				<li> <button class="btn" onclick="location.href='${path }/user_list'">회원관리</button> </li>
-				<li> <button class="btn" onclick="location.href='${path}/dog_list'">유기견관리</button> </li>
-				<li> <button class="btn" onclick="location.href='${path}/cat_list'">유기묘관리</button> </li>
-				<li> <button class="btn" onclick="location.href='${path}/adoptreg_list'">입양관리</button> </li>
+				<li> <a href="${path }/user_list">회원관리</a> </li>
+				<li> <a href="${path}/support_list">후원관리</a> </li>
 			</ul>
-			<ul>
-				<li> <button class="btn" onclick="location.href='${path}/support_list'">후원관리</button> </li>
-				<li> <button class="btn" onclick="location.href='${path}/notice_list'">공지사항관리</button> </li>
-				<li> <button class="btn" onclick="location.href='${path}/admin_qna_list'">Q&A관리</button> </li>
-				<li> <button class="btn" onclick="location.href='${path}/admin_fnq_list'">FNQ관리</button> </li>
-				<li> <button class="btn" onclick="location.href='${path}/admin_review_list'">후기관리</button> </li>
+			<ul>	
+				<li> <a href="${path}/dog_list">유기견관리</a> </li>
+				<li> <a href="${path}/cat_list">유기묘관리</a> </li>
+				<li> <a href="${path}/adoptreg_list">입양관리</a> </li>
 			</ul>
+			<ul>	
+				<li> <a href="${path}/notice_list">공지사항관리</a> </li>
+				<li> <a href="${path}/admin_qna_list">Q&A관리</a> </li>
+				<li> <a href="${path}/admin_fnq_list">FNQ관리</a> </li>
+				<li> <a href="${path}/admin_review_list">후기관리</a> </li>
+			</ul>
+			
 		</div>
 		
 	</div>
