@@ -168,7 +168,8 @@
 }
 
 .container ._container .wrap .user_info .info_title ul li span {
-	margin-left: 20px;
+	margin-left: 10px;
+	font-size: 14px;
 }
 
 .container ._container .wrap .user_info .info_title ul li .bold {
@@ -328,7 +329,7 @@
 	margin: auto;
 	margin-top: 1%;
 	margin-bottom: 1%;
-	width: 100%;
+	width: 70%;
 	max-width: 1000px;
 }
 
