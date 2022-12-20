@@ -18,23 +18,23 @@
     <br>
     <br><br>
 
-    <table class="table noticeinfo">
+    <table class="table noticeinfo mt-4">
         <tr>
-            <th class="table-secondary">제목</th>
-            <td colspan="5">${dto.getNotice_title() }</td>
+            <th class="table-light col-1">제목</th>
+            <td class="col-1" colspan="5">${dto.getNotice_title() }</td>
         </tr>
 
         <tr>
-            <th class="table-secondary">내용</th>
-            <td colspan="5">
+            <th class="table-light">내용</th>
+            <td class="col-1"colspan="5">
                 <textarea cols="60" rows="10" readonly>${dto.getNotice_content() }</textarea>
             </td>
         </tr>
 
         <tr>
-            <th class="table-secondary">이미지</th>
-            <td colspan="2"><img src="resources/upload/${dto.getNotice_img1() }"></td>
-            <td colspan="2"><img src="resources/upload/${dto.getNotice_img2() }"></td>
+            <th class="table-light">이미지</th>
+            <td class="col-1" colspan="2"><img src="resources/upload/${dto.getNotice_img1() }"></td>
+            <td class="col-1" colspan="2"><img src="resources/upload/${dto.getNotice_img2() }"></td>
         </tr>
 
     </table>

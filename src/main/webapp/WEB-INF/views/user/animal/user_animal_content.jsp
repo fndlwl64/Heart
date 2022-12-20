@@ -123,10 +123,11 @@ pageContext.setAttribute("newline", "\n");
 				"wish_petno" : $("#animal_no").val(),
 				"wish_userid" : $("#user_id").val()
 			};
+			console.log(wishDTO);
 			$.ajax({
 				url : $("#linkwish").val(),
 				type : 'POST',
-				data : t(wishDTO),
+				data : JSON.stringify(wishDTO),
 				contentType : "application/json",
 				success : function(data) {
 					console.log('success');

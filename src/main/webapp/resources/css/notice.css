@@ -58,3 +58,16 @@
 	display: flex;
 	width: 60%;
 }
+
+/* admin_notice에서 사용하는 css */
+
+.container .order_form {
+	float: right;
+	width: 26%;
+	clear: both;
+}
+
+.container .lists #insert_btn {
+	float: right;
+	clear: both;
+}

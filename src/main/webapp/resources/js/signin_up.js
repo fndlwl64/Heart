@@ -462,6 +462,9 @@ $(function() {
 		});
 		$("#id_name").val('');	$("#id_email").val(''); 
 		$("#name_check").html("");	$("#email_check").html("");
+		$("#id_found").css({
+			'display' : 'none'
+		});
 	});
 		
 });
