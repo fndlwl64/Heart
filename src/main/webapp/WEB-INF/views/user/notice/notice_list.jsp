@@ -16,16 +16,15 @@
         <%-- 검색 폼 --%>
         <div>
         <form class="search_form" method="post" action="${path }/user_notice">
-            <div class="form_box">
-                <select name="field">
+            <div>
+                <select name="field" class="form-select d-inline align-middle">
                     <option value="allSearch" <c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
                     <option value="title" <c:if test="${ field eq 'title' }">selected="selected"</c:if>>글제목</option>
                     <option value="cont" <c:if test="${ field eq 'cont' }">selected="selected"</c:if>>내용</option>
                 </select>
-				<span class="search-name">검색어</span> 
-                <input name="keyword" value="${ keyword }">
-
-                <input class="btn btn-secondary searchbtn" type="submit" value="검색">
+				<span class="search-name">&nbsp;&nbsp;&nbsp;검색어</span> 
+                <input class="form-control d-inline align-middle" name="keyword" value="${ keyword }">
+                <button class="btn btn-dark d-inline align-middle ms-1" type="submit"><i class="bi bi-search"></i> 검색</button>
             </div>
         </form>
 		</div>
@@ -46,7 +45,7 @@
 	        </div>
 	    </form>
 	    </div>
-        <br>
+        <br><br>
         <table class="table table-bordered">
             <tr class="table-light">
                 <th>글 No.</th>

@@ -15,16 +15,15 @@
 				<hr width="95%">
 				<p><span class="sp_content3">${dto.getNotice_content()}</span></p>
 				<div class="notice_content_mid"> 
-					<img alt="" src="resources/upload/${dto.getNotice_img1() }">
-					<img alt="" src="resources/upload/${dto.getNotice_img2() }">
-				</div>
-				<div>
-					<button onclick="location.href='${path}/user_notice'">목록으로</button><br><br>
+					<img class="notice_img" alt="" src="resources/upload/${dto.getNotice_img1() }">
+					<img class="notice_img" alt="" src="resources/upload/${dto.getNotice_img2() }">
 				</div>
 			</div>
-
 		</div>
-		
+		<br><br>
+		<div>
+			<button type="button" id="btn_content" class="btn btn-secondary mx-1" onclick="location.href='${path}/user_notice'"><i class="bi bi-card-list"></i> 목록</button>
+		</div>
 	</div>
 </div>
 <br><br><br>

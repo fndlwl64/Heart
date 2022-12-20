@@ -1,9 +1,9 @@
 /* support.jsp에서 사용하는 css */
- .btn_support {
+.btn_support {
  	width: 60%;
  	height: 800px; 
  	background-image: url("../image/animal.png");
- 	background-size: 100%;
+ 	background-size: 20%;
  	border: none;
  }
  

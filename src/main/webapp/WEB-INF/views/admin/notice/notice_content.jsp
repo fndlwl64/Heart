@@ -40,7 +40,7 @@
 
     <br>
     <%-- 목록 버튼만 : 수정,삭제,등록은 list.jsp에서  --%>
-    <button type="button" class="btn btn-secondary mx-1" onclick="location.href='${path}/notice_list'"><i class="bi bi-card-list"></i> 목록</button>
+    <button type="button" id="btn_content" class="btn btn-secondary mx-1" onclick="location.href='${path}/notice_list'"><i class="bi bi-card-list"></i> 목록</button>
 
 </div>
 

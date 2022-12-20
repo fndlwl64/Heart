@@ -114,6 +114,7 @@
 		var hiddenbutton = document.getElementById("hiddenbutton");
 		hiddenbutton.type="hidden";
 	}
+    
 </script>
 </head>
 <!-- 랜덤으로 임의의 숫자 ６자리르 생성 （이메일 보내는 내용에 들어갈 숫자） -->
