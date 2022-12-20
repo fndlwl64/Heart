@@ -27,15 +27,15 @@
 	        
 	        <table class="table">
 	            <tr>
-	                <th class="table-secondary">아이디</th>
+	                <th class="table-light">아이디</th>
 	                <td><input class ="input1" name="user_id" type="text" value="${cont.user_id}"   readonly></td>
 	            </tr>
 	            <tr>
-	                <th class="table-secondary">이름</th>
+	                <th class="table-light">이름</th>
 	                <td><input class ="input1" name="user_name" type="text" value="${cont.user_name}"   readonly></td>
 	            </tr>
 	            <tr>
-	                <th class="table-secondary">등급</th>
+	                <th class="table-light">등급</th>
 	                <c:set var="grade" value="${cont.user_grade}" />
 	                <td>
 	                
@@ -50,7 +50,7 @@
 	                </td>
 	            </tr>
 	            <tr>
-	                <th class="table-secondary">이메일</th>
+	                <th class="table-light">이메일</th>
 	                <c:if test="${empty cont.user_email }">
 	                	<td><input class ="input1" name="user_email" type="text" value="${cont.user_email}"   placeholder="카카오 로그인 회원. 이메일 입력 요망"></td>
 	                </c:if>
@@ -59,7 +59,7 @@
 	                </c:if>
 	            </tr>
 	            <tr>
-	                <th class="table-secondary">연락처</th>
+	                <th class="table-light">연락처</th>
 	                <c:if test="${empty cont.user_phone }">
 	                	<td><input class ="input1" name="user_phone" type="text" value="${cont.user_phone}"   placeholder="SNS 로그인 회원. 연락처 입력 요망"></td>
 	                </c:if>
@@ -69,7 +69,7 @@
 	            </tr>
 	            <tr>
 	                <c:set var="addr" value="${cont.user_addr }"/>
-	                <th class="table-secondary">주소</th>
+	                <th class="table-light">주소</th>
 	                <c:if test="${empty addr }">
 	                <td>
 		                <input class="input1 zipcode" name="user_addr" type="text" id="sample6_postcode" placeholder="우편번호" required>
@@ -91,23 +91,23 @@
 	                </c:if>
 	            </tr>
 	            <tr>
-	                <th class="table-secondary">후원금액</th>
+	                <th class="table-light">후원금액</th>
 	                <td><input class ="input1" name="user_totalprice" type="text" value="${cont.user_totalprice}"  ></td>
 	            </tr>
 	            <tr>
-	                <th class="table-secondary">반려동물경험</th>
+	                <th class="table-light">반려동물경험</th>
 	                <td>
 	                <c:if test="${'Y' eq cont.user_animalexp }">
-	                	<input class ="input1" name="user_animalexp" type="radio" value="Y" checked> Y
-	                	<input class ="input1" name="user_animalexp" type="radio" value="N"> N
+	                	<input class ="expcss" name="user_animalexp" type="radio" value="Y" checked> Y
+	                	<input class ="expcss" name="user_animalexp" type="radio" value="N"> N
 	                </c:if>
 	                <c:if test="${'N' eq cont.user_animalexp }">
-	                	<input class ="input1" name="user_animalexp" type="radio" value="Y"> Y
-	                	<input class ="input1" name="user_animalexp" type="radio" value="N" checked> N
+	                	<input class ="expcss" name="user_animalexp" type="radio" value="Y"> Y
+	                	<input class ="expcss" name="user_animalexp" type="radio" value="N" checked> N
 	                </c:if>
 	                <c:if test="${null eq cont.user_animalexp }">
-	                	<input class ="input1" name="user_animalexp" type="radio" value="Y"> Y
-	                	<input class ="input1" name="user_animalexp" type="radio" value="N"> N
+	                	<label class ="expcss"><input name="user_animalexp" type="radio" value="Y"> Y</label>
+	                	<label class ="expcss"><input name="user_animalexp" type="radio" value="N"> N</label>
 	                </c:if>
 	                </td>
 	            </tr>
@@ -115,8 +115,8 @@
 	        
 	        <br>
 	        
-	        <input class="btn btn-secondary" type="submit" value="변경">
-	        <input class="btn btn-secondary" type="reset" value="취소">
+	        <button class="btn btn-success"><i class="bi bi-pencil"></i> 변경</button>
+	        <button class="btn btn-warning"><i class="bi bi-eraser"></i> 취소</button>
 	        
 	    </form>
 	    
