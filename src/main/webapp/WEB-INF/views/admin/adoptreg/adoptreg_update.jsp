@@ -12,7 +12,7 @@
 <c:set var="content" value="${content }"></c:set>
 <c:set var="foreign" value="${foreign }"></c:set>
 <body>
-	<jsp:include page="../include/admin_header.jsp" />
+	<jsp:include page="../../include/admin_header.jsp" />
 	<br>
 	<br>
 	<div class="div1" align="center">
