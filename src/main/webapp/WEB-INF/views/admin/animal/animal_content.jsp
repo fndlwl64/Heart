@@ -50,7 +50,7 @@ pageContext.setAttribute("newline", "\n");
 				<td colspan="5">${dto.animal_place }</td>
 
 			</tr>
-			<tr>
+			<tr class="animal_content">
 				<th class="table-light col-1"><span class="sp2">유의사항</span></th>
 				<td colspan="3">${dto.animal_caution.replace(newline,'<br>') }</td>
 

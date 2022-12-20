@@ -5,6 +5,7 @@
 <c:set var="dto" value="${content }" />
 <script src="resources/js/admin.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
+<link rel="stylesheet" href="resources/css/admin_animal.css">
 <body>
 	<br>
 	<br>
@@ -84,46 +85,39 @@
 								<c:if test="${dto.animal_size eq '대형'}">selected</c:if>>대형</option>
 					</select></td>
 					<th class="table-light col-1"><span class="sp2">무게</span></th>
-					<td><input class="form-control text-center"
+					<td><input type="number" class="form-control text-center"
 						name="animal_weight" type="text" value="${dto.animal_weight }"></td>
 				</tr>
-
 				<tr>
+					<th class="table-light col-1"><span class="sp2">입양 상태</span></th>
+					<td class="col-2"><input type="text" name="animal_status"
+						class="form-control text-center" value="${dto.animal_status }"></td>
 					<th class="table-light col-1"><span class="sp2">발견장소</span></th>
-					<td><input type="text" name="animal_place"
+					<td colspan="5"><input type="text" name="animal_place"
 						class="form-control text-center" value=${dto.animal_place }></td>
 				</tr>
-				<tr>
-
-				</tr>
-				<tr>
-
-				</tr>
-				<tr>
-					<th class="table-light"><span class="sp2">유의사항</span></th>
-					<td><textarea rows="2" cols="22" name="animal_caution"><c:out
+				<tr class="animal_content">
+					<th class="table-light col-1"><span class="sp2">유의사항</span></th>
+					<td colspan="3" ><textarea rows="2" cols="22"
+							name="animal_caution"><c:out
 								value="${dto.animal_caution }"></c:out></textarea></td>
 				</tr>
+
 				<tr>
-					<th class="table-light"><span class="sp2">입양 상태</span></th>
-					<td><input type="text" name="animal_status"
-						class="form-control text-center" value="${dto.animal_status }"></td>
-				</tr>
-				<tr>
-					<th class="table-light">이미지</th>
-					<td>
+					<th class="table-light col-1">이미지</th>
+					<td colspan="7">
 						<div class="image-upload">
 							<label for="file-form-control text-center"> <img
 								id="file_change1" class="logo"
 								src="resources/upload/${dto.animal_img1 } "
-								style="max-height: 200px;" alt="review_img" />
+								alt="review_img" />
 							</label> <input class="file_input btn" id="file-form-control text-center"
 								type="file" onchange="readURL4(this);" name="files" />
 						</div> <c:if test="${not empty dto.animal_img2 }">
 							<div class="image-upload">
 								<label for="file-input2"> <img id="file_change2"
 									class="logo" src="resources/upload/${dto.animal_img2 } "
-									style="max-height: 200px;" alt="review_img" />
+									alt="review_img" />
 								</label> <input class="file_input btn" id="file-input2" type="file"
 									onchange="readURL5(this);" name="files" />
 							</div>
@@ -131,7 +125,7 @@
 							<div class="image-upload">
 								<label for="file-input3"> <img id="file_change3"
 									class="logo" src="resources/upload/${dto.animal_img3 } "
-									style="max-height: 200px;" alt="review_img" />
+									alt="review_img" />
 								</label> <input class="file_input btn" id="file-input3" type="file"
 									onchange="readURL6(this);" name="files" />
 							</div>
@@ -139,31 +133,7 @@
 					</td>
 				</tr>
 			</table>
-			<br>
-			<div class="div2">
-				<%-- <div class="image-upload">
-					<label for="file-form-control text-center"> <img id="file_change1"
-						class="logo" src="resources/upload/${dto.animal_img1 } " />
-					</label> <input class="file_input" id="file-form-control text-center" type="file"
-						onchange="readURL4(this);" name="files" />
-				</div>
-				<c:if test="${not empty dto.animal_img2 }">
-					<div class="image-upload">
-						<label for="file-input2"> <img id="file_change2"
-							class="logo" src="resources/upload/${dto.animal_img2 } " />
-						</label> <input class="file_input" id="file-input2" type="file"
-							onchange="readURL5(this);" name="files" />
-					</div>
-				</c:if>
-				<c:if test="${not empty dto.animal_img3 }">
-					<div class="image-upload">
-						<label for="file-input3"> <img id="file_change3"
-							class="logo" src="resources/upload/${dto.animal_img3 } " />
-						</label> <input class="file_input" id="file-input3" type="file"
-							onchange="readURL6(this);" name="files" />
-					</div>
-				</c:if> --%>
-			</div>
+
 			<button type="submit" class="btn btn-success mx-1">
 				<i class="bi bi-pencil"></i>수정
 			</button>

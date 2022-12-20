@@ -14,11 +14,11 @@
 	background-size:cover;
 	background-position : 50% 50%;	
 }
-.img-frame {
-	
-}
 
 .animal_explan { 
 	font-size: x-small;
 }
 
+.animal_content{
+	height: 300px;
+}
