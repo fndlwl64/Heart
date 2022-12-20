@@ -197,22 +197,30 @@ public class AdminAnimalController {
 		// 페이징
 		String field = "";
 		String keyword = "";
-		if (startDate == null) {
-			startDate = "";
-		}
-		if (endDate == null) {
-			endDate = "";
-		}
-		if (adopt_tag == null) {
-			adopt_tag = "";
-		}
+//		if (startDate == null) {
+//			startDate = "";
+//		}
+//		if (endDate == null) {
+//			endDate = "";
+//		}
+//		if (adopt_tag == null) {
+//			adopt_tag = "";
+//		}
 
 		int currentPage = 1; // 현재 페이지 변수
 		if (page != 1) {
 			currentPage = page;
 		}
-
-		totalRecord = adoptRegDAO.countTag(startDate, endDate, adopt_tag);
+		//animal_status 조건으로 검색하기 위해 필요한 데이터(adopt_reg_animalno)
+		List<Integer> status_no = null;
+		if(animal_status != null && !animal_status.equals("")) {
+			status_no = animalDAO.joinStatus(animal_status);
+			if(status_no.size() == 0) {
+				status_no = null;
+			}
+		}
+		// 페이지
+		totalRecord = adoptRegDAO.countTag(startDate, endDate, adopt_tag, status_no);
 		PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
 
 		// 해시맵으로 조인 유사하게 구현
@@ -225,8 +233,8 @@ public class AdminAnimalController {
 			maps.put(dto.getAnimal_no(), aList);
 		}
 
-		List<AdoptRegDTO> list = adoptRegDAO.listPaging(paging.getStartNo(), paging.getEndNo(), startDate, endDate,
-				adopt_tag,sort);
+		List<AdoptRegDTO> list = adoptRegDAO.listPaging(paging.getStartNo(), paging.getEndNo(), startDate, endDate,adopt_tag,
+				status_no,sort);
 //		
 
 		model.addAttribute("total", totalRecord);

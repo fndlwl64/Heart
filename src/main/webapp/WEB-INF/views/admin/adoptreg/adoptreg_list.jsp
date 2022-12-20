@@ -67,7 +67,7 @@
 						<option value="입양 대기"
 							<c:if test="${animal_status eq '입양 대기'}">selected</c:if>>입양 대기</option>
 						<option value="입양 완료"
-							<c:if test="${animal_status eq '입양 가능'}">selected</c:if>>입양 완료</option>
+							<c:if test="${animal_status eq '입양 완료'}">selected</c:if>>입양 완료</option>
 					</select>
 				</div>
 				<div class="col">
