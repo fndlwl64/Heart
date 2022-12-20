@@ -40,7 +40,8 @@
 	background-color: white;
 	border: none;
 	border-bottom: 1px solid #000;
-	padding-left: 5%;
+	padding-left: 2%;
+	width: 250px;
 }
 
 .container .table .input1:focus {
@@ -68,7 +69,8 @@
 }
 
 .div1 .table {
-	width: 60%;
+	width: 70%;
+	max-width: 1000px;
 	margin: auto;
 	text-align: center;
 	background-color: white;
@@ -98,6 +100,10 @@
 
 .div1 .table .input1:focus {
 	outline: none;
+}
+
+.div1 .table .expcss {
+	margin-right: 3%;
 }
 
 .div1 .table select {

@@ -22,11 +22,17 @@
 	<select id="adoptreg_countTag" parameterType="hashmap"
 		resultType="int">
 		select count(*) from heartpet_adopt_reg
-		<if test="!startDate.equals('') and !endDate.equals('') ">
-			where ${tag} between TO_DATE(#{startDate}, 'YYYY-MM-DD') and
+		where adopt_reg_regno != 0
+		<if test="startDate != null and endDate != null and tag != null and
+		 !startDate.equals('') and !endDate.equals('') and !tag.equals('')">
+			and ${tag} between TO_DATE(#{startDate}, 'YYYY-MM-DD') and
 			TO_DATE(#{endDate},'YYYY-MM-DD')
-			<!-- <![CDATA[ where ${tag} >= TO_DATE(#{startDate}, 'YYYY-MM-DD') and 
-				${tag} <= TO_DATE(#{endDate},'YYYY-MM-DD') ]]> -->
+		</if>
+		<if test="status_no != null">
+			and adopt_reg_animalno in 
+			<foreach collection="status_no" item="adopt_reg_animalno" index="index" separator="," open="(" close=")">
+				#{adopt_reg_animalno}
+			</foreach>
 		</if>
 	</select>
 	<select id="adoptreg_content" parameterType="int"
@@ -55,9 +61,17 @@
 		</choose>
 		
 		from heartpet_adopt_reg a
-		<if test="!startDate.equals('') and !endDate.equals('') ">
-			where ${tag} between TO_DATE(#{startDate}, 'YYYY-MM-DD')
+		where adopt_reg_regno != 0
+		<if test="startDate != null and endDate != null and tag != null and
+		!startDate.equals('') and !endDate.equals('') and !tag.equals('')">
+			and ${tag} between TO_DATE(#{startDate}, 'YYYY-MM-DD')
 			and TO_DATE(#{endDate},'YYYY-MM-DD')
+		</if>
+		<if test="status_no != null">
+			and adopt_reg_animalno in 
+			<foreach collection="status_no" item="adopt_reg_animalno" index="index" separator="," open="(" close=")">
+				#{adopt_reg_animalno}
+			</foreach>
 		</if>
 		)
 		where rnum between #{startNo} and #{endNo}

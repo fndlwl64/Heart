@@ -1,5 +1,6 @@
 package com.heartpet.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,11 @@ public class AnimalDAOImpl implements AnimalDAO {
 	@Override
 	public void delete(int id) {
 		sqlSession.delete("animal_delete", id);
+	}
+
+	@Override
+	public List<Integer> joinStatus(String animal_status) {
+		return sqlSession.selectList("animal_join_status",animal_status);
 	}
 
 	@Override

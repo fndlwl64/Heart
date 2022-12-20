@@ -140,12 +140,8 @@ $(function() {
 		let id = $(this).val();	
 		
 		if(id == '') {
-			$("#login_id").css({
-				'border': '2px solid red',
-				'border-radius': '3px'
-			});
 			$("#login_btn").attr("disabled", true);
-			$("#idcheck").html("<font style='color:red; font-size:13px;'>아이디를 입력하세요. <i class='bi bi-x-circle-fill'></i></font>");
+			$("#idcheck").html("<font style='color:#FB79A0; font-size:13px;'>아이디를 입력하세요. <i class='bi bi-x-circle-fill'></i></font>");
 		}else {			
 			$.ajax({			
 	            contentType: "application/x-www-form-urlencoded;charset=UTF-8",
@@ -154,19 +150,14 @@ $(function() {
 	            data: {paramId : id},
 	            success: function(res) {
 	            	if(res == 1) {  // DB에 아이디가 존재하는 경우
-						$("#idcheck").html("<font style='color:green; font-size:13px;'>아이디 확인 완료 <i class='bi bi-check-circle-fill'></i></font>");
+						$("#idcheck").html("");
 						$("#login_id").css({
-							'border': '2px solid green',
+							'border': '1px solid #000',
 							'border-radius': '3px'
 						});
 						$("#login_btn").attr("disabled", false);
 					}else {
-						$("#idcheck").html("<font style='color:red; font-size:13px;'>존재하지 않는 아이디입니다. <i class='bi bi-x-circle-fill'></i><br></font>");
-						$("#login_btn").attr("disabled", true);
-						$("#login_id").css({
-							'border': '2px solid red',
-							'border-radius': '3px'
-						});
+						$("#idcheck").html("<font style='color:#FB79A0; font-size:13px;'>존재하지 않는 아이디입니다. <i class='bi bi-x-circle-fill'></i><br></font>");
 						$("#login_btn").attr("disabled", true);
 					}
 	            },
@@ -185,9 +176,9 @@ $(function() {
 		
 		if(id == '') {
 			console.log('아이디 공란');
-			$("#join_id").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px'>  아이디 : 5자 이상 20자 이내 대소문자, 숫자 </font>");
+			$("#join_id").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:#FB79A0; font-size:13px'>  아이디 : 5자 이상 20자 이내 대소문자, 숫자 </font>");
 			$("#input_id").css({
-				'border-bottom': '2px solid red'
+				'border-bottom': '1px solid #FB79A0'
 			});
 			$("#join_btn").attr("disabled", true);
 		}else {
@@ -200,17 +191,17 @@ $(function() {
 		            success: function(res) {
 		            	if(res == 1) {  // DB에 아이디가 존재하는 경우
 		            		console.log('DB 존재 아이디');
-							$("#join_id").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px;'> 존재하는 아이디입니다. 다시 만들어주세요. </font>");
+							$("#join_id").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:#FB79A0; font-size:13px;'> 이미 존재하는 아이디입니다. 다시 만들어주세요. </font>");
 							$("#input_id").css({
-								'border-bottom': '2px solid red'
+								'border-bottom': '1px solid #FB79A0'
 							});
 							$("#join_btn").attr("disabled", true);
 						}else {
 							console.log('사용가능한 아이디');
-							$("#join_id").html("<i class='bi bi-check-circle'></i><br><font style='color:green; font-size:13px;'> 사용가능한 아이디입니다.</font>");
+							$("#join_id").html("<i class='bi bi-check-circle'></i>");
 							$("#join_btn").attr("disabled", false);
 							$("#input_id").css({
-								'border-bottom': '2px solid green'
+								'border-bottom': '1px solid #000'
 							});
 						}
 		            },
@@ -220,9 +211,9 @@ $(function() {
 		       	});
 			}else {
 				console.log('정규식 조건 위배 아이디');
-				$("#join_id").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px'>  아이디 : 5자 이상 20자 이내 대소문자, 숫자 </font>");
+				$("#join_id").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:#FB79A0; font-size:13px'>  아이디 : 5자 이상 20자 이내 대소문자, 숫자 </font>");
 				$("#input_id").css({
-					'border-bottom': '2px solid red'
+					'border-bottom': '1px solid #FB79A0'
 				});
 				$("#join_btn").attr("disabled", true);
 			}
@@ -237,9 +228,9 @@ $(function() {
 		
 		if(pwd == '') {
 			console.log('비밀번호 공란');
-			$("#join_pwd").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px'>  비밀번호 : 5자 이상 20자 이내  </font>");
+			$("#join_pwd").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:#FB79A0; font-size:13px'>  비밀번호 : 5자 이상 20자 이내  </font>");
 			$("#input_pwd").css({
-				'border-bottom': '2px solid red'
+				'border-bottom': '1px solid #FB79A0'
 			});
 			$("#join_btn").attr("disabled", true);
 		}else {
@@ -248,13 +239,13 @@ $(function() {
 				$("#join_pwd").html("<i class='bi bi-check-circle'></i>");
 				$("#join_btn").attr("disabled", false);
 				$("#input_pwd").css({
-					'border-bottom': '2px solid green'
+					'border-bottom': '1px solid #000'
 				});
 			}else {
 				console.log('조건 위배 비밀번호');
-				$("#join_pwd").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px'>  비밀번호 : 5자 이상 20자 이내 </font>");
+				$("#join_pwd").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:#FB79A0; font-size:13px'>  비밀번호 : 5자 이상 20자 이내 </font>");
 				$("#input_pwd").css({
-					'border-bottom': '2px solid red'
+					'border-bottom': '1px solid #FB79A0'
 				});
 				$("#join_btn").attr("disabled", true);
 			}
@@ -268,9 +259,9 @@ $(function() {
 		let email_pattern = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 		
 		if(email == '') {
-			$("#join_email").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px'>이메일 형식에 맞게 작성해주세요.</font>");
+			$("#join_email").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:#FB79A0; font-size:13px'>이메일 형식에 맞게 작성해주세요.</font>");
 			$("#input_email").css({
-				'border-bottom': '2px solid red'
+				'border-bottom': '1px solid #FB79A0'
 			});
 			$("#join_btn").attr("disabled", true);
 		}else {
@@ -283,17 +274,17 @@ $(function() {
 		            success: function(res) {
 		            	if(res == 1) {  // DB에 이메일이 존재하는 경우
 		            		console.log('DB 존재 이메일');
-							$("#join_email").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px;'> 존재하는 이메일입니다.</font>");
+							$("#join_email").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:#FB79A0; font-size:13px;'>이미 사용하는 이메일입니다.</font>");
 							$("#input_email").css({
-								'border-bottom': '2px solid red'
+								'border-bottom': '1px solid #FB79A0'
 							});
 							$("#join_btn").attr("disabled", true);
 						}else {
 							console.log('사용가능한 이메일');
-							$("#join_email").html("<i class='bi bi-check-circle'></i><br><font style='color:green; font-size:13px;'> 사용가능한 이메일입니다.</font>");
+							$("#join_email").html("<i class='bi bi-check-circle'></i>");
 							$("#join_btn").attr("disabled", false);
 							$("#input_email").css({
-								'border-bottom': '2px solid green'
+								'border-bottom': '1px solid #000'
 							});
 						}
 		            },
@@ -303,9 +294,9 @@ $(function() {
 		       	});
 			}else {
 				console.log('조건 위배 이메일');
-				$("#join_email").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px'>이메일 형식에 맞게 입력해주세요.</font>");
+				$("#join_email").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:#FB79A0; font-size:13px'>이메일 형식에 맞게 입력해주세요.</font>");
 				$("#input_email").css({
-					'border-bottom': '2px solid red'
+					'border-bottom': '1px solid #FB79A0'
 				});
 				$("#join_btn").attr("disabled", true);
 			}
@@ -320,15 +311,15 @@ $(function() {
 		
 		if(phone == '') {
 			console.log('연락처 공란');
-			$("#join_phone").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:red; font-size:13px'>연락처 ex) 010-0000-0000</font>");
+			$("#join_phone").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:#FB79A0; font-size:13px'>연락처 ex) 010-0000-0000</font>");
 			$("#input_phone").css({
-				'border-bottom': '2px solid red'
+				'border-bottom': '1px solid #FB79A0'
 			});
 			$("#join_btn").attr("disabled", true);
 		}else {
 			$("#join_phone").html("<br><font style='color:darkgray; font-size:13px'>연락처 ex) 010-0000-0000</font>");
 			$("#input_phone").css({
-				'border-bottom': '2px solid black'
+				'border-bottom': '1px solid black'
 			});
 			$("#join_btn").attr("disabled", false);
 		}
@@ -355,10 +346,10 @@ $(function() {
 	            data: {name : name},
 	            success: function(res) {
 	            	if(res == 1) {  // DB에 이름이 존재하는 경우
-	            		$("#name_check").html("<font style='font-size:13px; color:green'>이름 확인 완료</font>");
+	            		$("#name_check").html("");
 						$("#find_id").attr("disabled", false);
 					}else {
-						$("#name_check").html("<font style='font-size:13px; color:red'>가입되지 않은 이름입니다.</font>");
+						$("#name_check").html("<font style='font-size:13px; color:#FB79A0'>가입되지 않은 이름입니다.</font>");
 						$("#find_id").attr("disabled", true);
 					}
 	            },
@@ -384,10 +375,10 @@ $(function() {
 	            data: {email : email, name : name},
 	            success: function(res) {
 	            	if(res === email) {  // DB 존재
-	            		$("#email_check").html("<font style='font-size:13px; color:green'>이메일 확인 완료</font>");
+	            		$("#email_check").html("");
 						$("#find_id").attr("disabled", false);
 					}else {
-						$("#email_check").html("<font style='font-size:13px; color:red'>위의 이름과 일치하지 않는 이메일입니다.</font>");
+						$("#email_check").html("<font style='font-size:13px; color:#FB79A0'>위의 이름과 일치하지 않는 이메일입니다.</font>");
 						$("#find_id").attr("disabled", true);
 					}
 	            },
@@ -412,10 +403,10 @@ $(function() {
 	            data: {paramId : id},
 	            success: function(res) {
 	            	if(res == 1) {  // DB에 아이디가 존재하는 경우
-	            		$("#name_check").html("<font style='font-size:13px; color:green'>아이디 확인 완료</font>");
+	            		$("#name_check").html("");
 						$("#pwd_btn").attr("disabled", false);
 					}else {
-						$("#name_check").html("<font style='font-size:13px; color:red'>가입되지 않은 아이디입니다.</font>");
+						$("#name_check").html("<font style='font-size:13px; color:#FB79A0'>가입되지 않은 아이디입니다.</font>");
 						$("#pwd_btn").attr("disabled", true);
 					}
 	            },
@@ -440,10 +431,10 @@ $(function() {
 	            data: {email : email, id : id},
 	            success: function(res) {
 	            	if(res === email) {  // DB 존재
-	            		$("#email_check").html("<font style='font-size:13px; color:green'>이메일 확인 완료</font>");
+	            		$("#email_check").html("");
 						$("#pwd_btn").attr("disabled", false);
 					}else {
-						$("#email_check").html("<font style='font-size:13px; color:red'>위의 아이디와 일치하지 않는 이메일입니다.</font>");
+						$("#email_check").html("<font style='font-size:13px; color:#FB79A0'>위의 아이디와 일치하지 않는 이메일입니다.</font>");
 						$("#pwd_btn").attr("disabled", true);
 					}
 	            },
@@ -484,7 +475,7 @@ function idfind() {
         url: "/project/user_find_id",
         data: { name : name, email : email },
         success: function(res) {
-        	$("#found_id").html("<br>회원님의 아이디는 <b>"+res+"</b>입니다.");
+        	$("#found_id").html("<br>회원님의 아이디는 <font style='color:#FB79A0; font-weight:bold;'>"+res+"</font>입니다.");
         },
         error: function(e) {            
             console.log("ajax fail", e);

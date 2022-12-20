@@ -40,13 +40,14 @@ public class AdoptRegDAOImpl implements AdoptRegDAO{
 	}
 
 	@Override
-	public List<AdoptRegDTO> listPaging(int startNo, int endNo, String startDate, String endDate,String tag,String sort) {
+	public List<AdoptRegDTO> listPaging(int startNo, int endNo, String startDate, String endDate, String tag,List<Integer> status_no, String sort) {
 		Map<String, Object> map = new HashMap<String, Object>();
     	map.put("tag", tag);
     	map.put("startDate", startDate);
     	map.put("endDate", endDate);
     	map.put("startNo", startNo);
     	map.put("endNo", endNo);
+    	map.put("status_no", status_no);
     	map.put("sort", sort);
     	return this.sqlSession.selectList("adoptreg_list_paging", map);
 	}
@@ -68,11 +69,12 @@ public class AdoptRegDAOImpl implements AdoptRegDAO{
 	}
 
 	@Override
-	public int countTag(String startDate, String endDate, String tag) {
+	public int countTag(String startDate, String endDate, String tag, List<Integer> status_no) {
 		Map<String, Object> map = new HashMap<String, Object>();
     	map.put("tag", tag);
     	map.put("startDate", startDate);
     	map.put("endDate", endDate);
+    	map.put("status_no", status_no);
 		return sqlSession.selectOne("adoptreg_countTag",map);
 	}
 

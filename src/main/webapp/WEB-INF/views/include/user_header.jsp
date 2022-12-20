@@ -71,6 +71,7 @@
 												<span>${ session_name }님</span>
 											</a>
 										</li>
+
 									</c:if> 
 									<c:if test="${ not empty session_admin_id }">
 		                           		<li class="col-4 login-location">
