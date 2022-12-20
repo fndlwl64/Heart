@@ -35,7 +35,8 @@
 			<div class="col-5 header-nav">			
                	<div class="login-section">
 					<ul class="row">
-					   <li class="col-4 login-location"><a href="${path}/">홈</a></li>
+					   <li class="col-2 login-location"></li>
+					   <li class="col-2 login-location"><a href="${path}/"><i class="bi bi-house"></i> 홈</a></li>
 					   <li class="col-4 join-location"><a class="login-title" href="${path}/user_logout">로그아웃</a></li>
 					</ul>
                 </div>
