@@ -51,8 +51,8 @@
 								동물관리
 							</a>
 							<ul class="dropdown-menu">
-		                        <li><a class="dropdown-item" href="${path}/dog_list">유기견관리</a></li>
-		                        <li><a class="dropdown-item" href="${path}/cat_list">유기묘관리</a></li>
+		                        <li><a class="dropdown-item" href="${path}/dog_list">강아지관리</a></li>
+		                        <li><a class="dropdown-item" href="${path}/cat_list">고양이관리</a></li>
 		                    </ul>
 				        </li>
 						<li><a href="${path}/adoptreg_list">입양관리</a></li>
@@ -63,8 +63,8 @@
                                 문의관리
                             </a>
 		                    <ul class="dropdown-menu">
-		                        <li><a class="dropdown-item" href="${path}/admin_qna_list">Q&A관리</a></li>
 		                        <li><a class="dropdown-item" href="${path}/admin_fnq_list">FNQ관리</a></li>
+		                        <li><a class="dropdown-item" href="${path}/admin_qna_list">문의글관리</a></li>
 		                    </ul>
 	                    </li>
 						<li><a href="${path}/admin_review_list">후기관리</a></li>
