@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="list" value="${ reviewContent }" />
+<c:set var="uList" value="${ userContent }" />
 <c:if test="${ not empty session_admin_id }">
     <c:set var="session_id" value="${ session_admin_id }" />
 </c:if>
@@ -58,7 +59,7 @@ $(function() {
                 <div class="header-info">
                     <ul>
                         <li class="d-inline">
-                            <img src="${path}/resources/image/heartpet_logo.png" alt="user_image">
+                            <img src="${path}/resources/image/user_img/${ uList.user_image }" alt="user_image">
                         </li>
                         <li class="d-inline">
                             <a href="${path}/user_mypage_wish_list"><span id="id">${ list.review_id }</span></a>
@@ -115,8 +116,15 @@ $(function() {
 		        <tr class="align-middle">
 		            <th class="col-2">댓글쓰기</th>
 		            <td class="col-10" id="content-reply">
-		                <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" placeholder="댓글을 남겨보세요." required="required"></textarea>
-		                <button type="button" class="btn btn-outline-primary btn-sm" onclick="commentSave('${ session_id }', ${ list.review_no }, '${ path }');"><i class="bi bi-reply"></i> 댓글등록</button>
+		                <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" required="required"
+		                <c:if test="${ not empty session_id }">placeholder="댓글을 남겨보세요."</c:if>  
+		                <c:if test="${ empty session_id }">placeholder="로그인이 필요합니다."</c:if>></textarea>
+		                <c:if test="${ not empty session_id }" >
+		                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="commentSave('${ session_id }', ${ list.review_no }, '${ path }');"><i class="bi bi-reply"></i> 댓글등록</button>
+		                </c:if>
+		                <c:if test="${ empty session_id }">
+		                  <a class="btn btn-outline-dark btn-sm" href="#goto-login"><i class="bi bi-box-arrow-in-right"></i> 로그인</a>
+		                </c:if>
 		            </td>
 		        </tr>
 		    </table>

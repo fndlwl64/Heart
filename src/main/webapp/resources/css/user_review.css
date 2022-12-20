@@ -19,11 +19,19 @@
 
 /* 총 게시물 */
 .review-section .total-data {
+	display: flex;
+	justify-content: space-between;
 	align-items: flex-end;
 	margin-left: 1rem;
+	margin-right: 1rem;
 	margin-bottom: 0.5rem;
 	font-size: 14px;
-	font-weight: bold;
+}
+
+/* 정렬 */
+.review-section .order {
+    min-width: 80px;
+    width: 10%;
 }
 
 /* button */
@@ -37,23 +45,13 @@
 	border: #FF9E9E;
 }
 
-/* 정렬 */
-.review-section .review_order {
-    margin-bottom: 0.5rem;
-}
-
-.review-section .review_order .order {
-	min-width: 80px;
-	font-weight: bold;
-}
-
 .review-section .title h6 {
     font-weight: bold;
 }
 
 /* review_list - review-card */
 .review-section .review-card {
-	
+	margin: 0 1rem;	
 }
 
 .review-section .review-card a {
@@ -201,10 +199,11 @@
     font-size: 15px;
 }
 
+/* 답글 쓰기 */
 #content-reply {
     text-align: right;
 }
-#content-reply > button {
+#content-reply > button, a {
     margin-top: 0.5rem;
 }
 
@@ -228,3 +227,12 @@
     text-align: right;
 }
 
+
+/* search */
+.review-section .search .form-select {
+	width: 20%;
+}
+
+.review-section .search .btn-light {
+    border: 1px solid gray;
+}
