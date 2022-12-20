@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${path }/resources/css/list_view.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
+<c:set var="animal_status" value="${animal_status }"></c:set>
 <c:set var="qList" value="${ qnaList }" />
 <c:set var="total" value="${ total }" />
 <c:set var="paging" value="${ paging }" />
@@ -23,21 +24,21 @@
 <c:set var="path" value="<%=request.getContextPath()%>" />
 
 <c:set var="pagingSort"
-	value="startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }" />
+	value="startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }&animal_status=${animal_status }" />
 <c:set var="pagingTag"
-	value="startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }&sort=${sort }" />
+	value="startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }&animal_status=${animal_status }&sort=${sort }" />
 <input type="hidden" id="sortlink"
 	value="<%=request.getContextPath() %>/adoptreg_list?page=${ paging.page }&${pagingSort}" />
 <!-- 쿼리 조인을 피하기 위한 key, value를 통한 animal테이블 데이터 참조 -->
 
 <body>
 	<div class="container">
-		<br> 검색 폼
 		<form class="search_form" method="post"
 			action="${path }/adoptreg_list">
 			<div class="form_box row">
 				<div class="col">
 					<select name="adopt_tag" class="form-select">
+						<option value=""></option>
 						<option value="adopt_reg_appdate"
 							<c:if test="${tag eq 'adopt_reg_appdate'}">selected</c:if>>입소신청일</option>
 						<option value="adopt_reg_regdate"
@@ -56,17 +57,17 @@
 					<input type="date" name="endDate" value="${endDate }"
 						class="input-group">
 				</div>
-				<div class="col"></div>
 				<div class="col">
-					<select name="adopt_tag" class="form-select">
-						<option value="adopt_reg_appdate"
-							<c:if test="${tag eq 'adopt_reg_appdate'}">selected</c:if>>입소신청일</option>
-						<option value="adopt_reg_regdate"
-							<c:if test="${tag eq 'adopt_reg_regdate'}">selected</c:if>>입양등록일</option>
-						<option value="adopt_reg_duedate"
-							<c:if test="${tag eq 'adopt_reg_duedate'}">selected</c:if>>입양예정일</option>
-						<option value="adopt_reg_adoptdate"
-							<c:if test="${tag eq 'adopt_reg_adoptdate'}">selected</c:if>>입양완료일</option>
+					<select name="animal_status" class="form-select">
+						<option value=""></option>
+						<option value="입소 신청"
+							<c:if test="${animal_status eq '입소 신청'}">selected</c:if>>입소 신청</option>
+						<option value="입양 가능"
+							<c:if test="${animal_status eq '입양 가능'}">selected</c:if>>입양 가능</option>
+						<option value="입양 대기"
+							<c:if test="${animal_status eq '입양 대기'}">selected</c:if>>입양 대기</option>
+						<option value="입양 완료"
+							<c:if test="${animal_status eq '입양 완료'}">selected</c:if>>입양 완료</option>
 					</select>
 				</div>
 				<div class="col">

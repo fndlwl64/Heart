@@ -77,9 +77,9 @@
             </tr>
         </table>
 	    <div class="buttons">
-		    <button class="btn btn-dark mx-1" onclick="location.href='${path}/admin_qna_list'"><i class="bi bi-card-list"></i> 목록으로</button>
-		    <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 다시작성</button>
-		    <button type="submit" class="btn btn-primary mx-1"><i class="bi bi-reply"></i> 답변달기</button>
+		    <button class="btn btn-dark mx-1" onclick="location.href='${path}/admin_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
+		    <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
+		    <button type="submit" class="btn btn-primary mx-1"><i class="bi bi-reply"></i> 답변</button>
 		</div>
         </form>
     </div>

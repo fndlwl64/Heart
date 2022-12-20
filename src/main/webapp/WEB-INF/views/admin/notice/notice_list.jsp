@@ -14,7 +14,7 @@
 <html>
 <script src="${path}/resources/js/admin_list_view.js"></script>
 <head>
-<jsp:include page="../include/admin_header.jsp"/>
+<jsp:include page="../../include/admin_header.jsp"/>
     <meta charset="UTF-8">
     <title>HeartPet</title>
     <link rel="stylesheet" href="resources/css/list_view.css">
@@ -89,10 +89,10 @@
 
         <br><br>
         <%-- 페이징처리 --%>
-   	 	<jsp:include page="../include/pagination.jsp" />
+   	 	<jsp:include page="../../include/pagination.jsp" />
 
         <%-- 삭제 모달 --%>
-		<jsp:include page="../include/deleteModal.jsp" />
+		<jsp:include page="../../include/deleteModal.jsp" />
     </div>
 
 </body>

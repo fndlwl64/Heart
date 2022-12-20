@@ -67,12 +67,12 @@ public class AdminNoticeController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("order", order);
         
-        return "admin/notice_list";
+        return "admin/notice/notice_list";
     }
 	
 	@RequestMapping("/notice_insert")
     public String notice_insert() {
-        return "admin/notice_insert";
+        return "admin/notice/notice_insert";
     }
 	
 	@RequestMapping("/notice_insert_ok")
@@ -113,7 +113,7 @@ public class AdminNoticeController {
 		NoticeDTO dto = this.noticedao.getNotice(no);
 		model.addAttribute("Cont", dto);
 		
-        return "admin/notice_content";
+        return "admin/notice/notice_content";
     }
 	
 	@RequestMapping("/notice_update")
@@ -121,7 +121,7 @@ public class AdminNoticeController {
 		NoticeDTO dto = this.noticedao.getNotice(no);
 		model.addAttribute("Cont", dto);
 		
-        return "admin/notice_update";
+        return "admin/notice/notice_update";
     }
 	
 	@RequestMapping("/notice_update_ok")

@@ -255,7 +255,7 @@ public class UserController {
     @RequestMapping("/naver_login")
     public String naver_login(HttpServletRequest request, HttpServletResponse response) throws IOException {
     	
-    	return "user/callback";
+    	return "include/callback";
     }
     
     @RequestMapping("/user_logout")
@@ -279,7 +279,7 @@ public class UserController {
     @RequestMapping("/join")
     public String join() {
     	
-        return "user/join";
+        return "include/join";
     }
     
     @RequestMapping(value="/joined")

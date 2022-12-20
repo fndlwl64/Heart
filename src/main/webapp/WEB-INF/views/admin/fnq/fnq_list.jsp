@@ -82,7 +82,7 @@
 		
 		<%-- 답변 등록하기 버튼 --%>		
 		<div class="insert-form">
-        <button class="btn btn-primary insertbtn mb-3" onclick="location.href='${path}/admin_fnq_insert'"><i class="bi bi-pencil-fill"></i> 등록하기</button>
+        <button class="btn btn-primary insertbtn mb-3" onclick="location.href='${path}/admin_fnq_insert'"><i class="bi bi-pencil-fill"></i> 등록</button>
         </div>
         
         <%-- 페이징처리 --%>
