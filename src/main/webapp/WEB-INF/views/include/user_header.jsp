@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% long time = System.currentTimeMillis(); %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="path" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,39 +43,41 @@
             <div class="header-logo">
                 <div class="row">
                     <c:if test="${ empty session_id && empty session_admin_id }">                
-                    <div class="col-5 header-space"></div>
-                    <div class="col-2 header-image">
-                        <a href="${path}/"><img src="${path}/resources/logo/heartpet_logo_words.png" alt="HeartPet" /></a>
-                    </div>
-                    <div class="col-5 header-nav">
-                    	<div class="login_section">
-	                        <ul class="row">
-	                           <li class="col-8"><a data-bs-toggle="modal" data-bs-target="#exampleModal">로그인</a></li>
-	                           <li class="col-4"><a href="${path}/join">회원가입</a></li>
-	                        </ul>
-                        </div>
-                    </div>
+	                    <div class="col-5 header-space"></div>
+	                    <div class="col-2 header-image">
+	                        <a href="${path}/"><img src="${path}/resources/logo/heartpet_logo_words.png" alt="HeartPet" /></a>
+	                    </div>
+	                    <div class="col-5 header-nav">
+	                    	<div class="login-section">
+		                        <ul class="row">
+		                           <li class="col-4 login-location"><a class="login-title" data-bs-toggle="modal" data-bs-target="#exampleModal">로그인</a></li>
+		                           <li class="col-2"><a class="login-title" href="${path}/join">회원가입</a></li>
+		                        </ul>
+	                        </div>
+	                    </div>
                     </c:if>
                     <c:if test="${!empty session_id || !empty session_admin_id }">                
-                    <div class="col-5 header-space"></div>
-                    <div class="col-2 header-image">
-                        <a href="${path}/"><img src="${path}/resources/logo/heartpet_logo_words.png" alt="HeartPet" /></a>
-                    </div>
-                    <div class="col-5 header-nav">
-                    	<div class="login_section">
-	                        <ul class="row">
-	                        	<c:if test="${ not empty session_id }">
-									<li class="col-8"><a href="${path}/user_mypage_user_update"><strong>
-										${ session_name }님<i class="bi bi-suit-heart-fill"></i></strong></a></li>
-								</c:if> 
-								<c:if test="${ not empty session_admin_id }">
-	                           		<li class="col-8"><a href="${path}/user_list"><strong>
-	                           			${ session_admin_name }님<i class="bi bi-suit-heart-fill"></i></strong></a></li>
-	                           </c:if>
-	                           <li class="col"><a href="${path}/user_logout">로그아웃</a></li>
-	                        </ul>
-                        </div>
-                    </div>
+	                    <div class="col-5 header-space"></div>
+	                    <div class="col-2 header-image">
+	                        <a href="${path}/"><img src="${path}/resources/logo/heartpet_logo_words.png" alt="HeartPet" /></a>
+	                    </div>
+	                    <div class="col-5 header-nav">
+	                    	<div class="login-section">
+		                        <ul class="row">
+		                        	<c:if test="${ not empty session_id }">
+										<li class="col-4 login-location">
+										<img class="user-image" src="${path}/resources/logo/heartpet_logo_words.png" alt="HeartPet" />
+										<a class="login-title" href="${path}/user_mypage_user_update"><strong>${ session_name }님</strong></a></li>
+									</c:if> 
+									<c:if test="${ not empty session_admin_id }">
+		                           		<li class="col-4 login-location">
+		                           		<img class="user-image" src="${path}/resources/logo/heartpet_logo_words.png" alt="HeartPet" />
+		                           		<a class="login-title" href="${path}/user_list"><strong>${ session_admin_name }님</strong></a></li>
+		                           </c:if>
+		                           <li class="col-2"><a class="login-title" href="${path}/user_logout">로그아웃</a></li>
+		                        </ul>
+	                        </div>
+	                    </div>
                     </c:if>
                 </div>
                 
