@@ -5,6 +5,7 @@
 <c:set var="dto" value="${content }" />
 <script src="resources/js/admin.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
+<link rel="stylesheet" href="resources/css/admin_animal.css">
 <body>
 	<br>
 	<br>
@@ -18,9 +19,40 @@
 
 			<table class="table noticeinfo mt-4">
 				<tr>
-					<th class="table-light w-25"><span class="sp2">이름</span></th>
-					<td class="w-50"><input type="text" name="animal_name"
-						class="form-control text-center" value=${dto.animal_name }></td>
+					<th class="table-light col-1"><span class="sp2">이름</span></th>
+					<td class="w-50" colspan="8"><input type="text"
+						name="animal_name" class="form-control text-center"
+						value=${dto.animal_name }></td>
+				</tr>
+				<tr>
+					<th class="table-light w-25"><span class="sp2">나이</span></th>
+					<td><input type="number" name="animal_age"
+						class="form-control text-center" value=${dto.animal_age }></td>
+					<th class="table-light"><span class="sp2">성별</span></th>
+					<td><select name="animal_gender"
+						class="form-control text-center">
+							<option value="male"
+								<c:if test="${dto.animal_gender eq 'male'}">selected</c:if>>수컷</option>
+							<option value="female"
+								<c:if test="${dto.animal_gender eq 'female'}">selected</c:if>>암컷</option>
+					</select></td>
+					<th class="table-light"><span class="sp2">중성화</span></th>
+					<td><select name="animal_neutered"
+						class="form-control text-center">
+							<option value="Y"
+								<c:if test="${dto.animal_neutered eq 'Y'}">selected</c:if>>Y</option>
+							<option value="N"
+								<c:if test="${dto.animal_neutered eq 'N'}">selected</c:if>>N</option>
+					</select></td>
+					<th class="table-light"><span class="sp2">예방접종</span></th>
+					<td><select name="animal_vaccination"
+						class="form-control text-center">
+							<option value="Y"
+								<c:if test="${dto.animal_vaccination eq 'Y'}">selected</c:if>>Y</option>
+							<option value="N"
+								<c:if test="${dto.animal_vaccination eq 'N'}">selected</c:if>>N</option>
+					</select></td>
+					
 				</tr>
 				<tr>
 					<th class="table-light"><span class="sp2">종류</span></th>
@@ -44,41 +76,8 @@
 								<c:if test="${dto.animal_species eq '진돗개'}">selected</c:if>>진돗개</option>
 					</select></td>
 				</tr>
-				<tr>
-					<th class="table-light"><span class="sp2">성별</span></th>
-					<td><select name="animal_gender"
-						class="form-control text-center">
-							<option value="male"
-								<c:if test="${dto.animal_gender eq 'male'}">selected</c:if>>수컷</option>
-							<option value="female"
-								<c:if test="${dto.animal_gender eq 'female'}">selected</c:if>>암컷</option>
-					</select></td>
-				</tr>
-				<tr>
-					<th class="table-light"><span class="sp2">중성화여부</span></th>
-					<td><select name="animal_neutered"
-						class="form-control text-center">
-							<option value="Y"
-								<c:if test="${dto.animal_neutered eq 'Y'}">selected</c:if>>Y</option>
-							<option value="N"
-								<c:if test="${dto.animal_neutered eq 'N'}">selected</c:if>>N</option>
-					</select></td>
-				</tr>
-				<tr>
-					<th class="table-light"><span class="sp2">예방접종여부</span></th>
-					<td><select name="animal_vaccination"
-						class="form-control text-center">
-							<option value="Y"
-								<c:if test="${dto.animal_vaccination eq 'Y'}">selected</c:if>>Y</option>
-							<option value="N"
-								<c:if test="${dto.animal_vaccination eq 'N'}">selected</c:if>>N</option>
-					</select></td>
-				</tr>
-				<tr>
-					<th class="table-light"><span class="sp2">나이</span></th>
-					<td><input type="number" name="animal_age"
-						class="form-control text-center" value=${dto.animal_age }></td>
-				</tr>
+			
+
 				<tr>
 					<th class="table-light"><span class="sp2">발견장소</span></th>
 					<td><input type="text" name="animal_place"
