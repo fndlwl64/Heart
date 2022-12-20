@@ -10,7 +10,7 @@
 </head>
 <link rel="stylesheet" href="${path }/resources/css/admin_include.css">
 <body>
-<jsp:include page="../include/admin_header.jsp" />
+<jsp:include page="../../include/admin_header.jsp" />
 <br><br>
 <div class="div1" align="center">
 	<form>
