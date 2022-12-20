@@ -66,10 +66,10 @@
 		                        <ul class="row">
 		                        	<c:if test="${ not empty session_id }">
 										<li class="col-4 login-location">
-											<a class="login-title" href="${path}/user_mypage_user_update">
-											<img class="user-image" src="${path}/resources/image/user_img/${ session_image }" alt="user_img" />
-											<strong>${ session_name }님</strong></a>
-										</li>
+										<a class="login-title" href="${path}/user_mypage_user_update">
+										<img class="user-image" src="${path}/resources/image/user_img/${session_image}" alt="user_img" />
+										<strong>${ session_name }님</strong></a></li>
+
 									</c:if> 
 									<c:if test="${ not empty session_admin_id }">
 		                           		<li class="col-4 login-location">
