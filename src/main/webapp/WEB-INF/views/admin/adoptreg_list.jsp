@@ -28,13 +28,14 @@
 <c:set var="list" value="${adoptRegList }"></c:set>
 <c:set var="map" value="${animalMap }"></c:set>
 <c:set var="tag" value="${tag }"></c:set>
-<c:set var="sort" value="${sort }"/>
+<c:set var="sort" value="${sort }" />
 <c:set var="path" value="<%=request.getContextPath()%>" />
 <c:set var="pagingSort"
 	value="startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }" />
 <c:set var="pagingTag"
 	value="startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }&sort=${sort }" />
-<input type="hidden" id="sortlink" value="<%=request.getContextPath() %>/adoptreg_list?page=${ paging.page }&${pagingSort}" />	
+<input type="hidden" id="sortlink"
+	value="<%=request.getContextPath() %>/adoptreg_list?page=${ paging.page }&${pagingSort}" />
 <!-- 쿼리 조인을 피하기 위한 key, value를 통한 animal테이블 데이터 참조 -->
 
 <body>
@@ -45,7 +46,7 @@
 			<div class="form_box row">
 				<div class="col">
 
-					<select name="adopt_tag">
+					<select name="adopt_tag" class="form-select">
 						<option value="adopt_reg_appdate"
 							<c:if test="${tag eq 'adopt_reg_appdate'}">selected</c:if>>입소신청일</option>
 						<option value="adopt_reg_regdate"
@@ -57,13 +58,23 @@
 					</select>
 				</div>
 				<div class="col">
-					<input type="date" name="startDate" value="${startDate }">
+					<input type="date" name="startDate" value="${startDate }"
+						class="input-group">
 				</div>
 				<div class="col">
-					<input type="date" name="endDate" value="${endDate }">
+					<input type="date" name="endDate" value="${endDate }"
+						class="input-group">
 				</div>
-				<div class="col form_box_div search">
-					<input class="btn btn-secondary searchbtn" type="submit" value="검색">
+				<div class="col"></div>
+				<!-- <div class="col">
+					<button type="reset" class="rbtn btn-warning btn-sm">
+						<i class="bi bi-pencil"></i> 리셋
+					</button>
+				</div> -->
+				<div class="col">
+					<button type="submit" class="btn btn-dark btn-sm">
+						<i class="bi bi-search"></i> 검색
+					</button>
 				</div>
 
 			</div>
@@ -76,10 +87,14 @@
 				<div class="validation-form mx-2">
 					<select class="form-select form-select-sm" name="sort" id="sort">
 						<option value="">정렬</option>
-						<option value="adopt_reg_appdate" <c:if test="${sort eq 'adopt_reg_appdate'}">selected</c:if> >입소신청일</option>
-						<option value="adopt_reg_regdate" <c:if test="${sort eq 'adopt_reg_regdate'}">selected</c:if> >입양등록일</option>
-						<option value="adopt_reg_duedate" <c:if test="${sort eq 'adopt_reg_duedate'}">selected</c:if> >입양예정일</option>
-						<option value="adopt_reg_adoptdate" <c:if test="${sort eq 'adopt_reg_adoptdate'}">selected</c:if> >입양완료일</option>
+						<option value="adopt_reg_appdate"
+							<c:if test="${sort eq 'adopt_reg_appdate'}">selected</c:if>>입소신청일</option>
+						<option value="adopt_reg_regdate"
+							<c:if test="${sort eq 'adopt_reg_regdate'}">selected</c:if>>입양등록일</option>
+						<option value="adopt_reg_duedate"
+							<c:if test="${sort eq 'adopt_reg_duedate'}">selected</c:if>>입양예정일</option>
+						<option value="adopt_reg_adoptdate"
+							<c:if test="${sort eq 'adopt_reg_adoptdate'}">selected</c:if>>입양완료일</option>
 					</select>
 				</div>
 			</div>
@@ -97,14 +112,16 @@
 					<tr>
 						<td class="list-title text-center">${dto.adopt_reg_userid }</td>
 						<td class="list-title text-center">${map.get(dto.adopt_reg_animalno).get(0) }</td>
-						<td class="list-title text-center">${dto.adopt_reg_appdate }</td>
-						<td class="list-title text-center">${dto.adopt_reg_regdate }</td>
-						<td class="list-title text-center">${dto.adopt_reg_duedate }</td>
-						<td class="list-title text-center">${dto.adopt_reg_adoptdate }</td>
+						<td class="list-title text-center small">${dto.adopt_reg_appdate }</td>
+						<td class="list-title text-center small">${dto.adopt_reg_regdate }</td>
+						<td class="list-title text-center small">${dto.adopt_reg_duedate }</td>
+						<td class="list-title text-center small">${dto.adopt_reg_adoptdate }</td>
 						<c:if test="${map.get(dto.adopt_reg_animalno).get(1) ne '입양 대기'}">
 							<td><a class="text-primary" data-bs-toggle="modal"
-								data-bs-target="#admissionModal"
-								data-id="${path }/adoptreg_admission?animal_no=${dto.adopt_reg_animalno}&animal_status=${map.get(dto.adopt_reg_animalno).get(1)}" data-value="${map.get(dto.adopt_reg_animalno).get(1)}" onclick="onclickOption(this);" >${map.get(dto.adopt_reg_animalno).get(1)}</a></td>
+								style="cursor: pointer" data-bs-target="#admissionModal"
+								data-id="${path }/adoptreg_admission?animal_no=${dto.adopt_reg_animalno}&animal_status=${map.get(dto.adopt_reg_animalno).get(1)}"
+								data-value="${map.get(dto.adopt_reg_animalno).get(1)}"
+								onclick="onclickOption(this);">${map.get(dto.adopt_reg_animalno).get(1)}</a></td>
 						</c:if>
 						<%-- <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 가능'}">
 							<td><a class="text-primary" data-bs-toggle="modal"
@@ -256,5 +273,7 @@
 		console.log($("#sortlink").val()+'&sort='+$('select[name=sort]').val());
 		location.href = $("#sortlink").val()+'&sort='+$('select[name=sort]').val();
 	});
+	
+	
 </script>
 </html>
