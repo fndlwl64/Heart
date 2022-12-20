@@ -10,7 +10,8 @@ body {
 	border: 0px;
     text-align: center;
     display: grid;
-    padding: 20px;
+    padding-top: 2rem;
+    padding-bottom: 0.5rem
 }
 
 .header-nav {
@@ -29,45 +30,83 @@ body {
 
 .header-nav ul li a {
     text-decoration: none;
-    color: gray;
-    padding: 1rem 1.5rem;
+    padding: 1rem 1rem;
     display: block;
+    color : white;
+    font-weight: bold;
+    font-size: 17px;
 }
 
 .header-nav ul li a:hover {
-    color: black;
+    color: gray;
 }
 
-.header-logo .nav-bar {
-	margin: auto;
+.header-logo {
+	background-color: black;
 }
 
-.header-logo .nav-bar ul {
-	padding: 0;
-	margin: auto;
+/* 홈/로그아웃 */
+.header-logo .login-section > a {
+	color: white;
 }
 
-.div_header li {
-	display: inline-block;
+.header-logo .login-section .login-location {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	color: white;
+}
+
+.header-logo .login-section .join-location {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.header-logo .login-section .login-title {	
 	font-weight: bold;
-	margin-left: 20px;
-	margin-right: 20px;
-	font-size: 17px;
-	color: black;
+	padding-left: 0.5rem !important;
+	padding-right: 2rem !important;
 }
 
-.div_header li a{
-	text-decoration: none;
-	color: black;
+/* nav-bar */
+.header-logo .nav-bar {
+	display: grid;
+	align-items: center;	
+	background-color: black !important;
 }
 
-.div_header li:hover {
-	cursor: pointer;
-	text-decoration-line: underline;
+.header-logo .nav-bar .nav-links {
+	font-weight: bold;
 }
 
+.header-logo .nav-bar .nav-links > ul {
+	padding: 0px;
+	margin: 0px;
+    display: flex;
+}
+
+.header-logo .nav-bar .nav-links > ul > li {
+    list-style: none;
+}
+
+.header-logo .nav-bar .nav-links > ul > li > a {
+    text-decoration: none;
+    color: white;
+    padding: 1rem 3rem;
+    display: block;
+    border-bottom: 1px solid black;
+    font-size: 17px;
+}
+
+.header-logo .nav-bar .nav-links > ul > li > a:hover {
+    color: gray;
+	border-bottom: 1px solid lightgray;
+    
+}
+
+/* 중앙이미지 */
 .div_header .logo {
-	text-align: center;
 	height: 100px;
 }
 
