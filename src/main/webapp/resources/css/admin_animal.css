@@ -1,7 +1,7 @@
 body{
 	font-size: 15px;
 }
-.table{
+.table .animal_table{
 
 }
 .table th {
@@ -14,3 +14,11 @@ body{
 	vertical-align: middle;
 }
 
+.img-fluid .file_change1{
+	display: inline-block;
+    width: 50%;
+    height: 400px;
+    overflow: hidden;
+    object-fit: cover;
+    border-radius: 5px;
+}
