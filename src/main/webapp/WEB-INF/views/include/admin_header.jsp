@@ -41,8 +41,8 @@
 				<div class="nav-links">
 					<ul>
 						<li><a href="${path}/user_list">회원관리</a></li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<li class="dropdown">
+							<a class="dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 								동물관리
 							</a>
 							<ul class="dropdown-menu">
