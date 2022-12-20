@@ -80,9 +80,9 @@
 					type="radio" name="animal_size" ondblclick="this.checked=false"
 					value="소형"> 소</label> -->
 				<div>
-					<label><input type="radio" name="animal_size" value="대형" />대</label>
-					<label><input type="radio" name="animal_size" value="중형" />중</label>
-					<label><input type="radio" name="animal_size" value="소형" />소</label>
+					<label><input type="radio" name="animal_size" value="대형" />대형</label>
+					<label><input type="radio" name="animal_size" value="중형" />중형</label>
+					<label><input type="radio" name="animal_size" value="소형" />소형</label>
 				</div>
 				<div>
 					<input type="hidden" id="YN" name="animal_neutered" /> <label><input
@@ -132,7 +132,7 @@
 					<c:if test="${dto.animal_state eq 0 }">
 						<tr class="table-secondary">
 						<td><a data-bs-toggle="modal"
-							data-bs-target="#lockModal">${dto.animal_name }</a></td>
+							data-bs-target="#lockModal" style="cursor:pointer;">${dto.animal_name }</a></td>
 					</c:if>
 					<td>${dto.animal_species }</td>
 					<td>${dto.animal_gender }</td>
