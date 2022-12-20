@@ -187,7 +187,9 @@
 							src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a> --%>
 						<div class="rounded back_image" id="back_image"
 							style="background-image : url(<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()});"></div>
-						<div class="text-center animal_explan w-50">${dto.getAnimal_name() }</div>
+						<div class="text-center animal_explan w-50">
+							<a href="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}">${dto.getAnimal_name() }</a>
+						</div>
 					</div>
 				</div>
 			</c:forEach>
@@ -275,12 +277,12 @@
 				location.href = $("#sortlink").val() + '&sort='
 						+ $('select[name=sort]').val();
 			});
-	$(document).ready(function () {
+	/* $(document).ready(function () {
 		  $(document).on("click", "#back_image", function () {
 		    location.href = $('#href').val();
 		  });
 		});
-	
+	 */
 </script>
 
 <jsp:include page="../../include/user_footer.jsp" />
