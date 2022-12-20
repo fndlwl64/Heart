@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+pageContext.setAttribute("newline", "\n");
+%>
 <jsp:include page="../../include/admin_header.jsp" />
 <c:set var="dto" value="${content }" />
 <c:set var="path" value="<%=request.getContextPath()%>" />
@@ -9,6 +12,7 @@
 	value="${ path }/animal_delete?no=${dto.animal_no }" />
 <script src="resources/js/admin.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
+<link rel="stylesheet" href="resources/css/admin_animal.css">
 <body>
 	<br>
 	<br>
@@ -21,81 +25,80 @@
 
 		<table class="table noticeinfo mt-4">
 			<tr>
-				<th class="table-light col-1 w-25"><span class="sp2">이름</span></th>
-				<td class="w-50">${dto.animal_name }</td>
-			</tr>
-			<tr>
-				<th class="table-light"><span class="sp2">종류</span></th>
-				<td>${dto.animal_species }</td>
-			</tr>
-			<tr>
-				<th class="table-light"><span class="sp2">성별</span></th>
-				<td>${dto.animal_gender }</td>
-			</tr>
-			<tr>
-				<th class="table-light"><span class="sp2">중성화여부</span></th>
-				<td>${dto.animal_neutered }</td>
-			</tr>
-			<tr>
-				<th class="table-light"><span class="sp2">예방접종여부</span></th>
-				<td>${dto.animal_vaccination }</td>
+				<th class="table-light col-1 w-25">이름</th>
+				<td colspan="8">${dto.animal_name }</td>
 			</tr>
 			<tr>
 				<th class="table-light"><span class="sp2">나이</span></th>
 				<td>${dto.animal_age }</td>
-			</tr>
+				<th class="table-light"><span class="sp2">성별</span></th>
+				<td>${dto.animal_gender }</td>
+				<th class="table-light"><span class="sp2">중성화</span></th>
+				<td>${dto.animal_neutered }</td>
+				<th class="table-light"><span class="sp2">예방접종</span></th>
+				<td>${dto.animal_vaccination }</td>
 			<tr>
-				<th class="table-light"><span class="sp2">발견장소</span></th>
-				<td>${dto.animal_place }</td>
-			</tr>
-			<tr>
+				<th class="table-light"><span class="sp2">종류</span></th>
+				<td colspan="3">${dto.animal_species }</td>
 				<th class="table-light"><span class="sp2">크기</span></th>
 				<td>${dto.animal_size }</td>
-			</tr>
-			<tr>
 				<th class="table-light"><span class="sp2">무게</span></th>
-				<td>${dto.animal_weight }</td>
+				<td colspan="3">${dto.animal_weight }(kg)</td>
+
 			</tr>
-			<tr>
-				<th class="table-light"><span class="sp2">유의사항</span></th>
-				<td>${dto.animal_caution }</td>
-			</tr>
+
 			<tr>
 				<th class="table-light"><span class="sp2">입양 상태</span></th>
-				<td>${dto.animal_status }</td>
+				<td colspan="3">${dto.animal_status }</td>
+				<th class="table-light"><span class="sp2">발견장소</span></th>
+				<td colspan="5">${dto.animal_place }</td>
+
 			</tr>
 			<tr>
-				<th class="table-light">이미지</th>
-				<td>
+				<th class="table-light" rowspan="6"><span class="sp2">유의사항</span></th>
+				<td colspan="4" rowspan="4">${dto.animal_caution.replace(newline,'<br>') }</td>
+			</tr>
+			<tr>
+
+			</tr>
+			<tr>
+				<!-- 				<th class="table-light">이미지</th> -->
+				<td colspan="4" rowspan="4">
 					<div class="img-fluid">
-						<img id="file_change1" src="resources/upload/${dto.animal_img1 } "  style="max-height: 300px;" alt="review_img" />
+						<img id="file_change1" src="resources/upload/${dto.animal_img1 } "
+							style="max-height: 300px;" alt="review_img" />
 					</div> <c:if test="${not empty dto.animal_img2}">
 						<div class="img-fluid">
 							<img id="file_change1"
-								src="resources/upload/${dto.animal_img2 } "  style="max-height: 300px;" alt="review_img" />
+								src="resources/upload/${dto.animal_img2 } "
+								style="max-height: 300px;" alt="review_img" />
 						</div>
 					</c:if> <c:if test="${not empty dto.animal_img3}">
 						<div class="img-fluid">
 							<img id="file_change1"
-								src="resources/upload/${dto.animal_img3 } " style="max-height: 300px;" alt="review_img" />
+								src="resources/upload/${dto.animal_img3 } "
+								style="max-height: 300px;" alt="review_img" />
 						</div>
 					</c:if>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2">
-					<button type="button" class="btn btn-success mx-1"
-						onclick="location.href='<%=request.getContextPath() %>/animal_update?no=${dto.animal_no }'">
-						<i class="bi bi-pencil"></i>수정
-					</button>
-					<button type="button" class="btn btn-danger" data-bs-toggle="modal"
-						data-bs-target="#deleteModal" data-id="${ deleteAddr }">
-						<i class="bi bi-trash3"></i> 삭제
-					</button> <%-- <button type="button" onclick="location.href='<%=request.getContextPath() %>/animal_delete?no=${dto.animal_no }'">삭제</button> --%>
-				</td>
+				<td colspan="2"></td>
 			</tr>
-		</table>
 
+		</table>
+		<div>
+			<button type="button" class="btn btn-success mx-1"
+				onclick="location.href='<%=request.getContextPath() %>/animal_update?no=${dto.animal_no }'">
+				<i class="bi bi-pencil"></i>수정
+			</button>
+			<button type="button" class="btn btn-danger" data-bs-toggle="modal"
+				data-bs-target="#deleteModal" data-id="${ deleteAddr }">
+				<i class="bi bi-trash3"></i> 삭제
+			</button>
+			<%-- <button type="button" onclick="location.href='<%=request.getContextPath() %>/animal_delete?no=${dto.animal_no }'">삭제</button> --%>
+
+		</div>
 
 
 
