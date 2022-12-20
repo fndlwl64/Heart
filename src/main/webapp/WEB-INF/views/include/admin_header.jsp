@@ -41,33 +41,31 @@
 				<div class="nav-links">
 					<ul>
 						<li><a href="${path}/user_list">회원관리</a></li>
-						<%-- <li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 								동물관리
 							</a>
 							<ul class="dropdown-menu">
 		                        <li><a class="dropdown-item" href="${path}/dog_list">유기견관리</a></li>
 		                        <li><a class="dropdown-item" href="${path}/cat_list">유기묘관리</a></li>
 		                    </ul>
-				        </li> --%>
-						<li class="lis"><a href="${path}/dog_list">유기견관리</a></li>
-						<li class="lis"><a href="${path}/cat_list">유기묘관리</a></li>
+				        </li>
+						<%-- <li class="lis"><a href="${path}/dog_list">유기견관리</a></li>
+						<li class="lis"><a href="${path}/cat_list">유기묘관리</a></li> --%>
 						<li><a href="${path}/adoptreg_list">입양관리</a></li>
 						<li><a href="${path}/support_list">후원관리</a></li>
-						<%-- <li class="dropdown">
+						<li><a href="${path}/notice_list">공지사항관리</a></li>
+						<li class="dropdown">
 		                    <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="true">
-		                        게시물관리
+		                        문의사항관리
 		                    </a>
 		                    <ul class="dropdown-menu">
-		                        <li><a class="dropdown-item" href="${path}/notice_list">공지사항관리</a></li>
 		                        <li><a class="dropdown-item" href="${path}/admin_qna_list">Q&A관리</a></li>
 		                        <li><a class="dropdown-item" href="${path}/admin_fnq_list">FNQ관리</a></li>
-		                        <li><a class="dropdown-item" href="${path}/admin_review_list">후기관리</a></li>
 		                    </ul>
-	                    </li> --%>
-						<li><a href="${path}/notice_list">공지사항관리</a></li>
-						<li><a href="${path}/admin_qna_list">Q&A관리</a></li>
-						<li><a href="${path}/admin_fnq_list">FNQ관리</a></li>
+	                    </li>
+						<%-- <li><a href="${path}/admin_qna_list">Q&A관리</a></li>
+						<li><a href="${path}/admin_fnq_list">FNQ관리</a></li> --%>
 						<li><a href="${path}/admin_review_list">후기관리</a></li>
 					</ul>
 				</div>	

@@ -50,7 +50,7 @@
 	<%-- 정렬 & 게시물 수 --%>
 	<form class="order_total" method="get" action="${path}/user_list">    
 		<div class="user_section">
-			<div class="total_user"><label>총 회원 <span>${total}</span>명</label></div>
+			<div class="total_user"><label>총 회원 <span>${totalRecord}</span>명</label></div>
 			<div class="user_order">
                 <select class="form-select form-select-sm order_select" name="order" onchange="this.form.submit()">
                     <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>최신가입순</option>
@@ -65,7 +65,7 @@
     <%-- 검색 결과 테이블 --%>
     <div class="lists">
 	   
-        <table class="table table-hover searched_list">
+        <table class="table searched_list">
             <tr>
                 <th class="table-light">회원번호</th>
                 <th class="table-light">회원아이디</th>
@@ -85,8 +85,8 @@
 	                <td>${list.user_animalexp}</td>
 	                <td>
 	                	<c:set value="${ path }/user_delete?user_no=${ list.user_no }" var="deleteAddr" />
-	                    <button class="btn btn-outline-success" onclick="location.href='${path}/user_update?user_id=${list.user_id }'">수정</button>
-	                    <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }">삭제</button>
+	                    <button class="btn btn-outline-success btn-sm" onclick="location.href='${path}/user_update?user_id=${list.user_id }'">수정</button>
+	                    <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }">삭제</button>
 	                </td>
 	            </tr>
             </c:forEach>            	

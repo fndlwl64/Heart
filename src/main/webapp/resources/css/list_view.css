@@ -79,8 +79,10 @@
 }
 
 .container .order_total {
-	width: 75%;
+	width: 70%;
 	margin: auto;
+	font-size: 15px;
+	vertical-align: middle;
 }
 
 .container .order_total .user_section {
@@ -243,32 +245,6 @@
 }
 
 /* admin/_view.jsp 목록 버튼 */
-.container .listbtn {
-    background-color: #000;
-    border: none;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-bottom: 5%;
-}
-
-.container .listbtn_1 {
-    background-color: #0069d9;
-    border: none;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-bottom: 5%;
-}
-
-.container .listbtn_2 {
-    background-color: #dc3545;
-    border: none;
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-bottom: 5%;
-}
 
 
 /* admin/_list.jsp 검색 결과 테이블 태그 */
@@ -343,12 +319,24 @@
 	margin: auto;
 	margin-top: 1%;
 	margin-bottom: 1%;
-	width: 75%;
+	width: 70%;
+}
+
+.container .lists tr:hover {
+	background-color: #ececf6;
 }
 
 /* admin/ _list.jsp -> 검색 폼 밑 테이블 a 링크 밑줄 제거 */
 .container .lists .table td a {
-    text-decoration: none;
+	text-decoration: none;
+}
+
+.container .lists .table td a:link, .container .lists .table td a:visited {
+    color: #000;
+}
+
+.container .lists .table td a:hover {
+	text-decoration: underline;
 }
 
 /* 등록하기 버튼 */
