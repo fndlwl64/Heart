@@ -1,9 +1,9 @@
-  /* support.jsp에서 사용하는 css */
+/* support.jsp에서 사용하는 css */
  .btn_support {
  	width: 60%;
  	height: 800px; 
  	background-image: url("../image/animal.png");
- 	background-size: 100% 100%;
+ 	background-size: 100%;
  	border: none;
  }
  
@@ -12,7 +12,7 @@
  }
  
  
- /* support_insert.jsp에서 사용하는 css */
+/* support_insert.jsp에서 사용하는 css */
  
   .div_sup_insert {
   	margin: 15px;
@@ -22,6 +22,35 @@
  	display: inline-block;
  	list-style: none;
  	margin: 15px;
- 	
  }
+ 
+ 
+/* admin support_list에서 사용하는 css */
+/*  table 폰트 크기 15px */
+ .container .lists .table{
+ 	font-size: 15px;
+ }
+ 
+ 
+/* admin support_insert, support_update에서 사용하는 css */
+ .div1 .table{
+ 	font-size: 15px;
+ 	width: 70%;
+ }
+ 
+ .div1 .table .table-light {
+ 	vertical-align: middle;
+ }
+ 
+ .container .order_form {
+ 	float: right;
+ 	width: 26%;
+ 	clear: both;
+ }
+ 
+.container .lists #insert_btn{
+	float: right;
+ 	clear: right;
+}
+ 
  

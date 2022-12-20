@@ -13,27 +13,25 @@
     <meta charset="UTF-8">
     <title>HeartPet</title>
     <link rel="stylesheet" href="resources/css/list_view.css">
+    <link rel="stylesheet" href="resources/css/notice.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <!-- <script src="resources/js/main.js"></script> -->
     <script src="${path}/resources/js/admin_list_view.js"></script>
 </head>
 <body>
     <br>
     <div class="container">
-
         <%-- 검색 폼 --%>
         <form class="search_form" method="post" action="${path }/notice_list">
-            <div class="form_box">
-                <select name="field">
+            <div class="form_box d-flex">
+                <select name="field" class="form-select d-inline align-middle w-25">
                     <option value="allSearch" <c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
                     <option value="title" <c:if test="${ field eq 'title' }">selected="selected"</c:if>>글제목</option>
                     <option value="cont" <c:if test="${ field eq 'cont' }">selected="selected"</c:if>>내용</option>
                 </select>
 				<span class="search-name">검색어</span> 
-                <input name="keyword" value="${ keyword }">
-
-                <input class="btn btn-secondary searchbtn" type="submit" value="검색">
+                <input name="keyword" class="form-control d-inline align-middle w-50" value="${ keyword }">
+                <button class="btn btn-dark d-inline align-middle ms-1" type="submit"><i class="bi bi-search"></i> 검색</button>
             </div>
         </form>
 
@@ -52,19 +50,19 @@
 	        </div>
 	    </form>
 
-        <button class="btn btn-success insertbtn" onclick="location.href='${path}/notice_insert'">등록</button>
+        
 
         <br><br>
 
         <%-- 검색 결과 테이블 --%>
         <div class="lists">
-            <table class="table searched_list">
+            <table class="table table-hover searched_list">
                 <tr>
-                    <th class="table-secondary">글번호</th>
-                    <th class="table-secondary">글제목</th>
-                    <th class="table-secondary">조회수</th>
-                    <th class="table-secondary">게시일</th>
-                    <th class="table-secondary">수정/삭제</th>
+                    <th class="table-light col-1">글번호</th>
+                    <th class="table-light col-1">글제목</th>
+                    <th class="table-light col-1">조회수</th>
+                    <th class="table-light col-1">게시일</th>
+                    <th class="table-light col-1">수정/삭제</th>
                 </tr>
 				<c:if test="${!empty noticeList}">
 					<c:forEach items="${noticeList }" var="dto">
@@ -74,24 +72,24 @@
 		                    <td>${dto.getNotice_hit() }</td>
 		                    <td>${dto.getNotice_date().substring(0, 10) }</td>
 		                    <td>
-		                        <button class="btn btn-primary" onclick="location.href='${path}/notice_update?no=${dto.getNotice_no() }'">수정</button>
-		                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${path }/notice_delete?no=${dto.getNotice_no()}">삭제</button>
+		                        <button class="btn btn-outline-success btn-sm" onclick="location.href='${path}/notice_update?no=${dto.getNotice_no() }'">수정</button>
+		                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${path }/notice_delete?no=${dto.getNotice_no()}">삭제</button>
 		                    </td>
 		                </tr>
                 	</c:forEach>
                 </c:if>
             </table>
-
+            <br>
+			<button id="insert_btn"class="btn btn-primary insertbtn mb-3" onclick="location.href='${path}/notice_insert'"><i class="bi bi-pencil-fill"></i> 등록</button>
         </div>
 
-        <br>
+        <br><br>
         <%-- 페이징처리 --%>
    	 	<jsp:include page="../include/pagination.jsp" />
 
         <%-- 삭제 모달 --%>
 		<jsp:include page="../include/deleteModal.jsp" />
     </div>
-
 
 </body>
 </html>
