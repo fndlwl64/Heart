@@ -2,22 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<jsp:include page="../include/admin_header.jsp" />
+<jsp:include page="../../include/admin_header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>HeartPet</title>
 <link rel="stylesheet" href="${path }/resources/css/list_view.css">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-	crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 <c:set var="qList" value="${ qnaList }" />
@@ -30,6 +21,7 @@
 <c:set var="tag" value="${tag }"></c:set>
 <c:set var="sort" value="${sort }" />
 <c:set var="path" value="<%=request.getContextPath()%>" />
+
 <c:set var="pagingSort"
 	value="startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }" />
 <c:set var="pagingTag"
@@ -45,7 +37,6 @@
 			action="${path }/adoptreg_list">
 			<div class="form_box row">
 				<div class="col">
-
 					<select name="adopt_tag" class="form-select">
 						<option value="adopt_reg_appdate"
 							<c:if test="${tag eq 'adopt_reg_appdate'}">selected</c:if>>입소신청일</option>
@@ -66,11 +57,18 @@
 						class="input-group">
 				</div>
 				<div class="col"></div>
-				<!-- <div class="col">
-					<button type="reset" class="rbtn btn-warning btn-sm">
-						<i class="bi bi-pencil"></i> 리셋
-					</button>
-				</div> -->
+				<div class="col">
+					<select name="adopt_tag" class="form-select">
+						<option value="adopt_reg_appdate"
+							<c:if test="${tag eq 'adopt_reg_appdate'}">selected</c:if>>입소신청일</option>
+						<option value="adopt_reg_regdate"
+							<c:if test="${tag eq 'adopt_reg_regdate'}">selected</c:if>>입양등록일</option>
+						<option value="adopt_reg_duedate"
+							<c:if test="${tag eq 'adopt_reg_duedate'}">selected</c:if>>입양예정일</option>
+						<option value="adopt_reg_adoptdate"
+							<c:if test="${tag eq 'adopt_reg_adoptdate'}">selected</c:if>>입양완료일</option>
+					</select>
+				</div>
 				<div class="col">
 					<button type="submit" class="btn btn-dark btn-sm">
 						<i class="bi bi-search"></i> 검색

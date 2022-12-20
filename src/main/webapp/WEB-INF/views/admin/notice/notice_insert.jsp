@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <body>
-<jsp:include page="../include/admin_header.jsp" />
+<jsp:include page="../../include/admin_header.jsp" />
 <br><br>
 <div class="div1" align="center">
 	<form method="post" enctype="multipart/form-data" action="${path }/notice_insert_ok" onsubmit="return submitOption();">

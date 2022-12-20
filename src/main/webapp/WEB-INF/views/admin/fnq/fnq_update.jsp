@@ -54,9 +54,9 @@
                 
         <%-- button  --%>
 	    <div class="buttons">
-            <button type="button" class="btn btn-dark mx-1" onclick="location.href='${path}/admin_fnq_list'"><i class="bi bi-card-list"></i> 목록으로</button>
-            <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 다시작성</button>
-            <button type="submit" class="btn btn-success mx-1"><i class="bi bi-save"></i> 수정하기</button>
+            <button type="button" class="btn btn-dark mx-1" onclick="location.href='${path}/admin_fnq_list'"><i class="bi bi-card-list"></i> 목록</button>
+            <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
+            <button type="submit" class="btn btn-success mx-1"><i class="bi bi-save"></i> 수정</button>
 		</div>
         </form>        
     </div>

@@ -13,7 +13,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="dto" value="${Cont }" />
 <body>
-<jsp:include page="../include/admin_header.jsp" />
+<jsp:include page="../../include/admin_header.jsp" />
 <br><br>
 <div class="div1" align="center">
 	<form method="post" action="${path }/notice_update_ok" enctype="multipart/form-data">
