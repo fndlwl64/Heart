@@ -66,7 +66,7 @@
 			                	<p><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">나이 : ${dto.getAnimal_age()}</a></p>
 			                	<p><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">입양 예정일 : ${dto.getAdopt_reg_duedate().substring(0, 10)}</a></p>
 			                </li>
-			                <c:if test="${count % 4 == 0 }">
+			                <c:if test="${count % 3 == 0 }">
 								<li>
 								</li>
 							</c:if>
