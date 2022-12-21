@@ -10,6 +10,7 @@
 <c:set var="keyword" value="${ keyword }" />
 <c:set var="cList" value="${ commentList }" />
 <c:set var="link_address" value="${pageContext.request.contextPath}/user_qna_list" />
+<c:set var="url" value="&field=${ field }&keyword=${ keyword }&order=${ order }" />
 <c:set var="now" value="<%=new java.util.Date()%>" />
 <fmt:formatDate value="${ now }" pattern="yyyy-MM-dd" var="today" />
 

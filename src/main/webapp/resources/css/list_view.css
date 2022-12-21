@@ -2,7 +2,7 @@
 .container {
     text-align: center;
     margin: auto;
-    width: 85%;
+    width: 70%;
 }
 
 ._container {
@@ -99,7 +99,6 @@
 .container .sub-title {
 	display: flex;
 	margin: 1rem auto;
-	width: 60%;
 	background-color: #FDEDEC;
 	border-radius: 10px;
 }
@@ -194,8 +193,6 @@
 }
 /* admin/notice_content.jsp  */
 .container .noticeinfo {
-    width: 60%;
-    margin: auto;
 }
 
 .container .noticeinfo tr th {
@@ -204,6 +201,12 @@
 
 .container .noticeinfo tr .secret {
 	padding-left: 1.5rem;
+}
+
+.container .noticeinfo tr td {
+    text-align: left;
+    padding-left: 1.5rem;
+    
 }
 
 .container .noticeinfo #admin_id {
@@ -225,12 +228,10 @@
 /* fnq 문의글 제목 */
 .container .noticeinfo .question {
 	text-align: left;
-	padding-left: 1.5rem;
 }
 
 .container .noticeinfo .answer {
 	text-align: left;
-	padding-left: 1rem;
 	padding-right: 1rem;
 }
 
@@ -250,9 +251,8 @@
 
 /* admin/_list.jsp 검색 결과 테이블 태그 */
 .container .searched_list {
-    width: 100%;
     text-align: center;
-    margin: auto;
+    margin: 0;
 }
 
 /* vertical-align 추가 */
@@ -292,7 +292,7 @@
 .container .search_form .form_box {
 	display: flex;
     border: 1px solid #545a62;
-    width: 70%;
+    width: 80%;
     margin: auto;
     padding: 2%;
     border-radius: 5px;
@@ -331,11 +331,9 @@
 
 /* admin/ _list.jsp -> 검색 폼 밑 div (전체 목록 테이블) */
 .container .lists {
-	margin: auto;
 	margin-top: 1%;
 	margin-bottom: 1%;
-	width: 70%;
-	max-width: 1000px;
+	width: 100%;
 }
 
 .container .lists tr:hover {
@@ -358,10 +356,7 @@
 /* 등록하기 버튼 */
 .insert-form {
 	display: flex;
-	width: 70%;
-	margin: 0 auto;
 	justify-content: flex-end;
-	
 }
 
 .insert-form .insertbtn {
@@ -369,26 +364,25 @@
 }
 
 .qna-section {
-	display: flex;
-	width: 70%;
-	margin: 0 auto;
-	justify-content: space-between;
-	align-items: flex-end;
+    display: grid;	
+	width: 100%;
 }
 
-총 게시물
+/* 총 게시물 / 정렬 */
 .qna-section .total-data {
-	font-size: 14px;
-	margin-left: 1%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-size: 14px;
 }
 
-qna : 정렬
-.qna-section .qna_order {
-    justify-content: right;
-    margin-right: 1%;
+/* qna : 정렬 */
+.qna-section .total-data .order {
+    min-width: 100px;
+    width: 10%;
 }
 
-space : 여백용
+/* 여백용 */
 .space {
 	margin: 4rem 0;
 }
@@ -396,9 +390,8 @@ space : 여백용
 /* buttons : 버튼 정렬 */
 .buttons {
 	display: flex;
-	margin: 1rem auto;
-	width: 60%;
-	justify-content: flex-end;
+	margin-bottom: 3rem;
+	justify-content: space-between;
 }
 
 /* 댓글쓰기 */

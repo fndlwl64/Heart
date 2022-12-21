@@ -92,7 +92,6 @@
     <%-- 삭제모달 --%>
 	<jsp:include page="../../include/deleteModal.jsp" />
 
-	<div class="space"></div>
 </div>
 
 </body>
