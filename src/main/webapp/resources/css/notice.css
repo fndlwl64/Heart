@@ -67,8 +67,13 @@
 /* admin_notice에서 사용하는 css */
 
 .container .order_form {
-	float: right;
-	clear: both;
+	width: 70%;
+	margin: auto;
+}
+
+.container .order_form .notice-section {
+	display: flex;
+	flex-direction: row-reverse;
 }
 
 .container .lists #insert_btn {
