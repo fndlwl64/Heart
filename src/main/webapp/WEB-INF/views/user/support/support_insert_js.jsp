@@ -99,6 +99,7 @@
 		                      console.log("후원에러", e);
 		                  }
 		              });
+		              alert('후원 감사합니다!');
 		              opener.location.reload();
 		              window.close();
 		          }else {
@@ -149,6 +150,7 @@
 		                      console.log("후원에러", e);
 		                  }
 		              });
+		        	  alert('후원 감사합니다!');
 		              opener.location.reload();
 		              window.close();
 		          } else {
@@ -188,6 +190,7 @@
 		                      console.log("후원에러", e);
 		                  }
 		              });
+		              alert('후원 감사합니다!');
 		              opener.location.reload();
 		              window.close();
 		          }else {
@@ -225,6 +228,7 @@
 	                      console.log("후원에러", e);
 	                  }
 	              });
+	              alert('후원 감사합니다!');
 	              opener.location.reload();
 	              window.close();
 	          }else {
@@ -262,6 +266,7 @@
 	                      console.log("후원에러", e);
 	                  }
 	              });
+	              alert('후원 감사합니다!');
 	              opener.location.reload();
 	              window.close();
 	          }else {
@@ -299,6 +304,7 @@
 	                      console.log("후원에러", e);
 	                  }
 	              });
+	              alert('후원 감사합니다!');
 	              opener.location.reload();
 	              window.close();
 	          }else {
