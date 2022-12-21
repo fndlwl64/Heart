@@ -97,17 +97,7 @@
     </table>    
     
     <%-- 댓글쓰기 --%>
-    <table class="table table-bordered" id="comment-table">
-        <thead>
-            <tr>
-                <th class="col-1">작성자</th>
-                <th class="col-5">댓글내용</th>
-                <th class="col-1">작성시간</th>
-                <th class="col-1">삭제</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <table class="table table-bordered" id="comment-table"></table>
     <table class="table table-bordered reply-table">
         <tr class="align-middle">
             <th class="col-2">댓글쓰기</th>
