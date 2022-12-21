@@ -8,6 +8,7 @@
 <c:set var="paging" value="${ paging }" />
 <c:set var="field" value="${ field }" />
 <c:set var="keyword" value="${ keyword }" />
+<c:set var="url" value="&field=${ field }&keyword=${ keyword }&order=${ order }" />
 <c:set var="link_address" value="${pageContext.request.contextPath}/user_fnq_list" />
 
 <jsp:include page="../../include/user_header.jsp" />
@@ -17,18 +18,16 @@
 <div id="qna-contents" class="qna-contents">
     <div class="qna-section">
         <div class="row">
-            <div class="col-2 space"></div>
-            <div class="col-8 title">FAQ</div>
-            <div class="col-2 space"></div>
+            <div class="col title">FAQ</div>
         </div>
     </div>
     
     <%-- 정렬 --%>
-    <form class="order_form" method="get" action="${path}/user_fnq_list?order=${ order }">        	
+    <form class="order_form" method="get" action="${path}/user_fnq_list">        	
     <div class="qna-section">
         <div class="row">
-            <div class="col-2 space"></div>
-            <div class="col-8 total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
+            <div class="col total-data">
+                <span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
                 <select class="form-select form-select-sm order" name="order" onchange="this.form.submit()">
                     <option selected="selected" value="no_desc" <c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호순</option>
                     <option value="question_desc" <c:if test="${ order eq 'question_desc' }">selected="selected"</c:if>>가나다순</option>
@@ -66,8 +65,7 @@
     <%-- search --%>
     <div class="qna-section">
         <div class="row">
-            <div class="col-3 space"></div>
-            <div class="col-6 search">
+            <div class="col search">
                 <form method="get" action="${path}/user_fnq_list">
                     <select name="field" class="form-select d-inline align-middle w-25">
                         <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
@@ -82,16 +80,8 @@
             </div>
         </div>
     </div>
-
-    <div class="space-add"></div>
-
-    <!-- 페이징 처리 부분 -->
-    
-	<jsp:include page="../../include/pagination.jsp" />
-
-
-    <div class="space-add"></div>
-
+    <!-- 페이징 처리 부분 -->    
+    <%@ include file="../../include/pagination_update.jsp" %>
 </div>
 
 <jsp:include page="../../include/user_footer.jsp" />

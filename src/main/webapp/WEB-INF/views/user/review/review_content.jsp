@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% pageContext.setAttribute("newline", "\n"); %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="list" value="${ reviewContent }" />
 <c:set var="uList" value="${ userContent }" />
@@ -10,7 +11,7 @@
 <c:if test="${ empty session_admin_id }">
     <c:set var="session_id" value="${ session_id }" />
 </c:if>
-<% pageContext.setAttribute("newline", "\n"); %>
+
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${ path }/resources/css/user_review.css" />
 <script type="text/javascript">

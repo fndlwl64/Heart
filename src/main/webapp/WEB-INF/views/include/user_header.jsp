@@ -50,8 +50,9 @@
 	                    <div class="col-5 header-nav">
 	                    	<div class="login-section">
 		                        <ul class="row">
-		                           <li class="col-4 login-location"><a class="login-title" id="goto-login" data-bs-toggle="modal" data-bs-target="#exampleModal">로그인</a></li>
-		                           <li class="col-4 join-location"><a class="login-title" href="${path}/join">회원가입</a></li>
+		                           <li class="col-1"></li>
+		                           <li class="col-3 login-location"><a class="login-title" id="goto-login" data-bs-toggle="modal" data-bs-target="#exampleModal">로그인</a></li>
+		                           <li class="col-6 join-location"><a class="login-title" href="${path}/join">회원가입</a></li>
 		                        </ul>
 	                        </div>
 	                    </div>

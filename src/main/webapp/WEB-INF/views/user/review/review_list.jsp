@@ -68,7 +68,7 @@
     </div>
 	</form>
     
-    <div class="review-section">
+    <div class="review-section review-main mb-5">
        <div class="row">
            <div class="col-2 space"></div>
            <div class="col-8 review-card">
@@ -111,10 +111,8 @@
        </div>
     </div>
 
-    <div class="space-add"></div>
-
     <%-- search --%>
-    <div class="review-section">
+    <div class="review-section mb-4">
         <div class="row">
             <div class="col-3 space"></div>
             <div class="col-6 search">
@@ -139,12 +137,10 @@
             </div>
         </div>
     </div>
-
-    <div class="space-add"></div>
     
     <%-- 페이징 --%>    
-	<jsp:include page="../../include/pagination_update.jsp" />
-
+    <%@ include file="../../include/pagination_update.jsp" %>
+    
 </div>
 
 <jsp:include page="../../include/user_footer.jsp" />
