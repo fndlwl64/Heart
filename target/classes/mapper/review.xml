@@ -162,6 +162,52 @@
             review_animal_tag = #{ animal_tag }
         </where>
     </select>
+    
+    <!-- 
+    //======================================================================  
+    // Review : Admin
+    //======================================================================    
+    -->     
+    <!-- review : review_admin_list -->
+    <select id="review_admin_list" parameterType="hashMap" resultType="ReviewDTO">
+        SELECT * 
+            FROM (SELECT r.*, a.animal_name, ROW_NUMBER() OVER(ORDER BY review_no DESC) rnum <include refid="review_join" />
+            WHERE 1 = 1
+	        <if test="search_animal != null and !search_animal.equals('')">
+	            AND animal_name LIKE '%' || #{ search_animal } || '%'
+	        </if>
+	        <if test="search_id != null and !search_id.equals('')">
+	            AND review_id LIKE '%' || #{ search_id } || '%'
+	        </if>
+	        <if test="search_content != null and !search_content.equals('')">
+	            AND review_title LIKE '%' || #{ search_content } || '%'
+	        </if>
+         <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo}]]>
+         <choose>
+            <when test="order == ''"></when>
+            <when test="order.equals('date_desc')"> ORDER BY review_regdate DESC </when>         
+            <when test="order.equals('hit_desc')"> ORDER BY review_hit DESC</when>         
+            <when test="order.equals('no_desc')"> ORDER BY review_no DESC</when>         
+            <when test="order.equals('title_desc')"> ORDER BY review_title</when>         
+         </choose>
+    </select>
+    
+    <!-- review : review_admin_list -->
+    <select id="review_admin_count" parameterType="hashMap" resultType="int">
+        SELECT COUNT(*) 
+            FROM (SELECT r.*, a.animal_name <include refid="review_join" />
+            WHERE 1 = 1
+            <if test="search_animal != null and !search_animal.equals('')">
+                AND animal_name LIKE '%' || #{ search_animal } || '%'
+            </if>
+            <if test="search_id != null and !search_id.equals('')">
+                AND review_id LIKE '%' || #{ search_id } || '%'
+            </if>
+            <if test="search_content != null and !search_content.equals('')">
+                AND review_title LIKE '%' || #{ search_content } || '%'
+            </if>
+            )
+    </select>
 	
     <!-- 
     ///////////////////////////////////////////////////////
