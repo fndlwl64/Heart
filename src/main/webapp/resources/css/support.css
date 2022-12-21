@@ -46,9 +46,13 @@
  }
  
  .container .order_form {
- 	float: right;
- 	width: 26%;
- 	clear: both;
+ 	width: 70%;
+ 	margin: auto;
+ }
+ 
+ .container .order_form .sup-section {
+ 	display: flex;
+ 	flex-direction: row-reverse;
  }
  
 .container .lists #insert_btn{

@@ -43,8 +43,8 @@
         
         <%-- 정렬 & 게시물 수 --%>
 	    <form class="order_form" method="get" action="${path}/notice_list">    
-	       <div class="qna-section">
-	            <div class="qna_order">
+	       <div class="notice-section">
+	            <div class="notice_order">
 	                <select class="form-select form-select-sm" name="order" onchange="this.form.submit()">
 	                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
 	                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신게시일순</option>
@@ -53,10 +53,6 @@
 	            </div>
 	        </div>
 	    </form>
-
-        
-
-        <br><br>
 
         <%-- 검색 결과 테이블 --%>
         <div class="lists">
