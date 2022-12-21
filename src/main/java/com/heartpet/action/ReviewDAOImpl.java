@@ -91,6 +91,31 @@ public class ReviewDAOImpl implements ReviewDAO {
     public List<ReviewDTO> listReview(String animal_tag) {
         return this.sqlSession.selectList("review_total_list", animal_tag);
     }
+    
+    //===========================================================
+    // Admin : List 출력
+    //===========================================================    
+    @Override
+    public List<ReviewDTO> listReview(int startNo, int endNo, String search_animal, String search_id,
+            String search_content, String order) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("startNo", startNo);
+        map.put("endNo", endNo);
+        map.put("search_animal", search_animal);
+        map.put("search_id", search_id);
+        map.put("search_content", search_content);
+        map.put("order", order);
+        return this.sqlSession.selectList("review_admin_list", map);
+    }
+
+    @Override
+    public int listReviewCount(String search_animal, String search_id, String search_content) {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("search_animal", search_animal);
+        map.put("search_id", search_id);
+        map.put("search_content", search_content);
+        return this.sqlSession.selectOne("review_admin_count", map);
+    }
 
     ////////////////////////////////////////////////////////////
     // Comment

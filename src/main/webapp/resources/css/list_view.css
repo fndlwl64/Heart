@@ -290,18 +290,60 @@
 
 /* admin/ _list.jsp -> 검색 폼 div 태그 */
 .container .search_form .form_box {
-	display: flex;
-    border: 1px solid #545a62;
-    width: 80%;
-    margin: auto;
+	width: 90%;
+	margin: 0 auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     padding: 2%;
     border-radius: 5px;
     justify-content: space-evenly;
     align-items: center;
-    margin-top: 2%;
+    border: 1px solid #545a62;
     font-weight: bold;
 }
 
+/* 검색 폼 내 테이블 */
+.search_form .form_box .search-semi-title {
+	text-align: left;
+	font-size: 16px;
+}
+
+.search_form .form_box .search-table-box {	
+}
+
+.search_form .form_box .search-table-box #search-table {
+	width: 100%;
+	margin: 0;
+	border: none;
+}
+
+.form_box #search-table tr {	
+}
+
+.form_box #search-table th {
+    background-color: white;
+    vertical-align: middle;
+    font-size: 15px;  
+    padding: 1rem 0.5rem; 
+    border: none !important;  
+}
+
+.form_box #search-table td {
+    padding: 1rem 0.5rem; 
+    border: none !important;  
+}
+
+.form_box .search-buttons {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
+
+.form_box .search-buttons > button {
+	margin-left: 0.5rem;
+
+}
 .container .search_form .form_box .keyword {
 	width: 40%;
 }

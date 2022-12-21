@@ -26,16 +26,16 @@
 
         <%-- 검색 폼 --%>
         <form class="search_form" method="get" action="${path}/admin_fnq_list">
-            <div class="form_box search d-flex">
+            <div class="form_box d-flex">
            		<span class="search-name">대분류</span>
-                <select name="field" class="form-select d-inline align-middle">
+                <select name="field" class="form-select d-inline align-middle w-25">
                     <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
                     <option value="category"<c:if test="${ field eq 'category' }">selected="selected"</c:if>>카테고리</option>
                     <option value="question"<c:if test="${ field eq 'question' }">selected="selected"</c:if>>질문</option>
                     <option value="answer"<c:if test="${ field eq 'answer' }">selected="selected"</c:if>>답변</option>
                 </select>
                 <span class="search-name">검색어</span> 
-                <input type="text" class="form-control d-inline align-middle search-text" value="${ keyword }" name="keyword" />
+                <input type="text" class="form-control d-inline align-middle keyword" value="${ keyword }" name="keyword" />
                 <select name="" class="form-select d-none align-middle search-select">
                     <option value="입양"<c:if test="${ keyword eq '입양' }">selected="selected"</c:if>>입양</option>
                     <option value="입소"<c:if test="${ keyword eq '입소' }">selected="selected"</c:if>>입소</option>

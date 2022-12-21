@@ -45,20 +45,15 @@ public class AdminReviewController {
     // REVIEW_LIST - 고양이/강아지 선택 추가
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/admin_review_list")
-    public String admin_review_list(@RequestParam(value = "field", required = false) String field,
-            @RequestParam(value = "keyword", required = false) String keyword,
-            @RequestParam(value = "animal_tag", required = false) String animal_tag,
+    public String admin_review_list(@RequestParam(value = "search_animal", required = false) String search_animal,
+            @RequestParam(value = "search_id", required = false) String search_id,
+            @RequestParam(value = "search_content", required = false) String search_content,
             @RequestParam(value = "order", required = false) String order,
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 
-        if (field == null) { field = ""; }
-        if (keyword == null) {
-            keyword = ""; 
-        }else if(keyword == "강아지") { 
-            keyword = "dog";
-        }else if(keyword == "고양이") { 
-            keyword = "cat"; 
-        }
+        if (search_animal == null) { search_animal = ""; }
+        if (search_id == null) { search_id = ""; }
+        if (search_content == null) { search_content = ""; }
         if (order == null) { order = ""; }
 
         int currentPage = 1; // 현재 페이지 변수
@@ -69,15 +64,9 @@ public class AdminReviewController {
 
         // animal name 추출
         // 전체 선택
-        if (animal_tag == null) {
-            totalRecord = this.reviewDAO.listReviewCount(field, keyword);
-            paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-            reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
-        } else { // dog/cat 선택
-            totalRecord = this.reviewDAO.listReviewCount(animal_tag);
-            paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-            reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), animal_tag, order);
-        }
+        totalRecord = this.reviewDAO.listReviewCount(search_animal, search_id, search_content);
+        paging = new PageDTO(currentPage, rowsize, totalRecord);
+        reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), search_animal, search_id, search_content, order);
         
         // 댓글수 추가
         List<Integer> commentList = new ArrayList<Integer>();
@@ -88,8 +77,9 @@ public class AdminReviewController {
         model.addAttribute("reviewList", reviewList);
         model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);
-        model.addAttribute("field", field);
-        model.addAttribute("keyword", keyword);
+        model.addAttribute("search_animal", search_animal);
+        model.addAttribute("search_id", search_id);
+        model.addAttribute("search_content", search_content);
         model.addAttribute("order", order);
         model.addAttribute("commentList", commentList);
 
