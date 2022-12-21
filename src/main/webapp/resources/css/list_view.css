@@ -1,4 +1,8 @@
 /* 전체 div */
+body {
+	overflow-x: hidden;
+}
+
 .container {
     text-align: center;
     margin: auto;
@@ -79,7 +83,6 @@
 }
 
 .container .order_total {
-	width: 70%;
 	margin: auto;
 	font-size: 15px;
 	vertical-align: middle;
@@ -290,8 +293,8 @@
 
 /* admin/ _list.jsp -> 검색 폼 div 태그 */
 .container .search_form .form_box {
-	width: 90%;
-	margin: 0 auto;
+    width: 90%;
+    margin: 0 auto;
     margin-top: 2rem;
     margin-bottom: 2rem;
     padding: 2%;
@@ -376,6 +379,8 @@
 	margin-top: 1%;
 	margin-bottom: 1%;
 	width: 100%;
+	margin: auto;
+	margin-bottom: 2%;
 }
 
 .container .lists tr:hover {

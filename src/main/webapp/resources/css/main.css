@@ -1,4 +1,7 @@
 /* main-title */
+body {
+	overflow-x: hidden;
+}
 .main-title {
     display: flex;
     flex-direction: column;
