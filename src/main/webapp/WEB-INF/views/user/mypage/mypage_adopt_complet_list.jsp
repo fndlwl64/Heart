@@ -73,7 +73,7 @@
 			                		<p><a class="animal_cont" href="${path }/user_review_content?review_no=${ sendCheck[status.index].review_no }"><button>내가 쓴 후기보기</button></a></p>
 			                	</c:if>
 			                </li>
-		 		        <c:if test="${count % 4 == 0 }">
+		 		        <c:if test="${count % 3 == 0 }">
 							<li>
 							</li>
 						</c:if>

@@ -65,7 +65,7 @@
 		                	<p><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">성별 : ${dto.getAnimal_gender()}</a></p>
 		                	<p><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">나이 : ${dto.getAnimal_age()}</a></p>
 		                </li>
-		                <c:if test="${count % 4 == 0 }">
+		                <c:if test="${count % 3 == 0 }">
 							<li>
 							</li>
 						</c:if>
