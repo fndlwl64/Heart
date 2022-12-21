@@ -40,6 +40,8 @@
 /* search */
 .qna-section .search {
     text-align: center;
+    margin-bottom: 2rem;
+    
 }
 
 .qna-section .search .form-select {
