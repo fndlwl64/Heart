@@ -127,10 +127,11 @@
                         <option value="id"<c:if test="${ field eq 'id' }">selected="selected"</c:if>>작성자</option>
                         <option value="animal"<c:if test="${ field eq 'animal' }">selected="selected"</c:if>>반려동물명</option>
                     </select>
-                    <input type="text" class="form-control d-inline align-middle w-50" 
-                    <c:if test="${ keyword eq 'dog' }">value="강아지"</c:if> 
-                    <c:if test="${ keyword eq 'cat' }">value="고양이"</c:if> 
-                    name="keyword" />
+                    <input type="text" class="form-control d-inline align-middle w-50" name="keyword"                    
+                    <c:if test="${ keyword ne 'dog' && keyword ne 'cat' }">value=${ keyword }</c:if>
+                    <c:if test="${ keyword eq 'dog' }">value=${ keyword }</c:if>
+                    <c:if test="${ keyword eq 'cat' }">value=${ keyword }</c:if>
+                    />
                     <select name="" class="form-select d-none align-middle w-50">
                         <option value="dog"<c:if test="${ keyword eq 'dog' }">selected="selected"</c:if>>강아지</option>
                         <option value="cat"<c:if test="${ keyword eq 'cat' }">selected="selected"</c:if>>고양이</option>
