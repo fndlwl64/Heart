@@ -9,6 +9,7 @@
 <c:set var="field" value="${ field }"/>
 <c:set var="keyword" value="${ keyword }"/>
 <c:set var="cList" value="${ commentList }"/>
+<c:set var="url" value="&field=${ field }&keyword=${ keyword }&order=${ order }" />
 <c:set var="link_address" value="${pageContext.request.contextPath}/admin_qna_list" />
 <c:set var="now" value="<%=new java.util.Date()%>" />
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />	
@@ -36,7 +37,7 @@
            		<span class="search-name">분류</span>
                 <select name="field" class="form-select d-inline align-middle w-25">
                     <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
-                    <option value="category"<c:if test="${ field eq 'category' }">selected="selected"</c:if>>분류</option>
+                    <option value="category"<c:if test="${ field eq 'category' }">selected="selected"</c:if>>카테고리</option>
                     <option value="title"<c:if test="${ field eq 'title' }">selected="selected"</c:if>>제목</option>
                     <option value="content"<c:if test="${ field eq 'content' }">selected="selected"</c:if>>내용</option>
                     <option value="id"<c:if test="${ field eq 'id' }">selected="selected"</c:if>>작성자</option>
@@ -49,10 +50,10 @@
         <br>
         
        <%-- 정렬 & 게시물 수 --%>
-       <div class="qna-section">
-            <div class="total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
-            <div class="qna_order">
-                <select class="form-select form-select-sm" name="order" onchange="location.href='${ path }/user_qna_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">
+    <div class="qna-section">
+       <div class="row">
+            <div class="col total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
+                <select class="form-select form-select-sm order" name="order" onchange="location.href='${ path }/user_qna_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">
                     <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
                     <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신등록순</option>
                     <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>
@@ -60,18 +61,19 @@
                 </select>
             </div>
         </div>
+    </div>
         
         <%-- 검색 결과 테이블 --%>
         <div class="lists">
-            <table class="table table-hover searched_list">
+            <table class="table table-hover searched_list mb-4">
                 <tr>                
-                    <th class="table-light col-1">No</th>
-                    <th class="table-light col-1">분류</th>
-                    <th class="table-light col-4">제목</th>
-                    <th class="table-light col-1">작성자</th>
-                    <th class="table-light col-1">조회수</th>
-                    <th class="table-light col-2">작성일시</th>
-                    <th class="table-light col-2">답변 / 삭제</th>
+                    <th class="table-light" width="7.5%">No</th>
+                    <th class="table-light" width="7.7%">카테고리</th>
+                    <th class="table-light" width="45%">제목</th>
+                    <th class="table-light" width="7.5%">작성자</th>
+                    <th class="table-light" width="7.5%">조회수</th>
+                    <th class="table-light" width="12.5%">작성일시</th>
+                    <th class="table-light" width="12.5%">답변 / 삭제</th>
                 </tr>
 				<c:forEach items="${ qList }" var="list" varStatus="status">
                 <tr>
@@ -110,16 +112,12 @@
                 </c:forEach>
             </table>
         </div>
-        
-        <%-- 삭제 모달 // admin_list_view.js 삽입되어 있음
-        	modal-dialog-centered 삽입됨
-         --%>
+
 		<jsp:include page="../../include/deleteModal.jsp" />
         
         <%-- 페이징처리 --%>
-		<jsp:include page="../../include/pagination.jsp" />
+		<%@ include file="../../include/pagination_update.jsp" %>
 		
     </div>
-    <div class="space"> </div>
 </body>
 </html>

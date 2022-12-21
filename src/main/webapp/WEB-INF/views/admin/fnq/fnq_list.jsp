@@ -8,6 +8,7 @@
 <c:set var="paging" value="${ paging }"/>
 <c:set var="field" value="${ field }"/>
 <c:set var="keyword" value="${ keyword }"/>
+<c:set var="url" value="&field=${ field }&keyword=${ keyword }&order=${ order }" />
 <c:set var="link_address" value="${pageContext.request.contextPath}/admin_fnq_list" />
 
 <!DOCTYPE html>
@@ -41,26 +42,25 @@
         </form>
         
        <%-- 정렬 --%>
-       <form class="order_form" method="get" action="${path}/admin_fnq_list">
-       <div class="qna-section">
-            <div class="total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
-            <div class="qna_order">
-                <select class="form-select form-select-sm" name="order" onchange="this.form.submit()">
-                    <option selected="selected" value="no_desc" <c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호순</option>
-                    <option value="question_desc" <c:if test="${ order eq 'question_desc' }">selected="selected"</c:if>>가나다순</option>
-                </select>
+	    <div class="qna-section">
+	        <div class="row">
+	            <div class="col total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
+	                <select class="form-select form-select-sm order" name="order" onchange="location.href='${ path }/admin_fnq_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">
+	                    <option selected="selected" value="no_desc" <c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호순</option>
+	                    <option value="question_desc" <c:if test="${ order eq 'question_desc' }">selected="selected"</c:if>>가나다순</option>
+	                </select>
+	            </div>
             </div>
         </div>
-        </form>
         
         <%-- 검색 결과 테이블 --%>
         <div class="lists">
             <table class="table table-hover searched_list">
                 <tr>                
-                    <th class="table-light col-1">No</th>
-                    <th class="table-light col-1">분류</th>
-                    <th class="table-light col-8">질문</th>
-                    <th class="table-light col-2">수정 / 삭제</th>
+                    <th class="table-light" width="10%">No</th>
+                    <th class="table-light" width="10%">카테고리</th>
+                    <th class="table-light" width="65%">질문</th>
+                    <th class="table-light" width="15%">수정 / 삭제</th>
                 </tr>
 				<c:forEach items="${ fList }" var="list">
                 <tr>
@@ -86,7 +86,7 @@
         </div>
         
         <%-- 페이징처리 --%>
-		<jsp:include page="../../include/pagination.jsp" />
+		<%@ include file="../../include/pagination_update.jsp" %>
 		
     </div>
     <div class="space"> </div>

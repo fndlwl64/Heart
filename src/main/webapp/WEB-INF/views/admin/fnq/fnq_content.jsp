@@ -25,9 +25,9 @@
     <table class="table noticeinfo mt-4">
         <tr>
             <th class="table-light col-1">번호</th>
-            <td class="col-2">${ list.fnq_no }</td>
+            <td class="col-3">${ list.fnq_no }</td>
             <th class="table-light col-1">분류</th>
-            <td class="col-2">${ list.fnq_category }</td>
+            <td class="col-3">${ list.fnq_category }</td>
         </tr>
         <tr>
             <th class="table-light">문의</th>
@@ -37,24 +37,26 @@
             <th class="table-light">답변</th>
             <td colspan="3" class="col-5">
             	<div class="answer"><strong>A.</strong></div>
-                <textarea class="form-control-plaintext px-3" cols="60" rows="10" readonly>${ list.fnq_answer.replace(newline, '<br/>') }</textarea>
+                <textarea class="form-control-plaintext" cols="60" rows="10" readonly>${ list.fnq_answer.replace(newline, '<br/>') }</textarea>
             </td>
         </tr>
     </table>
 
     <%-- button  --%>
     <div class="buttons">
+        <div>
 	    <button class="btn btn-dark mx-1" onclick="location.href='${path}/admin_fnq_list'"><i class="bi bi-card-list"></i> 목록</button>
+	    </div>
+	    <div>
 	    <button class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }"><i class="bi bi-trash3"></i> 삭제</button>	    
 	    <button class="btn btn-success mx-1" onclick="location.href='${path}/admin_fnq_update?fnq_no=${ list.fnq_no }'"><i class="bi bi-pencil-fill"></i> 수정</button>
+	    </div>
 	</div>
 	
  	<%-- 삭제 모달 --%>
 	<jsp:include page="../../include/deleteModal.jsp" />
 
-	<div class="space"></div>
 </div>
-
 
 </body>
 </html>
