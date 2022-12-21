@@ -11,14 +11,12 @@
 <div id="qna-contents" class="qna-contents">
     <div class="qna-section">
         <div class="row">
-            <div class="col-3 space"></div>
-            <div class="col-6 title">문의글 수정하기</div>
-            <div class="col-3 space"></div>
+            <div class="col title">문의글 수정하기</div>
         </div>
     </div>
 
     <div>
-        <form action="${ path }/user_qna_update_ok" method="post" enctype="multipart/form-data" >
+        <form class="mb-3" action="${ path }/user_qna_update_ok" method="post" enctype="multipart/form-data" >
         	<input type="hidden" name="board_no" value="${ list.board_no }" />
         	<input type="hidden" name="board_id" value="${ list.board_id }" />
             <table class="table align-middle">
@@ -73,18 +71,19 @@
                 	</td>
                 </tr>
             </table>
-
             <div class="qna-section">
                 <div class="row">
-                    <div class="col-3 space"></div>
-                    <div class="col-6 title btn-insert">
-                        <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록으로</button>
-                        <button type="reset" class="btn btn-warning"><i class="bi bi-pencil"></i> 다시작성</button>
-                        <button type="submit" class="btn btn-success"><i class="bi bi-eraser"></i> 수정하기</button>
+                    <div class="col btn-insert d-flex justify-content-between">
+                    <div>
+                        <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
                     </div>
-                    <div class="col-3 space"></div>
+                    <div>
+                        <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
+                        <button type="submit" class="btn btn-success"><i class="bi bi-eraser"></i> 수정</button>
+                    </div>
                 </div>
             </div>
+        </div>
         </form>
     </div>
 </div>
