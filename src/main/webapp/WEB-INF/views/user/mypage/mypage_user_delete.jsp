@@ -57,15 +57,21 @@
             <li><a href="${path }/user_mypage_user_delete" class="my_a">회원탈퇴</a></li>
         </ul>
     </div>
-    <div id="my_cont5" class="mypage_cont">
+    <div id="my_cont5" class="mypage_cont" align="center">
         <form method="post" action="${path }/user_mypage_user_deleteCheck">
+        <br><br><br>
 	     <div class="mb-3">
 	   		<label for="receiver" class="col-form-label">이메일 인증</label>
 	 	 </div>
 	 	 
 		 <div class="mb-3">
-		    <input type="text" id="receiver" name="receiver" value="${dto.getUser_email() }" class="form-control" aria-describedby="passwordHelpInline" readonly="readonly" />
-		    <input class="btn btn-primary" id="submit" type="submit"  value="인증번호발송">
+		 	<c:if test="${!empty dto.getUser_email()}">
+			    <input type="text" id="receiver" name="receiver" value="${dto.getUser_email() }" class="form-control" aria-describedby="passwordHelpInline" readonly="readonly"/><br>
+			    <button class="btn btn-dark mx-1" id="update_btn" type="submit"><i class="bi bi-save"></i> 인증번호발송</button>
+		    </c:if>
+		    <c:if test="${empty dto.getUser_email()}"><br><br>
+		    	<h3>이메일이 없습니다. 회원정보변경에서 이메일을 입력해주세요.</h3>
+		    </c:if>
 		 </div>
 		 
 		 <div class="mb-3">

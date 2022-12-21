@@ -56,34 +56,37 @@
         <div align="center">
             <form method="post" action="${path }/user_mypage_user_update2">
                 <h3>회원정보변경</h3>
-                <table class="table">
+                <c:if test="${empty dto.getUser_email() || empty dto.getUser_phone() || empty dto.getUser_addr()}">
+                <span class="not_email">회원 이메일, 연락처, 주소를 등록해야 추후에 비밀번호찾기, 회원탈퇴, 후원하기 등이 가능합니다. </span>
+                </c:if>
+                <table class="table table-hover searched_list">
                     <tr>
-                        <th class="table-secondary"><span class="sp2">아이디</span></th>
-                        <td><input name="user_id" class ="input1" type="text" value="${dto.getUser_id()}" readonly></td>
+                        <th class="table-light col">아이디</th>
+                        <td><input name="user_id" class="form-control" type="text" value="${dto.getUser_id()}" readonly></td>
                     </tr>
                     <tr>
-                        <th class="table-secondary"><span class="sp2">이름</span></th>
-                        <td><input name="user_name"class ="input1" type="text" value="${dto.getUser_name()}"></td>
+                        <th class="table-light col-3"><span class="sp2">이름</span></th>
+                        <td><input name="user_name" class="form-control" type="text" value="${dto.getUser_name()}"></td>
                     </tr>
                     <tr>
-                        <th class="table-secondary"><span class="sp2">이메일</span></th>
-                        <td><input name="user_email" class ="input1" type="text" value="${dto.getUser_email()}"></td>
+                        <th class="table-light col-3"><span class="sp2">이메일</span></th>
+                        <td><input name="user_email" class="form-control" type="text" value="${dto.getUser_email()}"></td>
                     </tr>
                     <tr>
-                        <th class="table-secondary"><span class="sp2">연락처</span></th>
-                        <td><input name="user_phone" class ="input1" type="text" value="${dto.getUser_phone()}"></td>
+                        <th class="table-light col-3"><span class="sp2">연락처</span></th>
+                        <td><input name="user_phone" class="form-control" type="text" value="${dto.getUser_phone()}"></td>
                     </tr>
                     <tr>
-                        <th class="table-secondary"><span class="sp2">주소</span></th>
-                        <td><input name="user_addr" class ="input1" type="text" value="${dto.getUser_addr()}"></td>
+                        <th class="table-light col-3"><span class="sp2">주소</span></th>
+                        <td><input name="user_addr" class="form-control" type="text" value="${dto.getUser_addr()}"></td>
                     </tr>
                     <tr>
-                        <th class="table-secondary"><span class="sp2">반려동물경험</span></th>
-                        <td><input name="user_animalexp" class ="input1" type="text" value="${dto.getUser_animalexp()}"></td>
+                        <th class="table-light col-3"><span class="sp2">반려동물경험</span></th>
+                        <td><input name="user_animalexp" class="form-control" type="text" value="${dto.getUser_animalexp()}"></td>
                     </tr>
                 </table>
                 <br>
-                <input class="btn btn-primary" id="update_btn" type="submit" value="변경" align="center">
+                <button class="btn btn-dark mx-1" id="update_btn" type="submit"><i class="bi bi-save"></i> 변경</button>
             </form>
         </div>
     </div>
