@@ -21,9 +21,9 @@
 <div id="qna-contents" class="qna-contents">
     <div class="qna-section">
         <div class="row">
-            <div class="col-3 space"></div>
-            <div class="col-6 title">QnA</div>
-            <div class="col-3 space"></div>
+            <div class="col-2 space"></div>
+            <div class="col-8 title">QnA</div>
+            <div class="col-2 space"></div>
         </div>
     </div>
 
@@ -31,17 +31,15 @@
     <form class="order_form" method="get" action="${path}/user_qna_list">    
     <div class="qna-section">
         <div class="row">
-        	<div class="col-3 space"></div>
-            <div class="col-5 total-data d-flex"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
-            <div class="col-1 qna_order d-flex">
-                <select class="form-select form-select-sm w-75" name="order" onchange="this.form.submit()">
+        	<div class="col-2 space"></div>
+            <div class="col-8 total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
+                <select class="form-select form-select-sm order" name="order" onchange="this.form.submit()">
                     <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
                     <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신등록순</option>
                     <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>
                     <option value="title_desc"<c:if test="${ order eq 'title_desc' }">selected="selected"</c:if>>가나다순</option>
                 </select>
             </div>
-            <div class="col-3 space"></div>
         </div>
     </div>
     </form>
@@ -52,12 +50,12 @@
         <table class="table table-bordered">
             <thead>
 	            <tr class="table-light">
-	                <th scope="col" class="col-1">No</th>
-	                <th scope="col" class="col-2">카테고리</th>
-	                <th scope="col" class="col-4">제목</th>
-	                <th scope="col" class="col-2">작성자</th>
-	                <th scope="col" class="col-2">작성일</th>
-	                <th scope="col" class="col-1">Hit</th>
+	                <th scope="col" width="10%">No</th>
+	                <th scope="col" width="15%">카테고리</th>
+	                <th scope="col" width="40%">제목</th>
+	                <th scope="col" width="10%">작성자</th>
+	                <th scope="col" width="15%">작성일</th>
+	                <th scope="col" width="10%">조회수</th>
 	            </tr>
             </thead>
             <tbody>
@@ -68,10 +66,10 @@
                     <td>${ list.board_category }</td>
                     <td class="left-align">     
                     	<c:if test="${ list.board_state ne 'disabled' }">            
-	                       <a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }&board_parentNo=${ list.board_parentNo }&board_group=${ board_group }">
+                        <a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }&board_parentNo=${ list.board_parentNo }&board_group=${ board_group }">
 	                    </c:if> 
 	                    <c:if test="${ list.board_state eq 'disabled' }">
-	                       <a class="disabled">
+                        <a class="disabled">
 	                    </c:if>
 	                    <c:choose>
 	                    	<c:when test="${ list.level > 1 }">
@@ -87,11 +85,11 @@
 	                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
 	                    <c:if test="${ list.board_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>	                    
 	                    <c:if test="${ cList[status.index] gt 0 }"><span>[${ cList[status.index] }]</span></c:if>	                    
-	                    </a> 
+                        </a> 
                     </td>
                     <td><c:if test="${ list.board_id eq 'admin' }"><span id="admin_id">관리자</span></c:if>
                     <c:if test="${ list.board_id ne 'admin' }"><span>${ list.board_id }</span></c:if></td>
-                    <td>${ list.board_regdate.substring(0,10) }</td>
+                    <td><small>${ list.board_regdate.substring(0,10) }</small></td>
                     <td>${ list.board_hit }</td>
                 </tr>
                 </c:forEach>
@@ -107,19 +105,19 @@
 
     <div class="qna-section">
         <div class="row">
-            <div class="col-3 space"></div>
-            <div class="col-6 title btn-insert">
+            <div class="col-2 space"></div>
+            <div class="col-8 title btn-insert">
                 <button type="button" class="btn btn-primary" onclick="location.href='${path}/user_qna_insert'"><i class="bi bi-pencil"></i> 작성하기</button>
             </div>
-            <div class="col-3 space"></div>
+            <div class="col-2 space"></div>
         </div>
     </div>
 
     <%-- search --%>
     <div class="qna-section">
         <div class="row">
-            <div class="col-4 space"></div>
-            <div class="col-4 search">
+            <div class="col-3 space"></div>
+            <div class="col-6 search">
                 <form method="get" action="${ path }/user_qna_list">
                     <select name="field" class="form-select d-inline align-middle w-25">
                         <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
@@ -136,6 +134,7 @@
                         <option value="기타"<c:if test="${ keyword eq '기타' }">selected="selected"</c:if>>기타</option>
                     </select>
                     <button type="submit" class="btn btn-dark d-inline align-middle"><i class="bi bi-search"></i> 검색</button>
+                    <button type="button" class="btn btn-light d-inline align-middle" onclick="location.href='${ path }/user_qna_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
                 </form>
             </div>
         </div>

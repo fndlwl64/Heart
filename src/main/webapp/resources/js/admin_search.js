@@ -21,6 +21,7 @@ $(document).ready(function() {
 	    	$('.search input[type=text]').attr("name", "keyword");
 	    	$('.search select.w-50').attr("name", "");	    	
 		}
+		$('.search input[type=text]').val('');
 	});
 });
 
