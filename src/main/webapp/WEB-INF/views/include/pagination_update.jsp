@@ -3,7 +3,9 @@
 
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center">
-
+        
+            <c:out value="${ url }" />
+            <c:out value="1" />
             <!-- 처음으로 -->
             <c:if test="${ paging.page eq 1 }"><li class="page-item disabled"></c:if>
             <c:if test="${ paging.page gt 1 }"><li class="page-item"></c:if>
