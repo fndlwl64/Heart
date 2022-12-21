@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="QnaDAO">
+
+	<!-- 
+	////////////////////////////////////////////////////////////////////////////////////////////  
+	// QNA
+	////////////////////////////////////////////////////////////////////////////////////////////  	
+	-->
+	<sql id="qna_select">
+       SELECT LEVEL, 
+	       board_no, 
+	       board_parentNo, 
+	       board_group,
+	       board_category,
+	       board_id,
+	       board_hit,
+	       board_title,
+	       board_content,
+	       board_secret,
+	       board_pwd, 
+	       board_regdate,
+	       board_update,
+	       board_state,
+	       board_img1,
+	       board_img2
+	</sql>
+	<sql id="qna_keyword">
+		LIKE '%' || #{keyword} || '%'
+	</sql>
+	<sql id="qna_hierarchy">
+		START WITH board_parentNo = 0
+		CONNECT BY PRIOR board_no = board_parentNo
+		ORDER SIBLINGS BY board_group DESC
+	</sql>
+	
+	<!-- qna : list -->
+	<select id="qna_list" parameterType="hashMap" resultType="QnaDTO">
+		<include refid="qna_select" /> 
+			FROM (SELECT b.*, ROW_NUMBER() OVER(ORDER BY board_no DESC) rnum FROM heartpet_board b
+		<where>
+		 <choose>
+            <when test="field.equals('allSearch') and keyword != ''"> (board_title <include refid="qna_keyword" />) OR (board_content <include refid="qna_keyword" />) OR (board_category <include refid="qna_keyword" />) OR (board_id <include refid="qna_keyword" />)</when>
+            <when test="field.equals('title') and keyword != ''"> board_title <include refid="qna_keyword" /></when>
+            <when test="field.equals('content') and keyword != ''"> board_content <include refid="qna_keyword" /></when>
+            <when test="field.equals('category') and keyword != ''"> board_category <include refid="qna_keyword" /></when>
+            <when test="field.equals('id') and keyword != ''"> board_id <include refid="qna_keyword" /></when>
+         </choose>
+         </where>
+         <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo} ]]>
+		 <include refid="qna_hierarchy" /> 
+         <choose>
+            <when test="order.equals('no_desc')">, board_no DESC</when>
+            <when test="order.equals('date_desc')">, board_regdate DESC</when>
+            <when test="order.equals('hit_desc')">, board_hit DESC</when>
+            <when test="order.equals('title_desc')">, board_title DESC</when>        
+         </choose>
+	</select>
+	
+	<!-- qna : content -->
+	<update id="qna_hit" parameterType="int">
+		UPDATE heartpet_board 
+			SET board_hit = board_hit + 1 
+			WHERE board_no = #{ board_no }
+	</update>	
+	<select id="qna_content" parameterType="int" resultType="QnaDTO">
+		<include refid="qna_select" /> 
+			FROM heartpet_board 
+			WHERE board_no = #{ board_no }
+		<include refid="qna_hierarchy" />
+	</select>
+	
+	<!-- qna : count : 게시글 개수 -->
+	<select id="qna_count" parameterType="hashMap" resultType="int">
+		SELECT COUNT(*) 
+            FROM heartpet_board
+		<where>
+		 	<choose>
+		 		<when test="field == '' and keyword == ''"></when>
+				<when test="field.equals('allSearch') and keyword != ''"> (board_title <include refid="qna_keyword" />) or (board_content <include refid="qna_keyword" />) or (board_category <include refid="qna_keyword" />) or (board_id <include refid="qna_keyword" />)</when>
+				<when test="field.equals('title') and keyword != ''"> board_title <include refid="qna_keyword" /></when>
+				<when test="field.equals('content') and keyword != ''"> board_content <include refid="qna_keyword" /></when>
+				<when test="field.equals('category') and keyword != ''"> board_category <include refid="qna_keyword" /></when>
+				<when test="field.equals('id') and keyword != ''"> board_id <include refid="qna_keyword" /></when>
+			</choose>
+        </where>
+	</select>
+	
+	<!-- qna : insert -->
+	<insert id="qna_insert" parameterType="QnaDTO">
+		<selectKey resultType="int" keyProperty="board_no" order="BEFORE">
+		SELECT MAX(board_no)+1 FROM heartpet_board
+		</selectKey>
+		INSERT INTO heartpet_board 
+			VALUES (#{ board_no },
+			#{ board_parentNo },
+			<if test="board_parentNo == 0"> #{ board_no },</if>
+			<if test="board_parentNo != 0"> #{ board_group },</if>
+			#{ board_category }, 
+			#{ board_id }, 
+			default, 
+			#{ board_title },
+			#{ board_content }, 
+			#{ board_secret }, 
+			#{ board_pwd }, 
+			sysdate, 
+			'', 
+			default,
+			#{ board_img1 }, 
+			#{ board_img2 })
+	</insert>
+		
+	<!-- qna : update -->
+	<update id="qna_update" parameterType="QnaDTO">
+		UPDATE heartpet_board 
+			SET board_category = #{ board_category }, 
+			board_title = #{ board_title }, 
+			board_content = #{ board_content }, 
+			board_secret = #{ board_secret }, 
+			board_update = sysdate
+			<if test="board_img1 != null">, board_img1 = #{ board_img1 } </if> 
+			<if test="board_img2 != null">, board_img2 = #{ board_img2 } </if> 
+            WHERE board_no = #{ board_no }
+	</update>
+	
+	<!-- qna : delete -->
+	<delete id="qna_delete" parameterType="int">
+		UPDATE heartpet_board 
+			SET board_title = '삭제된 게시글입니다.', 
+			board_content = '삭제된 게시글입니다.', 
+			board_secret = 'Y',
+			board_state = 'disabled',
+			board_img1 = '',
+			board_img2 = ''
+            WHERE board_no = #{ board_no }
+	</delete>
+	
+    <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////  
+    // COMMENT
+    ////////////////////////////////////////////////////////////////////////////////////////////    
+    -->
+    <!-- Comment : insert 댓글 입력 -->     
+    <insert id="qna_comment_insert" parameterType="QnaCommentDTO">
+        <selectKey resultType="int" keyProperty="comment_commentno" order="BEFORE">
+        SELECT NVL(MAX(comment_commentno), 0)+1 
+            FROM heartpet_board_comment
+        </selectKey>
+        INSERT INTO heartpet_board_comment 
+            VALUES (#{ comment_commentno },
+            #{ comment_boardno },
+            #{ comment_id },
+            #{ comment_content },
+            sysdate)
+    </insert>
+    
+    <!-- Comment : list 댓글 목록 --> 
+    <select id="qna_comment_list" parameterType="int" resultType="QnaCommentDTO">
+        SELECT * 
+            FROM heartpet_board_comment 
+            WHERE comment_boardno = #{ board_no } 
+            ORDER BY comment_commentno
+    </select>
+        
+    <!-- Comment : count 댓글 개수 -->    
+    <select id="qna_comment_count" parameterType="int" resultType="int">
+        SELECT COUNT(*)
+            FROM heartpet_board_comment
+            WHERE comment_boardno = #{ board_no }
+    </select>
+    
+    <!-- Comment : delete  -->
+    <delete id="qna_comment_delete" parameterType="int">
+        DELETE FROM heartpet_board_comment
+            WHERE comment_commentno = #{ comment_commentno }
+    </delete>
+    
+    <!-- 
+	////////////////////////////////////////////////////////////////////////////////////////////  
+	// FNQ
+	////////////////////////////////////////////////////////////////////////////////////////////  	
+    -->
+	<!-- fnq : count 게시글 개수 + 검색 -->
+	<select id="fnq_count" parameterType="hashMap" resultType="int">
+		SELECT COUNT(*) 
+            FROM heartpet_fnq
+        <where>
+	        <choose>
+				<when test="field == '' and keyword == ''"></when>
+				<when test="field.equals('allSearch') and keyword != ''"> (fnq_category <include refid="qna_keyword" />) OR (fnq_question <include refid="qna_keyword" />) OR (fnq_answer <include refid="qna_keyword" />)</when>
+				<when test="field.equals('category') and keyword != ''"> fnq_category <include refid="qna_keyword" /></when>
+				<when test="field.equals('question') and keyword != ''"> fnq_question <include refid="qna_keyword" /></when>
+				<when test="field.equals('answer') and keyword != ''"> fnq_answer <include refid="qna_keyword" /></when>
+	        </choose>
+        </where>
+	</select>
+	
+	<!-- fnq : list + 검색 -->
+	<select id="fnq_list" parameterType="hashMap" resultType="FnqDTO">
+		SELECT * 
+            FROM (SELECT f.*, ROW_NUMBER() OVER(ORDER BY fnq_no DESC) rnum FROM heartpet_fnq f
+        <where>
+	        <choose>
+				<when test="field == '' and keyword == ''"></when>
+				<when test="field.equals('allSearch') and keyword != ''"> (fnq_category <include refid="qna_keyword" />) OR (fnq_question <include refid="qna_keyword" />) OR (fnq_answer <include refid="qna_keyword" />)</when>
+				<when test="field.equals('category') and keyword != ''"> fnq_category <include refid="qna_keyword" /></when>
+				<when test="field.equals('question') and keyword != ''"> fnq_question <include refid="qna_keyword" /></when>
+				<when test="field.equals('answer') and keyword != ''"> fnq_answer <include refid="qna_keyword" /></when>
+	        </choose>
+        </where>
+         <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo}]]>
+       	 <choose>
+       		<when test="order == ''"></when>
+       		<when test="order.equals('no_desc')"> ORDER BY fnq_no DESC </when>         
+       		<when test="order.equals('question_desc')"> ORDER BY fnq_question DESC</when>         
+       	 </choose>
+	</select>
+	
+	<!-- fnq : content -->
+	<select id="fnq_content" parameterType="int" resultType="FnqDTO">
+		SELECT * 
+			FROM heartpet_fnq 
+			WHERE fnq_no = #{ fnq_no }
+	</select>
+	
+	<!-- fnq : insert -->	
+	<insert id="fnq_insert" parameterType="FnqDTO">
+        <selectKey resultType="int" keyProperty="fnq_no" order="BEFORE">
+		SELECT MAX(fnq_no)+1 
+			FROM heartpet_fnq
+        </selectKey>
+		INSERT INTO heartpet_fnq 
+            VALUES (#{ fnq_no }, 
+            #{ fnq_category }, 
+            #{ fnq_question }, 
+            #{ fnq_answer })
+	</insert>
+	
+	<!-- fnq : update -->
+	<update id="fnq_update" parameterType="FnqDTO">
+		UPDATE heartpet_fnq 
+			SET fnq_category = #{ fnq_category }, 
+			fnq_question = #{ fnq_question }, 
+			fnq_answer = #{ fnq_answer }
+			WHERE fnq_no = #{ fnq_no }
+	</update>
+	
+	<!-- fnq : delete -->
+	<delete id="fnq_delete" parameterType="int">
+		DELETE FROM heartpet_fnq 
+            WHERE fnq_no = #{ fnq_no }
+	</delete>
+	
+</mapper>
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<settings>
+	    <setting name="callSettersOnNulls" value="true"/>
+	</settings>
+	<!-- Alias 설정 : 별칭 설정 -->
+	<typeAliases>
+		<!-- QnA -->
+		<typeAlias type="com.heartpet.action.QnaDAO" alias="QnaDAO"/>
+		<typeAlias type="com.heartpet.model.QnaDTO" alias="QnaDTO"/>
+		<typeAlias type="com.heartpet.model.FnqDTO" alias="FnqDTO"/>
+		<typeAlias type="com.heartpet.model.QnaCommentDTO" alias="QnaCommentDTO"/>
+		<!-- Review -->
+		<typeAlias type="com.heartpet.action.ReviewDAO" alias="ReviewDAO"/>
+		<typeAlias type="com.heartpet.model.ReviewDTO" alias="ReviewDTO"/>
+		<typeAlias type="com.heartpet.model.ReviewCommentDTO" alias="ReviewCommentDTO"/>
+		<!-- Animal -->
+		<typeAlias type="com.heartpet.action.AnimalDAO" alias="AnimalDAO"/>
+		<typeAlias type="com.heartpet.model.AnimalDTO" alias="AnimalDTO"/>
+		<!-- User -->
+		<typeAlias type="com.heartpet.model.UserDTO" alias="UserDTO"/>
+		<typeAlias type="com.heartpet.action.UserDAO" alias="UserDAO"/>
+		<!-- AdoptReg -->
+		<typeAlias type="com.heartpet.model.AdoptRegDTO" alias="AdoptRegDTO"/>
+		<typeAlias type="com.heartpet.action.AdoptRegDAO" alias="AdoptRegDAO"/>
+		<!-- Wish -->
+		<typeAlias type="com.heartpet.model.WishDTO" alias="WishDTO"/>
+		<typeAlias type="com.heartpet.action.WishDAO" alias="WishDAO"/>
+	</typeAliases>	
+</configuration>
+

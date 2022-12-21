@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="AnimalDAO">
+	<sql id="animal_select">
+	<![CDATA[ 
+		animal_no,         
+		animal_name,       
+		animal_species,    
+		animal_gender,     
+		animal_neutered,   
+		animal_vaccination,
+		animal_age,        
+		animal_place,      
+		animal_size,       
+		animal_weight,     
+		animal_caution,    
+		animal_img1,       
+		animal_img2,       
+		animal_img3,       
+		animal_status,     
+		animal_tag,
+		animal_state   
+	]]>
+	</sql>
+	<select id="animal_count" parameterType="string"
+		resultType="int">
+		select max(animal_no) from heartpet_animal
+		<if test="null != value and !''.equals(value)">
+			where animal_tag = #{animal_tag}
+		</if>
+	</select>
+	<select id="animal_countPaging" parameterType="hashmap"
+		resultType="int">
+		select count(animal_no) from heartpet_animal
+		where animal_tag =
+		#{animalDTO.animal_tag} and <![CDATA[ animal_state >= #{animalDTO.animal_state}]]>
+		<if
+			test="animalDTO.animal_size != null and !animalDTO.animal_size.equals('')">
+			and animal_size = #{animalDTO.animal_size }
+		</if>
+		<if
+			test="animalDTO.animal_neutered != null and !animalDTO.animal_neutered.equals('')">
+			and animal_neutered = #{animalDTO.animal_neutered }
+		</if>
+		<if
+			test="animalDTO.animal_species != null and !animalDTO.animal_species.equals('')">
+			and animal_species = #{animalDTO.animal_species }
+		</if>
+		<if
+			test="animalDTO.animal_age != 0 and animalDTO.animal_age lt 6">
+			and animal_age between (${animalDTO.animal_age } -1) and ${animalDTO.animal_age }
+		</if>
+		<if
+			test="animalDTO.animal_age == 6">
+			<![CDATA[and animal_age >= 5 ]]>
+		</if>
+		<if
+			test="animalDTO.animal_gender != null and !animalDTO.animal_gender.equals('')">
+			and animal_gender = #{animalDTO.animal_gender }
+		</if>
+		<if
+			test="animalDTO.animal_weight != 0">
+			<![CDATA[and animal_weight >= ${animalDTO.animal_weight} ]]>
+		</if>
+		<if
+			test="animalDTO.animal_status != null and !animalDTO.animal_status.equals('')">
+			and animal_status = #{animalDTO.animal_status}
+		</if>
+		<if
+			test="animalDTO.animal_place != null and !animalDTO.animal_place.equals('')">
+			and animal_place like '%' || #{animalDTO.animal_place } || '%'
+		</if>
+		<if
+			test="keyword != null and !keyword.equals('')">
+			and animal_place like '%' || #{keyword } || '%'
+		</if>
+	</select>
+	<select id="animal_content" resultType="AnimalDTO">
+		select * from
+		heartpet_animal where animal_no = #{animal_no}
+	</select>
+	<select id="animal_list" resultType="AnimalDTO">
+		select * from
+		heartpet_animal order by animal_no desc
+	</select>
+	<select id="animal_join_status" parameterType="String" resultType="Integer">
+		select animal_no from
+		heartpet_animal where animal_status = #{animal_status} order by animal_no desc 
+	</select>
+	<select id="animal_listTag" resultType="AnimalDTO">
+		select * from
+		heartpet_animal where animal_tag = #{animal_tag} order by animal_no desc
+	</select>
+	<select id="animal_listTagUser" resultType="AnimalDTO">
+		select * from
+		heartpet_animal
+		where animal_tag = #{animal_tag} and not animal_status
+		= '입양 완료'
+		order by animal_no desc
+	</select>
+	<select id="animal_listTagPaging" parameterType="hashmap"
+		resultType="AnimalDTO">
+		select 
+		<include refid="animal_select"></include>
+		from
+		(
+		select a.*, row_number() 
+		<choose>
+			<when test="sort == null or sort.equals('')">
+				over(order by animal_no desc) as rnum
+			</when>
+			<when test="sort != null and sort.equals('size')">
+				over(order by decode(animal_size, '대형' , 1 , '중형' , 2 , '소형' , 3 , 4)) as rnum
+			</when>
+			<otherwise>
+				over(order by animal_${sort} desc) as rnum
+			</otherwise>
+		</choose>
+		from heartpet_animal a
+		where animal_tag = #{animalDTO.animal_tag} and <![CDATA[ animal_state >= #{animalDTO.animal_state}]]>
+		<if
+			test="animalDTO.animal_size != null and !animalDTO.animal_size.equals('')">
+			and animal_size = #{animalDTO.animal_size }
+		</if>
+		<if
+			test="animalDTO.animal_neutered != null and !animalDTO.animal_neutered.equals('')">
+			and animal_neutered = #{animalDTO.animal_neutered }
+		</if>
+		<if
+			test="animalDTO.animal_species != null and !animalDTO.animal_species.equals('')">
+			and animal_species = #{animalDTO.animal_species }
+		</if>
+		<if
+			test="animalDTO.animal_age != 0 and animalDTO.animal_age lt 6">
+			and animal_age between (${animalDTO.animal_age } -1) and ${animalDTO.animal_age }
+		</if>
+		<if
+			test="animalDTO.animal_age == 6">
+			<![CDATA[and animal_age >= 5 ]]>
+		</if>
+		<if
+			test="animalDTO.animal_gender != null and !animalDTO.animal_gender.equals('')">
+			and animal_gender = #{animalDTO.animal_gender }
+		</if>
+		<if
+			test="animalDTO.animal_weight != 0">
+			<![CDATA[and animal_weight >= ${animalDTO.animal_weight} ]]>
+		</if>
+		<if
+			test="animalDTO.animal_status != null and !animalDTO.animal_status.equals('')">
+			and animal_status = #{animalDTO.animal_status}
+		</if>
+		<if
+			test="animalDTO.animal_place != null and !animalDTO.animal_place.equals('')">
+			and animal_place like '%' || #{animalDTO.animal_place } || '%'
+		</if>
+		<if
+			test="keyword != null and !keyword.equals('')">
+			and animal_place like '%' || #{keyword } || '%'
+		</if>
+		)
+		where rnum between ${startNo} and ${endNo}
+	</select>
+	<insert id="animal_insert" parameterType="AnimalDTO">
+		<selectKey resultType="int" keyProperty="animal_no"
+			order="BEFORE">
+			select max(animal_no) from heartpet_animal
+		</selectKey>
+		insert into heartpet_animal
+		values
+		(
+		#{animal_no}+1,
+		#{animal_name},
+		#{animal_species},
+		#{animal_gender},
+		#{animal_neutered},
+		#{animal_vaccination},
+		#{animal_age},
+		#{animal_place},
+		#{animal_size},
+		#{animal_weight},
+		#{animal_caution},
+		#{animal_img1},
+		#{animal_img2},
+		#{animal_img3},
+		#{animal_status},
+		#{animal_tag},
+		sysdate,
+		'',
+		1
+		)
+	</insert>
+	<update id="animal_update" parameterType="AnimalDTO">
+		update heartpet_animal
+		set
+		animal_name = #{animal_name},
+		animal_species = #{animal_species},
+		animal_gender = #{animal_gender},
+		animal_neutered = #{animal_neutered},
+		animal_vaccination = #{animal_vaccination},
+		animal_age = #{animal_age},
+		animal_place = #{animal_place},
+		animal_size = #{animal_size},
+		animal_weight = #{animal_weight},
+		animal_caution = #{animal_caution},
+		animal_img1 = #{animal_img1},
+		animal_img2 = #{animal_img2},
+		animal_img3
+		= #{animal_img3},
+		animal_status = #{animal_status},
+		animal_update =
+		sysdate
+		where animal_no = #{animal_no}
+	</update>
+	<update id="animal_updateStatus" parameterType="AnimalDTO">
+		update
+		heartpet_animal
+		set
+		animal_status = #{animal_status}
+		where animal_no =
+		#{animal_no}
+	</update>
+	<update id="animal_delete" parameterType="int">
+		update heartpet_animal set animal_state = 0 where animal_no = #{animal_no}
+	</update>
+	<!-- <delete id="animal_delete">
+		delete from heartpet_animal where animal_no =
+		#{animal_no}
+	</delete> -->
+	
+	
+	<!-- 
+	/////////////////////////////////////////////////////////////
+	Review에서 사용 중 // 삭제 및 수정 금지 : @남윤지 : 필요 시 물어보세요...
+	/////////////////////////////////////////////////////////////
+	-->
+	<resultMap type="hashMap" id="animalMap">
+		<result property="animal_name" column="animal_name" />
+		<result property="animal_tag" column="animal_tag" />		
+		<result property="animal_species" column="animal_species" />		
+	</resultMap>
+	
+	<select id="animal_name" parameterType="int" resultMap="animalMap">
+		SELECT animal_name, animal_tag, animal_species 
+			FROM heartpet_animal 
+			WHERE animal_no = #{ animal_no }
+	</select>
+</mapper>
