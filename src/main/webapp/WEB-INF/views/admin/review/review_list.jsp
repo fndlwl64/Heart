@@ -11,6 +11,7 @@
 <c:set var="cList" value="${ commentList }"/>
 <c:set var="link_address" value="${pageContext.request.contextPath}/admin_review_list" />
 <c:set var="url" value="&field=${ field }&keyword=${ keyword }&order=${ order }" />
+<c:out value="${ url }" />
 <c:set var="now" value="<%=new java.util.Date()%>" />
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
 
@@ -42,11 +43,10 @@
                     <option value="name"<c:if test="${ field eq 'name' }">selected="selected"</c:if>>반려동물명</option>
                     <option value="id"<c:if test="${ field eq 'id' }">selected="selected"</c:if>>작성자</option>
                 </select>
-                 <input type="text" class="form-control d-inline align-middle w-50" value="${ keyword }" name="keyword" />
                 <span class="search-name">검색어</span> 
                 <input name="keyword" class="form-control d-inline align-middle keyword" value="${ keyword }">
                 <button class="btn btn-dark d-inline align-middle ms-1" type="submit"><i class="bi bi-search"></i> 검색</button>
-                <button class="btn btn-light d-inline align-middle ms-1" type="submit"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
+                <button class="btn btn-light d-inline align-middle ms-1" type="button" onclick="location.href='${ path }/admin_review_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
            </div>
         </form>
         <br>
