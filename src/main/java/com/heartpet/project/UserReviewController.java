@@ -57,7 +57,7 @@ public class UserReviewController {
     @RequestMapping("/user_review_list")
     public String user_review_list(@RequestParam(value = "field", required = false) String field,
             @RequestParam(value = "keyword", required = false) String keyword,
-            @RequestParam(value = "animal_tag", required = false) String animal_tag,
+            @RequestParam(value = "animal_tag", required = false, defaultValue = "") String animal_tag,
             @RequestParam(value = "order", required = false) String order, 
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         
@@ -75,11 +75,13 @@ public class UserReviewController {
 
         // animal name 추출
         // 전체 선택
-        if (animal_tag == null) {
+        if (animal_tag == null || animal_tag.equals("")) {
             totalRecord = this.reviewDAO.listReviewCount(field, keyword);
             paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
             reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
+
         } else { // dog/cat 선택
+            System.out.println("animal_tag >>>>>>> " + animal_tag);
             totalRecord = this.reviewDAO.listReviewCount(animal_tag);
             paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
             reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), animal_tag, order);

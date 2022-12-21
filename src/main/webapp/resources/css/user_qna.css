@@ -84,7 +84,7 @@
 
 /* qna_content */
 .qna-content {
-    width: 50%;
+    width: 100%;
     margin: auto;
     padding: 1rem;
 }
@@ -146,9 +146,8 @@
     display: flex;
     padding: 1rem 2rem;
     min-height: 400px;
-    align-content: center;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: flex-start;
+    flex-direction: row;
 }
 
 .qna-content .content-body .qna-image {

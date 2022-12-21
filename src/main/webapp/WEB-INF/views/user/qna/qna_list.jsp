@@ -11,7 +11,7 @@
 <c:set var="cList" value="${ commentList }" />
 <c:set var="link_address" value="${pageContext.request.contextPath}/user_qna_list" />
 <c:set var="now" value="<%=new java.util.Date()%>" />
-<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
+<fmt:formatDate value="${ now }" pattern="yyyy-MM-dd" var="today" />
 
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_qna.css" />
@@ -26,11 +26,10 @@
     </div>
 
     <%-- 정렬 --%>
-    <form class="order_form" method="get" action="${path}/user_qna_list">    
     <div class="qna-section">
         <div class="row">
             <div class="col total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
-                <select class="form-select form-select-sm order" name="order" onchange="this.form.submit()">
+                <select class="form-select form-select-sm order" name="order" onchange="location.href='${path}/user_qna_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">
                     <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
                     <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신등록순</option>
                     <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>
@@ -39,7 +38,6 @@
             </div>
         </div>
     </div>
-    </form>
 
     <%-- 아코디언 --%>
     <!-- 문의하기 -->

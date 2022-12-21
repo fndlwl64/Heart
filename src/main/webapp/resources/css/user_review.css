@@ -41,6 +41,10 @@
 	background-color: #FF9E9E;
 	border: #FF9E9E;
 }
+.animal-button:active,
+.animal-button:focus-visible {
+	background-color: pink !important;
+}
 
 .review-section .title h6 {
     font-weight: bold;

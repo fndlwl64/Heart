@@ -24,8 +24,8 @@
             FROM (SELECT r.*, a.animal_name, ROW_NUMBER() OVER(ORDER BY review_no DESC) rnum <include refid="review_join" />
 		<where>
 			<choose>
-				<when test="field.equals('allSearch') and keyword != ''"> (review_title <include refid="review_keyword" />) OR (review_content <include refid="review_keyword" />) 
-				OR (review_animal_tag <include refid="review_keyword" />) OR (review_id <include refid="review_keyword" />) OR (animal_name <include refid="review_keyword" />)</when>
+				<when test="field.equals('allSearch') and keyword != ''"> (review_title <include refid="review_keyword" /> OR review_content <include refid="review_keyword" />
+				OR review_animal_tag <include refid="review_keyword" /> OR review_id <include refid="review_keyword" /> OR animal_name <include refid="review_keyword" />)</when>
 				<when test="field.equals('category') and keyword != ''"> review_animal_tag <include refid="review_keyword" /></when>
 				<when test="field.equals('title') and keyword != ''"> review_title <include refid="review_keyword" /></when>
 				<when test="field.equals('content') and keyword != ''"> review_content <include refid="review_keyword" /></when>
@@ -48,14 +48,13 @@
             FROM (SELECT r.*, a.animal_name <include refid="review_join" />
         <where>
             <choose>
-				<when test="field == '' and keyword == ''"></when>
-				<when test="field.equals('allSearch') and keyword != ''"> (review_title <include refid="review_keyword" />) OR (review_content <include refid="review_keyword" />) 
-				OR (review_animal_tag <include refid="review_keyword" />) OR (review_id <include refid="review_keyword" />) OR (animal_name <include refid="review_keyword" />)</when>
-				<when test="field.equals('category') and keyword != ''"> review_animal_tag <include refid="review_keyword" /></when>
-				<when test="field.equals('title') and keyword != ''"> review_title <include refid="review_keyword" /></when>
-				<when test="field.equals('content') and keyword != ''"> review_content <include refid="review_keyword" /></when>
-				<when test="field.equals('id') and keyword != ''"> review_id <include refid="review_keyword" /></when>
-				<when test="field.equals('name') and keyword != ''"> animal_name <include refid="review_keyword" /></when>
+                <when test="field.equals('allSearch') and keyword != ''"> (review_title <include refid="review_keyword" />) OR (review_content <include refid="review_keyword" />) 
+                OR (review_animal_tag <include refid="review_keyword" />) OR (review_id <include refid="review_keyword" />) OR (animal_name <include refid="review_keyword" />)</when>
+                <when test="field.equals('category') and keyword != ''"> review_animal_tag <include refid="review_keyword" /></when>
+                <when test="field.equals('title') and keyword != ''"> review_title <include refid="review_keyword" /></when>
+                <when test="field.equals('content') and keyword != ''"> review_content <include refid="review_keyword" /></when>
+                <when test="field.equals('id') and keyword != ''"> review_id <include refid="review_keyword" /></when>
+                <when test="field.equals('name') and keyword != ''"> animal_name <include refid="review_keyword" /></when>
             </choose>
         </where>
         )

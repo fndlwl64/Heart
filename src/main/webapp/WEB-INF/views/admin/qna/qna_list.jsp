@@ -49,11 +49,10 @@
         <br>
         
        <%-- 정렬 & 게시물 수 --%>
-    <form class="order_form" method="get" action="${path}/admin_qna_list">    
        <div class="qna-section">
             <div class="total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
             <div class="qna_order">
-                <select class="form-select form-select-sm" name="order" onchange="this.form.submit()">
+                <select class="form-select form-select-sm" name="order" onchange="location.href='${ path }/user_qna_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">
                     <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
                     <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신등록순</option>
                     <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>
@@ -61,7 +60,6 @@
                 </select>
             </div>
         </div>
-        </form>
         
         <%-- 검색 결과 테이블 --%>
         <div class="lists">
@@ -94,17 +92,19 @@
 		                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if>
 		                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
 		                    <c:if test="${ list.board_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>
-		                    <c:if test="${ cList[status.index] gt 0 }"><span>[${ cList[status.index] }]</span></c:if>
+		                    <c:if test="${ cList[status.index] gt 0 }"><span class="comment-count">[${ cList[status.index] }]</span></c:if>
                         </a>
                     </td>
                     <td><c:if test="${ list.board_id eq 'admin' }"><span id="admin_id">관리자</span></c:if>
                     <c:if test="${ list.board_id ne 'admin' }"><span>${ list.board_id }</span></c:if></td>
                     <td>${ list.board_hit }</td>
-                    <td>${ list.board_regdate.substring(0,10) }</td>
+                    <td><small>${ list.board_regdate.substring(0,10) }</small></td>
                     <td>
                     	<c:set var="deleteAddr" value="${ path }/admin_qna_delete?board_no=${ list.board_no }"/>
+                    	<c:if test="${ list.board_state eq 'abled' }">
                         <button class="btn btn-outline-primary btn-sm" onclick="location.href='${path}/admin_qna_reply_insert?board_parentNo=${ list.board_no }&board_group=${ list.board_group }'">답변</button>
                         <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }">삭제</button>
+                        </c:if>
                     </td>
                 </tr>
                 </c:forEach>
