@@ -25,9 +25,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.ReviewDAO;
+import com.heartpet.action.UserDAO;
 import com.heartpet.model.PageDTO;
 import com.heartpet.model.ReviewCommentDTO;
 import com.heartpet.model.ReviewDTO;
+import com.heartpet.model.UserDTO;
 import com.heartpet.util.CheckMimeType;
 import com.heartpet.util.FileUploadImage;
 
@@ -39,6 +41,9 @@ public class UserReviewController {
 
     @Autowired
     private AnimalDAO animalDAO;
+    
+    @Autowired
+    private UserDAO userDAO;
 
     // 한 페이지당 보여질 게시물의 수
     private final int rowsize = 6;
@@ -104,8 +109,9 @@ public class UserReviewController {
     public String user_review_content(@RequestParam("review_no") int review_no, Model model) {
         ReviewDTO reviewContent = this.reviewDAO.contentReview(review_no);
         this.reviewDAO.hitReview(review_no);
+        UserDTO userContent = this.userDAO.getUserInfo(reviewContent.getReview_id());
         model.addAttribute("reviewContent", reviewContent);
-        System.out.println("here");
+        model.addAttribute("userContent", userContent);
         return "user/review/review_content";
     }
 

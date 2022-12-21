@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ include file="../../include/pagination_update.jsp" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="rList" value="${ reviewList }"/>
 <c:set var="total" value="${ total }"/>
@@ -11,8 +12,7 @@
 <c:set var="cList" value="${ commentList }"/>
 <c:set var="link_address" value="${pageContext.request.contextPath}/admin_review_list" />
 <c:set var="url" value="&field=${ field }&keyword=${ keyword }&order=${ order }" />
-<c:out value="${ url }" />
-<c:set var="now" value="<%=new java.util.Date()%>" />
+<c:set var="now" value="<%= new java.util.Date() %>" />
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
 
 <!-- modal delete Function 추가 시 data-id 검색 -> 주소값만 수정하세요....
@@ -112,8 +112,7 @@
 		<jsp:include page="../../include/deleteModal.jsp" />
         
         <%-- 페이징처리 --%>
-        <jsp:include page="../../include/pagination_update.jsp" />
-        
+        <%@ include file="../../include/pagination_update.jsp" %>
     </div>
     <div class="space"> </div>
 </body>

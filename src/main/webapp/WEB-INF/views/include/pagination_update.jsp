@@ -2,10 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
     <nav aria-label="Page navigation">
-        <ul class="pagination justify-content-center">
+        <ul class="pagination justify-content-center mb-5">
         
-            <c:out value="${ url }" />
-            <c:out value="1" />
             <!-- 처음으로 -->
             <c:if test="${ paging.page eq 1 }"><li class="page-item disabled"></c:if>
             <c:if test="${ paging.page gt 1 }"><li class="page-item"></c:if>

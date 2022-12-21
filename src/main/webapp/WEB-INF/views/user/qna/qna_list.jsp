@@ -21,9 +21,7 @@
 <div id="qna-contents" class="qna-contents">
     <div class="qna-section">
         <div class="row">
-            <div class="col-2 space"></div>
-            <div class="col-8 title">QnA</div>
-            <div class="col-2 space"></div>
+            <div class="col title">QnA</div>
         </div>
     </div>
 
@@ -31,8 +29,7 @@
     <form class="order_form" method="get" action="${path}/user_qna_list">    
     <div class="qna-section">
         <div class="row">
-        	<div class="col-2 space"></div>
-            <div class="col-8 total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
+            <div class="col total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
                 <select class="form-select form-select-sm order" name="order" onchange="this.form.submit()">
                     <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
                     <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신등록순</option>
@@ -47,7 +44,7 @@
     <%-- 아코디언 --%>
     <!-- 문의하기 -->
     <div class="qna-board">
-        <table class="table table-bordered">
+        <table class="table table-bordered mb-0">
             <thead>
 	            <tr class="table-light">
 	                <th scope="col" width="10%">No</th>
@@ -105,29 +102,26 @@
 
     <div class="qna-section">
         <div class="row">
-            <div class="col-2 space"></div>
-            <div class="col-8 title btn-insert">
-                <button type="button" class="btn btn-primary" onclick="location.href='${path}/user_qna_insert'"><i class="bi bi-pencil"></i> 작성하기</button>
+            <div class="col title btn-insert">
+                <button type="button" class="btn btn-primary" onclick="location.href='${path}/user_qna_insert'"><i class="bi bi-pencil"></i> 글쓰기</button>
             </div>
-            <div class="col-2 space"></div>
         </div>
     </div>
 
     <%-- search --%>
     <div class="qna-section">
         <div class="row">
-            <div class="col-3 space"></div>
-            <div class="col-6 search">
+            <div class="col search">
                 <form method="get" action="${ path }/user_qna_list">
-                    <select name="field" class="form-select d-inline align-middle w-25">
+                    <select name="field" class="form-select d-inline align-middle">
                         <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
                         <option value="category"<c:if test="${ field eq 'category' }">selected="selected"</c:if>>카테고리</option>
                         <option value="title"<c:if test="${ field eq 'title' }">selected="selected"</c:if>>제목</option>
                         <option value="content"<c:if test="${ field eq 'content' }">selected="selected"</c:if>>내용</option>
                         <option value="id"<c:if test="${ field eq 'id' }">selected="selected"</c:if>>작성자</option>
                     </select>
-                    <input type="text" class="form-control d-inline align-middle w-50" value="${ keyword }" name="keyword" />
-                    <select name="" class="form-select d-none align-middle w-50">
+                    <input type="text" class="form-control d-inline align-middle search-text" value="${ keyword }" name="keyword" />
+                    <select name="" class="form-select d-none align-middle search-select">
                         <option value="입양"<c:if test="${ keyword eq '입양' }">selected="selected"</c:if>>입양</option>
                         <option value="입소"<c:if test="${ keyword eq '입소' }">selected="selected"</c:if>>입소</option>
                         <option value="후원"<c:if test="${ keyword eq '후원' }">selected="selected"</c:if>>후원</option>

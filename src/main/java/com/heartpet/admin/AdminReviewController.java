@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.heartpet.action.ReviewDAO;
+import com.heartpet.action.UserDAO;
 import com.heartpet.model.PageDTO;
 import com.heartpet.model.ReviewDTO;
+import com.heartpet.model.UserDTO;
 import com.heartpet.util.FileUploadImage;
 
 @Controller
@@ -29,6 +31,9 @@ public class AdminReviewController {
     
     @Autowired
     private ReviewDAO reviewDAO;
+    
+    @Autowired
+    private UserDAO userDAO;
 
     // 한 페이지당 보여질 게시물의 수
     private final int rowsize = 10;
@@ -98,7 +103,9 @@ public class AdminReviewController {
     public String admin_review_content(@RequestParam("review_no") int review_no, Model model) {
         ReviewDTO reviewContent = this.reviewDAO.contentReview(review_no);
         this.reviewDAO.hitReview(review_no);
+        UserDTO userContent = this.userDAO.getUserInfo(reviewContent.getReview_id());
         model.addAttribute("reviewContent", reviewContent);
+        model.addAttribute("userContent", userContent);
         return "admin/review/review_content";
     }
     
