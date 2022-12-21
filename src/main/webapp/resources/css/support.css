@@ -1,4 +1,11 @@
 /* support.jsp에서 사용하는 css */
+
+body {
+	font-family: 'Gowun Dodum', sans-serif !important;	
+	margin: 0px;
+	font-size: 17px;
+}
+
 .div1 {
 	height: 775px;
 }
@@ -17,16 +24,15 @@
  
 /* support_insert.jsp에서 사용하는 css */
  
-  .div_sup_insert {
-  	margin: 15px;
-  }
+.div_sup_insert .btn-group {
+	display: block;
+}
  
  .div_sup_insert .support_li {
  	display: inline-block;
  	list-style: none;
  	margin: 15px;
  }
- 
  
 /* admin support_list에서 사용하는 css */
 /*  table 폰트 크기 15px */
@@ -58,6 +64,15 @@
 .container .lists #insert_btn{
 	float: right;
  	clear: right;
+}
+
+.div_sup_insert .sup_img {
+	width: 904px;
+}
+
+.div_sup_insert .sup_table{
+	
+	width: 500px;
 }
  
  
