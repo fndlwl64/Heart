@@ -1,4 +1,8 @@
 /* 전체 div */
+body {
+	overflow-x: hidden;
+}
+
 .container {
     text-align: center;
     margin: auto;
@@ -292,7 +296,7 @@
 .container .search_form .form_box {
 	display: flex;
     border: 1px solid #545a62;
-    width: 80%;
+    width: 70%;
     margin: auto;
     padding: 2%;
     border-radius: 5px;
@@ -333,7 +337,8 @@
 .container .lists {
 	margin-top: 1%;
 	margin-bottom: 1%;
-	width: 100%;
+	width: 70%;
+	margin: auto;
 }
 
 .container .lists tr:hover {

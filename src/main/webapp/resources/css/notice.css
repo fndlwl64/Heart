@@ -63,7 +63,9 @@
 	width: 26%;
 	clear: both;
 }
-
+body {
+	overflow-x: hidden;
+}
 /* admin_notice에서 사용하는 css */
 
 .container .order_form {
