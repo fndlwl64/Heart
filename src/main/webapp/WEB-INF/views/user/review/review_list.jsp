@@ -41,9 +41,9 @@
             <div class="col-8 title">
             	<form action="${path}/user_review_list" method="get" >
             	<input type="hidden" name="animal_tag" />
-			    	<button type="button" class="btn btn-info animal-button" onclick="location.href='${path}/user_review_list'"><i class="bi bi-clipboard-heart"></i> 전체</button>
-			    	<button type="submit" class="btn btn-info animal-button" value="dog" onclick="return animalChange(this.value)"><i class="bi bi-search-heart"></i> 강아지</button>
-			    	<button type="submit" class="btn btn-info animal-button" value="cat" onclick="return animalChange(this.value)"><i class="bi bi-search-heart-fill"></i> 고양이</button>
+			    	<button type="button" class="btn btn-light animal-button" onclick="location.href='${path}/user_review_list'"><i class="bi bi-clipboard-heart"></i> 전체</button>
+			    	<button type="submit" class="btn btn-light animal-button" value="dog" onclick="return animalChange(this.value)"><i class="bi bi-search-heart"></i> 강아지</button>
+			    	<button type="submit" class="btn btn-light animal-button" value="cat" onclick="return animalChange(this.value)"><i class="bi bi-search-heart-fill"></i> 고양이</button>
 		    	</form>
             </div>
             <div class="col-2 space"></div>
@@ -123,9 +123,9 @@
                         <option value="id"<c:if test="${ field eq 'id' }">selected="selected"</c:if>>작성자</option>
                         <option value="animal"<c:if test="${ field eq 'animal' }">selected="selected"</c:if>>반려동물명</option>
                     </select>
-                    <input type="text" class="form-control d-inline align-middle w-50" name="keyword"                    
+                    <input type="text" class="form-control d-inline align-middle w-50 search-text" name="keyword"                    
                         value=<c:if test="${ keyword ne 'dog' && keyword ne 'cat' }">"${ keyword }"</c:if>>
-                    <select name="" class="form-select d-none align-middle w-50">
+                    <select name="" class="form-select d-none align-middle w-50 search-select">
                         <option value="dog"<c:if test="${ keyword eq 'dog' }">selected="selected"</c:if>>강아지</option>
                         <option value="cat"<c:if test="${ keyword eq 'cat' }">selected="selected"</c:if>>고양이</option>
                     </select>

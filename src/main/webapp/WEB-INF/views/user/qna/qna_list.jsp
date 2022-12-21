@@ -132,12 +132,8 @@
         </div>
     </div>
 
-    <div class="space-add"></div>
-
     <!-- 페이징 처리 부분 -->
-	<jsp:include page="../../include/pagination.jsp" />
-
-    <div class="space-add"></div>
+	<%@ include file="../../include/pagination_update.jsp" %>
 
 </div>
 

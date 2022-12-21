@@ -6,11 +6,11 @@
 <c:choose>
 	<c:when test="${ not empty list }"> 
 		<c:set var="semiTitle" value="답변" />
-		<c:set var="buttonText" value="답변달기" />
+		<c:set var="buttonText" value="답변" />
 	</c:when>
 	<c:otherwise> 
 		<c:set var="semiTitle" value="문의" />	
-		<c:set var="buttonText" value="등록하기" />	
+		<c:set var="buttonText" value="등록" />	
 	</c:otherwise>
 </c:choose>
 <!-- list : 부모글 -->
@@ -24,9 +24,7 @@
 <div id="qna-contents" class="qna-contents">
     <div class="qna-section">
         <div class="row">
-            <div class="col-3 space"></div>
-            <div class="col-6 title">${ semiTitle }글 작성하기</div>
-            <div class="col-3 space"></div>
+            <div class="col title">${ semiTitle }글 작성하기</div>
         </div>
     </div>
 
@@ -79,24 +77,22 @@
 				<th class="table-light">이미지</th>
                 <td colspan="2">
                     <div class="d-flex align-middle">
-                        <input type="file" class="form-control" name="board_img" accept="image/gif, image/jpeg, image/png" multiple onchange="fileOption(2, this.name);">
+                        <input type="file" class="form-control" id="image" name="board_img" accept="image/gif, image/jpeg, image/png" multiple onchange="fileOption(2, this.id);">
                     </div>
                 </td>
             </tr>
         </table>
         <div class="qna-section">
             <div class="row">
-                <div class="col-3 space"></div>
-                <div class="col-6 title btn-insert d-flex justify-content-between">
+                <div class="col btn-insert d-flex justify-content-between">
                 	<div>
                     	<button type="button" class="btn btn-dark" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
                     </div>
                     <div>
-	                    <button type="reset" class="btn btn-warning"><i class="bi bi-pencil"></i> 다시작성</button>
+	                    <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
 	                    <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> ${ buttonText }</button>
                     </div>
                 </div>
-                <div class="col-3 space"></div>
             </div>
         </div>
         </form>
