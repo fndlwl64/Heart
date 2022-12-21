@@ -21,22 +21,6 @@ $(function() {
 	let path = '${ path }';
 	commentTable(userId, boardNo, path);	
  	commentCount(boardNo, path);
- 	
-    // 삭제 모달
-    const deleteModal = document.getElementById('deleteModal')
-    const deleteInput = document.getElementById('deleteInput')
-
-    deleteModal.addEventListener('shown.bs.modal', (e) => {
-        deleteInput.focus();
-        let commentNo = $(e.relatedTarget).data('no');
-        let path = $(e.relatedTarget).data('path');
-        let userId = $(e.relatedTarget).data('user');
-        let boardNo = $(e.relatedTarget).data('boardno');
-        
-        $('#deleteFunction').on("click", function() {
-        	commentDelete(commentNo, path, userId, boardNo);
-        });
-    });
 });
 </script> 
 <script type="text/javascript" src="${ path }/resources/js/qna_comment.js"></script>
@@ -88,17 +72,7 @@ $(function() {
             </div>
 			
             <%-- 댓글쓰기 --%>
-            <table class="table table-bordered" id="comment-table">
-                <thead>
-	                <tr>
-	                    <th>작성자</th>
-	                    <th>댓글내용</th>
-	                    <th>작성시간</th>
-	                    <th>삭제</th>
-	                </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
+            <table class="table table-bordered" id="comment-table"></table>
 			<table class="table table-bordered reply-table">
 			    <tr class="align-middle">
 			        <th class="col-2">댓글쓰기</th>
