@@ -90,10 +90,14 @@ function commentTable(userId, boardNo, path) {
               comment += '</tr></thead><tbody>';
               console.log(commentList.length);
               for (let i=0; i<commentList.length; i++) {
-                  comment += '<tr><td><a>' + commentList[i].comment_id + '</a></td>';
+                  if(commentList[i].comment_id == 'admin') {                  
+                    comment += '<tr><td style="vertical-align:middle; color:red;"><a>' + commentList[i].comment_id + '</a></td>';
+                  }else {
+                    comment += '<tr><td style="vertical-align:middle;"><a>' + commentList[i].comment_id + '</a></td>';
+                  }                  
                   comment += '<td style=\"text-align:left\">' + commentList[i].comment_content + '</td>';
                   comment += '<td><small>' + commentList[i].comment_regdate + '</small></td>';
-                  comment += '<td>';
+                  comment += '<td style="vertical-align:middle;">';
                   if(userId == 'admin') {
                        comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-boardno='+boardNo+'>삭제</button>';
                   }else {

@@ -52,11 +52,10 @@
         <br>
         
        <%-- 정렬 & 게시물 수 --%>
-    <form class="order_form" method="get" action="${path}/admin_review_list">    
        <div class="qna-section">
             <div class="total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
             <div class="qna_order">
-                <select class="form-select form-select-sm" name="order" onchange="this.form.submit()">
+                <select class="form-select form-select-sm" name="order" onchange="location.href='${ path }/user_review_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">
                     <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>높은번호순</option>
                     <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신등록순</option>
                     <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>
@@ -64,7 +63,6 @@
                 </select>
             </div>
         </div>
-        </form>
         
         <%-- 검색 결과 테이블 --%>
         <div class="lists">
@@ -90,12 +88,12 @@
 	                    <c:if test="${ list.review_title.length() gt 30 }">${ list.review_title.substring(0,30) }...</c:if>
 	                    <c:if test="${ list.review_title.length() lt 30 }">${ list.review_title }</c:if>
 	                    <c:if test="${ list.review_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>
-                        <c:if test="${ cList[status.index] gt 0 }"><span>[${ cList[status.index] }]</span></c:if>
+                        <c:if test="${ cList[status.index] gt 0 }"><span class="comment-count">[${ cList[status.index] }]</span></c:if>
 	                    </a>
                     </td>
                     <td>${ list.review_id }</td>
                     <td>${ list.review_hit }</td>
-                    <td>${ list.review_regdate.substring(0,10) }</td>
+                    <td><small>${ list.review_regdate.substring(0,10) }</small></td>
                     <td>
                     	<c:set var="deleteAddr" value="${ path }/admin_review_delete?review_no=${ list.review_no }" />
                         <button class="btn btn-outline-success btn-sm" onclick="location.href='${path}/admin_review_update?review_no=${ list.review_no }'">수정</button>
@@ -105,11 +103,8 @@
                 </c:forEach>
             </table>
         </div>
-        
-        <%-- 삭제 모달 // admin_list_view.js 삽입되어 있음
-            modal-dialog-centered 삽입됨
-         --%>
-		<jsp:include page="../../include/deleteModal.jsp" />
+        <%-- 삭제 모달 --%>		
+        <jsp:include page="../../include/deleteModal.jsp" />
         
         <%-- 페이징처리 --%>
         <%@ include file="../../include/pagination_update.jsp" %>

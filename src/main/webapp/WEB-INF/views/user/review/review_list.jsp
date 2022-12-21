@@ -51,12 +51,11 @@
     </div>
 
 	<!-- 정렬 -->
-    <form method="get" action="${path}/user_review_list">
     <div class="review-section">
         <div class="row">
             <div class="col-2 space"></div>
             <div class="col-8 total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
-                <select class="form-select form-select-sm order" name="order" onchange="this.form.submit()">
+                <select class="form-select form-select-sm order" name="order" onchange="location.href='${ path }/user_review_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&animal_tag=${ animal_tag }&order='+this.value;">
                     <option selected="selected" value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신순</option>
                     <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>
                     <option value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호순</option>
@@ -66,7 +65,6 @@
             <div class="col-2 space"></div>
         </div>
     </div>
-	</form>
     
     <div class="review-section review-main mb-5">
        <div class="row">

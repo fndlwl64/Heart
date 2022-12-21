@@ -275,6 +275,11 @@
  	color: #686461;
 }
 
+.list-title .comment-count {
+    color:  #ff4d4d;
+    font-weight: bold;
+}
+
 .searched_list #admin_id {
 	color: red;
 }
