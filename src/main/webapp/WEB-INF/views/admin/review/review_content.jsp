@@ -20,23 +20,6 @@
             let path = '${ path }';
             commentTable(userId, reviewNo, path);    
             commentCount(reviewNo, path);
-            
-            // 삭제 모달
-            const deleteModal = document.getElementById('deleteModal')
-            const deleteInput = document.getElementById('deleteInput')
-    
-            deleteModal.addEventListener('shown.bs.modal', (e) => {
-                deleteInput.focus();
-                let commentNo = $(e.relatedTarget).data('no');
-                let path = $(e.relatedTarget).data('path');
-                let userId = $(e.relatedTarget).data('user');
-                let reviewNo = $(e.relatedTarget).data('reviewno');
-                
-                $('#deleteFunction').on("click", function() {
-                    commentDelete(commentNo, path, userId, reviewNo);
-                });
-            });
-        });   
     </script>
     <script type="text/javascript" src="${ path }/resources/js/review_comment.js"></script>    
 </head>

@@ -47,7 +47,13 @@ public class AdminReviewController {
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 
         if (field == null) { field = ""; }
-        if (keyword == null) { keyword = ""; }
+        if (keyword == null) {
+            keyword = ""; 
+        }else if(keyword == "강아지") { 
+            keyword = "dog";
+        }else if(keyword == "고양이") { 
+            keyword = "cat"; 
+        }
         if (order == null) { order = ""; }
 
         int currentPage = 1; // 현재 페이지 변수

@@ -41,7 +41,7 @@ public class UserReviewController {
     private AnimalDAO animalDAO;
 
     // 한 페이지당 보여질 게시물의 수
-    private final int rowsize = 8;
+    private final int rowsize = 6;
 
     // 전체 게시물의 수
     private int totalRecord = 0;
@@ -55,6 +55,8 @@ public class UserReviewController {
             @RequestParam(value = "animal_tag", required = false) String animal_tag,
             @RequestParam(value = "order", required = false) String order, 
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+        
+        System.out.println("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+keyword);
 
         if (field == null) { field = ""; }
         if (keyword == null) { keyword = ""; }

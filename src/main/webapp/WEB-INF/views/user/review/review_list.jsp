@@ -7,8 +7,11 @@
 <c:set var="total" value="${ total }" />
 <c:set var="paging" value="${ paging }" />
 <c:set var="field" value="${ field }" />
+<c:set var="animal_tag" value="${ animal_tag }" />
+<c:set var="order" value="${ order }" />
 <c:set var="keyword" value="${ keyword }" />
 <c:set var="cList" value="${ commentList }" />
+<c:set var="url" value="&field=${ field }&keyword=${ keyword }&animal_tag=${ animal_tag }&order=${ order }" />
 <c:set var="link_address" value="${pageContext.request.contextPath}/user_review_list" />
 <c:set var="now" value="<%=new java.util.Date()%>" />
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />
@@ -16,6 +19,7 @@
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/user_review.css" />
 <script src="${path}/resources/js/user_review_list.js"></script>
+<script src="${path}/resources/js/admin_search.js"></script>
 
 <%-- 리뷰 --%>
 <%-- review list --%>
@@ -47,16 +51,16 @@
     </div>
 
 	<!-- 정렬 -->
-    <form class="order_form" method="get" action="${path}/user_review_list">
+    <form method="get" action="${path}/user_review_list">
     <div class="review-section">
         <div class="row">
             <div class="col-2 space"></div>
-            <div class="col-7 total-data d-flex"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
-            <div class="col-1 review_order d-flex">
-                <select class="form-select form-select-sm w-75 order" name="order" onchange="this.form.submit()">
-                    <option selected="selected" value="date_desc">최신순</option>
-                    <option value="hit_desc">조회수순</option>
-                    <option value="no_desc">번호순</option>
+            <div class="col-8 total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
+                <select class="form-select form-select-sm order" name="order" onchange="this.form.submit()">
+                    <option selected="selected" value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신순</option>
+                    <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>
+                    <option value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호순</option>
+                    <option value="title_desc"<c:if test="${ order eq 'title_desc' }">selected="selected"</c:if>>가나다순</option>                    
                 </select>
             </div>
             <div class="col-2 space"></div>
@@ -64,14 +68,13 @@
     </div>
 	</form>
     
-
     <div class="review-section">
        <div class="row">
            <div class="col-2 space"></div>
            <div class="col-8 review-card">
            
                <%-- 입양동물 --%>
-                <div class="row row-cols-1 row-cols-md-4 g-4">             
+                <div class="row row-cols-1 row-cols-md-3 g-2">             
                     <c:if test="${ not empty rList }">
                     <c:forEach items="${ rList }" var="list" varStatus="status">
 	                    <div class="col">
@@ -113,18 +116,27 @@
     <%-- search --%>
     <div class="review-section">
         <div class="row">
-            <div class="col-4 space"></div>
-            <div class="col-4 search">
+            <div class="col-3 space"></div>
+            <div class="col-6 search">
                 <form method="get" action="${ path }/user_review_list">
-                    <select name="field" class="form-select d-inline align-middle w-25">
+                    <select name="field" class="form-select d-inline align-middle">
                         <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
                         <option value="category"<c:if test="${ field eq 'category' }">selected="selected"</c:if>>구분</option>
                         <option value="title"<c:if test="${ field eq 'title' }">selected="selected"</c:if>>제목</option>
                         <option value="content"<c:if test="${ field eq 'content' }">selected="selected"</c:if>>내용</option>
                         <option value="id"<c:if test="${ field eq 'id' }">selected="selected"</c:if>>작성자</option>
+                        <option value="animal"<c:if test="${ field eq 'animal' }">selected="selected"</c:if>>반려동물명</option>
                     </select>
-                    <input type="text" class="form-control d-inline align-middle w-50" name="keyword" value="${ keyword }" />
+                    <input type="text" class="form-control d-inline align-middle w-50" 
+                    <c:if test="${ keyword eq 'dog' }">value="강아지"</c:if> 
+                    <c:if test="${ keyword eq 'cat' }">value="고양이"</c:if> 
+                    name="keyword" />
+                    <select name="" class="form-select d-none align-middle w-50">
+                        <option value="dog"<c:if test="${ keyword eq 'dog' }">selected="selected"</c:if>>강아지</option>
+                        <option value="cat"<c:if test="${ keyword eq 'cat' }">selected="selected"</c:if>>고양이</option>
+                    </select>
                     <button type="submit" class="btn btn-dark d-inline align-middle"><i class="bi bi-search"></i> 검색</button>
+                    <button type="button" class="btn btn-light d-inline align-middle" onclick="location.href='${ path }/user_review_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
                 </form>
             </div>
         </div>
@@ -132,9 +144,8 @@
 
     <div class="space-add"></div>
     
-    <!-- 페이징 처리 부분 -->
-    <%-- 페이지 링크 처리 예정 --%>    
-	<jsp:include page="../../include/pagination.jsp" />
+    <%-- 페이징 --%>    
+	<jsp:include page="../../include/pagination_update.jsp" />
 
 </div>
 

@@ -10,6 +10,7 @@
 <c:set var="keyword" value="${ keyword }"/>
 <c:set var="cList" value="${ commentList }"/>
 <c:set var="link_address" value="${pageContext.request.contextPath}/admin_review_list" />
+<c:set var="url" value="&field=${ field }&keyword=${ keyword }&order=${ order }" />
 <c:set var="now" value="<%=new java.util.Date()%>" />
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
 
@@ -41,6 +42,7 @@
                     <option value="name"<c:if test="${ field eq 'name' }">selected="selected"</c:if>>반려동물명</option>
                     <option value="id"<c:if test="${ field eq 'id' }">selected="selected"</c:if>>작성자</option>
                 </select>
+                 <input type="text" class="form-control d-inline align-middle w-50" value="${ keyword }" name="keyword" />
                 <span class="search-name">검색어</span> 
                 <input name="keyword" class="form-control d-inline align-middle keyword" value="${ keyword }">
                 <button class="btn btn-dark d-inline align-middle ms-1" type="submit"><i class="bi bi-search"></i> 검색</button>
@@ -55,11 +57,10 @@
             <div class="total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
             <div class="qna_order">
                 <select class="form-select form-select-sm" name="order" onchange="this.form.submit()">
-                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
+                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>높은번호순</option>
                     <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신등록순</option>
                     <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>
                     <option value="title_desc"<c:if test="${ order eq 'title_desc' }">selected="selected"</c:if>>가나다순</option>
-                    <option value="comment_desc"<c:if test="${ order eq 'comment_desc' }">selected="selected"</c:if>>댓글많은순</option>
                 </select>
             </div>
         </div>
@@ -111,7 +112,7 @@
 		<jsp:include page="../../include/deleteModal.jsp" />
         
         <%-- 페이징처리 --%>
-        <jsp:include page="../../include/pagination.jsp" />
+        <jsp:include page="../../include/pagination_update.jsp" />
         
     </div>
     <div class="space"> </div>

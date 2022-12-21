@@ -21,7 +21,6 @@ $(function() {
     commentTable(userId, reviewNo, path);    
     commentCount(reviewNo, path);
 });
-
 </script> 
 <script type="text/javascript" src="${ path }/resources/js/review_comment.js"></script>
 
