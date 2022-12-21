@@ -45,7 +45,7 @@
 	<!-- review : count -->
 	<select id="review_count" parameterType="hashMap" resultType="int">
 		SELECT COUNT(*)
-            FROM heartpet_review
+            FROM (SELECT r.*, a.animal_name <include refid="review_join" />
         <where>
             <choose>
 				<when test="field == '' and keyword == ''"></when>
@@ -58,6 +58,7 @@
 				<when test="field.equals('name') and keyword != ''"> animal_name <include refid="review_keyword" /></when>
             </choose>
         </where>
+        )
 	</select>
 	
 	<select id="review_animal" resultType="hashMap">

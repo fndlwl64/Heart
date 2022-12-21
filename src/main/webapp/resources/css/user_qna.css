@@ -14,31 +14,49 @@
 
 /* 총 게시물 */
 .qna-section .total-data {
-	align-items: flex-end;
-	margin-bottom: 0.5rem;
-	font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 14px;
 }
 
 /* qna : 정렬 */
-.qna-section .qna_order {
-    justify-content: right;
-    margin-bottom: 0.5rem;
+.qna-section .total-data .order {
+    min-width: 80px;
+    width: 10%;
 }
 
 /* qna : 글쓰기 버튼 btn-insert */
 .qna-section .btn-insert {
-    padding-right: 1rem;
     text-align: right;
+}
+
+/* search */
+.qna-section .search {
+    text-align: center;
+}
+
+.qna-section .search .form-select {
+    width: 20%;
+}
+
+.qna-section .search .btn-light {
+    border: 1px solid gray;
 }
 
 /* qna_list - table */
 .table {
-    margin: auto;
     width: 70%;
+    margin: 0 auto;
     min-width: 700px;
     max-width: 1000px;
     text-align: center;
     font-size: 15px;
+    position: relative;
+    left: 1rem;
 }
 
 .table .left-align {
