@@ -55,7 +55,7 @@
 					</select> <span class="btn btn-sm btn-secondary position-relative">백신</span>
 				</div>
 			</div>
-			<div class="col">
+			<div class="col text-lg-end">
 				<div class="input-group">
 					<select name="animal_status" class="form-select form-select-sm">
 						<option value=""></option>
@@ -139,7 +139,7 @@
 					</select> <span class="btn btn-sm btn-secondary position-relative">크기</span>
 				</div>
 			</div>
-			<div class="col">
+			<div class="col text-lg-end">
 				<div class="input-group">
 					<input type="number" value="0" min="0" name="animal_weight"
 						class="form-control form-control-sm" style="width: 70px"> <span
@@ -149,7 +149,7 @@
 		</div>
 		<div class="row animal_row">
 			<div class="col">
-				<div class="validation-form mx-2">
+				<div class="input-group">
 					<select class="form-select form-select-sm" name="sort" id="sort">
 						<option value="">정렬</option>
 						<option value="size"
@@ -162,7 +162,7 @@
 			</div>
 			<div class="col-4"></div>
 			<div class="col-4"></div>
-			<div class="col">
+			<div class="col text-lg-end">
 				<button type="submit" class="btn btn-primary btn-sm">Search</button>
 			</div>
 		</div>
