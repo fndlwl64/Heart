@@ -229,6 +229,10 @@
 
 
 /* search */
+.review-section .search {
+	text-align: center;
+}
+
 .review-section .search .form-select {
 	width: 20%;
 }
