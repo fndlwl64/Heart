@@ -135,7 +135,6 @@
 
     <!-- 페이징 처리 부분 -->
 	<%@ include file="../../include/pagination_update.jsp" %>
-
 </div>
 
 <jsp:include page="../../include/user_footer.jsp" />
