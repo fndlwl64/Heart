@@ -2,27 +2,13 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<jsp:include page="../../../include/admin_header.jsp" />
+<jsp:include page="../../include/admin_header.jsp" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>HeartPet</title>
 <link rel="stylesheet" href="${path}/resources/css/list_view.css">
-
-<%-- <meta charset="UTF-8">
-<title>HeartPet</title>
-<link rel="stylesheet" href="${path}resources/css/list_view.css">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-	crossorigin="anonymous"></script>
-<script src="${path}resources/js/main.js"></script> --%>
 <c:set var="qList" value="${ qnaList }" />
 <c:set var="total" value="${ total }" />
 <c:set var="paging" value="${ paging }" />
@@ -37,7 +23,7 @@
 	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }" />
 </head>
 <input type="hidden" id="sortlink"
-	value="<%=request.getContextPath() %>/dog_list?page=${ paging.page }&${pagingSort}" />
+	value="<%=request.getContextPath() %>/${animalDTO.animal_tag}_list?page=${ paging.page }&${pagingSort}" />
 <body>
 
 	<div class="container">
@@ -45,30 +31,40 @@
 		<br> <br>
 
 		<%-- 검색 폼 --%>
-		<form class="search_form" action="${path}/dog_list" method="post">
+		<form class="search_form" action="${path}/${animalDTO.animal_tag}_list" method="post">
 			<div class="form_box">
-
-				<select class="form-select form-select-sm w-25"
-					name="animal_species">
-					<option value=""></option>
-					<option value="말티즈">말티즈</option>
-					<option value="푸들">푸들</option>
-					<option value="포메라니안">포메라니안</option>
-					<option value="믹스견">믹스견</option>
-					<option value="치와와">치와와</option>
-					<option value="시츄">시츄</option>
-					<option value="골든리트리버">골든리트리버</option>
-					<option value="진돗개">진돗개</option>
-					<option value="기타">기타</option>
-				</select>
-				<!-- <label class="Dneutered"><input type="checkbox"
-					name="animal_neutered"> 중성화</label> <label class="size"><input
-					type="radio" name="animal_size" ondblclick="this.checked=false"
-					value="대형"> 대</label> <label class="size"><input
-					type="radio" name="animal_size" ondblclick="this.checked=false"
-					value="중형"> 중</label> <label class="size"><input
-					type="radio" name="animal_size" ondblclick="this.checked=false"
-					value="소형"> 소</label> -->
+				<c:if test="${animalDTO.animal_tag eq 'dog' }">
+					<select class="form-select form-select-sm w-25"
+						name="animal_species">
+						<option value=""></option>
+						<option value="말티즈">말티즈</option>
+						<option value="푸들">푸들</option>
+						<option value="포메라니안">포메라니안</option>
+						<option value="믹스견">믹스견</option>
+						<option value="치와와">치와와</option>
+						<option value="시츄">시츄</option>
+						<option value="골든리트리버">골든리트리버</option>
+						<option value="진돗개">진돗개</option>
+						<option value="기타">기타</option>
+					</select>
+				</c:if>
+				<c:if test="${animalDTO.animal_tag eq 'cat' }">
+					<select name="animal_species"
+						class="form-select form-select-sm w-25">
+						<option value=""></option>
+						<option value="스코티시">스코티시</option>
+						<option value="폴드">폴드</option>
+						<option value="샴">샴</option>
+						<option value="페르시안">페르시안</option>
+						<option value="터키시">터키시</option>
+						<option value="앙고라">앙고라</option>
+						<option value="러시안 블루">러시안 블루</option>
+						<option value="벵갈">벵갈</option>
+						<option value="먼치킨">먼치킨</option>
+						<option value="아비시니안">아비시니안</option>
+						<option value="기타">기타</option>
+					</select>
+				</c:if>
 				<div>
 					<label><input type="radio" name="animal_size" value="대형" />대형</label>
 					<label><input type="radio" name="animal_size" value="중형" />중형</label>
@@ -121,8 +117,8 @@
 					</c:if>
 					<c:if test="${dto.animal_state eq 0 }">
 						<tr class="table-secondary">
-						<td><a data-bs-toggle="modal"
-							data-bs-target="#lockModal" style="cursor:pointer;">${dto.animal_name }</a></td>
+							<td><a data-bs-toggle="modal" data-bs-target="#lockModal"
+								style="cursor: pointer;">${dto.animal_name }</a></td>
 					</c:if>
 					<td>${dto.animal_species }</td>
 					<td>${dto.animal_gender }</td>
@@ -142,7 +138,7 @@
 				<tr>
 					<td colspan="7"><button
 							class="btn btn-success btn-sm insertbtn float-end"
-							onclick="location.href='${path}/animal_insert?tag=dog'">등록</button></td>
+							onclick="location.href='${path}/animal_insert?tag=${dto.animal_tag}'">등록</button></td>
 				</tr>
 			</table>
 		</div>
