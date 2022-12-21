@@ -334,7 +334,7 @@
 }
 
 .container .lists tr:hover {
-	background-color: #ececf6;
+	background-color: #EBEDEF;
 }
 
 /* admin/ _list.jsp -> 검색 폼 밑 테이블 a 링크 밑줄 제거 */
@@ -353,7 +353,7 @@
 /* 등록하기 버튼 */
 .insert-form {
 	display: flex;
-	width: 75%;
+	width: 70%;
 	margin: 0 auto;
 	justify-content: flex-end;
 	
@@ -365,7 +365,7 @@
 
 .qna-section {
 	display: flex;
-	width: 75%;
+	width: 70%;
 	margin: 0 auto;
 	justify-content: space-between;
 	align-items: flex-end;
