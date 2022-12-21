@@ -138,7 +138,9 @@ public class UserController {
     }
     
     @RequestMapping("/kakao_login")
-    public void kakao(@RequestParam("paramId")String id, @RequestParam("paramName")String name, HttpServletRequest request, HttpServletResponse response) throws IOException{
+    public void kakao(@RequestParam("paramId")String id, @RequestParam("paramName")String name, @RequestParam("email")String email, HttpServletRequest request, HttpServletResponse response) throws IOException{
+    	
+    	String img = java.lang.Math.round(java.lang.Math.random() * 10) + ".png";
     	
     	PrintWriter out = response.getWriter();
     	int check = userDAO.idCheck(id);
@@ -165,6 +167,8 @@ public class UserController {
     		Map<String, Object> map = new HashMap<String, Object>();
     		map.put("id", id);
     		map.put("name", name);
+    		map.put("email", email);
+    		map.put("img", img);
     		
     		int res = userDAO.kakaoInsert(map);
     		
@@ -198,6 +202,9 @@ public class UserController {
     public void naver(@RequestParam("id")String id, @RequestParam("name")String name, @RequestParam("email")String email, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
     	
     	System.out.println("/naver_logined : "+id+" /name : "+name+"/email : "+email);
+    	
+    	String img = java.lang.Math.round(java.lang.Math.random() * 10) + ".png";
+    	
     	PrintWriter out = response.getWriter();
     	int check = userDAO.idCheck(id);
     	
@@ -223,6 +230,7 @@ public class UserController {
     		map.put("id", id);
     		map.put("name", name);
     		map.put("email", email);
+    		map.put("img", img);
     		
     		int res = userDAO.naverInsert(map);
     		

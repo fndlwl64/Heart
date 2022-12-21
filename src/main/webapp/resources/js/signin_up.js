@@ -94,16 +94,16 @@ $(function() {
 	                id = "K"+result.id
 	                nickname = result.properties.nickname
 	                kakao_account = result.kakao_account
+	                email = kakao_account.email
 	               
-	                console.log('아이디 :'+id, '이름 :'+nickname);
-	
 	                $.ajax({
 	                    type: "POST",
 	                    contentType:  "application/x-www-form-urlencoded;charset=UTF-8",
 	                    url: "/project/kakao_login",
 	                    data: {
 	                        paramId : id,
-	                        paramName : nickname
+	                        paramName : nickname,
+	                        email : email
 	                    },
 	                    dataType: "text",
 	                    success: function(data) {
