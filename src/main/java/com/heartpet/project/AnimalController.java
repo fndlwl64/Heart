@@ -118,11 +118,20 @@ public class AnimalController {
 	@RequestMapping(value = "/user_animal_content", method = RequestMethod.GET)
 	public String user_dog_content(@RequestParam("no") int no, Model model) {
 		AnimalDTO animalDTO = animalDAO.content(no);
-		model.addAttribute("dto", animalDTO);
+		
+		//좋아요 여부
 		WishDTO wishDTO = new WishDTO();
 		wishDTO.setWish_petno(animalDTO.getAnimal_no());
 		wishDTO.setWish_userid((String)request.getSession().getAttribute("session_id"));
+		
+		//입소 신청일
+		AdoptRegDTO adoptRegDTO = adoptRegDAO.content(no);
+		
 		model.addAttribute("wishCheck",wishDAO.check(wishDTO) );
+		if(adoptRegDTO != null) {
+			model.addAttribute("appdate",adoptRegDTO.getAdopt_reg_appdate());
+		}
+		model.addAttribute("dto", animalDTO);
 		return "user/animal/user_animal_content";
 	}
 
