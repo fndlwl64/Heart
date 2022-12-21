@@ -1,4 +1,6 @@
-
+body {
+	overflow-x: hidden;
+}
 .container{
 	width:70%;
 }
