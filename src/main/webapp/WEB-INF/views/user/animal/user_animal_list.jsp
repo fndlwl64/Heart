@@ -21,11 +21,11 @@
 <div class="d-flex justify-content-center" style="font-size: 14px">
 	<form
 		action="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list"
-		class="validation-form" method="post">
-		<div class="row row-cols-auto form-select-sm">
+		class="validation-form wells" method="post">
+		<div class="row row-cols-auto animal_row">
 			<div class="col">
 				<div class="input-group">
-					<select name="animal_place" class="form-select">
+					<select name="animal_place" class="form-select form-select-sm">
 						<option value=""></option>
 						<option value="서울">서울특별시</option>
 						<option value="울산">울산광역시</option>
@@ -40,15 +40,24 @@
 				</div>
 			</div>
 
-			<div class="col-sm">
+			<div class="col animal-keyword">
 				<div class="input-group">
 					<input type="text" name="keyword" placeholder="상세주소 입력"
-						class="form-control">
+						class="form-control form-control-sm">
 				</div>
 			</div>
 			<div class="col">
 				<div class="input-group">
-					<select name="animal_status" class="form-select">
+					<select name="animal_vaccination" class="form-select form-select-sm">
+						<option value=""></option>
+						<option value="Y">Y</option>
+						<option value="N">N</option>
+					</select> <span class="btn btn-sm btn-secondary position-relative">백신</span>
+				</div>
+			</div>
+			<div class="col">
+				<div class="input-group">
+					<select name="animal_status" class="form-select form-select-sm">
 						<option value=""></option>
 						<option value="입소 신청">입소 신청</option>
 						<option value="입양 가능">입양 가능</option>
@@ -59,11 +68,11 @@
 			</div>
 
 		</div>
-		<div class="row row-cols-auto form-select-sm">
+		<div class="row row-cols-auto animal_row">
 
 			<div class="col">
 				<div class="input-group">
-					<select name="animal_gender" class="form-select">
+					<select name="animal_gender" class="form-select form-select-sm">
 						<option value=""></option>
 						<option value="male">수컷</option>
 						<option value="female">암컷</option>
@@ -72,7 +81,7 @@
 			</div>
 			<div class="col">
 				<div class="input-group">
-					<select name="animal_age" class="form-select">
+					<select name="animal_age" class="form-select form-select-sm">
 						<option value="0"></option>
 						<option value="1">0~1</option>
 						<option value="2">1~2</option>
@@ -87,7 +96,7 @@
 			<div class="col">
 				<div class="input-group">
 					<c:if test="${animalDTO.animal_tag eq 'dog'}">
-						<select name="animal_species" class="form-select">
+						<select name="animal_species" class="form-select form-select-sm">
 							<option value=""></option>
 							<option value="말티즈">말티즈</option>
 							<option value="푸들">푸들</option>
@@ -101,7 +110,7 @@
 						</select>
 					</c:if>
 					<c:if test="${animalDTO.animal_tag eq 'cat'}">
-						<select name="animal_species" class="form-select">
+						<select name="animal_species" class="form-select form-select-sm">
 							<option value=""></option>
 							<option value="스코티시">스코티시</option>
 							<option value="폴드">폴드</option>
@@ -122,7 +131,7 @@
 
 			<div class="col">
 				<div class="input-group">
-					<select name="animal_size" class="form-select">
+					<select name="animal_size" class="form-select form-select-sm">
 						<option value=""></option>
 						<option value="소형">소형</option>
 						<option value="중형">중형</option>
@@ -133,13 +142,13 @@
 			<div class="col">
 				<div class="input-group">
 					<input type="number" value="0" min="0" name="animal_weight"
-						class="form-control" style="width: 70px"> <span
+						class="form-control form-control-sm" style="width: 70px"> <span
 						class="btn btn-sm btn-secondary position-relative">무게</span>
 				</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-2">
+		<div class="row animal_row">
+			<div class="col">
 				<div class="validation-form mx-2">
 					<select class="form-select form-select-sm" name="sort" id="sort">
 						<option value="">정렬</option>
@@ -153,8 +162,8 @@
 			</div>
 			<div class="col-4"></div>
 			<div class="col-4"></div>
-			<div class="col-1">
-				<button type="submit" class="btn btn-primary">Search</button>
+			<div class="col">
+				<button type="submit" class="btn btn-primary btn-sm">Search</button>
 			</div>
 		</div>
 	</form>
@@ -170,7 +179,7 @@
 		</select>
 	</form> -->
 </div>
-<p class="main_mainTitle__nxOQS text-center">입양 동물들</p>
+<div class="text-center main-title">입양을 기다리는 동물들</div>
 <%--메인 페이지--%>
 <div class="main_mainContents__GXYBn">
 	<%--강아지 정보 폼--%>
