@@ -20,12 +20,12 @@
 	
 	<insert id="kakao_insert" parameterType="map">
 		<selectKey resultType="int" keyProperty="user_no" order="BEFORE">select max(user_no) from heartpet_user</selectKey> 
-		INSERT INTO HEARTPET_USER VALUES (#{user_no}+1, #{id}, 'kakao1234', #{name}, default, '', '', '', '', default, '' )
+		INSERT INTO HEARTPET_USER VALUES (#{user_no}+1, #{id}, 'kakao1234', #{name}, default, #{email}, '', '', #{img}, default, '' )
 	</insert>
 	
 	<insert id="naver_insert" parameterType="map">
 		<selectKey resultType="int" keyProperty="user_no" order="BEFORE">select max(user_no) from heartpet_user</selectKey> 
-		INSERT INTO HEARTPET_USER VALUES (#{user_no}+1, #{id}, 'naver1234', #{name}, default, #{email}, '', '', '', default, '' )
+		INSERT INTO HEARTPET_USER VALUES (#{user_no}+1, #{id}, 'naver1234', #{name}, default, #{email}, '', '', #{img}, default, '' )
 	</insert>
 	
 	<select id="login" parameterType="String" resultType="String">
