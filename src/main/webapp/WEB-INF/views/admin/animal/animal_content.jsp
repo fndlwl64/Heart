@@ -9,12 +9,12 @@ pageContext.setAttribute("newline", "\n");
 <c:set var="path" value="<%=request.getContextPath()%>" />
 <script src="${path}/resources/js/admin_list_view.js"></script>
 <c:set var="deleteAddr"
-	value="${ path }/animal_delete?no=${dto.animal_no }" />
+	value="${ path }/animal_delete?no=${dto.animal_no }&animal_tag=${dto.animal_tag }" />
 <script src="resources/js/admin.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <link rel="stylesheet" href="resources/css/admin_animal.css">
 <body>
-	
+
 	<div class="div1" align="center">
 		<input type="hidden" name="animal_no" value="${dto.animal_no }">
 		<input type="hidden" name="animal_img1" value="${dto.animal_img1 }">
@@ -77,7 +77,7 @@ pageContext.setAttribute("newline", "\n");
 				</td>
 			</tr>
 		</table>
-		<div class="animal_button">
+		<%-- <div class="animal_button">
 			<button type="button" class="btn btn-success mx-1"
 				onclick="location.href='<%=request.getContextPath() %>/animal_update?no=${dto.animal_no }'">
 				<i class="bi bi-pencil"></i>수정
@@ -86,10 +86,24 @@ pageContext.setAttribute("newline", "\n");
 				data-bs-target="#deleteModal" data-id="${ deleteAddr }">
 				<i class="bi bi-trash3"></i> 삭제
 			</button>
-			<%-- <button type="button" onclick="location.href='<%=request.getContextPath() %>/animal_delete?no=${dto.animal_no }'">삭제</button> --%>
+			<button type="button" onclick="location.href='<%=request.getContextPath() %>/animal_delete?no=${dto.animal_no }'">삭제</button>
 
+		</div> --%>
+		<%-- button  --%>
+		<div class="animal_button ">
+			<button class="btn btn-success mx-1 float-right"
+				onclick="location.href='${path}/animal_update?no=${ dto.animal_no }'">
+				<i class="bi bi-pencil-fill"></i> 수정
+			</button>
+			<button class="btn btn-danger mx-1 float-right" data-bs-toggle="modal"
+				data-bs-target="#deleteModal" data-id="${ deleteAddr }">
+				<i class="bi bi-trash3"></i> 삭제
+			</button>
+			<button class="btn btn-dark mx-1 float-right"
+				onclick="location.href='${path}/${dto.animal_tag }_list'">
+				<i class="bi bi-card-list"></i> 목록
+			</button>
 		</div>
-
 
 
 	</div>

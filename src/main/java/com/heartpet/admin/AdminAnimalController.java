@@ -79,10 +79,10 @@ public class AdminAnimalController {
 		model.addAttribute("total", totalRecord);
 		model.addAttribute("paging", paging);
 		model.addAttribute("sort",sort);
-		model.addAttribute("dogList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), animalDTO, keyword,sort));
+		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), animalDTO, keyword,sort));
 		model.addAttribute("animalDTO", animalDTO);
 
-		return "admin/animal/dog/dog_list";
+		return "admin/animal/animal_list";
 	}
 
 // @RequestParam(value = "adopt_tag" , required = false) String adopt_tag 
@@ -108,10 +108,10 @@ public class AdminAnimalController {
 		model.addAttribute("total", totalRecord);
 		model.addAttribute("paging", paging);
 		model.addAttribute("sort",sort);
-		model.addAttribute("catList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), animalDTO, keyword,sort));
+		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), animalDTO, keyword,sort));
 		model.addAttribute("animalDTO", animalDTO);
 
-		return "admin/animal/cat/cat_list";
+		return "admin/animal/animal_list";
 	}
 
 	@RequestMapping(value = "/animal_update", method = RequestMethod.GET)
@@ -167,16 +167,14 @@ public class AdminAnimalController {
 	}
 
 	@RequestMapping("/animal_delete")
-	public String animal_delete(@RequestParam("no") int no) {
+	public String animal_delete(@RequestParam("no") int no, @RequestParam("animal_tag") String animal_tag) {
 		AnimalDTO animalDTO = animalDAO.content(no);
-		System.out.println("==================");
-		System.out.println("delete form");
 		FileUploadImage upload = new FileUploadImage();
 		upload.deleteAnimalImg(request, animalDTO);
 
 		animalDAO.delete(no);
 
-		return "redirect:/admin_main";
+		return "redirect:/"+animal_tag+"_list";
 	}
 	
 	@RequestMapping(value="/animal_content",method = RequestMethod.GET)
@@ -316,5 +314,10 @@ public class AdminAnimalController {
 		}
 		animalDAO.updateStatus(animalDTO);
 		return "redirect:/adoptreg_list";
+	}
+	
+	@RequestMapping("/csstest")
+	public String test() {
+		return "user/animal/csstest";
 	}
 }

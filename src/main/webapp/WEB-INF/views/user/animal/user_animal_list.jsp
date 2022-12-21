@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<link rel="stylesheet" href="${path}/resources/css/user_animal_main.css">
+<link rel="stylesheet" href="resources/css/user_animal_main.css">
 <jsp:include page="../../include/user_header.jsp" />
 <c:set var="qList" value="${ qnaList }" />
 <c:set var="total" value="${ total }" />
@@ -170,25 +170,29 @@
 		</select>
 	</form> -->
 </div>
-
+<p class="main_mainTitle__nxOQS text-center">입양 동물들</p>
 <%--메인 페이지--%>
-<div class="d-flex justify-content-center">
+<div class="main_mainContents__GXYBn">
 	<%--강아지 정보 폼--%>
 
-	<div class="row row-cols-4">
+	<div class="main_mainGridContainer__xl9yt">
 		<c:if test="${not empty animalList}">
 			<c:forEach var="dto" items="${animalList}">
-				<div class="col animal">
-					<div class="d-flex flex-row text-center  p-2 alert-primary alert alert-primary animal_wrap">
-					<input type="hidden" value="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}" id="href">
+				<div class="mainContent_mainContentBox__shdST">
+					<!-- d-flex flex-row text-center  p-2 alert-primary alert alert-primary animal_wrap -->
+					<div class="mainContent_mainImgWrapper__DJlMe">
+						<%-- <input type="hidden"
+							value="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"> --%>
 						<%-- <a
 							href="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"><img
 							class="img-fluid rounded mx-auto img-frame"
 							src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a> --%>
-						<div class="rounded back_image" id="back_image"
-							style="background-image : url(<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()});"></div>
-						<div class="text-center animal_explan w-50">
-							<a href="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}">${dto.getAnimal_name() }</a>
+						<div class="mainContent_mainImgWrapper__DJlMe rounded back_image"
+							style="background-image : url(<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()});" data-value = "<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"></div>
+						<div class="mainContent_mainContent__w_Buk">
+							<!-- href=request.getContextPath()h() %>/user_animal_content?no=${dto.getAnimal_no()}" -->
+							<div class="mainContent_mainTitle__8iW62">${dto.getAnimal_name() }</div>
+							<div class="mainContent_mainAuthor__kKyGl">${dto.animal_status }</div>
 						</div>
 					</div>
 				</div>
@@ -277,8 +281,11 @@
 				location.href = $("#sortlink").val() + '&sort='
 						+ $('select[name=sort]').val();
 			});
+	$(document).on("click", ".back_image", function() {
+		location.href = $(this).data("value");
+	});
 	/* $(document).ready(function () {
-		  $(document).on("click", "#back_image", function () {
+		  $(document).on("click", ".back_image", function () {
 		    location.href = $('#href').val();
 		  });
 		});
