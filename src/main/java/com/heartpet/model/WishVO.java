@@ -6,6 +6,7 @@ import lombok.Data;
 public class WishVO {
 
 	private int animal_no;
+	private String animal_name;
 	private String animal_species;
 	private String animal_gender;
 	private int animal_age;
