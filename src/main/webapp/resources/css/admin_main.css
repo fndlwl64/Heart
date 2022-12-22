@@ -1,7 +1,9 @@
 @charset "UTF-8";
 body {
 	overflow-x: hidden;
+	font-family: 'Gowun Dodum', sans-serif;	
 }
+
 .container {
 	width: 80%;
 	margin: auto;
