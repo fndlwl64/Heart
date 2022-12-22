@@ -42,21 +42,7 @@
 				<div class="search-table-box">
 					<table class="table table-sm" id="search-table">
 						<tr>
-							<th>검색할 항목 설정</th>
-							<td>
-								<select name="adopt_tag" class="form-select">
-									<option value=""></option>
-									<option value="adopt_reg_appdate"
-										<c:if test="${tag eq 'adopt_reg_appdate'}">selected</c:if>>입소신청일</option>
-									<option value="adopt_reg_regdate"
-										<c:if test="${tag eq 'adopt_reg_regdate'}">selected</c:if>>입양등록일</option>
-									<option value="adopt_reg_duedate"
-										<c:if test="${tag eq 'adopt_reg_duedate'}">selected</c:if>>입양예정일</option>
-									<option value="adopt_reg_adoptdate"
-									<c:if test="${tag eq 'adopt_reg_adoptdate'}">selected</c:if>>입양완료일</option>
-								</select>
-							</td>
-							<th>상태설정</th>
+							<th width="12.5%">입양 진행 상태</th>
 							<td>
 								<select name="animal_status" class="form-select">
 									<option value=""></option>
@@ -72,23 +58,35 @@
 							</td>
 						</tr>
 						<tr>
-							<th>시작일</th>
+							<th width="12.5%">입양 검색 항목</th>
+							<td>
+								<select name="adopt_tag" class="form-select">
+									<option value=""></option>
+									<option value="adopt_reg_appdate"
+										<c:if test="${tag eq 'adopt_reg_appdate'}">selected</c:if>>입소 신청일</option>
+									<option value="adopt_reg_regdate"
+										<c:if test="${tag eq 'adopt_reg_regdate'}">selected</c:if>>입양 등록일</option>
+									<option value="adopt_reg_duedate"
+										<c:if test="${tag eq 'adopt_reg_duedate'}">selected</c:if>>입양 예정일</option>
+									<option value="adopt_reg_adoptdate"
+									<c:if test="${tag eq 'adopt_reg_adoptdate'}">selected</c:if>>입양 완료일</option>
+								</select>
+							</td>
+							<th width="12.5%">항목 시작일</th>
 							<td>
 								<input type="date" name="startDate" value="${startDate }" class="form-control">
 							</td>
-							<th>종료일</th>
+							<th width="12.5%">항목 종료일</th>
 							<td>
 								<input type="date" name="endDate" value="${endDate }" class="form-control">
 							</td>
 						</tr>
 					</table>					
 				</div>
-				<div class="col">
-					<button type="submit" class="btn btn-dark btn-sm">
-						<i class="bi bi-search"></i> 검색
-					</button>
+				<div class="search-buttons">
+				<button class="btn btn-light" type="button" onclick="location.href='${ path }/adoptreg_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
+				<button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
 				</div>
-
 			</div>
 		</form>
 
