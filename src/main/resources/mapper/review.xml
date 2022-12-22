@@ -180,7 +180,7 @@
 	            AND review_id LIKE '%' || #{ search_id } || '%'
 	        </if>
 	        <if test="search_content != null and !search_content.equals('')">
-	            AND review_title LIKE '%' || #{ search_content } || '%'
+	            AND (review_title LIKE '%' || #{ search_content } || '%' OR review_content LIKE '%' || #{ search_content })
 	        </if>
          <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo}]]>
          <choose>
@@ -204,7 +204,7 @@
                 AND review_id LIKE '%' || #{ search_id } || '%'
             </if>
             <if test="search_content != null and !search_content.equals('')">
-                AND review_title LIKE '%' || #{ search_content } || '%'
+	            AND (review_title LIKE '%' || #{ search_content } || '%' OR review_content LIKE '%' || #{ search_content })
             </if>
             )
     </select>
