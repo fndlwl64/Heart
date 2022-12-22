@@ -67,7 +67,7 @@
                         <th width="10%">회원 아이디</th>
                         <td width="20%"><input type="text" class="form-control" name="user_id" value="${ user_id }" /></td>
                         <th width="10%">회원 이름</th>
-                        <td width="20%"><input type="text" class="form-control" name="user_id" value="${ user_id }" /></td>
+                        <td width="20%"><input type="text" class="form-control" name="user_name" value="${ user_name }" /></td>
                         <th width="10%">반려동물 경험</th>
                         <td width="15%" class=""> 
                         	<div class="search-checkbox">
