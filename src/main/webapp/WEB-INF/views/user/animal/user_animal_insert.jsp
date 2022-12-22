@@ -1,14 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="resources/css/animal.css" />
 
 <jsp:include page="../../include/user_header.jsp"/>
 
 <body>
-<div class="d-flex justify-content-center">
+<div class="div1">
+    <div class="title">
+    	<h3>HeartPet 입소 신청</h3>
+    	<span>가족을 만날 수 있도록 정확하게 작성해주세요</span>
+    </div>
+    
     <form action="<%=request.getContextPath() %>/user_animal_insert" method="post" enctype="multipart/form-data" onsubmit="return submitOption();">
     	<input type="hidden" value="${sessionScope.session_id }" id="user_id" name="user_id"/>
     	<input type="hidden" value="${sessionScope.session_grade }" id="user_grade"/>
+        
         <table class="table">
             <tr>
                 <th>종류</th>
@@ -90,10 +97,10 @@
                 <td><input type="file" name="files" id="files" class="form-control" accept="image/gif, image/jpeg, image/png"
                            onchange="fileOption();" multiple></td>
             </tr>
-            <tr>
-                <td colspan="2" class="text-center"><input type="submit" value="입양 등록" class="btn btn-primary"></td>
-            </tr>
+            
         </table>
+        
+        <input type="submit" value="입양 등록" class="btn btn-primary">
     </form>
 </div>
 <script>
