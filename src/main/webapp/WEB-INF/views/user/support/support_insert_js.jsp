@@ -99,8 +99,7 @@
 		                      console.log("후원에러", e);
 		                  }
 		              });
-		              alert('후원 감사합니다!');
-		              opener.location.reload();
+		              opener.location.href="/project/user_support_finish";
 		              window.close();
 		          }else {
 		        	  alert('후원실패');
@@ -150,8 +149,7 @@
 		                      console.log("후원에러", e);
 		                  }
 		              });
-		        	  alert('후원 감사합니다!');
-		              opener.location.reload();
+		        	  opener.location.href="/project/user_support_finish";
 		              window.close();
 		          } else {
 		        	  alert('후원실패');
@@ -190,8 +188,7 @@
 		                      console.log("후원에러", e);
 		                  }
 		              });
-		              alert('후원 감사합니다!');
-		              opener.location.reload();
+		              opener.location.href="/project/user_support_finish";
 		              window.close();
 		          }else {
 		        	  alert('후원실패');
@@ -228,8 +225,7 @@
 	                      console.log("후원에러", e);
 	                  }
 	              });
-	              alert('후원 감사합니다!');
-	              opener.location.reload();
+	              opener.location.href="/project/user_support_finish";
 	              window.close();
 	          }else {
 	        	  alert('후원실패');
@@ -266,8 +262,7 @@
 	                      console.log("후원에러", e);
 	                  }
 	              });
-	              alert('후원 감사합니다!');
-	              opener.location.reload();
+	              opener.location.href="/project/user_support_finish";
 	              window.close();
 	          }else {
 	        	  alert('후원실패');
@@ -304,8 +299,7 @@
 	                      console.log("후원에러", e);
 	                  }
 	              });
-	              alert('후원 감사합니다!');
-	              opener.location.reload();
+	              opener.location.href="/project/user_support_finish";
 	              window.close();
 	          }else {
 	        	  alert('후원실패');

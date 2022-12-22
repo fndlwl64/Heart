@@ -91,5 +91,11 @@ public class SupportDAOImpl implements SupportDAO{
         return this.sqlSession.selectOne("sup_count", map);
 	}
 
+	@Override
+	public void updateUserPrice(HashMap<String, Object> map) {
+		this.sqlSession.update("user_price_update", map);
+	}
+	
+
 
 }

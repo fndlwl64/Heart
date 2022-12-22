@@ -72,6 +72,7 @@ public class SupportController {
 		map.put("userid", user_id);
 		
 		supportdao.insertSupportPay(map);
+		supportdao.updateUserPrice(map);
 		
 	}
 	//비회원이 후원했을때 db에 등록
@@ -136,5 +137,11 @@ public class SupportController {
 	            msg_e.printStackTrace();
 	        }
 	}
+	
+	@RequestMapping("/user_support_finish")
+    public String user_support_finish() {
+		
+        return "user/support/support_finish";
+    }
 	
 }
