@@ -25,7 +25,6 @@
     <script src="${path}/resources/js/admin_list_view.js"></script>
 </head>
 <body>
-    <br>
     <div class="container">
         <%-- 검색 폼 --%>
         <form class="search_form" method="post" action="${path }/notice_list">
@@ -40,6 +39,8 @@
 	                        <td><input type="text" class="form-control" name="search_title" value="${ search_title }" /></td>
 	                        <th>공지내용</th>
 	                        <td><input type="text" class="form-control" name="search_cont" value="${ search_cont }" /></td>
+	                    </tr>
+	                    <tr>   
 	                        <th>게시일(시작)</th>
 	                        <td><input type="date" class="form-control" name="search_date_start" value="${ search_date_start }" /></td>
 	                        <th>게시일(종료)</th>
