@@ -40,7 +40,9 @@
 	                <th>추정 이름</th>
 	                <td><input type="text" name="animal_name" class="form-control" id="name" placeholder="모를 시 '알 수 없음' 기재해주세요."></td>
 	                <th width="15%">추정 나이</th>
-	                <td width="30%" colspan="3"><input type="number" name="animal_age" class="form-control" id="age"></td>
+	                <td width="30%" colspan="3">
+	                   <input type="number" name="animal_age" min="0" max="20" class="form-control" id="age">
+	                </td>
 	            </tr>
 	            <tr>
 	                <th>성별 <span class="must-write">*</span></th>
@@ -87,7 +89,7 @@
 	                <th>무게 <span class="must-write">*</span></th>
 	                <td colspan="3">
 	                    <div class="d-flex align-items-center">
-		                    <input type="number" name="animal_weight" class="form-control" id="weight">
+		                    <input type="number" name="animal_weight" class="form-control" id="weight" min="0" max="40">
 		                    <span class="ms-2"><b>kg</b></span>
 	                    </div>
 	                </td>
