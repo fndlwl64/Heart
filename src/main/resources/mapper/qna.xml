@@ -49,7 +49,8 @@
         <![CDATA[) 
        	WHERE rnum >= #{startNo} AND rnum <= #{endNo} ]]>
 		<choose>
-			<when test="field.equals('allSearch') and keyword != ''"> (board_title <include refid="qna_keyword" />) OR (board_content <include refid="qna_keyword" />) OR (board_category <include refid="qna_keyword" />) OR (board_id <include refid="qna_keyword" />)</when>
+			<when test="field.equals('allSearch') and keyword != ''"> (board_title <include refid="qna_keyword" />) OR (board_content <include refid="qna_keyword" />) 
+				OR (board_category <include refid="qna_keyword" />) OR (board_id <include refid="qna_keyword" />)</when>
 			<when test="field.equals('title') and keyword != ''"> board_title <include refid="qna_keyword" /></when>
 			<when test="field.equals('content') and keyword != ''"> board_content <include refid="qna_keyword" /></when>
 			<when test="field.equals('category') and keyword != ''"> board_category <include refid="qna_keyword" /></when>
@@ -106,7 +107,7 @@
 			    <when test="order.equals('title_desc')">board_title DESC</when>        
 			</choose> 
 	</select>
-	
+	 -->
 	<!-- Admin : qna-count  -->
 	<select id="qna_admin_count" parameterType="hashMap" resultType="int">
 		SELECT COUNT(*) 
@@ -127,8 +128,7 @@
 	        <if test="search_content != null and !search_content.equals('')">
 	            AND (board_title LIKE '%' || #{ search_content } || '%' OR board_content LIKE '%' || #{ search_content })
 	        </if>
-	</select>
-	
+	</select>	
 	
 	<!-- qna : content -->
 	<update id="qna_hit" parameterType="int">
