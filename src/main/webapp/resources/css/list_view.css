@@ -362,6 +362,10 @@ body {
 	vertical-align: middle;
 }
 
+.form_box #search-table .search-checkbox > label {
+	margin: 0;
+}
+
 .form_box #search-table .search-date {
 	display: flex;
 	justify-content: space-between;
