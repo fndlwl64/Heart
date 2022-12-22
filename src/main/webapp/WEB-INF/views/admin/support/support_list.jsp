@@ -43,6 +43,8 @@
 	                        <td><input type="text" class="form-control" name="search_id" value="${ search_id }" /></td>
 	                        <th>후원금액</th>
 	                        <td><input type="text" class="form-control" name="search_price" value="${ search_price }" /></td>
+	                    </tr>
+	                    <tr>    
 	                        <th>게시일(시작)</th>
 	                        <td><input type="date" class="form-control" name="search_date_start" value="${ search_date_start }" /></td>
 	                        <th>게시일(종료)</th>
