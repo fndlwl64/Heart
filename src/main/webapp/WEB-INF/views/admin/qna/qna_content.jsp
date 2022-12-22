@@ -19,7 +19,8 @@
 	        let boardNo = ${ list.board_no };
 	        let path = '${ path }';
 	        commentTable(userId, boardNo, path);    
-	        commentCount(boardNo, path);	        
+	        commentCount(boardNo, path);	
+	    });
     </script>
     <script type="text/javascript" src="${ path }/resources/js/qna_comment.js"></script>
     </head>
