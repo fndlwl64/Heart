@@ -61,8 +61,6 @@ public class UserReviewController {
             @RequestParam(value = "order", required = false) String order, 
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         
-        System.out.println("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"+keyword);
-
         if (field == null) { field = ""; }
         if (keyword == null) { keyword = ""; }
         if (order == null) { order = ""; }

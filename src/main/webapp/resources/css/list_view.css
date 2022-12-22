@@ -352,12 +352,14 @@ body {
 
 .form_box #search-table td {
     padding: 0.5rem 0.5rem; 
-    border: none !important;  
+    border: none !important; 
+    vertical-align: middle !important;     
 }
 
 .form_box #search-table .search-checkbox {
 	display: flex;
 	justify-content: space-evenly;
+	vertical-align: middle;
 }
 
 .form_box #search-table .search-date {

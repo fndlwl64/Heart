@@ -77,7 +77,7 @@
 	</div>
 	</form>
         
-       <%-- 정렬 & 게시물 수 --%>
+    <%-- 정렬 & 게시물 수 --%>
     <div class="qna-section">
        <div class="row">
             <div class="col total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
