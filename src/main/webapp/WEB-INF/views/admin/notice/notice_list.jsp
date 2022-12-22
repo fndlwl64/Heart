@@ -5,8 +5,10 @@
 <c:set var="dto" value="${supportList }"/>
 <c:set var="total" value="${ total }"/>
 <c:set var="paging" value="${ paging }"/>
-<c:set var="field" value="${ field }"/>
-<c:set var="keyword" value="${ keyword }"/>
+<c:set var="search_title" value="${ search_title }"/>
+<c:set var="search_cont" value="${ search_cont }"/>
+<c:set var="search_date_start" value="${ search_date_start }"/>
+<c:set var="search_date_end" value="${ search_date_end }"/>
 <c:set var="url" value="&search_title=${ search_title }&search_cont=${ search_cont }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&order=${ order }" />
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
@@ -46,7 +48,7 @@
 	                </table>
 				</div>
 				<div class="search-buttons">
-					<button class="btn btn-light" type="button" onclick="location.href='${ path }/admin_review_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
+					<button class="btn btn-light" type="button" onclick="location.href='${ path }/notice_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
 		            <button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
 	            </div>   
             </div>
