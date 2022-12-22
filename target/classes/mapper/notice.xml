@@ -43,21 +43,34 @@
         </choose>
 		) rnum from heartpet_notice s 
 		WHERE notice_status = 1
-		<choose>
-			<when test="field.equals('allSearch') and keyword != ''">and (notice_title <include refid="notice_keyword" />) OR (notice_content <include refid="notice_keyword" />) and notice_status = 1</when>
-			<when test="field.equals('title') and keyword != ''">and notice_title <include refid="notice_keyword" /> and notice_status = 1</when>
-			<when test="field.equals('cont') and keyword != ''">and notice_content <include refid="notice_keyword" /> and notice_status = 1</when>
-		</choose>
+			<if test="search_title != null and !search_title.equals('')">
+				and notice_title like '%' || #{search_title} || '%'
+			</if>
+			<if test="search_cont != null and !search_cont.equals('')">
+				and notice_content like '%' || #{search_cont} || '%'
+			</if>
+			<if test="search_date_start != null and !search_date_start.equals('')">
+				<![CDATA[and notice_date >= #{search_date_start}]]>
+			</if>
+			<if test="search_date_end != null and !search_date_end.equals('')">
+				<![CDATA[and notice_date < to_date(#{search_date_end},'YYYY-MM-DD')+1 ]]>
+			</if>
 		<![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo}]]>
-		
 	</select>
 	
  	<select id="notice_count" parameterType="hashMap" resultType="int">
 		select count(*) from heartpet_notice where notice_status=1
-		<choose>
-			<when test="field.equals('allSearch') and keyword != ''">and (notice_title <include refid="notice_keyword" />) OR (notice_content <include refid="notice_keyword" />) and notice_status = 1</when>
-			<when test="field.equals('title') and keyword != ''">and notice_title <include refid="notice_keyword" /> and notice_status = 1</when>
-			<when test="field.equals('cont') and keyword != ''">and notice_content <include refid="notice_keyword" /> and notice_status = 1</when>
-		</choose>
+			<if test="search_title != null and !search_title.equals('')">
+				and notice_title like '%' || #{search_title} || '%'
+			</if>
+			<if test="search_cont != null and !search_cont.equals('')">
+				and notice_content like '%' || #{search_cont} || '%'
+			</if>
+			<if test="search_date_start != null and !search_date_start.equals('')">
+				<![CDATA[and notice_date >= #{search_date_start}]]>
+			</if>
+			<if test="search_date_end != null and !search_date_end.equals('')">
+				<![CDATA[and notice_date < to_date(#{search_date_end},'YYYY-MM-DD')+1 ]]>
+			</if>
 	</select> 
 </mapper>
