@@ -24,41 +24,50 @@
 <body>
     <div class="container">
 
-        <%-- 검색 폼 --%>
-        <form class="search_form" method="get" action="${path}/admin_fnq_list">
-            <div class="form_box d-flex">
-           		<span class="search-name">대분류</span>
-                <select name="field" class="form-select d-inline align-middle w-25">
-                    <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
-                    <option value="category"<c:if test="${ field eq 'category' }">selected="selected"</c:if>>카테고리</option>
-                    <option value="question"<c:if test="${ field eq 'question' }">selected="selected"</c:if>>질문</option>
-                    <option value="answer"<c:if test="${ field eq 'answer' }">selected="selected"</c:if>>답변</option>
-                </select>
-                <span class="search-name">검색어</span> 
-                <input type="text" class="form-control d-inline align-middle keyword" value="${ keyword }" name="keyword" />
-                <select name="" class="form-select d-none align-middle search-select">
-                    <option value="입양"<c:if test="${ keyword eq '입양' }">selected="selected"</c:if>>입양</option>
-                    <option value="입소"<c:if test="${ keyword eq '입소' }">selected="selected"</c:if>>입소</option>
-                    <option value="후원"<c:if test="${ keyword eq '후원' }">selected="selected"</c:if>>후원</option>
-                    <option value="기타"<c:if test="${ keyword eq '기타' }">selected="selected"</c:if>>기타</option>
-                </select>                    
-                <button type="submit" class="btn btn-dark align-middle d-inline"><i class="bi bi-search"></i> 검색</button>
-                <button type="button" class="btn btn-light d-inline align-middle" onclick="location.href='${ path }/user_fnq_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>                    
-           </div>
-        <br>
-        </form>
+    <%-- 검색 폼 --%>
+	<form action="${path}/admin_fnq_list" class="search_form" method="get">
+	<div class="form_box">
+	<div class="search-semi-title">
+	    <span><i class="bi bi-check2-square"></i> 문의글관리 검색</span>
+	</div>       
+		<div class="search-table-box">
+              <table class="table table-sm" id="search-table">
+                  <tr>
+                      <th width="12.5%">카테고리</th>
+                      <td width="37.5%">
+                      	  <div class="search-checkbox">
+		                      <label><input type="radio" class="form-check-input" name="search_category" value="전체" checked="checked" <c:if test="${ search_category eq '전체' }">checked="checked"</c:if>>전체</label>
+		                      <label><input type="radio" class="form-check-input" name="search_category" value="입양" <c:if test="${ search_category eq '입양' }">checked="checked"</c:if>>입양</label>
+		                      <label><input type="radio" class="form-check-input" name="search_category" value="입소" <c:if test="${ search_category eq '입소' }">checked="checked"</c:if>>입소</label>
+		                      <label><input type="radio" class="form-check-input" name="search_category" value="후원" <c:if test="${ search_category eq '후원' }">checked="checked"</c:if>>후원</label>
+		                      <label><input type="radio" class="form-check-input" name="search_category" value="기타" <c:if test="${ search_category eq '기타' }">checked="checked"</c:if>>기타</label>
+                      	  </div>
+                      </td>
+                      <th>질문</th>
+                      <td><input type="text" class="form-control" name="search_question" value="${ search_question }" /></td>
+                      <th>답변</th>
+                      <td><input type="text" class="form-control" name="search_answer" value="${ search_answer }" /></td>
+                  </tr>                                                           
+              </table>
+		</div>
+		<div class="search-buttons">
+		<button class="btn btn-light" type="button" onclick="location.href='${ path }/admin_qna_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
+		<button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
+		</div>
+	</div>
+	</form>
         
-       <%-- 정렬 --%>
-	    <div class="qna-section">
-	        <div class="row">
-	            <div class="col total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
-	                <select class="form-select form-select-sm order" name="order" onchange="location.href='${ path }/admin_fnq_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">
-	                    <option selected="selected" value="no_desc" <c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호순</option>
-	                    <option value="question_desc" <c:if test="${ order eq 'question_desc' }">selected="selected"</c:if>>가나다순</option>
-	                </select>
-	            </div>
+     <%-- 정렬 --%>
+    <div class="qna-section">
+        <div class="row">
+            <div class="col total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
+                <select class="form-select form-select-sm order" name="order" onchange="location.href='${ path }/admin_fnq_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">
+                    <option selected="selected" value="no_desc" <c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호순</option>
+                    <option value="question_desc" <c:if test="${ order eq 'question_desc' }">selected="selected"</c:if>>가나다순</option>
+                </select>
             </div>
-        </div>
+           </div>
+       </div>
         
         <%-- 검색 결과 테이블 --%>
         <div class="lists">

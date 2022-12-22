@@ -29,7 +29,7 @@ body {
 }
 
 .container .search_form .form_box .form-control {
-	width: 30%;
+	width: 100%;
 }
 
 .container .search_form .form_div .search-table-box {
@@ -352,12 +352,18 @@ body {
 
 .form_box #search-table td {
     padding: 0.5rem 0.5rem; 
-    border: none !important;  
+    border: none !important; 
+    vertical-align: middle !important;     
 }
 
 .form_box #search-table .search-checkbox {
 	display: flex;
 	justify-content: space-evenly;
+	vertical-align: middle;
+}
+
+.form_box #search-table .search-checkbox > label {
+	margin: 0;
 }
 
 .form_box #search-table .search-date {
@@ -500,4 +506,6 @@ body {
     justify-content: right;
 }
 
-
+#search_table{
+	width: 40%;
+}

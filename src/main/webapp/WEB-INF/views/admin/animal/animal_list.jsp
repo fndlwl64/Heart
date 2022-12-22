@@ -33,52 +33,66 @@
 		<%-- 검색 폼 --%>
 		<form class="search_form" action="${path}/${animalDTO.animal_tag}_list" method="post">
 			<div class="form_box">
-				<c:if test="${animalDTO.animal_tag eq 'dog' }">
-					<select class="form-select form-select-sm w-25"
-						name="animal_species">
-						<option value=""></option>
-						<option value="말티즈">말티즈</option>
-						<option value="푸들">푸들</option>
-						<option value="포메라니안">포메라니안</option>
-						<option value="믹스견">믹스견</option>
-						<option value="치와와">치와와</option>
-						<option value="시츄">시츄</option>
-						<option value="골든리트리버">골든리트리버</option>
-						<option value="진돗개">진돗개</option>
-						<option value="기타">기타</option>
-					</select>
-				</c:if>
-				<c:if test="${animalDTO.animal_tag eq 'cat' }">
-					<select name="animal_species"
-						class="form-select form-select-sm w-25">
-						<option value=""></option>
-						<option value="스코티시">스코티시</option>
-						<option value="폴드">폴드</option>
-						<option value="샴">샴</option>
-						<option value="페르시안">페르시안</option>
-						<option value="터키시">터키시</option>
-						<option value="앙고라">앙고라</option>
-						<option value="러시안 블루">러시안 블루</option>
-						<option value="벵갈">벵갈</option>
-						<option value="먼치킨">먼치킨</option>
-						<option value="아비시니안">아비시니안</option>
-						<option value="기타">기타</option>
-					</select>
-				</c:if>
-				<div>
-					<label><input type="radio" name="animal_size" value="대형" />대형</label>
-					<label><input type="radio" name="animal_size" value="중형" />중형</label>
-					<label><input type="radio" name="animal_size" value="소형" />소형</label>
-				</div>
-				<div>
-					<input type="hidden" id="YN" name="animal_neutered" /> <label><input
-						type="checkbox" id="checkYN">중성화</label>
-				</div>
-				<div>
-					<button class="btn searchbtn" type="submit">
+				<div class="search-semi-title">
+                	<span><i class="bi bi-check2-square"></i> 동물관리 검색</span>
+            	</div>
+            	<div class="search-table-box">
+            		<table class="table table-sm" id="search_table">
+            			<tr>
+            				<th>동물 종</th>
+            				<th>크기</th>
+            				<th>중성화여부</th>
+            			</tr>
+            			<tr>
+				            <td>
+            					<c:if test="${animalDTO.animal_tag eq 'dog' }">
+									<select class="form-select form-select-sm" id="search_animal"
+										name="animal_species">
+										<option value=""></option>
+										<option value="말티즈">말티즈</option>
+										<option value="푸들">푸들</option>
+										<option value="포메라니안">포메라니안</option>
+										<option value="믹스견">믹스견</option>
+										<option value="치와와">치와와</option>
+										<option value="시츄">시츄</option>
+										<option value="골든리트리버">골든리트리버</option>
+										<option value="진돗개">진돗개</option>
+										<option value="기타">기타</option>
+									</select>
+								</c:if>
+								<c:if test="${animalDTO.animal_tag eq 'cat' }">
+									<select name="animal_species" id="search_animal"
+										class="form-select form-select-sm">
+										<option value=""></option>
+										<option value="스코티시">스코티시</option>
+										<option value="폴드">폴드</option>
+										<option value="샴">샴</option>
+										<option value="페르시안">페르시안</option>
+										<option value="터키시">터키시</option>
+										<option value="앙고라">앙고라</option>
+										<option value="러시안 블루">러시안 블루</option>
+										<option value="벵갈">벵갈</option>
+										<option value="먼치킨">먼치킨</option>
+										<option value="아비시니안">아비시니안</option>
+										<option value="기타">기타</option>
+									</select>
+								</c:if>
+            				</td>
+            				<td>
+            					<label><input type="radio" name="animal_size" value="대형" />대형</label>
+								<label><input type="radio" name="animal_size" value="중형" />중형</label>
+								<label><input type="radio" name="animal_size" value="소형" />소형</label>
+            				</td>
+            				<td>
+            					<input type="hidden" id="YN" name="animal_neutered" /> <label><input type="checkbox" id="checkYN">중성화</label>
+            				</td>
+            			</tr>
+            		</table>
+            		
+            		<button class="btn searchbtn" type="submit">
 						<i class="bi bi-search"></i>검색
 					</button>
-				</div>
+            	</div>
 			</div>
 
 		</form>
