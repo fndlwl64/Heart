@@ -506,6 +506,6 @@ body {
     justify-content: right;
 }
 
-#search_animal {
-	width: 30% !important;
+#search_table{
+	width: 40%;
 }
