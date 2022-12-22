@@ -81,25 +81,26 @@ pageContext.setAttribute("newline", "\n");
 			</div>
 		</div>
 	</div>
+	<c:if test="${not empty user_id }">
+		<button class="btn" id="wish">
+			<c:if test="${wishCheck ne 0 }">
+				<i class="bi bi-star-fill text-warning"></i>'
+					</c:if>
+			<c:if test="${wishCheck eq 0 }">
+				<i class="bi bi-star"></i>
+			</c:if>
+		</button>
+	</c:if>
 	<form action="user_get_animal" method="post"
 		onsubmit="return submitOption();">
 		<input type="hidden" id="animal_status" value="${dto.animal_status }">
 		<input type="hidden" name="animal_no" id="animal_no"
-			value="${dto.animal_no }">
-		<c:if test="${not empty user_id }">
-			<button class="btn" id="wish">
-				<c:if test="${wishCheck ne 0 }">
-					<i class="bi bi-star-fill text-warning"></i>'
-					</c:if>
-				<c:if test="${wishCheck eq 0 }">
-					<i class="bi bi-star"></i>
-				</c:if>
-			</button>
-		</c:if>
-		<input type="submit" class="btn btn-primary " value="입양하기" data-bs-toggle="modal" data-bs-target="#cautionModal"
-			onclick="return submitOption();">
+			value="${dto.animal_no }"> <input type="submit"
+			class="btn btn-primary " value="입양하기" data-bs-toggle="modal"
+			data-bs-target="#cautionModal">
 	</form>
 	<!-- Modal -->
+	<jsp:include page="../../include/cautionModal.jsp" />
 	<jsp:include page="../../include/cautionModal.jsp" />
 </div>
 <script type="text/javascript">

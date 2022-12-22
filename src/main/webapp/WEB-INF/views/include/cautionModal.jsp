@@ -2,8 +2,11 @@
     pageEncoding="UTF-8"%>
     
     <!-- 버튼 예시 -->
-	<!-- <input type="submit" class="btn btn-primary " value="입양하기" data-bs-toggle="modal" data-bs-target="#cautionModal"
-			onclick="return submitOption();"> -->
+	<!-- 
+	<form action="user_get_animal" method="post" onsubmit="return submitOption();">
+		<input type="submit" class="btn btn-primary " value="입양하기" data-bs-toggle="modal" data-bs-target="#cautionModal"> 
+	</form>		
+	-->
 			
 			
     <!-- Modal -->
