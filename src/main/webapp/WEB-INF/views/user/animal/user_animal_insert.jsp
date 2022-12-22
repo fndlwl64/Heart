@@ -9,100 +9,110 @@
 <div class="div1">
     <div class="title">
     	<h3>HeartPet 입소 신청</h3>
-    	<span>가족을 만날 수 있도록 정확하게 작성해주세요.</span>
+    	<span>유기동물이 가족을 만날 수 있도록 정확한 정보를 기입해주세요.</span>
     </div>
     
-    <form action="<%=request.getContextPath() %>/user_animal_insert" method="post" enctype="multipart/form-data" onsubmit="return submitOption();">
-    	<input type="hidden" value="${sessionScope.session_id }" id="user_id" name="user_id"/>
-    	<input type="hidden" value="${sessionScope.session_grade }" id="user_grade"/>
-        
-        <table class="table">
-            <tr>
-                <th>종류</th>
-                <td>
-                    <select name="animal_tag" class="form-select" id="tag" onchange="optionChange();">
-                    	<option value=""></option>
-                        <option value="dog">강아지</option>
-                        <option value="cat">고양이</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>품종</th>
-                <td><select name="animal_species" class="form-control" id="species"></select></td>
-            </tr>
-            <tr>
-                <th>이름</th>
-                <td><input type="text" name="animal_name" class="form-control" id="name"></td>
-            </tr>
-            <tr>
-                <th>성별</th>
-                <td>
-                    <select name="animal_gender" class="form-select" id="gender">
-                        <option value=""></option>
-                        <option value="male">수컷</option>
-                        <option value="female">암컷</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>중성화</th>
-                <td>
-                    <select name="animal_neutered" class="form-select" id="neutered">
-                        <option value=""></option>
-                        <option value="Y">O</option>
-                        <option value="N">X</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>예방 접종</th>
-                <td>
-                    <select name="animal_vaccination" class="form-select" id="vaccination">
-                        <option value=""></option>
-                        <option value="Y">O</option>
-                        <option value="N">X</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>나이</th>
-                <td><input type="number" name="animal_age" class="form-control" id="age"></td>
-            </tr>
-            <tr>
-                <th>발견 장소</th>
-                <td><input type="text" name="animal_place" class="form-control" id="place"></td>
-            </tr>
-            <tr>
-                <th>크기</th>
-                <td>
-                    <select name="animal_size" class="form-select" id="size">
-                    	<option value=""></option>
-                        <option value="소형">소형</option>
-                        <option value="중형">중형</option>
-                        <option value="대형">대형</option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <th>무게</th>
-                <td><input type="number" name="animal_weight" class="form-control" id="weight"></td>
-            </tr>
-            <tr>
-                <th>상세 내용</th>
-                <td><textarea name="animal_caution" class="form-control" id="content"></textarea></td>
-            </tr>
-            <tr>
-                <th>첨부 이미지</th>
-                <td><input type="file" name="files" id="files" class="form-control" accept="image/gif, image/jpeg, image/png"
-                           onchange="fileOption();" multiple></td>
-            </tr>
-            
-        </table>
-        
-        <button type="submit" class="btn btn-primary"><i class="bi bi-upload"></i> 입소신청</button>
-        
-    </form>
+    <div class="insert-form">
+	    <form action="<%=request.getContextPath() %>/user_animal_insert" method="post" enctype="multipart/form-data" onsubmit="return submitOption();">
+	    	<input type="hidden" value="${sessionScope.session_id }" id="user_id" name="user_id"/>
+	    	<input type="hidden" value="${sessionScope.session_grade }" id="user_grade"/>
+	        
+	        <table class="table caption-top">
+                <caption><span class="must-write">*</span> 표시는 필수 입력 사항입니다.</caption>
+				<thead class="table-light">
+					<tr>
+		                <th colspan="6">입소 신청 양식</th>
+		            </tr>
+				</thead>
+				<tbody>
+	            <tr>
+	                <th width="15%">종류 <span class="must-write">*</span></th>
+	                <td width="35%">
+	                    <select name="animal_tag" class="form-select" id="tag" onchange="optionChange();">
+	                    	<option value=""></option>
+	                        <option value="dog">강아지</option>
+	                        <option value="cat">고양이</option>
+	                    </select>
+	                </td>
+	                <td width="50%" colspan="4"><select name="animal_species" class="form-control" id="species"></select></td>
+	            </tr>
+	            <tr>
+	                <th>추정 이름</th>
+	                <td><input type="text" name="animal_name" class="form-control" id="name" placeholder="모를 시 '알 수 없음' 기재해주세요."></td>
+	                <th width="15%">추정 나이</th>
+	                <td width="30%" colspan="3"><input type="number" name="animal_age" class="form-control" id="age"></td>
+	            </tr>
+	            <tr>
+	                <th>성별 <span class="must-write">*</span></th>
+	                <td>
+	                    <select name="animal_gender" class="form-select" id="gender">
+	                        <option value=""></option>
+	                        <option value="male">수컷</option>
+	                        <option value="female">암컷</option>
+	                    </select>
+	                </td>
+	                <th>중성화 유무 <span class="must-write">*</span></th>
+	                <td width="10%">
+	                    <select name="animal_neutered" class="form-select" id="neutered">
+	                        <option value=""></option>
+	                        <option value="Y">C</option>
+	                        <option value="N">NO</option>
+	                    </select>
+	                </td>
+	                <th width="15%">접종 유무 <span class="must-write">*</span></th>
+	                <td width="10%">
+	                    <select name="animal_vaccination" class="form-select" id="vaccination">
+	                        <option value=""></option>
+	                        <option value="Y">YES</option>
+	                        <option value="N">NO</option>
+	                    </select>
+	                </td>
+	            </tr>
+	            <tr>
+	                <th>발견 장소 <span class="must-write">*</span></th>
+	                <td colspan="5">
+	                    <input type="text" name="animal_place" class="form-control" placeholder="최대한 구체적으로 적어주세요." id="place">
+	                </td>
+	            </tr>
+	            <tr>
+	                <th>사이즈 <span class="must-write">*</span></th>
+	                <td>
+	                    <select name="animal_size" class="form-select" id="size">
+	                    	<option value=""></option>
+	                        <option value="소형">소형</option>
+	                        <option value="중형">중형</option>
+	                        <option value="대형">대형</option>
+	                    </select>
+	                </td>
+	                <th>무게 <span class="must-write">*</span></th>
+	                <td colspan="3">
+	                    <div class="d-flex align-items-center">
+		                    <input type="number" name="animal_weight" class="form-control" id="weight">
+		                    <span class="ms-2"><b>kg</b></span>
+	                    </div>
+	                </td>
+	            </tr>
+	            <tr>
+	                <th>상세 내용</th>
+	                <td colspan="5">
+	                    <textarea name="animal_caution" class="form-control" id="content" placeholder="유기동물의 특징을 자세히 적어주세요. ex) 아이가 짖는 편입니다." rows="10"></textarea>
+	                </td>
+	            </tr>
+	            <tr>
+	                <th>첨부 이미지 <span class="must-write">*</span></th>
+	                <td colspan="5">
+	                   <input type="text" class="form-control-plaintext" value="※ 사진 등록은 필수입니다(최소 1장 ~ 최대 3장)." />
+	                   <input type="file" name="files" id="files" class="form-control" accept="image/gif, image/jpeg, image/png"
+	                           onchange="fileOption();" multiple>
+	                </td>
+	            </tr>
+	            </tbody>
+	        </table>
+	        <div class="buttons">
+	            <button type="submit" class="btn btn-primary"><i class="bi bi-arrow-up-square"></i> 등록</button>        
+	        </div> 
+       </form>
+    </div>
 </div>
 <script>
 
