@@ -71,11 +71,11 @@
                 <tr>                
                     <th class="table-light col-1">No</th>
                     <th class="table-light col-1">종류</th>
-                    <th class="table-light col-6">제목</th>
+                    <th class="table-light col-5">제목</th>
                     <th class="table-light col-1">작성자</th>
                     <th class="table-light col-1">조회수</th>
                     <th class="table-light col-1">작성일시</th>
-                    <th class="table-light col-1">수정 / 삭제</th>
+                    <th class="table-light col-2">수정 / 삭제</th>
                 </tr>
                 <c:forEach items="${ rList }" var="list" varStatus="status">
                 <tr>

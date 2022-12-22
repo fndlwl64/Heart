@@ -27,15 +27,6 @@ $(function() {
 
 <%-- 문의글 상세 보기 --%>
 <div id="qna-contents" class="qna-contents">
-    <div class="qna_section">
-        <div class="row">
-            <div class="col-3 space"></div>
-            <div class="col-6 title"></div>
-            <div class="col-3 space"></div>
-        </div>
-    </div>
-
-    <div>
         <div class="border qna-content">
             <div class="content-header">
                 <div><h3>${ list.board_title }</h3></div>
@@ -75,8 +66,8 @@ $(function() {
             <table class="table table-bordered" id="comment-table"></table>
 			<table class="table table-bordered reply-table">
 			    <tr class="align-middle">
-			        <th class="col-2">댓글쓰기</th>
-			        <td class="col-10" id="content-reply">
+			        <th class="col-1">댓글쓰기</th>
+			        <td class="col-11" id="content-reply">
 			            <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" placeholder="댓글을 남겨보세요." required="required"></textarea>
 			            <button type="button" class="btn btn-outline-primary btn-sm" onclick="commentSave('${ session_id }', ${ list.board_no }, '${ path }');"><i class="bi bi-reply"></i> 댓글등록</button>
 			        </td>
@@ -86,11 +77,11 @@ $(function() {
             <%-- 작성자가 로그인한 아이디일 때 수정/삭제 버튼 활성화 --%>
             <div class="content-buttons d-flex">
             	<div class="left-button">
+	                <button type="button" class="btn btn-dark" onclick="location.href='${ path }/user_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
 					<c:if test="${ list.board_id eq session_id }">
-						<button type="button" class="btn btn-success" onclick="location.href='${path}/user_qna_update?board_no=${ list.board_no }'"><i class="bi bi-eraser"></i> 수정</button>
 						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteQna"><i class="bi bi-trash3"></i> 삭제</button>
+						<button type="button" class="btn btn-success" onclick="location.href='${path}/user_qna_update?board_no=${ list.board_no }'"><i class="bi bi-eraser"></i> 수정</button>
 					</c:if>
-	                <button type="button" class="btn btn-dark" onclick="history.back()"><i class="bi bi-card-list"></i> 목록</button>
                 </div>
                 <div class="right-button">
                 	<button type="button" class="btn btn-primary" onclick="location.href='${path}/user_qna_insert?board_parentNo=${ list.board_no }&board_group=${ list.board_group }'">
@@ -127,7 +118,5 @@ $(function() {
     <jsp:include page="../../include/deleteModal.jsp" />	
 
     <div class="space-add"></div>
-
-</div>
 
 <jsp:include page="../../include/user_footer.jsp" />
