@@ -42,7 +42,6 @@ body {
 .div1 .form_search .animal_row label {
 	background-color: darkgray;
 	color: #fff;
-	cursor: pointer;
 }
 
 .div1 .order {
@@ -64,6 +63,7 @@ body {
 .div1 .main-title span {
 	font-size: 14px;
 	color: darkgray;
+	cursor: pointer;
 }
 
 /* .justify-content-center .wells {
