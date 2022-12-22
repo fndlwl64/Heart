@@ -22,11 +22,24 @@ body {
 	/* color: #FD68A0; */
 }
 
-.container .lists .table .btn {
-	font-size: 14px;
-}
 
 /* admin/user_list.jsp */
+.container .search_form .form_div {
+	
+}
+
+.container .search_form .form_box .form-control {
+	width: 30%;
+}
+
+.container .search_form .form_div .search-table-box {
+	margin-bottom: 2%;
+}
+
+.container .search_form .wrapper {
+	display: inline-block;
+}
+
 .container .search_form .wrapper .user_search {
 	width: 250px;
 }

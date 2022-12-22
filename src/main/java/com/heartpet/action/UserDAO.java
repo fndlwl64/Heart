@@ -24,11 +24,11 @@ public interface UserDAO {
     
     public List<UserDTO> getUserList();
     
-    public List<UserDTO> userListPaging(int startNo, int endNo, String field, String keyword, Integer grade, String exp, String order);
+    public List<UserDTO> userListPaging(int startNo, int endNo, String id, Integer grade, String exp, String order);
     
     public int totalUser();
     
-    public int countUser(String field, String keyword, Integer grade, String exp);
+    public int countUser(String id, Integer grade, String exp);
     
     public int emailCheck(String email);
     

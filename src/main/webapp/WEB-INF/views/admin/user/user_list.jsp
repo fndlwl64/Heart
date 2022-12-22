@@ -20,7 +20,7 @@
     <%-- 검색 폼  --%>
     <form class="search_form" action="${path }/user_list" method="get">
     	<div class="form_box">
-            <select id="fieldSelect" class="form-select form-select-sm user_field" name="field">
+           <%--  <select id="fieldSelect" class="form-select form-select-sm user_field" name="field">
                 <option value="id"<c:if test="${field eq 'id'}">selected="selected"</c:if>>회원아이디</option>
                 <option value="grade"<c:if test="${field eq 'grade'}">selected="selected"</c:if>>회원등급</option>
                 <option value="animalexp"<c:if test="${field eq 'animalexp'}">selected="selected"</c:if>>반려동물경험</option>
@@ -40,9 +40,43 @@
 		    	<div id="expSearch" class="radio_exp">
 		    		<label><input type="radio" name="user_animalexp" value="Y" ondblclick="this.checked=false"/> Y</label>
 		    		<label><input type="radio" name="user_animalexp" value="N" ondblclick="this.checked=false"/> N</label>
-		    	</div>
+		    	</div> 
+		    	
+            </div> --%>
+            
+            <div class="search-semi-title">
+                <span><i class="bi bi-check2-square"></i> 회원 검색</span>
+            </div>       
+            
+            <div class="search-table-box">
+                <table class="table table-sm" id="search-table">
+                    <tr>
+                        <th>회원아이디</th>
+                        <td colspan="3"><input type="text" class="form-control" name="user_id" value="${ user_id }" /></td>
+                    </tr>
+                    <tr>
+                        <th>회원등급</th>
+                        <td>
+                        	<label><input type="radio" name="user_grade" value="1" ondblclick="this.checked=false"/> 1등급</label>
+				    		<label><input type="radio" name="user_grade" value="2" ondblclick="this.checked=false"/> 2등급</label>
+				    		<label><input type="radio" name="user_grade" value="3" ondblclick="this.checked=false"/> 3등급</label>
+				    		<label><input type="radio" name="user_grade" value="4" ondblclick="this.checked=false"/> 4등급</label>
+				    		<label><input type="radio" name="user_grade" value="5" ondblclick="this.checked=false"/> 5등급</label>
+                        </td>
+                        <th>반려동물경험</th>
+                        <td>
+                        	<label><input type="radio" name="user_animalexp" value="Y" ondblclick="this.checked=false"/> Y</label>
+		    				<label><input type="radio" name="user_animalexp" value="N" ondblclick="this.checked=false"/> N</label>
+                        </td>
+                    </tr>                                                           
+                </table>
+			</div>
+			
+			<div class="search-buttons">
+				<button class="btn btn-light" type="button" onclick="location.href='${ path }/admin_review_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
+	            <button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
             </div>
-			<button class="btn searchbtn" type="submit"><i class="i bi-search"></i> 검색</button>
+            
 	    </div> 
     </form>
     
