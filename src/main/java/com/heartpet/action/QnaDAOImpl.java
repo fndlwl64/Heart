@@ -39,6 +39,38 @@ public class QnaDAOImpl implements QnaDAO {
         map.put("keyword", keyword);
         return this.sqlSession.selectOne("qna_count", map);
     }
+    
+    //=========================================================
+    // Admin - QNA
+    //=========================================================
+	@Override
+	public List<QnaDTO> listQna(int startNo, int endNo, String search_category, String search_date_start,
+			String search_date_end, String search_id, String search_content, String order) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("startNo", startNo);
+        map.put("endNo", endNo);
+        map.put("search_category", search_category);
+        map.put("search_date_start", search_date_start);
+        map.put("search_date_end", search_date_end);
+        map.put("search_id", search_id);
+        map.put("search_content", search_content);
+        map.put("order", order);
+        return this.sqlSession.selectList("qna_admin_list", map);
+	}
+	
+	@Override
+	public int listQnaCount(String search_category, String search_date_start, String search_date_end, String search_id,
+			String search_content) {
+		Map<String, Object> map = new HashMap<String, Object>();
+        map.put("search_category", search_category);
+        map.put("search_date_start", search_date_start);
+        map.put("search_date_end", search_date_end);
+        map.put("search_id", search_id);
+        map.put("search_content", search_content);
+		return this.sqlSession.selectOne("qna_admin_count", map);
+	}
+	
+    //=========================================================
 
     @Override
     public int insertQna(QnaDTO dto) {

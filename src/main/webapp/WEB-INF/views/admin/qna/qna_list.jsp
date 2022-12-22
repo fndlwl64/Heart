@@ -39,17 +39,22 @@
 		<div class="search-table-box">
               <table class="table table-sm" id="search-table">
                   <tr>
-                      <th>카테고리</th>
-                      <td>
-	                      <label><input type="radio" class="form-check-input" name="search_category" value="입양" />입양</label>
-	                      <label><input type="radio" class="form-check-input" name="search_category" value="입소" />입소</label>
-	                      <label><input type="radio" class="form-check-input" name="search_category" value="후원" />후원</label>
-	                      <label><input type="radio" class="form-check-input" name="search_category" value="기타" />기타</label>
+                      <th width="12.5%">카테고리</th>
+                      <td width="37.5%">
+                      	  <div class="search-checkbox">
+		                      <label><input type="radio" class="form-check-input" name="search_category" value="전체" checked="checked" <c:if test="${ search_category eq '전체' }">checked="checked"</c:if>>전체</label>
+		                      <label><input type="radio" class="form-check-input" name="search_category" value="입양" <c:if test="${ search_category eq '입양' }">checked="checked"</c:if>>입양</label>
+		                      <label><input type="radio" class="form-check-input" name="search_category" value="입소" <c:if test="${ search_category eq '입소' }">checked="checked"</c:if>>입소</label>
+		                      <label><input type="radio" class="form-check-input" name="search_category" value="후원" <c:if test="${ search_category eq '후원' }">checked="checked"</c:if>>후원</label>
+		                      <label><input type="radio" class="form-check-input" name="search_category" value="기타" <c:if test="${ search_category eq '기타' }">checked="checked"</c:if>>기타</label>
+                      	  </div>
                       </td>
-                      <th>작성기간</th>
-                      <td class="search-date">
-	                      <input type="date" class="form-control search-date-picker" name="search_date_start" value="${ search_date_start }">
-	                      <input type="date" class="form-control search-date-picker" name="search_date_end" value="${ search_date_end }">
+                      <th width="12.5%">작성기간</th>
+                      <td width="37.5%">
+                      	  <div class="search-date">
+		                      <input type="date" class="form-control search-date-picker" name="search_date_start" value="${ search_date_start }">
+		                      <input type="date" class="form-control search-date-picker" name="search_date_end" value="${ search_date_end }">
+                          </div>
                       </td>
 				  </tr>
 				  <tr>
