@@ -43,8 +43,6 @@ function commentDelete(commentNo, path, userId, reviewNo) {
 
 //comment 수 count
 function commentCount(reviewNo, path) {
-  console.log(1, reviewNo);
-  console.log(2, path);
   $.ajax({
       contentType : "application/x-www-form-urlencoded;charset=UTF-8",
       type: "post",
@@ -65,9 +63,6 @@ function commentCount(reviewNo, path) {
 
 //comment 테이블 생성
 function commentTable(userId, reviewNo, path) {
-	console.log(1, userId);
-	console.log(2, reviewNo);
-	console.log(3, path);
   $.ajax({
       contentType : "application/x-www-form-urlencoded;charset=UTF-8",
       type: "post",
@@ -140,7 +135,7 @@ function commentSave(userId, reviewNo, path) {
               commentCount(reviewNo, path);
               $("#comment_content").val('');
           }else {
-              alert('댓글 등록 실패')
+              alert('댓글 등록 실패');
           }
       },
       error : function(e) {
