@@ -22,13 +22,9 @@ pageContext.setAttribute("newline", "\n");
 <script src="${path}/resources/js/admin_list_view.js"></script>
 <div class="container">
 	<div class="_container">
-
 		<div class="wrap">
-
 			<h3>입양동물</h3>
-
 			<div class="user_info">
-
 				<div class="info_title">
 					<ul class="info_border">
 						<%-- <li><img class="user_img"
@@ -108,7 +104,7 @@ pageContext.setAttribute("newline", "\n");
 					value="${path }/user_get_animal?animal_no=${dto.animal_no }"></c:set>
 				<div class="col-1">
 					<c:choose>
-						<c:when test="${dto.animal_status eq '입양 가능'}">
+						<c:when test="${dto.animal_status eq '입양 가능' and not empty user_id}">
 							<button class="btn btn-primary " data-bs-toggle="modal"
 								data-bs-target="#deleteModal" data-id="${ deleteAddr }"
 								onclick="changeOption()">입양하기</button>
@@ -139,8 +135,7 @@ pageContext.setAttribute("newline", "\n");
 		$('#deleteModalLabel').empty();
 		$('#deleteModalLabel').append('입양신청');
 		$('#deleteModalBody').empty();
-		$('#deleteModalBody').append('입양신청을 하시겠습니까?');
-		
+		$('#deleteModalBody').append('입양신청을 하시겠습니까?');		
 	}
 	function submitOption() {
 		if (!$('#user_grade').val()) {
