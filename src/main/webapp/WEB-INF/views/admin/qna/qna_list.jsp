@@ -6,10 +6,15 @@
 <c:set var="qList" value="${ qnaList }"/>
 <c:set var="total" value="${ total }"/>
 <c:set var="paging" value="${ paging }"/>
-<c:set var="field" value="${ field }"/>
-<c:set var="keyword" value="${ keyword }"/>
+<c:set var="search_category" value="${ search_category }"/>
+<c:set var="search_date_start" value="${ search_date_start }"/>
+<c:set var="search_date_end" value="${ search_date_end }"/>
+<c:set var="search_id" value="${ search_id }"/>
+<c:set var="search_content" value="${ search_content }"/>
+<c:set var="order" value="${ order }"/>
+<c:out value="" />
 <c:set var="cList" value="${ commentList }"/>
-<c:set var="url" value="&field=${ field }&keyword=${ keyword }&order=${ order }" />
+<c:set var="url" value="&search_category=${ search_category }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&search_id=${ search_id }&search_content=${ search_content }&order=${ order }" />
 <c:set var="link_address" value="${pageContext.request.contextPath}/admin_qna_list" />
 <c:set var="now" value="<%=new java.util.Date()%>" />
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />	
@@ -66,7 +71,7 @@
               </table>
 		</div>
 		<div class="search-buttons">
-		<button class="btn btn-light" type="button" onclick="location.href='${ path }/admin_review_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
+		<button class="btn btn-light" type="button" onclick="location.href='${ path }/admin_qna_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
 		<button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
 		</div>
 	</div>
@@ -76,7 +81,7 @@
     <div class="qna-section">
        <div class="row">
             <div class="col total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
-                <select class="form-select form-select-sm order" name="order" onchange="location.href='${ path }/user_qna_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">
+                <select class="form-select form-select-sm order" name="order" onchange="location.href='${ link_address }?page=${ paging.page }&search_category=${ search_category }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&search_id=${ search_id }&search_content=${ search_content }&order='+this.value;">
                     <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
                     <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신등록순</option>
                     <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>

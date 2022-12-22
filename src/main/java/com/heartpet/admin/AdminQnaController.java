@@ -45,22 +45,43 @@ public class AdminQnaController {
     // QNA_LIST
     ///////////////////////////////////////////////////////////////////
     @RequestMapping("/admin_qna_list")
-    public String admin_qna_list(@RequestParam(value = "search_category", required = false, defaultValue = "") String search_category,
-            @RequestParam(value = "search_date_start", required = false, defaultValue = "") String search_date_start,
-            @RequestParam(value = "search_date_end", required = false, defaultValue = "") String search_date_end,
-            @RequestParam(value = "search_id", required = false, defaultValue = "") String search_id,
-            @RequestParam(value = "search_content", required = false, defaultValue = "") String search_content,
-            @RequestParam(value = "order", required = false, defaultValue = "") String order,
+    public String admin_qna_list(@RequestParam(value = "search_category", required = false) String search_category,
+            @RequestParam(value = "search_date_start", required = false) String search_date_start,
+            @RequestParam(value = "search_date_end", required = false) String search_date_end,
+            @RequestParam(value = "search_id", required = false) String search_id,
+            @RequestParam(value = "search_content", required = false) String search_content,
+            @RequestParam(value = "order", required = false) String order,
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
+    	
+        if (search_category == null || search_category.equals("전체")) { search_category = ""; }
+        if (search_date_start == null) { search_date_start = ""; }
+        if (search_date_end == null) { search_date_end = ""; }
+        if (search_id == null) { search_id = ""; }
+        if (search_content == null) { search_content = ""; }
+        if (order == null) { order = ""; }
+        
+        System.out.print("1"+search_category);
+        System.out.print("2"+search_date_start);
+        System.out.print("3"+search_date_end);
+        System.out.print("4"+search_id);
+        System.out.print("5"+search_content);
 
         int currentPage = 1; // 현재 페이지 변수
         if (page != 1) {
             currentPage = page;
         }
+        
+        System.out.println(totalRecord);
 
         totalRecord = this.qnaDAO.listQnaCount(search_category, search_date_start, search_date_end, search_id, search_content);
         PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord);
         List<QnaDTO> qnaList = this.qnaDAO.listQna(paging.getStartNo(), paging.getEndNo(), search_category, search_date_start, search_date_end, search_id, search_content, order);
+        
+        System.out.print("1"+search_category);
+        System.out.print("2"+search_date_start);
+        System.out.print("3"+search_date_end);
+        System.out.print("4"+search_id);
+        System.out.print("5"+search_content);
         
         // 댓글수 추가
         List<Integer> commentList = new ArrayList<Integer>();
