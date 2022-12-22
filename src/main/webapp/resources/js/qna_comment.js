@@ -43,8 +43,6 @@ function commentDelete(commentNo, path, userId, boardNo) {
 
 //comment 수 count
 function commentCount(boardNo, path) {
-  console.log(1, boardNo);
-  console.log(2, path);
   $.ajax({
       contentType : "application/x-www-form-urlencoded;charset=UTF-8",
       type: "post",
@@ -137,7 +135,7 @@ function commentSave(userId, boardNo, path) {
               commentCount(boardNo, path);
               $("#comment_content").val('');
           }else {
-              alert('댓글 등록 실패')
+              alert('댓글 등록 실패');
           }
       },
       error : function(e) {
