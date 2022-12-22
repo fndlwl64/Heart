@@ -26,7 +26,6 @@
 		value="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list?page=${ paging.page }&${pagingSort}" />
 		
 	<div class="form_search">
-	
 		<form
 			action="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list"
 			class="validation-form wells" method="post">
@@ -35,15 +34,15 @@
 					<div class="input-group">
 						<select name="animal_place" class="form-select form-select-sm">
 							<option value=""></option>
-							<option value="서울" <c:if test="${fn:contains(animalDTO.animal_place , '서울' )} ">selected</c:if>>서울특별시</option>
-							<option value="울산" <c:if test="${fn:contains(animalDTO.animal_place , '울산' )} ">selected</c:if>>울산광역시</option>
-							<option value="인천" <c:if test="${fn:contains(animalDTO.animal_place , '인천' )} ">selected</c:if>>인천광역시</option>
-							<option value="부산">부산광역시</option>
-							<option value="대전">대전광역시</option>
-							<option value="광주">광주광역시</option>
-							<option value="대구">대구광역시</option>
-							<option value="세종">세종특별자치시</option>
-							<option value="제주">제주도</option>
+							<option value="서울" <c:if test="${fn:contains(animalDTO.animal_place,'서울')}">selected</c:if>>서울특별시</option>
+							<option value="울산" <c:if test="${fn:contains(animalDTO.animal_place,'울산')}">selected</c:if>>울산광역시</option>
+							<option value="인천" <c:if test="${fn:contains(animalDTO.animal_place,'인천')}">selected</c:if>>인천광역시</option>
+							<option value="부산" <c:if test="${fn:contains(animalDTO.animal_place,'부산')}">selected</c:if>>부산광역시</option>
+							<option value="대전" <c:if test="${fn:contains(animalDTO.animal_place,'대전')}">selected</c:if>>대전광역시</option>
+							<option value="광주" <c:if test="${fn:contains(animalDTO.animal_place,'광주')}">selected</c:if>>광주광역시</option>
+							<option value="대구" <c:if test="${fn:contains(animalDTO.animal_place,'대구')}">selected</c:if>>대구광역시</option>
+							<option value="세종" <c:if test="${fn:contains(animalDTO.animal_place,'세종')}">selected</c:if>>세종특별자치시</option>
+							<option value="제주" <c:if test="${fn:contains(animalDTO.animal_place,'제주')}">selected</c:if>>제주도</option>
 						</select> <span class="btn btn-sm btn-secondary position-relative">장소</span>
 					</div>
 				</div>
@@ -149,7 +148,7 @@
 				</div>
 				<div class="col text-lg-end">
 					<div class="input-group">
-						<input type="number" value="0" min="0" name="animal_weight"
+						<input type="number" value="${animalDTO.animal_weight }" min="0" name="animal_weight"
 							class="form-control form-control-sm" style="width: 70px"> <span
 							class="btn btn-sm btn-secondary position-relative">무게</span>
 					</div>
