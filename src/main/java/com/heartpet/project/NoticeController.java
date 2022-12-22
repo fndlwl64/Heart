@@ -25,18 +25,18 @@ public class NoticeController {
     private int totalRecord = 0;
 	
 	@RequestMapping("/user_notice")
-    public String notice(@RequestParam(value = "field", required = false) String field,
-			@RequestParam(value = "keyword", required = false) String keyword,
+    public String notice(@RequestParam(value = "search_title", required = false) String search_title,
+    		@RequestParam(value = "search_cont", required = false) String search_cont,
+			@RequestParam(value = "search_date_start", required = false) String search_date_start,
+			@RequestParam(value = "search_date_end", required = false) String search_date_end,
 			@RequestParam(value = "order", required = false) String order,
 			@RequestParam(value = "page", defaultValue = "1") int page,Model model) {
 		
 		// 페이징
-		if (field == null) {
-            field = "";
-        }
-        if (keyword == null) {
-            keyword = "";
-        }
+		if (search_title == null) { search_title = ""; }
+        if (search_cont == null) { search_cont = ""; }
+        if (search_date_start == null) { search_date_start = ""; }
+        if (search_date_end == null) { search_date_end = ""; }
         if (order == null) {
             order = "";
         }
@@ -49,15 +49,17 @@ public class NoticeController {
         List<NoticeDTO> noticeList = null;
         PageDTO paging= null;
 		
-        //totalRecord = this.noticedao.listNoticeCount(field, keyword);
-        //paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-        //noticeList = this.noticedao.listNotice(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
+        totalRecord = this.noticedao.listNoticeCount(search_title, search_cont, search_date_start, search_date_end);
+        paging = new PageDTO(currentPage, rowsize, totalRecord);
+        noticeList = this.noticedao.listNotice(paging.getStartNo(), paging.getEndNo(), search_title, search_cont, search_date_start, search_date_end, order);
 		
         model.addAttribute("List", noticeList);
         model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);
-        model.addAttribute("field", field);
-        model.addAttribute("keyword", keyword);
+        model.addAttribute("search_title", search_title);
+        model.addAttribute("search_cont", search_cont);
+        model.addAttribute("search_date_start", search_date_start);
+        model.addAttribute("search_date_end", search_date_end);
         model.addAttribute("order", order);
 
         return "user/notice/notice_list";
