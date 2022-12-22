@@ -71,17 +71,9 @@ public class AdminQnaController {
             currentPage = page;
         }
         
-        System.out.println(totalRecord);
-
         totalRecord = this.qnaDAO.listQnaCount(search_category, search_date_start, search_date_end, search_id, search_content);
         PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord);
         List<QnaDTO> qnaList = this.qnaDAO.listQna(paging.getStartNo(), paging.getEndNo(), search_category, search_date_start, search_date_end, search_id, search_content, order);
-        
-        System.out.print("1"+search_category);
-        System.out.print("2"+search_date_start);
-        System.out.print("3"+search_date_end);
-        System.out.print("4"+search_id);
-        System.out.print("5"+search_content);
         
         // 댓글수 추가
         List<Integer> commentList = new ArrayList<Integer>();
