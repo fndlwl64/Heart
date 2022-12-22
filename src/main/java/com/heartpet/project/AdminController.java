@@ -45,12 +45,12 @@ public class AdminController {
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
 		
-		//List<UserDTO> list = null;
+		List<UserDTO> list = null;
 		PageDTO paging = null;
 		
     	totalRecord = this.userDAO.countUser(id, grade, exp);
     	paging = new PageDTO(currentPage, rowsize, totalRecord);
-    	List<UserDTO> list = userDAO.userListPaging(paging.getStartNo(), paging.getEndNo(), id, grade, exp, order);
+    	list = userDAO.userListPaging(paging.getStartNo(), paging.getEndNo(), id, grade, exp, order);
     	int total =userDAO.totalUser();
 		
 		model.addAttribute("list", list);
@@ -77,10 +77,13 @@ public class AdminController {
     	
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
+		
+		List<UserDTO> list = null;
+		PageDTO paging = null;
     	
     	totalRecord = this.userDAO.countUser(id, grade, exp);
-    	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord);
-    	List<UserDTO> list = userDAO.userListPaging(paging.getStartNo(), paging.getEndNo(), id, grade, exp, order);
+    	paging = new PageDTO(currentPage, rowsize, totalRecord);
+    	list = userDAO.userListPaging(paging.getStartNo(), paging.getEndNo(), id, grade, exp, order);
     	int total =userDAO.totalUser();
 		
 		model.addAttribute("list", list);
