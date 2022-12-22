@@ -12,18 +12,18 @@
 		select max(support_no) from heartpet_support
 	</select>
 	
-	<insert id="sup_insert" parameterType="com.heartpet.model.SupportDTO">
+	<insert id="sup_insert" parameterType="SupportDTO">
 		<selectKey resultType="int" keyProperty="support_no" order="BEFORE">
 			select max(support_no) from heartpet_support
 		</selectKey>
 			insert into heartpet_support values(#{support_no}+1,#{support_userid},#{support_price},#{support_date},1)
 	</insert>
 	
-	<update id="sup_update" parameterType="com.heartpet.model.SupportDTO">
+	<update id="sup_update" parameterType="SupportDTO">
 		update heartpet_support set support_userid = #{support_userid}, support_price = #{support_price}, support_date = #{support_date} where support_no = #{support_no}
 	</update>
 
-	<select id="sup_content" parameterType="int" resultType="com.heartpet.model.SupportDTO">
+	<select id="sup_content" parameterType="int" resultType="SupportDTO">
    		select * from heartpet_support where support_no = #{no}
    </select>
    
@@ -42,7 +42,7 @@
 			insert into heartpet_support values(#{support_no}+1,#{userid},#{amount},sysdate,1)
 	</insert>
 	
-    <select id="sup_list" parameterType="hashMap" resultType="com.heartpet.model.SupportDTO">
+    <select id="sup_list" parameterType="hashMap" resultType="SupportDTO">
         SELECT * 
         FROM (SELECT s.*, row_number() over(
         <choose>
@@ -53,22 +53,36 @@
         </choose>
         ) rnum from heartpet_support s
         WHERE support_status = 1
-        <choose>
-            <when test="field.equals('allSearch') and keyword != ''">and (support_userid <include refid="support_keyword" />) OR (support_price <include refid="support_keyword" />) and support_status=1</when>
-            <when test="field.equals('id') and keyword != ''">and support_userid <include refid="support_keyword" /> and support_status=1</when>
-            <when test="field.equals('grade') and keyword != ''">and support_price <include refid="support_keyword" /> and support_status=1</when>
-        </choose>
+   			<if test="search_id != null and !search_id.equals('')">
+				and support_userid like '%' || #{search_id} || '%'
+			</if>
+			<if test="search_price != null and !search_price.equals('')">
+				and support_price like '%' || #{search_price} || '%'
+			</if>
+			<if test="search_date_start != null and !search_date_start.equals('')">
+				<![CDATA[and support_date >= #{search_date_start}]]>
+			</if>
+			<if test="search_date_end != null and !search_date_end.equals('')">
+				<![CDATA[and support_date < to_date(#{search_date_end},'YYYY-MM-DD')+1 ]]>
+			</if>
         <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo}]]>
         
     </select>
 
 	<!-- 후원 개수 -->
- 	<select id="sup_count" parameterType="hashMap" resultType="int">
+  	<select id="sup_count" parameterType="hashMap" resultType="int">
 		select count(*) from heartpet_support WHERE support_status = 1
-			<choose>
-				<when test="field.equals('allSearch') and keyword != ''">and (support_userid <include refid="support_keyword" />) OR (support_price <include refid="support_keyword" />) and support_status=1</when>
-				<when test="field.equals('id') and keyword != ''">and support_userid <include refid="support_keyword" /> and support_status=1</when>
-				<when test="field.equals('grade') and keyword != ''">and support_price <include refid="support_keyword" /> and support_status=1</when>
-			</choose>
+			<if test="search_id != null and !search_id.equals('')">
+				and support_userid like '%' || #{search_id} || '%'
+			</if>
+			<if test="search_price != null and !search_price.equals('')">
+				and support_price like '%' || #{search_price} || '%'
+			</if>
+			<if test="search_date_start != null and !search_date_start.equals('')">
+				<![CDATA[and support_date >= #{search_date_start}]]>
+			</if>
+			<if test="search_date_end != null and !search_date_end.equals('')">
+				<![CDATA[and support_date < to_date(#{search_date_end},'YYYY-MM-DD')+1 ]]>
+			</if>
 	</select>
 </mapper>

@@ -33,8 +33,8 @@ public interface SupportDAO {
 	void insertSupportPay(HashMap<String, Object> map);
 	
 	//후원하기 페이징
-    public List<SupportDTO> listSupport(int startNo, int endNo, String field, String keyword, String order);
+    public List<SupportDTO> listSupport(int startNo, int endNo, String search_id, String search_price, String search_date_start, String search_date_end, String order);
 
     //후원하기 페이징 전체 개수
-    public int listSupportCount(String field, String keyword);
+    public int listSupportCount(String search_id, String search_price, String search_date_start, String search_date_end);
 }

@@ -29,6 +29,13 @@
 		<!-- Wish -->
 		<typeAlias type="com.heartpet.model.WishDTO" alias="WishDTO"/>
 		<typeAlias type="com.heartpet.action.WishDAO" alias="WishDAO"/>
+		<typeAlias type="com.heartpet.model.WishVO" alias="WishVO"/>
+		<!-- support -->
+		<typeAlias type="com.heartpet.model.Mypage_SupportDTO" alias="Mypage_SupportDTO"/>
+		<typeAlias type="com.heartpet.model.SupportDTO" alias="SupportDTO"/>
+		<!-- notice -->
+		<typeAlias type="com.heartpet.model.NoticeDTO" alias="NoticeDTO"/>
+		
 	</typeAliases>	
 </configuration>
 

@@ -8,7 +8,7 @@
 		LIKE '%' || #{keyword} || '%'
     </sql>
 	
-	<select id="notice_content" parameterType="int" resultType="com.heartpet.model.NoticeDTO">
+	<select id="notice_content" parameterType="int" resultType="NoticeDTO">
 		select * from heartpet_notice where notice_no = #{no}
 	</select>	
 	
@@ -16,14 +16,14 @@
 		update heartpet_notice set notice_hit = (notice_hit + 1) where notice_no = #{no}
 	</update>
 	
-	<insert id="notice_insert" parameterType="com.heartpet.model.NoticeDTO">
+	<insert id="notice_insert" parameterType="NoticeDTO">
 		<selectKey resultType="int" keyProperty="notice_no" order="BEFORE">
 			select max(notice_no) from heartpet_notice
 		</selectKey>
 			insert into heartpet_notice values(#{notice_no}+1,#{notice_title},#{notice_content},#{notice_hit},#{notice_img1},#{notice_img2},sysdate, 1)
 	</insert>
 	
-	<update id="notice_update" parameterType="com.heartpet.model.NoticeDTO">
+	<update id="notice_update" parameterType="NoticeDTO">
 		update heartpet_notice set notice_title=#{notice_title}, notice_content=#{notice_content}, notice_hit=#{notice_hit}, notice_img1=#{notice_img1}, notice_img2=#{notice_img2}, notice_date = sysdate where notice_no = #{notice_no} 
 	</update>
 	
@@ -31,7 +31,7 @@
 		update heartpet_notice set notice_status = 0 where notice_no = #{no}
 	</update>
 	
-  	<select id="notice_list" parameterType="hashMap" resultType="com.heartpet.model.NoticeDTO">
+  	<select id="notice_list" parameterType="hashMap" resultType="NoticeDTO">
 				
 		SELECT * 
 		FROM (SELECT s.*, row_number() over(
