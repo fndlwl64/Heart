@@ -60,12 +60,12 @@
 			<if test="user_id != null and !user_id.equals('')">
 				AND USER_ID LIKE '%' || #{user_id } || '%'
 			</if>
-			<if test="user_grade != 0">
-				AND user_grade = #{ user_grade }
+			<if test="user_grade != null and !user_grade.equals('')">
+				AND USER_GRADE = #{user_grade}
 			</if>
 			<if test="user_animalexp != null and !user_animalexp.equals('')">
-				AND user_animalexp = #{ user_animalexp }
-			</if>			
+				AND USER_ANIMALEXP = #{user_animalexp}
+			</if>
         <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo}]]>
 	</select>
 	
@@ -74,7 +74,7 @@
 			<if test="user_id != null and !user_id.equals('')">
 				AND USER_ID LIKE '%' || #{ user_id } || '%'
 			</if>
-			<if test="user_grade != null">
+			<if test="user_grade != null and !user_grade.equals('')">
 				AND USER_GRADE = #{user_grade}
 			</if>
 			<if test="user_animalexp != null and !user_animalexp.equals('')">

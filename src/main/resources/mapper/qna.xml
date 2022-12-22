@@ -67,7 +67,7 @@
 	//============================================================  	
 	-->
 	<!-- Admin : qna-list  -->
-	<select id="qna_admin_list" parameterType="hashMap" resultType="QnaDTO">
+<!-- 	<select id="qna_admin_list" parameterType="hashMap" resultType="QnaDTO">
 		<include refid="qna_select" /> 
 			FROM (SELECT b.*, ROW_NUMBER() OVER(ORDER BY 
 			<choose>
@@ -97,8 +97,9 @@
          <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo} ]]>
          <include refid="qna_hierarchy" /> 
 	</select>
-	
+	 -->
 	<!-- Admin : qna-count  -->
+
 	<select id="qna_admin_count" parameterType="hashMap" resultType="QnaDTO">
 		SELECT COUNT(*) 
 			FROM heartpet_board
@@ -118,8 +119,7 @@
 	        <if test="search_content != null and !search_content.equals('')">
 	            AND (board_title LIKE '%' || #{ search_content } || '%' OR board_content LIKE '%' || #{ search_content })
 	        </if>
-	</select>
-	
+	</select>	
 	
 	<!-- qna : content -->
 	<update id="qna_hit" parameterType="int">
