@@ -12,7 +12,7 @@ body {
 ._container {
 	text-align: center;
 	margin: auto;
-	width: 70%;
+	
 	display: flex;
 	margin-top: 3%;
 }
@@ -164,7 +164,9 @@ body {
 
 .container ._container .wrap .user_info .info_title .info_border {
 	border-bottom: 1px solid #D5D8DC;
-	width: 90%;
+	width: 100%;
+	display: flex;
+	flex-direction: space-evenly;
 }
 
 .container ._container .wrap .user_info .info_title ul li{

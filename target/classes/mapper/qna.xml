@@ -67,7 +67,7 @@
 	//============================================================  	
 	-->
 	<!-- Admin : qna-list  -->
-	<select id="qna_admin_list" parameterType="hashMap" resultType="QnaDTO">
+<!-- 	<select id="qna_admin_list" parameterType="hashMap" resultType="QnaDTO">
 		<include refid="qna_select" /> 
 			FROM (SELECT b.*, ROW_NUMBER() OVER(ORDER BY 
 			<choose>
@@ -97,8 +97,31 @@
          <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo} ]]>
          <include refid="qna_hierarchy" /> 
 	</select>
-	
+	 -->
 	<!-- Admin : qna-count  -->
+  
+<!-- 	<select id="qna_list" parameterType="hashMap" resultType="QnaDTO">
+		<include refid="qna_select" /> 
+			FROM (SELECT b.*, ROW_NUMBER() OVER(ORDER BY board_no DESC) rnum FROM heartpet_board b
+		<where>
+		 <choose>
+            <when test="field.equals('allSearch') and keyword != ''"> (board_title <include refid="qna_keyword" />) OR (board_content <include refid="qna_keyword" />) OR (board_category <include refid="qna_keyword" />) OR (board_id <include refid="qna_keyword" />)</when>
+            <when test="field.equals('title') and keyword != ''"> board_title <include refid="qna_keyword" /></when>
+            <when test="field.equals('content') and keyword != ''"> board_content <include refid="qna_keyword" /></when>
+            <when test="field.equals('category') and keyword != ''"> board_category <include refid="qna_keyword" /></when>
+            <when test="field.equals('id') and keyword != ''"> board_id <include refid="qna_keyword" /></when>
+         </choose>
+         </where>
+         <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo} ]]>
+		 <include refid="qna_hierarchy" /> 
+         <choose>
+            <when test="order.equals('no_desc')">, board_no DESC</when>
+            <when test="order.equals('date_desc')">, board_regdate DESC</when>
+            <when test="order.equals('hit_desc')">, board_hit DESC</when>
+            <when test="order.equals('title_desc')">, board_title DESC</when>        
+         </choose>
+	</select> -->
+
 	<select id="qna_admin_count" parameterType="hashMap" resultType="QnaDTO">
 		SELECT COUNT(*) 
 			FROM heartpet_board
@@ -119,6 +142,7 @@
 	            AND (board_title LIKE '%' || #{ search_content } || '%' OR board_content LIKE '%' || #{ search_content })
 	        </if>
 	</select>
+
 	
 	
 	<!-- qna : content -->
