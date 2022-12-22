@@ -29,7 +29,7 @@ body {
 }
 
 .container .search_form .form_box .form-control {
-	width: 30%;
+	width: 100%;
 }
 
 .container .search_form .form_div .search-table-box {
@@ -498,4 +498,6 @@ body {
     justify-content: right;
 }
 
-
+#search_animal {
+	width: 30% !important;
+}

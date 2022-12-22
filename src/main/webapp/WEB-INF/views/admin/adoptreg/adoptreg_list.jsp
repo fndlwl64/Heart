@@ -33,42 +33,55 @@
 
 <body>
 	<div class="container">
-		<form class="search_form" method="post"
-			action="${path }/adoptreg_list">
-			<div class="form_box row">
-				<div class="col">
-					<select name="adopt_tag" class="form-select">
-						<option value=""></option>
-						<option value="adopt_reg_appdate"
-							<c:if test="${tag eq 'adopt_reg_appdate'}">selected</c:if>>입소신청일</option>
-						<option value="adopt_reg_regdate"
-							<c:if test="${tag eq 'adopt_reg_regdate'}">selected</c:if>>입양등록일</option>
-						<option value="adopt_reg_duedate"
-							<c:if test="${tag eq 'adopt_reg_duedate'}">selected</c:if>>입양예정일</option>
-						<option value="adopt_reg_adoptdate"
-							<c:if test="${tag eq 'adopt_reg_adoptdate'}">selected</c:if>>입양완료일</option>
-					</select>
-				</div>
-				<div class="col">
-					<input type="date" name="startDate" value="${startDate }"
-						class="input-group">
-				</div>
-				<div class="col">
-					<input type="date" name="endDate" value="${endDate }"
-						class="input-group">
-				</div>
-				<div class="col">
-					<select name="animal_status" class="form-select">
-						<option value=""></option>
-						<option value="입소 신청"
-							<c:if test="${animal_status eq '입소 신청'}">selected</c:if>>입소 신청</option>
-						<option value="입양 가능"
-							<c:if test="${animal_status eq '입양 가능'}">selected</c:if>>입양 가능</option>
-						<option value="입양 대기"
-							<c:if test="${animal_status eq '입양 대기'}">selected</c:if>>입양 대기</option>
-						<option value="입양 완료"
-							<c:if test="${animal_status eq '입양 완료'}">selected</c:if>>입양 완료</option>
-					</select>
+		<form class="search_form" method="post" action="${path }/adoptreg_list">
+			<div class="form_box">
+				<div class="search-semi-title">
+                	<span><i class="bi bi-check2-square"></i> 입양관리 검색</span>
+	           	</div>
+	           
+				<div class="search-table-box">
+					<table class="table table-sm" id="search-table">
+						<tr>
+							<th>검색할 항목 설정</th>
+							<td>
+								<select name="adopt_tag" class="form-select">
+									<option value=""></option>
+									<option value="adopt_reg_appdate"
+										<c:if test="${tag eq 'adopt_reg_appdate'}">selected</c:if>>입소신청일</option>
+									<option value="adopt_reg_regdate"
+										<c:if test="${tag eq 'adopt_reg_regdate'}">selected</c:if>>입양등록일</option>
+									<option value="adopt_reg_duedate"
+										<c:if test="${tag eq 'adopt_reg_duedate'}">selected</c:if>>입양예정일</option>
+									<option value="adopt_reg_adoptdate"
+									<c:if test="${tag eq 'adopt_reg_adoptdate'}">selected</c:if>>입양완료일</option>
+								</select>
+							</td>
+							<th>상태설정</th>
+							<td>
+								<select name="animal_status" class="form-select">
+									<option value=""></option>
+									<option value="입소 신청"
+										<c:if test="${animal_status eq '입소 신청'}">selected</c:if>>입소 신청</option>
+									<option value="입양 가능"
+										<c:if test="${animal_status eq '입양 가능'}">selected</c:if>>입양 가능</option>
+									<option value="입양 대기"
+										<c:if test="${animal_status eq '입양 대기'}">selected</c:if>>입양 대기</option>
+									<option value="입양 완료"
+										<c:if test="${animal_status eq '입양 완료'}">selected</c:if>>입양 완료</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th>시작일</th>
+							<td>
+								<input type="date" name="startDate" value="${startDate }" class="form-control">
+							</td>
+							<th>종료일</th>
+							<td>
+								<input type="date" name="endDate" value="${endDate }" class="form-control">
+							</td>
+						</tr>
+					</table>					
 				</div>
 				<div class="col">
 					<button type="submit" class="btn btn-dark btn-sm">

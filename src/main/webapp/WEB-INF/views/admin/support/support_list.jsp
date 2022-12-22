@@ -103,11 +103,11 @@
 	            </tr>
 	            </c:forEach>
             </c:if>
-            <c:if test="${empty supportList }">
-            	<h3>후원내역이 없습니다.</h3>
-            </c:if>
         </table>
 		<br>
+	        <c:if test="${empty supportList }">
+	        	<h3>후원내역이 없습니다.</h3>
+	        </c:if>
 		<button id="insert_btn" class="btn btn-primary insertbtn mb-3" onclick="location.href='${path }/support_insert'"><i class="bi bi-pencil-fill"></i> 등록</button>
     </div>
     <br><br>
