@@ -6,6 +6,7 @@
 <c:set var="field" value="${ field }"/>
 <c:set var="keyword" value="${ keyword }"/>
 <c:set var="path" value="${pageContext.request.contextPath}" />
+<c:set var="url" value="&search_title=${ search_title }&search_cont=${ search_cont }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&order=${ order }" />
 <jsp:include page="../../include/admin_header.jsp"/>
 <!DOCTYPE html>
 
@@ -22,7 +23,6 @@
     <title>HeartPet</title>
     <link rel="stylesheet" href="resources/css/list_view.css">
     <link rel="stylesheet" href="resources/css/support.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 	<script src="${path}/resources/js/admin_list_view.js"></script>
 </head>
 <body>
@@ -46,17 +46,21 @@
     <br>
     
        <%-- 정렬 & 게시물 수 --%>
-    <form class="order_form" method="get" action="${path}/support_list">    
+<%--     <form class="order_form" method="get" action="${path}/support_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">     --%>
        <div class="sup-section">
-            <div class="sup_order">
-                <select class="form-select form-select-sm" name="order" onchange="this.form.submit()">
-                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
-                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신후원순</option>
-                    <option value="price_desc"<c:if test="${ order eq 'price_desc' }">selected="selected"</c:if>>금액순</option>
-                </select>
+       		<div class="row">
+       			<div class="col total-data">
+		            <!-- <div class="sup_order"> -->
+		                <select class="form-select form-select-sm order" name="order" onchange="location.href='${path}/support_list?page=${ paging.page }&search_title=${ search_title }&search_cont=${ search_cont }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&order='+this.value;">
+		                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
+		                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신후원순</option>
+		                    <option value="price_desc"<c:if test="${ order eq 'price_desc' }">selected="selected"</c:if>>금액순</option>
+		                </select>
+	                <!-- </div> -->
+	            </div>
             </div>
         </div>
-    </form>
+<!--     </form> -->
 
     
     <%-- 검색 결과 테이블 --%>
@@ -95,7 +99,8 @@
     <%-- 삭제 모달 --%>
     <jsp:include page="../../include/deleteModal.jsp" />
     <%-- 페이징처리 --%>
-    <jsp:include page="../../include/pagination.jsp" />
+    <%-- <jsp:include page="../../include/pagination.jsp" /> --%>
+    <%@ include file="../../include/pagination_update.jsp" %>
 </div>
 </body>
 </html>

@@ -24,8 +24,8 @@ public interface NoticeDAO {
     public int noticedelete(int no);
     
     //후원하기 페이징
-    public List<NoticeDTO> listNotice(int startNo, int endNo, String field, String keyword, String order);
+    public List<NoticeDTO> listNotice(int startNo, int endNo, String search_title, String search_cont, String search_date_start, String search_date_end, String order);
 
     //후원하기 페이징 전체 개수
-    public int listNoticeCount(String field, String keyword);
+    public int listNoticeCount(String search_title, String search_cont, String search_date_start, String search_date_end);
 }
