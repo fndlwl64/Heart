@@ -49,9 +49,9 @@ public class NoticeController {
         List<NoticeDTO> noticeList = null;
         PageDTO paging= null;
 		
-        totalRecord = this.noticedao.listNoticeCount(field, keyword);
-        paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-        noticeList = this.noticedao.listNotice(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
+        //totalRecord = this.noticedao.listNoticeCount(field, keyword);
+        //paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+        //noticeList = this.noticedao.listNotice(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
 		
         model.addAttribute("List", noticeList);
         model.addAttribute("total", totalRecord);

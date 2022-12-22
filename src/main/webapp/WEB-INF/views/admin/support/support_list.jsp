@@ -6,7 +6,7 @@
 <c:set var="field" value="${ field }"/>
 <c:set var="keyword" value="${ keyword }"/>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<c:set var="url" value="&field=${ field }&keyword=${ keyword }&order=${ order }" />
+<c:set var="url" value="&search_title=${ search_title }&search_cont=${ search_cont }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&order=${ order }" />
 <jsp:include page="../../include/admin_header.jsp"/>
 <!DOCTYPE html>
 
@@ -51,7 +51,7 @@
        		<div class="row">
        			<div class="col total-data">
 		            <!-- <div class="sup_order"> -->
-		                <select class="form-select form-select-sm order" name="order" onchange="location.href='${path}/support_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">
+		                <select class="form-select form-select-sm order" name="order" onchange="location.href='${path}/support_list?page=${ paging.page }&search_title=${ search_title }&search_cont=${ search_cont }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&order='+this.value;">
 		                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
 		                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신후원순</option>
 		                    <option value="price_desc"<c:if test="${ order eq 'price_desc' }">selected="selected"</c:if>>금액순</option>
