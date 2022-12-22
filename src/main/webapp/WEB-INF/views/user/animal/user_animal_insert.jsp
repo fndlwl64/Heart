@@ -9,7 +9,7 @@
 <div class="div1">
     <div class="title">
     	<h3>HeartPet 입소 신청</h3>
-    	<span>가족을 만날 수 있도록 정확하게 작성해주세요</span>
+    	<span>가족을 만날 수 있도록 정확하게 작성해주세요.</span>
     </div>
     
     <form action="<%=request.getContextPath() %>/user_animal_insert" method="post" enctype="multipart/form-data" onsubmit="return submitOption();">
@@ -100,7 +100,8 @@
             
         </table>
         
-        <input type="submit" value="입양 등록" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary"><i class="bi bi-upload"></i> 입소신청</button>
+        
     </form>
 </div>
 <script>
