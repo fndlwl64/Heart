@@ -127,14 +127,14 @@
 			SET board_hit = board_hit + 1 
 			WHERE board_no = #{ board_no }
 	</update>	
-	<select id="qna_content" parameterType="int" resultType="QnaDTO">
+	<!-- <select id="qna_content" parameterType="int" resultType="QnaDTO">
 		<include refid="qna_select" /> 
 			FROM heartpet_board 
 			WHERE board_no = #{ board_no }
 		<include refid="qna_hierarchy" />
 	</select>
 	
-	<!-- qna : count : 게시글 개수 -->
+	qna : count : 게시글 개수
 	<select id="qna_count" parameterType="hashMap" resultType="int">
 		SELECT COUNT(*) 
             FROM heartpet_board
@@ -150,7 +150,7 @@
         </where>
 	</select>
 	
-	<!-- qna : insert -->
+	qna : insert
 	<insert id="qna_insert" parameterType="QnaDTO">
 		<selectKey resultType="int" keyProperty="board_no" order="BEFORE">
 		SELECT MAX(board_no)+1 FROM heartpet_board
@@ -172,7 +172,7 @@
 			default,
 			#{ board_img1 }, 
 			#{ board_img2 })
-	</insert>
+	</insert> -->
 		
 	<!-- qna : update -->
 	<update id="qna_update" parameterType="QnaDTO">

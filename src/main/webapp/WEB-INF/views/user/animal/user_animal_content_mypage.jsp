@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="resources/css/list_view.css">
 <jsp:include page="../../include/user_header.jsp" />
@@ -7,7 +8,7 @@ pageContext.setAttribute("newline", "\n");
 %>
 <c:set var="dto" value="${dto }" />
 <c:set var="wishCheck" value="${wishCheck }" />
-<c:set var="adoptRegDTO" value="${adoptRegDTO }" />
+<c:set var="appdate" value="${appdate }" />
 <c:set var="user_id"
 	value='<%=(String) session.getAttribute("session_id")%>' />
 <c:set var="user_grade"
@@ -42,8 +43,8 @@ pageContext.setAttribute("newline", "\n");
 					<ul class="">
 						<li class="forMargin">
 							<div>
-								<label class="title">입소날짜</label><span>${adoptRegDTO.adopt_reg_appdate }</span>
-								<br /> <label class="title">백신</label><span>${dto.animal_vaccination }</span>
+								<label class="title">입소날짜</label><span>${appdate }</span> <br />
+								<label class="title">백신</label><span>${dto.animal_vaccination }</span>
 								<br /> <label class="title">중성화</label><span>${dto.animal_neutered}</span>
 							</div>
 						</li>
@@ -87,32 +88,16 @@ pageContext.setAttribute("newline", "\n");
 				</button>
 			</c:if>
 		</div>
-		<c:choose>
-			<c:when
-				test="${user_id eq adoptRegDTO.adopt_reg_userid and dto.animal_status eq '입양 대기'}">
-				<div class="col-1">
-					<form action="user_cancel_animal" method="post">
-						<input type="hidden" id="animal_status"
-							value="${dto.animal_status }"> <input type="hidden"
-							name="animal_no" id="animal_no" value="${dto.animal_no }">
-						<input type="submit" class="btn btn-danger " value="입양취소"
-						data-bs-toggle="modal" data-bs-target="#deleteModal">
-					</form>
-				</div>
-			</c:when>
-			<c:otherwise>
-				<div class="col-1">
-					<form action="user_get_animal" method="post"
-						onsubmit="return submitOption();">
-						<input type="hidden" id="animal_status"
-							value="${dto.animal_status }"> <input type="hidden"
-							name="animal_no" id="animal_no" value="${dto.animal_no }">
-						<input type="submit" class="btn btn-primary " value="입양하기"
-							data-bs-toggle="modal" data-bs-target="#cautionModal">
-					</form>
-				</div>
-			</c:otherwise>
-		</c:choose>
+		<div class="col-1">
+			<form action="user_cancel_animal" method="post"
+				onsubmit="return submitOption();">
+				<input type="hidden" id="animal_status"
+					value="${dto.animal_status }"> <input type="hidden"
+					name="animal_no" id="animal_no" value="${dto.animal_no }">
+				<input type="submit" class="btn btn-danger " value="입양취소"
+					data-bs-toggle="modal" data-bs-target="#cautionModal">
+			</form>
+		</div>
 	</div>
 
 	<!-- Modal -->
@@ -120,33 +105,6 @@ pageContext.setAttribute("newline", "\n");
 	<jsp:include page="../../include/cautionModal.jsp" />
 </div>
 <script type="text/javascript">
-	function submitOption() {
-		if (!$('#user_grade').val()) {
-			$('.modal-body-cancel').empty();
-			$('.modal-body-cancel').append('로그인을 해주세요');
-			return false;
-		}
-		if ($('#user_grade').val() > 3) {
-			$('.modal-body-cancel').empty();
-			$('.modal-body-cancel').append('회원의 등급이 낮아 입양 자격이 없습니다.');
-			return false;
-		}
-		if ($('#animal_status').val() == '입소 신청') {
-			$('.modal-body-cancel').empty();
-			$('.modal-body-cancel').append('아직 입소가 완료되지 않은 상태입니다.');
-			return false;
-		}
-		if ($('#animal_status').val() == '입양 대기') {
-			$('.modal-body-cancel').empty();
-			$('.modal-body-cancel').append('입양 대기 중인 상태입니다.');
-			return false;
-		}
-		if ($('#animal_status').val() == '입양 완료') {
-			$('.modal-body-cancel').empty();
-			$('.modal-body-cancel').append('이미 입양 완료된 상태입니다.');
-			return false;
-		}
-	}
 	$(document)
 			.ready(
 					function() {
