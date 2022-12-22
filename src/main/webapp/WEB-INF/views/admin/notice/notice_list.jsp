@@ -35,16 +35,17 @@
             	<div class="search-table-box">
 	                <table class="table table-sm" id="search-table">
 	                    <tr>
-	                        <th>공지제목</th>
-	                        <td><input type="text" class="form-control" name="search_title" value="${ search_title }" /></td>
-	                        <th>공지내용</th>
-	                        <td><input type="text" class="form-control" name="search_cont" value="${ search_cont }" /></td>
-	                    </tr>
-	                    <tr>   
-	                        <th>게시일(시작)</th>
-	                        <td><input type="date" class="form-control" name="search_date_start" value="${ search_date_start }" /></td>
-	                        <th>게시일(종료)</th>
-	                        <td><input type="date" class="form-control" name="search_date_end" value="${ search_date_end }" /></td>
+	                        <th width="10%">공지글 제목</th>
+	                        <td width="17.5%"><input type="text" class="form-control" name="search_title" value="${ search_title }" /></td>
+	                        <th width="10%">공지글 내용</th>
+	                        <td width="17.5%"><input type="text" class="form-control" name="search_cont" value="${ search_cont }" /></td>
+	                        <th width="10%">작성일자</th>
+	                        <td width="35%">
+								<div class="search-date">	                        	
+			                        <input type="date" class="form-control search-date-picker" name="search_date_start" value="${ search_date_start }" />
+			                        <input type="date" class="form-control search-date-picker" name="search_date_end" value="${ search_date_end }" />
+		                        </div>
+	                        </td>
 	                    </tr>                                                           
 	                </table>
 				</div>
@@ -57,12 +58,12 @@
         
         <%-- 정렬 & 게시물 수 --%>
 	    <%-- <form class="order_form" method="get" action="${path}/notice_list">     --%>
-	       <div class="notice-section">
+	       <div class="qna-section">
 	       		<div class="row">
-		            <div class="col total-data">
-		                <select class="form-select form-select-sm" name="order" onchange="location.href='${path}/notice_list?page=${ paging.page }&search_title=${ search_title }&search_cont=${ search_cont }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&order='+this.value;">
+		            <div class="col total-data justify-content-end">
+		                <select class="form-select form-select-sm order" name="order" onchange="location.href='${path}/notice_list?page=${ paging.page }&search_title=${ search_title }&search_cont=${ search_cont }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&order='+this.value;">
 		                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
-		                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신게시일순</option>
+		                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신순</option>
 		                    <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>조회수높은순</option>
 		                </select>
 		            </div>
@@ -73,11 +74,11 @@
         <div class="lists">
             <table class="table table-hover searched_list">
                 <tr>
-                    <th class="table-light col-1">글번호</th>
-                    <th class="table-light col-1">글제목</th>
-                    <th class="table-light col-1">조회수</th>
-                    <th class="table-light col-1">게시일</th>
-                    <th class="table-light col-1">수정/삭제</th>
+                    <th class="table-light" width="10%">번호</th>
+                    <th class="table-light" width="50%">제목</th>
+                    <th class="table-light" width="10%">조회수</th>
+                    <th class="table-light" width="12.5%">게시일</th>
+                    <th class="table-light" width="12.5%">수정 / 삭제</th>
                 </tr>
 				<c:if test="${!empty noticeList}">
 					<c:forEach items="${noticeList }" var="dto">
@@ -85,7 +86,7 @@
 		                    <td>${dto.getNotice_no() }</td>
 		                    <td><a href="${path }/notice_content?no=${dto.getNotice_no()}">${dto.getNotice_title() }</a></td>
 		                    <td>${dto.getNotice_hit() }</td>
-		                    <td>${dto.getNotice_date().substring(0, 10) }</td>
+		                    <td><small>${dto.getNotice_date().substring(0, 10) }</small></td>
 		                    <td>
 		                        <button class="btn btn-outline-success btn-sm" onclick="location.href='${path}/notice_update?no=${dto.getNotice_no() }'">수정</button>
 		                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${path }/notice_delete?no=${dto.getNotice_no()}">삭제</button>
