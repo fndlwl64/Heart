@@ -37,7 +37,7 @@
                 	<span><i class="bi bi-check2-square"></i> 동물관리 검색</span>
             	</div>
             	<div class="search-table-box">
-            		<table class="table table-sm" id="search-table" style="text-align: center;">
+            		<table class="table table-sm" id="search_table">
             			<tr>
             				<th>동물 종</th>
             				<th>크기</th>
