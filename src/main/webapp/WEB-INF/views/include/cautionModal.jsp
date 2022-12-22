@@ -12,7 +12,7 @@
     <!-- Modal -->
 	<div class="modal fade" id="cautionModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div id="cautionInput" class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h1 class="modal-title fs-5" id="cautionModalLabel">Caution</h1>
@@ -22,7 +22,7 @@
 				<div class="modal-body modal-body-cancel"></div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Close</button>
+						data-bs-dismiss="modal"  id="cautionFunction">Close</button>
 				</div>
 			</div>
 		</div>

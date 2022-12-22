@@ -175,7 +175,18 @@ public class AnimalController {
 
 	// 입소 신청
 	@RequestMapping(value = "/user_animal_insert", method = RequestMethod.GET)
-	public String user_animal_insert(Model model) {
+	public String user_animal_insert(Model model){
+	
+		//로그인을 하지 않았거나 자격이 없을 경우
+		if(request.getSession().getAttribute("session_grade") == null) {
+			model.addAttribute("msg", "로그인이 필요합니다.");
+			model.addAttribute("url", "main");
+			return "alert";
+		}else if ((Integer) request.getSession().getAttribute("session_grade") > 2){
+			model.addAttribute("msg", "회원 등급이 낮습니다.");
+			model.addAttribute("url", "main");
+			return "alert";
+		}
 		return "user/animal/user_animal_insert";
 	}
 
