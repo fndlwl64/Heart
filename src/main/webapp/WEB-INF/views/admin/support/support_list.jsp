@@ -3,10 +3,12 @@
 <c:set var="dto" value="${supportList }"/>
 <c:set var="total" value="${ total }"/>
 <c:set var="paging" value="${ paging }"/>
-<c:set var="field" value="${ field }"/>
-<c:set var="keyword" value="${ keyword }"/>
+<c:set var="search_id" value="${ search_id }"/>
+<c:set var="search_price" value="${ search_price }"/>
+<c:set var="search_date_start" value="${ search_date_start }"/>
+<c:set var="search_date_end" value="${ search_date_end }"/>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<c:set var="url" value="&search_title=${ search_title }&search_cont=${ search_cont }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&order=${ order }" />
+<c:set var="url" value="&search_id=${ search_id }&search_price=${ search_price }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&order=${ order }" />
 <jsp:include page="../../include/admin_header.jsp"/>
 <!DOCTYPE html>
 
@@ -30,17 +32,29 @@
     <br>
     <%-- 검색 폼 --%>
     <form class="search_form" method="post" action="${path }/support_list">
-        <div class="form_box d-flex">
-            <select name="field" class="form-select d-inline align-middle w-25">
-            	<option value="allSearch" <c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
-                <option value="id" <c:if test="${ field eq 'id' }">selected="selected"</c:if>>회원아이디</option>
-                <option value="grade" <c:if test="${ field eq 'grade' }">selected="selected"</c:if>>후원금액</option>
-            </select>
-			<span class="search-name">검색어</span> 
-            <input name="keyword" class="form-control d-inline align-middle w-50" value="${ keyword }">
-
-            <button class="btn btn-dark d-inline align-middle ms-1" type="submit"><i class="bi bi-search"></i> 검색</button>
-        </div>
+        <div class="form_box">
+            	<div class="search-semi-title">
+                	<span><i class="bi bi-check2-square"></i> 후원관리 검색</span>
+            	</div>
+            	<div class="search-table-box">
+	                <table class="table table-sm" id="search-table">
+	                    <tr>
+	                        <th>사용자ID</th>
+	                        <td><input type="text" class="form-control" name="search_id" value="${ search_id }" /></td>
+	                        <th>후원금액</th>
+	                        <td><input type="text" class="form-control" name="search_price" value="${ search_price }" /></td>
+	                        <th>게시일(시작)</th>
+	                        <td><input type="date" class="form-control" name="search_date_start" value="${ search_date_start }" /></td>
+	                        <th>게시일(종료)</th>
+	                        <td><input type="date" class="form-control" name="search_date_end" value="${ search_date_end }" /></td>
+	                    </tr>                                                           
+	                </table>
+				</div>
+				<div class="search-buttons">
+					<button class="btn btn-light" type="button" onclick="location.href='${ path }/support_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
+		            <button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
+	            </div>   
+            </div>
     </form>
 
     <br>
@@ -50,13 +64,12 @@
        <div class="sup-section">
        		<div class="row">
        			<div class="col total-data">
-		            <!-- <div class="sup_order"> -->
-		                <select class="form-select form-select-sm order" name="order" onchange="location.href='${path}/support_list?page=${ paging.page }&search_title=${ search_title }&search_cont=${ search_cont }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&order='+this.value;">
+		                <select class="form-select form-select-sm order" name="order" onchange="location.href='${path}/support_list?page=${ paging.page }&search_id=${ search_id }&search_price=${ search_price }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&order='+this.value;">
 		                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
 		                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신후원순</option>
 		                    <option value="price_desc"<c:if test="${ order eq 'price_desc' }">selected="selected"</c:if>>금액순</option>
 		                </select>
-	                <!-- </div> -->
+
 	            </div>
             </div>
         </div>

@@ -69,21 +69,25 @@ public class SupportDAOImpl implements SupportDAO{
 	}
 
 	@Override
-	public List<SupportDTO> listSupport(int startNo, int endNo, String field, String keyword, String order) {
+	public List<SupportDTO> listSupport(int startNo, int endNo, String search_id, String search_price, String search_date_start, String search_date_end, String order) {
 		Map<String, Object> map = new HashMap<String, Object>();
         map.put("startNo", startNo);
         map.put("endNo", endNo);
-        map.put("field", field);
-        map.put("keyword", keyword);
+        map.put("search_id", search_id);
+        map.put("search_price", search_price);
+        map.put("search_date_start", search_date_start);
+        map.put("search_date_end", search_date_end);
         map.put("order", order);
         return this.sqlSession.selectList("sup_list", map);
 	}
 
 	@Override
-	public int listSupportCount(String field, String keyword) {
+	public int listSupportCount(String search_id, String search_price, String search_date_start, String search_date_end) {
 		Map<String, String> map = new HashMap<String, String>();
-        map.put("field", field);
-        map.put("keyword", keyword);
+        map.put("search_id", search_id);
+        map.put("search_price", search_price);
+        map.put("search_date_start", search_date_start);
+        map.put("search_date_end", search_date_end);
         return this.sqlSession.selectOne("sup_count", map);
 	}
 

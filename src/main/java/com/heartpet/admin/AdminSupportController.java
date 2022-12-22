@@ -32,18 +32,18 @@ public class AdminSupportController {
 	
 	//후원리스트출력
 	@RequestMapping("/support_list")
-	public String admin_support_list(@RequestParam(value = "field", required = false) String field,
-			@RequestParam(value = "keyword", required = false) String keyword,
+	public String admin_support_list(@RequestParam(value = "search_id", required = false) String search_id,
+			@RequestParam(value = "search_price", required = false) String search_price,
+			@RequestParam(value = "search_date_start", required = false) String search_date_start,
+			@RequestParam(value = "search_date_end", required = false) String search_date_end,
 			@RequestParam(value = "order", required = false) String order,
 			@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
 		
 		// 페이징
-		if (field == null) {
-            field = "";
-        }
-        if (keyword == null) {
-            keyword = "";
-        }
+		if (search_id == null) { search_id = ""; }
+        if (search_price == null) { search_price = ""; }
+        if (search_date_start == null) { search_date_start = ""; }
+        if (search_date_end == null) { search_date_end = ""; }
         if (order == null) {
             order = "";
         }
@@ -56,15 +56,17 @@ public class AdminSupportController {
         List<SupportDTO> supportList = null;
         PageDTO paging= null;
         
-		totalRecord = this.supportdao.listSupportCount(field, keyword);
-        paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-        supportList = this.supportdao.listSupport(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
+		totalRecord = this.supportdao.listSupportCount(search_id, search_price, search_date_start, search_date_end);
+        paging = new PageDTO(currentPage, rowsize, totalRecord);
+        supportList = this.supportdao.listSupport(paging.getStartNo(), paging.getEndNo(), search_id, search_price, search_date_start, search_date_end, order);
 
         model.addAttribute("supportList", supportList);
         model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);
-        model.addAttribute("field", field);
-        model.addAttribute("keyword", keyword);
+        model.addAttribute("search_id", search_id);
+        model.addAttribute("search_price", search_price);
+        model.addAttribute("search_date_start", search_date_start);
+        model.addAttribute("search_date_end", search_date_end);
         model.addAttribute("order", order);
         
 		return "admin/support/support_list";
