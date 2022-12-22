@@ -74,7 +74,9 @@
 		$('#deleteModalLabel').empty();
 		$('#deleteModalLabel').append('입양 등록 취소');
 		$('#deleteModalBody').empty();
-		$('#deleteModalBody').append($('#user_id').val()+'님의 '+$('#animal_name').val()+' 펫 입양 신청을 취소하시겠습니까?');		
+		$('#deleteModalBody').append($('#user_id').val()+'님의 '+$('#animal_name').val()+' 펫 입양 신청을 취소하시겠습니까?');	
+		$('#deleteFunction').empty();
+		$('#deleteFunction').append('취소');
 	}
 </script>
 </html>
