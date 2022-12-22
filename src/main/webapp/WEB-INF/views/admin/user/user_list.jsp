@@ -73,7 +73,7 @@
 			</div>
 			
 			<div class="search-buttons">
-				<button class="btn btn-light" type="button" onclick="location.href='${ path }/admin_review_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
+				<button class="btn btn-light" type="button" onclick="location.href='${ path }/user_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
 	            <button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
             </div>
             
