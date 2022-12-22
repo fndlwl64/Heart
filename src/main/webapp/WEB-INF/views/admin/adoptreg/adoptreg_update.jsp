@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <c:set var="content" value="${content }"></c:set>
 <c:set var="foreign" value="${foreign }"></c:set>
-<c:set var="deleteAddr" value="${path }/adoptreg_cancel?animal_no=${content.adopt_reg_animalno }&adopt_reg_regno=${content.adopt_reg_regno }"></c:set>
+<c:set var="deleteAddr" value="${path }/adoptreg_cancel?animal_no=${content.adopt_reg_animalno }&adopt_reg_regno=${content.adopt_reg_regno }&user_id=${content.adopt_reg_userid }"></c:set>
 <body>
 	<jsp:include page="../../include/admin_header.jsp" />
 	<script src="resources/js/admin_list_view.js"></script>
@@ -74,7 +74,9 @@
 		$('#deleteModalLabel').empty();
 		$('#deleteModalLabel').append('입양 등록 취소');
 		$('#deleteModalBody').empty();
-		$('#deleteModalBody').append($('#user_id').val()+'님의 '+$('#animal_name').val()+' 펫 입양 신청을 취소하시겠습니까?');		
+		$('#deleteModalBody').append($('#user_id').val()+'님의 '+$('#animal_name').val()+' 펫 입양 신청을 취소하시겠습니까?');	
+		$('#deleteFunction').empty();
+		$('#deleteFunction').append('취소');
 	}
 </script>
 </html>
