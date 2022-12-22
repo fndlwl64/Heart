@@ -28,26 +28,43 @@
 
 </head>
 <body>
-    <br>
     <div class="container">
 
-        <%-- 검색 폼 --%>
-        <form class="search_form" method="get" action="${path}/admin_qna_list">
-            <div class="form_box d-flex">
-           		<span class="search-name">분류</span>
-                <select name="field" class="form-select d-inline align-middle w-25">
-                    <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
-                    <option value="category"<c:if test="${ field eq 'category' }">selected="selected"</c:if>>카테고리</option>
-                    <option value="title"<c:if test="${ field eq 'title' }">selected="selected"</c:if>>제목</option>
-                    <option value="content"<c:if test="${ field eq 'content' }">selected="selected"</c:if>>내용</option>
-                    <option value="id"<c:if test="${ field eq 'id' }">selected="selected"</c:if>>작성자</option>
-                </select>
-                <span class="search-name">검색어</span> 
-                <input name="keyword" class="form-control d-inline align-middle w-50" value="${ keyword }">
-                <button class="btn btn-dark d-inline align-middle ms-1" type="submit"><i class="bi bi-search"></i> 검색</button>
-           </div>
-        </form>
-        <br>
+    <%-- 검색 폼 --%>
+	<form action="${path}/admin_qna_list" class="search_form" method="get">
+	<div class="form_box">
+	<div class="search-semi-title">
+	    <span><i class="bi bi-check2-square"></i> 문의글관리 검색</span>
+	</div>       
+		<div class="search-table-box">
+              <table class="table table-sm" id="search-table">
+                  <tr>
+                      <th>카테고리</th>
+                      <td>
+	                      <label><input type="radio" class="form-check-input" name="search_category" value="입양" />입양</label>
+	                      <label><input type="radio" class="form-check-input" name="search_category" value="입소" />입소</label>
+	                      <label><input type="radio" class="form-check-input" name="search_category" value="후원" />후원</label>
+	                      <label><input type="radio" class="form-check-input" name="search_category" value="기타" />기타</label>
+                      </td>
+                      <th>작성일시</th>
+                      <td>
+	                      <input type="text" id="datePicker" name="search_date" />
+                      </td>
+				  </tr>
+				  <tr>
+                      <th>작성자 아이디</th>
+                      <td><input type="text" class="form-control" name="search_id" value="${ search_id }" /></td>
+                      <th>문의글</th>
+                      <td><input type="text" class="form-control" name="search_content" value="${ search_content }" /></td>
+                  </tr>                                                           
+              </table>
+		</div>
+		<div class="search-buttons">
+		<button class="btn btn-light" type="button" onclick="location.href='${ path }/admin_review_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
+		<button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
+		</div>
+	</div>
+	</form>
         
        <%-- 정렬 & 게시물 수 --%>
     <div class="qna-section">
