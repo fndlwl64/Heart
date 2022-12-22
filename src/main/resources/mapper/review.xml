@@ -171,25 +171,28 @@
     <!-- review : review_admin_list -->
     <select id="review_admin_list" parameterType="hashMap" resultType="ReviewDTO">
         SELECT * 
-            FROM (SELECT r.*, a.animal_name, ROW_NUMBER() OVER(ORDER BY review_no DESC) rnum <include refid="review_join" />
-            WHERE 1 = 1
-	        <if test="search_animal != null and !search_animal.equals('')">
-	            AND animal_name LIKE '%' || #{ search_animal } || '%'
-	        </if>
-	        <if test="search_id != null and !search_id.equals('')">
-	            AND review_id LIKE '%' || #{ search_id } || '%'
-	        </if>
-	        <if test="search_content != null and !search_content.equals('')">
-	            AND (review_title LIKE '%' || #{ search_content } || '%' OR review_content LIKE '%' || #{ search_content })
-	        </if>
-         <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo}]]>
-         <choose>
-            <when test="order == ''"></when>
-            <when test="order.equals('date_desc')"> ORDER BY review_regdate DESC </when>         
-            <when test="order.equals('hit_desc')"> ORDER BY review_hit DESC</when>         
-            <when test="order.equals('no_desc')"> ORDER BY review_no DESC</when>         
-            <when test="order.equals('title_desc')"> ORDER BY review_title</when>         
-         </choose>
+            FROM 
+            (SELECT r.*, a.animal_name, ROW_NUMBER() OVER(
+     	     	ORDER BY 
+				<choose>
+					<when test="order == ''"> review_no DESC</when>
+					<when test="order.equals('date_desc')"> review_regdate DESC </when>         
+					<when test="order.equals('hit_desc')"> review_hit DESC</when>         
+					<when test="order.equals('no_desc')"> review_no DESC</when>         
+					<when test="order.equals('title_desc')"> review_title</when>         
+				</choose>
+       		) rnum <include refid="review_join" />
+	            WHERE 1 = 1
+		        <if test="search_animal != null and !search_animal.equals('')">
+		            AND animal_name LIKE '%' || #{ search_animal } || '%'
+		        </if>
+		        <if test="search_id != null and !search_id.equals('')">
+		            AND review_id LIKE '%' || #{ search_id } || '%'
+		        </if>
+		        <if test="search_content != null and !search_content.equals('')">
+		            AND (review_title LIKE '%' || #{ search_content } || '%' OR review_content LIKE '%' || #{ search_content })
+		        </if>
+	         <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo}]]>
     </select>
     
     <!-- review : review_admin_list -->

@@ -36,6 +36,9 @@ public interface QnaDAO {
     ////////////////////////////////////////////////////////////
     public List<FnqDTO> listFnq(int startNo, int endNo, String field, String keyword, String order);
     public int listFnqCount(String field, String keyword);
+    public List<FnqDTO> listFnq(int startNo, int endNo, String search_category, String search_question,
+    		String search_answer, String order);
+    public int listFnqCount(String search_category, String search_question, String search_answer);
     public FnqDTO contentFnq(int fnq_no);
     public int insertFnq(FnqDTO dto);
     public int updateFnq(FnqDTO dto);

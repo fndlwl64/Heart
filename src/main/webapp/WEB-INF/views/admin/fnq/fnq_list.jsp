@@ -6,9 +6,11 @@
 <c:set var="fList" value="${ fnqList }" />
 <c:set var="total" value="${ total }"/>
 <c:set var="paging" value="${ paging }"/>
-<c:set var="field" value="${ field }"/>
-<c:set var="keyword" value="${ keyword }"/>
-<c:set var="url" value="&field=${ field }&keyword=${ keyword }&order=${ order }" />
+<c:set var="search_category" value="${ search_category }"/>
+<c:set var="search_question" value="${ search_question }"/>
+<c:set var="search_answer" value="${ search_answer }"/>
+<c:set var="order" value="${ order }"/>
+<c:set var="url" value="&search_category=${ search_category }&search_question=${ search_question }&search_answer=${ search_answer }&order=${ order }" />
 <c:set var="link_address" value="${pageContext.request.contextPath}/admin_fnq_list" />
 
 <!DOCTYPE html>
@@ -28,7 +30,7 @@
 	<form action="${path}/admin_fnq_list" class="search_form" method="get">
 	<div class="form_box">
 	<div class="search-semi-title">
-	    <span><i class="bi bi-check2-square"></i> 문의글관리 검색</span>
+	    <span><i class="bi bi-check2-square"></i> FNQ 검색</span>
 	</div>       
 		<div class="search-table-box">
               <table class="table table-sm" id="search-table">
@@ -51,7 +53,7 @@
               </table>
 		</div>
 		<div class="search-buttons">
-		<button class="btn btn-light" type="button" onclick="location.href='${ path }/admin_qna_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
+		<button class="btn btn-light" type="button" onclick="location.href='${ path }/admin_fnq_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
 		<button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
 		</div>
 	</div>
@@ -61,9 +63,9 @@
     <div class="qna-section">
         <div class="row">
             <div class="col total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
-                <select class="form-select form-select-sm order" name="order" onchange="location.href='${ path }/admin_fnq_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">
+                <select class="form-select form-select-sm order" name="order" onchange="location.href='${ link_address }?page=${ paging.page }&search_category=${ search_category }&search_question=${ search_question }&search_answer=${ search_answer }&order='+this.value;">
                     <option selected="selected" value="no_desc" <c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호순</option>
-                    <option value="question_desc" <c:if test="${ order eq 'question_desc' }">selected="selected"</c:if>>가나다순</option>
+                    <option value="question_asc" <c:if test="${ order eq 'question_asc' }">selected="selected"</c:if>>가나다순</option>
                 </select>
             </div>
            </div>
