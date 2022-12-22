@@ -33,7 +33,6 @@
 	<sql id="qna_hierarchy">
 		START WITH board_parentNo = 0
 		CONNECT BY PRIOR board_no = board_parentNo
-		ORDER SIBLINGS BY board_no DESC
 	</sql>
 	
 	<!-- qna : list -->
@@ -44,7 +43,15 @@
 				FROM (
 					SELECT LEVEL, b.* 
 	                    FROM heartpet_board b
-						<include refid="qna_hierarchy" /> 			
+						<include refid="qna_hierarchy" /> 
+			            ORDER SIBLINGS BY 
+			            <choose>
+				            <when test="order.equals('')"> board_no DESC</when>
+				            <when test="order.equals('no_desc')"> board_no DESC</when>
+				            <when test="order.equals('date_desc')"> board_regdate DESC</when>
+				            <when test="order.equals('hit_desc')"> board_hit DESC</when>
+				            <when test="order.equals('title_asc')"> board_title ASC</when>        
+				        </choose>									
 					) E 
         <![CDATA[) 
        	WHERE rnum >= #{startNo} AND rnum <= #{endNo} ]]>
@@ -56,14 +63,6 @@
 			<when test="field.equals('category') and keyword != ''"> board_category <include refid="qna_keyword" /></when>
 			<when test="field.equals('id') and keyword != ''"> board_id <include refid="qna_keyword" /></when>
 		</choose>
-         ORDER BY
-         <choose>
-            <when test="order.equals('')"> board_no DESC</when>
-            <when test="order.equals('no_desc')"> board_no DESC</when>
-            <when test="order.equals('date_desc')"> board_regdate DESC</when>
-            <when test="order.equals('hit_desc')"> board_hit DESC</when>
-            <when test="order.equals('title_asc')"> board_title ASC</when>        
-        </choose>
 	</select>
 	
 	<!-- qna : count : 게시글 개수 -->
@@ -96,7 +95,15 @@
 				FROM (
 					SELECT LEVEL, b.* 
 	                    FROM heartpet_board b
-						<include refid="qna_hierarchy" /> 			
+						<include refid="qna_hierarchy" /> 	
+						ORDER SIBLINGS BY 
+                        <choose>
+                            <when test="order.equals('')"> board_no DESC</when>
+                            <when test="order.equals('no_desc')"> board_no DESC</when>
+                            <when test="order.equals('date_desc')"> board_regdate DESC</when>
+                            <when test="order.equals('hit_desc')"> board_hit DESC</when>
+                            <when test="order.equals('title_asc')"> board_title ASC</when>        
+                        </choose>   		
 					) E 
          <![CDATA[) 
        		WHERE rnum >= #{startNo} AND rnum <= #{endNo} ]]>         
@@ -115,14 +122,6 @@
 			<if test="search_content != null and !search_content.equals('')">
 			    AND (board_title LIKE '%' || #{ search_content } || '%' OR board_content LIKE '%' || #{ search_content })
 			</if>
-			ORDER BY
-			<choose>
-			    <when test="order.equals('')">board_no DESC</when>
-			    <when test="order.equals('no_desc')">board_no DESC</when>
-			    <when test="order.equals('date_desc')">board_regdate DESC</when>
-			    <when test="order.equals('hit_desc')">board_hit DESC</when>
-			    <when test="order.equals('title_asc')">board_title ASC</when>        
-			</choose> 
 	</select>
 	
 	<!-- Admin : qna-count  -->
@@ -161,7 +160,9 @@
 		<include refid="qna_select" /> 
 			FROM heartpet_board 
 			WHERE board_no = #{ board_no }
-		<include refid="qna_hierarchy" />
+			<include refid="qna_hierarchy" />
+            ORDER SIBLINGS BY 
+                board_no DESC
 	</select>
 	
 	<!-- qna : insert -->

@@ -20,15 +20,23 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="div1">
 
-	<div class="text-center main-title">입양을 기다리는 동물들</div>
+	<div class="text-center main-title">
+		<label>입양을 기다리는 동물들 <span class="more_info" onclick="search()">자세히 찾아보기</span></label>
+	</div>
 	
 	<input type="hidden" id="sortlink"
 		value="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list?page=${ paging.page }&${pagingSort}" />
-		
-	<div class="form_search">
+	
+	<div id="form" class="form_search">
+
 		<form
 			action="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list"
 			class="validation-form wells" method="post">
+			
+			<div class="lil-title">
+				<span><i class="bi bi-check2-square"></i>조건 검색</span>
+			</div>
+			
 			<div class="row animal_row">
 				<div class="col">
 					<div class="input-group">
@@ -287,6 +295,14 @@
 		</ul>
 	</nav>
 	<script type="text/javascript">
+		$(function() {
+			
+			$("#form").css({
+				 'display' : 'none'
+			 });			
+			
+		});
+		
 		//정렬 select
 		$("#sort").change(
 				function() {
@@ -302,6 +318,15 @@
 			  });
 			});
 		 */
+		 function search() {
+			 
+			 $("#form").toggle();
+			 
+			 /* $("#form").css({
+				 'display' : 'block'
+			 }); */
+		 }
+		 
 	</script>
 	
 	<jsp:include page="../../include/user_footer.jsp" />

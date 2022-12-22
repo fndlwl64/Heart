@@ -30,7 +30,7 @@
     <%-- 강아지 list 출력 // swiper --%>
     <div class="main-title">
         <p id="heart-pet">HeartPet, </p>
-        <p>당신을 기다리고 있는 강아지를 만나보세요</p>
+        <p>당신과 평생 함께 할 반려동물을 만나보세요</p>
     </div>
     <div class="swiper dogSwiper">
         <div class="swiper-wrapper">
@@ -53,11 +53,6 @@
         <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_dog_list'">더 보러가기</button>
     </div>
     
-    <%-- 고양이 list 출력 // swiper --%>
-    <div class="main-title">
-        <p id="heart-pet">HeartPet, </p>
-        <p>당신을 기다리고 있는 고양이를 만나보세요</p>
-    </div>
     <div class="swiper dogSwiper">
         <div class="swiper-wrapper">
         	<c:forEach items="${ cList }" var="list">

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .div1 {
-	width: 60%;
+	width: 70%;
 	margin: auto;
 }
 
@@ -18,20 +18,53 @@
 	font-size: 15px;
 }
 
+.div1 .insert-form {
+	
+}
+
 .div1 form {
 	text-align: center;
 	margin: auto;
 }
 
 .div1 .table {
-	width: 50%;
+	width: 80%;
 	margin: auto;
+}
+
+.div1 .table thead tr th {
+	height: 3rem;
+	padding: 0;
+	font-size: 17px;
+}
+
+.div1 .table tr > th, td {
+	vertical-align: middle;
 }
 
 .div1 .table th {
 	text-align: center;
 }
 
-.div1 form .btn {
-	margin: 2%;
+.div1 form .buttons {
+	display: flex;
+	margin: 0 auto;
+	justify-content: flex-end;
+	width: 80%;
 }
+
+.div1 form .buttons .btn {
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+}
+
+/* 필수 입력 사항 */
+.must-write {
+	color: red;
+}
+
+.form-control-plaintext {
+	font-size: 13px;
+	padding-top: 0 !important;
+}
+
