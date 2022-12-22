@@ -58,11 +58,11 @@
                     <tr>
                         <th>회원등급</th>
                         <td>
-                        	<label><input type="radio" name="user_grade" value="1" ondblclick="this.checked=false"/> 1등급</label>
-				    		<label><input type="radio" name="user_grade" value="2" ondblclick="this.checked=false"/> 2등급</label>
-				    		<label><input type="radio" name="user_grade" value="3" ondblclick="this.checked=false"/> 3등급</label>
-				    		<label><input type="radio" name="user_grade" value="4" ondblclick="this.checked=false"/> 4등급</label>
-				    		<label><input type="radio" name="user_grade" value="5" ondblclick="this.checked=false"/> 5등급</label>
+                        	<label><input type="radio" name="user_grade" value="1" ondblclick="this.checked=false"/> 관리자</label>
+				    		<label><input type="radio" name="user_grade" value="2" ondblclick="this.checked=false"/> 입소가능회원</label>
+				    		<label><input type="radio" name="user_grade" value="3" ondblclick="this.checked=false"/> 일반회원</label>
+				    		<label><input type="radio" name="user_grade" value="4" ondblclick="this.checked=false"/> 블랙리스트</label>
+				    		<label><input type="radio" name="user_grade" value="5" ondblclick="this.checked=false"/> 탈퇴회원</label>
                         </td>
                         <th>반려동물경험</th>
                         <td>
@@ -115,7 +115,13 @@
 	                <td>${list.user_no}</td>
 	                <td><a href="${path}/user_view?user_id=${list.user_id}">${list.user_id}</a></td>
 	                <td>${list.user_name}</td>
-	                <td id="user_list_grade">${list.user_grade}등급</td>
+	                <td id="user_list_grade">
+	                	<c:if test="${list.user_grade == 1}">관리자</c:if>
+	                	<c:if test="${list.user_grade == 2}">입소가능회원</c:if>
+	                	<c:if test="${list.user_grade == 3}">일반회원</c:if>
+	                	<c:if test="${list.user_grade == 4}">블랙리스트</c:if>
+	                	<c:if test="${list.user_grade == 5}">탈퇴회원</c:if>
+	                </td>
 	                <td>${list.user_animalexp}</td>
 	                <td>
 	                	<c:set value="${ path }/user_delete?user_no=${ list.user_no }" var="deleteAddr" />
