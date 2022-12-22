@@ -67,15 +67,14 @@
     
        <%-- 정렬 & 게시물 수 --%>
 <%--     <form class="order_form" method="get" action="${path}/support_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">     --%>
-       <div class="sup-section">
+       <div class="qna-section">
        		<div class="row">
-       			<div class="col total-data">
-		                <select class="form-select form-select-sm order" name="order" onchange="location.href='${path}/support_list?page=${ paging.page }&search_id=${ search_id }&search_price=${ search_price }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&order='+this.value;">
-		                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
-		                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신후원순</option>
-		                    <option value="price_desc"<c:if test="${ order eq 'price_desc' }">selected="selected"</c:if>>금액순</option>
-		                </select>
-
+       			<div class="col total-data justify-content-end">
+	                <select class="form-select form-select-sm order" name="order" onchange="location.href='${path}/support_list?page=${ paging.page }&search_id=${ search_id }&search_price=${ search_price }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&order='+this.value;">
+	                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
+	                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신후원순</option>
+	                    <option value="price_desc"<c:if test="${ order eq 'price_desc' }">selected="selected"</c:if>>금액순</option>
+	                </select>
 	            </div>
             </div>
         </div>
