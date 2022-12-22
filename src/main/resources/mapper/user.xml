@@ -54,7 +54,9 @@
 	            <when test="order.equals('grade_asc')">order by user_grade, user_no</when>
 	            <when test="order.equals('name_asc')">order by user_name</when>        
 	        </choose>
-			) rnum FROM HEARTPET_USER U WHERE USER_NO IS NOT NULL
+			) rnum 
+			FROM HEARTPET_USER u
+			WHERE USER_NO IS NOT NULL
 			<if test="user_id != null and !user_id.equals('')">
 				AND USER_ID LIKE '%' || #{user_id } || '%'
 			</if>

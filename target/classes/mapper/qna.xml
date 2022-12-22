@@ -39,7 +39,15 @@
 	<!-- qna : list -->
 	<select id="qna_list" parameterType="hashMap" resultType="QnaDTO">
 		<include refid="qna_select" /> 
-			FROM (SELECT b.*, ROW_NUMBER() OVER(ORDER BY board_no DESC) rnum FROM heartpet_board b
+			FROM (SELECT b.*, ROW_NUMBER() OVER(ORDER BY 
+			<choose>
+	            <when test="order.equals('')">board_no DESC</when>
+	            <when test="order.equals('no_desc')">board_no DESC</when>
+	            <when test="order.equals('date_desc')">board_regdate DESC</when>
+	            <when test="order.equals('hit_desc')">board_hit DESC</when>
+	            <when test="order.equals('title_desc')">board_title DESC</when>        
+         	</choose>
+         	) rnum FROM heartpet_board b
 		<where>
 		 <choose>
             <when test="field.equals('allSearch') and keyword != ''"> (board_title <include refid="qna_keyword" />) OR (board_content <include refid="qna_keyword" />) OR (board_category <include refid="qna_keyword" />) OR (board_id <include refid="qna_keyword" />)</when>
@@ -51,12 +59,6 @@
          </where>
          <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo} ]]>
 		 <include refid="qna_hierarchy" /> 
-         <choose>
-            <when test="order.equals('no_desc')">, board_no DESC</when>
-            <when test="order.equals('date_desc')">, board_regdate DESC</when>
-            <when test="order.equals('hit_desc')">, board_hit DESC</when>
-            <when test="order.equals('title_desc')">, board_title DESC</when>        
-         </choose>
 	</select>
 	
 	<!-- 
@@ -67,34 +69,37 @@
 	<!-- Admin : qna-list  -->
 <!-- 	<select id="qna_admin_list" parameterType="hashMap" resultType="QnaDTO">
 		<include refid="qna_select" /> 
-			FROM (SELECT b.*, ROW_NUMBER() OVER(ORDER BY board_no DESC) rnum FROM heartpet_board b
+			FROM (SELECT b.*, ROW_NUMBER() OVER(ORDER BY 
+			<choose>
+	            <when test="order.equals('')">board_no DESC</when>
+	            <when test="order.equals('no_desc')">board_no DESC</when>
+	            <when test="order.equals('date_desc')">board_regdate DESC</when>
+	            <when test="order.equals('hit_desc')">board_hit DESC</when>
+	            <when test="order.equals('title_asc')">board_title ASC</when>        
+         	</choose>
+			) rnum FROM heartpet_board b
 			WHERE 1 = 1 
 			<if test="search_category != null and !search_category.equals('')">
-	            AND animal_name LIKE '%' || #{ search_animal } || '%'
+	            AND board_category LIKE '%' || #{ search_category } || '%'
 	        </if>
 	        <if test="search_date_start != null and !search_date_start.equals('')">
-	            AND animal_name LIKE '%' || #{ search_animal } || '%'
+	            <![CDATA[AND board_regdate >= #{ search_date_start } ]]>
 	        </if>
 	        <if test="search_date_end != null and !search_date_end.equals('')">
-	            AND animal_name LIKE '%' || #{ search_animal } || '%'
+	            <![CDATA[AND board_regdate <= #{ search_date_end } ]]>
 	        </if>	        
 	        <if test="search_id != null and !search_id.equals('')">
-	            AND review_id LIKE '%' || #{ search_id } || '%'
+	            AND board_id LIKE '%' || #{ search_id } || '%'
 	        </if>
 	        <if test="search_content != null and !search_content.equals('')">
-	            AND (review_title LIKE '%' || #{ search_content } || '%' OR review_content LIKE '%' || #{ search_content })
+	            AND (board_title LIKE '%' || #{ search_content } || '%' OR board_content LIKE '%' || #{ search_content })
 	        </if>
          <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo} ]]>
-		 <include refid="qna_hierarchy" /> 
-         <choose>
-            <when test="order.equals('no_desc')">, board_no DESC</when>
-            <when test="order.equals('date_desc')">, board_regdate DESC</when>
-            <when test="order.equals('hit_desc')">, board_hit DESC</when>
-            <when test="order.equals('title_desc')">, board_title DESC</when>        
-         </choose>
+         <include refid="qna_hierarchy" /> 
 	</select>
 	 -->
 	<!-- Admin : qna-count  -->
+  
 <!-- 	<select id="qna_list" parameterType="hashMap" resultType="QnaDTO">
 		<include refid="qna_select" /> 
 			FROM (SELECT b.*, ROW_NUMBER() OVER(ORDER BY board_no DESC) rnum FROM heartpet_board b
@@ -116,6 +121,28 @@
             <when test="order.equals('title_desc')">, board_title DESC</when>        
          </choose>
 	</select> -->
+
+	<select id="qna_admin_count" parameterType="hashMap" resultType="QnaDTO">
+		SELECT COUNT(*) 
+			FROM heartpet_board
+			WHERE 1 = 1 
+			<if test="search_category != null and !search_category.equals('')">
+	            AND board_category LIKE '%' || #{ search_category } || '%'
+	        </if>
+	        <if test="search_date_start != null and !search_date_start.equals('')">
+	            <![CDATA[AND board_regdate >= #{ search_date_start } ]]>
+	        </if>
+	        <if test="search_date_end != null and !search_date_end.equals('')">
+	            <![CDATA[AND board_regdate <= #{ search_date_end } ]]>
+	        </if>	        
+	        <if test="search_id != null and !search_id.equals('')">
+	            AND board_id LIKE '%' || #{ search_id } || '%'
+	        </if>
+	        <if test="search_content != null and !search_content.equals('')">
+	            AND (board_title LIKE '%' || #{ search_content } || '%' OR board_content LIKE '%' || #{ search_content })
+	        </if>
+	</select>
+
 	
 	
 	<!-- qna : content -->

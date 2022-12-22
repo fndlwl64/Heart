@@ -33,8 +33,11 @@ public class AdminController {
 
     /*관리자 상단바에서 페이지 이동*/
 	@RequestMapping("/admin_main")
-	public String admin_main(@RequestParam(value = "user_id", required = false) String id, @RequestParam(value = "page", defaultValue = "1") int page, 
-    		@RequestParam(value = "user_grade", required=false) String grade, @RequestParam(value = "user_animalexp", required=false) String exp,
+
+	public String admin_main(@RequestParam(value = "user_id", required = false) String id, 
+        @RequestParam(value = "page", defaultValue = "1") int page, 
+    		@RequestParam(value = "user_grade", required=false) String grade, 
+        @RequestParam(value = "user_animalexp", required=false) String exp,
     		@RequestParam(value = "order", required=false) String order, Model model) {
 		
        	if(id == null) { id = ""; }
@@ -66,8 +69,10 @@ public class AdminController {
 	}
 	
     @RequestMapping("/user_list")
-    public String user_list(@RequestParam(value = "user_id", required = false) String id, @RequestParam(value = "page", defaultValue = "1") int page, 
-    		@RequestParam(value = "user_grade", required=false) String grade, @RequestParam(value = "user_animalexp", required=false) String exp,
+    public String user_list(@RequestParam(value = "user_id", required = false) String id, 
+        @RequestParam(value = "page", defaultValue = "1") int page, 
+    		@RequestParam(value = "user_grade", required=false) String grade, 
+        @RequestParam(value = "user_animalexp", required=false) String exp,
     		@RequestParam(value = "order", required=false) String order, Model model) {
     	
     	if(id == null) { id = ""; }
