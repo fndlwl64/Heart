@@ -7,6 +7,7 @@
 <c:set var="paging" value="${ paging }"/>
 <c:set var="field" value="${ field }"/>
 <c:set var="keyword" value="${ keyword }"/>
+<c:set var="url" value="&field=${ field }&keyword=${ keyword }&order=${ order }" />
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
 
@@ -41,17 +42,19 @@
         <br>
         
         <%-- 정렬 & 게시물 수 --%>
-	    <form class="order_form" method="get" action="${path}/notice_list">    
+	    <%-- <form class="order_form" method="get" action="${path}/notice_list">     --%>
 	       <div class="notice-section">
-	            <div class="notice_order">
-	                <select class="form-select form-select-sm" name="order" onchange="this.form.submit()">
-	                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
-	                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신게시일순</option>
-	                    <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>조회수높은순</option>
-	                </select>
+	       		<div class="row">
+		            <div class="col total-data">
+		                <select class="form-select form-select-sm" name="order" onchange="location.href='${path}/notice_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">
+		                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
+		                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신게시일순</option>
+		                    <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>조회수높은순</option>
+		                </select>
+		            </div>
 	            </div>
 	        </div>
-	    </form>
+	    <!-- </form> -->
 
         <%-- 검색 결과 테이블 --%>
         <div class="lists">
@@ -84,8 +87,9 @@
 
         <br><br>
         <%-- 페이징처리 --%>
-   	 	<jsp:include page="../../include/pagination.jsp" />
-
+   	 	<%-- <jsp:include page="../../include/pagination.jsp" /> --%>
+		<%@ include file="../../include/pagination_update.jsp" %>
+		
         <%-- 삭제 모달 --%>
 		<jsp:include page="../../include/deleteModal.jsp" />
     </div>

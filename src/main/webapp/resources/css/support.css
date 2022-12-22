@@ -51,8 +51,8 @@ body {
  .div1 .table .table-light {
  	vertical-align: middle;
  }
- 
- .container .order_form {
+  
+/*  .container .order_form {
  	width: 70%;
  	margin: auto;
  }
@@ -60,6 +60,12 @@ body {
  .container .order_form .sup-section {
  	display: flex;
  	flex-direction: row-reverse;
+ } */
+ 
+ .sup-section .row .total-data .form-select {
+ 	float: right;
+ 	clear: both;
+ 	width: auto;
  }
  
 .container .lists #insert_btn{
