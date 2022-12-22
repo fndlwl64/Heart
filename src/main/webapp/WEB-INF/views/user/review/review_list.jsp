@@ -26,19 +26,16 @@
 <div id="review-contents" class="review-contents">
     <div class="review-section">
         <div class="row">
-            <div class="col-2 space"></div>
-            <div class="col-8 title">
+            <div class="col title">
                 <h2>하트펫 family</h2>
                 <h6>하트펫을 통해 반려동물을 만나 가족이 된 이야기를 들어보세요.</h6>
             </div>
-            <div class="col-2 space"></div>
         </div>
     </div>
     
     <div class="review-section">
         <div class="row">
-            <div class="col-2 space"></div>
-            <div class="col-8 title">
+            <div class="col title">
             	<form action="${path}/user_review_list" method="get" >
             	<input type="hidden" name="animal_tag" />
 			    	<button type="button" class="btn btn-light animal-button" onclick="location.href='${path}/user_review_list'"><i class="bi bi-clipboard-heart"></i> 전체</button>
@@ -46,15 +43,13 @@
 			    	<button type="submit" class="btn btn-light animal-button" value="cat" onclick="return animalChange(this.value)"><i class="bi bi-search-heart-fill"></i> 고양이</button>
 		    	</form>
             </div>
-            <div class="col-2 space"></div>
         </div>
     </div>
 
 	<!-- 정렬 -->
     <div class="review-section">
         <div class="row">
-            <div class="col-2 space"></div>
-            <div class="col-8 total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
+            <div class="col total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
                 <select class="form-select form-select-sm order" name="order" onchange="location.href='${ path }/user_review_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&animal_tag=${ animal_tag }&order='+this.value;">
                     <option selected="selected" value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신순</option>
                     <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>
@@ -62,14 +57,12 @@
                     <option value="title_desc"<c:if test="${ order eq 'title_desc' }">selected="selected"</c:if>>가나다순</option>                    
                 </select>
             </div>
-            <div class="col-2 space"></div>
         </div>
     </div>
     
     <div class="review-section review-main mb-5">
        <div class="row">
-           <div class="col-2 space"></div>
-           <div class="col-8 review-card">
+           <div class="col review-card">
            
                <%-- 입양동물 --%>
                 <div class="row row-cols-1 row-cols-md-3 g-2">             
@@ -112,8 +105,7 @@
     <%-- search --%>
     <div class="review-section mb-4">
         <div class="row">
-            <div class="col-3 space"></div>
-            <div class="col-6 search">
+            <div class="col search">
                 <form method="get" action="${ path }/user_review_list">
                     <select name="field" class="form-select d-inline align-middle">
                         <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
@@ -123,9 +115,9 @@
                         <option value="id"<c:if test="${ field eq 'id' }">selected="selected"</c:if>>작성자</option>
                         <option value="animal"<c:if test="${ field eq 'animal' }">selected="selected"</c:if>>반려동물명</option>
                     </select>
-                    <input type="text" class="form-control d-inline align-middle w-50 search-text" name="keyword"                    
+                    <input type="text" class="form-control d-inline align-middle search-text" name="keyword"                    
                         value=<c:if test="${ keyword ne 'dog' && keyword ne 'cat' }">"${ keyword }"</c:if>>
-                    <select name="" class="form-select d-none align-middle w-50 search-select">
+                    <select name="" class="form-select d-none align-middle search-select">
                         <option value="dog"<c:if test="${ keyword eq 'dog' }">selected="selected"</c:if>>강아지</option>
                         <option value="cat"<c:if test="${ keyword eq 'cat' }">selected="selected"</c:if>>고양이</option>
                     </select>

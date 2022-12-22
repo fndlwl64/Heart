@@ -210,6 +210,13 @@ body {
 	font-size: 14;
 }
 
+/* container */
+#container {
+	width: 100%;
+	margin: 0 auto;
+}
+
+
 /* footer */
 .footer {
     display: grid;
