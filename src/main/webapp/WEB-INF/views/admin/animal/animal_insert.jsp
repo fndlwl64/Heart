@@ -4,6 +4,7 @@
 <jsp:include page="../../include/admin_header.jsp" />
 <script src="resources/js/admin.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
+<link rel="stylesheet" href="resources/css/list_view.css" />
 <c:set var="tag" value="${tag }"></c:set>
 <body>
 	<div class="d-flex justify-content-center">
@@ -13,17 +14,50 @@
 			<input type="hidden" name="animal_tag" value="${tag }" id="animal_tag">
 			<table class="table">
 				<tr>
-					<th class="table-secondary">품종</th>
-					<td><select name="animal_species" class="form-control"
-						id="species"></select></td>
+					<th class="table-light">품종</th>
+					<td>
+					<c:if test="${tag eq 'dog' }">
+					<select class="form-select"
+						name="animal_species">
+						<option value=""></option>
+						<option value="말티즈">말티즈</option>
+						<option value="푸들">푸들</option>
+						<option value="포메라니안">포메라니안</option>
+						<option value="믹스견">믹스견</option>
+						<option value="치와와">치와와</option>
+						<option value="시츄">시츄</option>
+						<option value="골든리트리버">골든리트리버</option>
+						<option value="진돗개">진돗개</option>
+						<option value="기타">기타</option>
+					</select>
+				</c:if>
+				<c:if test="${tag eq 'cat' }">
+					<select name="animal_species"
+						class="form-select">
+						<option value=""></option>
+						<option value="스코티시">스코티시</option>
+						<option value="폴드">폴드</option>
+						<option value="샴">샴</option>
+						<option value="페르시안">페르시안</option>
+						<option value="터키시">터키시</option>
+						<option value="앙고라">앙고라</option>
+						<option value="러시안 블루">러시안 블루</option>
+						<option value="벵갈">벵갈</option>
+						<option value="먼치킨">먼치킨</option>
+						<option value="아비시니안">아비시니안</option>
+						<option value="기타">기타</option>
+					</select>
+				</c:if>
+					
+					</td>
 				</tr>
 				<tr>
-					<th class="table-secondary">이름</th>
+					<th class="table-light">이름</th>
 					<td><input type="text" name="animal_name" class="form-control"
 						id="name"></td>
 				</tr>
 				<tr>
-					<th class="table-secondary">성별</th>
+					<th class="table-light">성별</th>
 					<td><select name="animal_gender" class="form-control"
 						id="gender">
 							<option value=""></option>
@@ -32,7 +66,7 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th class="table-secondary">중성화</th>
+					<th class="table-light">중성화</th>
 					<td><select name="animal_neutered" class="form-control"
 						id="neutered">
 							<option value=""></option>
@@ -41,7 +75,7 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th class="table-secondary">예방 접종</th>
+					<th class="table-light">예방 접종</th>
 					<td><select name="animal_vaccination" class="form-control"
 						id="vaccination">
 							<option value=""></option>
@@ -50,17 +84,17 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th class="table-secondary">나이</th>
+					<th class="table-light">나이</th>
 					<td><input type="number" name="animal_age" min = 0
 						class="form-control" id="age"></td>
 				</tr>
 				<tr>
-					<th class="table-secondary">발견 장소</th>
+					<th class="table-light">발견 장소</th>
 					<td><input type="text" name="animal_place"
 						class="form-control" id="place"></td>
 				</tr>
 				<tr>
-					<th class="table-secondary">크기</th>
+					<th class="table-light">크기</th>
 					<td><select name="animal_size" class="form-control" id="size">
 							<option value=""></option>
 							<option value="소형">소형</option>
@@ -69,17 +103,17 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th class="table-secondary">무게</th>
+					<th class="table-light">무게</th>
 					<td><input type="number" name="animal_weight" min = 0
 						class="form-control" id="weight"></td>
 				</tr>
 				<tr>
-					<th class="table-secondary">상세 내용</th>
+					<th class="table-light">상세 내용</th>
 					<td><textarea name="animal_caution" class="form-control"
 							id="content"></textarea></td>
 				</tr>
 				<tr>
-					<th class="table-secondary">첨부 이미지</th>
+					<th class="table-light">첨부 이미지</th>
 					<td><input type="file" name="files" id="files"
 						class="form-control" accept="image/gif, image/jpeg, image/png"
 						onchange="fileOption();" multiple></td>

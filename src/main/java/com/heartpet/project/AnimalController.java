@@ -158,7 +158,16 @@ public class AnimalController {
 	// 입양 취소
 	@RequestMapping(value = "/user_cancel_animal")
 	public String user_cancel_animal(@RequestParam("animal_no") int animal_no){
+		AnimalDTO animalDTO = new AnimalDTO();
+		animalDTO.setAnimal_no(animal_no);
+		animalDTO.setAnimal_status("입양 가능");
 		
+		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
+		adoptRegDTO.setAdopt_reg_regdate("");
+		adoptRegDTO.setAdopt_reg_animalno(animal_no);
+		
+		animalDAO.updateStatus(animalDTO);
+		adoptRegDAO.update(adoptRegDTO);
 		return "redirect:/user_mypage_adoptreg_list";
 	}
 
