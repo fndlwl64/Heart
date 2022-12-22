@@ -85,4 +85,8 @@
 				<![CDATA[and support_date < to_date(#{search_date_end},'YYYY-MM-DD')+1 ]]>
 			</if>
 	</select>
+	
+	<update id= "user_price_update" parameterType="hashmap">
+			update heartpet_user set user_totalprice = (user_totalprice+#{amount}) where user_id = #{userid}
+	</update>
 </mapper>
