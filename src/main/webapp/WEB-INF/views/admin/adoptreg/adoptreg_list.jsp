@@ -43,7 +43,7 @@
 					<table class="table table-sm" id="search-table">
 						<tr>
 							<th width="12.5%">입양 진행 상태</th>
-							<td>
+							<td width="20%">
 								<select name="animal_status" class="form-select">
 									<option value=""></option>
 									<option value="입소 신청"
@@ -72,14 +72,14 @@
 									<c:if test="${tag eq 'adopt_reg_adoptdate'}">selected</c:if>>입양 완료일</option>
 								</select>
 							</td>
-							<th width="12.5%">항목 시작일</th>
+							<th width="12.5%">검색 기준일</th>
 							<td>
-								<input type="date" name="startDate" value="${startDate }" class="form-control">
+								<div class="search-date">
+								<input type="date" name="startDate" value="${startDate }" class="form-control search-date-picker">
+								<input type="date" name="endDate" value="${endDate }" class="form-control search-date-picker">
+								</div>
 							</td>
-							<th width="12.5%">항목 종료일</th>
-							<td>
-								<input type="date" name="endDate" value="${endDate }" class="form-control">
-							</td>
+							<td width="20%"></td>
 						</tr>
 					</table>					
 				</div>

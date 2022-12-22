@@ -38,16 +38,22 @@
             	<div class="search-table-box">
 	                <table class="table table-sm" id="search-table">
 	                    <tr>
-	                        <th>사용자ID</th>
-	                        <td><input type="text" class="form-control" name="search_id" value="${ search_id }" /></td>
-	                        <th>후원금액</th>
-	                        <td><input type="text" class="form-control" name="search_price" value="${ search_price }" /></td>
-	                    </tr>
-	                    <tr>    
-	                        <th>게시일(시작)</th>
-	                        <td><input type="date" class="form-control" name="search_date_start" value="${ search_date_start }" /></td>
-	                        <th>게시일(종료)</th>
-	                        <td><input type="date" class="form-control" name="search_date_end" value="${ search_date_end }" /></td>
+	                        <th width="10%">회원 아이디</th>
+	                        <td width="15%"><input type="text" class="form-control" name="search_id" value="${ search_id }" /></td>
+	                        <th width="10%">후원 금액</th>
+	                        <td width="17.5%">
+		                        <div class="support-money">
+			                        <input type="text" class="form-control d-inline" name="search_price" value="${ search_price }" />
+			                        <span>원</span>
+		                        </div>
+	                        </td>    
+	                        <th width="10%">후원일자</th>
+							<td width="35%">
+								<div class="search-date">
+			                        <input type="date" class="form-control search-date-picker" name="search_date_start" value="${ search_date_start }" />
+			                        <input type="date" class="form-control search-date-picker" name="search_date_end" value="${ search_date_end }" />
+		                        </div>
+	                        </td>
 	                    </tr>                                                           
 	                </table>
 				</div>

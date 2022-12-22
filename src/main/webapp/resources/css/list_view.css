@@ -335,6 +335,15 @@ body {
 	border: none;
 }
 
+.search_form .form_box .search-table-box #search-table .support-money {
+	display: flex;
+	align-items: center;
+}
+
+#search-table .support-money > span {
+	margin-left: 0.5rem;
+}
+
 .form_box #search-table tr {	
 }
 

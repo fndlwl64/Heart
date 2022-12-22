@@ -42,8 +42,8 @@
             	<div class="search-table-box">
             		<table class="table table-sm" id="search-table">
 	            		<tr>
-	                      	<th width="10%">${ animal } 종</th>
-	                      	<td width="30%">
+	                      	<th width="12.5%">${ animal } 종</th>
+	                      	<td width="20%">
 	                      	  <div class="search-date">
 			                      <c:if test="${animalDTO.animal_tag eq 'dog' }">
 									<select class="form-select" id="search_animal" name="animal_species">
@@ -77,35 +77,35 @@
 								</c:if>
 	                          </div>
 	                      	</td>
-	                      	<th width="10%">${ animal } 크기</th>
-	                      	<td width="30%" colspan="2">
+	                      	<th width="12.5%">${ animal } 크기</th>
+	                      	<td width="20%" colspan="2">
 	                      	  <div class="search-checkbox">
 			                    <label><input type="radio" name="animal_size" value="대형" class="form-check-input" /> 대형</label>
 								<label><input type="radio" name="animal_size" value="중형" class="form-check-input" /> 중형</label>
 								<label><input type="radio" name="animal_size" value="소형" class="form-check-input"/> 소형</label>
 	                      	  </div>
 	                      	</td>
-	                      	<td></td>
+	                      	<td colspan="2"></td>
                       	<tr>
-	                      	<th width="10%">${ animal } 이름</th>
-	                      	<td width="30%">
+	                      	<th width="12.5%">${ animal } 이름</th>
+	                      	<td width="20%">
 	                      		<input type="text" class="form-control" name="animal_name"/>
 	                      	</td>
-							<th width="10%">중성화 여부</th>
-							<td width="15%">
+							<th width="12.5%">중성화 여부</th>
+							<td width="10%">
 								<div class="search-checkbox">
 									<input type="hidden" id="YN" name="animal_neutered" /> 
 									<label><input type="checkbox" class="form-check-input" id="checkYN"> Yes</label>
 								</div>
 							</td>
-							<th width="10%">예방접종 여부</th>
-							<td width="15%">
+							<th width="12.5%">예방접종 여부</th>
+							<td width="10%">
 								<div class="search-checkbox">								
 									<input type="hidden" id="YNvaccin" name="animal_vaccination" /> 
 									<label><input type="checkbox" class="form-check-input" id="checkYNvaccin"> Yes</label>
 								</div>
 							</td>
-							
+							<td></td>
 	                      <%-- <th>문의글</th>
 	                      <td><input type="text" class="form-control" name="search_content" value="${ search_content }" /></td> --%>
 	                  	</tr>
