@@ -115,27 +115,21 @@
 						<td class="list-title text-center small">${dto.adopt_reg_regdate }</td>
 						<td class="list-title text-center small">${dto.adopt_reg_duedate }</td>
 						<td class="list-title text-center small">${dto.adopt_reg_adoptdate }</td>
-						<c:if test="${map.get(dto.adopt_reg_animalno).get(1) ne '입양 대기'}">
+					
+						<c:if test="${map.get(dto.adopt_reg_animalno).get(1) ne '입양 대기' and map.get(dto.adopt_reg_animalno).get(1) ne '입양 완료'}">
 							<td><a class="text-primary" data-bs-toggle="modal"
 								style="cursor: pointer" data-bs-target="#admissionModal"
 								data-id="${path }/adoptreg_admission?animal_no=${dto.adopt_reg_animalno}&animal_status=${map.get(dto.adopt_reg_animalno).get(1)}"
 								data-value="${map.get(dto.adopt_reg_animalno).get(1)}"
 								onclick="onclickOption(this);">${map.get(dto.adopt_reg_animalno).get(1)}</a></td>
 						</c:if>
-						<%-- <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 가능'}">
-							<td><a class="text-primary" data-bs-toggle="modal"
-								data-bs-target="#admissionModal"
-								data-id="${path }/adoptreg_admission?animal_no=${dto.adopt_reg_animalno}">${map.get(dto.adopt_reg_animalno).get(1)}</a></td>
-						</c:if>
-						<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 완료'}">
-							<td><a class="text-primary" data-bs-toggle="modal"
-								data-bs-target="#admissionModal"
-								data-id="${path }/adoptreg_admission?animal_no=${dto.adopt_reg_animalno}">${map.get(dto.adopt_reg_animalno).get(1)}</a></td>
-						</c:if> --%>
 						<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 대기'}">
 							<td><a
 								href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }"
 								data-value="${dto.adopt_reg_animalno }">${map.get(dto.adopt_reg_animalno).get(1) }</a></td>
+						</c:if>
+						<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 완료' }">
+							<td>${map.get(dto.adopt_reg_animalno).get(1)}</td>
 						</c:if>
 					</tr>
 				</c:forEach>
@@ -247,10 +241,18 @@
 	};
 	function onclickOption(data) {
 		let modal_text = $(data).data("value");
-		$('.modal-title').empty();
-		$('.modal-title').append(modal_text+' 수정');
-		$('.modal-body').empty();
-		$('.modal-body').append(modal_text+'을(를) 수정하시겠습니까?');
+		if(modal_text === '입소 신청'){
+			$('.modal-title').empty();
+			$('.modal-title').append(modal_text+' 수정');
+			$('.modal-body').empty();
+			$('.modal-body').append(modal_text+'을 입양 가능으로 변경하시겠습니까?');
+		}
+		if(modal_text === '입양 가능'){
+			$('.modal-title').empty();
+			$('.modal-title').append(modal_text+' 수정');
+			$('.modal-body').empty();
+			$('.modal-body').append(modal_text+'을 입소 신청으로 변경하시겠습니까?');
+		}
 	}
 	$(document).ready(function () {
 		

@@ -127,10 +127,8 @@ public class AnimalController {
 		//입소 신청일
 		AdoptRegDTO adoptRegDTO = adoptRegDAO.content(no);
 		
+		model.addAttribute("adoptRegDTO",adoptRegDTO);
 		model.addAttribute("wishCheck",wishDAO.check(wishDTO) );
-		if(adoptRegDTO != null) {
-			model.addAttribute("appdate",adoptRegDTO.getAdopt_reg_appdate());
-		}
 		model.addAttribute("dto", animalDTO);
 		return "user/animal/user_animal_content";
 	}
@@ -155,6 +153,13 @@ public class AnimalController {
 		adoptRegDAO.update(adoptRegDTO);
 	
 		return "redirect:/";
+	}
+	
+	// 입양 취소
+	@RequestMapping(value = "/user_cancel_animal")
+	public String user_cancel_animal(@RequestParam("animal_no") int animal_no){
+		
+		return "redirect:/user_mypage_adoptreg_list";
 	}
 
 	// 입소 신청
