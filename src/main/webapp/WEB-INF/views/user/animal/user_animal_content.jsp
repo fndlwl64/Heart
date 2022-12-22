@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <link rel="stylesheet" href="resources/css/list_view.css">
 <jsp:include page="../../include/user_header.jsp" />
@@ -13,7 +14,6 @@ pageContext.setAttribute("newline", "\n");
 	value='<%=(String) session.getAttribute("session_id")%>' />
 <c:set var="user_grade"
 	value='<%=(Integer) session.getAttribute("session_grade")%>' />
-<c:set var="deleteAddr" value="${path }/user_cancel_animal?animal_no=${dto.animal_no }"></c:set>	
 <input type="hidden" value="<%=request.getContextPath()%>/wish"
 	id="linkwish">
 <input type="hidden" value="${user_id }" id="user_id" />
@@ -92,21 +92,36 @@ pageContext.setAttribute("newline", "\n");
 		</div>
 		<c:choose>
 			<c:when
-				test="${user_id eq adoptRegDTO.adopt_reg_userid and dto.animal_status eq '입양 대기'}">
+				test="${not empty user_id and user_id eq adoptRegDTO.adopt_reg_userid and dto.animal_status eq '입양 대기'}">
+				<c:set var="deleteAddr"
+					value="${path }/user_cancel_animal?animal_no=${dto.animal_no }"></c:set>
 				<div class="col-1">
-					<button class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#deleteModal"  data-id="${ deleteAddr }">입양취소</button>
+					<button class="btn btn-danger " data-bs-toggle="modal"
+						data-bs-target="#deleteModal" data-id="${ deleteAddr }">입양취소</button>
 				</div>
 			</c:when>
 			<c:otherwise>
+				<c:set var="deleteAddr"
+					value="${path }/user_get_animal?animal_no=${dto.animal_no }"></c:set>
 				<div class="col-1">
-					<form action="user_get_animal" method="post"
-						onsubmit="return submitOption();">
-						<input type="hidden" id="animal_status"
-							value="${dto.animal_status }"> <input type="hidden"
-							name="animal_no" id="animal_no" value="${dto.animal_no }">
-						<input type="submit" class="btn btn-primary " value="입양하기"
-							data-bs-toggle="modal" data-bs-target="#cautionModal">
-					</form>
+					<c:choose>
+						<c:when test="${dto.animal_status eq '입양 가능'}">
+							<button class="btn btn-primary " data-bs-toggle="modal"
+								data-bs-target="#deleteModal" data-id="${ deleteAddr }"
+								onclick="changeOption()">입양하기</button>
+						</c:when>
+						<c:otherwise>
+							<form action="user_get_animal" method="post"
+								onsubmit="return submitOption();">
+								<input type="hidden" id="animal_status"
+									value="${dto.animal_status }"> <input type="hidden"
+									name="animal_no" id="animal_no" value="${dto.animal_no }">
+								<input type="submit" class="btn btn-primary " value="입양하기"
+									data-bs-toggle="modal" data-bs-target="#cautionModal">
+							</form>
+						</c:otherwise>
+					</c:choose>
+					<%--  --%>
 				</div>
 			</c:otherwise>
 		</c:choose>
@@ -117,6 +132,13 @@ pageContext.setAttribute("newline", "\n");
 	<jsp:include page="../../include/deleteModal.jsp" />
 </div>
 <script type="text/javascript">
+	function changeOption() {
+		$('#deleteModalLabel').empty();
+		$('#deleteModalLabel').append('입양신청');
+		$('#deleteModalBody').empty();
+		$('#deleteModalBody').append('입양신청을 하시겠습니까?');
+		
+	}
 	function submitOption() {
 		if (!$('#user_grade').val()) {
 			$('.modal-body-cancel').empty();
