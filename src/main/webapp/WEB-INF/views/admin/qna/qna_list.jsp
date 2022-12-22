@@ -46,9 +46,10 @@
 	                      <label><input type="radio" class="form-check-input" name="search_category" value="후원" />후원</label>
 	                      <label><input type="radio" class="form-check-input" name="search_category" value="기타" />기타</label>
                       </td>
-                      <th>작성일시</th>
-                      <td>
-	                      <input type="text" id="datePicker" name="search_date" />
+                      <th>작성기간</th>
+                      <td class="search-date">
+	                      <input type="date" class="form-control search-date-picker" name="search_date_start" value="${ search_date_start }">
+	                      <input type="date" class="form-control search-date-picker" name="search_date_end" value="${ search_date_end }">
                       </td>
 				  </tr>
 				  <tr>
