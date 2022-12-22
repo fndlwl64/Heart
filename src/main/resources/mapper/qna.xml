@@ -326,7 +326,7 @@
 	
 	<!-- Admin : fnq-count  -->	
 	<select id="fnq_admin_count" parameterType="hashMap" resultType="int">
-		SELECT * 
+		SELECT COUNT(*) 
             FROM heartpet_fnq f	
             WHERE 1=1 
             <if test="search_category != null and !search_category.equals('')">
@@ -338,7 +338,6 @@
             <if test="search_answer != null and !search_answer.equals('')">
             	AND fnq_answer LIKE '%' || #{ search_answer } || '%'            	
             </if>
-            )
 	</select>
 
 	<!-- 	

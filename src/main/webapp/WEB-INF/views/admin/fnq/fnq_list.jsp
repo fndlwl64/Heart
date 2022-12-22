@@ -35,8 +35,8 @@
 		<div class="search-table-box">
               <table class="table table-sm" id="search-table">
                   <tr>
-                      <th width="12.5%">카테고리</th>
-                      <td width="37.5%">
+                      <th width="10%">카테고리</th>
+                      <td width="30%">
                       	  <div class="search-checkbox">
 		                      <label><input type="radio" class="form-check-input" name="search_category" value="전체" checked="checked" <c:if test="${ search_category eq '전체' }">checked="checked"</c:if>>전체</label>
 		                      <label><input type="radio" class="form-check-input" name="search_category" value="입양" <c:if test="${ search_category eq '입양' }">checked="checked"</c:if>>입양</label>
@@ -45,10 +45,10 @@
 		                      <label><input type="radio" class="form-check-input" name="search_category" value="기타" <c:if test="${ search_category eq '기타' }">checked="checked"</c:if>>기타</label>
                       	  </div>
                       </td>
-                      <th>질문</th>
-                      <td><input type="text" class="form-control" name="search_question" value="${ search_question }" /></td>
-                      <th>답변</th>
-                      <td><input type="text" class="form-control" name="search_answer" value="${ search_answer }" /></td>
+                      <th width="10%">질문 내용</th>
+                      <td width="20%"><input type="text" class="form-control" name="search_question" value="${ search_question }" /></td>
+                      <th width="10%">답변 내용</th>
+                      <td width="20%"><input type="text" class="form-control" name="search_answer" value="${ search_answer }" /></td>
                   </tr>                                                           
               </table>
 		</div>

@@ -20,6 +20,7 @@
             let path = '${ path }';
             commentTable(userId, reviewNo, path);    
             commentCount(reviewNo, path);
+        });
     </script>
     <script type="text/javascript" src="${ path }/resources/js/review_comment.js"></script>    
 </head>
@@ -36,7 +37,7 @@
         </tr>
         <tr>
             <th class="table-light">작성자</th>
-            <td class="user col-1"><a href="${ path }/admin_user_content?user_id=${ list.review_id }">${ list.review_id }</a></td>
+            <td class="user col-1"><a href="${ path }/user_view?user_id=${ list.review_id }">${ list.review_id }</a></td>
             <th class="table-light col-1">조회수</th>
             <td class="col-1">${ list.review_hit }</td>
             <th class="col-1">등록일시</th>
@@ -45,7 +46,7 @@
         <tr>
             <th class="table-light col-1">동물명(종)</th>
             <td class="user col-6" colspan="5">
-	            <a href="${ path }/admin_animal_content?animal_id=${ list.review_animal_id }">${ list.animal_name }
+	            <a href="${ path }/animal_content?no=${ list.review_animal_id }">${ list.animal_name }
 	            ( <c:if test="${ list.review_animal_tag eq 'dog' }">강아지</c:if><c:if test="${ list.review_animal_tag eq 'cat' }">고양이</c:if> )</a>
             </td>
         </tr>
@@ -83,8 +84,8 @@
     <table class="table table-bordered" id="comment-table"></table>
     <table class="table table-bordered reply-table">
         <tr class="align-middle">
-            <th class="col-2">댓글쓰기</th>
-            <td class="col-10" id="content-reply">
+            <th class="col-1">댓글쓰기</th>
+            <td class="col-11" id="content-reply">
                 <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" placeholder="댓글을 남겨보세요." required="required"></textarea>
                 <button type="button" class="btn btn-outline-primary btn-sm" onclick="commentSave('${ session_admin_id }', ${ list.review_no }, '${ path }');"><i class="bi bi-reply"></i> 댓글등록</button>
             </td>

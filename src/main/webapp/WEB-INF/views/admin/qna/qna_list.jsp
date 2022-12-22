@@ -54,7 +54,7 @@
 		                      <label><input type="radio" class="form-check-input" name="search_category" value="기타" <c:if test="${ search_category eq '기타' }">checked="checked"</c:if>>기타</label>
                       	  </div>
                       </td>
-                      <th width="12.5%">작성기간</th>
+                      <th width="12.5%">작성일자</th>
                       <td width="37.5%">
                       	  <div class="search-date">
 		                      <input type="date" class="form-control search-date-picker" name="search_date_start" value="${ search_date_start }">
@@ -65,7 +65,7 @@
 				  <tr>
                       <th>작성자 아이디</th>
                       <td><input type="text" class="form-control" name="search_id" value="${ search_id }" /></td>
-                      <th>문의글</th>
+                      <th>문의글 내용</th>
                       <td><input type="text" class="form-control" name="search_content" value="${ search_content }" /></td>
                   </tr>                                                           
               </table>
