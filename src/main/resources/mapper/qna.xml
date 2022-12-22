@@ -65,7 +65,7 @@
 	//============================================================  	
 	-->
 	<!-- Admin : qna-list  -->
-	<select id="qna_admin_list" parameterType="hashMap" resultType="QnaDTO">
+<!-- 	<select id="qna_admin_list" parameterType="hashMap" resultType="QnaDTO">
 		<include refid="qna_select" /> 
 			FROM (SELECT b.*, ROW_NUMBER() OVER(ORDER BY board_no DESC) rnum FROM heartpet_board b
 			WHERE 1 = 1 
@@ -93,9 +93,9 @@
             <when test="order.equals('title_desc')">, board_title DESC</when>        
          </choose>
 	</select>
-	
+	 -->
 	<!-- Admin : qna-count  -->
-	<select id="qna_list" parameterType="hashMap" resultType="QnaDTO">
+<!-- 	<select id="qna_list" parameterType="hashMap" resultType="QnaDTO">
 		<include refid="qna_select" /> 
 			FROM (SELECT b.*, ROW_NUMBER() OVER(ORDER BY board_no DESC) rnum FROM heartpet_board b
 		<where>
@@ -115,7 +115,7 @@
             <when test="order.equals('hit_desc')">, board_hit DESC</when>
             <when test="order.equals('title_desc')">, board_title DESC</when>        
          </choose>
-	</select>
+	</select> -->
 	
 	
 	<!-- qna : content -->
