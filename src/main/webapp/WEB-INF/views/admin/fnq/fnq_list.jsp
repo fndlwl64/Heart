@@ -68,8 +68,8 @@
                     <option value="question_asc" <c:if test="${ order eq 'question_asc' }">selected="selected"</c:if>>가나다순</option>
                 </select>
             </div>
-           </div>
-       </div>
+		</div>
+	</div>
         
         <%-- 검색 결과 테이블 --%>
         <div class="lists">
