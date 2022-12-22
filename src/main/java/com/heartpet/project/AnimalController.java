@@ -35,6 +35,7 @@ import com.heartpet.action.WishDAO;
 import com.heartpet.model.AdoptRegDTO;
 import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.PageDTO;
+import com.heartpet.model.UserDTO;
 import com.heartpet.model.WishDTO;
 import com.heartpet.util.FileUploadImage;
 
@@ -52,6 +53,8 @@ public class AnimalController {
 	private AdoptRegDAO adoptRegDAO;
 	@Autowired
 	private WishDAO wishDAO;
+	@Autowired
+	private UserDAO userDAO;
 	@Autowired
 	private HttpServletRequest request;
 	
@@ -175,7 +178,34 @@ public class AnimalController {
 
 	// 입소 신청
 	@RequestMapping(value = "/user_animal_insert", method = RequestMethod.GET)
-	public String user_animal_insert(Model model) {
+	public String user_animal_insert(Model model, HttpServletResponse response) throws IOException {	    
+        response.setContentType("text/html; charset=UTF-8");
+        HttpSession session = request.getSession();
+        PrintWriter out = response.getWriter();
+        String user_id ="";
+        
+        // 로그인 여부 체크
+        if ((session.getAttribute("session_id") == null || session.getAttribute("session_id") == "")
+                && (session.getAttribute("session_admin_id") == null || session.getAttribute("session_admin_id") == "")) {
+            out.println("<script> alert('로그인이 필요합니다.'); location.href='" + request.getContextPath() + "/'; </script>");
+        }else {
+            if(session.getAttribute("session_id") != null) {
+                user_id = (String) session.getAttribute("session_id");
+            }else {
+                user_id = (String) session.getAttribute("session_admin_id");
+            }
+        }
+        
+        System.out.println("user_id"+user_id);
+        
+        UserDTO userContent = this.userDAO.getUserInfo(user_id);
+        System.out.println(userContent.getUser_grade());
+        
+        if(userContent.getUser_grade() > 2) {
+            out.println("<script> alert('접근 권한이 없습니다.'); location.href='" + request.getContextPath() + "/'; </script>");
+            out.flush();
+        }
+        
 		return "user/animal/user_animal_insert";
 	}
 
