@@ -164,7 +164,7 @@
 					</select>
 				</div>
 			</div> --%>
-			<table class="table table-hover searched_list">
+			<table class="table table-hover searched_list mb-4">
 				<tr>
 					<th class="table-light col-1">이름</th>
 					<th class="table-light col-1">종</th>
@@ -205,7 +205,7 @@
 			
 		</div>
 		<div class="insert-form">
-			<button style="float: right; clear: both;" class="btn btn-primary insertbtn mb-3" onclick="location.href='${path}/animal_insert?tag=${animalDTO.animal_tag}'"><i class="bi bi-pencil-fill"></i> 등록</button>
+			<button class="btn btn-primary insertbtn mb-3" onclick="location.href='${path}/animal_insert?tag=${animalDTO.animal_tag}'"><i class="bi bi-pencil-fill"></i> 등록</button>
 		</div>
 		<br>
 		<%-- 페이징처리 --%>
