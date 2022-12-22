@@ -35,6 +35,7 @@ import com.heartpet.action.WishDAO;
 import com.heartpet.model.AdoptRegDTO;
 import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.PageDTO;
+import com.heartpet.model.UserDTO;
 import com.heartpet.model.WishDTO;
 import com.heartpet.util.FileUploadImage;
 
@@ -52,6 +53,8 @@ public class AnimalController {
 	private AdoptRegDAO adoptRegDAO;
 	@Autowired
 	private WishDAO wishDAO;
+	@Autowired
+	private UserDAO userDAO;
 	@Autowired
 	private HttpServletRequest request;
 	
