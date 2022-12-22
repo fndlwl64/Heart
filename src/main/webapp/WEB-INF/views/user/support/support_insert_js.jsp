@@ -53,7 +53,7 @@
 			   document.getElementById('checkCode').innerHTML = "인증되었습니다."; 
 			   makeReal();
 		  }
-		 }
+	}
 	function makeReal(){
 		var hiddenbutton = document.getElementById("hiddenbutton");
 		hiddenbutton.type="submit";
@@ -99,7 +99,8 @@
 		                      console.log("후원에러", e);
 		                  }
 		              });
-		              opener.location.href="/project/user_support_finish";
+		              
+		              opener.location.href="/project/user_support_finish?name=100&amount=100";
 		              window.close();
 		          }else {
 		        	  alert('후원실패');
@@ -107,7 +108,7 @@
 		      });
 		  }
 	      
-	    }
+	}
 	
 	function requestPay2() {
 		  let name2 = document.getElementById('sup_name').value;
@@ -194,7 +195,7 @@
 		        	  alert('후원실패');
 		          }
 		      });
-	    }
+	}
 
 	function requestPay50000() {
 		  IMP.request_pay({ 
@@ -231,7 +232,7 @@
 	        	  alert('후원실패');
 	          }
 	      });
-  }
+  	}
 	
 	function requestPay70000() {
 		  IMP.request_pay({ 
@@ -268,7 +269,7 @@
 	        	  alert('후원실패');
 	          }
 	      });
-  }
+  	}
 	
 	function requestPay100000() {
 		  IMP.request_pay({ 
@@ -305,5 +306,5 @@
 	        	  alert('후원실패');
 	          }
 	      });
-  }
+  	}
 </script>

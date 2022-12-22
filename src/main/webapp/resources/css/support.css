@@ -81,5 +81,29 @@ body {
 	
 	width: 500px;
 }
+
+.div_finish {
+	margin-top: 20px;
+	height: auto;
+}
+
+.div_finish #sup_finish {
+	height: 700px;
+	width: 600px;
+}
+
+.div_finish .sup_text #text_id {
+	position: absolute;
+	top: 48%;
+	left: 47%;
+	color: #1D5454;
+	font-weight: bold;
+}
  
- 
+.div_finish .sup_text #text_amount {
+	position: absolute;
+	top: 56%;
+	left: 48%;
+	color: #1D5454;
+	font-weight: bold;
+}
