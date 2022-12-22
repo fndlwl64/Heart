@@ -6,10 +6,15 @@
 <link rel="stylesheet" href="${path}/resources/css/support.css">
 <script src="${path}/resources/js/support.js"></script>
 <%-- 여기서부터 작성 --%>
-<div class="div1" align="center">
-	<br><br><br><br><br><br>
-	<h1>후원해주셔서 감사합니다!</h1>
-	<img class="btn_support" src="resources/image/animal.png" onclick="popup('${path}')">
+<div class="div_finish" align="center">
+	<div align="center">
+		<h1>후원해주셔서 감사합니다!</h1>
+		<img id="sup_finish" src="resources/image/sup_finish.png">
+	</div>
+	<div class="sup_text">
+		<h1 id="text_id">${name}</h1>
+		<h1 id="text_amount">${amount}</h1>
+	</div>
 </div>
 
 <jsp:include page="../../include/user_footer.jsp" />
