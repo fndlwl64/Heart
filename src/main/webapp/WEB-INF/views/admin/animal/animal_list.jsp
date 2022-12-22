@@ -215,9 +215,8 @@
 					</tr>
 				</c:forEach>
 				<tr>
-					<td colspan="7"><button
-							class="btn btn-success btn-sm insertbtn float-end"
-							onclick="location.href='${path}/animal_insert?tag=${animalDTO.animal_tag}'">등록</button></td>
+					<td colspan="7">
+					<button style="float: right; clear: both;" class="btn btn-primary insertbtn mb-3" onclick="location.href='${path}/animal_insert?tag=${animalDTO.animal_tag}'"><i class="bi bi-pencil-fill"></i> 등록</button></td>
 				</tr>
 			</table>
 		</div>

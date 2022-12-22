@@ -15,9 +15,8 @@
 	<jsp:include page="../../include/admin_header.jsp" />
 	<br>
 	<br>
-	<div class="div1" align="center">
-		<form action="<%=request.getContextPath()%>/adoptreg_update"
-			, method="post">
+	<div class="div1" align="center" style="margin-top: 10%;">
+		<form action="<%=request.getContextPath()%>/adoptreg_update" method="post">
 			<input type="hidden" name="adopt_reg_animalno"
 				value="${content.adopt_reg_animalno }" />
 			<table class="table table-hover searched_list">
@@ -44,25 +43,24 @@
 				</tr>
 				<tr>
 					<th class="table-light "><span class="sp2">입양예정일</span></th>
-					<td><input type="datetime-local" name="adopt_reg_duedate"
-						value="${content.adopt_reg_duedate }"></td>
+					<td>
+						<input type="datetime-local" name="adopt_reg_duedate" class="form-control" value="${content.adopt_reg_duedate }">
+					</td>
 				</tr>
 				<c:if test="${not empty content.adopt_reg_duedate }">
 					<tr>
 						<th class="table-light "><span class="sp2">입양완료일</span></th>
-						<td><input type="datetime-local" name="adopt_reg_adoptdate">
+						<td>
+							<input type="datetime-local" name="adopt_reg_adoptdate" class="form-control">
 						</td>
 					</tr>
 				</c:if>
-
-
-
 			</table>
+			<br>
 			<div class="buttons">
-				<button type="submit" class="btn btn-success mx-1">
-					<i class="bi bi-save"></i> 수정하기
-				</button>
+				<button type="submit" class="btn btn-success mx-1"><i class="bi bi-save"></i> 수정</button>
 			</div>
+		</form>
 	</div>
 </body>
 </html>
