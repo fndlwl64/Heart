@@ -270,7 +270,7 @@ body {
 /* admin/_list.jsp 검색 결과 테이블 태그 */
 .container .searched_list {
     text-align: center;
-    margin: 0;
+    margin-bottom: 0;
 }
 
 /* vertical-align 추가 */
@@ -432,7 +432,6 @@ body {
 	margin-bottom: 1%;
 	width: 100%;
 	margin: auto;
-	margin-bottom: 2%;
 }
 
 .container .lists tr:hover {

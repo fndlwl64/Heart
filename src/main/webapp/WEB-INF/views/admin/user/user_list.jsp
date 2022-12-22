@@ -104,7 +104,7 @@
     <%-- 검색 결과 테이블 --%>
     <div class="lists">
 	   
-        <table class="table searched_list">
+        <table class="table searched_list mb-4">
             <tr>
                 <th class="table-light col-1">번호</th>
                 <th class="table-light col-1">아이디</th>
