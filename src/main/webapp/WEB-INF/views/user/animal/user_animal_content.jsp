@@ -106,24 +106,28 @@ pageContext.setAttribute("newline", "\n");
 <script type="text/javascript">
 	function submitOption() {
 		if (!$('#user_grade').val()) {
-			$('.modal-body').empty();
-			$('.modal-body').append('로그인을 해주세요');
+			$('.modal-body-cancel').empty();
+			$('.modal-body-cancel').append('로그인을 해주세요');
 			return false;
 		}
 		if ($('#user_grade').val() > 3) {
-			alert("회원의 등급이 낮아 입양 자격이 없습니다.");
+			$('.modal-body-cancel').empty();
+			$('.modal-body-cancel').append('회원의 등급이 낮아 입양 자격이 없습니다.');
 			return false;
 		}
 		if ($('#animal_status').val() == '입소 신청') {
-			alert('아직 입소가 완료되지 않은 상태입니다.');
+			$('.modal-body-cancel').empty();
+			$('.modal-body-cancel').append('아직 입소가 완료되지 않은 상태입니다.');
 			return false;
 		}
 		if ($('#animal_status').val() == '입양 대기') {
-			alert('입양 대기 중인 상태입니다.');
+			$('.modal-body-cancel').empty();
+			$('.modal-body-cancel').append('입양 대기 중인 상태입니다.');
 			return false;
 		}
 		if ($('#animal_status').val() == '입양 완료') {
-			alert('이미 입양 완료된 상태입니다.')
+			$('.modal-body-cancel').empty();
+			$('.modal-body-cancel').append('이미 입양 완료된 상태입니다.');
 			return false;
 		}
 	}

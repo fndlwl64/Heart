@@ -16,7 +16,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
-				<div class="modal-body"></div>
+				<div class="modal-body modal-body-cancel"></div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal">Close</button>
@@ -28,8 +28,8 @@
 	<!-- 자바스크립트 예시 -->
 	<!-- function submitOption() {
 		if (!$('#user_grade').val()) {
-			$('.modal-body').empty();
-			$('.modal-body').append('로그인을 해주세요');
+			$('.modal-body-cancel').empty();
+			$('.modal-body-cancel').append('로그인을 해주세요');
 			return false;
 		}
 	} -->
