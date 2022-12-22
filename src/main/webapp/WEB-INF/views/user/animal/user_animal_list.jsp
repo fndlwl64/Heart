@@ -20,30 +20,37 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="div1">
 
-	<div class="text-center main-title">입양을 기다리는 동물들</div>
+	<div class="text-center main-title">
+		<label>입양을 기다리는 동물들 <span class="more_info" onclick="search()">자세히 찾아보기</span></label>
+	</div>
 	
 	<input type="hidden" id="sortlink"
 		value="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list?page=${ paging.page }&${pagingSort}" />
-		
-	<div class="form_search">
 	
+	<div id="form" class="form_search">
+
 		<form
 			action="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list"
 			class="validation-form wells" method="post">
+			
+			<div class="lil-title">
+				<span><i class="bi bi-check2-square"></i>조건 검색</span>
+			</div>
+			
 			<div class="row animal_row">
 				<div class="col">
 					<div class="input-group">
 						<select name="animal_place" class="form-select form-select-sm">
 							<option value=""></option>
-							<option value="서울" <c:if test="${fn:contains(animalDTO.animal_place , '서울' )} ">selected</c:if>>서울특별시</option>
-							<option value="울산" <c:if test="${fn:contains(animalDTO.animal_place , '울산' )} ">selected</c:if>>울산광역시</option>
-							<option value="인천" <c:if test="${fn:contains(animalDTO.animal_place , '인천' )} ">selected</c:if>>인천광역시</option>
-							<option value="부산">부산광역시</option>
-							<option value="대전">대전광역시</option>
-							<option value="광주">광주광역시</option>
-							<option value="대구">대구광역시</option>
-							<option value="세종">세종특별자치시</option>
-							<option value="제주">제주도</option>
+							<option value="서울" <c:if test="${fn:contains(animalDTO.animal_place,'서울')}">selected</c:if>>서울특별시</option>
+							<option value="울산" <c:if test="${fn:contains(animalDTO.animal_place,'울산')}">selected</c:if>>울산광역시</option>
+							<option value="인천" <c:if test="${fn:contains(animalDTO.animal_place,'인천')}">selected</c:if>>인천광역시</option>
+							<option value="부산" <c:if test="${fn:contains(animalDTO.animal_place,'부산')}">selected</c:if>>부산광역시</option>
+							<option value="대전" <c:if test="${fn:contains(animalDTO.animal_place,'대전')}">selected</c:if>>대전광역시</option>
+							<option value="광주" <c:if test="${fn:contains(animalDTO.animal_place,'광주')}">selected</c:if>>광주광역시</option>
+							<option value="대구" <c:if test="${fn:contains(animalDTO.animal_place,'대구')}">selected</c:if>>대구광역시</option>
+							<option value="세종" <c:if test="${fn:contains(animalDTO.animal_place,'세종')}">selected</c:if>>세종특별자치시</option>
+							<option value="제주" <c:if test="${fn:contains(animalDTO.animal_place,'제주')}">selected</c:if>>제주도</option>
 						</select> <span class="btn btn-sm btn-secondary position-relative">장소</span>
 					</div>
 				</div>
@@ -149,7 +156,7 @@
 				</div>
 				<div class="col text-lg-end">
 					<div class="input-group">
-						<input type="number" value="0" min="0" name="animal_weight"
+						<input type="number" value="${animalDTO.animal_weight }" min="0" name="animal_weight"
 							class="form-control form-control-sm" style="width: 70px"> <span
 							class="btn btn-sm btn-secondary position-relative">무게</span>
 					</div>
@@ -288,6 +295,14 @@
 		</ul>
 	</nav>
 	<script type="text/javascript">
+		$(function() {
+			
+			$("#form").css({
+				 'display' : 'none'
+			 });			
+			
+		});
+		
 		//정렬 select
 		$("#sort").change(
 				function() {
@@ -303,6 +318,15 @@
 			  });
 			});
 		 */
+		 function search() {
+			 
+			 $("#form").toggle();
+			 
+			 /* $("#form").css({
+				 'display' : 'block'
+			 }); */
+		 }
+		 
 	</script>
 	
 	<jsp:include page="../../include/user_footer.jsp" />
