@@ -18,9 +18,9 @@
 <c:set var="animalDTO" value="${ animalDTO }" />
 <c:set var="animalList" value="${ animalList }" />
 <c:set var="pagingTag"
-	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }&sort=${sort }" />
+	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }&animal_name=${animalDTO.animal_name }&animal_vaccination=${animalDTO.animal_vaccination }&sort=${sort }" />
 <c:set var="pagingSort"
-	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }" />
+	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }&animal_name=${animalDTO.animal_name }&animal_vaccination=${animalDTO.animal_vaccination }"/>
 </head>
 <input type="hidden" id="sortlink"
 	value="<%=request.getContextPath() %>/${animalDTO.animal_tag}_list?page=${ paging.page }&${pagingSort}" />
@@ -87,7 +87,7 @@
                       	<tr>
 	                      	<th width="12.5%">동물 이름</th>
 	                      	<td width="37.5%">
-	                      		<input type="text" class="form-control" />
+	                      		<input type="text" class="form-control" name="animal_name"/>
 	                      	</td>
 							<th class="col-2">중성화 여부</th>
 							<td class="col-1">
@@ -96,8 +96,8 @@
 							</td>
 							<th class="col-2">예방접종 여부</th>
 							<td class="col-1">
-								<input type="hidden" id="YN" name="animal_neutered" /> 
-								<label><input type="checkbox" class="form-check-label" id="checkYN"></label>
+								<input type="hidden" id="YNvaccin" name="animal_vaccination" /> 
+								<label><input type="checkbox" class="form-check-label" id="checkYNvaccin"></label>
 							</td>
 							
 	                      <%-- <th>문의글</th>
@@ -317,11 +317,17 @@
 	$("#checkYN").change(function() {
 		if ($("#checkYN").is(":checked")) {
 			$("#YN").val('Y');
-			console.log($("#YN").val());
-		} else {
-
+		}else{
+			$("#YN").empty();
 		}
-	})
+	});
+	$("#checkYNvaccin").change(function() {
+		if ($("#checkYNvaccin").is(":checked")) {
+			$("#YNvaccin").val('Y');
+		}else{
+			$("#YNvaccin").empty();
+		}
+	});
 	//정렬 select
 	$("#sort").change(
 			function() {

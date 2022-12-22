@@ -77,6 +77,10 @@
 			test="keyword != null and !keyword.equals('')">
 			and animal_place like '%' || #{keyword } || '%'
 		</if>
+		<if
+			test="animalDTO.animal_name != null and !animalDTO.animal_name.equals('')">
+			and animal_name like '%' || #{animalDTO.animal_name } || '%'
+		</if>
 	</select>
 	<select id="animal_content" resultType="AnimalDTO">
 		select * from
@@ -164,6 +168,10 @@
 		<if
 			test="animalDTO.animal_vaccination != null and !animalDTO.animal_vaccination.equals('')">
 			and animal_vaccination = #{animalDTO.animal_vaccination }
+		</if>
+		<if
+			test="animalDTO.animal_name != null and !animalDTO.animal_name.equals('')">
+			and animal_name like '%' || #{animalDTO.animal_name } || '%'
 		</if>
 		)
 		where rnum between ${startNo} and ${endNo}
