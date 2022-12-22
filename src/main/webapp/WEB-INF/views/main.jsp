@@ -29,49 +29,54 @@
 
     <%-- 강아지 list 출력 // swiper --%>
     <div class="main-title">
-        <p id="heart-pet">HeartPet, </p>
-        <p>당신과 평생 함께 할 반려동물을 만나보세요</p>
+        <h1 id="heart-pet">HeartPet, </h1>
+        <div class="more">
+            <div>
+	           <span>당신과 평생 함께 할 반려동물을 만나보세요</span>
+	        </div>    
+	        <div class="d-flex">
+		      <button type="button" class="btn btn-dark mx-3" onclick="location.href='${path}/user_dog_list'"><i class="bi bi-arrow-right-circle"></i> 강아지</button>
+		      <button type="button" class="btn btn-light" onclick="location.href='${path}/user_cat_list'"><i class="bi bi-arrow-right-circle-fill"></i> 고양이</button>
+	        </div>
+	    </div>
     </div>
+	    
     <div class="swiper dogSwiper">
         <div class="swiper-wrapper">
         	<c:forEach items="${ dList }" var="list">
             	<div class="swiper-slide">
-            	<a href="${path}/user_animal_content?no=${ list.animal_no }">
-            	<c:choose>
-            	<c:when test="${ not empty list.animal_img1 }"><img src="${path}/resources/upload/${ list.animal_img1 }" alt="animal_img"></c:when>
-            	<c:when test="${ not empty list.animal_img2 }"><img src="${path}/resources/upload/${ list.animal_img2 }" alt="animal_img"></c:when>
-            	<c:when test="${ not empty list.animal_img3 }"><img src="${path}/resources/upload/${ list.animal_img3 }" alt="animal_img"></c:when>
-            	</c:choose>
-            	</a></div>
+	            	<a href="${path}/user_animal_content?no=${ list.animal_no }">
+		            	<c:choose>
+			            	<c:when test="${ not empty list.animal_img1 }"><img src="${path}${ list.animal_img1 }" alt="animal_img"></c:when>
+			            	<c:when test="${ not empty list.animal_img2 }"><img src="${path}${ list.animal_img2 }" alt="animal_img"></c:when>
+			            	<c:when test="${ not empty list.animal_img3 }"><img src="${path}${ list.animal_img3 }" alt="animal_img"></c:when>
+		            	</c:choose>
+	            	</a>
+            	</div>
             </c:forEach>
         </div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
         <div class="swiper-pagination"></div>
-    </div>
-    <div class="more">
-        <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_dog_list'">더 보러가기</button>
     </div>
     
     <div class="swiper dogSwiper">
         <div class="swiper-wrapper">
         	<c:forEach items="${ cList }" var="list">
             	<div class="swiper-slide">
-            	<a href="${path}/user_animal_content?no=${ list.animal_no }">
-            	<c:choose>
-            	<c:when test="${ not empty list.animal_img1 }"><img src="${path}/resources/upload/${ list.animal_img1 }" alt="animal_img"></c:when>
-            	<c:when test="${ not empty list.animal_img2 }"><img src="${path}/resources/upload/${ list.animal_img2 }" alt="animal_img"></c:when>
-            	<c:when test="${ not empty list.animal_img3 }"><img src="${path}/resources/upload/${ list.animal_img3 }" alt="animal_img"></c:when>
-            	</c:choose>
-            	</a></div>
+	            	<a href="${path}/user_animal_content?no=${ list.animal_no }">
+	            	<c:choose>
+		            	<c:when test="${ not empty list.animal_img1 }"><img src="${path}${ list.animal_img1 }" alt="animal_img"></c:when>
+		            	<c:when test="${ not empty list.animal_img2 }"><img src="${path}${ list.animal_img2 }" alt="animal_img"></c:when>
+		            	<c:when test="${ not empty list.animal_img3 }"><img src="${path}${ list.animal_img3 }" alt="animal_img"></c:when>
+	            	</c:choose>
+	            	</a>
+            	</div>
             </c:forEach>
         </div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
         <div class="swiper-pagination"></div>
-    </div>
-    <div class="more">
-        <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_cat_list'">더 보러가기</button>
     </div>
     
     <%-- 입양후기 list 출력 --%>
@@ -80,9 +85,22 @@
         <div class="swiper-wrapper">
         	<c:forEach items="${ dRList }" var="list">
             <div class="swiper-slide">
-                <a href=""><img src="${path}/resources/logo/heartpet_logo.png" /></a>
-                <span class="title">${ list.review_title }</span><br>
-                <span class="content">${ list.review_content }</span>
+                <a href="${ path }/user_review_content?review_no=${ list.review_no }">
+                <c:choose>
+					<c:when test="${ not empty list.review_img1 }"><img src="${path}${ list.review_img1 }" alt="review_img"></c:when>
+					<c:when test="${ not empty list.review_img2 }"><img src="${path}${ list.review_img2 }" alt="review_img"></c:when>
+					<c:when test="${ not empty list.review_img3 }"><img src="${path}${ list.review_img3 }" alt="review_img"></c:when>
+                </c:choose>
+                </a>
+                <div>
+                    <span class="title">
+                        <c:if test="${ list.review_title.length() gt 15 }">${ list.review_title.substring(0,15) }...</c:if>
+                        <c:if test="${ list.review_title.length() lt 15 }">${ list.review_title }</c:if>
+                    </span>
+                </div>
+                <div>
+                    <span class="content">등록일 ${ list.review_regdate.substring(0,10) } 조회 ${ list.review_hit }</span>
+                </div>
             </div>
             </c:forEach>
         </div>
@@ -94,13 +112,25 @@
         <div class="swiper-wrapper">
         	<c:forEach items="${ cRList }" var="list">
             <div class="swiper-slide">
-                <a href=""><img src="${path}/resources/logo/heartpet_logo.png" /></a>
-                <span class="title">${ list.review_title }</span><br>
-                <span class="content">${ list.review_content }</span>
+                <a href="${ path }/user_review_content?review_no=${ list.review_no }">
+                <c:choose>
+                    <c:when test="${ not empty list.review_img1 }"><img src="${path}${ list.review_img1 }" alt="review_img"></c:when>
+                    <c:when test="${ not empty list.review_img2 }"><img src="${path}${ list.review_img2 }" alt="review_img"></c:when>
+                    <c:when test="${ not empty list.review_img3 }"><img src="${path}${ list.review_img3 }" alt="review_img"></c:when>
+                </c:choose>
+                </a>
+                <div>
+	                <span class="title">
+	                    <c:if test="${ list.review_title.length() gt 15 }">${ list.review_title.substring(0,15) }...</c:if>
+	                    <c:if test="${ list.review_title.length() lt 15 }">${ list.review_title } </c:if>
+	                </span>
+                </div>
+                <div>
+                    <span class="content">등록일 ${ list.review_regdate.substring(0,10) } 조회 ${ list.review_hit }</span>
+                </div>
             </div>
             </c:forEach>
         </div>
-        <div class="swiper-pagination"></div>
     </div>
 
 </div>
