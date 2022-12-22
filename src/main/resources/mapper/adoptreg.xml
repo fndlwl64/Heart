@@ -97,6 +97,13 @@
 		</choose>
 		where adopt_reg_animalno = #{adopt_reg_animalno}
 	</update>
+	<update id="adoptreg_update_cancel" parameterType="int">
+		update heartpet_adopt_reg set
+			adopt_reg_regdate = '' ,
+			adopt_reg_duedate = '' ,
+			adopt_reg_adoptdate = ''
+		where adopt_reg_regno = #{adopt_reg_regno}
+	</update>
 	<insert id="adoptreg_insert" parameterType="AdoptRegDTO">
 		<selectKey resultType="int" keyProperty="adopt_reg_regno"
 			order="BEFORE">

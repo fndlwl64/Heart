@@ -28,6 +28,11 @@ public class AdoptRegDAOImpl implements AdoptRegDAO{
 	}
 
 	@Override
+	public int updateCancel(int adoptreg_regno) {
+		return sqlSession.update("adoptreg_update_cancel",adoptreg_regno);
+	}
+
+	@Override
 	public void delete(int id) {
 		// TODO Auto-generated method stub
 		
