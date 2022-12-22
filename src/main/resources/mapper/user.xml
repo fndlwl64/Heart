@@ -54,34 +54,31 @@
 	            <when test="order.equals('grade_asc')">order by user_grade, user_no</when>
 	            <when test="order.equals('name_asc')">order by user_name</when>        
 	        </choose>
-			) rnum FROM HEARTPET_USER U
-		<where>
+			) rnum FROM HEARTPET_USER U WHERE USER_GRADE IN (1,2,3,4,5)
 			<if test="user_id != null and !user_id.equals('')">
-				USER_ID LIKE '%' || #{user_id } || '%'
+				AND USER_ID LIKE '%' || #{user_id } || '%'
 			</if>
 			<if test="user_grade != null and !user_grade.equals('')">
-				USER_GRADE = #{user_grade}
+				AND USER_GRADE = #{user_grade}
 			</if>
 			<if test="user_animalexp != null and !user_animalexp.equals('')">
-				USER_ANIMALEXP = #{user_animalexp}
+				AND USER_ANIMALEXP = #{user_animalexp}
 			</if>
-        </where>	
+			
         <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo}]]>
 	</select>
 	
 	<select id="user_count" parameterType="map" resultType="int">
-		SELECT COUNT(*) FROM HEARTPET_USER
-		<where>
+		SELECT COUNT(*) FROM HEARTPET_USER WHERE USER_GRADE IN (1,2,3,4,5)
 			<if test="user_id != null and !user_id.equals('')">
-				USER_ID LIKE '%' || #{ user_id } || '%'
+				AND USER_ID LIKE '%' || #{ user_id } || '%'
 			</if>
 			<if test="user_grade != null and !user_grade.equals('')">
-				USER_GRADE = #{user_grade}
+				AND USER_GRADE = #{user_grade}
 			</if>
 			<if test="user_animalexp != null and !user_animalexp.equals('')">
-				USER_ANIMALEXP = #{user_animalexp}
+				AND USER_ANIMALEXP = #{user_animalexp}
 			</if>
-        </where>
 	</select>
 	
 	<select id="email_check" parameterType="String" resultType="int">
