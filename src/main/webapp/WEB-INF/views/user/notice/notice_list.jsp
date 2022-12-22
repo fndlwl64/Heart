@@ -6,6 +6,7 @@
 <c:set var="paging" value="${ paging }"/>
 <c:set var="field" value="${ field }"/>
 <c:set var="keyword" value="${ keyword }"/>
+<c:set var="url" value="&field=${ field }&keyword=${ keyword }&order=${ order }" />
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path }/resources/css/notice.css">
 <%-- 여기서부터 작성 --%>
@@ -33,17 +34,19 @@
         
         <%-- 정렬 & 게시물 수 --%>
         <div>
-	    <form class="order_form" method="get" action="${path}/user_notice">    
-	       <div class="qna-section">
-	            <div class="qna_order">
-	                <select class="form-select form-select-sm" name="order" onchange="this.form.submit()">
-	                   <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
-	                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신게시일순</option>
-	                    <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>조회수높은순</option>
-	                </select>
+	    <%-- <form class="order_form" method="get" action="${path}/user_notice">   --%>  
+	       <div class="notice-section2">
+	       		<div class="row">
+		            <div class="col total-data">
+		                <select class="form-select form-select-sm" name="order" onchange="location.href='${path}/user_notice?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">
+		                   <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
+		                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신게시일순</option>
+		                    <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>조회수높은순</option>
+		                </select>
+		            </div>
 	            </div>
 	        </div>
-	    </form>
+	    <!-- </form> -->
 	    </div>
         <br><br>
         <table class="table table-bordered">
@@ -70,6 +73,7 @@
     </div>
     <br>
     <%-- 페이징처리 --%>
-    <jsp:include page="../../include/pagination.jsp" />
+    <%-- <jsp:include page="../../include/pagination.jsp" /> --%>
+    <%@ include file="../../include/pagination_update.jsp" %>
 </div>
 <jsp:include page="../../include/user_footer.jsp" />

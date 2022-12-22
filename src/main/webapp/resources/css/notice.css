@@ -58,22 +58,17 @@
 	display: flex;
 }
 
-.notice-board .order_form {
+.notice-section .row .total-data .form-select {
 	float: right;
-	width: 26%;
 	clear: both;
+	width: auto;
 }
 
-/* admin_notice에서 사용하는 css */
-
-.container .order_form {
-	width: 70%;
-	margin: auto;
-}
-
-.container .order_form .notice-section {
-	display: flex;
-	flex-direction: row-reverse;
+.notice-section2 .row .total-data .form-select {
+	float: right;
+	clear: both;
+	width: auto;
+	margin-right: 20%;
 }
 
 .container .lists #insert_btn {
