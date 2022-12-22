@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="../../include/admin_header.jsp"/>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
@@ -87,11 +88,10 @@
     </form>
     
 	<%-- 정렬 & 게시물 수 --%>
-	<form class="order_total" method="get" action="${path}/user_list">    
-		<div class="user_section">
-			<div class="total_user"><label>총 회원 <span>${totalRecord}</span>명</label></div>
-			<div class="user_order">
-                <select class="form-select form-select-sm order_select" name="order" onchange="location.href='${path}/user_list?page=${ paging.page }&user_id=${user_id }&user_grade=${user_grade }&user_animalexp=${user_animalexp }&order='+this.value;">
+    <div class="qna-section">
+        <div class="row">
+            <div class="col total-data"><span>총 회원 <fmt:formatNumber value="${ totalRecord }" /> 명</span>
+                <select class="form-select form-select-sm order" name="order" onchange="location.href='${path}/user_list?page=${ paging.page }&user_id=${user_id }&user_grade=${user_grade }&user_animalexp=${user_animalexp }&order='+this.value;">
                     <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>최신가입순</option>
                     <option value="grade_desc"<c:if test="${ order eq 'grade_desc' }">selected="selected"</c:if>>등급낮은순</option>
                     <option value="grade_asc"<c:if test="${ order eq 'grade_asc' }">selected="selected"</c:if>>등급높은순</option>
@@ -99,7 +99,7 @@
                 </select>
             </div>
         </div>
-        </form>
+    </div>
 	
     <%-- 검색 결과 테이블 --%>
     <div class="lists">
