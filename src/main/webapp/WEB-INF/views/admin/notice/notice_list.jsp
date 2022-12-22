@@ -54,8 +54,6 @@
 	            </div>   
             </div>
         </form>
-
-        <br>
         
         <%-- 정렬 & 게시물 수 --%>
 	    <%-- <form class="order_form" method="get" action="${path}/notice_list">     --%>
@@ -71,7 +69,6 @@
 	            </div>
 	        </div>
 	    <!-- </form> -->
-		<br>
         <%-- 검색 결과 테이블 --%>
         <div class="lists">
             <table class="table table-hover searched_list">

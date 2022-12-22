@@ -22,14 +22,11 @@
 <c:set var="pagingSort"
 	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }&animal_name=${animalDTO.animal_name }&animal_vaccination=${animalDTO.animal_vaccination }"/>
 </head>
-<input type="hidden" id="sortlink"
-	value="<%=request.getContextPath() %>/${animalDTO.animal_tag}_list?page=${ paging.page }&${pagingSort}" />
+<input type="hidden" id="sortlink" value="<%=request.getContextPath() %>/${animalDTO.animal_tag}_list?page=${ paging.page }&${pagingSort}" />
 <body>
 
 	<div class="container">
-
-		<br> <br>
-
+	
 		<%-- 검색 폼 --%>
 		<form class="search_form" action="${path}/${animalDTO.animal_tag}_list" method="post">
 			<div class="form_box">
@@ -43,8 +40,7 @@
 	                      	<td width="37.5%">
 	                      	  <div class="search-date">
 			                      <c:if test="${animalDTO.animal_tag eq 'dog' }">
-									<select class="form-select" id="search_animal"
-										name="animal_species">
+									<select class="form-select" id="search_animal" name="animal_species">
 										<option value=""></option>
 										<option value="말티즈">말티즈</option>
 										<option value="푸들">푸들</option>
@@ -58,8 +54,7 @@
 									</select>
 								</c:if>
 								<c:if test="${animalDTO.animal_tag eq 'cat' }">
-									<select name="animal_species" id="search_animal"
-										class="form-select">
+									<select name="animal_species" id="search_animal" class="form-select">
 										<option value=""></option>
 										<option value="스코티시">스코티시</option>
 										<option value="폴드">폴드</option>
@@ -103,11 +98,12 @@
 	                      <%-- <th>문의글</th>
 	                      <td><input type="text" class="form-control" name="search_content" value="${ search_content }" /></td> --%>
 	                  	</tr>
-            		</table>
-            		
-            		<button class="btn searchbtn" type="submit">
-						<i class="bi bi-search"></i>검색
-					</button>
+
+            		</table>            		
+                <div class="search-buttons">
+                <button class="btn btn-light" type="button" onclick="location.href='${ path }/${animalDTO.animal_tag}_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
+                <button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
+                </div>
             	</div>
 			</div>
 
