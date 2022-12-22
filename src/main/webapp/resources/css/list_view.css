@@ -327,13 +327,22 @@ body {
     background-color: white;
     vertical-align: middle;
     font-size: 15px;  
-    padding: 1rem 0.5rem; 
+	padding-left: 2rem;
+	padding-right: 0.5rem;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
     border: none !important;  
+    text-align: left;
 }
 
 .form_box #search-table td {
-    padding: 1rem 0.5rem; 
+    padding: 0.5rem 0.5rem; 
     border: none !important;  
+}
+
+.form_box #search-table .search-checkbox {
+	display: flex;
+	justify-content: space-evenly;
 }
 
 .form_box #search-table .search-date {

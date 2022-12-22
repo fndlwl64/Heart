@@ -45,29 +45,22 @@ public class AdminQnaController {
     // QNA_LIST
     ///////////////////////////////////////////////////////////////////
     @RequestMapping("/admin_qna_list")
-    public String admin_qna_list(@RequestParam(value = "field", required = false) String field,
-            @RequestParam(value = "keyword", required = false) String keyword,
-            @RequestParam(value = "order", required = false) String order,
+    public String admin_qna_list(@RequestParam(value = "search_category", required = false, defaultValue = "") String search_category,
+            @RequestParam(value = "search_date_start", required = false, defaultValue = "") String search_date_start,
+            @RequestParam(value = "search_date_end", required = false, defaultValue = "") String search_date_end,
+            @RequestParam(value = "search_id", required = false, defaultValue = "") String search_id,
+            @RequestParam(value = "search_content", required = false, defaultValue = "") String search_content,
+            @RequestParam(value = "order", required = false, defaultValue = "") String order,
             @RequestParam(value = "page", defaultValue = "1") int page, Model model) {
-
-        if (field == null) {
-            field = "";
-        }
-        if (keyword == null) {
-            keyword = "";
-        }
-        if (order == null) {
-            order = "";
-        }
 
         int currentPage = 1; // 현재 페이지 변수
         if (page != 1) {
             currentPage = page;
         }
 
-        totalRecord = this.qnaDAO.listQnaCount(field, keyword);
-        PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-        List<QnaDTO> qnaList = this.qnaDAO.listQna(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
+        totalRecord = this.qnaDAO.listQnaCount(search_category, search_date_start, search_date_end, search_id, search_content);
+        PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord);
+        List<QnaDTO> qnaList = this.qnaDAO.listQna(paging.getStartNo(), paging.getEndNo(), search_category, search_date_start, search_date_end, search_id, search_content, order);
         
         // 댓글수 추가
         List<Integer> commentList = new ArrayList<Integer>();
@@ -78,8 +71,11 @@ public class AdminQnaController {
         model.addAttribute("qnaList", qnaList);
         model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);
-        model.addAttribute("field", field);
-        model.addAttribute("keyword", keyword);
+        model.addAttribute("search_category", search_category);
+        model.addAttribute("search_date_start", search_date_start);
+        model.addAttribute("search_date_end", search_date_end);
+        model.addAttribute("search_id", search_id);
+        model.addAttribute("search_content", search_content);
         model.addAttribute("order", order);
         model.addAttribute("commentList", commentList);
 
