@@ -34,9 +34,9 @@
         
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="${path}/resources/js/main.js"></script>
-
 </head>
 <body>
+    
     <div class="wrap">
         <%-- header --%>
         <header class="h-wrap">

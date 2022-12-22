@@ -26,6 +26,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="${path}/resources/icon/favicon_144x144.png" />
 </head>
 <body>
+
 	<div class="header-logo">
 		<div class="row div_header">
 			<div class="col-5 header-space"></div>		

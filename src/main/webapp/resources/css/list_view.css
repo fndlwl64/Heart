@@ -349,6 +349,16 @@ body {
     border: none !important;  
 }
 
+.form_box #search-table .search-date {
+	display: flex;
+	justify-content: space-between;
+	
+}
+
+.form_box #search-table .search-date .search-date-picker {
+	width: 48%;
+}
+
 .form_box .search-buttons {
 	display: flex;
 	flex-direction: row;
