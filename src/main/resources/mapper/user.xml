@@ -54,17 +54,18 @@
 	            <when test="order.equals('grade_asc')">order by user_grade, user_no</when>
 	            <when test="order.equals('name_asc')">order by user_name</when>        
 	        </choose>
-			) rnum FROM HEARTPET_USER U WHERE USER_NO IS NOT NULL
+			) rnum 
+			FROM HEARTPET_USER u
+			WHERE USER_NO IS NOT NULL
 			<if test="user_id != null and !user_id.equals('')">
 				AND USER_ID LIKE '%' || #{user_id } || '%'
 			</if>
-			<if test="user_grade != null">
-				AND USER_GRADE = #{user_grade}
+			<if test="user_grade != 0">
+				AND user_grade = #{ user_grade }
 			</if>
 			<if test="user_animalexp != null and !user_animalexp.equals('')">
-				AND USER_ANIMALEXP = #{user_animalexp}
-			</if>
-			
+				AND user_animalexp = #{ user_animalexp }
+			</if>			
         <![CDATA[) WHERE rnum >= #{startNo} and rnum <= #{endNo}]]>
 	</select>
 	
