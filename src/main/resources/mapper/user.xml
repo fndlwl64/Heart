@@ -60,6 +60,9 @@
 			<if test="user_id != null and !user_id.equals('')">
 				AND USER_ID LIKE '%' || #{user_id } || '%'
 			</if>
+			<if test="user_name != null and !user_name.equals('')">
+				AND USER_NAME LIKE '%' || #{user_name } || '%'
+			</if>
 			<if test="user_grade != null and !user_grade.equals('')">
 				AND USER_GRADE = #{user_grade}
 			</if>
@@ -73,6 +76,9 @@
 		SELECT COUNT(*) FROM HEARTPET_USER WHERE USER_NO IS NOT NULL
 			<if test="user_id != null and !user_id.equals('')">
 				AND USER_ID LIKE '%' || #{ user_id } || '%'
+			</if>
+			<if test="user_name != null and !user_name.equals('')">
+				AND USER_NAME LIKE '%' || #{user_name } || '%'
 			</if>
 			<if test="user_grade != null and !user_grade.equals('')">
 				AND USER_GRADE = #{user_grade}
