@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+.div1 {
+	width: 60%;
+	margin: auto;
+}
+
+.div1 .title {
+	margin-bottom: 3%;
+}
+
+.div1 .title h3{
+	font-weight: bold;
+}
+
+.div1 .title span {
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.div1 form {
+	text-align: center;
+	margin: auto;
+}
+
+.div1 .table {
+	width: 50%;
+	margin: auto;
+}
+
+.div1 .table th {
+	text-align: center;
+}
+
+.div1 form .btn {
+	margin: 2%;
+}

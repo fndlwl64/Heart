@@ -2,15 +2,40 @@
 body {
 	overflow-x: hidden;
 }
-.justify-content-center {
-	margin: 5px;
+
+.div1 {
+	width: 70%;
+	margin: auto;
+}
+.div1 .form_search {
 	/* border-bottom: 2.5px solid #adafbd7a; */
 	border-width: 70%;
+	border: 1px solid #000;
+	border-radius: 10px;
+	padding: 1%;
+	font-size: 14px;
+	display: flex;
+	margin: 2% auto;
+	justify-content: space-evenly;
 }
 
+.div1 .form_search .animal_row .btn {
+}
 
+.div1 .form_search .animal_row label {
+	background-color: darkgray;
+	color: #fff;
+}
+
+.div1 .order {
+	margin-bottom: 2%;
+}
+.div1 .order select {
+	width: 150px;
+}
 .main-title {
-	font-size: 30px;
+	text-align: center;
+	font-size: 25px;
 	font-weight: bold;
 	margin-bottom: 1rem;
 }

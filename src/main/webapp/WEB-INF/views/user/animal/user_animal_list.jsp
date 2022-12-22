@@ -16,290 +16,295 @@
 <c:set var="pagingSort"
 	value="animal_size=${animalDTO.animal_size }&animal_species=${ animalDTO.animal_species}&animal_age=${animalDTO.animal_age }&animal_gender=${animalDTO.animal_gender }&animal_weight=${animalDTO.animal_weight }&animal_status=${animalDTO.animal_status }&animal_place=${animalDTO.animal_place }&keyword=${keyword }" />
 <%--검색--%>
-<input type="hidden" id="sortlink"
-	value="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list?page=${ paging.page }&${pagingSort}" />
-<div class="d-flex justify-content-center" style="font-size: 14px">
-	<form
-		action="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list"
-		class="validation-form wells" method="post">
-		<div class="row row-cols-auto animal_row">
-			<div class="col">
-				<div class="input-group">
-					<select name="animal_place" class="form-select form-select-sm">
-						<option value=""></option>
-						<option value="서울">서울특별시</option>
-						<option value="울산">울산광역시</option>
-						<option value="인천">인천광역시</option>
-						<option value="부산">부산광역시</option>
-						<option value="대전">대전광역시</option>
-						<option value="광주">광주광역시</option>
-						<option value="대구">대구광역시</option>
-						<option value="세종">세종특별자치시</option>
-						<option value="제주">제주도</option>
-					</select> <span class="btn btn-sm btn-secondary position-relative">장소</span>
-				</div>
-			</div>
 
-			<div class="col animal-keyword">
-				<div class="input-group">
-					<input type="text" name="keyword" placeholder="상세주소 입력"
-						class="form-control form-control-sm">
-				</div>
-			</div>
-			<div class="col">
-				<div class="input-group">
-					<select name="animal_vaccination" class="form-select form-select-sm">
-						<option value=""></option>
-						<option value="Y">Y</option>
-						<option value="N">N</option>
-					</select> <span class="btn btn-sm btn-secondary position-relative">백신</span>
-				</div>
-			</div>
-			<div class="col text-lg-end">
-				<div class="input-group">
-					<select name="animal_status" class="form-select form-select-sm">
-						<option value=""></option>
-						<option value="입소 신청">입소 신청</option>
-						<option value="입양 가능">입양 가능</option>
-						<option value="입양 대기">입양 대기</option>
-						<option value="입양 완료">입양 완료</option>
-					</select> <span class="btn btn-sm btn-secondary position-relative">입양</span>
-				</div>
-			</div>
+<div class="div1">
 
-		</div>
-		<div class="row row-cols-auto animal_row">
-
-			<div class="col">
-				<div class="input-group">
-					<select name="animal_gender" class="form-select form-select-sm">
-						<option value=""></option>
-						<option value="male">수컷</option>
-						<option value="female">암컷</option>
-					</select> <span class="btn btn-sm btn-secondary position-relative">성별</span>
-				</div>
-			</div>
-			<div class="col">
-				<div class="input-group">
-					<select name="animal_age" class="form-select form-select-sm">
-						<option value="0"></option>
-						<option value="1">0~1</option>
-						<option value="2">1~2</option>
-						<option value="3">2~3</option>
-						<option value="4">3~4</option>
-						<option value="5">4~5</option>
-						<option value="6">5~</option>
-					</select> <span class="btn btn-sm btn-secondary position-relative">나이</span>
-				</div>
-			</div>
-
-			<div class="col">
-				<div class="input-group">
-					<c:if test="${animalDTO.animal_tag eq 'dog'}">
-						<select name="animal_species" class="form-select form-select-sm">
+	<div class="text-center main-title">입양을 기다리는 동물들</div>
+	
+	<input type="hidden" id="sortlink"
+		value="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list?page=${ paging.page }&${pagingSort}" />
+		
+	<div class="form_search">
+	
+		<form
+			action="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list"
+			class="validation-form wells" method="post">
+			
+			<div class="row animal_row">
+				<div class="col">
+					<div class="input-group">
+						<select name="animal_place" class="form-select form-select-sm">
 							<option value=""></option>
-							<option value="말티즈">말티즈</option>
-							<option value="푸들">푸들</option>
-							<option value="포메라니안">포메라니안</option>
-							<option value="믹스견">믹스견</option>
-							<option value="치와와">치와와</option>
-							<option value="시츄">시츄</option>
-							<option value="골든리트리버">시츄</option>
-							<option value="진돗개">진돗개</option>
-							<option value="기타">기타</option>
-						</select>
-					</c:if>
-					<c:if test="${animalDTO.animal_tag eq 'cat'}">
-						<select name="animal_species" class="form-select form-select-sm">
-							<option value=""></option>
-							<option value="스코티시">스코티시</option>
-							<option value="폴드">폴드</option>
-							<option value="샴">샴</option>
-							<option value="페르시안">페르시안</option>
-							<option value="터키시">터키시</option>
-							<option value="앙고라">앙고라</option>
-							<option value="러시안 블루">러시안 블루</option>
-							<option value="벵갈">벵갈</option>
-							<option value="먼치킨">먼치킨</option>
-							<option value="아비시니안">아비시니안</option>
-							<option value="기타">기타</option>
-						</select>
-					</c:if>
-					<span class="btn btn-sm btn-secondary position-relative">품종</span>
-				</div>
-			</div>
-
-			<div class="col">
-				<div class="input-group">
-					<select name="animal_size" class="form-select form-select-sm">
-						<option value=""></option>
-						<option value="소형">소형</option>
-						<option value="중형">중형</option>
-						<option value="대형">대형</option>
-					</select> <span class="btn btn-sm btn-secondary position-relative">크기</span>
-				</div>
-			</div>
-			<div class="col text-lg-end">
-				<div class="input-group">
-					<input type="number" value="0" min="0" name="animal_weight"
-						class="form-control form-control-sm" style="width: 70px"> <span
-						class="btn btn-sm btn-secondary position-relative">무게</span>
-				</div>
-			</div>
-		</div>
-		<div class="row animal_row">
-			<div class="col">
-				<div class="input-group">
-					<select class="form-select form-select-sm" name="sort" id="sort">
-						<option value="">정렬</option>
-						<option value="size"
-							<c:if test="${sort eq 'size'}">selected</c:if>>크기</option>
-						<option value="weight"
-							<c:if test="${sort eq 'weight'}">selected</c:if>>무게</option>
-						<option value="age" <c:if test="${sort eq 'age'}">selected</c:if>>나이</option>
-					</select>
-				</div>
-			</div>
-			<div class="col-4"></div>
-			<div class="col-4"></div>
-			<div class="col text-lg-end">
-				<button type="submit" class="btn btn-primary btn-sm">Search</button>
-			</div>
-		</div>
-	</form>
-</div>
-
-<%--정렬--%>
-<div class="d-flex justify-content-end my-2">
-
-	<!-- <form class="validation-form mx-2" action="" method="post">
-		<select class="form-select form-select-sm " name="sort">
-			<option value="des">내림차순</option>
-			<option value="asc">오름차순</option>
-		</select>
-	</form> -->
-</div>
-<div class="text-center main-title">입양을 기다리는 동물들</div>
-<%--메인 페이지--%>
-<div class="main_mainContents__GXYBn">
-	<%--강아지 정보 폼--%>
-
-	<div class="main_mainGridContainer__xl9yt">
-		<c:if test="${not empty animalList}">
-			<c:forEach var="dto" items="${animalList}">
-				<div class="mainContent_mainContentBox__shdST">
-					<!-- d-flex flex-row text-center  p-2 alert-primary alert alert-primary animal_wrap -->
-					<div class="mainContent_mainImgWrapper__DJlMe">
-						<%-- <input type="hidden"
-							value="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"> --%>
-						<%-- <a
-							href="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"><img
-							class="img-fluid rounded mx-auto img-frame"
-							src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a> --%>
-						<div class="mainContent_mainImgWrapper__DJlMe rounded back_image"
-							style="background-image : url(<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()});" data-value = "<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"></div>
-						<div class="mainContent_mainContent__w_Buk">
-							<!-- href=request.getContextPath()h() %>/user_animal_content?no=${dto.getAnimal_no()}" -->
-							<div class="mainContent_mainTitle__8iW62">${dto.getAnimal_name() }</div>
-							<div class="mainContent_mainAuthor__kKyGl">${dto.animal_status }</div>
-						</div>
+							<option value="서울">서울특별시</option>
+							<option value="울산">울산광역시</option>
+							<option value="인천">인천광역시</option>
+							<option value="부산">부산광역시</option>
+							<option value="대전">대전광역시</option>
+							<option value="광주">광주광역시</option>
+							<option value="대구">대구광역시</option>
+							<option value="세종">세종특별자치시</option>
+							<option value="제주">제주도</option>
+						</select> <span class="btn btn-sm btn-secondary position-relative">장소</span>
 					</div>
 				</div>
-			</c:forEach>
-		</c:if>
+	
+				<div class="col animal-keyword">
+					<div class="input-group">
+						<input type="text" name="keyword" placeholder="상세주소 입력"
+							class="form-control form-control-sm">
+					</div>
+				</div>
+				<div class="col">
+					<div class="input-group">
+						<select name="animal_vaccination" class="form-select form-select-sm">
+							<option value=""></option>
+							<option value="Y">Y</option>
+							<option value="N">N</option>
+						</select> <span class="btn btn-sm btn-secondary position-relative">백신</span>
+					</div>
+				</div>
+				<div class="col text-lg-end">
+					<div class="input-group">
+						<select name="animal_status" class="form-select form-select-sm">
+							<option value=""></option>
+							<option value="입소 신청">입소 신청</option>
+							<option value="입양 가능">입양 가능</option>
+							<option value="입양 대기">입양 대기</option>
+							<option value="입양 완료">입양 완료</option>
+						</select> <span class="btn btn-sm btn-secondary position-relative">입양</span>
+					</div>
+				</div>
+	
+			</div>
+			<div class="row animal_row">
+	
+				<div class="col">
+					<div class="input-group">
+						<select name="animal_gender" class="form-select form-select-sm">
+							<option value=""></option>
+							<option value="male">수컷</option>
+							<option value="female">암컷</option>
+						</select> <span class="btn btn-sm btn-secondary position-relative">성별</span>
+					</div>
+				</div>
+				<div class="col">
+					<div class="input-group">
+						<select name="animal_age" class="form-select form-select-sm">
+							<option value="0"></option>
+							<option value="1">0~1</option>
+							<option value="2">1~2</option>
+							<option value="3">2~3</option>
+							<option value="4">3~4</option>
+							<option value="5">4~5</option>
+							<option value="6">5~</option>
+						</select> <span class="btn btn-sm btn-secondary position-relative">나이</span>
+					</div>
+				</div>
+	
+				<div class="col">
+					<div class="input-group">
+						<c:if test="${animalDTO.animal_tag eq 'dog'}">
+							<select name="animal_species" class="form-select form-select-sm">
+								<option value=""></option>
+								<option value="말티즈">말티즈</option>
+								<option value="푸들">푸들</option>
+								<option value="포메라니안">포메라니안</option>
+								<option value="믹스견">믹스견</option>
+								<option value="치와와">치와와</option>
+								<option value="시츄">시츄</option>
+								<option value="골든리트리버">시츄</option>
+								<option value="진돗개">진돗개</option>
+								<option value="기타">기타</option>
+							</select>
+						</c:if>
+						<c:if test="${animalDTO.animal_tag eq 'cat'}">
+							<select name="animal_species" class="form-select form-select-sm">
+								<option value=""></option>
+								<option value="스코티시">스코티시</option>
+								<option value="폴드">폴드</option>
+								<option value="샴">샴</option>
+								<option value="페르시안">페르시안</option>
+								<option value="터키시">터키시</option>
+								<option value="앙고라">앙고라</option>
+								<option value="러시안 블루">러시안 블루</option>
+								<option value="벵갈">벵갈</option>
+								<option value="먼치킨">먼치킨</option>
+								<option value="아비시니안">아비시니안</option>
+								<option value="기타">기타</option>
+							</select>
+						</c:if>
+						<span class="btn btn-sm btn-secondary position-relative">품종</span>
+					</div>
+				</div>
+	
+				<div class="col">
+					<div class="input-group">
+						<select name="animal_size" class="form-select form-select-sm">
+							<option value=""></option>
+							<option value="소형">소형</option>
+							<option value="중형">중형</option>
+							<option value="대형">대형</option>
+						</select> <span class="btn btn-sm btn-secondary position-relative">크기</span>
+					</div>
+				</div>
+				<div class="col text-lg-end">
+					<div class="input-group">
+						<input type="number" value="0" min="0" name="animal_weight"
+							class="form-control form-control-sm" style="width: 70px"> <span
+							class="btn btn-sm btn-secondary position-relative">무게</span>
+					</div>
+				</div>
+			</div>
+			<div class="row animal_row">
+				<div class="col"></div>
+				<div class="col-4"></div>
+				<div class="col-4"></div>
+				<div class="col text-lg-end">
+					<button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>
+				</div>
+			</div>
+		</form>
 	</div>
-	<c:if test="${empty animalList}">
-		<h3>해당 내용이 없습니다.</h3>
-	</c:if>
+	
+	<%--정렬--%>
+	<div class="order">
+		<select class="form-select form-select-sm" name="sort" id="sort">
+			<option value="">정렬</option>
+			<option value="size"
+				<c:if test="${sort eq 'size'}">selected</c:if>>크기</option>
+			<option value="weight"
+				<c:if test="${sort eq 'weight'}">selected</c:if>>무게</option>
+			<option value="age" <c:if test="${sort eq 'age'}">selected</c:if>>나이</option>
+		</select>
+		<!-- <form class="validation-form mx-2" action="" method="post">
+			<select class="form-select form-select-sm " name="sort">
+				<option value="des">내림차순</option>
+				<option value="asc">오름차순</option>
+			</select>
+		</form> -->
+	</div>
+	
+	<%--메인 페이지--%>
+	<div class="main_mainContents__GXYBn">
+		<%--강아지 정보 폼--%>
+	
+		<div class="main_mainGridContainer__xl9yt">
+			<c:if test="${not empty animalList}">
+				<c:forEach var="dto" items="${animalList}">
+					<div class="mainContent_mainContentBox__shdST">
+						<!-- d-flex flex-row text-center  p-2 alert-primary alert alert-primary animal_wrap -->
+						<div class="mainContent_mainImgWrapper__DJlMe">
+							<%-- <input type="hidden"
+								value="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"> --%>
+							<%-- <a
+								href="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"><img
+								class="img-fluid rounded mx-auto img-frame"
+								src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a> --%>
+							<div class="mainContent_mainImgWrapper__DJlMe rounded back_image"
+								style="background-image : url(<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()});" data-value = "<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"></div>
+							<div class="mainContent_mainContent__w_Buk">
+								<!-- href=request.getContextPath()h() %>/user_animal_content?no=${dto.getAnimal_no()}" -->
+								<div class="mainContent_mainTitle__8iW62">${dto.getAnimal_name() }</div>
+								<div class="mainContent_mainAuthor__kKyGl">${dto.animal_status }</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</c:if>
+		</div>
+		<c:if test="${empty animalList}">
+			<h3>해당 내용이 없습니다.</h3>
+		</c:if>
+	
+	</div>
+	<%--페이징--%>
+	
+	<nav aria-label="Page navigation">
+		<ul class="pagination justify-content-center">
+	
+			<!-- 처음으로 -->
+			<c:if test="${ paging.page eq 1 }">
+				<li class="page-item disabled">
+			</c:if>
+			<c:if test="${ paging.page gt 1 }">
+				<li class="page-item">
+			</c:if>
+			<a class="page-link" href="${link_address}?page=1&${pagingTag}"
+				aria-label="First"> <span aria-hidden="true">&laquo;</span>
+			</a>
+			</li>
+	
+			<!-- 이전으로 -->
+			<c:if test="${ paging.page eq 1 }">
+				<li class="page-item disabled">
+			</c:if>
+			<c:if test="${ paging.page gt paging.block }">
+				<li class="page-item">
+			</c:if>
+			<a class="page-link"
+				href="${link_address}?page=${ paging.page - 1 }&${pagingTag}"
+				aria-label="Previous"> <span aria-hidden="true">&lsaquo;</span>
+			</a>
+			</li>
+	
+			<!-- 페이지 중간 -->
+			<c:forEach begin="${ paging.startBlock }" end="${ paging.endBlock }"
+				var="i">
+				<c:if test="${ i == paging.page }">
+					<li class="page-item active"><a class="page-link"
+						href="${link_address}?page=${ i }&${pagingTag}">${ i }</a></li>
+				</c:if>
+				<c:if test="${ i != paging.page }">
+					<li class="page-item"><a class="page-link"
+						href="${link_address}?page=${ i }&${pagingTag}">${ i }</a></li>
+				</c:if>
+			</c:forEach>
+	
+			<!-- 다음으로 -->
+			<c:if test="${ paging.endBlock lt paging.allPage }">
+				<li class="page-item">
+			</c:if>
+			<c:if test="${ paging.endBlock eq paging.allPage }">
+				<li class="page-item disabled">
+			</c:if>
+			<a class="page-link"
+				href="${link_address}?page=${ paging.page + 1 }&${pagingTag}"
+				aria-label="Next"> <span aria-hidden="true">&rsaquo;</span>
+			</a>
+			</li>
+	
+			<!-- 마지막으로 -->
+			<c:if test="${ paging.endBlock lt paging.allPage }">
+				<li class="page-item">
+			</c:if>
+			<c:if test="${ paging.endBlock eq paging.allPage }">
+				<li class="page-item disabled">
+			</c:if>
+			<a class="page-link"
+				href="${link_address}?page=${ paging.allPage }&${pagingTag}"
+				aria-label="Last"> <span aria-hidden="true">&raquo;</span>
+			</a>
+			</li>
+		</ul>
+	</nav>
+	<script type="text/javascript">
+		//정렬 select
+		$("#sort").change(
+				function() {
+					location.href = $("#sortlink").val() + '&sort='
+							+ $('select[name=sort]').val();
+				});
+		$(document).on("click", ".back_image", function() {
+			location.href = $(this).data("value");
+		});
+		/* $(document).ready(function () {
+			  $(document).on("click", ".back_image", function () {
+			    location.href = $('#href').val();
+			  });
+			});
+		 */
+	</script>
+	
+	<jsp:include page="../../include/user_footer.jsp" />
 
 </div>
-<%--페이징--%>
-
-<nav aria-label="Page navigation">
-	<ul class="pagination justify-content-center">
-
-		<!-- 처음으로 -->
-		<c:if test="${ paging.page eq 1 }">
-			<li class="page-item disabled">
-		</c:if>
-		<c:if test="${ paging.page gt 1 }">
-			<li class="page-item">
-		</c:if>
-		<a class="page-link" href="${link_address}?page=1&${pagingTag}"
-			aria-label="First"> <span aria-hidden="true">&laquo;</span>
-		</a>
-		</li>
-
-		<!-- 이전으로 -->
-		<c:if test="${ paging.page eq 1 }">
-			<li class="page-item disabled">
-		</c:if>
-		<c:if test="${ paging.page gt paging.block }">
-			<li class="page-item">
-		</c:if>
-		<a class="page-link"
-			href="${link_address}?page=${ paging.page - 1 }&${pagingTag}"
-			aria-label="Previous"> <span aria-hidden="true">&lsaquo;</span>
-		</a>
-		</li>
-
-		<!-- 페이지 중간 -->
-		<c:forEach begin="${ paging.startBlock }" end="${ paging.endBlock }"
-			var="i">
-			<c:if test="${ i == paging.page }">
-				<li class="page-item active"><a class="page-link"
-					href="${link_address}?page=${ i }&${pagingTag}">${ i }</a></li>
-			</c:if>
-			<c:if test="${ i != paging.page }">
-				<li class="page-item"><a class="page-link"
-					href="${link_address}?page=${ i }&${pagingTag}">${ i }</a></li>
-			</c:if>
-		</c:forEach>
-
-		<!-- 다음으로 -->
-		<c:if test="${ paging.endBlock lt paging.allPage }">
-			<li class="page-item">
-		</c:if>
-		<c:if test="${ paging.endBlock eq paging.allPage }">
-			<li class="page-item disabled">
-		</c:if>
-		<a class="page-link"
-			href="${link_address}?page=${ paging.page + 1 }&${pagingTag}"
-			aria-label="Next"> <span aria-hidden="true">&rsaquo;</span>
-		</a>
-		</li>
-
-		<!-- 마지막으로 -->
-		<c:if test="${ paging.endBlock lt paging.allPage }">
-			<li class="page-item">
-		</c:if>
-		<c:if test="${ paging.endBlock eq paging.allPage }">
-			<li class="page-item disabled">
-		</c:if>
-		<a class="page-link"
-			href="${link_address}?page=${ paging.allPage }&${pagingTag}"
-			aria-label="Last"> <span aria-hidden="true">&raquo;</span>
-		</a>
-		</li>
-	</ul>
-</nav>
-<script type="text/javascript">
-	//정렬 select
-	$("#sort").change(
-			function() {
-				location.href = $("#sortlink").val() + '&sort='
-						+ $('select[name=sort]').val();
-			});
-	$(document).on("click", ".back_image", function() {
-		location.href = $(this).data("value");
-	});
-	/* $(document).ready(function () {
-		  $(document).on("click", ".back_image", function () {
-		    location.href = $('#href').val();
-		  });
-		});
-	 */
-</script>
-
-<jsp:include page="../../include/user_footer.jsp" />
-
