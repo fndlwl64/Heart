@@ -17,6 +17,12 @@
 <c:set var="sort" value="${sort }" />
 <c:set var="animalDTO" value="${ animalDTO }" />
 <c:set var="animalList" value="${ animalList }" />
+<c:if test="${animalDTO.animal_tag eq 'dog'}" >
+	<c:set var="animal" value="강아지" />
+</c:if>
+<c:if test="${animalDTO.animal_tag eq 'cat'}" >
+	<c:set var="animal" value="고양이" />
+</c:if>
 <c:set var="pagingTag"
 	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }&animal_name=${animalDTO.animal_name }&animal_vaccination=${animalDTO.animal_vaccination }&sort=${sort }" />
 <c:set var="pagingSort"
@@ -31,13 +37,13 @@
 		<form class="search_form" action="${path}/${animalDTO.animal_tag}_list" method="post">
 			<div class="form_box">
 				<div class="search-semi-title">
-                	<span><i class="bi bi-check2-square"></i> 동물관리 검색</span>
+                	<span><i class="bi bi-check2-square"></i> ${ animal }관리 검색</span>
             	</div>
             	<div class="search-table-box">
             		<table class="table table-sm" id="search-table">
 	            		<tr>
-	                      	<th width="12.5%">동물 종</th>
-	                      	<td width="37.5%">
+	                      	<th width="10%">${ animal } 종</th>
+	                      	<td width="30%">
 	                      	  <div class="search-date">
 			                      <c:if test="${animalDTO.animal_tag eq 'dog' }">
 									<select class="form-select" id="search_animal" name="animal_species">
@@ -71,28 +77,33 @@
 								</c:if>
 	                          </div>
 	                      	</td>
-	                      	<th width="12.5%">동물 크기</th>
-	                      	<td width="37.5%" colspan="3">
+	                      	<th width="10%">${ animal } 크기</th>
+	                      	<td width="30%" colspan="2">
 	                      	  <div class="search-checkbox">
-			                    <label><input type="radio" name="animal_size" value="대형" /> 대형</label>
-								<label><input type="radio" name="animal_size" value="중형" /> 중형</label>
-								<label><input type="radio" name="animal_size" value="소형" /> 소형</label>
+			                    <label><input type="radio" name="animal_size" value="대형" class="form-check-input" /> 대형</label>
+								<label><input type="radio" name="animal_size" value="중형" class="form-check-input" /> 중형</label>
+								<label><input type="radio" name="animal_size" value="소형" class="form-check-input"/> 소형</label>
 	                      	  </div>
 	                      	</td>
+	                      	<td></td>
                       	<tr>
-	                      	<th width="12.5%">동물 이름</th>
-	                      	<td width="37.5%">
+	                      	<th width="10%">${ animal } 이름</th>
+	                      	<td width="30%">
 	                      		<input type="text" class="form-control" name="animal_name"/>
 	                      	</td>
-							<th class="col-2">중성화 여부</th>
-							<td class="col-1">
-								<input type="hidden" id="YN" name="animal_neutered" /> 
-								<label><input type="checkbox" class="form-check-label" id="checkYN"></label>
+							<th width="10%">중성화 여부</th>
+							<td width="15%">
+								<div class="search-checkbox">
+									<input type="hidden" id="YN" name="animal_neutered" /> 
+									<label><input type="checkbox" class="form-check-input" id="checkYN"> Yes</label>
+								</div>
 							</td>
-							<th class="col-2">예방접종 여부</th>
-							<td class="col-1">
-								<input type="hidden" id="YNvaccin" name="animal_vaccination" /> 
-								<label><input type="checkbox" class="form-check-label" id="checkYNvaccin"></label>
+							<th width="10%">예방접종 여부</th>
+							<td width="15%">
+								<div class="search-checkbox">								
+									<input type="hidden" id="YNvaccin" name="animal_vaccination" /> 
+									<label><input type="checkbox" class="form-check-input" id="checkYNvaccin"> Yes</label>
+								</div>
 							</td>
 							
 	                      <%-- <th>문의글</th>
