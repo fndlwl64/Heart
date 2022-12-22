@@ -200,15 +200,6 @@ public class AdminAnimalController {
 		// 페이징
 		String field = "";
 		String keyword = "";
-//		if (startDate == null) {
-//			startDate = "";
-//		}
-//		if (endDate == null) {
-//			endDate = "";
-//		}
-//		if (adopt_tag == null) {
-//			adopt_tag = "";
-//		}
 
 		int currentPage = 1; // 현재 페이지 변수
 		if (page != 1) {
@@ -315,8 +306,15 @@ public class AdminAnimalController {
 		return "redirect:/adoptreg_list";
 	}
 	
-	@RequestMapping("/csstest")
-	public String test() {
-		return "user/animal/csstest";
+	@RequestMapping("/adoptreg_cancel")
+	public String adoptreg_cancel(@RequestParam("animal_no") int animal_no,@RequestParam("adopt_reg_regno") int adopt_reg_regno) {
+		AnimalDTO animalDTO = new AnimalDTO();
+		animalDTO.setAnimal_no(animal_no);
+		animalDTO.setAnimal_status("입양 가능");
+		
+		animalDAO.updateStatus(animalDTO);
+		adoptRegDAO.updateCancel(adopt_reg_regno);
+		
+		return "redirect:/adoptreg_list";
 	}
 }

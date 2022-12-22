@@ -37,4 +37,6 @@ public interface SupportDAO {
 
     //후원하기 페이징 전체 개수
     public int listSupportCount(String search_id, String search_price, String search_date_start, String search_date_end);
+
+    public void updateUserPrice(HashMap<String, Object> map);
 }

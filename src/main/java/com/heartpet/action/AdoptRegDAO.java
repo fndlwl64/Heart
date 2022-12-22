@@ -8,6 +8,7 @@ import com.heartpet.model.AdoptRegDTO;
 public interface AdoptRegDAO {
 	public int insert(AdoptRegDTO dto);
     public int update(AdoptRegDTO dto);
+    public int updateCancel(int adoptreg_regno);
     public void delete(int id);
     //public List<Map<String, Object>> list();
     public List<AdoptRegDTO> list();
