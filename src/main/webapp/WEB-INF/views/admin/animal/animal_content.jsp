@@ -104,8 +104,6 @@ pageContext.setAttribute("newline", "\n");
 				<i class="bi bi-card-list"></i> 목록
 			</button>
 		</div>
-
-
 	</div>
 	<jsp:include page="../../include/deleteModal.jsp" />
 </body>

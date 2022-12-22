@@ -132,6 +132,11 @@ public class AdminAnimalController {
 	@RequestMapping(value = "/animal_insert", method = RequestMethod.GET)
 	public String animal_insert(@RequestParam("tag") String tag, Model model) {
 		model.addAttribute("tag", tag);
+		System.out.println("===========================");
+		System.out.println("===========================");
+		System.out.println("===========================");
+		
+		System.out.println(tag);
 		return "admin/animal/animal_insert";
 	}
 
@@ -297,14 +302,8 @@ public class AdminAnimalController {
 		
 		//수정
 		if(animal_status.equals("입소 신청")) {
-			adoptRegDTO.setAdopt_reg_animalno(animal_no);
-			adoptRegDTO.setAdopt_reg_regdate(strDate);
-			adoptRegDAO.update(adoptRegDTO);
 			animalDTO.setAnimal_status("입양 가능");
 		}else if(animal_status.equals("입양 가능")) {
-			adoptRegDTO.setAdopt_reg_animalno(animal_no);
-			adoptRegDTO.setAdopt_reg_regdate("");
-			adoptRegDAO.update(adoptRegDTO);
 			animalDTO.setAnimal_status("입소 신청");
 		}else if(animal_status.equals("입양 완료")) {
 			animalDTO.setAnimal_status("입양 대기");

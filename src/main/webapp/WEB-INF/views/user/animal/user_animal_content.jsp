@@ -8,14 +8,17 @@ pageContext.setAttribute("newline", "\n");
 <c:set var="dto" value="${dto }" />
 <c:set var="wishCheck" value="${wishCheck }" />
 <c:set var="adoptRegDTO" value="${adoptRegDTO }" />
+<c:set var="path" value="<%=request.getContextPath()%>" />
 <c:set var="user_id"
 	value='<%=(String) session.getAttribute("session_id")%>' />
 <c:set var="user_grade"
 	value='<%=(Integer) session.getAttribute("session_grade")%>' />
+<c:set var="deleteAddr" value="${path }/user_cancel_animal?animal_no=${dto.animal_no }"></c:set>	
 <input type="hidden" value="<%=request.getContextPath()%>/wish"
 	id="linkwish">
 <input type="hidden" value="${user_id }" id="user_id" />
 <input type="hidden" value="${user_grade }" id="user_grade" />
+<script src="${path}/resources/js/admin_list_view.js"></script>
 <div class="container">
 	<div class="_container">
 
@@ -91,13 +94,7 @@ pageContext.setAttribute("newline", "\n");
 			<c:when
 				test="${user_id eq adoptRegDTO.adopt_reg_userid and dto.animal_status eq '입양 대기'}">
 				<div class="col-1">
-					<form action="user_cancel_animal" method="post">
-						<input type="hidden" id="animal_status"
-							value="${dto.animal_status }"> <input type="hidden"
-							name="animal_no" id="animal_no" value="${dto.animal_no }">
-						<input type="submit" class="btn btn-danger " value="입양취소"
-						data-bs-toggle="modal" data-bs-target="#deleteModal">
-					</form>
+					<button class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#deleteModal"  data-id="${ deleteAddr }">입양취소</button>
 				</div>
 			</c:when>
 			<c:otherwise>
@@ -117,7 +114,7 @@ pageContext.setAttribute("newline", "\n");
 
 	<!-- Modal -->
 	<jsp:include page="../../include/cautionModal.jsp" />
-	<jsp:include page="../../include/cautionModal.jsp" />
+	<jsp:include page="../../include/deleteModal.jsp" />
 </div>
 <script type="text/javascript">
 	function submitOption() {

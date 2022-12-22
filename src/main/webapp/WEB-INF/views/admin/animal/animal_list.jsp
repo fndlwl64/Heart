@@ -138,7 +138,7 @@
 				<tr>
 					<td colspan="7"><button
 							class="btn btn-success btn-sm insertbtn float-end"
-							onclick="location.href='${path}/animal_insert?tag=${dto.animal_tag}'">등록</button></td>
+							onclick="location.href='${path}/animal_insert?tag=${animalDTO.animal_tag}'">등록</button></td>
 				</tr>
 			</table>
 		</div>
