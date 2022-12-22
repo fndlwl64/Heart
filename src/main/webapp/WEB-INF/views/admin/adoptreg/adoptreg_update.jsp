@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <c:set var="content" value="${content }"></c:set>
 <c:set var="foreign" value="${foreign }"></c:set>
-<c:set var="deleteAddr" value="${path }/adoptreg_cancel?animal_no=${content.adopt_reg_animalno }&adopt_reg_regno=${content.adopt_reg_regno }"></c:set>
+<c:set var="deleteAddr" value="${path }/adoptreg_cancel?animal_no=${content.adopt_reg_animalno }&adopt_reg_regno=${content.adopt_reg_regno }&user_id=${content.adopt_reg_userid }"></c:set>
 <body>
 	<jsp:include page="../../include/admin_header.jsp" />
 	<script src="resources/js/admin_list_view.js"></script>
