@@ -95,7 +95,7 @@ pageContext.setAttribute("newline", "\n");
 				<div class="col-1">
 
 					<button class="btn btn-danger " data-bs-toggle="modal"
-						data-bs-target="#deleteModal" data-id="${ deleteAddr }">입양취소</button>
+						data-bs-target="#deleteModal" data-id="${ deleteAddr }" onclick="changeOptionCancel()">입양취소</button>
 
 				</div>
 			</c:when>
@@ -135,7 +135,17 @@ pageContext.setAttribute("newline", "\n");
 		$('#deleteModalLabel').empty();
 		$('#deleteModalLabel').append('입양신청');
 		$('#deleteModalBody').empty();
-		$('#deleteModalBody').append('입양신청을 하시겠습니까?');		
+		$('#deleteModalBody').append('입양신청을 하시겠습니까?');
+		$('#deleteFunction').empty();
+		$('#deleteFunction').append('신청');
+	}
+	function changeOptionCancel() {
+		$('#deleteModalLabel').empty();
+		$('#deleteModalLabel').append('입양취소');
+		$('#deleteModalBody').empty();
+		$('#deleteModalBody').append('입양신청을 취소하시겠습니까?');
+		$('#deleteFunction').empty();
+		$('#deleteFunction').append('취소');
 	}
 	function submitOption() {
 		if (!$('#user_grade').val()) {
