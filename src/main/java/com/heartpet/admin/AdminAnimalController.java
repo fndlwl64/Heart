@@ -1,17 +1,28 @@
 package com.heartpet.admin;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.UUID;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -31,9 +42,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.heartpet.action.AdoptRegDAO;
 import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.QnaDAO;
+import com.heartpet.action.UserDAO;
 import com.heartpet.model.AdoptRegDTO;
 import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.PageDTO;
+import com.heartpet.model.UserDTO;
 import com.heartpet.util.FileUploadImage;
 
 import lombok.Data;
@@ -50,6 +63,8 @@ public class AdminAnimalController {
 	private HttpServletRequest request;
 	@Autowired
 	private AdoptRegDAO adoptRegDAO;
+	@Autowired
+	private UserDAO userdao;
 
 	// 한 페이지당 보여질 게시물의 수
 	private final int rowsize = 3;
@@ -307,7 +322,8 @@ public class AdminAnimalController {
 	}
 	
 	@RequestMapping("/adoptreg_cancel")
-	public String adoptreg_cancel(@RequestParam("animal_no") int animal_no,@RequestParam("adopt_reg_regno") int adopt_reg_regno) {
+	public String adoptreg_cancel(@RequestParam("animal_no") int animal_no,@RequestParam("adopt_reg_regno") int adopt_reg_regno,
+			@RequestParam("user_id") String user_id, HttpServletRequest request) {
 		AnimalDTO animalDTO = new AnimalDTO();
 		animalDTO.setAnimal_no(animal_no);
 		animalDTO.setAnimal_status("입양 가능");
@@ -315,6 +331,66 @@ public class AdminAnimalController {
 		animalDAO.updateStatus(animalDTO);
 		adoptRegDAO.updateCancel(adopt_reg_regno);
 		
+		UserDTO userinfo = userdao.getUserInfo(user_id);
+		
+		String receiver = userinfo.getUser_email();
+		
+		Properties props = System.getProperties();
+        props.put("mail.smtp.user", "soopwe12@gmail.com"); // 서버 아이디만 쓰기
+		props.put("mail.smtp.host", "smtp.gmail.com"); // 구글 SMTP
+		props.put("mail.smtp.port", "587"); //465
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.debug", "true");
+		props.put("mail.smtp.socketFactory.port", "587"); //465
+		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		props.put("mail.smtp.socketFactory.fallback", "true");
+		props.put("mail.smtp.ssl.protocols", "TLSv1.2");
+		
+		Authenticator auth = new MyAuthentication();
+
+		//session 생성 및  MimeMessage생성
+        Session session = Session.getDefaultInstance(props, auth);
+        MimeMessage msg = new MimeMessage(session);
+        
+        try{
+            //편지보낸시간
+            msg.setSentDate(new Date());           
+            InternetAddress from = new InternetAddress();             
+            // 이메일 발신자
+            msg.setFrom(from);           
+            // 이메일 수신자
+            InternetAddress to = new InternetAddress(receiver);         
+            msg.setRecipient(Message.RecipientType.TO, to);
+            // 이메일 제목
+            msg.setSubject("HeartPet 입양신청이 취소되었습니다.", "UTF-8");
+            // 이메일 내용 
+            msg.setText("HeartPet 입양신청이 취소되었습니다. 자세한 사항은 문의하기로 문의 부탁드립니다.", "UTF-8");
+            // 이메일 헤더 
+            msg.setHeader("content-Type", "text/html");
+            //메일보내기
+            javax.mail.Transport.send(msg);
+	        }catch (AddressException addr_e) {
+	            addr_e.printStackTrace();
+	        }catch (MessagingException msg_e) {
+	            msg_e.printStackTrace();
+	        }
+		
 		return "redirect:/adoptreg_list";
+	}
+	
+	
+	class MyAuthentication extends Authenticator {
+	    PasswordAuthentication pa;
+	    public MyAuthentication(){   
+	        String aa = "soopwe12@gmail.com";
+	        String zz = "lgezfcfzoabqkbrg";
+
+	        pa = new PasswordAuthentication(aa, zz);
+	}
+	    	// 시스템에서 사용하는 인증정보
+		    public PasswordAuthentication getPasswordAuthentication() {
+		        return pa;
+		    }
 	}
 }

@@ -35,12 +35,14 @@ public class AdminController {
 	@RequestMapping("/admin_main")
 
 	public String admin_main(@RequestParam(value = "user_id", required = false) String id, 
+			@RequestParam(value = "user_name", required = false) String name,
         @RequestParam(value = "page", defaultValue = "1") int page, 
     		@RequestParam(value = "user_grade", required=false) String grade, 
         @RequestParam(value = "user_animalexp", required=false) String exp,
     		@RequestParam(value = "order", required=false) String order, Model model) {
 		
        	if(id == null) { id = ""; }
+       	if(name == null) { name = ""; }
        	if(grade == null) { grade = ""; }
        	if(exp == null) { exp = ""; }
        	if(order == null) { order = ""; }
@@ -51,9 +53,9 @@ public class AdminController {
 		List<UserDTO> list = null;
 		PageDTO paging = null;
 		
-    	totalRecord = this.userDAO.countUser(id, grade, exp);
+    	totalRecord = this.userDAO.countUser(id, name, grade, exp);
     	paging = new PageDTO(currentPage, rowsize, totalRecord);
-    	list = userDAO.userListPaging(paging.getStartNo(), paging.getEndNo(), id, grade, exp, order);
+    	list = userDAO.userListPaging(paging.getStartNo(), paging.getEndNo(), id, name, grade, exp, order);
     	int total =userDAO.totalUser();
 		
 		model.addAttribute("list", list);
@@ -61,6 +63,7 @@ public class AdminController {
 		model.addAttribute("totalRecord", totalRecord);
 		model.addAttribute("paging", paging);		
 		model.addAttribute("user_id", id);	
+		model.addAttribute("user_name", name);
 		model.addAttribute("user_grade", grade);
 		model.addAttribute("user_animalexp", exp);
 		model.addAttribute("order", order);
@@ -70,12 +73,14 @@ public class AdminController {
 	
     @RequestMapping("/user_list")
     public String user_list(@RequestParam(value = "user_id", required = false) String id, 
+    		@RequestParam(value = "user_name", required = false) String name,
         @RequestParam(value = "page", defaultValue = "1") int page, 
     		@RequestParam(value = "user_grade", required=false) String grade, 
         @RequestParam(value = "user_animalexp", required=false) String exp,
     		@RequestParam(value = "order", required=false) String order, Model model) {
     	
     	if(id == null) { id = ""; }
+    	if(name == null) { name = ""; }
        	if(grade == null) { grade = ""; }
        	if(exp == null) { exp = ""; }
        	if(order == null) { order = ""; }
@@ -86,9 +91,9 @@ public class AdminController {
 		List<UserDTO> list = null;
 		PageDTO paging = null;
     	
-    	totalRecord = this.userDAO.countUser(id, grade, exp);
+    	totalRecord = this.userDAO.countUser(id, name, grade, exp);
     	paging = new PageDTO(currentPage, rowsize, totalRecord);
-    	list = userDAO.userListPaging(paging.getStartNo(), paging.getEndNo(), id, grade, exp, order);
+    	list = userDAO.userListPaging(paging.getStartNo(), paging.getEndNo(), id, name, grade, exp, order);
     	int total =userDAO.totalUser();
 		
 		model.addAttribute("list", list);
@@ -96,6 +101,7 @@ public class AdminController {
 		model.addAttribute("totalRecord", totalRecord);
 		model.addAttribute("paging", paging);		
 		model.addAttribute("user_id", id);	
+		model.addAttribute("user_name", name);
 		model.addAttribute("user_grade", grade);
 		model.addAttribute("user_animalexp", exp);
 		model.addAttribute("order", order);
