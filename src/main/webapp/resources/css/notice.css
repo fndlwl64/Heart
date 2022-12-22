@@ -69,6 +69,12 @@
 	clear: both;
 	width: auto;
 	margin-right: 20%;
+
+body {
+	overflow-x: hidden;
+}
+/* admin_notice에서 사용하는 css */
+
 }
 
 .container .lists #insert_btn {

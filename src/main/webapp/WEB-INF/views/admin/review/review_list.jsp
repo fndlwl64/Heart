@@ -2,16 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ include file="../../include/pagination_update.jsp" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="rList" value="${ reviewList }"/>
 <c:set var="total" value="${ total }"/>
 <c:set var="paging" value="${ paging }"/>
-<c:set var="field" value="${ field }"/>
-<c:set var="keyword" value="${ keyword }"/>
+<c:set var="search_id" value="${ search_id }"/>
+<c:set var="search_animal" value="${ search_animal }"/>
+<c:set var="search_content" value="${ search_content }"/>
 <c:set var="cList" value="${ commentList }"/>
 <c:set var="link_address" value="${pageContext.request.contextPath}/admin_review_list" />
-<c:set var="url" value="&field=${ field }&keyword=${ keyword }&order=${ order }" />
+<c:set var="url" value="&search_id=${ search_id }&search_animal=${ search_animal }&search_content=${ search_content }&order=${ order }" />
 <c:set var="now" value="<%= new java.util.Date() %>" />
 <fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today" />  
 
@@ -23,47 +23,51 @@
     <jsp:include page="../../include/admin_header.jsp" />
     <link rel="stylesheet" href="${path}/resources/css/list_view.css" />
     <script src="${path}/resources/js/admin_list_view.js"></script>
-
 </head>
 <body>
-    <br>
     <div class="container">
-
-        <%-- 검색 폼 --%>
-        <form class="search_form" method="get" action="${path}/admin_review_list">
-            <div class="form_box d-flex">
-                <span class="search-name">분류</span>
-                <select name="field" class="form-select d-inline align-middle w-25">
-                    <option value="allSearch"<c:if test="${ field eq 'allSearch' }">selected="selected"</c:if>>전체</option>
-                    <option value="title"<c:if test="${ field eq 'title' }">selected="selected"</c:if>>제목</option>
-                    <option value="content"<c:if test="${ field eq 'content' }">selected="selected"</c:if>>내용</option>
-                    <option value="name"<c:if test="${ field eq 'name' }">selected="selected"</c:if>>반려동물명</option>
-                    <option value="id"<c:if test="${ field eq 'id' }">selected="selected"</c:if>>작성자</option>
-                </select>
-                <span class="search-name">검색어</span> 
-                <input name="keyword" class="form-control d-inline align-middle keyword" value="${ keyword }">
-                <button class="btn btn-dark d-inline align-middle ms-1" type="submit"><i class="bi bi-search"></i> 검색</button>
-                <button class="btn btn-light d-inline align-middle ms-1" type="button" onclick="location.href='${ path }/admin_review_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
-           </div>
+    
+        <form action="${path}/admin_review_list" class="search_form" method="get">
+        <div class="form_box">
+            <div class="search-semi-title">
+                <span><i class="bi bi-check2-square"></i> 후기관리 검색</span>
+            </div>       
+            <div class="search-table-box">
+                <table class="table table-sm" id="search-table">
+                    <tr>
+                        <th>반려동물 이름</th>
+                        <td><input type="text" class="form-control" name="search_animal" value="${ search_animal }" /></td>
+                        <th>작성자 아이디</th>
+                        <td><input type="text" class="form-control" name="search_id" value="${ search_id }" /></td>
+                        <th>후기글</th>
+                        <td><input type="text" class="form-control" name="search_content" value="${ search_content }" /></td>
+                    </tr>                                                           
+                </table>
+			</div>
+			<div class="search-buttons">
+			<button class="btn btn-light" type="button" onclick="location.href='${ path }/admin_review_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
+            <button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
+            </div>
+        </div>
         </form>
-        <br>
         
        <%-- 정렬 & 게시물 수 --%>
-       <div class="qna-section">
-            <div class="total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span></div>
-            <div class="qna_order">
-                <select class="form-select form-select-sm" name="order" onchange="location.href='${ path }/user_review_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">
-                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>높은번호순</option>
-                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신등록순</option>
-                    <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>
-                    <option value="title_desc"<c:if test="${ order eq 'title_desc' }">selected="selected"</c:if>>가나다순</option>
-                </select>
+        <div class="qna-section">
+            <div class="row">
+	            <div class="col total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
+	                <select class="form-select form-select-sm order" name="order" onchange="location.href='${ path }/user_review_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">
+	                    <option selected="selected" value="no_desc"<c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>높은번호순</option>
+	                    <option value="date_desc"<c:if test="${ order eq 'date_desc' }">selected="selected"</c:if>>최신등록순</option>
+	                    <option value="hit_desc"<c:if test="${ order eq 'hit_desc' }">selected="selected"</c:if>>인기순</option>
+	                    <option value="title_asc"<c:if test="${ order eq 'title_asc' }">selected="selected"</c:if>>가나다순</option>
+	                </select>
+	            </div>
             </div>
         </div>
         
         <%-- 검색 결과 테이블 --%>
         <div class="lists">
-            <table class="table table-hover searched_list">
+            <table class="table table-hover searched_list mb-4">
                 <tr>                
                     <th class="table-light col-1">No</th>
                     <th class="table-light col-1">종류</th>

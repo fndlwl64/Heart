@@ -4,6 +4,7 @@ body {
 	font-family: 'Gowun Dodum', sans-serif !important;	
 	margin: 0px;
 	font-size: 17px;
+	overflow-x: hidden;
 }
 
 .div1 {

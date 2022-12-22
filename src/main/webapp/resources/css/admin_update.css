@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+body {
+	overflow-x: hidden;
+}
 /* admin/admin_main을 제외한 나머지 페이지 */
 .div1 {
 	width: 70%;

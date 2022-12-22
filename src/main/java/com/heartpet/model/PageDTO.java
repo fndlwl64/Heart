@@ -50,5 +50,31 @@ public class PageDTO {
         if (this.endBlock > this.allPage)
             this.endBlock = this.allPage;
     }
+    
+    // 검색 페이징 처리 인자 생성자
+    public PageDTO(int page, int rowsize, int totalRecord) {
+
+        this.page = page;
+        this.rowsize = rowsize;
+        this.totalRecord = totalRecord;
+
+        // 해당 페이지에서 시작 글 번호
+        this.startNo = (this.page * this.rowsize) - (this.rowsize - 1);
+
+        // 해당 페이지에서 끝 글 번호
+        this.endNo = (this.page * this.rowsize);
+
+        // 해당 페이지에서 시작 블럭
+        this.startBlock = (((this.page - 1) / block) * block) + 1;
+
+        // 해당 페이지에서 끝 블럭
+        this.endBlock = (((this.page - 1) / block) * block) + block;
+
+        // 전체 페이지 수 얻어오는 과정
+        this.allPage = (int) Math.ceil(this.totalRecord / (double) this.rowsize);
+        if (this.endBlock > this.allPage)
+            this.endBlock = this.allPage;
+    }
+
 
 }

@@ -1,4 +1,7 @@
 /* animal에 쓸 css */
+body {
+	overflow-x: hidden;
+}
 .justify-content-center {
 	margin: 5px;
 	/* border-bottom: 2.5px solid #adafbd7a; */
