@@ -141,6 +141,33 @@ public class QnaDAOImpl implements QnaDAO {
         map.put("keyword", keyword);
         return this.sqlSession.selectOne("fnq_count", map);
     }
+    
+    //=========================================================
+    // Admin - FNQ
+    //=========================================================    
+	@Override
+	public List<FnqDTO> listFnq(int startNo, int endNo, String search_category, String search_question,
+			String search_answer, String order) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("startNo", startNo);
+        map.put("endNo", endNo);
+        map.put("search_category", search_category);
+        map.put("search_question", search_question);
+        map.put("search_answer", search_answer);
+        map.put("order", order);
+        return this.sqlSession.selectList("fnq_admin_list", map);
+	}
+
+	@Override
+	public int listFnqCount(String search_category, String search_question, String search_answer) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("search_category", search_category);
+        map.put("search_question", search_question);
+        map.put("search_answer", search_answer);
+        return this.sqlSession.selectOne("fnq_admin_count", map);
+	}
+	
+    ////////////////////////////////////////////////////////////   
 
     @Override
     public int insertFnq(FnqDTO dto) {

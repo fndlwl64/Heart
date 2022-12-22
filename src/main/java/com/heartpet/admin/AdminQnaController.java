@@ -59,12 +59,6 @@ public class AdminQnaController {
         if (search_id == null) { search_id = ""; }
         if (search_content == null) { search_content = ""; }
         if (order == null) { order = ""; }
-        
-        System.out.print("1"+search_category);
-        System.out.print("2"+search_date_start);
-        System.out.print("3"+search_date_end);
-        System.out.print("4"+search_id);
-        System.out.print("5"+search_content);
 
         int currentPage = 1; // 현재 페이지 변수
         if (page != 1) {
@@ -266,35 +260,33 @@ public class AdminQnaController {
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping("/admin_fnq_list")
     public String admin_fnq_list(@RequestParam(value = "field", required = false) String field,
-            @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(value = "search_category", required = false) String search_category,
+            @RequestParam(value = "search_question", required = false) String search_question,
+            @RequestParam(value = "search_answer", required = false) String search_answer,
             @RequestParam(value = "order", required = false) String order,
             @RequestParam(value = "page", defaultValue = "0") int page, Model model) {
 
-        if (field == null) {
-            field = "";
-        }
-        if (keyword == null) {
-            keyword = "";
-        }
-        if (order == null) {
-            order = "";
-        }
+        if (search_category == null || search_category.equals("전체")) { search_category = ""; }
+        if (search_question == null) { search_question = ""; }
+        if (search_answer == null) { search_answer = ""; }
+        if (order == null) { order = ""; }
 
         int currentPage = 1; // 현재 페이지 변수
         if (page != 0) {
             currentPage = page;
         }
 
-        totalRecord = this.qnaDAO.listFnqCount(field, keyword);
-        PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+        totalRecord = this.qnaDAO.listFnqCount(search_category, search_question, search_answer);
+        PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord);
 
-        List<FnqDTO> fnqList = this.qnaDAO.listFnq(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
+        List<FnqDTO> fnqList = this.qnaDAO.listFnq(paging.getStartNo(), paging.getEndNo(), search_category, search_question, search_answer, order);
 
         model.addAttribute("fnqList", fnqList);
         model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);
-        model.addAttribute("field", field);
-        model.addAttribute("keyword", keyword);
+        model.addAttribute("search_category", search_category);
+        model.addAttribute("search_question", search_question);
+        model.addAttribute("search_answer", search_answer);
         model.addAttribute("order", order);
 
         return "admin/fnq/fnq_list";

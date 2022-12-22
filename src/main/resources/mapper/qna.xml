@@ -133,8 +133,7 @@
 	<!-- 
 	//============================================================
 	//============================================================  	
-	-->
-	
+	-->	
 	<!-- qna : content -->
 	<update id="qna_hit" parameterType="int">
 		UPDATE heartpet_board 
@@ -257,7 +256,31 @@
 	////////////////////////////////////////////////////////////////////////////////////////////  
 	// FNQ
 	////////////////////////////////////////////////////////////////////////////////////////////  	
-    -->
+    -->	
+	<!-- fnq : list + 검색 -->
+	<select id="fnq_list" parameterType="hashMap" resultType="FnqDTO">
+		SELECT * 
+            FROM 
+            	(SELECT f.*, ROW_NUMBER() OVER(
+            		ORDER BY 
+					<choose>
+						<when test="order == ''">fnq_no DESC</when>
+						<when test="order.equals('no_desc')"> ORDER BY fnq_no DESC </when>         
+						<when test="order.equals('question_desc')"> ORDER BY fnq_question DESC</when>         
+					</choose>            
+            ) rnum FROM heartpet_fnq f
+			<where>
+				<choose>
+					<when test="field == '' and keyword == ''"></when>
+					<when test="field.equals('allSearch') and keyword != ''"> (fnq_category <include refid="qna_keyword" />) OR (fnq_question <include refid="qna_keyword" />) OR (fnq_answer <include refid="qna_keyword" />)</when>
+					<when test="field.equals('category') and keyword != ''"> fnq_category <include refid="qna_keyword" /></when>
+					<when test="field.equals('question') and keyword != ''"> fnq_question <include refid="qna_keyword" /></when>
+					<when test="field.equals('answer') and keyword != ''"> fnq_answer <include refid="qna_keyword" /></when>
+				</choose>
+			</where>
+         <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo}]]>
+	</select>
+	
 	<!-- fnq : count 게시글 개수 + 검색 -->
 	<select id="fnq_count" parameterType="hashMap" resultType="int">
 		SELECT COUNT(*) 
@@ -272,28 +295,55 @@
 	        </choose>
         </where>
 	</select>
-	
-	<!-- fnq : list + 검색 -->
-	<select id="fnq_list" parameterType="hashMap" resultType="FnqDTO">
+	<!-- 
+	//============================================================
+	// ADMIN : FNQ
+	//============================================================  	
+	-->
+	<!-- Admin : fnq-list  -->
+	<select id="fnq_admin_list" parameterType="hashMap" resultType="FnqDTO">	
 		SELECT * 
-            FROM (SELECT f.*, ROW_NUMBER() OVER(ORDER BY fnq_no DESC) rnum FROM heartpet_fnq f
-        <where>
-	        <choose>
-				<when test="field == '' and keyword == ''"></when>
-				<when test="field.equals('allSearch') and keyword != ''"> (fnq_category <include refid="qna_keyword" />) OR (fnq_question <include refid="qna_keyword" />) OR (fnq_answer <include refid="qna_keyword" />)</when>
-				<when test="field.equals('category') and keyword != ''"> fnq_category <include refid="qna_keyword" /></when>
-				<when test="field.equals('question') and keyword != ''"> fnq_question <include refid="qna_keyword" /></when>
-				<when test="field.equals('answer') and keyword != ''"> fnq_answer <include refid="qna_keyword" /></when>
-	        </choose>
-        </where>
-         <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo}]]>
-       	 <choose>
-       		<when test="order == ''"></when>
-       		<when test="order.equals('no_desc')"> ORDER BY fnq_no DESC </when>         
-       		<when test="order.equals('question_desc')"> ORDER BY fnq_question DESC</when>         
-       	 </choose>
+            FROM 
+            	(SELECT f.*, ROW_NUMBER() OVER(
+            		ORDER BY
+					<choose>
+						<when test="order == ''"> fnq_no DESC</when>
+						<when test="order.equals('no_desc')"> fnq_no DESC </when>         
+						<when test="order.equals('question_asc')"> fnq_question ASC</when>         
+					</choose>            
+            ) rnum FROM heartpet_fnq f	
+            <if test="search_category != null and !search_category.equals('')">
+            	AND fnq_category LIKE '%' || #{ search_category } || '%'            	
+            </if>
+            <if test="search_question != null and !search_question.equals('')">
+            	AND fnq_question LIKE '%' || #{ search_question } || '%'            	
+            </if>	
+            <if test="search_answer != null and !search_answer.equals('')">
+            	AND fnq_answer LIKE '%' || #{ search_answer } || '%'            	
+            </if>	            
+			<![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo}]]>
 	</select>
 	
+	<!-- Admin : fnq-count  -->	
+	<select id="fnq_admin_count" parameterType="hashMap" resultType="int">
+		SELECT COUNT(*) 
+            FROM heartpet_fnq f	
+            WHERE 1=1 
+            <if test="search_category != null and !search_category.equals('')">
+            	AND fnq_category LIKE '%' || #{ search_category } || '%'            	
+            </if>
+            <if test="search_question != null and !search_question.equals('')">
+            	AND fnq_question LIKE '%' || #{ search_question } || '%'            	
+            </if>	
+            <if test="search_answer != null and !search_answer.equals('')">
+            	AND fnq_answer LIKE '%' || #{ search_answer } || '%'            	
+            </if>
+	</select>
+
+	<!-- 	
+	============================================================  	 
+	-->
+			
 	<!-- fnq : content -->
 	<select id="fnq_content" parameterType="int" resultType="FnqDTO">
 		SELECT * 

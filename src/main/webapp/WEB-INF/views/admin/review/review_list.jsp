@@ -35,12 +35,12 @@
             <div class="search-table-box">
                 <table class="table table-sm" id="search-table">
                     <tr>
-                        <th>반려동물 이름</th>
-                        <td><input type="text" class="form-control" name="search_animal" value="${ search_animal }" /></td>
-                        <th>작성자 아이디</th>
-                        <td><input type="text" class="form-control" name="search_id" value="${ search_id }" /></td>
-                        <th>후기글</th>
-                        <td><input type="text" class="form-control" name="search_content" value="${ search_content }" /></td>
+                        <th class="col-1">반려동물 이름</th>
+                        <td class="col-2"><input type="text" class="form-control" name="search_animal" value="${ search_animal }" /></td>
+                        <th class="col-1">작성자 아이디</th>
+                        <td class="col-2"><input type="text" class="form-control" name="search_id" value="${ search_id }" /></td>
+                        <th class="col-1">후기글 내용</th>
+                        <td class="col-2"><input type="text" class="form-control" name="search_content" value="${ search_content }" /></td>
                     </tr>                                                           
                 </table>
 			</div>
@@ -71,11 +71,11 @@
                 <tr>                
                     <th class="table-light col-1">No</th>
                     <th class="table-light col-1">종류</th>
-                    <th class="table-light col-4">제목</th>
+                    <th class="table-light col-6">제목</th>
                     <th class="table-light col-1">작성자</th>
                     <th class="table-light col-1">조회수</th>
-                    <th class="table-light col-2">작성일시</th>
-                    <th class="table-light col-2">수정 / 삭제</th>
+                    <th class="table-light col-1">작성일시</th>
+                    <th class="table-light col-1">수정 / 삭제</th>
                 </tr>
                 <c:forEach items="${ rList }" var="list" varStatus="status">
                 <tr>

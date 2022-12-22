@@ -65,6 +65,9 @@ function commentCount(reviewNo, path) {
 
 //comment 테이블 생성
 function commentTable(userId, reviewNo, path) {
+	console.log(1, userId);
+	console.log(2, reviewNo);
+	console.log(3, path);
   $.ajax({
       contentType : "application/x-www-form-urlencoded;charset=UTF-8",
       type: "post",
@@ -84,7 +87,7 @@ function commentTable(userId, reviewNo, path) {
           if(commentList.length > 0) {
               comment += '<thead><tr>';
               comment += '<th class="col-1">작성자</th>';
-              comment += '<th class="col-5">댓글내용</th>';
+              comment += '<th class="col-9">댓글내용</th>';
               comment += '<th class="col-1">작성시간</th>';
               comment += '<th class="col-1">삭제</th>';
               comment += '</tr></thead><tbody>';
@@ -95,7 +98,7 @@ function commentTable(userId, reviewNo, path) {
                   }else {
                     comment += '<tr><td style=\"vertical-align:middle;\"><a>' + commentList[i].comment_id + '</a></td>';
                   }  
-                  comment += '<td style=\"text-align:left\">' + commentList[i].comment_content + '</td>';
+                  comment += '<td style=\"text-align:left\"><div style=\"min-height:2rem\">' + commentList[i].comment_content + '</div></td>';
                   comment += '<td><small>' + commentList[i].comment_regdate + '</small></td>';
                   comment += '<td style=\"vertical-align:middle;\">';
                   if(userId == 'admin') {

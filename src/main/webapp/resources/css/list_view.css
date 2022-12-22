@@ -342,12 +342,16 @@ body {
     background-color: white;
     vertical-align: middle;
     font-size: 15px;  
-	padding-left: 2rem;
+	padding-left: 1.5rem;
 	padding-right: 0.5rem;
 	padding-top: 0.5rem;
 	padding-bottom: 0.5rem;
     border: none !important;  
     text-align: left;
+}
+
+.form_box #search-table th:first-child {
+	padding-left: 1.5rem;
 }
 
 .form_box #search-table td {
@@ -358,8 +362,7 @@ body {
 
 .form_box #search-table .search-checkbox {
 	display: flex;
-	justify-content: space-evenly;
-	vertical-align: middle;
+	justify-content: space-around;
 }
 
 .form_box #search-table .search-checkbox > label {
@@ -461,6 +464,7 @@ body {
     justify-content: space-between;
     align-items: flex-end;
     font-size: 14px;
+    margin: 0.5rem;
 }
 
 /* qna : 정렬 */
@@ -483,14 +487,20 @@ body {
 
 /* 댓글쓰기 */
 #comment-table {
-	width: 60%;
-	margin: 0.5rem auto;
-	
 }
 
+#comment-table tr th {
+	height: 2rem;
+}
+
+#comment-table tr td {
+	min-height: 4rem;
+}
 .reply-table {
-	width: 60%;
-	margin: 0 auto;
+}
+
+.reply-table tr th {
+	vertical-align: middle;
 }
 
 #content-reply {
