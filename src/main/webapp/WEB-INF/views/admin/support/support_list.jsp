@@ -29,7 +29,6 @@
 </head>
 <body>
 <div class="container">
-    <br>
     <%-- 검색 폼 --%>
     <form class="search_form" method="post" action="${path }/support_list">
         <div class="form_box">
@@ -59,7 +58,6 @@
             </div>
     </form>
 
-    <br>
     
        <%-- 정렬 & 게시물 수 --%>
 <%--     <form class="order_form" method="get" action="${path}/support_list?page=${ paging.page }&field=${ field }&keyword=${ keyword }&order='+this.value;">     --%>

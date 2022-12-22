@@ -16,8 +16,6 @@
 
 <div class="container">
 
-    <br>
-
     <%-- 검색 폼  --%>
     <form class="search_form" action="${path }/user_list" method="get">
     	<div class="form_box">
