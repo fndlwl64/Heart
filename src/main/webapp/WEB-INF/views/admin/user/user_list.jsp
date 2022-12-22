@@ -50,23 +50,30 @@
             <div class="search-table-box">
                 <table class="table table-sm" id="search-table">
                     <tr>
-                        <th>회원아이디</th>
-                        <td colspan="3"><input type="text" class="form-control" name="user_id" value="${ user_id }" /></td>
+                    	<th width="10%">회원 등급</th>
+                        <td colspan="3">
+                        	<div class="search-checkbox">
+	                        	<label><input type="radio" class="form-check-input" name="user_grade" value="1" ondblclick="this.checked=false"/> 관리자</label>
+					    		<label><input type="radio" class="form-check-input" name="user_grade" value="2" ondblclick="this.checked=false"/> 입소가능회원</label>
+					    		<label><input type="radio" class="form-check-input" name="user_grade" value="3" ondblclick="this.checked=false"/> 일반회원</label>
+					    		<label><input type="radio" class="form-check-input" name="user_grade" value="4" ondblclick="this.checked=false"/> 블랙리스트</label>
+					    		<label><input type="radio" class="form-check-input" name="user_grade" value="5" ondblclick="this.checked=false"/> 탈퇴회원</label>
+				    		</div>
+                        </td>
+                        <td colspan="2"></td>
                     </tr>
                     <tr>
-                        <th>회원등급</th>
-                        <td>
-                        	<label><input type="radio" name="user_grade" value="1" ondblclick="this.checked=false"/> 관리자</label>
-				    		<label><input type="radio" name="user_grade" value="2" ondblclick="this.checked=false"/> 입소가능회원</label>
-				    		<label><input type="radio" name="user_grade" value="3" ondblclick="this.checked=false"/> 일반회원</label>
-				    		<label><input type="radio" name="user_grade" value="4" ondblclick="this.checked=false"/> 블랙리스트</label>
-				    		<label><input type="radio" name="user_grade" value="5" ondblclick="this.checked=false"/> 탈퇴회원</label>
-                        </td>
-                        <th>반려동물경험</th>
-                        <td>
-                        	<label><input type="radio" name="user_animalexp" value="Y" ondblclick="this.checked=false"/> Y</label>
-		    				<label><input type="radio" name="user_animalexp" value="N" ondblclick="this.checked=false"/> N</label>
-                        </td>
+                        <th width="10%">회원 아이디</th>
+                        <td width="20%"><input type="text" class="form-control" name="user_id" value="${ user_id }" /></td>
+                        <th width="10%">회원 이름</th>
+                        <td width="20%"><input type="text" class="form-control" name="user_id" value="${ user_id }" /></td>
+                        <th width="10%">반려동물 경험</th>
+                        <td width="15%" class=""> 
+                        	<div class="search-checkbox">
+	                        	<label><input type="radio" class="form-check-input" name="user_animalexp" value="Y" ondblclick="this.checked=false"/> 있음</label>
+			    				<label><input type="radio" class="form-check-input" name="user_animalexp" value="N" ondblclick="this.checked=false"/> 없음</label>
+		    				</div>
+                        </td>                        
                     </tr>                                                           
                 </table>
 			</div>
@@ -99,12 +106,12 @@
 	   
         <table class="table searched_list">
             <tr>
-                <th class="table-light">회원번호</th>
-                <th class="table-light">회원아이디</th>
-                <th class="table-light">회원이름</th>
-                <th class="table-light">회원등급</th>
-                <th class="table-light">반려동물경험</th>
-                <th class="table-light">수정/삭제</th>
+                <th class="table-light col-1">번호</th>
+                <th class="table-light col-1">아이디</th>
+                <th class="table-light col-1">이름</th>
+                <th class="table-light col-1">등급</th>
+                <th class="table-light col-1">반려동물경험</th>
+                <th class="table-light col-1">수정 / 삭제</th>
             </tr>
             
             <c:if test="${!empty list}">
