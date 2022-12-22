@@ -83,6 +83,7 @@ public class AnimalController {
         model.addAttribute("paging", paging);		
  		model.addAttribute("field", field);
  		model.addAttribute("sort",sort);
+ 		model.addAttribute("keyword",keyword);
 		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword,sort));
 		model.addAttribute("animalDTO",animalDTO);
 		return "user/animal/user_animal_list";
@@ -109,6 +110,7 @@ public class AnimalController {
         model.addAttribute("paging", paging);		
  		model.addAttribute("field", field);
  		model.addAttribute("sort",sort);
+ 		model.addAttribute("keyword",keyword);
 		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword,sort));
 		model.addAttribute("animalDTO",animalDTO);
 

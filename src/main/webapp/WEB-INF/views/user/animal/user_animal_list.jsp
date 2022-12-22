@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet" href="resources/css/user_animal_main.css">
 <jsp:include page="../../include/user_header.jsp" />
@@ -16,7 +17,7 @@
 <c:set var="pagingSort"
 	value="animal_size=${animalDTO.animal_size }&animal_species=${ animalDTO.animal_species}&animal_age=${animalDTO.animal_age }&animal_gender=${animalDTO.animal_gender }&animal_weight=${animalDTO.animal_weight }&animal_status=${animalDTO.animal_status }&animal_place=${animalDTO.animal_place }&keyword=${keyword }" />
 <%--검색--%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div class="div1">
 
 	<div class="text-center main-title">입양을 기다리는 동물들</div>
@@ -29,15 +30,14 @@
 		<form
 			action="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list"
 			class="validation-form wells" method="post">
-			
 			<div class="row animal_row">
 				<div class="col">
 					<div class="input-group">
 						<select name="animal_place" class="form-select form-select-sm">
 							<option value=""></option>
-							<option value="서울">서울특별시</option>
-							<option value="울산">울산광역시</option>
-							<option value="인천">인천광역시</option>
+							<option value="서울" <c:if test="${fn:contains(animalDTO.animal_place , '서울' )} ">selected</c:if>>서울특별시</option>
+							<option value="울산" <c:if test="${fn:contains(animalDTO.animal_place , '울산' )} ">selected</c:if>>울산광역시</option>
+							<option value="인천" <c:if test="${fn:contains(animalDTO.animal_place , '인천' )} ">selected</c:if>>인천광역시</option>
 							<option value="부산">부산광역시</option>
 							<option value="대전">대전광역시</option>
 							<option value="광주">광주광역시</option>
@@ -51,15 +51,15 @@
 				<div class="col animal-keyword">
 					<div class="input-group">
 						<input type="text" name="keyword" placeholder="상세주소 입력"
-							class="form-control form-control-sm">
+							class="form-control form-control-sm" value="${keyword }">
 					</div>
 				</div>
 				<div class="col">
 					<div class="input-group">
 						<select name="animal_vaccination" class="form-select form-select-sm">
 							<option value=""></option>
-							<option value="Y">Y</option>
-							<option value="N">N</option>
+							<option value="Y" <c:if test="${animalDTO.animal_vaccination eq 'Y'}">selected</c:if>>Y</option>
+							<option value="N" <c:if test="${animalDTO.animal_vaccination eq 'N'}">selected</c:if>>N</option>
 						</select> <span class="btn btn-sm btn-secondary position-relative">백신</span>
 					</div>
 				</div>
@@ -67,10 +67,10 @@
 					<div class="input-group">
 						<select name="animal_status" class="form-select form-select-sm">
 							<option value=""></option>
-							<option value="입소 신청">입소 신청</option>
-							<option value="입양 가능">입양 가능</option>
-							<option value="입양 대기">입양 대기</option>
-							<option value="입양 완료">입양 완료</option>
+							<option value="입소 신청" <c:if test="${animalDTO.animal_status eq '입소 신청'}">selected</c:if>>입소 신청</option>
+							<option value="입양 가능" <c:if test="${animalDTO.animal_status eq '입양 가능'}">selected</c:if>>입양 가능</option>
+							<option value="입양 대기" <c:if test="${animalDTO.animal_status eq '입양 대기'}">selected</c:if>>입양 대기</option>
+							<option value="입양 완료" <c:if test="${animalDTO.animal_status eq '입양 완료'}">selected</c:if>>입양 완료</option>
 						</select> <span class="btn btn-sm btn-secondary position-relative">입양</span>
 					</div>
 				</div>
@@ -82,8 +82,8 @@
 					<div class="input-group">
 						<select name="animal_gender" class="form-select form-select-sm">
 							<option value=""></option>
-							<option value="male">수컷</option>
-							<option value="female">암컷</option>
+							<option value="male" <c:if test="${animalDTO.animal_gender eq 'male'}">selected</c:if>>수컷</option>
+							<option value="female" <c:if test="${animalDTO.animal_gender eq 'female'}">selected</c:if>>암컷</option>
 						</select> <span class="btn btn-sm btn-secondary position-relative">성별</span>
 					</div>
 				</div>
@@ -91,12 +91,12 @@
 					<div class="input-group">
 						<select name="animal_age" class="form-select form-select-sm">
 							<option value="0"></option>
-							<option value="1">0~1</option>
-							<option value="2">1~2</option>
-							<option value="3">2~3</option>
-							<option value="4">3~4</option>
-							<option value="5">4~5</option>
-							<option value="6">5~</option>
+							<option value="1" <c:if test="${animalDTO.animal_age eq '1'}">selected</c:if>>0~1</option>
+							<option value="2" <c:if test="${animalDTO.animal_age eq '2'}">selected</c:if>>1~2</option>
+							<option value="3" <c:if test="${animalDTO.animal_age eq '3'}">selected</c:if>>2~3</option>
+							<option value="4" <c:if test="${animalDTO.animal_age eq '4'}">selected</c:if>>3~4</option>
+							<option value="5" <c:if test="${animalDTO.animal_age eq '5'}">selected</c:if>>4~5</option>
+							<option value="6" <c:if test="${animalDTO.animal_age eq '6'}">selected</c:if>>5~</option>
 						</select> <span class="btn btn-sm btn-secondary position-relative">나이</span>
 					</div>
 				</div>
@@ -106,31 +106,31 @@
 						<c:if test="${animalDTO.animal_tag eq 'dog'}">
 							<select name="animal_species" class="form-select form-select-sm">
 								<option value=""></option>
-								<option value="말티즈">말티즈</option>
-								<option value="푸들">푸들</option>
-								<option value="포메라니안">포메라니안</option>
-								<option value="믹스견">믹스견</option>
-								<option value="치와와">치와와</option>
-								<option value="시츄">시츄</option>
-								<option value="골든리트리버">시츄</option>
-								<option value="진돗개">진돗개</option>
-								<option value="기타">기타</option>
+								<option value="말티즈" <c:if test="${animalDTO.animal_species eq '말티즈'}">selected</c:if>>말티즈</option>
+								<option value="푸들" <c:if test="${animalDTO.animal_species eq '푸들'}">selected</c:if>>푸들</option>
+								<option value="포메라니안" <c:if test="${animalDTO.animal_species eq '포메라니안'}">selected</c:if>>포메라니안</option>
+								<option value="믹스견" <c:if test="${animalDTO.animal_species eq '믹스견'}">selected</c:if>>믹스견</option>
+								<option value="치와와" <c:if test="${animalDTO.animal_species eq '치와와'}">selected</c:if>>치와와</option>
+								<option value="시츄" <c:if test="${animalDTO.animal_species eq '시츄'}">selected</c:if>>시츄</option>
+								<option value="골든리트리버" <c:if test="${animalDTO.animal_species eq '골든리트리버'}">selected</c:if>>골든리트리버</option>
+								<option value="진돗개" <c:if test="${animalDTO.animal_species eq '진돗개'}">selected</c:if>>진돗개</option>
+								<option value="기타" <c:if test="${animalDTO.animal_species eq '기타'}">selected</c:if>>기타</option>
 							</select>
 						</c:if>
 						<c:if test="${animalDTO.animal_tag eq 'cat'}">
 							<select name="animal_species" class="form-select form-select-sm">
 								<option value=""></option>
-								<option value="스코티시">스코티시</option>
-								<option value="폴드">폴드</option>
-								<option value="샴">샴</option>
-								<option value="페르시안">페르시안</option>
-								<option value="터키시">터키시</option>
-								<option value="앙고라">앙고라</option>
-								<option value="러시안 블루">러시안 블루</option>
-								<option value="벵갈">벵갈</option>
-								<option value="먼치킨">먼치킨</option>
-								<option value="아비시니안">아비시니안</option>
-								<option value="기타">기타</option>
+								<option value="스코티시" <c:if test="${animalDTO.animal_species eq '스코티시'}">selected</c:if>>스코티시</option>
+								<option value="폴드" <c:if test="${animalDTO.animal_species eq '폴드'}">selected</c:if>>폴드</option>
+								<option value="샴" <c:if test="${animalDTO.animal_species eq '샴'}">selected</c:if>>샴</option>
+								<option value="페르시안" <c:if test="${animalDTO.animal_species eq '페르시안'}">selected</c:if>>페르시안</option>
+								<option value="터키시" <c:if test="${animalDTO.animal_species eq '터키시'}">selected</c:if>>터키시</option>
+								<option value="앙고라" <c:if test="${animalDTO.animal_species eq '앙고라'}">selected</c:if>>앙고라</option>
+								<option value="러시안 블루" <c:if test="${animalDTO.animal_species eq '러시안 블루'}">selected</c:if>>러시안 블루</option>
+								<option value="벵갈" <c:if test="${animalDTO.animal_species eq '벵갈'}">selected</c:if>>벵갈</option>
+								<option value="먼치킨" <c:if test="${animalDTO.animal_species eq '먼치킨'}">selected</c:if>>먼치킨</option>
+								<option value="아비시니안" <c:if test="${animalDTO.animal_species eq '아비시니안'}">selected</c:if>>아비시니안</option>
+								<option value="기타" <c:if test="${animalDTO.animal_species eq '기타'}">selected</c:if>>기타</option>
 							</select>
 						</c:if>
 						<span class="btn btn-sm btn-secondary position-relative">품종</span>
@@ -141,9 +141,9 @@
 					<div class="input-group">
 						<select name="animal_size" class="form-select form-select-sm">
 							<option value=""></option>
-							<option value="소형">소형</option>
-							<option value="중형">중형</option>
-							<option value="대형">대형</option>
+							<option value="소형" <c:if test="${animalDTO.animal_size eq '소형'}">selected</c:if>>소형</option>
+							<option value="중형" <c:if test="${animalDTO.animal_size eq '중형'}">selected</c:if>>중형</option>
+							<option value="대형" <c:if test="${animalDTO.animal_size eq '대형'}">selected</c:if>>대형</option>
 						</select> <span class="btn btn-sm btn-secondary position-relative">크기</span>
 					</div>
 				</div>
