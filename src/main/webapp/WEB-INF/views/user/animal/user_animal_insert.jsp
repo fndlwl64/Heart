@@ -60,7 +60,7 @@
 	                <td width="10%">
 	                    <select name="animal_neutered" class="form-select" id="neutered">
 	                        <option value=""></option>
-	                        <option value="Y">C</option>
+	                        <option value="Y">YES</option>
 	                        <option value="N">NO</option>
 	                    </select>
 	                </td>
