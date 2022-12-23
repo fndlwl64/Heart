@@ -16,6 +16,7 @@
 <jsp:include page="../../include/admin_header.jsp" />
 <br><br>
 <div class="div1" align="center">
+	<div class="sub-title"><h4>공지사항 등록하기</h4></div> 
 	<form method="post" enctype="multipart/form-data" action="${path }/notice_insert_ok" onsubmit="return submitOption();">
 		<table class="table noticeinfo mt-4">
 			<tr class="border-top">
@@ -24,7 +25,7 @@
 			</tr>
 			<tr>
 				<th class="table-light col-1"><span class="sp2">글내용</span></th>
-				<td><textarea id="notice_content" class="form-control" rows="2" cols="22" name="notice_content"></textarea> </td>
+				<td><textarea id="notice_content" class="form-control" rows="10" cols="22" name="notice_content"></textarea> </td>
 			</tr>
 			<tr>
 				<th class="table-light col-1"><span class="sp2">조회수</span></th>

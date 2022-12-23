@@ -14,8 +14,9 @@
 <%-- 여기서부터 작성 --%>
 <div class="notice-board">
     <div align="center">
-        <h2>공지사항</h2>
-        <br><br>
+        <div class="notice-title">
+            <h2>공지사항</h2>
+        </div>
         <%-- 검색 폼 --%>
         <div>
         <form class="search_form" method="post" action="${path }/user_notice">

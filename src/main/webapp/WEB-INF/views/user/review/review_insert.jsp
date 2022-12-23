@@ -12,9 +12,7 @@
 <div id="review-contents" class="review-contents">
     <div class="review-section">
         <div class="row">
-            <div class="col-3 space"></div>
-            <div class="col-6 title">입양후기 작성하기</div>
-            <div class="col-3 space"></div>
+            <div class="col title">입양후기 작성하기</div>
         </div>
     </div>
 
@@ -69,13 +67,15 @@
 
             <div class="review-section">
                 <div class="row">
-                    <div class="col-3 space"></div>
-                    <div class="col-6 title btn-insert">
-                        <button type="button" class="btn btn-dark" onclick="history.back()"><i class="bi bi-card-list"></i> 뒤로가기</button>
-                        <button type="reset" class="btn btn-warning"><i class="bi bi-pencil"></i> 다시작성</button>
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> 등록하기</button>
+                    <div class="col title btn-insert">
+                        <div>
+                            <button type="button" class="btn btn-dark" onclick="location.href='${ path }/user_mypage_adoptcomplet_list'"><i class="bi bi-card-list"></i> 목록</button>
+                        </div>
+                        <div>
+	                        <button type="reset" class="btn btn-warning"><i class="bi bi-pencil"></i> 리셋</button>
+	                        <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> 등록</button>
+                        </div>
                     </div>
-                    <div class="col-3 space"></div>
                 </div>
             </div>
         </form>

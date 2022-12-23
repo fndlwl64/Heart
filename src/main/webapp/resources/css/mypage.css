@@ -121,7 +121,7 @@ body {
 }
 .mypage_middle .mypage_menu {
     width: 15%;
-    height: 600px;
+    height: 400px;
     float: left;
     /*margin-left: 10%;*/
 /*    border: 1px solid black;*/
@@ -143,11 +143,13 @@ body {
     list-style: none;
     margin-left: 150px;
     font-size: 20px;
+    
 }
 
 .mypage_middle .mypage_menu .middle_ul .my_a{
     color: gray;
     text-decoration: none;
+    margin-top: -60px;
 }
 
 .mypage_middle .mypage_cont .my_cont_ul .animal_cont{
