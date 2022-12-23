@@ -93,12 +93,10 @@
                     <td width="10%">
                         <select name="animal_age" class="form-select">
                             <option value="0"></option>
-                            <option value="1" <c:if test="${animalDTO.animal_age eq '1'}">selected</c:if>>0~1</option>
-                            <option value="2" <c:if test="${animalDTO.animal_age eq '2'}">selected</c:if>>1~2</option>
-                            <option value="3" <c:if test="${animalDTO.animal_age eq '3'}">selected</c:if>>2~3</option>
-                            <option value="4" <c:if test="${animalDTO.animal_age eq '4'}">selected</c:if>>3~4</option>
-                            <option value="5" <c:if test="${animalDTO.animal_age eq '5'}">selected</c:if>>4~5</option>
-                            <option value="6" <c:if test="${animalDTO.animal_age eq '6'}">selected</c:if>>5~</option>
+                            <option value="1" <c:if test="${animalDTO.animal_age eq '1'}">selected</c:if>>0~3</option>
+                            <option value="2" <c:if test="${animalDTO.animal_age eq '2'}">selected</c:if>>3~5</option>
+                            <option value="3" <c:if test="${animalDTO.animal_age eq '3'}">selected</c:if>>5~10</option>
+                            <option value="4" <c:if test="${animalDTO.animal_age eq '4'}">selected</c:if>>10~</option>
                         </select>                 
                     </td>                   
                     <th width="7%">종류</th>
@@ -137,17 +135,17 @@
                     <th>사이즈</th>
                     <td colspan="3">
                         <div class="d-flex">
-	                        <select name="animal_size" class="form-select animal-size">
+	                        <select name="animal_size" class="form-select animal-size" id="size" onclick="optionChangeSize()">
 	                            <option value=""></option>
 	                            <option value="소형" <c:if test="${animalDTO.animal_size eq '소형'}">selected</c:if>>소형</option>
 	                            <option value="중형" <c:if test="${animalDTO.animal_size eq '중형'}">selected</c:if>>중형</option>
 	                            <option value="대형" <c:if test="${animalDTO.animal_size eq '대형'}">selected</c:if>>대형</option>
 	                        </select>             
-	                        <select name="animal_weight" class="form-select animal-weight">
-<%--                                 <option value=""></option>
-                                <option value="소형" <c:if test="${animalDTO.animal_weight eq '소형'}">selected</c:if>>1kg ~ 4kg</option>
-                                <option value="중형" <c:if test="${animalDTO.animal_weight eq '중형'}">selected</c:if>>4kg ~ 10kg</option>
-                                <option value="대형" <c:if test="${animalDTO.animal_weight eq '대형'}">selected</c:if>>10kg 이상</option> --%>
+	                        <select name="animal_weight_temp" class="form-select animal-weight" id="weight" onclick="optionChangeWeight()">
+                                <option value=""></option>
+                                <option value="1">1kg ~ 4kg</option>
+                                <option value="2">4kg ~ 10kg</option>
+                                <option value="3">>10kg 이상</option>
                             </select>     
                         </div>          
                     </td>                                                          
@@ -313,6 +311,36 @@
 			 }); */
 		 }
 		 
+		 /* 사이즈에 따른 무게 범위 */		
+			function optionChangeSize() {
+				if($('#size').val() == ''){
+					$("#weight").val("").prop("selected", true);
+				}
+				if($('#size').val() == '소형'){
+					$("#weight").val("1").prop("selected", true);
+				}
+				if($('#size').val() == '중형'){
+					$("#weight").val("2").prop("selected", true);
+				}
+				if($('#size').val() == '대형'){
+					$("#weight").val("3").prop("selected", true);
+				}
+			}
+		 
+			function optionChangeWeight() {
+				if($('#weight').val() == ''){
+					$("#size").val("").prop("selected", true);
+				}
+				if($('#weight').val() == '1'){
+					$("#size").val("소형").prop("selected", true);
+				}
+				if($('#weight').val() == '2'){
+					$("#size").val("중형").prop("selected", true);
+				}
+				if($('#weight').val() == '3'){
+					$("#size").val("대형").prop("selected", true);
+				}
+			}
 	</script>
 	
 	<jsp:include page="../../include/user_footer.jsp" />
