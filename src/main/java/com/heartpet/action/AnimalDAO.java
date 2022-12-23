@@ -1,6 +1,5 @@
 package com.heartpet.action;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +13,7 @@ public interface AnimalDAO {
     public List<Integer> joinStatus(String animal_status);
     public List<AnimalDTO> list();
     public List<AnimalDTO> listTag(String animal_tag);
+    public List<AnimalDTO> mainAnimal(String animal_tag);
     public List<AnimalDTO> listTagUser(String animal_tag);
     public List<AnimalDTO> listPaging(int startNO, int endNo, AnimalDTO animalDTO, String keyword,String sort,int startWeight, int endWeight);
     public AnimalDTO content(int id);

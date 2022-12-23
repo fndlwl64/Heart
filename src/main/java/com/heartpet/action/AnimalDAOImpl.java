@@ -97,6 +97,15 @@ public class AnimalDAOImpl implements AnimalDAO {
 	}
 	
 	//////////////////////////////////////////////////////
+    // Main에서 사용 @남윤지
+    //////////////////////////////////////////////////////
+	
+    @Override
+    public List<AnimalDTO> mainAnimal(String animal_tag) {
+        return this.sqlSession.selectList("animal_main_list", animal_tag);
+    }
+	
+	//////////////////////////////////////////////////////
 
 	@Override
 	public int countPaging(AnimalDTO dto, String keyword,int startWeight, int endWeight) {
@@ -107,7 +116,5 @@ public class AnimalDAOImpl implements AnimalDAO {
 		map.put("endWeight", endWeight);
 		return sqlSession.selectOne("animal_countPaging", map);
 	}
-
-
 
 }

@@ -17,6 +17,7 @@ public interface ReviewDAO {
             String search_animal, String search_id, String search_content, String order);
     public int listReviewCount(String search_animal, String search_id, String search_content);
     public List<ReviewDTO> listReview(String animal_tag);
+    public List<ReviewDTO> mainReview(String animal_tag);
     public int listReviewCount(String field, String keyword);
     public int listReviewCount(String animal_tag);
     public int insertReview(ReviewDTO dto);
