@@ -32,6 +32,7 @@ import com.heartpet.action.AdoptRegDAO;
 import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.UserDAO;
 import com.heartpet.action.WishDAO;
+import com.heartpet.action.service.AnimalService;
 import com.heartpet.model.AdoptRegDTO;
 import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.PageDTO;
@@ -54,7 +55,10 @@ public class AnimalController {
 	@Autowired
 	private WishDAO wishDAO;
 	@Autowired
+	private AnimalService animalService;
+  @Autowired
 	private UserDAO userDAO;
+
 	@Autowired
 	private HttpServletRequest request;
 	
@@ -77,7 +81,7 @@ public class AnimalController {
 		
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
-
+		
 		totalRecord = animalDAO.countPaging(animalDTO, keyword);
 		
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
@@ -145,17 +149,26 @@ public class AnimalController {
 		AnimalDTO animalDTO = new AnimalDTO();
 		animalDTO.setAnimal_no(animal_no);
 		animalDTO.setAnimal_status("입양 대기");
-		animalDAO.updateStatus(animalDTO);
+		
 		
 		// Adoptreg 추가
 		// user id 변경
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String strDate = dateFormat.format(Calendar.getInstance().getTime());
 		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
 		adoptRegDTO.setAdopt_reg_userid(request.getSession().getAttribute("session_id").toString());
 		adoptRegDTO.setAdopt_reg_animalno(animal_no);
 		adoptRegDTO.setAdopt_reg_regdate(strDate);
-		adoptRegDAO.update(adoptRegDTO);
+		
+		try {
+			animalService.update(animalDTO, adoptRegDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("msg", "입양 신청이 실패했습니다.");
+			request.setAttribute("url", "main");
+			return "alert";
+		}
+		
 	
 		return "redirect:/";
 	}
@@ -171,8 +184,14 @@ public class AnimalController {
 		adoptRegDTO.setAdopt_reg_regdate("");
 		adoptRegDTO.setAdopt_reg_animalno(animal_no);
 		
-		animalDAO.updateStatus(animalDTO);
-		adoptRegDAO.update(adoptRegDTO);
+		try {
+			animalService.update(animalDTO, adoptRegDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("msg", "입양 취소가 실패했습니다.");
+			request.setAttribute("url", "main");
+			return "alert";
+		}
 		return "redirect:/user_mypage_adoptreg_list";
 	}
 
@@ -211,27 +230,45 @@ public class AnimalController {
 			@RequestParam("user_id") String id) throws IllegalStateException, IOException {
 
 		// Adoptreg 추가
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String strDate = dateFormat.format(Calendar.getInstance().getTime());
+		
+		int idx = strDate.indexOf(" ");
+		
+		if(strDate.substring(idx+1, idx+3).equals("24")) {
+			strDate = strDate.substring(0,idx+1)+"0"+strDate.substring(idx+3);
+		}
+		
 
 		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
-		adoptRegDTO.setAdopt_reg_animalno(animalDAO.count(null) + 1);
+		//test
+		
+		adoptRegDTO.setAdopt_reg_animalno(animalDAO.count(null)+1);
 		adoptRegDTO.setAdopt_reg_userid(id);
 		adoptRegDTO.setAdopt_reg_appdate(strDate);
 
-		adoptRegDAO.insert(adoptRegDTO);
-
 		// 동물 입소 신청
 		// 이미지 업로드 및 animal 데이터 추가
+		
 		FileUploadImage upload = new FileUploadImage();
-		String[] images = upload.uploadAnimalImg(request, files,"animal");
-		animalDTO.setAnimal_img1(images[0]);
-		animalDTO.setAnimal_img2(images[1]);
-		animalDTO.setAnimal_img3(images[2]);
-
+		List<String> animalImgs =  upload.uploadFile(request, files, "animal", 3);
+		
+		animalDTO.setAnimal_img1(animalImgs.get(0));
+		animalDTO.setAnimal_img2(animalImgs.get(1));
+		animalDTO.setAnimal_img3(animalImgs.get(2));
+		
 		animalDTO.setAnimal_status("입소 신청");
-
-		animalDAO.insert(animalDTO);
+		
+		try {
+			animalService.insert(animalDTO, adoptRegDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			upload.deleteFile(request, animalImgs);
+			request.setAttribute("msg", "insert fail");
+			request.setAttribute("url", "user_animal_insert");
+			return "alert";
+		}
+		
 
 		return "redirect:/";
 	}

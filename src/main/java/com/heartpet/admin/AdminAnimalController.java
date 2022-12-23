@@ -43,6 +43,7 @@ import com.heartpet.action.AdoptRegDAO;
 import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.QnaDAO;
 import com.heartpet.action.UserDAO;
+import com.heartpet.action.service.AnimalService;
 import com.heartpet.model.AdoptRegDTO;
 import com.heartpet.model.AnimalDTO;
 import com.heartpet.model.PageDTO;
@@ -65,6 +66,8 @@ public class AdminAnimalController {
 	private AdoptRegDAO adoptRegDAO;
 	@Autowired
 	private UserDAO userdao;
+	@Autowired
+	private AnimalService animalService;
 
 	// 한 페이지당 보여질 게시물의 수
 	private final int rowsize = 3;
@@ -140,18 +143,21 @@ public class AdminAnimalController {
 		
 		FileUploadImage upload = new FileUploadImage();
 		animalDTO = upload.uploadAnimalImg(request, files, "animal", animalDTO);
-		animalDAO.update(animalDTO);
+		try {
+			animalDAO.update(animalDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("msg", "업데이트를 실패했습니다.");
+			request.setAttribute("url", "back");
+			return "alert";
+		}
+		
 		return "redirect:/admin_main";
 	}
 
 	@RequestMapping(value = "/animal_insert", method = RequestMethod.GET)
 	public String animal_insert(@RequestParam("tag") String tag, Model model) {
 		model.addAttribute("tag", tag);
-		System.out.println("===========================");
-		System.out.println("===========================");
-		System.out.println("===========================");
-		
-		System.out.println(tag);
 		return "admin/animal/animal_insert";
 	}
 
@@ -168,20 +174,28 @@ public class AdminAnimalController {
 		adoptRegDTO.setAdopt_reg_userid("admin");
 		adoptRegDTO.setAdopt_reg_appdate(strDate);
 
-		adoptRegDAO.insert(adoptRegDTO);
+		
 
 		// 동물 입소 신청하자마자 입양 가능 상태
 		// 이미지 업로드 및 animal 데이터 추가
 		FileUploadImage upload = new FileUploadImage();
-
-		String[] images = upload.uploadAnimalImg(request, files,"animal");
-		animalDTO.setAnimal_img1(images[0]);
-		animalDTO.setAnimal_img2(images[1]);
-		animalDTO.setAnimal_img3(images[2]);
-
+		List<String> animalImgs =  upload.uploadFile(request, files, "animal", 3);
+		
+		animalDTO.setAnimal_img1(animalImgs.get(0));
+		animalDTO.setAnimal_img2(animalImgs.get(1));
+		animalDTO.setAnimal_img3(animalImgs.get(2));
+		
 		animalDTO.setAnimal_status("입양 가능");
-
-		animalDAO.insert(animalDTO);
+		
+		try {
+			animalService.insert(animalDTO, adoptRegDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			upload.deleteFile(request, animalImgs);
+			request.setAttribute("msg", "insert fail");
+			request.setAttribute("url", "back");
+			return "alert";
+		}
 
 		return "redirect:/admin_main";
 	}
@@ -191,9 +205,14 @@ public class AdminAnimalController {
 		AnimalDTO animalDTO = animalDAO.content(no);
 		FileUploadImage upload = new FileUploadImage();
 		upload.deleteAnimalImg(request, animalDTO);
-
-		animalDAO.delete(no);
-
+		try {
+			animalDAO.delete(no);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("msg", "delete fail");
+			request.setAttribute("url", "back");
+			return "alert";
+		}
 		return "redirect:/"+animal_tag+"_list";
 	}
 	
@@ -243,8 +262,7 @@ public class AdminAnimalController {
 		}
 
 		List<AdoptRegDTO> list = adoptRegDAO.listPaging(paging.getStartNo(), paging.getEndNo(), startDate, endDate,adopt_tag,
-				status_no,sort);
-//		
+				status_no,sort);	
 
 		model.addAttribute("total", totalRecord);
 		model.addAttribute("paging", paging);
@@ -276,24 +294,7 @@ public class AdminAnimalController {
 
 	@RequestMapping(value = "/adoptreg_update", method = RequestMethod.POST)
 	public String adoptreg_update(AdoptRegDTO adoptRegDTO) {
-		if (adoptRegDTO.getAdopt_reg_duedate() != null) {// 입양 예정일 등록
-			String reg_duedate = adoptRegDTO.getAdopt_reg_duedate().replace("T", " ");
-			adoptRegDTO.setAdopt_reg_duedate(reg_duedate);
-			adoptRegDAO.update(adoptRegDTO);
-		}
-		if (adoptRegDTO.getAdopt_reg_adoptdate() != null) {// 입양 완료일 등록
-			adoptRegDTO.setAdopt_reg_duedate(null);
-			String reg_adoptdate = adoptRegDTO.getAdopt_reg_adoptdate().replace("T", " ");
-			adoptRegDTO.setAdopt_reg_adoptdate(reg_adoptdate);
-			System.out.println("============================");
-			System.out.println(reg_adoptdate);
-			
-			AnimalDTO animalDTO = new AnimalDTO();
-			animalDTO.setAnimal_status("입양 완료");
-			animalDTO.setAnimal_no(adoptRegDTO.getAdopt_reg_animalno());
-			animalDAO.updateStatus(animalDTO);
-			adoptRegDAO.update(adoptRegDTO);
-		}
+		animalService.adoptRegUpdate(adoptRegDTO);
 		return "redirect:/adoptreg_list";
 	}
 

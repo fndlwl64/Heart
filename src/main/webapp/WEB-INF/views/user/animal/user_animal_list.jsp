@@ -208,7 +208,7 @@
 								class="img-fluid rounded mx-auto img-frame"
 								src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a> --%>
 							<div class="mainContent_mainImgWrapper__DJlMe rounded back_image"
-								style="background-image : url(<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()});" data-value = "<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"></div>
+								style="background-image : url(<%=request.getContextPath()%>${dto.getAnimal_img1()});" data-value = "<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"></div>
 							<div class="mainContent_mainContent__w_Buk">
 								<!-- href=request.getContextPath()h() %>/user_animal_content?no=${dto.getAnimal_no()}" -->
 								<div class="mainContent_mainTitle__8iW62">${dto.getAnimal_name() }</div>
