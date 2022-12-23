@@ -15,8 +15,11 @@
     <div class="insert-form">
 	    <form action="<%=request.getContextPath() %>/user_animal_insert" method="post" enctype="multipart/form-data" onsubmit="return submitOption();">
 	    	<input type="hidden" value="${sessionScope.session_id }" id="user_id" name="user_id"/>
+	    	<input type="hidden" value="${sessionScope.session_admin_id }" id="user_admin_id" name="user_admin_id"/>
+	    	
 	    	<input type="hidden" value="${sessionScope.session_grade }" id="user_grade"/>
-	        
+	        <input type="hidden" value="${sessionScope.session_admin_grade }" id="user_admin_grade"/>
+	      
 	        <table class="table caption-top">
                 <caption><span class="must-write">*</span> 표시는 필수 입력 사항입니다.</caption>
 				<thead class="table-light">
@@ -147,15 +150,17 @@
         
         function  submitOption(){
         	/* 회원 정보 */
-        	if ($('#user_id').val() == ''){
-                alert("로그인을 해주세요");
-                return false;
-            }
-        	if ($('#user_grade').val() > 2){
-                alert("회원의 등급이 낮아 입소 자격이 없습니다.");
-                return false;
-            }
         	
+        	if ($('#user_admin_id').val() == ''){
+        		if ($('#user_id').val() == ''){
+                    alert("로그인을 해주세요");
+                    return false;
+                }
+            	if ($('#user_grade').val() > 2){
+                    alert("회원의 등급이 낮아 입소 자격이 없습니다.");
+                    return false;
+                }
+        	}
         	if ($('#tag').val() == ''){
                 alert("동물 종류를 골라주세요");
                 return false;

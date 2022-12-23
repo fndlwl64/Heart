@@ -17,7 +17,7 @@
 	</sql>
 	<select id="adoptreg_count" resultType="int">
 		select
-		max(adopt_reg_regno) from heartpet_adopt_reg
+		max(NVL(adopt_reg_regno, 0)) from heartpet_adopt_reg
 	</select>
 	<select id="adoptreg_countTag" parameterType="hashmap"
 		resultType="int">
@@ -107,7 +107,7 @@
 	<insert id="adoptreg_insert" parameterType="AdoptRegDTO">
 		<selectKey resultType="int" keyProperty="adopt_reg_regno"
 			order="BEFORE">
-			select max(adopt_reg_regno) from heartpet_adopt_reg
+			select max(NVL(adopt_reg_regno, 0)) from heartpet_adopt_reg
 		</selectKey>
 		insert into heartpet_adopt_reg
 		values
