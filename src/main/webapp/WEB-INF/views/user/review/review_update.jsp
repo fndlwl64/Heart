@@ -94,7 +94,7 @@
                 <div class="row">
                     <div class="col title btn-insert">
 					    <div>
-					       <button type="button" class="btn btn-dark" onclick="location.href='${ path }/user_review_list'"><i class="bi bi-card-list"></i> 목록</button>
+                            <button type="button" class="btn btn-dark" onclick="location.href='${ path }/user_review_list'"><i class="bi bi-card-list"></i> 목록</button>
 					    </div>
 					    <div>
 						    <button type="reset" class="btn btn-warning"><i class="bi bi-pencil"></i> 리셋</button>
