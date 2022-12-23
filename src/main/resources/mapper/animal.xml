@@ -53,12 +53,20 @@
 			and animal_species = #{animalDTO.animal_species }
 		</if>
 		<if
-			test="animalDTO.animal_age != 0 and animalDTO.animal_age lt 6">
-			and animal_age between (${animalDTO.animal_age } -1) and ${animalDTO.animal_age }
+			test="animalDTO.animal_age == 1">
+			and animal_age between 0 and 3
 		</if>
 		<if
-			test="animalDTO.animal_age == 6">
-			<![CDATA[and animal_age >= 5 ]]>
+			test="animalDTO.animal_age == 2">
+			and animal_age between 3 and 5
+		</if>
+		<if
+			test="animalDTO.animal_age == 3">
+			and animal_age between 5 and 10
+		</if>
+		<if
+			test="animalDTO.animal_age == 4">
+			<![CDATA[and animal_age >= 10 ]]>
 		</if>
 		<if
 			test="animalDTO.animal_gender != null and !animalDTO.animal_gender.equals('')">
@@ -144,12 +152,20 @@
 			and animal_species = #{animalDTO.animal_species }
 		</if>
 		<if
-			test="animalDTO.animal_age != 0 and animalDTO.animal_age lt 6">
-			and animal_age between (${animalDTO.animal_age } -1) and ${animalDTO.animal_age }
+			test="animalDTO.animal_age == 1">
+			and animal_age between 0 and 3
 		</if>
 		<if
-			test="animalDTO.animal_age == 6">
-			<![CDATA[and animal_age >= 5 ]]>
+			test="animalDTO.animal_age == 2">
+			and animal_age between 3 and 5
+		</if>
+		<if
+			test="animalDTO.animal_age == 3">
+			and animal_age between 5 and 10
+		</if>
+		<if
+			test="animalDTO.animal_age == 4">
+			<![CDATA[and animal_age >= 10 ]]>
 		</if>
 		<if
 			test="animalDTO.animal_gender != null and !animalDTO.animal_gender.equals('')">
