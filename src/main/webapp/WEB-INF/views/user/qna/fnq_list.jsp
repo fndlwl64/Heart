@@ -19,9 +19,10 @@
 <%-- fnq list --%>
 <div id="qna-contents" class="qna-contents">
     <div class="qna-section">
-        <div class="row">
-            <div class="col title">FAQ</div>
-        </div>
+        <div class="qna-title">
+			<span>FNQ</span>
+			<p>HeartPet의 자주 묻는 질문 게시판입니다.</p>
+		</div>
     </div>
     
     <%-- 정렬 --%>

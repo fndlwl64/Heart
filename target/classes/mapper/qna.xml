@@ -56,12 +56,12 @@
         <![CDATA[) 
        	WHERE rnum >= #{startNo} AND rnum <= #{endNo} ]]>
 		<choose>
-			<when test="field.equals('allSearch') and keyword != ''"> (board_title <include refid="qna_keyword" />) OR (board_content <include refid="qna_keyword" />) 
-				OR (board_category <include refid="qna_keyword" />) OR (board_id <include refid="qna_keyword" />)</when>
-			<when test="field.equals('title') and keyword != ''"> board_title <include refid="qna_keyword" /></when>
-			<when test="field.equals('content') and keyword != ''"> board_content <include refid="qna_keyword" /></when>
-			<when test="field.equals('category') and keyword != ''"> board_category <include refid="qna_keyword" /></when>
-			<when test="field.equals('id') and keyword != ''"> board_id <include refid="qna_keyword" /></when>
+			<when test="field.equals('allSearch') and keyword != ''">AND (board_title <include refid="qna_keyword" />) OR (board_content <include refid="qna_keyword" />) 
+				OR (board_category = #{ keyword }) OR (board_id <include refid="qna_keyword" />)</when>
+			<when test="field.equals('title') and keyword != ''">AND board_title <include refid="qna_keyword" /></when>
+			<when test="field.equals('content') and keyword != ''">AND board_content <include refid="qna_keyword" /></when>
+			<when test="field.equals('category') and keyword != ''">AND board_category = #{ keyword }</when>
+			<when test="field.equals('id') and keyword != ''">AND board_id <include refid="qna_keyword" /></when>
 		</choose>
 	</select>
 	
