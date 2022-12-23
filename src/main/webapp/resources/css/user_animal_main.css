@@ -32,6 +32,10 @@ body {
     margin-bottom: 0.5rem;
 }
 
+.div1 .form_search form {
+	margin: 0;
+}
+
 .div1 .form_search .search-semi-title > span {
     font-weight: bold;
 }
@@ -42,22 +46,40 @@ body {
 	
 }
 
-.div1 .form_search .animal-table .animal-place-select {
-	display: flex;
+.div1 .form_search .animal-table tr th, td {
+	padding-right: 1rem;
+	padding-left: 1rem;
 }
 
-.animal-place-select > select {
+.div1 .form_search .animal-table .animal-place-select {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.animal-table .animal-size {
 	width: 40%;
 }
 
-.animal-place-select > input {
-    width: 60%;
+.animal-table .animal-weight {
     margin-left: 0.5rem;
+    width: 60%;
 }
 
-.div1 .form_search form .lil-title {
-	margin: 1%;
-	
+.div1 .form_search .search-buttons {
+	text-align: right;
+} 
+
+.div1 .form_search .search-buttons .btn-light {
+	border: 1px solid darkgray;
+}
+
+.animal-place-select > select {
+	width: 39%;
+}
+
+.animal-place-select > input {
+	width: 60%;
 }
 
 .div1 .form_search .animal_row .btn {
@@ -69,14 +91,20 @@ body {
 }
 
 .div1 .order {
-	margin-bottom: 2%;
-	display: flex;
-	justify-content: flex-end;
-	margin-right: 8%;
+    display: flex;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    width: 70%;
+    justify-content: flex-end;
+    margin-bottom: 0.5rem;
 }
-.div1 .order select {
-	width: 150px;
+
+.div1 .order .form-select {
+    float: right;
+    clear: both;
+    width: auto;
 }
+
 .div1 .main-title {
 	width: 70%;
 	margin: 0 auto;	

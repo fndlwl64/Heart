@@ -138,20 +138,17 @@
             </div>
         </div>
     </div> --%>
-			<div class="qna-section">
-				<div class="row">
-					<div class="col total-data"><span></span>
-						<select class="form-select form-select-sm order" name="sort" id="sort">
-							<option value="">정렬</option>
-							<option value="size"
-								<c:if test="${sort eq 'size'}">selected</c:if>>크기</option>
-							<option value="weight"
-								<c:if test="${sort eq 'weight'}">selected</c:if>>무게</option>
-							<option value="age" <c:if test="${sort eq 'age'}">selected</c:if>>나이</option>
-						</select>
-					</div>
+		<div class="qna-section">
+			<div class="row">
+				<div class="col total-data">
+					<select class="form-select form-select-sm order" name="sort" id="sort">
+						<option value="size" selected="selected" <c:if test="${sort eq 'size'}">selected</c:if>>최신등록순</option>
+						<option value="weight" <c:if test="${sort eq 'weight'}">selected</c:if>>무게</option>
+						<option value="age" <c:if test="${sort eq 'age'}">selected</c:if>>나이</option>
+					</select>
 				</div>
 			</div>
+		</div>
 			<%-- <div class="d-flex justify-content-end my-2">
 				<div class="validation-form mx-2">
 					<select class="form-select form-select-sm" name="sort" id="sort">

@@ -13,6 +13,12 @@
 <c:set var="animalDTO" value="${ animalDTO }" />
 <c:set var="keyword" value="${keyword }" />
 <c:set var="sort" value="${sort }" />
+<c:if test="${animalDTO.animal_tag eq 'dog'}" >
+    <c:set var="animal" value="강아지" />
+</c:if>
+<c:if test="${animalDTO.animal_tag eq 'cat'}" >
+    <c:set var="animal" value="고양이" />
+</c:if>
 <c:set var="pagingTag"
 	value="animal_size=${animalDTO.animal_size }&animal_species=${ animalDTO.animal_species}&animal_age=${animalDTO.animal_age }&animal_gender=${animalDTO.animal_gender }&animal_weight=${animalDTO.animal_weight }&animal_status=${animalDTO.animal_status }&animal_place=${animalDTO.animal_place }&keyword=${keyword }&sort=${sort }" />
 <c:set var="pagingSort"
@@ -27,40 +33,40 @@
 	<input type="hidden" id="sortlink"
 		value="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list?page=${ paging.page }&${pagingSort}" />
 	
-	<div id="form" class="form_search">
+	<div id="form" class="form_search mb-3">
 		<form action="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list" class="validation-form wells" method="post">
             <div class="search-semi-title">
-                <span><i class="bi bi-search-heart-fill"></i> 공지 검색</span>
+                <span><i class="bi bi-search-heart-fill"></i> 당신의 ${ animal }를 찾아보세요.</span>
             </div>            
             <table class="table table-borderless animal-table">
                 <tr>
-                    <th width="10%">장소</th>
-                    <td width="50%" colspan="5">
+                    <th width="7%">위치</th>
+                    <td colspan="5">
                         <div class="animal-place-select">
-		                    <select name="animal_place" class="form-select col-2">
-		                        <option value=""></option>
-		                        <option value="서울" <c:if test="${fn:contains(animalDTO.animal_place,'서울')}">selected</c:if>>서울특별시</option>
-		                        <option value="울산" <c:if test="${fn:contains(animalDTO.animal_place,'울산')}">selected</c:if>>울산광역시</option>
-		                        <option value="인천" <c:if test="${fn:contains(animalDTO.animal_place,'인천')}">selected</c:if>>인천광역시</option>
-		                        <option value="부산" <c:if test="${fn:contains(animalDTO.animal_place,'부산')}">selected</c:if>>부산광역시</option>
-		                        <option value="대전" <c:if test="${fn:contains(animalDTO.animal_place,'대전')}">selected</c:if>>대전광역시</option>
-		                        <option value="광주" <c:if test="${fn:contains(animalDTO.animal_place,'광주')}">selected</c:if>>광주광역시</option>
-		                        <option value="대구" <c:if test="${fn:contains(animalDTO.animal_place,'대구')}">selected</c:if>>대구광역시</option>
-		                        <option value="세종" <c:if test="${fn:contains(animalDTO.animal_place,'세종')}">selected</c:if>>세종특별자치시</option>
-		                        <option value="제주" <c:if test="${fn:contains(animalDTO.animal_place,'제주')}">selected</c:if>>제주틀별자치도</option>
-		                    </select>                        
-	                        <input type="text" name="keyword" placeholder="상세주소 입력" class="form-control col-4" value="${ keyword }">
+			                    <select name="animal_place" class="form-select">
+			                        <option value=""></option>
+			                        <option value="서울" <c:if test="${fn:contains(animalDTO.animal_place,'서울')}">selected</c:if>>서울특별시</option>
+			                        <option value="울산" <c:if test="${fn:contains(animalDTO.animal_place,'울산')}">selected</c:if>>울산광역시</option>
+			                        <option value="인천" <c:if test="${fn:contains(animalDTO.animal_place,'인천')}">selected</c:if>>인천광역시</option>
+			                        <option value="부산" <c:if test="${fn:contains(animalDTO.animal_place,'부산')}">selected</c:if>>부산광역시</option>
+			                        <option value="대전" <c:if test="${fn:contains(animalDTO.animal_place,'대전')}">selected</c:if>>대전광역시</option>
+			                        <option value="광주" <c:if test="${fn:contains(animalDTO.animal_place,'광주')}">selected</c:if>>광주광역시</option>
+			                        <option value="대구" <c:if test="${fn:contains(animalDTO.animal_place,'대구')}">selected</c:if>>대구광역시</option>
+			                        <option value="세종" <c:if test="${fn:contains(animalDTO.animal_place,'세종')}">selected</c:if>>세종특별자치시</option>
+			                        <option value="제주" <c:if test="${fn:contains(animalDTO.animal_place,'제주')}">selected</c:if>>제주틀별자치도</option>
+			                    </select>                  
+	                           <input type="text" name="keyword" placeholder="상세주소 입력" class="form-control" value="${ keyword }">
                         </div>
                     </td>
-                    <th>접종 유무</th>
-                    <td>
+                    <th width="10%">접종 유무</th>
+                    <td width="10%">
                         <select name="animal_vaccination" class="form-select">
                             <option value=""></option>
-                            <option value="Y" <c:if test="${animalDTO.animal_vaccination eq 'Y'}">selected</c:if>>Y</option>
-                            <option value="N" <c:if test="${animalDTO.animal_vaccination eq 'N'}">selected</c:if>>N</option>
+                            <option value="Y" <c:if test="${animalDTO.animal_vaccination eq 'Y'}">selected</c:if>>Yes</option>
+                            <option value="N" <c:if test="${animalDTO.animal_vaccination eq 'N'}">selected</c:if>>No</option>
                         </select> 
                     </td>
-                    <th>입양 상태</th>
+                    <th width="10%">입양 상태</th>
                     <td>
                         <select name="animal_status" class="form-select">
                             <option value=""></option>
@@ -73,15 +79,15 @@
                 </tr>
                 <tr>
                     <th>성별</th>
-                    <td>
+                    <td width="10%">
                         <select name="animal_gender" class="form-select">
                             <option value=""></option>
                             <option value="male" <c:if test="${animalDTO.animal_gender eq 'male'}">selected</c:if>>수컷</option>
                             <option value="female" <c:if test="${animalDTO.animal_gender eq 'female'}">selected</c:if>>암컷</option>
                         </select>                  
                     </td>
-                    <th>나이</th>
-                    <td>
+                    <th width="7%">나이</th>
+                    <td width="10%">
                         <select name="animal_age" class="form-select">
                             <option value="0"></option>
                             <option value="1" <c:if test="${animalDTO.animal_age eq '1'}">selected</c:if>>0~1</option>
@@ -92,8 +98,8 @@
                             <option value="6" <c:if test="${animalDTO.animal_age eq '6'}">selected</c:if>>5~</option>
                         </select>                 
                     </td>                   
-                    <th>종류</th>
-                    <td>
+                    <th width="7%">종류</th>
+                    <td width="16%">
                         <c:if test="${animalDTO.animal_tag eq 'dog'}">
                             <select name="animal_species" class="form-select">
                                 <option value="">상관없음</option>
@@ -126,17 +132,21 @@
                         </c:if>                
                     </td> 
                     <th>사이즈</th>
-                    <td>
-                        <select name="animal_size" class="form-select">
-                            <option value=""></option>
-                            <option value="소형" <c:if test="${animalDTO.animal_size eq '소형'}">selected</c:if>>소형</option>
-                            <option value="중형" <c:if test="${animalDTO.animal_size eq '중형'}">selected</c:if>>중형</option>
-                            <option value="대형" <c:if test="${animalDTO.animal_size eq '대형'}">selected</c:if>>대형</option>
-                        </select>                
-                    </td>  
-                    <th>나이</th>
-                    <td>
-                        <input type="number" value="${animalDTO.animal_weight }" min="0" name="animal_weight" class="form-control form-control-sm" style="width: 70px">                
+                    <td colspan="3">
+                        <div class="d-flex">
+	                        <select name="animal_size" class="form-select animal-size">
+	                            <option value=""></option>
+	                            <option value="소형" <c:if test="${animalDTO.animal_size eq '소형'}">selected</c:if>>소형</option>
+	                            <option value="중형" <c:if test="${animalDTO.animal_size eq '중형'}">selected</c:if>>중형</option>
+	                            <option value="대형" <c:if test="${animalDTO.animal_size eq '대형'}">selected</c:if>>대형</option>
+	                        </select>             
+	                        <select name="animal_weight" class="form-select animal-weight">
+<%--                                 <option value=""></option>
+                                <option value="소형" <c:if test="${animalDTO.animal_weight eq '소형'}">selected</c:if>>1kg ~ 4kg</option>
+                                <option value="중형" <c:if test="${animalDTO.animal_weight eq '중형'}">selected</c:if>>4kg ~ 10kg</option>
+                                <option value="대형" <c:if test="${animalDTO.animal_weight eq '대형'}">selected</c:if>>10kg 이상</option> --%>
+                            </select>     
+                        </div>          
                     </td>                                                          
                 </tr>            
             </table>
@@ -150,9 +160,8 @@
 	<%--정렬--%>
 	<div class="order">
 		<select class="form-select form-select-sm" name="sort" id="sort">
-			<option value="">정렬</option>
-			<option value="size" 
-				<c:if test="${sort eq 'size'}">selected</c:if>>크기</option>
+			<option selected="selected" value="size" 
+				<c:if test="${sort eq 'size'}">selected</c:if>>최신등록순</option>
 			<option value="weight"
 				<c:if test="${sort eq 'weight'}">selected</c:if>>무게</option>
 			<option value="age" <c:if test="${sort eq 'age'}">selected</c:if>>나이</option>
