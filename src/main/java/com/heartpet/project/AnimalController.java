@@ -200,11 +200,11 @@ public class AnimalController {
 	public String user_animal_insert(Model model){
 		
 		//로그인을 하지 않았거나 자격이 없을 경우
-		if(request.getSession().getAttribute("session_grade") == null) {
+		if(request.getSession().getAttribute("session_grade") == null && (String)request.getSession().getAttribute("session_admin_id") == null) {
 			model.addAttribute("msg", "로그인이 필요합니다.");
 			model.addAttribute("url", "main");
 			return "alert";
-		}else if ((Integer) request.getSession().getAttribute("session_grade") > 2){
+		}else if (request.getSession().getAttribute("session_grade") != null && (Integer) request.getSession().getAttribute("session_grade") > 2 ){
 			model.addAttribute("msg", "회원 등급이 낮습니다.");
 			model.addAttribute("url", "main");
 			return "alert";
@@ -273,5 +273,15 @@ public class AnimalController {
 			wishDAO.insert(wishDTO);
 			return 1;
 		}
+	}
+	
+	@RequestMapping("test")
+	public void test() {
+		System.out.println("======================");
+		System.out.println("======================");
+		System.out.println("======================");
+		
+		System.out.println((String)request.getSession().getAttribute("session_id"));
+		System.out.println((String)request.getSession().getAttribute("session_admin_id"));
 	}
 }
