@@ -18,8 +18,8 @@
 }
 
 .notice-board .search-table-box {
-	width: 70%;
-	border: 1px solid black;
+	width: 65%;
+	border: 1px solid darkgray;
 	border-radius: 5px;
 	padding: 1rem;
 	background-color: #f8f9fa;
@@ -31,7 +31,7 @@
 }
 
 .notice-board .search-table-box .search-buttons .btn-light {
-	border: 1px solid black;	
+	border: 1px solid darkgray;	
     
 }
 
