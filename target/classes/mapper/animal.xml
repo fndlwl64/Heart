@@ -27,7 +27,7 @@
 	</sql>
 	<select id="animal_count" parameterType="string"
 		resultType="int">
-		select max(animal_no) from heartpet_animal
+		select max(NVL(animal_no, 0)) from heartpet_animal
 		<if test="null != value and !''.equals(value)">
 			where animal_tag = #{animal_tag}
 		</if>
@@ -179,7 +179,7 @@
 	<insert id="animal_insert" parameterType="AnimalDTO">
 		<selectKey resultType="int" keyProperty="animal_no"
 			order="BEFORE">
-			select max(animal_no) from heartpet_animal
+			select max(NVL(animal_no, 0)) from heartpet_animal
 		</selectKey>
 		insert into heartpet_animal
 		values
