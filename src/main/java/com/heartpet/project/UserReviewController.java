@@ -44,6 +44,7 @@ public class UserReviewController {
     
     @Autowired
     private UserDAO userDAO;
+    
 
     // 한 페이지당 보여질 게시물의 수
     private final int rowsize = 6;
@@ -305,6 +306,9 @@ public class UserReviewController {
         
         FileUploadImage deleteFiles = new FileUploadImage();  
         deleteFiles.deleteFile(request, origin_names);
+        
+        // 코멘트도 같이 지우는 메서드... 안 지우기로 함
+        // this.reviewDAO.deleteAllComment(review_no);
 
         int check = this.reviewDAO.deleteReview(review_no);
         if (check > 0) {

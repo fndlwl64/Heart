@@ -1,7 +1,7 @@
 // 삭제 모달
 $(function() {
-    const deleteModal = document.getElementById('deleteModal')
-    const deleteInput = document.getElementById('deleteInput')
+    const deleteModal = document.getElementById('deleteCommentModal')
+    const deleteInput = document.getElementById('deleteCommentInput')
 
     deleteModal.addEventListener('shown.bs.modal', (e) => {
         deleteInput.focus();
@@ -10,7 +10,7 @@ $(function() {
         let userId = $(e.relatedTarget).data('user');
         let reviewNo = $(e.relatedTarget).data('reviewno');
         
-        $('#deleteFunction').on("click", function() {
+        $('#deleteCommentFunction').on("click", function() {
             commentDelete(commentNo, path, userId, reviewNo);
         });
     });
@@ -31,7 +31,7 @@ function commentDelete(commentNo, path, userId, reviewNo) {
           if(check > 0){
               commentTable(userId, reviewNo, path);
               commentCount(reviewNo, path);
-              $('#deleteModal').modal('hide');
+              $('#deleteCommentModal').modal('hide');
               $('.modal-backdrop').hide();
           }
       },
@@ -102,10 +102,10 @@ function commentTable(userId, reviewNo, path) {
                   comment += '<td><small>' + commentList[i].comment_regdate + '</small></td>';
                   comment += '<td style=\"vertical-align:middle;\">';
                   if(userId == 'admin') {
-                       comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-reviewno='+reviewNo+'>삭제</button>';
+                       comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteCommentModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-reviewno='+reviewNo+'>삭제</button>';
                   }else {
                       if(userId == commentList[i].comment_id) {
-                          comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-reviewno='+reviewNo+'>삭제</button>';
+                          comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteCommentModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-reviewno='+reviewNo+'>삭제</button>';
                       }
                   }
                   comment += '</td></tr>';

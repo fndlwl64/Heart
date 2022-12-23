@@ -297,6 +297,9 @@ public class UserQnaController {
         
         FileUploadImage deleteFiles = new FileUploadImage();  
         deleteFiles.deleteFile(request, origin_names);
+        
+        // 코멘트도 같이 지우는 메서드... 안 지우기로 함
+        // this.qnaDAO.deleteAllComment(board_no);
 
         int check = this.qnaDAO.deleteQna(board_no);
         if (check > 0) {

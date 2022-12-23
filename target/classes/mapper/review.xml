@@ -253,6 +253,11 @@
         DELETE FROM heartpet_review_comment
             WHERE comment_commentno = #{ comment_commentno }
     </delete>
+    
+    <delete id="review_comment_deleteAll" parameterType="int">
+        DELETE FROM heartpet_review_comment
+            WHERE comment_reviewno = #{ review_no }
+    </delete>
 	
 	<!-- 
 	///////////////////////////////////////////////////////

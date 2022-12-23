@@ -23,7 +23,8 @@
 	    });
     </script>
     <script type="text/javascript" src="${ path }/resources/js/qna_comment.js"></script>
-    </head>
+    <script src="${path}/resources/js/admin_list_view.js"></script> 
+</head>
 <body>
 
 <div class="container">
@@ -96,7 +97,8 @@
 	</div>
 
     <%-- 삭제모달 --%>
-	<jsp:include page="../../include/deleteModal.jsp" />
+    <jsp:include page="../../include/deleteModal.jsp" />
+    <jsp:include page="../../include/deleteCommentModal.jsp" />
 
 </div>
 

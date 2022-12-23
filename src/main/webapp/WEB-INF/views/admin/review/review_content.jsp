@@ -22,7 +22,8 @@
             commentCount(reviewNo, path);
         });
     </script>
-    <script type="text/javascript" src="${ path }/resources/js/review_comment.js"></script>    
+    <script type="text/javascript" src="${ path }/resources/js/review_comment.js"></script>
+    <script src="${path}/resources/js/admin_list_view.js"></script>       
 </head>
 <body>
 
@@ -105,8 +106,8 @@
 	
 	<%-- 삭제모달 --%>
 	<jsp:include page="../../include/deleteModal.jsp" />
+	<jsp:include page="../../include/deleteCommentModal.jsp" />
 	
-	<div class="space"></div>
 </div>
 
 </body>

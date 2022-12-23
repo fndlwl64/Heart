@@ -144,7 +144,7 @@
             <if test="search_content != null and !search_content.equals('')">
                 AND (board_title LIKE '%' || #{ search_content } || '%' OR board_content LIKE '%' || #{ search_content })
             </if>
-    </select>   
+    </select>
 	
 	<!-- 
 	//============================================================
@@ -254,6 +254,12 @@
             WHERE comment_commentno = #{ comment_commentno }
     </delete>
     
+    <!-- Comment : delete All  -->
+    <delete id="qna_comment_deleteAll" parameterType="int">
+        DELETE FROM heartpet_board_comment
+            WHERE comment_boardno = #{ board_no }
+    </delete>
+    
     <!-- 
 	////////////////////////////////////////////////////////////////////////////////////////////  
 	// FNQ
@@ -314,6 +320,7 @@
 						<when test="order.equals('question_asc')"> fnq_question ASC</when>         
 					</choose>            
             ) rnum FROM heartpet_fnq f	
+            WHERE 1=1 
             <if test="search_category != null and !search_category.equals('')">
             	AND fnq_category = #{ search_category }             	
             </if>
