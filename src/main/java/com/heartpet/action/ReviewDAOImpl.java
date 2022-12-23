@@ -139,6 +139,11 @@ public class ReviewDAOImpl implements ReviewDAO {
     public int deleteComment(int comment_commentno) {
         return this.sqlSession.delete("review_comment_delete", comment_commentno);
     }
+    
+    @Override
+    public int deleteAllComment(int review_no) {
+        return this.sqlSession.delete("review_comment_deleteAll", review_no);
+    }
 
     ///////////////////////////////////////////////////////
     // myPage 사용

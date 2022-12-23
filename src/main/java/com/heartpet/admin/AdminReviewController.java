@@ -183,6 +183,8 @@ public class AdminReviewController {
         
         FileUploadImage deleteFiles = new FileUploadImage();  
         deleteFiles.deleteFile(request, origin_names);
+        
+        this.reviewDAO.deleteAllComment(review_no);
       
         int check = this.reviewDAO.deleteReview(review_no);
         if (check > 0) {

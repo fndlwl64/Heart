@@ -33,6 +33,7 @@ public interface ReviewDAO {
     public List<ReviewCommentDTO> listComment(int review_no);
     public int countComment(int review_no);
     public int deleteComment(int comment_commentno);
+    public int deleteAllComment(int review_no);
     
     ////////////////////////////////////////////////////////////
     // Mypage

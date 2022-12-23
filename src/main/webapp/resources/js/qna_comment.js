@@ -1,7 +1,7 @@
 // 삭제 모달
 $(function() {
-    const deleteModal = document.getElementById('deleteModal')
-    const deleteInput = document.getElementById('deleteInput')
+    const deleteModal = document.getElementById('deleteCommentModal')
+    const deleteInput = document.getElementById('deleteCommentInput')
 
     deleteModal.addEventListener('shown.bs.modal', (e) => {
         deleteInput.focus();
@@ -10,7 +10,7 @@ $(function() {
         let userId = $(e.relatedTarget).data('user');
         let boardNo = $(e.relatedTarget).data('boardno');
         
-        $('#deleteFunction').on("click", function() {
+        $('#deleteCommentFunction').on("click", function() {
             commentDelete(commentNo, path, userId, boardNo);
         });
     });
@@ -31,7 +31,7 @@ function commentDelete(commentNo, path, userId, boardNo) {
           if(check > 0){
               commentTable(userId, boardNo, path);
               commentCount(boardNo, path);
-              $('#deleteModal').modal('hide');
+              $('#deleteCommentModal').modal('hide');
               $('.modal-backdrop').hide();
           }
       },
@@ -76,8 +76,9 @@ function commentTable(userId, boardNo, path) {
           $("#comment-table tbody").append(aloading);
       },
       success : function(commentList) {
+          $("#comment-table caption").remove();
           $("#comment-table thead").remove();
-          $("#comment-table tbody").remove();
+          $("#comment-table tbody").remove();          
           let comment = "";
           if(commentList.length > 0) {
               comment += '<caption>등록된 댓글</caption>';
@@ -98,10 +99,10 @@ function commentTable(userId, boardNo, path) {
                   comment += '<td><small>' + commentList[i].comment_regdate + '</small></td>';
                   comment += '<td style=\"vertical-align:middle;\">';
                   if(userId == 'admin') {
-                       comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-boardno='+boardNo+'>삭제</button>';
+                       comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteCommentModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-boardno='+boardNo+'>삭제</button>';
                   }else {
                       if(userId == commentList[i].comment_id) {
-                          comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-boardno='+boardNo+'>삭제</button>';
+                          comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteCommentModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-boardno='+boardNo+'>삭제</button>';
                       }
                   }
                   comment += '</td></tr>';
