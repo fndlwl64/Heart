@@ -23,7 +23,7 @@
     <div class="qna-section">
         <div class="qna-title">
             <span>문의게시판</span>
-            <p>HeartPet의 궁금한 사항을 물어보세요.</p>
+            <p>HeartPet에 궁금한 사항을 물어보세요.</p>
         </div>
     </div>
 

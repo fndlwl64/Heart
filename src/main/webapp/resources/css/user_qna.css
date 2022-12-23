@@ -180,16 +180,56 @@ body {
 }
 
 /* qna_content - reply */
-.reply-table {
-    width: 100%;
-    margin-bottom: 1rem;
+/* 댓글쓰기 */
+#comment-table {
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    background-color: #f8f9fa;
+}
+
+#comment-table .comment-content {
+    text-align: left;
+    vertical-align: text-top;
+}
+
+#comment-table tr th {
+    height: 2rem;
     text-align: center;
-    font-size: 15px;
+}
+
+#comment-table tr td {
+    min-height: 4rem;
+    text-align: center;
+    
+}
+
+#comment-table caption { 
+    caption-side:top; 
+    font-size: 17px;
+    font-weight: bold;
+    padding-left: 1rem;
+    color: black;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+.reply-table {
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #f8f9fa;
+    text-align: center;
+}
+
+.reply-table tr th {
+    vertical-align: middle;
 }
 
 #content-reply {
     text-align: right;
 }
+
 #content-reply > button {
     margin-top: 0.5rem;
 }
