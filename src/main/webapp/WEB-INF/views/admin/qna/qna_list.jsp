@@ -12,7 +12,6 @@
 <c:set var="search_id" value="${ search_id }"/>
 <c:set var="search_content" value="${ search_content }"/>
 <c:set var="order" value="${ order }"/>
-<c:out value="" />
 <c:set var="cList" value="${ commentList }"/>
 <c:set var="url" value="&search_category=${ search_category }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&search_id=${ search_id }&search_content=${ search_content }&order=${ order }" />
 <c:set var="link_address" value="${pageContext.request.contextPath}/admin_qna_list" />
@@ -104,7 +103,7 @@
                     <th class="table-light" width="12.5%">답변 / 삭제</th>
                 </tr>
 				<c:forEach items="${ qList }" var="list" varStatus="status">
-                <tr>
+				<tr <c:if test="${ list.board_state eq 'disabled' }">style="background-color:#A8A8A8;"</c:if>>
                     <td>${ list.board_no }</td>
                     <td>${ list.board_category }</td>
                     <td class="list-title">
@@ -122,7 +121,7 @@
 		                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if>
 		                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
 		                    <c:if test="${ list.board_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>
-		                    <c:if test="${ cList[status.index] gt 0 }"><span class="comment-count">[${ cList[status.index] }]</span></c:if>
+		                    <c:if test="${ cList[status.index] gt 0 }"><span <c:if test="${ list.board_state eq 'disabled' }">style="color:black;"</c:if> class="comment-count">[${ cList[status.index] }]</span></c:if>
                         </a>
                     </td>
                     <td><c:if test="${ list.board_id eq 'admin' }"><span id="admin_id">관리자</span></c:if>

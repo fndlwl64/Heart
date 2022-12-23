@@ -75,6 +75,7 @@
     
     <table class="table caption-top" id="comment-table">
     </table>
+    <c:if test="${ list.board_state ne 'disabled' }">
     <table class="table reply-table">
         <tr class="align-middle">
             <th class="col-1">댓글쓰기</th>
@@ -84,7 +85,7 @@
             </td>
         </tr>
     </table>
-
+    </c:if>
     <%-- button  --%>
     <div class="buttons">
         <div>

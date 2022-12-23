@@ -62,6 +62,8 @@
 				        </c:if>                  
 				    </div>
 				</td>
+			</tr>
+			<tr>
 				<td colspan="5">
                     <div class="d-grid align-middle original-image">
                         <input type="file" class="form-control" name="review_file" accept="image/gif, image/jpeg, image/png" >
@@ -70,6 +72,8 @@
                         </c:if>                  
                     </div>
                 </td>
+            </tr>
+            <tr>
                 <td colspan="5">
                     <div class="d-grid align-middle original-image">
                         <input type="file" class="form-control" name="review_file" accept="image/gif, image/jpeg, image/png" >
@@ -89,9 +93,13 @@
             </tr>
         </table>
 	    <div class="buttons">
-		    <button type="button" class="btn btn-dark mx-1" onclick="location.href='${path}/admin_review_list'"><i class="bi bi-card-list"></i> 목록</button>
-		    <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
-		    <button type="submit" class="btn btn-success mx-1"><i class="bi bi-eraser"></i> 수정</button>
+            <div>
+                <button type="button" class="btn btn-dark mx-1" onclick="location.href='${path}/admin_review_list'"><i class="bi bi-card-list"></i> 목록</button>
+		    </div>
+		    <div>
+			    <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
+			    <button type="submit" class="btn btn-success mx-1"><i class="bi bi-eraser"></i> 수정</button>
+		    </div>
 		</div>
         </form>
     </div>

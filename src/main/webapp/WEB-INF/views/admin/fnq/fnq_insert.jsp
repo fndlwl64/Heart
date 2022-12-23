@@ -3,7 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<c:set var="link_address" value="${pageContext.request.contextPath}/user_fnq_list" />
 
 <jsp:include page="../../include/admin_header.jsp"/>
 <!DOCTYPE html>
