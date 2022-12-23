@@ -41,6 +41,9 @@
 			test="animalDTO.animal_size != null and !animalDTO.animal_size.equals('')">
 			and animal_size = #{animalDTO.animal_size }
 		</if>
+		<if test="startWeight != 0 and endWeight != 0">
+			and (animal_weight between #{startWeight} and #{endWeight} or animal_weight = 0)
+		</if>
 		<if
 			test="animalDTO.animal_neutered != null and !animalDTO.animal_neutered.equals('')">
 			and animal_neutered = #{animalDTO.animal_neutered }
@@ -61,10 +64,10 @@
 			test="animalDTO.animal_gender != null and !animalDTO.animal_gender.equals('')">
 			and animal_gender = #{animalDTO.animal_gender }
 		</if>
-		<if
+		<!-- <if
 			test="animalDTO.animal_weight != 0">
 			<![CDATA[and animal_weight >= ${animalDTO.animal_weight} ]]>
-		</if>
+		</if> -->
 		<if
 			test="animalDTO.animal_status != null and !animalDTO.animal_status.equals('')">
 			and animal_status = #{animalDTO.animal_status}
@@ -129,6 +132,9 @@
 			test="animalDTO.animal_size != null and !animalDTO.animal_size.equals('')">
 			and animal_size = #{animalDTO.animal_size }
 		</if>
+		<if test="startWeight != 0 and endWeight != 0">
+			and (animal_weight between #{startWeight} and #{endWeight} or animal_weight = 0)
+		</if>
 		<if
 			test="animalDTO.animal_neutered != null and !animalDTO.animal_neutered.equals('')">
 			and animal_neutered = #{animalDTO.animal_neutered }
@@ -149,10 +155,10 @@
 			test="animalDTO.animal_gender != null and !animalDTO.animal_gender.equals('')">
 			and animal_gender = #{animalDTO.animal_gender }
 		</if>
-		<if
+		<!-- <if
 			test="animalDTO.animal_weight != 0">
 			<![CDATA[and animal_weight >= ${animalDTO.animal_weight} ]]>
-		</if>
+		</if> -->
 		<if
 			test="animalDTO.animal_status != null and !animalDTO.animal_status.equals('')">
 			and animal_status = #{animalDTO.animal_status}

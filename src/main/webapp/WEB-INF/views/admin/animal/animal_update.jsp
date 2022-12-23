@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../../include/admin_header.jsp" />
 <c:set var="dto" value="${content }" />
+<c:set var="path" value="<%=request.getContextPath()%>"/>
 <script src="resources/js/admin.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <link rel="stylesheet" href="resources/css/admin_animal.css">
@@ -109,14 +110,14 @@
 						<div class="image-upload">
 							<label for="file-form-control text-center"> <img
 								id="file_change1" class="logo"
-								src="resources/upload/${dto.animal_img1 } "
+								src="${path}${dto.animal_img1 } "
 								alt="review_img" />
 							</label> <input class="file_input btn" id="file-form-control text-center"
 								type="file" onchange="readURL4(this);" name="files" />
 						</div> <c:if test="${not empty dto.animal_img2 }">
 							<div class="image-upload">
 								<label for="file-input2"> <img id="file_change2"
-									class="logo" src="resources/upload/${dto.animal_img2 } "
+									class="logo" src="${path}${dto.animal_img2 } "
 									alt="review_img" />
 								</label> <input class="file_input btn" id="file-input2" type="file"
 									onchange="readURL5(this);" name="files" />
@@ -124,7 +125,7 @@
 						</c:if> <c:if test="${not empty dto.animal_img3 }">
 							<div class="image-upload">
 								<label for="file-input3"> <img id="file_change3"
-									class="logo" src="resources/upload/${dto.animal_img3 } "
+									class="logo" src="${path}${dto.animal_img3 } "
 									alt="review_img" />
 								</label> <input class="file_input btn" id="file-input3" type="file"
 									onchange="readURL6(this);" name="files" />

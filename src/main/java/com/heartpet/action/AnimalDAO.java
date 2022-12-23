@@ -15,10 +15,10 @@ public interface AnimalDAO {
     public List<AnimalDTO> list();
     public List<AnimalDTO> listTag(String animal_tag);
     public List<AnimalDTO> listTagUser(String animal_tag);
-    public List<AnimalDTO> listPaging(int startNO, int endNo, AnimalDTO animalDTO, String keyword,String sort);
+    public List<AnimalDTO> listPaging(int startNO, int endNo, AnimalDTO animalDTO, String keyword,String sort,int startWeight, int endWeight);
     public AnimalDTO content(int id);
     public List<AnimalDTO> search();
     public Map<String, Object> animalName(int animal_no);
     public int count(String animal_tag);
-    public int countPaging(AnimalDTO dto, String keyword);
+    public int countPaging(AnimalDTO dto, String keyword,int startWeight, int endWeight);
 }

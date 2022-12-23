@@ -154,13 +154,13 @@
 						</select> <span class="btn btn-sm btn-secondary position-relative">크기</span>
 					</div>
 				</div>
-				<div class="col text-lg-end">
+				<%-- <div class="col text-lg-end">
 					<div class="input-group">
 						<input type="number" value="${animalDTO.animal_weight }" min="0" name="animal_weight"
 							class="form-control form-control-sm" style="width: 70px"> <span
 							class="btn btn-sm btn-secondary position-relative">무게</span>
 					</div>
-				</div>
+				</div> --%>
 			</div>
 			<div class="row animal_row">
 				<div class="col"></div>
