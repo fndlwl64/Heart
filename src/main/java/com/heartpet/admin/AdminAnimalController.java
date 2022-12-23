@@ -175,7 +175,7 @@ public class AdminAnimalController {
 
 	@RequestMapping(value = "/animal_update", method = RequestMethod.POST)
 	public String animal_update_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO) {
-		
+		System.out.println(files.size());
 		List<String> originImgs = new ArrayList<String>();
 		originImgs.add(animalDTO.getAnimal_img1());
 		originImgs.add(animalDTO.getAnimal_img2());
@@ -190,10 +190,10 @@ public class AdminAnimalController {
 			animalDTO.setAnimal_img1(newImgs.get(0));
 			animalDTO.setAnimal_img2(newImgs.get(1));
 			animalDTO.setAnimal_img3(newImgs.get(2));
+			
 			animalDAO.update(animalDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
-			upload.deleteAnimalImg(request, animalDTO);
 			request.setAttribute("msg", "업데이트를 실패했습니다.");
 			request.setAttribute("url", "back");
 			return "alert";

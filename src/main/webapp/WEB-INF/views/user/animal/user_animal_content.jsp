@@ -19,6 +19,7 @@ pageContext.setAttribute("newline", "\n");
 	id="linkwish">
 <input type="hidden" value="${user_id }" id="user_id" />
 <input type="hidden" value="${user_grade }" id="user_grade" />
+<input type="hidden" value="${dto.animal_no }" id="animal_number"/>
 <script src="${path}/resources/js/admin_list_view.js"></script>
 <div class="container">
 	<div class="_container">
@@ -174,45 +175,33 @@ pageContext.setAttribute("newline", "\n");
 			return false;
 		}
 	}
-	$(document)
-			.ready(
-					function() {
-						$("#wish")
-								.on(
-										"click",
-										function() {
-											let wishDTO = {
-												"wish_petno" : $("#animal_no")
-														.val(),
-												"wish_userid" : $("#user_id")
-														.val()
-											};
-											$
-													.ajax({
-														url : $("#linkwish")
-																.val(),
-														type : 'POST',
-														data : JSON
-																.stringify(wishDTO),
-														contentType : "application/json",
-														success : function(data) {
-															if (data) {
-																$("#wish")
-																		.empty();
-																$("#wish")
-																		.append(
-																				'<i class="bi bi-star-fill text-warning"></i>');
-															} else {
-																$("#wish")
-																		.empty();
-																$("#wish")
-																		.append(
-																				'<i class="bi bi-star"></i>');
-															}
-														}
-													})
-										});
-					});
+	let wishDTO = {
+		"wish_petno" : $("#animal_number").val(),
+		"wish_userid" : $("#user_id").val()
+	};
+	$(document).ready(function() {$("#wish").on("click",function() {
+		let wishDTO = {
+			"wish_petno" : $("#animal_number").val(),
+			"wish_userid" : $("#user_id").val()
+		};
+		$.ajax({
+			url : $("#linkwish").val(),
+			type : 'POST',
+			data : JSON.stringify(wishDTO),
+			contentType : "application/json",
+			success : function(data) {
+				if (data) {
+					$("#wish").empty();
+					$("#wish").append(
+									'<i class="bi bi-star-fill text-warning"></i>');
+				} else {
+					$("#wish").empty();
+					$("#wish").append('<i class="bi bi-star"></i>');
+				}
+			}
+		})
+		});
+	});
 </script>
 
 
