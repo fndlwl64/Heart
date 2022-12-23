@@ -202,18 +202,18 @@ public class AdminController {
     
     // 관리자 리스트에서 삭제하기
     @RequestMapping("/user_delete")
-    public void user_delete(@RequestParam("user_no") int no, HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public void user_delete(@RequestParam("user_id") String id, HttpServletResponse response, HttpServletRequest request) throws IOException {
     	response.setContentType("text/html; charset=utf-8");
     	PrintWriter out = response.getWriter();
-    	int res = userDAO.deleteuser(no);
+    	
+    	int res = userDAO.deleteuser(id);
     	
     	if(res>0) {
-    		//userDAO.update_num(no);
     		
-    		System.out.println("회원 정보 삭제 ㄱ");
+    		System.out.println("회원 정보 변경 ㄱ");
     		out.println("<script>");
     		out.println("alert('회원 정보 수정 완료');");
-    		out.println("location.href='"+request.getContextPath()+"/user_list'");
+    		out.println("location.href='"+request.getContextPath()+"/user_view?user_id="+id+"'");
     		out.println("</script>");
     		out.flush();
     	}else {
