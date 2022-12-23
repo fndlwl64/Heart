@@ -27,7 +27,10 @@
 <div class="div1">
 
 	<div class="text-center main-title">
-		<label>입양을 기다리는 동물들 <span class="more_info" onclick="search()">자세히 찾아보기</span></label>
+		<label>입양을 기다리는 ${ animal } 
+		<span class="more_info" onclick="search()">자세히 찾아보기</span>
+		</label>
+		<p>당신과 평생 함께 할 ${ animal }를 만나보세요.</p>
 	</div>
 	
 	<input type="hidden" id="sortlink"
@@ -36,7 +39,7 @@
 	<div id="form" class="form_search mb-3">
 		<form action="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list" class="validation-form wells" method="post">
             <div class="search-semi-title">
-                <span><i class="bi bi-search-heart-fill"></i> 당신의 ${ animal }를 찾아보세요.</span>
+                <span><i class="bi bi-search-heart-fill"></i> ${ animal } 찾기</span>
             </div>            
             <table class="table table-borderless animal-table">
                 <tr>
