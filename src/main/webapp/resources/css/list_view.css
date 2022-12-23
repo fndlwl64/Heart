@@ -504,6 +504,16 @@ body {
 
 /* 댓글쓰기 */
 #comment-table {
+	width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    background-color: #f8f9fa;
+}
+
+#comment-table .comment-content {
+	text-align: left;
+	vertical-align: text-top;
 }
 
 #comment-table tr th {
@@ -513,7 +523,21 @@ body {
 #comment-table tr td {
 	min-height: 4rem;
 }
+
+#comment-table caption { 
+	caption-side:top; 
+	font-size: 17px;
+	font-weight: bold;
+	padding-left: 1rem;
+	color: black;
+	background-color: #f8f9fa;
+}
 .reply-table {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #f8f9fa;
+	
 }
 
 .reply-table tr th {

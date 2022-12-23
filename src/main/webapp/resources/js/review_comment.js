@@ -80,10 +80,11 @@ function commentTable(userId, reviewNo, path) {
           $("#comment-table tbody").remove();
           let comment = "";
           if(commentList.length > 0) {
+              comment += '<caption>등록된 댓글</caption>';
               comment += '<thead><tr>';
               comment += '<th class="col-1">작성자</th>';
-              comment += '<th class="col-9">댓글내용</th>';
-              comment += '<th class="col-1">작성시간</th>';
+              comment += '<th class="col-8">댓글내용</th>';
+              comment += '<th class="col-2">작성시간</th>';
               comment += '<th class="col-1">삭제</th>';
               comment += '</tr></thead><tbody>';
               console.log(commentList.length);
@@ -93,7 +94,7 @@ function commentTable(userId, reviewNo, path) {
                   }else {
                     comment += '<tr><td style=\"vertical-align:middle;\"><a>' + commentList[i].comment_id + '</a></td>';
                   }  
-                  comment += '<td style=\"text-align:left\"><div style=\"min-height:2rem\">' + commentList[i].comment_content + '</div></td>';
+                  comment += '<td class=\"comment-content\"><div style=\"min-height:2rem\">' + commentList[i].comment_content + '</div></td>';
                   comment += '<td><small>' + commentList[i].comment_regdate + '</small></td>';
                   comment += '<td style=\"vertical-align:middle;\">';
                   if(userId == 'admin') {
