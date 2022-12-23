@@ -15,7 +15,7 @@
 <div class="notice-board">
     <div align="center">
         <div class="notice-title">
-            <h2>공지사항</h2>
+            <span>공지사항</span>
         </div>
         <%-- 검색 폼 --%>
         <div>
@@ -25,23 +25,24 @@
             	<div class="search-table-box">
 	                <table class="table table-sm" id="search-table">
 	                    <tr>
-	                        <th>공지제목</th>
-	                        <td><input type="text" class="form-control" name="search_title" value="${ search_title }" /></td>
-	                        <th>공지내용</th>
-	                        <td><input type="text" class="form-control" name="search_cont" value="${ search_cont }" /></td>
-	                    </tr>
-	                    <tr>    
-	                        <th>게시일(시작)</th>
-	                        <td><input type="date" class="form-control" name="search_date_start" value="${ search_date_start }" /></td>
-	                        <th>게시일(종료)</th>
-	                        <td><input type="date" class="form-control" name="search_date_end" value="${ search_date_end }" /></td>
+	                        <th width="10%">제목</th>
+	                        <td width="15%"><input type="text" class="form-control" name="search_title" value="${ search_title }" /></td>
+	                        <th width="10%">내용</th>
+	                        <td width="15%"><input type="text" class="form-control" name="search_cont" value="${ search_cont }" /></td>
+	                        <th width="10%">작성일자</th>
+	                        <td width="40%">
+		                        <div class="notice-date">
+			                        <input type="date" class="form-control" name="search_date_start" value="${ search_date_start }" />
+			                        <input type="date" class="form-control" name="search_date_end" value="${ search_date_end }" />
+		                        </div>
+	                        </td>
 	                    </tr>                                                           
 	                </table>
+					<div class="search-buttons">
+			            <button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
+						<button class="btn btn-light" type="button" onclick="location.href='${ path }/user_notice'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
+		            </div>   
 				</div>
-				<div class="search-buttons">
-					<button class="btn btn-light" type="button" onclick="location.href='${ path }/user_notice'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
-		            <button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
-	            </div>   
             </div>
         </form>
 		</div>

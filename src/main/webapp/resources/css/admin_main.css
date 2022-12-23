@@ -1,7 +1,6 @@
-@charset "UTF-8";
 body {
 	overflow-x: hidden;
-	font-family: 'Gowun Dodum', sans-serif;	
+	font-family: 'Gowun Dodum', sans-serif !important;	
 }
 
 .container {
