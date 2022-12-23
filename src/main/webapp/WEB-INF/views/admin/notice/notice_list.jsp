@@ -96,7 +96,7 @@
                 </c:if>
             </table>
             <br>
-			<button id="insert_btn"class="btn btn-primary insertbtn mb-3" onclick="location.href='${path}/notice_insert'"><i class="bi bi-pencil-fill"></i> 등록</button>
+			<button id="insert_btn"class="btn btn-primary insertbtn mb-3" onclick="location.href='${path}/notice_insert'" style="float: right;"><i class="bi bi-pencil-fill"></i> 등록</button>
         </div>
 
         <br><br>
