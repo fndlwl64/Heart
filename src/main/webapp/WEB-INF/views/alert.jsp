@@ -24,7 +24,11 @@
         cautionModal.addEventListener('shown.bs.modal', (e) => {
         	cautionInput.focus();
             $('#cautionFunction').on("click", function() {
-               location.href = url;        
+              	if(url === 'back'){
+              		history.back();
+              	}else{
+              		location.href = url;
+              	}
             });
         });
     });
