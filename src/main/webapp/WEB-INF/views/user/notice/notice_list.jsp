@@ -65,20 +65,19 @@
 	        </div>
 	    <!-- </form> -->
 	    </div>
-        <br><br>
-        <table class="table table-bordered">
+        <table class="table table-bordered notice-main-table">
             <tr class="table-light">
-                <th>글 No.</th>
-                <th>공지제목</th>
-                <th>게시일</th>
-                <th>조회수</th>
+                <th width="10%">No</th>
+                <th width="65%">제목</th>
+                <th width="15%">게시일</th>
+                <th width="10%">조회수</th>
             </tr>
             <c:if test="${!empty List}">
                 <c:forEach items="${List }" var="dto">
             <tr>
                 <td>${dto.getNotice_no()}</td>
-                <td><a href="${path }/user_notice_content?no=${dto.getNotice_no() }">${dto.getNotice_title() }</a></td>
-                <td>${dto.getNotice_date().substring(0, 10) }</td>
+                <td class="notice-table-title"><a href="${path }/user_notice_content?no=${dto.getNotice_no() }">${dto.getNotice_title() }</a></td>
+                <td><small>${dto.getNotice_date().substring(0, 10) }</small></td>
                 <td>${dto.getNotice_hit() }</td>
             </tr>
                 </c:forEach>

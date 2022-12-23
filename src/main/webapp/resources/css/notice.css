@@ -20,7 +20,7 @@
 }
 
 .notice-board .search-table-box .search-buttons {
-	
+	text-align: right;
 }
 
 .notice-board .search-table-box .search-buttons .btn-light {
@@ -49,6 +49,15 @@
 .notice-board .notice_content {
     text-decoration: none;
     color: gray;
+}
+
+.notice-board .notice-main-table {
+	width: 70%;
+}
+
+.notice-board .notice-main-table .notice-table-title {
+	text-decoration: none;
+	text-align: left;
 }
 
 .notice-board .notice_content {
@@ -102,11 +111,13 @@
 	width: auto;
 }
 
-.notice-section2 .row .total-data .form-select {
-	float: right;
-	clear: both;
-	width: auto;
-	margin-right: 20%;
+.notice-section2 {
+	display: flex;
+	flex-wrap: wrap;
+	width: 70%;
+	justify-content: flex-end;
+	margin-bottom: 0.5rem;
+}
 
 body {
 	overflow-x: hidden;
