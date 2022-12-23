@@ -5,6 +5,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="list" value="${ reviewContent }" />
 <c:set var="uList" value="${ userContent }" />
+<c:set var="deleteAddr" value="${ path }/user_review_delete?review_no=${ list.review_no }" />
 <c:if test="${ not empty session_admin_id }">
     <c:set var="session_id" value="${ session_admin_id }" />
 </c:if>
@@ -15,25 +16,25 @@
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${ path }/resources/css/user_review.css" />
 <script type="text/javascript">
-$(function() {
-    let userId = '${ session_id }';
-    let reviewNo = ${ list.review_no };
-    let path = '${ path }';
-    commentTable(userId, reviewNo, path);    
-    commentCount(reviewNo, path);
-});
+	$(function() {
+	    let userId = '${ session_id }';
+	    let reviewNo = ${ list.review_no };
+	    let path = '${ path }';
+	    commentTable(userId, reviewNo, path);    
+	    commentCount(reviewNo, path);
+	});
 </script> 
 <script type="text/javascript" src="${ path }/resources/js/review_comment.js"></script>
+<script type="text/javascript" src="${ path }/resources/js/admin_list_view.js"></script>
 
 <%-- 입양후기 상세 보기 --%>
 <div id="review-contents" class="review-contents">
     <div class="review-section">
         <div class="row">
-            <div class="col-3 space"></div>
-            <div class="col-6 title">
+            <div class="col title">
                 <h2>입양후기 - ${ list.animal_name } </h2>
+                <h6>HeartPet을 통해 가족을 찾은 ${ list.animal_name }의 이야기입니다.</h6>
             </div>
-            <div class="col-3 space"></div>
         </div>
     </div>
 
@@ -86,11 +87,11 @@ $(function() {
             </div>
 
             <%-- 댓글쓰기 --%>
-		    <table class="table table-bordered" id="comment-table"></table>
-		    <table class="table table-bordered reply-table">
+		    <table class="table caption-top" id="comment-table"></table>
+		    <table class="table reply-table">
 		        <tr class="align-middle">
-		            <th class="col-2">댓글쓰기</th>
-		            <td class="col-10" id="content-reply">
+		            <th class="col-1">댓글쓰기</th>
+		            <td class="col-12" id="content-reply">
 		                <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" required="required"
 		                <c:if test="${ not empty session_id }">placeholder="댓글을 남겨보세요."</c:if>  
 		                <c:if test="${ empty session_id }">placeholder="로그인이 필요합니다."</c:if>></textarea>
@@ -104,20 +105,25 @@ $(function() {
 		        </tr>
 		    </table>
 
-            <div class="content-buttons">
+            <div <c:if test="${ list.review_id eq session_id }">class="content-buttons"</c:if>
+                 <c:if test="${ list.review_id ne session_id }">class="content-buttons justify-content-end"</c:if>>
+                <div>
+                    <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_review_list'"><i class="bi bi-card-list"></i> 목록</button>
+                </div>
                 <c:if test="${ list.review_id eq session_id }">
-                <button type="button" class="btn btn-success" onclick="location.href='${path}/user_review_update?review_no=${ list.review_no }&animal_no=${ list.review_animal_id }'"><i class="bi bi-eraser"></i> 수정</button>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }"><i class="bi bi-trash3"></i> 삭제</button>
+                <div>
+	                <button type="button" class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }"><i class="bi bi-trash3"></i> 삭제</button>
+	                <button type="button" class="btn btn-success mx-1" onclick="location.href='${path}/user_review_update?review_no=${ list.review_no }&animal_no=${ list.review_animal_id }'"><i class="bi bi-eraser"></i> 수정</button>
+                </div>
                 </c:if>
-                <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_review_list'"><i class="bi bi-card-list"></i> 목록</button>
             </div>
         </div>
     </div>
     
     <%-- delete function --%>
 	<jsp:include page="../../include/deleteModal.jsp" />  
+	<jsp:include page="../../include/deleteCommentModal.jsp" />
 	      
-    <div class="space-add"></div>
 </div>
 
 <jsp:include page="../../include/user_footer.jsp" />

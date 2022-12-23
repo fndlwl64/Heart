@@ -24,7 +24,7 @@
         <table class="table noticeinfo mt-4">
             <tr class="border-top">
                 <th class="table-light col-1">카테고리</th>
-                <td class="col-3">
+                <td class="col-5">
                     <select class="form-select" name="fnq_category">
                         <option value="입양" selected="selected">입양</option>
                         <option value="입소">입소</option>
@@ -49,13 +49,15 @@
                 
         <%-- button  --%>
 	    <div class="buttons">
-            <button type="button" class="btn btn-secondary mx-1" onclick="location.href='${path}/admin_fnq_list'"><i class="bi bi-card-list"></i> 목록</button>
-            <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
-            <button type="submit" class="btn btn-dark mx-1"><i class="bi bi-save"></i> 등록</button>
+            <div>
+                <button type="button" class="btn btn-dark mx-1" onclick="location.href='${path}/admin_fnq_list'"><i class="bi bi-card-list"></i> 목록</button>
+            </div>
+            <div>
+	            <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
+	            <button type="submit" class="btn btn-primary mx-1"><i class="bi bi-save"></i> 등록</button>
+            </div>
 		</div>
         </form>        
     </div>
-
-    <div class="space-add"></div>
 
 </div>

@@ -27,7 +27,6 @@ public class UserMainController {
        
         List<AnimalDTO> dogList = this.animalDAO.mainAnimal("dog");
         List<AnimalDTO> catList = this.animalDAO.mainAnimal("cat");
-
         List<ReviewDTO> dogReviewList = this.reviewDAO.mainReview("dog"); 
         List<ReviewDTO> catReviewList = this.reviewDAO.mainReview("cat");
 

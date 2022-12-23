@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<%-- fnq insert --%>
+<%-- fnq update --%>
 <div class="container">
 
 	<div class="sub-title"><h4>FNQ 수정하기</h4></div>
@@ -61,7 +61,5 @@
 		</div>
         </form>        
     </div>
-
-    <div class="space-add"></div>
 
 </div>

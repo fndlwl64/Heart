@@ -13,9 +13,7 @@
 <div id="review-contents" class="review-contents">
     <div class="review-section">
         <div class="row">
-            <div class="col-3 space"></div>
-            <div class="col-6 title">입양후기 수정하기</div>
-            <div class="col-3 space"></div>
+            <div class="col title">입양후기 수정하기</div>
         </div>
     </div>
 
@@ -94,13 +92,15 @@
 
             <div class="review-section">
                 <div class="row">
-                    <div class="col-3 space"></div>
-                    <div class="col-6 title btn-insert">
-					    <button type="button" class="btn btn-dark" onclick="history.back();"><i class="bi bi-card-list"></i> 뒤로가기</button>
-					    <button type="reset" class="btn btn-warning"><i class="bi bi-pencil"></i> 다시작성</button>
-					    <button type="submit" class="btn btn-success"><i class="bi bi-eraser"></i> 수정하기</button>
+                    <div class="col title btn-insert">
+					    <div>
+					       <button type="button" class="btn btn-dark" onclick="location.href='${ path }/user_review_list'"><i class="bi bi-card-list"></i> 목록</button>
+					    </div>
+					    <div>
+						    <button type="reset" class="btn btn-warning"><i class="bi bi-pencil"></i> 리셋</button>
+						    <button type="submit" class="btn btn-success"><i class="bi bi-eraser"></i> 수정</button>
+					    </div>
                     </div>
-                    <div class="col-3 space"></div>
                 </div>
             </div>
         </form>

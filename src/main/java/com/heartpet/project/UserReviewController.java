@@ -308,7 +308,8 @@ public class UserReviewController {
         deleteFiles.deleteFile(request, origin_names);
         
         // 코멘트도 같이 지우는 메서드... 안 지우기로 함
-        // this.reviewDAO.deleteAllComment(review_no);
+        // 게시판은 안 지우고 리뷰는 지우는 걸로...
+        this.reviewDAO.deleteAllComment(review_no);
 
         int check = this.reviewDAO.deleteReview(review_no);
         if (check > 0) {
