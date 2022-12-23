@@ -76,6 +76,8 @@ function commentTable(userId, reviewNo, path) {
           $("#comment-table tbody").append(aloading);
       },
       success : function(commentList) {
+      
+          $("#comment-table caption").remove();      
           $("#comment-table thead").remove();
           $("#comment-table tbody").remove();
           let comment = "";
@@ -89,6 +91,8 @@ function commentTable(userId, reviewNo, path) {
               comment += '</tr></thead><tbody>';
               console.log(commentList.length);
               for (let i=0; i<commentList.length; i++) {
+                                console.log(1, userId);
+            console.log(2, commentList[i].comment_id);
                   if(commentList[i].comment_id == 'admin') {                  
                     comment += '<tr><td style=\"vertical-align:middle; color:red;\"><a>' + commentList[i].comment_id + '</a></td>';
                   }else {

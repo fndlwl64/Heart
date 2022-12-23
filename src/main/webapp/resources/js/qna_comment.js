@@ -76,8 +76,9 @@ function commentTable(userId, boardNo, path) {
           $("#comment-table tbody").append(aloading);
       },
       success : function(commentList) {
+          $("#comment-table caption").remove();
           $("#comment-table thead").remove();
-          $("#comment-table tbody").remove();
+          $("#comment-table tbody").remove();          
           let comment = "";
           if(commentList.length > 0) {
               comment += '<caption>등록된 댓글</caption>';
