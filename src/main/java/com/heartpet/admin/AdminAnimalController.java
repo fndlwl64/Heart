@@ -339,9 +339,14 @@ public class AdminAnimalController {
 		AnimalDTO animalDTO = new AnimalDTO();
 		animalDTO.setAnimal_no(animal_no);
 		animalDTO.setAnimal_status("입양 가능");
-		
-		animalDAO.updateStatus(animalDTO);
-		adoptRegDAO.updateCancel(adopt_reg_regno);
+		try {
+			animalService.adoptRegCancel(animalDTO, adopt_reg_regno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("msg", "cancel fail");
+			request.setAttribute("url", "back");
+			return "alert";
+		}
 		
 		UserDTO userinfo = userdao.getUserInfo(user_id);
 		

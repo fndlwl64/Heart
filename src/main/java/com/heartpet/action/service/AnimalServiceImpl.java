@@ -54,5 +54,11 @@ public class AnimalServiceImpl implements AnimalService {
 		}
 	}
 
+	@Override
+	public void adoptRegCancel(AnimalDTO animalDTO, int adopt_reg_regno) {
+		animalDAO.updateStatus(animalDTO);
+		adoptRegDAO.updateCancel(adopt_reg_regno);
+	}
+	
 
 }
