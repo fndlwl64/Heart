@@ -156,7 +156,7 @@
 			<div class="search-buttons">
 				<button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
 				<button class="btn btn-light" type="button" onclick="location.href='${ path }/user_${animalDTO.animal_tag }_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
-			</div>  
+			</div>
 		</form>
 	</div>
 	

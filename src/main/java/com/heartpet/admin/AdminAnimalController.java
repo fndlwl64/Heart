@@ -91,13 +91,31 @@ public class AdminAnimalController {
 			currentPage = page;
 		}
 
-		totalRecord = animalDAO.countPaging(animalDTO, keyword);
+
+    	int startWeight = 0 ;
+    	int endWeight = 0 ;
+    	
+    	//무게
+    	if(animalDTO.getAnimal_size() != null && animalDTO.getAnimal_size().equals("소형")) {
+    		startWeight = 1;
+    		endWeight = 4;
+    	}else if(animalDTO.getAnimal_size() != null && animalDTO.getAnimal_size().equals("중형")) {
+    		startWeight = 4;
+    		endWeight = 10;
+    	}else if(animalDTO.getAnimal_size() != null && animalDTO.getAnimal_size().equals("대형")) {
+    		startWeight = 10;
+    		endWeight = 40;
+    	}
+
+		
+		
+		totalRecord = animalDAO.countPaging(animalDTO, keyword,startWeight,endWeight);
 		PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
 
 		model.addAttribute("total", totalRecord);
 		model.addAttribute("paging", paging);
 		model.addAttribute("sort",sort);
-		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), animalDTO, keyword,sort));
+		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), animalDTO, keyword,sort,startWeight,endWeight));
 		model.addAttribute("animalDTO", animalDTO);
 
 		return "admin/animal/animal_list";
@@ -120,13 +138,30 @@ public class AdminAnimalController {
 			currentPage = page;
 		}
 
-		totalRecord = animalDAO.countPaging(animalDTO, keyword);
+    	int startWeight = 0 ;
+    	int endWeight = 0 ;
+    	
+    	//무게
+    	if(animalDTO.getAnimal_size() != null && animalDTO.getAnimal_size().equals("소형")) {
+    		startWeight = 1;
+    		endWeight = 4;
+    	}else if(animalDTO.getAnimal_size() != null && animalDTO.getAnimal_size().equals("중형")) {
+    		startWeight = 4;
+    		endWeight = 10;
+    	}else if(animalDTO.getAnimal_size() != null && animalDTO.getAnimal_size().equals("대형")) {
+    		startWeight = 10;
+    		endWeight = 40;
+    	}
+
+		
+		
+		totalRecord = animalDAO.countPaging(animalDTO, keyword,startWeight,endWeight);
 		PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
 
 		model.addAttribute("total", totalRecord);
 		model.addAttribute("paging", paging);
 		model.addAttribute("sort",sort);
-		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), animalDTO, keyword,sort));
+		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(), animalDTO, keyword,sort,startWeight,endWeight));
 		model.addAttribute("animalDTO", animalDTO);
 
 		return "admin/animal/animal_list";
@@ -141,9 +176,20 @@ public class AdminAnimalController {
 	@RequestMapping(value = "/animal_update", method = RequestMethod.POST)
 	public String animal_update_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO) {
 		
+		List<String> originImgs = new ArrayList<String>();
+		originImgs.add(animalDTO.getAnimal_img1());
+		originImgs.add(animalDTO.getAnimal_img2());
+		originImgs.add(animalDTO.getAnimal_img3());
+		
+		
 		FileUploadImage upload = new FileUploadImage();
-		animalDTO = upload.uploadAnimalImg(request, files, "animal", animalDTO);
+		//animalDTO = upload.uploadAnimalImg(request, files, "animal", animalDTO);
+		
 		try {
+			List<String> newImgs = upload.updateFile(request, files, "animal", originImgs, 3);
+			animalDTO.setAnimal_img1(newImgs.get(0));
+			animalDTO.setAnimal_img2(newImgs.get(1));
+			animalDTO.setAnimal_img3(newImgs.get(2));
 			animalDAO.update(animalDTO);
 		} catch (Exception e) {
 			e.printStackTrace();

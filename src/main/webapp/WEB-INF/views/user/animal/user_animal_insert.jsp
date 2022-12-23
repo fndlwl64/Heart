@@ -82,7 +82,7 @@
 	            <tr>
 	                <th>사이즈 <span class="must-write">*</span></th>
 	                <td>
-	                    <select name="animal_size" class="form-select" id="size">
+	                    <select name="animal_size" class="form-select" id="size" onclick="optionChangeSize();">
 	                    	<option value=""></option>
 	                        <option value="소형">소형</option>
 	                        <option value="중형">중형</option>
@@ -92,7 +92,7 @@
 	                <th>무게 <span class="must-write">*</span></th>
 	                <td colspan="3">
 	                    <div class="d-flex align-items-center">
-		                    <input type="number" name="animal_weight" class="form-control" id="weight" min="0" max="40">
+		                    <input type="number" name="animal_weight" class="form-control" id="weight" min="0" max="40" placeholder="무게를 모르면 공백으로 해주세요">
 		                    <span class="ms-2"><b>kg</b></span>
 	                    </div>
 	                </td>
@@ -120,6 +120,22 @@
     </div>
 </div>
 <script>
+
+		function optionChangeSize(){
+			if($('#size').val() === '소형'){
+				$('#weight').prop("min" , '1');
+				$('#weight').prop("max" , '4');
+			}
+			if($('#size').val() === '중형'){
+				$('#weight').prop("min" , '4');
+				$('#weight').prop("max" , '10');
+			}
+			if($('#size').val() === '대형'){
+				$('#weight').prop("min" , '10');
+				$('#weight').prop("max" , '40');
+			}
+			console.log($('#weight').val());
+		}
 
         /*동적 동물 선택 태그*/
         function optionChange(){
@@ -198,8 +214,7 @@
                 return false;
             }
         	if ($('#weight').val() == ''){
-                alert("무게를 적어주세요");
-                return false;
+                $('#weight').attr("value",0);
             }
         	if ($('#content').val() == ''){
                 alert("내용을 적어주세요");
