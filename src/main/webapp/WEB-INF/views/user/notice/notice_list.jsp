@@ -16,6 +16,7 @@
     <div align="center">
         <div class="notice-title">
             <span>공지사항</span>
+            <p>HeartPet의 공지사항 게시판입니다.</p>
         </div>
         <%-- 검색 폼 --%>
         <div>
@@ -25,10 +26,10 @@
             	<div class="search-table-box">
 	                <table class="table table-sm" id="search-table">
 	                    <tr>
-	                        <th width="10%">제목</th>
-	                        <td width="15%"><input type="text" class="form-control" name="search_title" value="${ search_title }" /></td>
-	                        <th width="10%">내용</th>
-	                        <td width="15%"><input type="text" class="form-control" name="search_cont" value="${ search_cont }" /></td>
+	                        <th width="8.5%">제목</th>
+	                        <td width="16.5%"><input type="text" class="form-control" name="search_title" value="${ search_title }" /></td>
+	                        <th width="8.5%">내용</th>
+	                        <td width="16.5%"><input type="text" class="form-control" name="search_cont" value="${ search_cont }" /></td>
 	                        <th width="10%">작성일자</th>
 	                        <td width="40%">
 		                        <div class="notice-date">
@@ -65,7 +66,7 @@
 	        </div>
 	    <!-- </form> -->
 	    </div>
-        <table class="table table-bordered notice-main-table">
+        <table class="table table-hover table-bordered notice-main-table">
             <tr class="table-light">
                 <th width="10%">No</th>
                 <th width="65%">제목</th>
