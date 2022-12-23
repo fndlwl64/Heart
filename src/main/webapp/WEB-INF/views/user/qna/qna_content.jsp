@@ -24,6 +24,7 @@ $(function() {
 });
 </script> 
 <script type="text/javascript" src="${ path }/resources/js/qna_comment.js"></script>
+<%-- delete 기능은 밑에 있음 --%>
 
 <%-- 문의글 상세 보기 --%>
 <div id="qna-contents" class="qna-contents">
@@ -63,13 +64,20 @@ $(function() {
             </div>
 			
             <%-- 댓글쓰기 --%>
-            <table class="table table-bordered" id="comment-table"></table>
-			<table class="table table-bordered reply-table">
+            <table class="table caption-top" id="comment-table"></table>
+			<table class="table reply-table">
 			    <tr class="align-middle">
 			        <th class="col-1">댓글쓰기</th>
 			        <td class="col-11" id="content-reply">
-			            <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" placeholder="댓글을 남겨보세요." required="required"></textarea>
-			            <button type="button" class="btn btn-outline-primary btn-sm" onclick="commentSave('${ session_id }', ${ list.board_no }, '${ path }');"><i class="bi bi-reply"></i> 댓글등록</button>
+                        <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" required="required"
+                        <c:if test="${ not empty session_id }">placeholder="댓글을 남겨보세요."</c:if>  
+                        <c:if test="${ empty session_id }">placeholder="로그인이 필요합니다."</c:if>></textarea>
+                        <c:if test="${ not empty session_id }" >
+                            <button type="button" class="btn btn-outline-primary btn-sm" onclick="commentSave('${ session_id }', ${ list.board_no }, '${ path }');"><i class="bi bi-reply"></i> 댓글등록</button>
+                        </c:if>
+                        <c:if test="${ empty session_id }">
+                          <a class="btn btn-outline-dark btn-sm" href="#goto-login"><i class="bi bi-box-arrow-in-right"></i> 로그인</a>
+                        </c:if>
 			        </td>
 			    </tr>
 			</table>
@@ -85,7 +93,7 @@ $(function() {
                 </div>
                 <div class="right-button">
                 	<button type="button" class="btn btn-primary" onclick="location.href='${path}/user_qna_insert?board_parentNo=${ list.board_no }&board_group=${ list.board_group }'">
-                	<i class="bi bi-arrow-return-right"></i> 답변하기</button>
+                	<i class="bi bi-arrow-return-right"></i> 답변</button>
                 </div>
             </div>
         </div>
@@ -116,7 +124,5 @@ $(function() {
 	</form>
 	
     <jsp:include page="../../include/deleteModal.jsp" />	
-
-    <div class="space-add"></div>
 
 <jsp:include page="../../include/user_footer.jsp" />

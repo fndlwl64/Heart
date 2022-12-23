@@ -91,8 +91,8 @@
 		    <table class="table reply-table">
 		        <tr class="align-middle">
 		            <th class="col-1">댓글쓰기</th>
-		            <td class="col-12" id="content-reply">
-		                <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" required="required"
+		            <td class="col-11" id="content-reply">
+		                <textarea class="form-control" name="review_comment" id="comment_content" cols="30" rows="5" required="required"
 		                <c:if test="${ not empty session_id }">placeholder="댓글을 남겨보세요."</c:if>  
 		                <c:if test="${ empty session_id }">placeholder="로그인이 필요합니다."</c:if>></textarea>
 		                <c:if test="${ not empty session_id }" >
