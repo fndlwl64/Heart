@@ -56,9 +56,8 @@ public class AnimalController {
 	private WishDAO wishDAO;
 	@Autowired
 	private AnimalService animalService;
-  @Autowired
+	@Autowired
 	private UserDAO userDAO;
-
 	@Autowired
 	private HttpServletRequest request;
 	
