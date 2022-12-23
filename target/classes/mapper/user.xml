@@ -37,7 +37,7 @@
 	</select>
 	
 	<insert id="join" parameterType="UserDTO">
-		<selectKey keyProperty="user_no" resultType="int" order="BEFORE">select max(user_no)+1 from heartpet_user</selectKey>
+		<selectKey keyProperty="user_no" resultType="int" order="BEFORE">select max(nvl(animial_no, 0))+1 from heartpet_user</selectKey>
 		INSERT INTO HEARTPET_USER VALUES (#{user_no}, #{user_id}, #{user_pwd}, #{user_name}, default, #{user_email}, #{user_phone}, #{user_addr}, #{user_image}, default, #{user_animalexp})
 	</insert>
 	

@@ -19,11 +19,13 @@
             <p>HeartPet의 공지사항 게시판입니다.</p>
         </div>
         <%-- 검색 폼 --%>
-        <div>
+        <div class="mb-3">
         <form class="search_form" method="post" action="${path }/user_notice">
-            <div class="form_box">
-            	
+            <div class="form_box">            	
             	<div class="search-table-box">
+            	    <div class="search-semi-title">
+		                <span><i class="bi bi-search-heart-fill"></i> 공지 검색</span>
+		            </div>      
 	                <table class="table table-sm" id="search-table">
 	                    <tr>
 	                        <th width="8.5%">제목</th>
@@ -47,8 +49,6 @@
             </div>
         </form>
 		</div>
-
-        <br>
         
         <%-- 정렬 & 게시물 수 --%>
         <div>
