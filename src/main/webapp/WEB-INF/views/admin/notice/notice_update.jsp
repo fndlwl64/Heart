@@ -26,7 +26,7 @@
 			</tr>
 			<tr>
 				<th class="table-light"><span class="sp2">글내용</span></th>
-				<td><textarea rows="2" cols="22" class="form-control" name="notice_content">${dto.getNotice_content() }</textarea> </td>
+				<td><textarea rows="8" cols="22" class="form-control" name="notice_content">${dto.getNotice_content() }</textarea> </td>
 			</tr>
 			<tr>
 				<th class="table-light"><span class="sp2">조회수</span></th>

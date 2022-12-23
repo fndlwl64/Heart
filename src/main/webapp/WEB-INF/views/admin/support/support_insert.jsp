@@ -14,6 +14,8 @@
 <body>
 	<br><br>
 	<div class="div1" align="center">
+
+	<div class="sub-title"><h4>후원하기 등록하기</h4></div> 
 		<form method="post" action="${path }/support_insert_ok" onsubmit="return submitOption();">
 			<table class="table noticeinfo mt-4">
 				<tr class="border-top">
@@ -34,6 +36,7 @@
 	         <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
 	         <button id="update_btn" type="submit" class="btn btn-dark mx-1"><i class="bi bi-save"></i> 등록</button>
 		</form>
+
 	</div>
 </body>
 </html>
