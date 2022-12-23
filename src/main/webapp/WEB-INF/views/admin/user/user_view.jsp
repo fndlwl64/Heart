@@ -37,7 +37,23 @@
 						<ul class="info_border">
 							<li class="forMargin">
 								<div>
-									<label class="title">등급</label><span> ${cont.user_grade }</span> <br />
+									<label class="title">등급</label>
+									<c:if test="${cont.user_grade == 1 }">
+										<span> ${cont.user_grade } [관리자]</span> <br />
+									</c:if>
+									<c:if test="${cont.user_grade == 2 }">
+										<span> ${cont.user_grade } [입소가능회원]</span> <br />
+									</c:if>
+									<c:if test="${cont.user_grade == 3 }">
+										<span> ${cont.user_grade } [일반회원]</span> <br />
+									</c:if>
+									<c:if test="${cont.user_grade == 4 }">
+										<span> ${cont.user_grade } [블랙리스트]</span> <br />
+									</c:if>
+									<c:if test="${cont.user_grade == 5 }">
+										<span> ${cont.user_grade } [탈퇴회원]</span> <br />
+									</c:if>
+									
 									<label class="title">이메일</label> <span> ${cont.user_email}</span>
 								</div>
 							</li>
