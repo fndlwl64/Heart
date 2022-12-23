@@ -108,7 +108,7 @@ body {
 .div1 .main-title {
 	width: 70%;
 	margin: 0 auto;	
-	text-align: center;
+	text-align: left;
 	font-size: 25px;
 	font-weight: bold;
 	margin-bottom: 1rem;
@@ -118,6 +118,10 @@ body {
 	font-size: 14px;
 	color: darkgray;
 	cursor: pointer;
+}
+
+.div1 .main-title p {
+	font-size: 14px;
 }
 
 /* .justify-content-center .wells {
