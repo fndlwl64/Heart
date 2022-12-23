@@ -12,15 +12,22 @@
 	margin-bottom: 1rem;
 }
 
+.notice-board .notice-title > p {
+	font-size: 15px;
+	
+}
+
 .notice-board .search-table-box {
 	width: 70%;
 	border: 1px solid black;
 	border-radius: 5px;
 	padding: 1rem;
+	background-color: #f8f9fa;
+	
 }
 
 .notice-board .search-table-box .search-buttons {
-	
+	text-align: right;
 }
 
 .notice-board .search-table-box .search-buttons .btn-light {
@@ -31,6 +38,9 @@
 .notice-board .table{
     width: 100%;
     text-align: center;
+}
+
+.notice-board #search-table {
 }
 
 .notice-board #search-table tr th, td {
@@ -50,6 +60,24 @@
     text-decoration: none;
     color: gray;
 }
+
+.notice-board .notice-main-table {
+	width: 70%;
+}
+
+.notice-board .notice-main-table .notice-table-title {
+	text-decoration: none;
+	text-align: left;
+}
+
+.notice-board .notice-main-table .notice-table-title > a {
+	color: black;
+}
+
+.notice-board .notice-main-table .notice-table-title > a:hover {
+	text-decoration: underline;
+}
+
 
 .notice-board .notice_content {
 	border: solid 1px lightgray;
@@ -102,11 +130,13 @@
 	width: auto;
 }
 
-.notice-section2 .row .total-data .form-select {
-	float: right;
-	clear: both;
-	width: auto;
-	margin-right: 20%;
+.notice-section2 {
+	display: flex;
+	flex-wrap: wrap;
+	width: 70%;
+	justify-content: flex-end;
+	margin-bottom: 0.5rem;
+}
 
 body {
 	overflow-x: hidden;

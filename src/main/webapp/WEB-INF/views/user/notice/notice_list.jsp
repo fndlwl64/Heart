@@ -16,6 +16,7 @@
     <div align="center">
         <div class="notice-title">
             <span>공지사항</span>
+            <p>HeartPet의 공지사항 게시판입니다.</p>
         </div>
         <%-- 검색 폼 --%>
         <div>
@@ -25,10 +26,10 @@
             	<div class="search-table-box">
 	                <table class="table table-sm" id="search-table">
 	                    <tr>
-	                        <th width="10%">제목</th>
-	                        <td width="15%"><input type="text" class="form-control" name="search_title" value="${ search_title }" /></td>
-	                        <th width="10%">내용</th>
-	                        <td width="15%"><input type="text" class="form-control" name="search_cont" value="${ search_cont }" /></td>
+	                        <th width="8.5%">제목</th>
+	                        <td width="16.5%"><input type="text" class="form-control" name="search_title" value="${ search_title }" /></td>
+	                        <th width="8.5%">내용</th>
+	                        <td width="16.5%"><input type="text" class="form-control" name="search_cont" value="${ search_cont }" /></td>
 	                        <th width="10%">작성일자</th>
 	                        <td width="40%">
 		                        <div class="notice-date">
@@ -65,20 +66,19 @@
 	        </div>
 	    <!-- </form> -->
 	    </div>
-        <br><br>
-        <table class="table table-bordered">
+        <table class="table table-hover table-bordered notice-main-table">
             <tr class="table-light">
-                <th>글 No.</th>
-                <th>공지제목</th>
-                <th>게시일</th>
-                <th>조회수</th>
+                <th width="10%">No</th>
+                <th width="65%">제목</th>
+                <th width="15%">게시일</th>
+                <th width="10%">조회수</th>
             </tr>
             <c:if test="${!empty List}">
                 <c:forEach items="${List }" var="dto">
             <tr>
                 <td>${dto.getNotice_no()}</td>
-                <td><a href="${path }/user_notice_content?no=${dto.getNotice_no() }">${dto.getNotice_title() }</a></td>
-                <td>${dto.getNotice_date().substring(0, 10) }</td>
+                <td class="notice-table-title"><a href="${path }/user_notice_content?no=${dto.getNotice_no() }">${dto.getNotice_title() }</a></td>
+                <td><small>${dto.getNotice_date().substring(0, 10) }</small></td>
                 <td>${dto.getNotice_hit() }</td>
             </tr>
                 </c:forEach>
