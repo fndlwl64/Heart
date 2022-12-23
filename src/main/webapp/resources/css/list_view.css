@@ -117,6 +117,7 @@ body {
 	margin: 1rem auto;
 	background-color: #FDEDEC;
 	border-radius: 10px;
+	width: 80%;
 }
 
 .container .sub-title > h4 {
@@ -209,8 +210,12 @@ body {
     width: 60%;
     margin: auto;
 }
+
+/* 등록하기 form 수정하는 css */
 /* admin/notice_content.jsp  */
 .container .noticeinfo {
+	width: 80%;
+	margin: 0 auto;
 }
 
 .container .noticeinfo tr th {
@@ -488,13 +493,27 @@ body {
 
 /* buttons : 버튼 정렬 */
 .buttons {
+	width: 80%;
 	display: flex;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1rem;
 	margin-bottom: 3rem;
 	justify-content: space-between;
 }
 
 /* 댓글쓰기 */
 #comment-table {
+	width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    background-color: #f8f9fa;
+}
+
+#comment-table .comment-content {
+	text-align: left;
+	vertical-align: text-top;
 }
 
 #comment-table tr th {
@@ -504,7 +523,21 @@ body {
 #comment-table tr td {
 	min-height: 4rem;
 }
+
+#comment-table caption { 
+	caption-side:top; 
+	font-size: 17px;
+	font-weight: bold;
+	padding-left: 1rem;
+	color: black;
+	background-color: #f8f9fa;
+}
 .reply-table {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #f8f9fa;
+	
 }
 
 .reply-table tr th {
