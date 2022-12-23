@@ -22,7 +22,9 @@ public class AnimalServiceImpl implements AnimalService {
 
 	@Override
 	public void insert(AnimalDTO animalDTO, AdoptRegDTO adoptRegDTO) {
-		adoptRegDAO.insert(adoptRegDTO);
+		if(adoptRegDTO != null) {
+			adoptRegDAO.insert(adoptRegDTO);
+		}
 		animalDAO.insert(animalDTO);
 	}
 
