@@ -10,12 +10,19 @@ body {
     display: grid;
 }
 
-.qna-section .title {
-    font-size: 2rem;
+.qna-section .qna-title {
+    width: 70%;
+    text-align: left;
     font-weight: bold;
-    margin-left: 10px;
-    margin-bottom: 10px;
+    font-size: 2rem;
+    margin-left: 1rem;
 }
+
+.qna-section .qna-title > p {
+    font-size: 15px;
+    margin-bottom: 0.5rem;
+}
+
 
 /* 총 게시물 */
 .qna-section .total-data {
@@ -76,6 +83,11 @@ body {
 
 .table .left-align .qna-a-link {
     text-decoration: none;
+    color: black;
+}
+
+.table .left-align .qna-a-link:hover {
+	text-decoration: underline;
 }
 
 .table .left-align .disabled {

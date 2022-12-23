@@ -21,8 +21,9 @@
 <%-- qna list --%>
 <div id="qna-contents" class="qna-contents">
     <div class="qna-section">
-        <div class="row">
-            <div class="col title">QnA</div>
+        <div class="qna-title">
+            <span>문의게시판</span>
+            <p>HeartPet의 궁금한 사항을 물어보세요.</p>
         </div>
     </div>
 
@@ -43,12 +44,12 @@
     <%-- 아코디언 --%>
     <!-- 문의하기 -->
     <div class="qna-board">
-        <table class="table table-bordered mb-0">
+        <table class="table table-hover table-bordered mb-2">
             <thead>
 	            <tr class="table-light">
 	                <th scope="col" width="10%">No</th>
-	                <th scope="col" width="15%">카테고리</th>
-	                <th scope="col" width="40%">제목</th>
+	                <th scope="col" width="10%">카테고리</th>
+	                <th scope="col" width="45%">제목</th>
 	                <th scope="col" width="10%">작성자</th>
 	                <th scope="col" width="15%">작성일</th>
 	                <th scope="col" width="10%">조회수</th>
@@ -57,15 +58,15 @@
             <tbody>
             <c:if test="${ not empty qList }">
                 <c:forEach var="list" items="${ qList }" varStatus="status">
-                <tr>
+                <tr <c:if test="${ list.board_state eq 'disabled' }">style="background-color:#A8A8A8;"</c:if>>
                     <td>${ list.board_no }</td>
                     <td>${ list.board_category }</td>
                     <td class="left-align">     
                     	<c:if test="${ list.board_state ne 'disabled' }">            
-                        <a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }&board_parentNo=${ list.board_parentNo }&board_group=${ board_group }">
+                            <a class="d-block qna-a-link" href="${path}/user_qna_content?board_no=${ list.board_no }&board_parentNo=${ list.board_parentNo }&board_group=${ board_group }">
 	                    </c:if> 
 	                    <c:if test="${ list.board_state eq 'disabled' }">
-                        <a class="disabled">
+                            <a class="disabled">
 	                    </c:if>
 	                    <c:choose>
 	                    	<c:when test="${ list.level > 1 }">
