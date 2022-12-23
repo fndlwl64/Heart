@@ -282,4 +282,14 @@
 			FROM heartpet_animal 
 			WHERE animal_no = #{ animal_no }
 	</select>
+    
+    <select id="animal_main_list" parameterType="String" resultType="AnimalDTO">
+        SELECT * 
+            FROM (
+                SELECT * 
+                FROM heartpet_animal
+                WHERE animal_tag = #{ animal_tag } 
+               <![CDATA[ ORDER BY DBMS_RANDOM.VALUE)
+            WHERE ROWNUM <= 10 ]]>
+    </select>
 </mapper>

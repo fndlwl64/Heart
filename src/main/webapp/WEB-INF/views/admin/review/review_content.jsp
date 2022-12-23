@@ -22,7 +22,8 @@
             commentCount(reviewNo, path);
         });
     </script>
-    <script type="text/javascript" src="${ path }/resources/js/review_comment.js"></script>    
+    <script type="text/javascript" src="${ path }/resources/js/review_comment.js"></script>
+    <script src="${path}/resources/js/admin_list_view.js"></script>       
 </head>
 <body>
 
@@ -81,8 +82,8 @@
     </table>    
     
     <%-- 댓글쓰기 --%>
-    <table class="table table-bordered" id="comment-table"></table>
-    <table class="table table-bordered reply-table">
+    <table class="table caption-top" id="comment-table"></table>
+    <table class="table reply-table">
         <tr class="align-middle">
             <th class="col-1">댓글쓰기</th>
             <td class="col-11" id="content-reply">
@@ -94,15 +95,19 @@
     
     <%-- button  --%>
     <div class="buttons">
-	    <button class="btn btn-dark mx-1" onclick="location.href='${path}/admin_review_list'"><i class="bi bi-card-list"></i> 목록</button>
-        <button class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }"><i class="bi bi-eraser"></i> 삭제</button>
-	    <button class="btn btn-success mx-1" onclick="location.href='${path}/admin_review_update?review_no=${ list.review_no }&animal_no=${ list.review_animal_id }'"><i class="bi bi-pencil"></i> 수정</button>
+        <div>
+	       <button class="btn btn-dark mx-1" onclick="location.href='${path}/admin_review_list'"><i class="bi bi-card-list"></i> 목록</button>
+        </div>
+        <div>
+            <button class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }"><i class="bi bi-eraser"></i> 삭제</button>
+	       <button class="btn btn-success mx-1" onclick="location.href='${path}/admin_review_update?review_no=${ list.review_no }&animal_no=${ list.review_animal_id }'"><i class="bi bi-pencil"></i> 수정</button>
+	   </div>
 	</div>
 	
 	<%-- 삭제모달 --%>
 	<jsp:include page="../../include/deleteModal.jsp" />
+	<jsp:include page="../../include/deleteCommentModal.jsp" />
 	
-	<div class="space"></div>
 </div>
 
 </body>

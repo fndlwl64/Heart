@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+    <div class="modal fade" id="deleteCommentModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+       <div id="deleteCommentInput" class="modal-dialog modal-dialog-centered">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <h1 class="modal-title fs-5" id="deleteModalLabel">데이터 삭제</h1>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+               </div>
+               <div class="modal-body" id="deleteModalBody">
+                   해당 댓글을 삭제하시겠습니까?
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="deleteClose">Close</button>
+                   <button type="button" class="btn btn-danger" id="deleteFunction">삭제</button>
+               </div>
+           </div>
+       </div>
+   </div>

@@ -66,7 +66,7 @@
 	        </div>
 	    <!-- </form> -->
 	    </div>
-        <table class="table table-hover table-bordered notice-main-table">
+        <table id="table_font" class="table table-hover table-bordered notice-main-table">
             <tr class="table-light">
                 <th width="10%">No</th>
                 <th width="65%">제목</th>

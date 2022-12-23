@@ -120,6 +120,11 @@ public class QnaDAOImpl implements QnaDAO {
         return this.sqlSession.delete("qna_comment_delete", comment_commentno);
     }
     
+    @Override
+    public int deleteAllComment(int board_no) {
+        return this.sqlSession.delete("qna_comment_deleteAll", board_no);
+    }
+    
     ////////////////////////////////////////////////////////////
     // FNQ
     ////////////////////////////////////////////////////////////

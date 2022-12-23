@@ -109,7 +109,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="${path}/user_fnq_list">FAQ</a></li>
-                                    <li><a class="dropdown-item" href="${path}/user_qna_list">문의글</a></li>
+                                    <li><a class="dropdown-item" href="${path}/user_qna_list">문의게시판</a></li>
                                 </ul>
                             </li>
                             <li><a href="${path}/user_review_list">입양후기</a></li>

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HeartPet</title>
+<title>HeartPet_Admin_Animal</title>
 <link rel="stylesheet" href="${path}/resources/css/list_view.css">
 <c:set var="qList" value="${ qnaList }" />
 <c:set var="total" value="${ total }" />
@@ -140,7 +140,7 @@
     </div> --%>
 		<div class="qna-section">
 			<div class="row">
-				<div class="col total-data">
+				<div class="col total-data justify-content-end">
 					<select class="form-select form-select-sm order" name="sort" id="sort">
 						<option value="size" selected="selected" <c:if test="${sort eq 'size'}">selected</c:if>>최신등록순</option>
 						<option value="weight" <c:if test="${sort eq 'weight'}">selected</c:if>>무게</option>

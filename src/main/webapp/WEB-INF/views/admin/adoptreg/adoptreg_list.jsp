@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HeartPet</title>
+<title>HeartPet_Admin_Adopt_Reg</title>
 <link rel="stylesheet" href="${path }/resources/css/list_view.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
@@ -96,8 +96,7 @@
 			<div class="d-flex justify-content-end my-2">
 				<div class="validation-form mx-2">
 					<select class="form-select form-select-sm" name="sort" id="sort">
-						<option value="">정렬</option>
-						<option value="adopt_reg_appdate"
+						<option value="adopt_reg_appdate" selected="selected"
 							<c:if test="${sort eq 'adopt_reg_appdate'}">selected</c:if>>입소신청일</option>
 						<option value="adopt_reg_regdate"
 							<c:if test="${sort eq 'adopt_reg_regdate'}">selected</c:if>>입양등록일</option>

@@ -92,6 +92,12 @@ public class ReviewDAOImpl implements ReviewDAO {
         return this.sqlSession.selectList("review_total_list", animal_tag);
     }
     
+    // Main에 띄울 메서드
+    @Override
+    public List<ReviewDTO> mainReview(String animal_tag) {
+        return this.sqlSession.selectList("review_main_list", animal_tag);
+    }
+    
     //===========================================================
     // Admin : List 출력
     //===========================================================    
@@ -138,6 +144,11 @@ public class ReviewDAOImpl implements ReviewDAO {
     @Override
     public int deleteComment(int comment_commentno) {
         return this.sqlSession.delete("review_comment_delete", comment_commentno);
+    }
+    
+    @Override
+    public int deleteAllComment(int review_no) {
+        return this.sqlSession.delete("review_comment_deleteAll", review_no);
     }
 
     ///////////////////////////////////////////////////////

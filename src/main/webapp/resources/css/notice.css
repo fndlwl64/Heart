@@ -177,3 +177,7 @@ body {
 	width: 150px;
 	height: 150px;
 }
+
+#table_font {
+	font-size: 15px;
+}

@@ -23,7 +23,8 @@
 	    });
     </script>
     <script type="text/javascript" src="${ path }/resources/js/qna_comment.js"></script>
-    </head>
+    <script src="${path}/resources/js/admin_list_view.js"></script> 
+</head>
 <body>
 
 <div class="container">
@@ -72,11 +73,12 @@
         </tr>
     </table>
     
-    <table class="table table-bordered" id="comment-table"></table>
-    <table class="table table-bordered reply-table">
+    <table class="table caption-top" id="comment-table">
+    </table>
+    <table class="table reply-table">
         <tr class="align-middle">
-            <th class="col-2">댓글쓰기</th>
-            <td class="col-10" id="content-reply">
+            <th class="col-1">댓글쓰기</th>
+            <td class="col-11" id="content-reply">
                 <textarea class="form-control" name="board_comment" id="comment_content" cols="30" rows="5" placeholder="댓글을 남겨보세요." required="required"></textarea>
                 <button type="button" class="btn btn-outline-primary btn-sm" onclick="commentSave('${ session_admin_id }', ${ list.board_no }, '${ path }');"><i class="bi bi-reply"></i> 댓글등록</button>
             </td>
@@ -85,13 +87,18 @@
 
     <%-- button  --%>
     <div class="buttons">
-	    <button class="btn btn-dark mx-1" onclick="location.href='${path}/admin_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
-	    <button class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }"><i class="bi bi-trash3"></i> 삭제</button>
-	    <button class="btn btn-primary mx-1" onclick="location.href='${path}/admin_qna_reply_insert?board_parentNo=${ list.board_no }'"><i class="bi bi-reply"></i> 답변</button>
+        <div>
+	       <button class="btn btn-dark mx-1" onclick="location.href='${path}/admin_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
+	    </div>
+	    <div>
+		    <button class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }"><i class="bi bi-trash3"></i> 삭제</button>
+		    <button class="btn btn-primary mx-1" onclick="location.href='${path}/admin_qna_reply_insert?board_parentNo=${ list.board_no }'"><i class="bi bi-reply"></i> 답변</button>
+	    </div>
 	</div>
 
     <%-- 삭제모달 --%>
-	<jsp:include page="../../include/deleteModal.jsp" />
+    <jsp:include page="../../include/deleteModal.jsp" />
+    <jsp:include page="../../include/deleteCommentModal.jsp" />
 
 </div>
 

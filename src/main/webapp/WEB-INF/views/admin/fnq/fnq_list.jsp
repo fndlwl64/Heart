@@ -64,7 +64,7 @@
         <div class="row">
             <div class="col total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
                 <select class="form-select form-select-sm order" name="order" onchange="location.href='${ link_address }?page=${ paging.page }&search_category=${ search_category }&search_question=${ search_question }&search_answer=${ search_answer }&order='+this.value;">
-                    <option selected="selected" value="no_desc" <c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호순</option>
+                    <option selected="selected" value="no_desc" <c:if test="${ order eq 'no_desc' }">selected="selected"</c:if>>번호높은순</option>
                     <option value="question_asc" <c:if test="${ order eq 'question_asc' }">selected="selected"</c:if>>가나다순</option>
                 </select>
             </div>

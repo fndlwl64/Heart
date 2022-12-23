@@ -1,7 +1,7 @@
 // 삭제 모달
 $(function() {
-    const deleteModal = document.getElementById('deleteModal')
-    const deleteInput = document.getElementById('deleteInput')
+    const deleteModal = document.getElementById('deleteCommentModal')
+    const deleteInput = document.getElementById('deleteCommentInput')
 
     deleteModal.addEventListener('shown.bs.modal', (e) => {
         deleteInput.focus();
@@ -10,7 +10,7 @@ $(function() {
         let userId = $(e.relatedTarget).data('user');
         let reviewNo = $(e.relatedTarget).data('reviewno');
         
-        $('#deleteFunction').on("click", function() {
+        $('#deleteCommentFunction').on("click", function() {
             commentDelete(commentNo, path, userId, reviewNo);
         });
     });
@@ -31,7 +31,7 @@ function commentDelete(commentNo, path, userId, reviewNo) {
           if(check > 0){
               commentTable(userId, reviewNo, path);
               commentCount(reviewNo, path);
-              $('#deleteModal').modal('hide');
+              $('#deleteCommentModal').modal('hide');
               $('.modal-backdrop').hide();
           }
       },
@@ -76,31 +76,36 @@ function commentTable(userId, reviewNo, path) {
           $("#comment-table tbody").append(aloading);
       },
       success : function(commentList) {
+      
+          $("#comment-table caption").remove();      
           $("#comment-table thead").remove();
           $("#comment-table tbody").remove();
           let comment = "";
           if(commentList.length > 0) {
+              comment += '<caption>등록된 댓글</caption>';
               comment += '<thead><tr>';
               comment += '<th class="col-1">작성자</th>';
-              comment += '<th class="col-9">댓글내용</th>';
-              comment += '<th class="col-1">작성시간</th>';
+              comment += '<th class="col-8">댓글내용</th>';
+              comment += '<th class="col-2">작성시간</th>';
               comment += '<th class="col-1">삭제</th>';
               comment += '</tr></thead><tbody>';
               console.log(commentList.length);
               for (let i=0; i<commentList.length; i++) {
+                                console.log(1, userId);
+            console.log(2, commentList[i].comment_id);
                   if(commentList[i].comment_id == 'admin') {                  
                     comment += '<tr><td style=\"vertical-align:middle; color:red;\"><a>' + commentList[i].comment_id + '</a></td>';
                   }else {
                     comment += '<tr><td style=\"vertical-align:middle;\"><a>' + commentList[i].comment_id + '</a></td>';
                   }  
-                  comment += '<td style=\"text-align:left\"><div style=\"min-height:2rem\">' + commentList[i].comment_content + '</div></td>';
+                  comment += '<td class=\"comment-content\"><div style=\"min-height:2rem\">' + commentList[i].comment_content + '</div></td>';
                   comment += '<td><small>' + commentList[i].comment_regdate + '</small></td>';
                   comment += '<td style=\"vertical-align:middle;\">';
                   if(userId == 'admin') {
-                       comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-reviewno='+reviewNo+'>삭제</button>';
+                       comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteCommentModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-reviewno='+reviewNo+'>삭제</button>';
                   }else {
                       if(userId == commentList[i].comment_id) {
-                          comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-reviewno='+reviewNo+'>삭제</button>';
+                          comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteCommentModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-reviewno='+reviewNo+'>삭제</button>';
                       }
                   }
                   comment += '</td></tr>';

@@ -22,7 +22,15 @@
 	<select id="review_list" parameterType="hashMap" resultType="ReviewDTO">
 		SELECT * 
             FROM (
-                SELECT r.*, a.animal_name, ROW_NUMBER() OVER(ORDER BY review_no DESC) rnum <include refid="review_join" />
+                SELECT r.*, a.animal_name, ROW_NUMBER() OVER(
+	            ORDER BY 
+	             <choose>
+	                <when test="order == ''"></when>
+	                <when test="order.equals('date_desc')"> review_regdate DESC </when>         
+	                <when test="order.equals('hit_desc')"> review_hit DESC</when>         
+	                <when test="order.equals('no_desc')"> review_no DESC</when>         
+	             </choose>                
+                ) rnum <include refid="review_join" />
 				<where>
 					<choose>
 						<when test="field.equals('allSearch') and keyword != ''"> (review_title <include refid="review_keyword" /> OR review_content <include refid="review_keyword" />
@@ -35,12 +43,6 @@
 					</choose>
 				</where>
 	         <![CDATA[) WHERE rnum >= #{startNo} AND rnum <= #{endNo}]]>
-	       	 <choose>
-	       		<when test="order == ''"></when>
-	       		<when test="order.equals('date_desc')"> ORDER BY review_regdate DESC </when>         
-	       		<when test="order.equals('hit_desc')"> ORDER BY review_hit DESC</when>         
-	       		<when test="order.equals('no_desc')"> ORDER BY review_no DESC</when>         
-	       	 </choose>
 	</select>
 	
 	<!-- review : count -->
@@ -165,6 +167,15 @@
         </where>
     </select>
     
+   <select id="review_main_list" parameterType="String" resultType="ReviewDTO">
+        SELECT * 
+            FROM (
+                SELECT r.*, a.animal_name <include refid="review_join" />
+                WHERE review_animal_tag = #{ animal_tag }
+               <![CDATA[ ORDER BY DBMS_RANDOM.VALUE)
+            WHERE ROWNUM <= 10 ]]>
+    </select>
+    
     <!-- 
     //======================================================================  
     // Review : Admin
@@ -252,6 +263,11 @@
     <delete id="review_comment_delete" parameterType="int">
         DELETE FROM heartpet_review_comment
             WHERE comment_commentno = #{ comment_commentno }
+    </delete>
+    
+    <delete id="review_comment_deleteAll" parameterType="int">
+        DELETE FROM heartpet_review_comment
+            WHERE comment_reviewno = #{ review_no }
     </delete>
 	
 	<!-- 

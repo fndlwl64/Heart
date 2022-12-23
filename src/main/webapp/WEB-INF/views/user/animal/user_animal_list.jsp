@@ -282,7 +282,7 @@
 		$(function() {
 			
 			$("#form").css({
-				 'display' : 'none'
+				 'display' : 'block'
 			 });			
 			
 		});

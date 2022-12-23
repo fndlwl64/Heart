@@ -36,7 +36,7 @@ public interface UserDAO {
     
     public int update_num(int no);
     
-    public int deleteuser(int no);
+    public int deleteuser(String id);
     
     public String find_pwd(Map<String, String> map);
     

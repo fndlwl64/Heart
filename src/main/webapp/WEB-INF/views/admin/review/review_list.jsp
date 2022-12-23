@@ -110,6 +110,5 @@
         <%-- 페이징처리 --%>
         <%@ include file="../../include/pagination_update.jsp" %>
     </div>
-    <div class="space"> </div>
 </body>
 </html>

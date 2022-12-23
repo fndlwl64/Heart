@@ -100,8 +100,8 @@
 		UPDATE HEARTPET_USER SET USER_NO = (USER_NO - 1) WHERE USER_NO > #{no} 
 	</update>
 	
-	<update id="delete_user" parameterType="int">
-		UPDATE HEARTPET_USER SET USER_GRADE = 5 WHERE USER_NO = #{no}
+	<update id="delete_user" parameterType="String">
+		UPDATE HEARTPET_USER SET USER_GRADE = 5 WHERE USER_ID = #{id}
 	</update>
 	
 	<update id="update_user" parameterType="UserDTO">
