@@ -147,12 +147,13 @@ public class AdminAnimalController {
 			animalDAO.update(animalDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
+			upload.deleteAnimalImg(request, animalDTO);
 			request.setAttribute("msg", "업데이트를 실패했습니다.");
 			request.setAttribute("url", "back");
 			return "alert";
 		}
 		
-		return "redirect:/admin_main";
+		return "admin/admin_main";
 	}
 
 	@RequestMapping(value = "/animal_insert", method = RequestMethod.GET)
@@ -166,7 +167,7 @@ public class AdminAnimalController {
 			throws IllegalStateException, IOException {
 
 		// Adoptreg 추가
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String strDate = dateFormat.format(Calendar.getInstance().getTime());
 
 		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
@@ -197,7 +198,7 @@ public class AdminAnimalController {
 			return "alert";
 		}
 
-		return "redirect:/admin_main";
+		return "admin/admin_main";
 	}
 
 	@RequestMapping("/animal_delete")
@@ -302,9 +303,9 @@ public class AdminAnimalController {
 	public String adoptreg_admission(@RequestParam("animal_no") int animal_no, @RequestParam("animal_status") String animal_status) {
 		AnimalDTO animalDTO = new AnimalDTO();
 		animalDTO.setAnimal_no(animal_no);
-		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
+		AdoptRegDTO adoptRegDTO = null;
 		//현재 시간
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String strDate = dateFormat.format(Calendar.getInstance().getTime());
 		
 		//수정
@@ -314,11 +315,21 @@ public class AdminAnimalController {
 			animalDTO.setAnimal_status("입소 신청");
 		}else if(animal_status.equals("입양 완료")) {
 			animalDTO.setAnimal_status("입양 대기");
+			adoptRegDTO = new AdoptRegDTO();
 			adoptRegDTO.setAdopt_reg_animalno(animal_no);
 			adoptRegDTO.setAdopt_reg_adoptdate("");
-			adoptRegDAO.update(adoptRegDTO);
+			
 		}
-		animalDAO.updateStatus(animalDTO);
+//		adoptRegDAO.update(adoptRegDTO);
+//		animalDAO.updateStatus(animalDTO);
+		try {
+			animalService.update(animalDTO, adoptRegDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("msg", "update fail");
+			request.setAttribute("url", "back");
+			return "alert";
+		}
 		return "redirect:/adoptreg_list";
 	}
 	
@@ -328,9 +339,14 @@ public class AdminAnimalController {
 		AnimalDTO animalDTO = new AnimalDTO();
 		animalDTO.setAnimal_no(animal_no);
 		animalDTO.setAnimal_status("입양 가능");
-		
-		animalDAO.updateStatus(animalDTO);
-		adoptRegDAO.updateCancel(adopt_reg_regno);
+		try {
+			animalService.adoptRegCancel(animalDTO, adopt_reg_regno);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("msg", "cancel fail");
+			request.setAttribute("url", "back");
+			return "alert";
+		}
 		
 		UserDTO userinfo = userdao.getUserInfo(user_id);
 		

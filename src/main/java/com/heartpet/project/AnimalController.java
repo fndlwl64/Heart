@@ -307,12 +307,13 @@ public class AnimalController {
 	}
 	
 	@RequestMapping("test")
-	public void test() {
+	public String test() {
 		System.out.println("======================");
 		System.out.println("======================");
 		System.out.println("======================");
 		
 		System.out.println((String)request.getSession().getAttribute("session_id"));
 		System.out.println((String)request.getSession().getAttribute("session_admin_id"));
+		return "admin/admin_main";
 	}
 }

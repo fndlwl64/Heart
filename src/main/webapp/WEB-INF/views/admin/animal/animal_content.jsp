@@ -60,18 +60,18 @@ pageContext.setAttribute("newline", "\n");
 				<td colspan="7">
 					<div class="img-fluid">
 						<img class="file_change1"
-							src="resources/upload/${dto.animal_img1 }" alt="review_img" />
+							src="${path }${dto.animal_img1 }" alt="review_img" />
 					</div> <c:if test="${not empty dto.animal_img2}">
 						<br>
 						<div class="img-fluid">
 							<img class="file_change1"
-								src="resources/upload/${dto.animal_img2 }" alt="review_img" />
+								src="${path }${dto.animal_img2 }" alt="review_img" />
 						</div>
 					</c:if> <c:if test="${not empty dto.animal_img3}">
 						<br>
 						<div class="img-fluid">
 							<img class="file_change1"
-								src="resources/upload/${dto.animal_img3 }" alt="review_img" />
+								src="${path }${dto.animal_img3 }" alt="review_img" />
 						</div>
 					</c:if>
 				</td>

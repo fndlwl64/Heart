@@ -22,7 +22,9 @@ public class AnimalServiceImpl implements AnimalService {
 
 	@Override
 	public void insert(AnimalDTO animalDTO, AdoptRegDTO adoptRegDTO) {
-		adoptRegDAO.insert(adoptRegDTO);
+		if(adoptRegDTO != null) {
+			adoptRegDAO.insert(adoptRegDTO);
+		}
 		animalDAO.insert(animalDTO);
 	}
 
@@ -52,5 +54,11 @@ public class AnimalServiceImpl implements AnimalService {
 		}
 	}
 
+	@Override
+	public void adoptRegCancel(AnimalDTO animalDTO, int adopt_reg_regno) {
+		animalDAO.updateStatus(animalDTO);
+		adoptRegDAO.updateCancel(adopt_reg_regno);
+	}
+	
 
 }
