@@ -221,7 +221,7 @@ body {
 /* review-insert */
 .insert-table {
     margin: auto;
-    width: 50%;
+    width: 70%;
     min-width: 700px;
     text-align: center;
     font-size: 15px;
@@ -230,7 +230,9 @@ body {
 /* btn-insert */
 .review-section .btn-insert {
     padding-right: 1rem;
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
+
 }
 
 

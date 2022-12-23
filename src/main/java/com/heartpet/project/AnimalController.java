@@ -55,11 +55,9 @@ public class AnimalController {
 	@Autowired
 	private WishDAO wishDAO;
 	@Autowired
-
 	private AnimalService animalService;
 	@Autowired
 	private UserDAO userDAO;
-
 	@Autowired
 	private HttpServletRequest request;
 	
@@ -83,16 +81,32 @@ public class AnimalController {
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
 
-		totalRecord = animalDAO.countPaging(animalDTO, keyword);
+    	int startWeight = 0 ;
+    	int endWeight = 0 ;
+    	
+    	//무게
+    	if(animalDTO.getAnimal_size() != null && animalDTO.getAnimal_size().equals("소형")) {
+    		startWeight = 1;
+    		endWeight = 4;
+    	}else if(animalDTO.getAnimal_size() != null && animalDTO.getAnimal_size().equals("중형")) {
+    		startWeight = 4;
+    		endWeight = 10;
+    	}else if(animalDTO.getAnimal_size() != null && animalDTO.getAnimal_size().equals("대형")) {
+    		startWeight = 10;
+    		endWeight = 40;
+    	}
+
+		
+		totalRecord = animalDAO.countPaging(animalDTO, keyword,startWeight,endWeight);
 		
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-		
+
     	model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
  		model.addAttribute("field", field);
  		model.addAttribute("sort",sort);
  		model.addAttribute("keyword",keyword);
-		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword,sort));
+		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword,sort,startWeight,endWeight));
 		model.addAttribute("animalDTO",animalDTO);
 		return "user/animal/user_animal_list";
 	}
@@ -110,16 +124,36 @@ public class AnimalController {
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
 
-		totalRecord = animalDAO.countPaging(animalDTO, keyword);
+    	int startWeight = 0 ;
+    	int endWeight = 0 ;
+    	
+    	//무게
+    	if(animalDTO.getAnimal_size() != null && animalDTO.getAnimal_size().equals("소형")) {
+    		startWeight = 1;
+    		endWeight = 4;
+    	}else if(animalDTO.getAnimal_size() != null && animalDTO.getAnimal_size().equals("중형")) {
+    		startWeight = 4;
+    		endWeight = 10;
+    	}else if(animalDTO.getAnimal_size() != null && animalDTO.getAnimal_size().equals("대형")) {
+    		startWeight = 10;
+    		endWeight = 40;
+    	}
+
+    	System.out.println("========================");
+    	System.out.println("========================");
+    	System.out.println("========================");
+		System.out.println(startWeight);
+		
+		totalRecord = animalDAO.countPaging(animalDTO, keyword,startWeight,endWeight);
 		
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-		
+    	
     	model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
  		model.addAttribute("field", field);
  		model.addAttribute("sort",sort);
  		model.addAttribute("keyword",keyword);
-		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword,sort));
+		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword,sort,startWeight , endWeight));
 		model.addAttribute("animalDTO",animalDTO);
 
 		return "user/animal/user_animal_list";
@@ -150,17 +184,26 @@ public class AnimalController {
 		AnimalDTO animalDTO = new AnimalDTO();
 		animalDTO.setAnimal_no(animal_no);
 		animalDTO.setAnimal_status("입양 대기");
-		animalDAO.updateStatus(animalDTO);
+		
 		
 		// Adoptreg 추가
 		// user id 변경
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String strDate = dateFormat.format(Calendar.getInstance().getTime());
 		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
 		adoptRegDTO.setAdopt_reg_userid(request.getSession().getAttribute("session_id").toString());
 		adoptRegDTO.setAdopt_reg_animalno(animal_no);
 		adoptRegDTO.setAdopt_reg_regdate(strDate);
-		adoptRegDAO.update(adoptRegDTO);
+		
+		try {
+			animalService.update(animalDTO, adoptRegDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("msg", "입양 신청이 실패했습니다.");
+			request.setAttribute("url", "main");
+			return "alert";
+		}
+		
 	
 		return "redirect:/";
 	}
@@ -176,70 +219,110 @@ public class AnimalController {
 		adoptRegDTO.setAdopt_reg_regdate("");
 		adoptRegDTO.setAdopt_reg_animalno(animal_no);
 		
-		animalDAO.updateStatus(animalDTO);
-		adoptRegDAO.update(adoptRegDTO);
+		try {
+			animalService.update(animalDTO, adoptRegDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("msg", "입양 취소가 실패했습니다.");
+			request.setAttribute("url", "main");
+			return "alert";
+		}
 		return "redirect:/user_mypage_adoptreg_list";
 	}
 
+
 	// 입소 신청
-	@RequestMapping(value = "/user_animal_insert", method = RequestMethod.GET)
-	public String user_animal_insert(Model model){
-		
-		//로그인을 하지 않았거나 자격이 없을 경우
-		if(request.getSession().getAttribute("session_grade") == null) {
-			model.addAttribute("msg", "로그인이 필요합니다.");
-			model.addAttribute("url", "main");
-			return "alert";
-		}else if ((Integer) request.getSession().getAttribute("session_grade") > 2){
-			model.addAttribute("msg", "회원 등급이 낮습니다.");
-			model.addAttribute("url", "main");
-			return "alert";
-		}
-		return "user/animal/user_animal_insert";
-	}
+//	@RequestMapping(value = "/user_animal_insert", method = RequestMethod.GET)
+//	public String user_animal_insert(Model model){
+//		
+//		//로그인을 하지 않았거나 자격이 없을 경우
+//		if(request.getSession().getAttribute("session_grade") == null && (String)request.getSession().getAttribute("session_admin_id") == null) {
+//			model.addAttribute("msg", "로그인이 필요합니다.");
+//			model.addAttribute("url", "main");
+//			return "alert";
+//		}else if (request.getSession().getAttribute("session_grade") != null && (Integer) request.getSession().getAttribute("session_grade") > 2 ){
+//			model.addAttribute("msg", "회원 등급이 낮습니다.");
+//			model.addAttribute("url", "main");
+//			return "alert";
+//		}
+//		return "user/animal/user_animal_insert";
+//	}
+
+    // 입소 신청
+    @RequestMapping(value = "/user_animal_insert", method = RequestMethod.GET)
+    public String user_animal_insert(Model model, HttpServletResponse response) throws IOException {        
+        response.setContentType("text/html; charset=UTF-8");
+        HttpSession session = request.getSession();
+        PrintWriter out = response.getWriter();
+        String user_id ="";
+    
+        // 로그인 여부 체크
+        if ((session.getAttribute("session_id") == null || session.getAttribute("session_id") == "")
+                && (session.getAttribute("session_admin_id") == null || session.getAttribute("session_admin_id") == "")) {
+           out.println("<script> alert('로그인이 필요합니다.'); location.href='" + request.getContextPath() + "/'; </script>");
+        }else {
+            if(session.getAttribute("session_id") != null) {
+                user_id = (String) session.getAttribute("session_id");
+            }else {
+                user_id = (String) session.getAttribute("session_admin_id");
+            }
+        }
+        UserDTO userContent = this.userDAO.getUserInfo(user_id);
+        System.out.println(userContent.getUser_grade());
+
+        if(userContent.getUser_grade() > 2) {
+            out.println("<script> alert('접근 권한이 없습니다.'); location.href='" + request.getContextPath() + "/'; </script>");
+            out.flush();
+        }
+        return "user/animal/user_animal_insert";
+    }
+
 
 	@RequestMapping(value = "/user_animal_insert", method = RequestMethod.POST)
 	public String user_animal_insert_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO,
 			@RequestParam("user_id") String id) throws IllegalStateException, IOException {
-
+		
+		animalDTO.toString();
+		System.out.println(animalDTO.toString());
 		// Adoptreg 추가
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
-		String strDate = dateFormat.format(Calendar.getInstance().getTime());
-		
-		int idx = strDate.indexOf(" ");
-		
-		if(strDate.substring(idx+1, idx+3).equals("24")) {
-			strDate = strDate.substring(0,idx+1)+"0"+strDate.substring(idx+3);
-		}
-		
-
-		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
-		//test
-		
-		adoptRegDTO.setAdopt_reg_animalno(animalDAO.count(null)+1);
-		adoptRegDTO.setAdopt_reg_userid(id);
-		adoptRegDTO.setAdopt_reg_appdate(strDate);
-
-		// 동물 입소 신청
-		// 이미지 업로드 및 animal 데이터 추가
-		
-		FileUploadImage upload = new FileUploadImage();
-		List<String> animalImgs =  upload.uploadFile(request, files, "qna", 3);
-		
-		animalDTO.setAnimal_img1(animalImgs.get(0));
-		animalDTO.setAnimal_img2(animalImgs.get(1));
-		animalDTO.setAnimal_img3(animalImgs.get(2));
-		
-		animalDTO.setAnimal_status("입소 신청");
-		
-		try {
-			animalService.userInsert(animalDTO, adoptRegDTO);
-		} catch (Exception e) {
-			e.printStackTrace();
-			request.setAttribute("msg", "insert fail");
-			request.setAttribute("url", "user_animal_insert");
-			return "alert";
-		}
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//		String strDate = dateFormat.format(Calendar.getInstance().getTime());
+//		
+//		int idx = strDate.indexOf(" ");
+//		
+//		if(strDate.substring(idx+1, idx+3).equals("24")) {
+//			strDate = strDate.substring(0,idx+1)+"0"+strDate.substring(idx+3);
+//		}
+//		
+//
+//		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
+//		//test
+//		
+//		adoptRegDTO.setAdopt_reg_animalno(animalDAO.count(null)+1);
+//		adoptRegDTO.setAdopt_reg_userid(id);
+//		adoptRegDTO.setAdopt_reg_appdate(strDate);
+//
+//		// 동물 입소 신청
+//		// 이미지 업로드 및 animal 데이터 추가
+//		
+//		FileUploadImage upload = new FileUploadImage();
+//		List<String> animalImgs =  upload.uploadFile(request, files, "animal", 3);
+//		
+//		animalDTO.setAnimal_img1(animalImgs.get(0));
+//		animalDTO.setAnimal_img2(animalImgs.get(1));
+//		animalDTO.setAnimal_img3(animalImgs.get(2));
+//		
+//		animalDTO.setAnimal_status("입소 신청");
+//		
+//		try {
+//			animalService.insert(animalDTO, adoptRegDTO);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			upload.deleteFile(request, animalImgs);
+//			request.setAttribute("msg", "insert fail");
+//			request.setAttribute("url", "user_animal_insert");
+//			return "alert";
+//		}
 		
 
 		return "redirect:/";
@@ -258,5 +341,16 @@ public class AnimalController {
 			wishDAO.insert(wishDTO);
 			return 1;
 		}
+	}
+	
+	@RequestMapping("test")
+	public String test() {
+		System.out.println("======================");
+		System.out.println("======================");
+		System.out.println("======================");
+		
+		System.out.println((String)request.getSession().getAttribute("session_id"));
+		System.out.println((String)request.getSession().getAttribute("session_admin_id"));
+		return "admin/admin_main";
 	}
 }

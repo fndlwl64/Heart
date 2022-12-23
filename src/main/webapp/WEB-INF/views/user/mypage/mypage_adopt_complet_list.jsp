@@ -46,40 +46,45 @@
     <div class="mypage_top"></div>
     <div class="mypage_menu">
         <ul class="middle_ul">
-            <li><a href="${path }/user_mypage_wish_list" class="my_a">관심목록</a></li><br><br>
-            <li><a href="${path }/user_mypage_adoptreg_list" class="my_a">입양대기목록</a></li><br><br>
-            <li><a href="${path }/user_mypage_adoptcomplet_list" class="my_a">입양완료목록</a></li><br><br>
-            <li><a href="${path }/user_mypage_user_update" class="my_a">회원정보변경</a></li><br><br>
+            <li><a href="${path }/user_mypage_wish_list" class="my_a">관심목록</a></li>
+            <li><a href="${path }/user_mypage_adoptreg_list" class="my_a">입양대기목록</a></li>
+            <li><a href="${path }/user_mypage_adoptcomplet_list" class="my_a">입양완료목록</a></li>
+            <li><a href="${path }/user_mypage_user_update" class="my_a">회원정보변경</a></li>
             <li><a href="${path }/user_mypage_user_delete" class="my_a">회원탈퇴</a></li>
         </ul>
     </div>
     <div id="my_cont3" class="mypage_cont">
         <div align="center">
-      	  	<c:if test="${!empty aList}">
-	            <h3>입양완료목록</h3>
-	            <ul class="my_cont_ul">
-		            <c:forEach items="${aList}" var="dto" varStatus="status">
-		            <c:set var="count" value="${count + 1 }"/>
-			                <li class ="my_cont_li">
-			                	<a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><img class="my_cont_img" src="${path}/resources/upload/${dto.getAnimal_img1()}"></a><br>
-			                	<p><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">종류 : ${dto.getAnimal_species()}</a></p>
-			                	<p><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">성별 : ${dto.getAnimal_gender()}</a></p>
-			                	<p><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">나이 : ${dto.getAnimal_age()}</a></p>
-			                	<p><a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">입양 완료일 : ${dto.getAdopt_reg_adoptdate().substring(0, 10)}</a></p>
-			                	<c:if test="${empty sendCheck[status.index].count }">
-			                		<p><a class="animal_cont" href="${path }/user_review_insert?animal_no=${dto.getAnimal_no()}"><button>후기작성</button></a></p>
-			                	</c:if>
-			                	<c:if test="${ sendCheck[status.index].count > 0  }">
-			                		<p><a class="animal_cont" href="${path }/user_review_content?review_no=${ sendCheck[status.index].review_no }"><button>내가 쓴 후기보기</button></a></p>
-			                	</c:if>
-			                </li>
-		 		        <c:if test="${count % 3 == 0 }">
-							<li>
-							</li>
+        	<c:if test="${!empty aList }">
+				<h3>입양완료목록</h3>
+				<table class="wish_table">
+					<tr>
+					<c:forEach items="${aList }" var="dto">
+					<c:set var="count" value="${count + 1 }"/>
+						<td>
+							<a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><img class="my_cont_img" src="${path}/resources/upload/${dto.getAnimal_img1()}"></a>
+						</td>
+						<td>
+							<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span id="sp_name">이름 : ${dto.getAnimal_name()}</span></a></p>
+		                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">종류 : ${dto.getAnimal_species()}</a></p>
+		                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">성별 : ${dto.getAnimal_gender()}</a></p>
+		                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">나이 : ${dto.getAnimal_age()}</a></p>
+		                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">입양 완료일 :<br> ${dto.getAdopt_reg_adoptdate().substring(0, 10)}</a></p>
+							<c:if test="${empty sendCheck[status.index].count }">
+	                			<p><a class="animal_cont" href="${path }/user_review_insert?animal_no=${dto.getAnimal_no()}"><button class="btn btn-dark"><i class="bi bi-pencil-fill"></i> 후기작성</button></a></p>
+		                	</c:if>
+		                	<c:if test="${ sendCheck[status.index].count > 0  }">
+		                		<p><a class="animal_cont" href="${path }/user_review_content?review_no=${ sendCheck[status.index].review_no }"><button class="btn btn-dark"><i class="bi bi-pencil-fill"></i> 내가 쓴 후기</button></a></p>
+		                	</c:if>
+						</td>
+						<c:if test="${count % 2 == 0 }">
+							<tr>
+							</tr>
 						</c:if>
-		            </c:forEach>
-	            </ul>
-            </c:if>
+					</c:forEach>
+					</tr>			
+				</table>
+			</c:if>
             <c:if test="${empty aList }">
             	<h1>입양완료 목록이 없습니다!</h1>
             </c:if>

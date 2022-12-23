@@ -27,7 +27,7 @@
 	</sql>
 	<select id="animal_count" parameterType="string"
 		resultType="int">
-		select max(animal_no) from heartpet_animal
+		select max(NVL(animal_no, 0)) from heartpet_animal
 		<if test="null != value and !''.equals(value)">
 			where animal_tag = #{animal_tag}
 		</if>
@@ -41,6 +41,9 @@
 			test="animalDTO.animal_size != null and !animalDTO.animal_size.equals('')">
 			and animal_size = #{animalDTO.animal_size }
 		</if>
+		<if test="startWeight != 0 and endWeight != 0">
+			and (animal_weight between #{startWeight} and #{endWeight} or animal_weight = 0)
+		</if>
 		<if
 			test="animalDTO.animal_neutered != null and !animalDTO.animal_neutered.equals('')">
 			and animal_neutered = #{animalDTO.animal_neutered }
@@ -50,21 +53,29 @@
 			and animal_species = #{animalDTO.animal_species }
 		</if>
 		<if
-			test="animalDTO.animal_age != 0 and animalDTO.animal_age lt 6">
-			and animal_age between (${animalDTO.animal_age } -1) and ${animalDTO.animal_age }
+			test="animalDTO.animal_age == 1">
+			and animal_age between 0 and 3
 		</if>
 		<if
-			test="animalDTO.animal_age == 6">
-			<![CDATA[and animal_age >= 5 ]]>
+			test="animalDTO.animal_age == 2">
+			and animal_age between 3 and 5
+		</if>
+		<if
+			test="animalDTO.animal_age == 3">
+			and animal_age between 5 and 10
+		</if>
+		<if
+			test="animalDTO.animal_age == 4">
+			<![CDATA[and animal_age >= 10 ]]>
 		</if>
 		<if
 			test="animalDTO.animal_gender != null and !animalDTO.animal_gender.equals('')">
 			and animal_gender = #{animalDTO.animal_gender }
 		</if>
-		<if
+		<!-- <if
 			test="animalDTO.animal_weight != 0">
 			<![CDATA[and animal_weight >= ${animalDTO.animal_weight} ]]>
-		</if>
+		</if> -->
 		<if
 			test="animalDTO.animal_status != null and !animalDTO.animal_status.equals('')">
 			and animal_status = #{animalDTO.animal_status}
@@ -129,6 +140,9 @@
 			test="animalDTO.animal_size != null and !animalDTO.animal_size.equals('')">
 			and animal_size = #{animalDTO.animal_size }
 		</if>
+		<if test="startWeight != 0 and endWeight != 0">
+			and (animal_weight between #{startWeight} and #{endWeight} or animal_weight = 0)
+		</if>
 		<if
 			test="animalDTO.animal_neutered != null and !animalDTO.animal_neutered.equals('')">
 			and animal_neutered = #{animalDTO.animal_neutered }
@@ -138,21 +152,29 @@
 			and animal_species = #{animalDTO.animal_species }
 		</if>
 		<if
-			test="animalDTO.animal_age != 0 and animalDTO.animal_age lt 6">
-			and animal_age between (${animalDTO.animal_age } -1) and ${animalDTO.animal_age }
+			test="animalDTO.animal_age == 1">
+			and animal_age between 0 and 3
 		</if>
 		<if
-			test="animalDTO.animal_age == 6">
-			<![CDATA[and animal_age >= 5 ]]>
+			test="animalDTO.animal_age == 2">
+			and animal_age between 3 and 5
+		</if>
+		<if
+			test="animalDTO.animal_age == 3">
+			and animal_age between 5 and 10
+		</if>
+		<if
+			test="animalDTO.animal_age == 4">
+			<![CDATA[and animal_age >= 10 ]]>
 		</if>
 		<if
 			test="animalDTO.animal_gender != null and !animalDTO.animal_gender.equals('')">
 			and animal_gender = #{animalDTO.animal_gender }
 		</if>
-		<if
+		<!-- <if
 			test="animalDTO.animal_weight != 0">
 			<![CDATA[and animal_weight >= ${animalDTO.animal_weight} ]]>
-		</if>
+		</if> -->
 		<if
 			test="animalDTO.animal_status != null and !animalDTO.animal_status.equals('')">
 			and animal_status = #{animalDTO.animal_status}
@@ -179,7 +201,7 @@
 	<insert id="animal_insert" parameterType="AnimalDTO">
 		<selectKey resultType="int" keyProperty="animal_no"
 			order="BEFORE">
-			select max(animal_no) from heartpet_animal
+			select max(NVL(animal_no, 0)) from heartpet_animal
 		</selectKey>
 		insert into heartpet_animal
 		values

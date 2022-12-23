@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../../include/admin_header.jsp" />
 <script src="resources/js/admin.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
@@ -11,45 +11,40 @@
 		<form action="<%=request.getContextPath()%>/animal_insert"
 			method="post" enctype="multipart/form-data"
 			onsubmit="return submitOption();">
-			<input type="hidden" name="animal_tag" value="${tag }" id="animal_tag">
+			<input type="hidden" name="animal_tag" value="${tag }"
+				id="animal_tag">
 			<table class="table">
 				<tr>
 					<th class="table-light">품종</th>
-					<td>
-					<c:if test="${tag eq 'dog' }">
-					<select class="form-select"
-						name="animal_species">
-						<option value=""></option>
-						<option value="말티즈">말티즈</option>
-						<option value="푸들">푸들</option>
-						<option value="포메라니안">포메라니안</option>
-						<option value="믹스견">믹스견</option>
-						<option value="치와와">치와와</option>
-						<option value="시츄">시츄</option>
-						<option value="골든리트리버">골든리트리버</option>
-						<option value="진돗개">진돗개</option>
-						<option value="기타">기타</option>
-					</select>
-				</c:if>
-				<c:if test="${tag eq 'cat' }">
-					<select name="animal_species"
-						class="form-select">
-						<option value=""></option>
-						<option value="스코티시">스코티시</option>
-						<option value="폴드">폴드</option>
-						<option value="샴">샴</option>
-						<option value="페르시안">페르시안</option>
-						<option value="터키시">터키시</option>
-						<option value="앙고라">앙고라</option>
-						<option value="러시안 블루">러시안 블루</option>
-						<option value="벵갈">벵갈</option>
-						<option value="먼치킨">먼치킨</option>
-						<option value="아비시니안">아비시니안</option>
-						<option value="기타">기타</option>
-					</select>
-				</c:if>
-					
-					</td>
+					<td><c:if test="${tag eq 'dog' }">
+							<select class="form-select" name="animal_species">
+								<option value=""></option>
+								<option value="말티즈">말티즈</option>
+								<option value="푸들">푸들</option>
+								<option value="포메라니안">포메라니안</option>
+								<option value="믹스견">믹스견</option>
+								<option value="치와와">치와와</option>
+								<option value="시츄">시츄</option>
+								<option value="골든리트리버">골든리트리버</option>
+								<option value="진돗개">진돗개</option>
+								<option value="기타">기타</option>
+							</select>
+						</c:if> <c:if test="${tag eq 'cat' }">
+							<select name="animal_species" class="form-select">
+								<option value=""></option>
+								<option value="스코티시">스코티시</option>
+								<option value="폴드">폴드</option>
+								<option value="샴">샴</option>
+								<option value="페르시안">페르시안</option>
+								<option value="터키시">터키시</option>
+								<option value="앙고라">앙고라</option>
+								<option value="러시안 블루">러시안 블루</option>
+								<option value="벵갈">벵갈</option>
+								<option value="먼치킨">먼치킨</option>
+								<option value="아비시니안">아비시니안</option>
+								<option value="기타">기타</option>
+							</select>
+						</c:if></td>
 				</tr>
 				<tr>
 					<th class="table-light">이름</th>
@@ -85,7 +80,7 @@
 				</tr>
 				<tr>
 					<th class="table-light">나이</th>
-					<td><input type="number" name="animal_age" min = 0
+					<td><input type="number" name="animal_age" min=0
 						class="form-control" id="age"></td>
 				</tr>
 				<tr>
@@ -95,7 +90,7 @@
 				</tr>
 				<tr>
 					<th class="table-light">크기</th>
-					<td><select name="animal_size" class="form-control" id="size">
+					<td><select name="animal_size" class="form-control" id="size" onclick="optionChangeSize()">
 							<option value=""></option>
 							<option value="소형">소형</option>
 							<option value="중형">중형</option>
@@ -104,7 +99,7 @@
 				</tr>
 				<tr>
 					<th class="table-light">무게</th>
-					<td><input type="number" name="animal_weight" min = 0
+					<td><input type="number" name="animal_weight" min=0
 						class="form-control" id="weight"></td>
 				</tr>
 				<tr>
@@ -126,15 +121,16 @@
 		</form>
 	</div>
 	<script>
+		
 		let dog_select = [ "말티즈", "푸들", "포메라니안", "믹스견", "치와와", "시츄", "골든리트리버",
 				"진돗개", "기타" ];
 		let cat_select = [ "스코티시", "폴드", "샴", "페르시안", "터키시", "앙고라", "러시안 블루",
-			"벵갈" ,"먼치킨","아비시니안","기타"];
+				"벵갈", "먼치킨", "아비시니안", "기타" ];
 		let result = [];
-		if($('#animal_tag').val() == 'cat'){
+		if ($('#animal_tag').val() == 'cat') {
 			result = cat_select;
 		}
-		if($('#animal_tag').val() == 'dog'){
+		if ($('#animal_tag').val() == 'dog') {
 			result = dog_select;
 		}
 		$('#species').append('<option></option>');
@@ -143,6 +139,24 @@
 					'<option value='+result[i]+'>' + result[i] + '</option>');
 		}
 
+		/* 사이즈에 따른 무게 범위 */		
+		function optionChangeSize() {
+			if ($('#size').val() === '소형') {
+				$('#weight').prop("min", '1');
+				$('#weight').prop("max", '4');
+			}
+			if ($('#size').val() === '중형') {
+				$('#weight').prop("min", '4');
+				$('#weight').prop("max", '10');
+			}
+			if ($('#size').val() === '대형') {
+				$('#weight').prop("min", '10');
+				$('#weight').prop("max", '40');
+			}
+			console.log($('#weight').val());
+		}
+
+		
 		/*파일 전송 수 제한*/
 		function fileOption() {
 			let files = document.getElementById("files");
@@ -186,10 +200,9 @@
 				alert("크기를 골라주세요");
 				return false;
 			}
-			if ($('#weight').val() == '') {
-				alert("무게를 적어주세요");
-				return false;
-			}
+			if ($('#weight').val() == ''){
+                $('#weight').attr("value",0);
+            }
 			if ($('#content').val() == '') {
 				alert("내용을 적어주세요");
 				return false;

@@ -4,7 +4,7 @@ body {
 }
 
 .div1 {
-	width: 70%;
+	width: 100%;
 	margin: auto;
 }
 
@@ -15,25 +15,71 @@ body {
 	margin-bottom: 2%;
 }
 
+/* 검색 form */
 .div1 .form_search {
-	/* border-bottom: 2.5px solid #adafbd7a; */
-	border-width: 70%;
-	border: 1px solid #000;
-	border-radius: 10px;
-	padding: 1%;
-	font-size: 14px;
-	display: flex;
-	margin: 2% auto;
-	justify-content: space-evenly;
+	width: 65%;
+	margin: 0 auto;
+	border: 1px solid darkgray;
+	background-color: #f8f9fa;
+	border-radius: 5px;
+	padding: 1rem;
+	font-size: 17px;
+}
+
+.div1 .form_search .search-semi-title {
+    text-align: left;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .div1 .form_search form {
-	margin: auto;
-	width: 80%;
+	margin: 0;
 }
 
-.div1 .form_search form .lil-title {
-	margin: 1%;
+.div1 .form_search .search-semi-title > span {
+    font-weight: bold;
+}
+
+/* 테이블 */
+.div1 .form_search .animal-table {
+	vertical-align: middle;
+	
+}
+
+.div1 .form_search .animal-table tr th, td {
+	padding-right: 1rem;
+	padding-left: 1rem;
+}
+
+.div1 .form_search .animal-table .animal-place-select {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.animal-table .animal-size {
+	width: 40%;
+}
+
+.animal-table .animal-weight {
+    margin-left: 0.5rem;
+    width: 60%;
+}
+
+.div1 .form_search .search-buttons {
+	text-align: right;
+} 
+
+.div1 .form_search .search-buttons .btn-light {
+	border: 1px solid darkgray;
+}
+
+.animal-place-select > select {
+	width: 39%;
+}
+
+.animal-place-select > input {
+	width: 60%;
 }
 
 .div1 .form_search .animal_row .btn {
@@ -45,16 +91,24 @@ body {
 }
 
 .div1 .order {
-	margin-bottom: 2%;
-	display: flex;
-	justify-content: flex-end;
-	margin-right: 8%;
+    display: flex;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    width: 70%;
+    justify-content: flex-end;
+    margin-bottom: 0.5rem;
 }
-.div1 .order select {
-	width: 150px;
+
+.div1 .order .form-select {
+    float: right;
+    clear: both;
+    width: auto;
 }
+
 .div1 .main-title {
-	text-align: center;
+	width: 70%;
+	margin: 0 auto;	
+	text-align: left;
 	font-size: 25px;
 	font-weight: bold;
 	margin-bottom: 1rem;
@@ -64,6 +118,10 @@ body {
 	font-size: 14px;
 	color: darkgray;
 	cursor: pointer;
+}
+
+.div1 .main-title p {
+	font-size: 14px;
 }
 
 /* .justify-content-center .wells {
@@ -99,9 +157,8 @@ div div .animal-col dl {
 .animal-keyword {
 	width: 31.8% !important;
 }
-/* .animal-keyword .input-group {
-	width:70%;
-} */
+
+
 .animal_wrap {
 	position: relative;
 	margin: 10px;

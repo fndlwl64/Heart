@@ -59,7 +59,6 @@ body {
 .main-title #heart-pet {
     margin-top: 1rem;
     margin-bottom: 0px;
-    font-size: 50px;
 }
 
 .main-title > p {
@@ -89,8 +88,7 @@ body {
 .dogSwiper {
     width: 70%;
     height: 70%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 2rem auto;
 }
 
 .dogSwiper .swiper-slide {
@@ -121,7 +119,6 @@ body {
 }
 
 .dogSwiper .swiper-button-next, .swiper-button-prev {
-    color: black;
 }
 
 .dogSwiper .swiper-button-next:hover, .swiper-button-prev:hover {
@@ -133,6 +130,15 @@ body {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.more > p {
+	margin: 0 !important;
+}
+
+.more .btn-light {
+	border: 1px solid black;
 }
 
 /* reviewSwiper */
@@ -157,11 +163,13 @@ body {
 }
 
 .reviewSwiper .swiper-slide .title {
-    padding: 10px;
+	margin-top: 1rem;
+    padding-left: 1rem;    
     font-size: 25px;
 }
 
 .reviewSwiper .swiper-slide .content {
-    padding: 10px;
-    font-size: 17px;
+    padding-left: 1rem;
+    font-size: 13px;
+    color: darkgray;
 }

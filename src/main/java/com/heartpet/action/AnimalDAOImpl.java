@@ -60,14 +60,15 @@ public class AnimalDAOImpl implements AnimalDAO {
 
 	@Override
 
-	public List<AnimalDTO> listPaging(int startNO, int endNo, AnimalDTO animalDTO, String keyword,String sort) {
-
+	public List<AnimalDTO> listPaging(int startNO, int endNo, AnimalDTO animalDTO, String keyword,String sort,int startWeight, int endWeight) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("startNo", startNO);
 		map.put("endNo", endNo);
 		map.put("animalDTO", animalDTO);
 		map.put("keyword", keyword);
 		map.put("sort", sort);
+		map.put("startWeight", startWeight);
+		map.put("endWeight", endWeight);
 		return sqlSession.selectList("animal_listTagPaging", map);
 	}
 
@@ -98,10 +99,12 @@ public class AnimalDAOImpl implements AnimalDAO {
 	//////////////////////////////////////////////////////
 
 	@Override
-	public int countPaging(AnimalDTO dto, String keyword) {
+	public int countPaging(AnimalDTO dto, String keyword,int startWeight, int endWeight) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("animalDTO", dto);
 		map.put("keyword", keyword);
+		map.put("startWeight", startWeight);
+		map.put("endWeight", endWeight);
 		return sqlSession.selectOne("animal_countPaging", map);
 	}
 

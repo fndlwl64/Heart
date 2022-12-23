@@ -121,7 +121,7 @@ body {
 }
 .mypage_middle .mypage_menu {
     width: 15%;
-    height: 600px;
+    height: 400px;
     float: left;
     /*margin-left: 10%;*/
 /*    border: 1px solid black;*/
@@ -143,16 +143,33 @@ body {
     list-style: none;
     margin-left: 150px;
     font-size: 20px;
+    
 }
 
 .mypage_middle .mypage_menu .middle_ul .my_a{
     color: gray;
     text-decoration: none;
+    margin-top: -60px;
 }
 
 .mypage_middle .mypage_cont .my_cont_ul .animal_cont{
     color: gray;
     text-decoration: none;
+}
+
+.mypage_middle .mypage_cont .wish_table .animal_cont2{
+    color: gray;
+    text-decoration: none;
+}
+
+.mypage_middle .mypage_cont .wish_table .animal_cont2{
+    color: gray;
+    text-decoration: none;
+}
+
+.mypage_middle .mypage_cont .wish_table #sp_name{
+    font-weight: bold;
+    font-size: 22px;
 }
 
 .mypage_middle .mypage_menu .middle_ul .my_a:hover{
@@ -204,4 +221,15 @@ body {
 	font-size: 25px;
 	color: red;
 	font-weight: bold;
+}
+
+.wish_table {
+	width: 1000px;
+	border-collapse: separate;
+	border-spacing: 50px; 50px;
+}
+.mypage_middle .mypage_cont .my_cont_img {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
 }

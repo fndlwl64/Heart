@@ -15,8 +15,11 @@
     <div class="insert-form">
 	    <form action="<%=request.getContextPath() %>/user_animal_insert" method="post" enctype="multipart/form-data" onsubmit="return submitOption();">
 	    	<input type="hidden" value="${sessionScope.session_id }" id="user_id" name="user_id"/>
+	    	<input type="hidden" value="${sessionScope.session_admin_id }" id="user_admin_id" name="user_admin_id"/>
+	    	
 	    	<input type="hidden" value="${sessionScope.session_grade }" id="user_grade"/>
-	        
+	        <input type="hidden" value="${sessionScope.session_admin_grade }" id="user_admin_grade"/>
+	      
 	        <table class="table caption-top">
                 <caption><span class="must-write">*</span> 표시는 필수 입력 사항입니다.</caption>
 				<thead class="table-light">
@@ -57,7 +60,7 @@
 	                <td width="10%">
 	                    <select name="animal_neutered" class="form-select" id="neutered">
 	                        <option value=""></option>
-	                        <option value="Y">C</option>
+	                        <option value="Y">YES</option>
 	                        <option value="N">NO</option>
 	                    </select>
 	                </td>
@@ -79,7 +82,7 @@
 	            <tr>
 	                <th>사이즈 <span class="must-write">*</span></th>
 	                <td>
-	                    <select name="animal_size" class="form-select" id="size">
+	                    <select name="animal_size" class="form-select" id="size" onclick="optionChangeSize();">
 	                    	<option value=""></option>
 	                        <option value="소형">소형</option>
 	                        <option value="중형">중형</option>
@@ -89,7 +92,7 @@
 	                <th>무게 <span class="must-write">*</span></th>
 	                <td colspan="3">
 	                    <div class="d-flex align-items-center">
-		                    <input type="number" name="animal_weight" class="form-control" id="weight" min="0" max="40">
+		                    <input type="number" name="animal_weight" class="form-control" id="weight" min="0" max="40" placeholder="무게를 모르면 공백으로 해주세요">
 		                    <span class="ms-2"><b>kg</b></span>
 	                    </div>
 	                </td>
@@ -117,6 +120,22 @@
     </div>
 </div>
 <script>
+
+		function optionChangeSize(){
+			if($('#size').val() === '소형'){
+				$('#weight').prop("min" , '1');
+				$('#weight').prop("max" , '4');
+			}
+			if($('#size').val() === '중형'){
+				$('#weight').prop("min" , '4');
+				$('#weight').prop("max" , '10');
+			}
+			if($('#size').val() === '대형'){
+				$('#weight').prop("min" , '10');
+				$('#weight').prop("max" , '40');
+			}
+			console.log($('#weight').val());
+		}
 
         /*동적 동물 선택 태그*/
         function optionChange(){
@@ -147,15 +166,17 @@
         
         function  submitOption(){
         	/* 회원 정보 */
-        	if ($('#user_id').val() == ''){
-                alert("로그인을 해주세요");
-                return false;
-            }
-        	if ($('#user_grade').val() > 2){
-                alert("회원의 등급이 낮아 입소 자격이 없습니다.");
-                return false;
-            }
         	
+        	if ($('#user_admin_id').val() == ''){
+        		if ($('#user_id').val() == ''){
+                    alert("로그인을 해주세요");
+                    return false;
+                }
+            	if ($('#user_grade').val() > 2){
+                    alert("회원의 등급이 낮아 입소 자격이 없습니다.");
+                    return false;
+                }
+        	}
         	if ($('#tag').val() == ''){
                 alert("동물 종류를 골라주세요");
                 return false;
@@ -193,8 +214,7 @@
                 return false;
             }
         	if ($('#weight').val() == ''){
-                alert("무게를 적어주세요");
-                return false;
+                $('#weight').attr("value",0);
             }
         	if ($('#content').val() == ''){
                 alert("내용을 적어주세요");
