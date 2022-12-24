@@ -24,6 +24,7 @@ import com.heartpet.action.QnaDAO;
 import com.heartpet.model.FnqDTO;
 import com.heartpet.model.PageDTO;
 import com.heartpet.model.QnaDTO;
+import com.heartpet.model.ReviewDTO;
 import com.heartpet.util.FileUploadImage;
 
 @Controller
@@ -126,11 +127,13 @@ public class AdminQnaController {
     ///////////////////////////////////////////////////////////////////
     @RequestMapping("/admin_qna_update_ok")
     public void admin_qna_update(@RequestParam("board_img") List<MultipartFile> board_img, 
+            @RequestParam(value = "board_image1_delete", required = false, defaultValue = "") String board_image1_delete, 
+            @RequestParam(value = "board_image2_delete", required = false, defaultValue = "") String board_image2_delete, 
             @Valid QnaDTO updateDto, BindingResult result, HttpServletResponse response)
             throws IOException {
+        
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
-        QnaDTO qnaContent = this.qnaDAO.contentQna(updateDto.getBoard_no());
 
         if (result.hasErrors()) {
             List<ObjectError> errors = result.getAllErrors();
@@ -150,6 +153,20 @@ public class AdminQnaController {
                 }
             }
         } else {
+            // 총 파일 개수
+            int totalFileCount = 2;            
+            QnaDTO qnaContent = this.qnaDAO.contentQna(updateDto.getBoard_no());
+                                  
+            // 기존 사진 삭제 checkbox 클릭 시 
+            List<String> only_delete = new ArrayList<String>();
+            if(board_image1_delete.equals("Y")) { 
+                only_delete.add(qnaContent.getBoard_img1()); 
+                qnaContent.setBoard_img1("");
+            }
+            if(board_image2_delete.equals("Y")) { 
+                only_delete.add(qnaContent.getBoard_img2()); 
+                qnaContent.setBoard_img2("");
+            }         
             
             // 기존 이미지 이름   
             List<String> origin_names = new ArrayList<String>();
@@ -158,7 +175,7 @@ public class AdminQnaController {
 
             // 파일 업데이트
             FileUploadImage upload = new FileUploadImage();  
-            List<String> updateFile = upload.updateFile(request, board_img, "qna", origin_names, 2);
+            List<String> updateFile = upload.updateFile(request, board_img, "qna", origin_names, totalFileCount);
             
             updateDto.setBoard_img1(updateFile.get(0));
             updateDto.setBoard_img2(updateFile.get(1));         

@@ -51,11 +51,11 @@
                 <th class="table-light col-1">작성자</th>
                 <td class="col-2"><input type="text" class="form-control-plaintext ms-2" value="${ session_id }" disabled="disabled"></td>
                 <th class="table-light col-1">
-                <label><input class="form-check-input col-1" type="checkbox" name="board_secret" value="Y"
-                <c:if test="${ empty list.board_secret }">checked="checked"</c:if>
-                <c:if test="${ list.board_secret eq 'Y' }">checked="checked" disabled="disabled"</c:if>
-                <c:if test="${ list.board_secret eq 'N' }"></c:if>> 비밀글</label>
-                <input type="hidden" name="board_secret" value="N" disabled="disabled" />
+	                <label><input class="form-check-input" type="checkbox" name="board_secret" value="Y"
+	                <c:if test="${ empty list.board_secret }">checked="checked"</c:if>
+	                <c:if test="${ list.board_secret eq 'Y' }">checked="checked" disabled="disabled"</c:if>
+	                <c:if test="${ list.board_secret eq 'N' }"></c:if>> 비밀글</label>
+	                <input type="hidden" name="board_secret" value="N" disabled="disabled" />
                 </th>
             </tr>
             <tr>

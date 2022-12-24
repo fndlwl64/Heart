@@ -85,6 +85,8 @@
 		                        <div class="card-body">                              
 		                            <div class="title-body">
 		                                <h5 class="card-title">${ list.animal_name } 입양후기 
+		                                <c:if test="${ not empty list.review_img1 || not empty list.review_img2 || not empty list.review_img3 }"><i class="bi bi-paperclip"></i></c:if>
+                                        <c:if test="${ not empty list.review_video }"><i class="bi bi-film"></i></c:if>
 		                                <c:if test="${ cList[status.index] gt 0 }"><span class="comment-count">[${ cList[status.index] }]</span></c:if></h5>		                                                                                           
 		                            </div>
 		                            <h7>${ list.review_regdate.substring(0,10) } 조회 ${ list.review_hit }</h7>

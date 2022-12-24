@@ -1,5 +1,6 @@
 package com.heartpet.project;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -236,6 +237,10 @@ public class UserReviewController {
     ////////////////////////////////////////////////////////////////////////////////////
     @RequestMapping(value = "/user_review_update_ok", method = RequestMethod.POST)
     public void user_review_update_ok(@RequestParam("review_file") List<MultipartFile> review_file, 
+            @RequestParam(value = "review_image1_delete", required = false, defaultValue = "") String review_image1_delete, 
+            @RequestParam(value = "review_image2_delete", required = false, defaultValue = "") String review_image2_delete, 
+            @RequestParam(value = "review_image3_delete", required = false, defaultValue = "") String review_image3_delete, 
+            @RequestParam(value = "review_video_delete", required = false, defaultValue = "") String review_video_delete, 
             @Valid ReviewDTO updateDto, BindingResult result, HttpServletResponse response,
             HttpServletRequest request) throws IOException {
         
@@ -255,11 +260,40 @@ public class UserReviewController {
             }
         } else {
             //================================================================================
-            // FileUploadImage.uploadFile(request, 실제 파일, 폴더명, 파일 개수)
+            // FileUploadImage.updateFile(request, 실제 파일, 폴더명, 원래 img/vid 이름, 파일 개수)
             //================================================================================
             // 총 파일 개수
             int totalFileCount = 4;            
             ReviewDTO originalContent = this.reviewDAO.contentReview(updateDto.getReview_no());
+            
+            // 기존 사진 삭제 checkbox 클릭 시 
+            List<String> only_delete = new ArrayList<String>();
+            if(review_image1_delete.equals("Y")) { 
+                only_delete.add(originalContent.getReview_img1()); 
+                originalContent.setReview_img1("");
+            }
+            if(review_image2_delete.equals("Y")) { 
+                only_delete.add(originalContent.getReview_img2()); 
+                originalContent.setReview_img2("");
+            }            
+            if(review_image3_delete.equals("Y")) { 
+                only_delete.add(originalContent.getReview_img3());
+                originalContent.setReview_img3("");
+            }
+            if(review_video_delete.equals("Y")) { 
+                only_delete.add(originalContent.getReview_video());
+                originalContent.setReview_video("");
+            }
+            
+            for(int i=0; i<only_delete.size(); i++) {
+                String deletePath = request.getSession().getServletContext().getRealPath(only_delete.get(i));
+                if(deletePath != null) {
+                    File deleteFile = new File(deletePath);
+                    if(deleteFile.exists()) {                       
+                        deleteFile.delete();                        
+                    }
+                }             
+            } 
             
             // 기존 이미지 및 비디오 이름 가져오기
             List<String> origin_names = new ArrayList<String>();

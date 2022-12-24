@@ -301,3 +301,21 @@ body {
 .review-section .search .btn-light {
     border: 1px solid gray;
 }
+
+/* review_update : 이미지 수정하기 original-image */
+.table tr td .original-image {
+    justify-items: start;
+}
+
+.original-image .image-update {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    
+}
+.original-image .delete-checkbox {
+    margin-bottom: 0rem;
+}
+
+.original-image .delete-checkbox > label {
+    margin-bottom: 0rem;
+}

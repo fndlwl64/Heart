@@ -80,7 +80,8 @@
 	                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if>
 	                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
 	                    <c:if test="${ list.board_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>	                    
-	                    <c:if test="${ cList[status.index] gt 0 }"><span>[${ cList[status.index] }]</span></c:if>	                    
+	                    <c:if test="${ not empty list.board_img1 || not empty list.board_img2 }"><i class="bi bi-paperclip"></i></c:if>
+	                    <c:if test="${ cList[status.index] gt 0 }"><span <c:if test="${ list.board_state eq 'disabled' }">style="color:black;"</c:if> class="comment-count">[${ cList[status.index] }]</span></c:if>	                    
                         </a> 
                     </td>
                     <td><c:if test="${ list.board_id eq 'admin' }"><span id="admin_id">관리자</span></c:if>

@@ -248,6 +248,21 @@ body {
 	
 }
 
+/* 이미지 수정하기 original-image */
+.original-image .image-update {
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+	
+}
+.original-image .delete-checkbox {
+    margin-bottom: 0rem;
+    margin-left: 1.5rem;
+}
+
+.original-image .delete-checkbox > label {
+	margin-bottom: 0rem;
+}
+
 /* fnq 문의글 제목 */
 .container .noticeinfo .question {
 	text-align: left;
