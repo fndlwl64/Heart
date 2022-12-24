@@ -80,8 +80,8 @@ public class AdminAnimalController {
 			AnimalDTO animalDTO, @RequestParam(value = "sort", required = false) String sort) {
 		// 강아지, 삭제 포함
 		animalDTO.setAnimal_tag("dog");
-		animalDTO.setAnimal_state(0);
-
+		System.out.println("============================");
+		System.out.println(animalDTO.getAnimal_state());
 		// 페이징
 		String field = "";
 		String keyword = "";
@@ -127,7 +127,6 @@ public class AdminAnimalController {
 			AnimalDTO animalDTO, @RequestParam(value = "sort", required = false) String sort) {
 		// 고양이, 삭제 포함
 		animalDTO.setAnimal_tag("cat");
-		animalDTO.setAnimal_state(0);
 
 		// 페이징
 		String field = "";
@@ -290,8 +289,8 @@ public class AdminAnimalController {
 		List<Integer> status_no = null;
 		if(animal_status != null && !animal_status.equals("")) {
 			status_no = animalDAO.joinStatus(animal_status);
-			if(status_no.size() == 0) {
-				status_no = null;
+			if(status_no.size() == 0) {//조건을 만족하는 데이터가 없을 경우
+				status_no.add(-1);
 			}
 		}
 		// 페이지
@@ -300,11 +299,12 @@ public class AdminAnimalController {
 
 		// 해시맵으로 조인 유사하게 구현
 		List<AnimalDTO> animalList = animalDAO.list();
-		Map<Integer, ArrayList<String>> maps = new HashMap();
+		Map<Integer, ArrayList<Object>> maps = new HashMap();
 		for (AnimalDTO dto : animalList) {
-			ArrayList<String> aList = new ArrayList();
+			ArrayList<Object> aList = new ArrayList();
 			aList.add(dto.getAnimal_name());
 			aList.add(dto.getAnimal_status());
+			aList.add(dto.getAnimal_state());
 			maps.put(dto.getAnimal_no(), aList);
 		}
 

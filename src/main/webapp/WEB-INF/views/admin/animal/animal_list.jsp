@@ -24,9 +24,9 @@
 	<c:set var="animal" value="고양이" />
 </c:if>
 <c:set var="pagingTag"
-	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }&animal_name=${animalDTO.animal_name }&animal_vaccination=${animalDTO.animal_vaccination }&sort=${sort }" />
+	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }&animal_name=${animalDTO.animal_name }&animal_vaccination=${animalDTO.animal_vaccination }&animal_state=${animalDTO.animal_state }&sort=${sort }" />
 <c:set var="pagingSort"
-	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }&animal_name=${animalDTO.animal_name }&animal_vaccination=${animalDTO.animal_vaccination }"/>
+	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }&animal_name=${animalDTO.animal_name }&animal_vaccination=${animalDTO.animal_vaccination }&animal_state=${animalDTO.animal_state }"/>
 </head>
 <input type="hidden" id="sortlink" value="<%=request.getContextPath() %>/${animalDTO.animal_tag}_list?page=${ paging.page }&${pagingSort}" />
 <body>
@@ -91,7 +91,6 @@
 	                      	<th width="12.5%">${ animal } 이름</th>
 	                      	<td width="20%">
 	                      		<input type="text" class="form-control" name="animal_name" value="${animalDTO.animal_name }"/>
-
 	                      	</td>
 							<th width="12.5%">중성화 여부</th>
 							<td width="10%">
@@ -107,7 +106,14 @@
 									<label><input type="checkbox" class="form-check-input" id="checkYNvaccin" <c:if test="${animalDTO.animal_vaccination eq 'Y' }">checked="checked"</c:if>> Yes</label>
 								</div>
 							</td>
-							<td></td>
+							<th width="12.5%">삭제 여부</th>
+							<td width="10%">
+								<select name="animal_state" class="form-select">
+									<option value=0></option>
+									<option value=2 <c:if test="${animalDTO.animal_state eq 2 }">selected</c:if>>O</option>
+									<option value=1 <c:if test="${animalDTO.animal_state eq 1 }">selected</c:if>>X</option>
+								</select>
+							</td>
 	                      <%-- <th>문의글</th>
 	                      <td><input type="text" class="form-control" name="search_content" value="${ search_content }" /></td> --%>
 	                  	</tr>
@@ -142,7 +148,8 @@
 			<div class="row">
 				<div class="col total-data justify-content-end">
 					<select class="form-select form-select-sm order" name="sort" id="sort">
-						<option value="size" selected="selected" <c:if test="${sort eq 'size'}">selected</c:if>>최신등록순</option>
+						<option value="">최신등록순</option>
+						<%-- <option value="size" <c:if test="${sort eq 'size'}">selected</c:if>>사이즈</option> --%>
 						<option value="weight" <c:if test="${sort eq 'weight'}">selected</c:if>>무게</option>
 						<option value="age" <c:if test="${sort eq 'age'}">selected</c:if>>나이</option>
 					</select>
