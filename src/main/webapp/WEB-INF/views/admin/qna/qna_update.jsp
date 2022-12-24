@@ -39,7 +39,7 @@
                     <td class="col-2"><input type="text" class="form-control-plaintext" name="board_id" value="${ list.board_id }" disabled="disabled"></td>
                 <th class="table-light col-1 secret">
                     <label>
-                    <input class="form-check-input col-1" type="checkbox" name="board_secret" value="Y" <c:if test="${ list.board_secret eq 'Y' }">checked="checked"</c:if>> 비밀글</label>
+                    <input class="form-check-input" type="checkbox" name="board_secret" value="Y" <c:if test="${ list.board_secret eq 'Y' }">checked="checked"</c:if>> 비밀글</label>
                     <input type="hidden" name="board_secret" value="N" disabled="disabled" />
                 </th>
             </tr>
@@ -65,8 +65,11 @@
                     <div class="d-grid align-middle original-image">
                         <input type="file" class="form-control" name="board_img" accept="image/gif, image/jpeg, image/png" >
                         <c:if test="${ !empty list.board_img1 }">
-                            <p class="mt-2"><img src="${ path }${ list.board_img1 }" style="max-height: 200px;" alt="board_img" /></p>      
-                        </c:if>                  
+                            <p class="image-update"><img src="${ path }${ list.board_img1 }" style="max-height: 200px;" alt="board_img" /></p>
+                            <p class="delete-checkbox">
+                                <label><input type="checkbox" class="form-check-input" name="board_image1_delete" value="Y" /> 선택한 파일 삭제</label>
+                            </p>
+                        </c:if>                
                     </div>
                 </td>
             </tr>
@@ -75,7 +78,10 @@
                     <div class="d-grid align-middle original-image">
                         <input type="file" class="form-control" name="board_img" accept="image/gif, image/jpeg, image/png" >
                         <c:if test="${ !empty list.board_img2 }">
-                            <p class="mt-2"><img src="${ path }${ list.board_img2 }" style="max-height: 200px;" alt="board_img" /></p>      
+                            <p class="image-update"><img src="${ path }${ list.board_img2 }" style="max-height: 200px;" alt="board_img" /></p>
+                            <p class="delete-checkbox">
+                                <label><input type="checkbox" class="form-check-input" name="board_image2_delete" value="Y" /> 선택한 파일 삭제</label>
+                            </p>
                         </c:if> 
                     </div>
                 </td>
@@ -83,7 +89,7 @@
         </table>
 	    <div class="buttons">
             <div>
-                <button class="btn btn-dark mx-1" onclick="location.href='${path}/admin_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
+                <button type="button" class="btn btn-dark mx-1" onclick="location.href='${path}/admin_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
 		    </div>
 		    <div>
 			    <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>

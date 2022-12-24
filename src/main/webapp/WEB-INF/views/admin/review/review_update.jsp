@@ -58,7 +58,10 @@
 				    <div class="d-grid align-middle original-image">
 				        <input type="file" class="form-control" name="review_file" accept="image/gif, image/jpeg, image/png" >
 				        <c:if test="${ !empty list.review_img1 }">
-				            <p class="mt-2"><img src="${ path }${ list.review_img1 }" style="max-height: 200px;" alt="review_img" /></p>      
+				            <p class="image-update"><img src="${ path }${ list.review_img1 }" style="max-height: 200px;" alt="review_img" /></p>      
+				            <p class="delete-checkbox">
+                                <label><input type="checkbox" class="form-check-input" name="review_image1_delete" value="Y" /> 선택한 파일 삭제</label>
+                            </p>
 				        </c:if>                  
 				    </div>
 				</td>
@@ -68,7 +71,10 @@
                     <div class="d-grid align-middle original-image">
                         <input type="file" class="form-control" name="review_file" accept="image/gif, image/jpeg, image/png" >
                         <c:if test="${ !empty list.review_img2 }">
-                            <p class="mt-2"><img src="${ path }${ list.review_img2 }" style="max-height: 200px;" alt="review_img" /></p>      
+                            <p class="image-update"><img src="${ path }${ list.review_img2 }" style="max-height: 200px;" alt="review_img" /></p>
+                            <p class="delete-checkbox">
+                                <label><input type="checkbox" class="form-check-input" name="review_image2_delete" value="Y" /> 선택한 파일 삭제</label>
+                            </p>
                         </c:if>                  
                     </div>
                 </td>
@@ -78,7 +84,10 @@
                     <div class="d-grid align-middle original-image">
                         <input type="file" class="form-control" name="review_file" accept="image/gif, image/jpeg, image/png" >
                         <c:if test="${ !empty list.review_img3 }">
-                            <p class="mt-2"><img src="${ path }${ list.review_img3 }" style="max-height: 200px;" alt="review_img" /></p>      
+                            <p class="image-update"><img src="${ path }${ list.review_img3 }" style="max-height: 200px;" alt="review_img" /></p>      
+                            <p class="delete-checkbox">
+                                <label><input type="checkbox" class="form-check-input" name="review_image3_delete" value="Y" /> 선택한 파일 삭제</label>
+                            </p>                        
                         </c:if>                  
                     </div>
                 </td>
@@ -88,6 +97,12 @@
                 <td colspan="5">
                     <div class="d-grid align-middle original-image">
                         <input type="file" class="form-control" name="review_file" value="${ list.review_video }" accept="video/mp4, video/mkv, video/x-m4v, video/*">
+	                    <c:if test="${ !empty list.review_video }">
+                            <p class="image-update"><video src="${ path }${ list.review_video }" height="200px" controls="controls"></video></p>      	                    
+                            <p class="delete-checkbox">
+                                <label><input type="checkbox" class="form-check-input" name="review_video_delete" value="Y" /> 선택한 파일 삭제</label>
+                            </p>	                    
+	                    </c:if>
                     </div>
                 </td>
             </tr>

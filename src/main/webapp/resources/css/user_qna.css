@@ -250,6 +250,21 @@ body {
 .table tr td .original-image {
 	justify-items: start;
 }
+
+/* qna_update : 이미지 수정하기 original-image */
+.original-image .image-update {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    
+}
+.original-image .delete-checkbox {
+    margin-bottom: 0rem;
+}
+
+.original-image .delete-checkbox > label {
+    margin-bottom: 0rem;
+}
+
 /* fnq - accordion */
 .accordion {
     margin: auto;
@@ -281,6 +296,11 @@ body {
     display: grid;
     text-align: center;
     justify-content: center;
+}
+
+.comment-count {
+	color: #ff4d4d;
+	font-weight: bold;
 }
 
 /* space-add */
