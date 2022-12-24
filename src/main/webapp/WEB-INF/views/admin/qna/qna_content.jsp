@@ -93,6 +93,7 @@
 	    </div>
 	    <div>
 		    <button class="btn btn-danger mx-1" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }"><i class="bi bi-trash3"></i> 삭제</button>
+		    <button class="btn btn-success mx-1" onclick="location.href='${path}/admin_qna_update?board_no=${ list.board_no }'"><i class="bi bi-eraser"></i> 수정</button>
 		    <button class="btn btn-primary mx-1" onclick="location.href='${path}/admin_qna_reply_insert?board_parentNo=${ list.board_no }'"><i class="bi bi-reply"></i> 답변</button>
 	    </div>
 	</div>
