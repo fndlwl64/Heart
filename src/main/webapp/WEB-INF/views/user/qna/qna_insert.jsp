@@ -82,6 +82,7 @@
                 </td>
             </tr>
         </table>
+        
         <div class="qna-section">
             <div class="row">
                 <div class="col btn-insert d-flex justify-content-between">

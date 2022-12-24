@@ -41,8 +41,7 @@
         </div>
     </div>
 
-    <%-- 아코디언 --%>
-    <!-- 문의하기 -->
+    <%-- 문의하기 : 아코디언 --%>
     <div class="qna-board">
         <table class="table table-hover table-bordered mb-2">
             <thead>
