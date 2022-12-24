@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<% pageContext.setAttribute("newline", "\n"); %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="fList" value="${ fnqList }" />
 <c:set var="total" value="${ total }" />
@@ -53,7 +54,7 @@
             </h2>
             <div id="flush-collapse${ status.count }" class="accordion-collapse collapse" aria-labelledby="flush-heading${ status.count }" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-                    <strong>A.&nbsp;</strong>${ list.fnq_answer }
+                    <strong>A.&nbsp;</strong>${ list.fnq_answer.replace(newline, '<br/>') }
                 </div>
             </div>
         </div>

@@ -2,10 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<% pageContext.setAttribute("newline", "\n"); %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="list" value="${ fnqContent }"/>
 <c:set value="${ path }/admin_fnq_delete?fnq_no=${ list.fnq_no }" var="deleteAddr" />
-<% pageContext.setAttribute("newline", "\n"); %>
 	
 <jsp:include page="../../include/admin_header.jsp"/>
 <!DOCTYPE html>
@@ -37,7 +37,7 @@
             <th class="table-light">답변</th>
             <td colspan="3" class="col-5">
             	<div class="answer"><strong>A.</strong></div>
-                <textarea class="form-control-plaintext" cols="60" rows="10" readonly>${ list.fnq_answer.replace(newline, '<br/>') }</textarea>
+                <textarea class="form-control-plaintext" cols="60" rows="10" readonly>${ list.fnq_answer.replace(newline, '<br/>').replace('<br/>', '') }</textarea>
             </td>
         </tr>
     </table>
