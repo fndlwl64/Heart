@@ -163,7 +163,7 @@ public class AdminQnaController {
             updateDto.setBoard_img1(updateFile.get(0));
             updateDto.setBoard_img2(updateFile.get(1));         
             
-            int check = this.qnaDAO.insertQna(updateDto);
+            int check = this.qnaDAO.updateQna(updateDto);
             if (check > 0) {
                 out.println("<script>alert('성공적으로 게시글이 수정되었습니다.'); location.href='" + request.getContextPath() + "/admin_qna_list'; </script>");
             } else {
@@ -300,7 +300,7 @@ public class AdminQnaController {
             updateDto.setBoard_img1(updateFile.get(0));
             updateDto.setBoard_img2(updateFile.get(1));        	
         	
-            int check = this.qnaDAO.insertQna(updateDto);
+            int check = this.qnaDAO.updateQna(updateDto);
             if (check > 0) {
                 out.println("<script>alert('성공적으로 답변글이 수정되었습니다.'); location.href='" + request.getContextPath() + "/admin_qna_list'; </script>");
             } else {

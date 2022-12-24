@@ -22,9 +22,9 @@
 
 <%-- 글쓰기 --%>
 <div id="qna-contents" class="qna-contents">
-    <div class="qna-section">
-        <div class="row">
-            <div class="col title">${ semiTitle }글 작성하기</div>
+    <div class="qna-section mb-3">
+        <div class="qna-title">
+            <span>${ semiTitle }글 작성하기</span>
         </div>
     </div>
 
