@@ -98,6 +98,79 @@ public class AdminQnaController {
         model.addAttribute("qnaContent", qnaContent);
         return "admin/qna/qna_content";
     }
+    
+    ///////////////////////////////////////////////////////////////////
+    // QNA_UPDATE
+    ///////////////////////////////////////////////////////////////////
+    @RequestMapping("/admin_qna_update")
+    public String admin_qna_update(@RequestParam(value = "board_no", defaultValue = "0") int board_no,
+            Model model, HttpServletResponse response) throws IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        HttpSession session = request.getSession();
+        PrintWriter out = response.getWriter();
+
+        // 관리자 로그인 여부 체크
+        if (session.getAttribute("session_admin_id") == null || session.getAttribute("session_admin_id") == "") {
+            out.println(
+                    "<script> alert('관리자 로그인이 필요합니다.'); location.href='" + request.getContextPath() + "/'; </script>");
+            out.flush();
+        }
+
+        QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
+        model.addAttribute("qnaContent", qnaContent);
+        return "admin/qna/qna_update";
+    }
+    
+    ///////////////////////////////////////////////////////////////////
+    // QNA_UPDATE_OK
+    ///////////////////////////////////////////////////////////////////
+    @RequestMapping("/admin_qna_update_ok")
+    public void admin_qna_update(@RequestParam("board_img") List<MultipartFile> board_img, 
+            @Valid QnaDTO updateDto, BindingResult result, HttpServletResponse response)
+            throws IOException {
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        QnaDTO qnaContent = this.qnaDAO.contentQna(updateDto.getBoard_no());
+
+        if (result.hasErrors()) {
+            List<ObjectError> errors = result.getAllErrors();
+            for (ObjectError error : errors) {
+                if (error.getDefaultMessage().equals("title")) {
+                    out.println("<script>alert('글 제목이 없습니다.'); history.back(); </script>");
+                    break;
+                } else if (error.getDefaultMessage().equals("content")) {
+                    out.println("<script>alert('글 내용이 없습니다.'); history.back(); </script>");
+                    break;
+                } else if (error.getDefaultMessage().equals("password")) {
+                    out.println("<script>alert('글 비밀번호를 입력해주세요.'); history.back(); </script>");
+                    break;
+                } else if (error.getDefaultMessage().equals("regexp")) {
+                    out.println("<script>alert('비밀번호는 6자 이상 10자 이하의 숫자 및 영문자로 구성되어야 합니다. 다시 입력해주세요.'); history.back(); </script>");
+                    break;
+                }
+            }
+        } else {
+            
+            // 기존 이미지 이름   
+            List<String> origin_names = new ArrayList<String>();
+            origin_names.add(qnaContent.getBoard_img1());
+            origin_names.add(qnaContent.getBoard_img2());
+
+            // 파일 업데이트
+            FileUploadImage upload = new FileUploadImage();  
+            List<String> updateFile = upload.updateFile(request, board_img, "qna", origin_names, 2);
+            
+            updateDto.setBoard_img1(updateFile.get(0));
+            updateDto.setBoard_img2(updateFile.get(1));         
+            
+            int check = this.qnaDAO.insertQna(updateDto);
+            if (check > 0) {
+                out.println("<script>alert('성공적으로 게시글이 수정되었습니다.'); location.href='" + request.getContextPath() + "/admin_qna_list'; </script>");
+            } else {
+                out.println("<script>alert('게시글 수정을 실패했습니다.'); history.back(); </script>");
+            }
+        }
+    }
 
     ///////////////////////////////////////////////////////////////////
     // QNA_REPLY_INSERT
