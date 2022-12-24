@@ -22,10 +22,8 @@
 
     <div>
         <form action="${path}/admin_qna_update_ok" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="board_id" value="${ session_admin_id }" />     
-        <c:if test="${ list.level eq 1 }"><input type="hidden" name="board_group" value="${ list.board_no }" /></c:if>
-        <c:if test="${ list.level ge 2 }"><input type="hidden" name="board_group" value="${ list.board_group }" /></c:if>
-        <input type="hidden" name="board_parentNo" value="${ list.board_no }" />
+        <input type="hidden" name="board_no" value="${ list.board_no }" />
+        <input type="hidden" name="board_id" value="${ list.board_id }" />
         <table class="table noticeinfo mt-4">
             <tr class="border-top">
                 <th class="table-light col-1">카테고리</th>
@@ -38,13 +36,11 @@
                     </select>
                 </td>           
                 <th class="table-light col-1">작성자</th>
-                	<td class="col-1 admin"><span id="admin_id">관리자</span></td>
+                    <td class="col-2"><input type="text" class="form-control-plaintext" name="board_id" value="${ list.board_id }" disabled="disabled"></td>
                 <th class="table-light col-1 secret">
-	                <label><input class="form-check-input" type="checkbox" name="board_secret" value="Y"
-	                <c:if test="${ empty list.board_secret }">checked="checked"</c:if>
-	                <c:if test="${ list.board_secret eq 'Y' }">checked="checked" disabled="disabled"</c:if>
-	                <c:if test="${ list.board_secret eq 'N' }"></c:if>> 비밀글</label>	  
-	                <input type="hidden" name="board_secret" value="N" disabled="disabled" />
+                    <label>
+                    <input class="form-check-input col-1" type="checkbox" name="board_secret" value="Y" <c:if test="${ list.board_secret eq 'Y' }">checked="checked"</c:if>> 비밀글</label>
+                    <input type="hidden" name="board_secret" value="N" disabled="disabled" />
                 </th>
             </tr>
             <tr>
@@ -56,7 +52,7 @@
             <tr>
                 <th class="table-light">내용</th>
                 <td colspan="4">
-                <textarea name="board_content" class="form-control" cols="30" rows="10">${ list.board_content.replace(newline, '<br/>').replace('<br/>', '') }</textarea>
+                <textarea name="board_content" class="form-control" cols="30" rows="10">${ list.board_content }</textarea>
                 </td>
             </tr>
             <tr>
@@ -77,7 +73,7 @@
             <tr>
                 <td colspan="4">
                     <div class="d-grid align-middle original-image">
-                        <input type="file" class="form-control" name="board_img" accept="video/mp4, video/mkv, video/x-m4v, video/*" >
+                        <input type="file" class="form-control" name="board_img" accept="image/gif, image/jpeg, image/png" >
                         <c:if test="${ !empty list.board_img2 }">
                             <p class="mt-2"><img src="${ path }${ list.board_img2 }" style="max-height: 200px;" alt="board_img" /></p>      
                         </c:if> 
