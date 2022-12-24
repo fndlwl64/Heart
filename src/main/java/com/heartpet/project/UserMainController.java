@@ -32,7 +32,6 @@ public class UserMainController {
 
         model.addAttribute("dogList", dogList);
         model.addAttribute("catList", catList);
-
         model.addAttribute("dogReviewList", dogReviewList);
         model.addAttribute("catReviewList", catReviewList);
 

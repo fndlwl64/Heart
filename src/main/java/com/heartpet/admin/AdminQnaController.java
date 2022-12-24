@@ -24,7 +24,6 @@ import com.heartpet.action.QnaDAO;
 import com.heartpet.model.FnqDTO;
 import com.heartpet.model.PageDTO;
 import com.heartpet.model.QnaDTO;
-import com.heartpet.model.ReviewDTO;
 import com.heartpet.util.FileUploadImage;
 
 @Controller
