@@ -80,8 +80,6 @@ public class AdminAnimalController {
 			AnimalDTO animalDTO, @RequestParam(value = "sort", required = false) String sort) {
 		// 강아지, 삭제 포함
 		animalDTO.setAnimal_tag("dog");
-		System.out.println("============================");
-		System.out.println(animalDTO.getAnimal_state());
 		// 페이징
 		String field = "";
 		String keyword = "";
@@ -197,8 +195,8 @@ public class AdminAnimalController {
 			request.setAttribute("url", "back");
 			return "alert";
 		}
-		
-		return "admin/admin_main";
+		String animal_tag = animalDTO.getAnimal_tag();
+		return "redirect:/"+animal_tag+"_list";
 	}
 
 	@RequestMapping(value = "/animal_insert", method = RequestMethod.GET)

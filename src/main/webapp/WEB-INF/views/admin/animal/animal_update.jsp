@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <link rel="stylesheet" href="resources/css/admin_animal.css">
 <input type="hidden" id="tag" value="${animalDTO.animal_tag }"/>
+<input type="hidden" id="sp" value="${animalDTO.animal_species }"/>
 <body>
 	<br>
 	<br>
@@ -16,6 +17,7 @@
 		<form action="<%=request.getContextPath()%>/animal_update"
 			method="post" enctype="multipart/form-data">
 			<input type="hidden" name="animal_no" value="${animalDTO.animal_no }">
+			<input type="hidden" name="animal_tag" value="${animalDTO.animal_tag }">
 			<input type="hidden" name="animal_img1"
 				value="${animalDTO.animal_img1 }"> <input type="hidden"
 				name="animal_img2" value="${animalDTO.animal_img2 }"> <input
@@ -93,7 +95,6 @@
 							name="animal_caution"><c:out
 								value="${animalDTO.animal_caution }"></c:out></textarea></td>
 				</tr>
-
 				<tr>
 					<th rowspan="3" class="table-light">이미지</th>
 					<td colspan="2">
@@ -213,7 +214,12 @@
         $('#species').empty();
         $('#species').append('<option></option>');
         for (let i=0;i<result.length ; i++){
-            $('#species').append('<option value="'+result[i]+'">'+ result[i] + '</option>');
+        	if($('#sp').val() === result[i]){
+        		$('#species').append('<option value="'+result[i]+'" selected>'+ result[i] + '</option>');
+        	}
+        	else{
+        		$('#species').append('<option value="'+result[i]+'">'+ result[i] + '</option>');        	
+        	}
         }
 
 	</script>
