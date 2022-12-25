@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet" href="resources/css/user_animal_main.css">
 <jsp:include page="../../include/user_header.jsp" />
@@ -101,36 +100,9 @@
                     </td>                   
                     <th width="7%">종류</th>
                     <td width="16%">
-                        <c:if test="${animalDTO.animal_tag eq 'dog'}">
-                            <select name="animal_species" class="form-select">
-                                <option value="">상관없음</option>
-                                <option value="말티즈" <c:if test="${animalDTO.animal_species eq '말티즈'}">selected</c:if>>말티즈</option>
-                                <option value="푸들" <c:if test="${animalDTO.animal_species eq '푸들'}">selected</c:if>>푸들</option>
-                                <option value="포메라니안" <c:if test="${animalDTO.animal_species eq '포메라니안'}">selected</c:if>>포메라니안</option>
-                                <option value="믹스견" <c:if test="${animalDTO.animal_species eq '믹스견'}">selected</c:if>>믹스견</option>
-                                <option value="치와와" <c:if test="${animalDTO.animal_species eq '치와와'}">selected</c:if>>치와와</option>
-                                <option value="시츄" <c:if test="${animalDTO.animal_species eq '시츄'}">selected</c:if>>시츄</option>
-                                <option value="골든리트리버" <c:if test="${animalDTO.animal_species eq '골든리트리버'}">selected</c:if>>골든리트리버</option>
-                                <option value="진돗개" <c:if test="${animalDTO.animal_species eq '진돗개'}">selected</c:if>>진돗개</option>
-                                <option value="기타" <c:if test="${animalDTO.animal_species eq '기타'}">selected</c:if>>기타</option>
-                            </select>
-                        </c:if>
-                        <c:if test="${animalDTO.animal_tag eq 'cat'}">
-                            <select name="animal_species" class="form-select">
-                                <option value="">상관없음</option>
-                                <option value="스코티시" <c:if test="${animalDTO.animal_species eq '스코티시'}">selected</c:if>>스코티시</option>
-                                <option value="폴드" <c:if test="${animalDTO.animal_species eq '폴드'}">selected</c:if>>폴드</option>
-                                <option value="샴" <c:if test="${animalDTO.animal_species eq '샴'}">selected</c:if>>샴</option>
-                                <option value="페르시안" <c:if test="${animalDTO.animal_species eq '페르시안'}">selected</c:if>>페르시안</option>
-                                <option value="터키시" <c:if test="${animalDTO.animal_species eq '터키시'}">selected</c:if>>터키시</option>
-                                <option value="앙고라" <c:if test="${animalDTO.animal_species eq '앙고라'}">selected</c:if>>앙고라</option>
-                                <option value="러시안 블루" <c:if test="${animalDTO.animal_species eq '러시안 블루'}">selected</c:if>>러시안 블루</option>
-                                <option value="벵갈" <c:if test="${animalDTO.animal_species eq '벵갈'}">selected</c:if>>벵갈</option>
-                                <option value="먼치킨" <c:if test="${animalDTO.animal_species eq '먼치킨'}">selected</c:if>>먼치킨</option>
-                                <option value="아비시니안" <c:if test="${animalDTO.animal_species eq '아비시니안'}">selected</c:if>>아비시니안</option>
-                                <option value="기타" <c:if test="${animalDTO.animal_species eq '기타'}">selected</c:if>>기타</option>
-                            </select>
-                        </c:if>                
+	                    <select name="animal_species" class="form-select">	
+	                		<jsp:include page="../../include/animal_species.jsp" /><!-- animal_species select -->
+	                	</select>
                     </td> 
                     <th>사이즈</th>
                     <td colspan="3">
