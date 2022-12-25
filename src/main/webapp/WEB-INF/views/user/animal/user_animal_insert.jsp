@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="resources/css/animal.css" />
 <script src="resources/js/animal_species.js"></script><!-- 동물 종 데이터 -->
 <jsp:include page="../../include/user_header.jsp"/>
-
 <body>
 <div class="div1">
     <div class="title">
@@ -149,7 +148,7 @@
             $('#species').empty();
             $('#species').append('<option></option>');
             for (let i=0;i<result.length ; i++){
-                $('#species').append('<option value='+result[i]+'>'+ result[i] + '</option>');
+                $('#species').append('<option value="'+result[i]+'">'+ result[i] + '</option>');
             }
         }
         /*파일 전송 수 제한*/

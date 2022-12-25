@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../../include/admin_header.jsp" />
 <script src="resources/js/admin.js"></script>
-<script src="resources/js/animal_species.js"></script><!-- 동물 종 데이터 -->
+<script src="resources/js/animal_species.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <link rel="stylesheet" href="resources/css/list_view.css" />
 <c:set var="tag" value="${tag }"></c:set>
@@ -19,6 +19,7 @@
 					<th class="table-light">품종</th>
 					<td>
 						<select class="form-select" name="animal_species">
+							<jsp:include page="../../include/animal_species.jsp" /><!-- animal_species select -->
 						</select>
 					</td>
 				</tr>
