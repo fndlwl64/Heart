@@ -2,7 +2,7 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="resources/css/animal.css" />
-
+<script src="resources/js/animal_species.js"></script><!-- 동물 종 데이터 -->
 <jsp:include page="../../include/user_header.jsp"/>
 
 <body>
@@ -120,7 +120,7 @@
     </div>
 </div>
 <script>
-
+		
 		function optionChangeSize(){
 			if($('#size').val() === '소형'){
 				$('#weight').prop("min" , '1');
@@ -139,14 +139,12 @@
 
         /*동적 동물 선택 태그*/
         function optionChange(){
-            const dog = ["말티즈","푸들","포메라니안","믹스견","치와와","시츄","골든리트리버","진돗개","기타"];
-            const cat = ["스코티시 폴드","샴","페르시안","터키시 앙고라","러시안 블루","벵갈","먼치킨","아비시니안","기타"];
             let result;
             let tag = $('#tag').val();
             if (tag === 'cat'){
-                result = cat;
+                result = cat_select;
             }else if(tag === 'dog'){
-                result = dog;
+                result = dog_select;
             }
             $('#species').empty();
             $('#species').append('<option></option>');

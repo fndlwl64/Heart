@@ -17,35 +17,38 @@
 <c:set var="sort" value="${sort }" />
 <c:set var="animalDTO" value="${ animalDTO }" />
 <c:set var="animalList" value="${ animalList }" />
-<c:if test="${animalDTO.animal_tag eq 'dog'}" >
+<c:if test="${animalDTO.animal_tag eq 'dog'}">
 	<c:set var="animal" value="강아지" />
 </c:if>
-<c:if test="${animalDTO.animal_tag eq 'cat'}" >
+<c:if test="${animalDTO.animal_tag eq 'cat'}">
 	<c:set var="animal" value="고양이" />
 </c:if>
 <c:set var="pagingTag"
 	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }&animal_name=${animalDTO.animal_name }&animal_vaccination=${animalDTO.animal_vaccination }&animal_state=${animalDTO.animal_state }&sort=${sort }" />
 <c:set var="pagingSort"
-	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }&animal_name=${animalDTO.animal_name }&animal_vaccination=${animalDTO.animal_vaccination }&animal_state=${animalDTO.animal_state }"/>
+	value="animal_species=${ animalDTO.animal_species }&animal_neutered=${ animalDTO.animal_neutered }&animal_size=${animalDTO.animal_size }&animal_name=${animalDTO.animal_name }&animal_vaccination=${animalDTO.animal_vaccination }&animal_state=${animalDTO.animal_state }" />
 </head>
-<input type="hidden" id="sortlink" value="<%=request.getContextPath() %>/${animalDTO.animal_tag}_list?page=${ paging.page }&${pagingSort}" />
+<input type="hidden" id="sortlink"
+	value="<%=request.getContextPath() %>/${animalDTO.animal_tag}_list?page=${ paging.page }&${pagingSort}" />
 <body>
 
 	<div class="container">
-	
+
 		<%-- 검색 폼 --%>
-		<form class="search_form" action="${path}/${animalDTO.animal_tag}_list" method="post">
+		<form class="search_form"
+			action="${path}/${animalDTO.animal_tag}_list" method="post">
 			<div class="form_box">
 				<div class="search-semi-title">
-                	<span><i class="bi bi-check2-square"></i> ${ animal }관리 검색</span>
-            	</div>
-            	<div class="search-table-box">
-            		<table class="table table-sm" id="search-table">
-	            		<tr>
-	                      	<th width="12.5%">${ animal } 종</th>
-	                      	<td width="20%">
-	                      	  <div class="search-date">
-			                      <c:if test="${animalDTO.animal_tag eq 'dog' }">
+					<span><i class="bi bi-check2-square"></i> ${ animal }관리 검색</span>
+				</div>
+				<div class="search-table-box">
+					<table class="table table-sm" id="search-table">
+						<tr>
+							<th width="12.5%">${ animal }종</th>
+							<td width="20%">
+								<div class="search-date">
+									<select class="form-select" id="search_animal" name="animal_species"></select>
+									<%-- <c:if test="${animalDTO.animal_tag eq 'dog' }">
 									<select class="form-select" id="search_animal" name="animal_species">
 										<option value=""></option>
 										<option value="말티즈" <c:if test="${animalDTO.animal_species eq '말티즈'}">selected</c:if>>말티즈</option>
@@ -74,56 +77,76 @@
 										<option value="아비시니안" <c:if test="${animalDTO.animal_species eq '아비시니안'}">selected</c:if>>아비시니안</option>
 										<option value="기타" <c:if test="${animalDTO.animal_species eq '기타'}">selected</c:if>>기타</option>
 									</select>
-								</c:if>
-	                          </div>
-	                      	</td>
-	                      	<th width="12.5%">${ animal } 크기</th>
-	                      	<td width="20%" colspan="2">
-	                      	  <div class="search-checkbox">
-			                    <label><input type="radio" name="animal_size" value="대형" class="form-check-input"  <c:if test="${animalDTO.animal_size eq '대형' }">checked="checked"</c:if>/> 대형</label>
-								<label><input type="radio" name="animal_size" value="중형" class="form-check-input"  <c:if test="${animalDTO.animal_size eq '중형' }">checked="checked"</c:if>/> 중형</label>
-								<label><input type="radio" name="animal_size" value="소형" class="form-check-input" <c:if test="${animalDTO.animal_size eq '소형' }">checked="checked"</c:if>/> 소형</label>
+								</c:if> --%>
+								</div>
+							</td>
+							<th width="12.5%">${ animal }크기</th>
+							<td width="20%" colspan="2">
+								<div class="search-checkbox">
+									<label><input type="radio" name="animal_size"
+										value="대형" class="form-check-input"
+										<c:if test="${animalDTO.animal_size eq '대형' }">checked="checked"</c:if> />
+										대형</label> <label><input type="radio" name="animal_size"
+										value="중형" class="form-check-input"
+										<c:if test="${animalDTO.animal_size eq '중형' }">checked="checked"</c:if> />
+										중형</label> <label><input type="radio" name="animal_size"
+										value="소형" class="form-check-input"
+										<c:if test="${animalDTO.animal_size eq '소형' }">checked="checked"</c:if> />
+										소형</label>
 
-	                      	  </div>
-	                      	</td>
-	                      	<td colspan="2"></td>
-                      	<tr>
-	                      	<th width="12.5%">${ animal } 이름</th>
-	                      	<td width="20%">
-	                      		<input type="text" class="form-control" name="animal_name" value="${animalDTO.animal_name }"/>
-	                      	</td>
+								</div>
+							</td>
+							<td colspan="2"></td>
+						<tr>
+							<th width="12.5%">${ animal }이름</th>
+							<td width="20%"><input type="text" class="form-control"
+								name="animal_name" value="${animalDTO.animal_name }" /></td>
 							<th width="12.5%">중성화 여부</th>
 							<td width="10%">
 								<div class="search-checkbox">
-									<input type="hidden" id="YN" name="animal_neutered" <c:if test="${animalDTO.animal_neutered eq 'Y' }">value="Y"</c:if>/> 
-									<label><input type="checkbox" class="form-check-input" id="checkYN" <c:if test="${animalDTO.animal_neutered eq 'Y' }">checked="checked"</c:if>> Yes</label>
+									<input type="hidden" id="YN" name="animal_neutered"
+										<c:if test="${animalDTO.animal_neutered eq 'Y' }">value="Y"</c:if> />
+									<label><input type="checkbox" class="form-check-input"
+										id="checkYN"
+										<c:if test="${animalDTO.animal_neutered eq 'Y' }">checked="checked"</c:if>>
+										Yes</label>
 								</div>
 							</td>
 							<th width="12.5%">예방접종 여부</th>
 							<td width="10%">
-								<div class="search-checkbox">								
-									<input type="hidden" id="YNvaccin" name="animal_vaccination" <c:if test="${animalDTO.animal_vaccination eq 'Y' }">value="Y"</c:if>/> 
-									<label><input type="checkbox" class="form-check-input" id="checkYNvaccin" <c:if test="${animalDTO.animal_vaccination eq 'Y' }">checked="checked"</c:if>> Yes</label>
+								<div class="search-checkbox">
+									<input type="hidden" id="YNvaccin" name="animal_vaccination"
+										<c:if test="${animalDTO.animal_vaccination eq 'Y' }">value="Y"</c:if> />
+									<label><input type="checkbox" class="form-check-input"
+										id="checkYNvaccin"
+										<c:if test="${animalDTO.animal_vaccination eq 'Y' }">checked="checked"</c:if>>
+										Yes</label>
 								</div>
 							</td>
 							<th width="12.5%">삭제 여부</th>
-							<td width="10%">
-								<select name="animal_state" class="form-select">
+							<td width="10%"><select name="animal_state"
+								class="form-select">
 									<option value=0></option>
-									<option value=2 <c:if test="${animalDTO.animal_state eq 2 }">selected</c:if>>O</option>
-									<option value=1 <c:if test="${animalDTO.animal_state eq 1 }">selected</c:if>>X</option>
-								</select>
-							</td>
-	                      <%-- <th>문의글</th>
+									<option value=2
+										<c:if test="${animalDTO.animal_state eq 2 }">selected</c:if>>O</option>
+									<option value=1
+										<c:if test="${animalDTO.animal_state eq 1 }">selected</c:if>>X</option>
+							</select></td>
+							<%-- <th>문의글</th>
 	                      <td><input type="text" class="form-control" name="search_content" value="${ search_content }" /></td> --%>
-	                  	</tr>
+						</tr>
 
-            		</table>            		
-                <div class="search-buttons">
-                <button class="btn btn-light" type="button" onclick="location.href='${ path }/${animalDTO.animal_tag}_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
-                <button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
-                </div>
-            	</div>
+					</table>
+					<div class="search-buttons">
+						<button class="btn btn-light" type="button"
+							onclick="location.href='${ path }/${animalDTO.animal_tag}_list'">
+							<i class="bi bi-arrow-counterclockwise"></i> 리셋
+						</button>
+						<button type="submit" class="btn btn-dark">
+							<i class="bi bi-search"></i> 검색
+						</button>
+					</div>
+				</div>
 			</div>
 
 		</form>
@@ -132,7 +155,7 @@
 		<%-- 검색 결과 테이블 : 일련번호 클릭 시 해당 동물 상세 정보 페이지로 이동 --%>
 		<div class="lists">
 			<%--정렬--%>
-		<%-- 	    <div class="qna-section">
+			<%-- 	    <div class="qna-section">
        <div class="row">
             <div class="col total-data"><span>총 <fmt:formatNumber value="${ total }" /> 개의 게시물</span>
                 <select class="form-select form-select-sm order" name="order" onchange="location.href='${ link_address }?page=${ paging.page }&search_category=${ search_category }&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }&search_id=${ search_id }&search_content=${ search_content }&order='+this.value;">
@@ -144,18 +167,20 @@
             </div>
         </div>
     </div> --%>
-		<div class="qna-section">
-			<div class="row">
-				<div class="col total-data justify-content-end">
-					<select class="form-select form-select-sm order" name="sort" id="sort">
-						<option value="">최신등록순</option>
-						<%-- <option value="size" <c:if test="${sort eq 'size'}">selected</c:if>>사이즈</option> --%>
-						<option value="weight" <c:if test="${sort eq 'weight'}">selected</c:if>>무게</option>
-						<option value="age" <c:if test="${sort eq 'age'}">selected</c:if>>나이</option>
-					</select>
+			<div class="qna-section">
+				<div class="row">
+					<div class="col total-data justify-content-end">
+						<select class="form-select form-select-sm order" name="sort"
+							id="sort">
+							<option value="">최신등록순</option>
+							<%-- <option value="size" <c:if test="${sort eq 'size'}">selected</c:if>>사이즈</option> --%>
+							<option value="weight"
+								<c:if test="${sort eq 'weight'}">selected</c:if>>무게</option>
+							<option value="age" <c:if test="${sort eq 'age'}">selected</c:if>>나이</option>
+						</select>
+					</div>
 				</div>
 			</div>
-		</div>
 			<%-- <div class="d-flex justify-content-end my-2">
 				<div class="validation-form mx-2">
 					<select class="form-select form-select-sm" name="sort" id="sort">
@@ -205,11 +230,14 @@
 					</tr>
 				</c:forEach>
 			</table>
-			
-			
+
+
 		</div>
 		<div class="insert-form">
-			<button class="btn btn-primary insertbtn mb-3" onclick="location.href='${path}/animal_insert?tag=${animalDTO.animal_tag}'"><i class="bi bi-pencil-fill"></i> 등록</button>
+			<button class="btn btn-primary insertbtn mb-3"
+				onclick="location.href='${path}/animal_insert?tag=${animalDTO.animal_tag}'">
+				<i class="bi bi-pencil-fill"></i> 등록
+			</button>
 		</div>
 		<br>
 		<%-- 페이징처리 --%>
@@ -307,14 +335,14 @@
 	$("#checkYN").change(function() {
 		if ($("#checkYN").is(":checked")) {
 			$("#YN").val('Y');
-		}else{
+		} else {
 			$("#YN").empty();
 		}
 	});
 	$("#checkYNvaccin").change(function() {
 		if ($("#checkYNvaccin").is(":checked")) {
 			$("#YNvaccin").val('Y');
-		}else{
+		} else {
 			$("#YNvaccin").empty();
 		}
 	});
