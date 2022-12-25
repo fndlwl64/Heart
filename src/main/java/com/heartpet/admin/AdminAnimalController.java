@@ -248,8 +248,8 @@ public class AdminAnimalController {
 	public String animal_delete(@RequestParam("no") int no, @RequestParam("animal_tag") String animal_tag) {
 		AnimalDTO animalDTO = animalDAO.content(no);
 		FileUploadImage upload = new FileUploadImage();
-		upload.deleteAnimalImg(request, animalDTO);
 		try {
+			upload.deleteAnimalImg(request, animalDTO);
 			animalDAO.delete(no);
 		} catch (Exception e) {
 			e.printStackTrace();
