@@ -111,7 +111,7 @@
 							<c:if test="${empty animalDTO.animal_img1 }">
 								<p class="mt-2">
 									<img id="file_change1" style="max-height: 200px;"
-										alt="review_img" />
+										alt="review_img"  src="resources/icon/animal_icon.png"/>
 								</p>
 							</c:if>
 						</div>
@@ -130,7 +130,7 @@
 							<c:if test="${empty animalDTO.animal_img2 }">
 								<p class="mt-2">
 									<img id="file_change2" style="max-height: 200px;"
-										alt="review_img" />
+										alt="review_img" src="resources/icon/animal_icon.png"/>
 								</p>
 							</c:if>
 						</div>
@@ -149,48 +149,11 @@
 							<c:if test="${empty animalDTO.animal_img3 }">
 								<p class="mt-2">
 									<img id="file_change3" style="max-height: 200px;"
-										alt="review_img" />
+										alt="review_img"  src="resources/icon/animal_icon.png"/>
 								</p>
 							</c:if>
 						</div>
 					</td>
-					<%-- <th class="table-light col-1">이미지</th>
-					<td colspan="7">
-						<div class="image-upload">
-							<label for="file-form-control text-center"> <img
-								id="file_change1" class="logo"
-								src="${path}${animalDTO.animal_img1 } "
-								alt="review_img" />
-							</label> <input class="file_input btn" id="file-form-control text-center"
-								type="file" onchange="readURL4(this);" name="files" />
-						</div> 
-						
-						<div class="image-upload">
-							<label for="file-input2"> 
-								<c:if test="${not empty animalDTO.animal_img2 }">
-									<img id="file_change2" class="logo" src="${path}${animalDTO.animal_img2 } "alt="review_img" />
-								</c:if> 
-								<c:if test="${empty animalDTO.animal_img2 }">
-									<img id="file_change2" class="logo" alt="review_img" />
-								</c:if>
-							</label> <input class="file_input btn" id="file-input2" type="file"
-								onchange="readURL5(this);" name="files" />
-						</div>
-						
-						
-						<div class="image-upload">
-							<label for="file-input3">
-								<c:if test="${not empty animalDTO.animal_img3 }">
-									<img id="file_change3"class="logo" src="${path}${animalDTO.animal_img3 } "alt="review_img" />
-								</c:if>
-								<c:if test="${empty animalDTO.animal_img2 }">
-									<img id="file_change3"class="logo" alt="review_img" />
-								</c:if>
-							</label> <input class="file_input btn" id="file-input3" type="file"
-								onchange="readURL6(this);" name="files" />
-						</div>
-						
-					</td> --%>
 				</tr>
 			</table>
 

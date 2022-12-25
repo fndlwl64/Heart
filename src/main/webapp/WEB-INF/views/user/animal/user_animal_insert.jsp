@@ -119,7 +119,7 @@
     </div>
 </div>
 <script>
-		
+		/* 사이즈에 따른 무게 */
 		function optionChangeSize(){
 			if($('#size').val() === '소형'){
 				$('#weight').prop("min" , '1');
@@ -160,7 +160,6 @@
                 return;
             }
         }
-        
         function  submitOption(){
         	/* 회원 정보 */
         	
