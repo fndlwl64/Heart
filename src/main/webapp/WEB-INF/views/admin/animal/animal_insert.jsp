@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../../include/admin_header.jsp" />
 <script src="resources/js/admin.js"></script>
+<script src="resources/js/animal_species.js"></script><!-- 동물 종 데이터 -->
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <link rel="stylesheet" href="resources/css/list_view.css" />
 <c:set var="tag" value="${tag }"></c:set>
@@ -16,35 +17,10 @@
 			<table class="table">
 				<tr>
 					<th class="table-light">품종</th>
-					<td><c:if test="${tag eq 'dog' }">
-							<select class="form-select" name="animal_species">
-								<option value=""></option>
-								<option value="말티즈">말티즈</option>
-								<option value="푸들">푸들</option>
-								<option value="포메라니안">포메라니안</option>
-								<option value="믹스견">믹스견</option>
-								<option value="치와와">치와와</option>
-								<option value="시츄">시츄</option>
-								<option value="골든리트리버">골든리트리버</option>
-								<option value="진돗개">진돗개</option>
-								<option value="기타">기타</option>
-							</select>
-						</c:if> <c:if test="${tag eq 'cat' }">
-							<select name="animal_species" class="form-select">
-								<option value=""></option>
-								<option value="스코티시">스코티시</option>
-								<option value="폴드">폴드</option>
-								<option value="샴">샴</option>
-								<option value="페르시안">페르시안</option>
-								<option value="터키시">터키시</option>
-								<option value="앙고라">앙고라</option>
-								<option value="러시안 블루">러시안 블루</option>
-								<option value="벵갈">벵갈</option>
-								<option value="먼치킨">먼치킨</option>
-								<option value="아비시니안">아비시니안</option>
-								<option value="기타">기타</option>
-							</select>
-						</c:if></td>
+					<td>
+						<select class="form-select" name="animal_species">
+						</select>
+					</td>
 				</tr>
 				<tr>
 					<th class="table-light">이름</th>
@@ -122,10 +98,7 @@
 	</div>
 	<script>
 		
-		let dog_select = [ "말티즈", "푸들", "포메라니안", "믹스견", "치와와", "시츄", "골든리트리버",
-				"진돗개", "기타" ];
-		let cat_select = [ "스코티시", "폴드", "샴", "페르시안", "터키시", "앙고라", "러시안 블루",
-				"벵갈", "먼치킨", "아비시니안", "기타" ];
+		
 		let result = [];
 		if ($('#animal_tag').val() == 'cat') {
 			result = cat_select;
