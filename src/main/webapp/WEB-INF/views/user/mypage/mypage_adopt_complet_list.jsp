@@ -5,6 +5,8 @@
 <script src="resources/js/mypage.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="dto" value="${uList }"/>
+<c:set var="total" value="${ total }"/>
+<c:set var="paging" value="${ paging }"/>
 <c:set var="sendCheck" value="${sendCheck }"/>
 <link rel="stylesheet" href="resources/css/mypage.css"/>
 <%-- 여기서부터 작성 --%>
@@ -93,6 +95,7 @@
 	        </div>
 	    </div>
     </div>
+    <%@ include file="../../include/pagination_update.jsp" %>
     <!-- mypage-body end 부분  -->
     <div class="mypage_bottom">
     </div>

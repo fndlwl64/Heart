@@ -29,21 +29,32 @@ public interface MypageDAO {
 	public int UserUpdate(UserDTO dto);
 	
 	// 마이페이지에서 관심정보를 불러오는 메서드
-	public List<WishVO> getWishList(String id);
+	/* public List<WishVO> getWishList(String id); */
+	
+	public List<WishVO> listWish(int startNo, int endNo, String id);
+    public int listWishCount(String id);
 	
 	// 마이페이지에서 입양예정 불러오는 메서드
-	public List<WishVO> getAdoptList(String id);
+	/* public List<WishVO> getAdoptList(String id); */
+	
+	public List<WishVO> listAdopt(int startNo, int endNo, String id);
+    public int listAdoptCount(String id);
 	
 	// 마이페이지에서 입양완료 불러오는 메서드
-	public List<WishVO> getAdoptComList(String id);
+	/* public List<WishVO> getAdoptComList(String id); */
+	
+	public List<WishVO> listAdoptCom(int startNo, int endNo, String id);
+    public int listAdoptComCount(String id);
 	
 	// 마이페이지에서 회원 탈퇴하는 메서드
 	public int UserDelete(String id);
 	
+	
+	
 	// 마이페이지에서 입양완료된 동물 후기썼는지 안썼는지 체크하는 메서드
 	public int review_count_check(HashMap<String, Object> map);
 	
-	// 마이페이지에서 후원내역 페이징까wl
+	// 마이페이지에서 후원내역 페이징까지
 	public List<Mypage_SupportDTO> getSupportList(int startNo, int endNo, String field, String keyword, String id);
 	
 	// 마이페이지에서 후원하기 페이징 전체 개수

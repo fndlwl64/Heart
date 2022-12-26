@@ -100,19 +100,24 @@ caption {
 	color: #413F42;
 }	
 
+/* 이미지 담고 있는 div */
 .div1 .animal_info {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
+	height: 400px;
+	margin-bottom: 1rem;
 }
+
 
 /* 이미지 */
 .animal_img {
 	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 	background-repeat: no-repeat;
 	background-size: cover;
-	width: 50%;
+	width: 49%;
 	background-position: center;
 	border-radius: 10px;	
+	margin-right: 1rem;
 }
 
 .div1 .animal_info .info_box {
@@ -165,7 +170,9 @@ caption {
 .div1 .btns {
 	display: flex;
 	justify-content: space-between;
-	width: 70%;
-	margin: 2% auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0.5rem;
+	margin-bottom: 2rem;
 	
 }

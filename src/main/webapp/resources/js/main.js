@@ -2,11 +2,11 @@ $(document).ready(function() {
     /* swiper */
     // dogSwiper
     const dog_swiper = new Swiper(".dogSwiper", {
-        slidesPerView: 1,
+        slidesPerView: 5,
         spaceBetween: 30,
         centeredSlides: true,
         autoplay: {
-            delay: 4000,
+            delay: 3000,
             disableOnInteraction: false,
         },
         loop: true,

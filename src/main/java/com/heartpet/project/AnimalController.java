@@ -174,7 +174,7 @@ public class AnimalController {
 		model.addAttribute("adoptRegDTO",adoptRegDTO);
 		model.addAttribute("wishCheck",wishDAO.check(wishDTO) );
 		model.addAttribute("dto", animalDTO);
-		return "user/animal/user_animal_view";
+		return "user/animal/user_animal_content";
 	}
 
 	// 입양 신청
