@@ -50,5 +50,9 @@ $(document).ready(function () {
 		}
 	});
 	
+	$("#animal_name").css({
+		'font-size' : '16px',
+		'font-weight' : 'bold' 
+	});
 	
 });

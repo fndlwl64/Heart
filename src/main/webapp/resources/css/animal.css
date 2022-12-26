@@ -3,6 +3,7 @@
 .div1 {
 	width: 70%;
 	margin: auto;
+	text-align: center;
 }
 
 .div1 .title {
@@ -29,7 +30,9 @@
 
 .div1 .table {
 	width: 80%;
+	text-align: center;
 	margin: auto;
+	margin-bottom: 2%;
 }
 
 .div1 .table thead tr th {
@@ -40,6 +43,7 @@
 
 .div1 .table tr > th, td {
 	vertical-align: middle;
+	text-align: center;
 }
 
 .div1 .table th {
@@ -68,3 +72,19 @@
 	padding-top: 0 !important;
 }
 
+.div1 .animal_info .table tr th .animal_name {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.div1 .animal_info .table img{
+	width: 400px;
+	height: 350px;
+	border-radius: 10px;
+	display: block;
+	margin: 1% auto;
+}
+
+.div1 .btn_list {
+	margin-bottom: 2%;
+}
