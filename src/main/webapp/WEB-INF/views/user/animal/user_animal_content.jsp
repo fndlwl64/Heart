@@ -65,20 +65,22 @@
 			</div>
 		</div>
 		
-		<div class="animal_info">
-			<c:if test="${!empty dto.animal_img2 && !empty dto.animal_img3}">
-				<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img2 }')"></div>
-				<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img3 }')"></div>
-			</c:if>			
-			<c:if test="${(!empty dto.animal_img2 && empty dto.animal_img3) || (empty dto.animal_img2 && !empty dto.animal_img3)}">
-				<c:if test="${ not empty dto.animal_img2 }">
-				<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img2 }')"></div>
-				</c:if>
-				<c:if test="${ not empty dto.animal_img3 }">				
-				<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img3 }')"></div>
+		<c:if test="${ !empty dto.animal_img2 || !empty dto.animal_img3 }">
+			<div class="animal_info">
+				<c:if test="${!empty dto.animal_img2 && !empty dto.animal_img3}">
+					<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img2 }')"></div>
+					<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img3 }')"></div>
+				</c:if>			
+				<c:if test="${(!empty dto.animal_img2 && empty dto.animal_img3) || (empty dto.animal_img2 && !empty dto.animal_img3)}">
+					<c:if test="${ not empty dto.animal_img2 }">
+					<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img2 }')"></div>
+					</c:if>
+					<c:if test="${ not empty dto.animal_img3 }">				
+					<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img3 }')"></div>
+					</c:if>				
 				</c:if>				
-			</c:if>				
-		</div>
+			</div>
+		</c:if>
 		<c:if test="${dto.animal_tag eq 'cat' }">
 			<div class="btns">
 				<div>

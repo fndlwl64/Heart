@@ -12,6 +12,8 @@
 
 <div id="main-contents" class="main-contents">
 
+	<div class="animal-intro"></div>
+
     <%-- 하트펫 Promotion 문구 --%>
     <div class="promo-title" style="background-image:linear-gradient(45deg, transparent, rgba(76, 40, 24, 0.5), rgba(166, 106, 44, 0.5), rgba(213, 170, 114, 0.5)), url('${path}/resources/image/potter_cute.jpg'); ">
         <p><span class="title-effect">유기동물 입양 중개 플랫폼</span><br>
@@ -36,16 +38,22 @@
 	        </div>
 	    </div>
     </div>
+    
+    <div class="animal-intro"></div>
 	    
     <div class="swiper dogSwiper">
         <div class="swiper-wrapper">
         	<c:forEach items="${ dList }" var="list">
             	<div class="swiper-slide">
 		            <c:choose>
-	            		<c:when test="${ not empty list.animal_img1 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img1 }');"></a></c:when>
-	            		<c:when test="${ not empty list.animal_img2 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img2 }');"></a></c:when>
-	            		<c:when test="${ not empty list.animal_img3 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img3 }');"></a></c:when>
+	            		<c:when test="${ not empty list.animal_img1 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img1 }');"></c:when>
+	            		<c:when test="${ not empty list.animal_img2 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img2 }');"></c:when>
+	            		<c:when test="${ not empty list.animal_img3 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img3 }');"></c:when>
 		            </c:choose>
+			            <div>
+			            	<span class="swiper-text">${ list.animal_name } <c:if test="${ list.animal_gender eq 'male' }"><i class="bi bi-gender-male"></i></c:if><c:if test="${ list.animal_gender eq 'female' }"><i class="bi bi-gender-female"></i></c:if></span>          
+			            </div>
+		            </a>
             	</div>
             </c:forEach>
         </div>
@@ -54,17 +62,19 @@
         <div class="swiper-pagination"></div>
     </div>
     
-    <div class="swiper dogSwiper">
+    <div class="swiper dogSwiper catSwiper">
         <div class="swiper-wrapper">
         	<c:forEach items="${ cList }" var="list">
             	<div class="swiper-slide">
-	            	<a href="${path}/user_animal_content?no=${ list.animal_no }">
-	            	<c:choose>
-		            	<c:when test="${ not empty list.animal_img1 }"><img src="${path}${ list.animal_img1 }" alt="animal_img"></c:when>
-		            	<c:when test="${ not empty list.animal_img2 }"><img src="${path}${ list.animal_img2 }" alt="animal_img"></c:when>
-		            	<c:when test="${ not empty list.animal_img3 }"><img src="${path}${ list.animal_img3 }" alt="animal_img"></c:when>
-	            	</c:choose>
-	            	</a>
+		            <c:choose>
+	            		<c:when test="${ not empty list.animal_img1 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img1 }');"></c:when>
+	            		<c:when test="${ not empty list.animal_img2 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img2 }');"></c:when>
+	            		<c:when test="${ not empty list.animal_img3 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img3 }');"></c:when>
+		            </c:choose>
+			            <div>
+			            	<span class="swiper-text">${ list.animal_name } <c:if test="${ list.animal_gender eq 'male' }"><i class="bi bi-gender-male"></i></c:if><c:if test="${ list.animal_gender eq 'female' }"><i class="bi bi-gender-female"></i></c:if></span>          
+			            </div>
+		            </a>
             	</div>
             </c:forEach>
         </div>
