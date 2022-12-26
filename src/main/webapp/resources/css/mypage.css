@@ -4,17 +4,41 @@ body {
 .mypage_header {
     background-color: black;
     width: 100%;
-    height: 300px;
     position: relative;
     color: white;
 
+}
+
+.mypage_header .mypage-header-title {
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	display: flex;
+	justify-content: space-between;
+	font-size: 1.5rem;
+	padding-top: 1rem;
+}
+
+.mypage_header .mypage-header-title .mypage-mypage {
+	
+}
+
+.mypage_header .mypage-header-title .mypage-adopt {
+	
+}
+
+.mypage-adopt .adopt_a {
+	text-decoration: none !important;
+	color: white !important;
+	vertical-align: middle;
+	
 }
 
 .mypage_header.mypage_header_mid {
     display: inline-block;
 }
 .mypage_header .mypage{
-    margin-left: 10%;
     font-size: 24px;
     color: white;
 }
@@ -24,10 +48,7 @@ body {
     color: white;
 }
 .mypage_header .mypage #adopt_span{
-    float: right;
-    font-size: 20px;
-    margin-right: 300px;
-    color: white;
+	text-decoration: none;
 }
 
 .mypage_header .mypage #adopt_btn{
@@ -35,32 +56,51 @@ body {
     border-radius: 50%;
     width: 30px;
     height: 30px;
+    
 }
-.mypage_header .mypage #adopt_span2{
-    font-size: 20px;
+.btn {
+	vertical-align: middle;
+}
+
+.btn-group-sm>.btn, .btn-sm {
+	--bs-btn-padding-y: 0rem;
+	--bs-btn-padding-x: 0.6rem;
+	--bs-btn-border-radius: 1rem;
+}
+
+#adopt_span2 {
+	font-size: 1.2rem;
     color: white;
-    margin-top: 5px;
+    font-weight: bold;
 }
 .mypage_header .profile_img {
     display: inline-block;
 }
 
-.mypage_header .mypage_header_mid .profile_text {
-    display: inline-block;
-    margin-top: 20px;
-    margin-left: 30px;
+.mypage_header .mypage_header_mid {
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	display: flex;
+	justify-content: space-between;
 }
+
+.mypage_header .mypage_header_mid .mypage-header-profile {
+	display: flex;
+	align-items: flex-end;
+}
+
 .mypage_header .mypage_header_mid .profile_text2 {
     display: inline-block;
-    margin-top: 20px;
-    margin-right: 15%;
     float: right;
 }
 
-.mypage_header .mypage_header_ mid.profile_text {
-    display: inline-block;
+.mypage_header .mypage_header_ mid .profile_text {
     margin-left: 30px;
     margin-right: 30px;
+}
+
+.profile_text > h1 {
+	padding: 1rem;
 }
 
 .mypage_header .mypage_header_mid .profile_img #profile_dog {
@@ -68,17 +108,23 @@ body {
     height: 150px;
     border-radius: 50%;
     background-color: white;
-    margin-left: 200px;
     position: relative;
 }
 
 .mypage_header .profile_text .sp1 a{
-    font-size: 10px;
-    color: gray;
+    font-size: 13px;
+    font-weight: bold;
+    color: #e6e6e6;
     text-decoration: none;
 }
 .mypage_header .profile_name #profile_text .sp1:hover{
     cursor: pointer;
+}
+
+.mypage_header .mypage_header_mid {
+	width: 70%;
+	margin: 0 auto;
+	
 }
 
 .mypage_header .mypage_header_mid .profile_text #test {
@@ -86,8 +132,7 @@ body {
 }
 
 .mypage_header .mypage_header_mid .profile_text2 .mypage_img {
-    width: 70px;
-    height: 50px;
+    width: 4rem;
 }
 
 .mypage_header .mypage_header_mid .profile_text2 #mypage_table {
