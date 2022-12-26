@@ -83,8 +83,12 @@
 			<![CDATA[and animal_weight >= ${animalDTO.animal_weight} ]]>
 		</if> -->
 		<if
-			test="animalDTO.animal_status != null and !animalDTO.animal_status.equals('')">
+			test="animalDTO.animal_status != null and !animalDTO.animal_status.equals('') and !animalDTO.animal_status.equals('not 입소 신청')">
 			and animal_status = #{animalDTO.animal_status}
+		</if>
+		<if
+			test="animalDTO.animal_status != null and !animalDTO.animal_status.equals('') and animalDTO.animal_status.equals('not 입소 신청')">
+			and not animal_status = '입소 신청'
 		</if>
 		<if
 			test="animalDTO.animal_place != null and !animalDTO.animal_place.equals('')">
@@ -187,9 +191,17 @@
 			test="animalDTO.animal_weight != 0">
 			<![CDATA[and animal_weight >= ${animalDTO.animal_weight} ]]>
 		</if> -->
-		<if
+		<!-- <if
 			test="animalDTO.animal_status != null and !animalDTO.animal_status.equals('')">
 			and animal_status = #{animalDTO.animal_status}
+		</if> -->
+		<if
+			test="animalDTO.animal_status != null and !animalDTO.animal_status.equals('') and !animalDTO.animal_status.equals('not 입소 신청')">
+			and animal_status = #{animalDTO.animal_status}
+		</if>
+		<if
+			test="animalDTO.animal_status != null and !animalDTO.animal_status.equals('') and animalDTO.animal_status.equals('not 입소 신청')">
+			and not animal_status = '입소 신청'
 		</if>
 		<if
 			test="animalDTO.animal_place != null and !animalDTO.animal_place.equals('')">

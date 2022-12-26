@@ -74,6 +74,9 @@ public class AnimalController {
     	//강아지 , 삭제되지 않은 데이터
     	animalDTO.setAnimal_tag("dog");
     	animalDTO.setAnimal_state(1);
+    	if(animalDTO.getAnimal_status()==null || animalDTO.getAnimal_status().equals("")) {
+    		animalDTO.setAnimal_status("not 입소 신청");
+    	}
     	System.out.println(animalDTO.getAnimal_status());
 		//페이징
 		String field = ""; 
@@ -117,7 +120,9 @@ public class AnimalController {
 		//고양이 , 삭제되지 않은 데이터
     	animalDTO.setAnimal_tag("cat");
     	animalDTO.setAnimal_state(1);
-    	
+    	if(animalDTO.getAnimal_status()==null || animalDTO.getAnimal_status().equals("")) {
+    		animalDTO.setAnimal_status("not 입소 신청");
+    	}
 		//페이징
 		String field = ""; 
 		
