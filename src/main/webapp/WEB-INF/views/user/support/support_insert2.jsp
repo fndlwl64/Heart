@@ -73,9 +73,10 @@
 		var hiddenbutton = document.getElementById("hiddenbutton");
 		hiddenbutton.type="submit";
 	}
+	
   	function makeNull(){
 		var hiddenbutton = document.getElementById("hiddenbutton");
-		hiddenbutton.type="hidden";
+		$("#hiddenbutton").attr("disabled", true);
 	}
   	
   	IMP.init("imp44175061");
@@ -169,7 +170,8 @@
 						<input class="form-control" id="support" type="text" placeholder="후원금액입력" onkeypress='return checkNumber(event)'>
 						<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=request.getAttribute("code")%>" />
 					</td>
-					<td><input class="btn btn-outline-success" id="hiddenbutton" type="hidden" value='후원하기' onclick="requestPay2()"/></td>
+<!-- 					<td><input class="btn btn-outline-success" id="hiddenbutton" type="hidden" value='후원하기' onclick="requestPay2()"/></td> -->
+					<td><input class="btn btn-outline-success" id="hiddenbutton" type="button" value='후원하기' onclick="requestPay2()" disabled="disabled"/></td>
 				</tr>
 			</table>
 		</div>

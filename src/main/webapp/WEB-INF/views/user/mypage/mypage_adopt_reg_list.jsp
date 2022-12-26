@@ -13,7 +13,7 @@
         <br><h1 class="mypage"><a id="mypage_a" href="${path }/user_mypage_wish_list">My Page</a><a class="adopt_a" href="${path }/user_mypage_adoptreg_list"><span id="adopt_span">입양대기목록<button id="adopt_btn"><span id="adopt_span2">${Count }</span></button></span></a></h1>
     </div>
     <br>
-    <div class="mypage_header_mid">
+<%--     <div class="mypage_header_mid">
         <div class="profile_img">
             <img id="profile_dog" src="${path }/resources/image/user_img/${dto.getUser_image()}">
         </div>
@@ -39,7 +39,8 @@
                 </tr>
             </table>
         </div>
-    </div>
+    </div> --%>
+    	<%@ include file="mypage_top.jsp" %>
 </div>
 <div class="mypage_middle">
     <div class="mypage_top"></div>
@@ -84,6 +85,7 @@
             </c:if>
         </div>
     </div>
+
     <div class="mypage_bottom">
 
     </div>
