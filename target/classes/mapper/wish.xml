@@ -19,4 +19,18 @@
 	<delete id="wish_delete" parameterType="WishDTO">
 		delete from heartpet_wish where wish_petno = #{wish_petno} and wish_userid = #{wish_userid}  
 	</delete>
+	
+	<!-- ////////////////////////////////////////////// -->
+	<select id="wish_animal_select" parameterType="hashMap" resultType="int">
+		select count(*) from heartpet_wish where wish_petno = ${animal_no} and wish_userid = #{user_id}
+	</select>
+	<insert id="wish_animal_insert" parameterType="hashMap">
+		<selectKey resultType="int" keyProperty="wish_no" order="BEFORE">
+			select max(wish_no) from heartpet_wish
+		</selectKey>
+		insert into heartpet_wish values(#{ wish_no }+1, #{ animal_no }, #{ user_id })
+	</insert>
+	<delete id="wish_animal_delete" parameterType="hashMap">
+		delete from heartpet_wish where wish_petno = #{ animal_no } and wish_userid = #{ user_id }  
+	</delete>
 </mapper>

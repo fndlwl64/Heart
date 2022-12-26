@@ -355,6 +355,21 @@ public class AnimalController {
 		}
 	}
 	
+	@ResponseBody
+	@RequestMapping("/wish_insert")
+	public int wish(@RequestParam("animal_no") int animal_no, @RequestParam("user_id") String user_id) {
+		System.out.println("여기"+animal_no);
+		System.out.println("여기22222222222222"+user_id);
+		int check = wishDAO.selectWish(animal_no, user_id);
+		if(check > 0) {
+			wishDAO.deleteWish(animal_no, user_id);
+			return 0;
+		}else {
+			wishDAO.insertWish(animal_no, user_id);
+			return 1;
+		}
+	}
+	
 	@RequestMapping("test")
 	public String test() {
 		System.out.println("======================");

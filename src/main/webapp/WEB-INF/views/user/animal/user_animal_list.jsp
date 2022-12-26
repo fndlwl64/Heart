@@ -179,7 +179,7 @@
 		 					<div>
 								<span>
 								<c:if test="${not empty user_id }">
-									<button class="btn" id="wish" onclick="wishAdd(${ dto.animal_no }, ${ user_id })">
+									<button class="btn" id="wish" onclick="wishAdd(${ dto.animal_no }, '${ user_id }', '${ path }')">
 										<c:if test="${wishCheck ne 0 }">
 											<i class="bi bi-star-fill text-warning"></i>
 										</c:if>
@@ -305,6 +305,7 @@
 					location.href = $("#sortlink").val() + '&sort='
 							+ $('select[name=sort]').val();
 				});
+		
 		$(document).on("click", ".back_image", function() {
 			location.href = $(this).data("value");
 		});
@@ -386,40 +387,32 @@
 					});
 				 }); */
 				
-				function wishAdd(animal_no, user_id) {
-					 	let wishDTO = {
-								"wish_petno" : animal_no,
-								"wish_userid" : user_id
-							};
-						console.log(1, animal_no);
-						console.log(2, user_id);
-							let wishDTO = {
-								"wish_petno" : animal_no,
-								"wish_userid" : user_id
-							};
-							console.log(3, animal_no);
-							console.log(4, user_id);
-							$.ajax({
-								url : $("#linkwish222").val(),
-								type : 'POST',
-								data : JSON.stringify(wishDTO),
-								contentType : "application/json",
-								success : function(data) {
-									console.log("abc");
-									if (data) {
-										$("#wish").empty();
-										$("#wish").append(
-														'<i class="bi bi-star-fill text-warning"></i>');
-									} else {
-										$("#wish").empty();
-										$("#wish").append('<i class="bi bi-star"></i>');
-									}
-								}
-							})
-						 });
-					
-					
-				}
+			function wishAdd(animalNo, userId, path) {
+				$.ajax({
+					contentType : "application/x-www-form-urlencoded;charset=UTF-8",
+					url : path + "/wish_insert",
+					type : "POST",
+					data : {
+						animal_no : animalNo,
+						user_id : userId
+					},
+					dataType: "text",
+					success : function(data) {
+						console.log(3, data);
+						if (data) { 
+							$("#wish").empty();
+							$("#wish").append('<i class="bi bi-star-fill text-warning"></i>');
+						} else { 
+							$("#wish").empty();
+							$("#wish").append('<i class="bi bi-star"></i>');
+						}
+					},
+			       error : function(e) {
+			          alert("Error : "+e.status);
+			       }
+				})
+			 }
+				 
 	</script>
 	
 	<jsp:include page="../../include/user_footer.jsp" />
