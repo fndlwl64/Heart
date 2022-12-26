@@ -57,7 +57,7 @@
     </div> --%>
     <%@ include file="mypage_menu.jsp" %>
 	    <div id="my_cont1" class="mypage_cont">
-	        <div align="center">      
+	        <div>      
 				<c:if test="${!empty wList }">
 					<h3>관심목록</h3>
 					<table class="wish_table">
@@ -65,36 +65,38 @@
 						<c:forEach items="${wList }" var="dto">
 						<c:set var="count" value="${count + 1 }"/>
 							<td>
-								<a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><img class="my_cont_img"src="${path}${dto.getAnimal_img1()}"></a>	
-							</td>
-							<td>
-								<div class="animal_detail">
-									<label>이름</label><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span> ${dto.getAnimal_name()}</span></a><br />
-									<label>종</label><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span> 
-										<c:if test="${dto.getAnimal_species().length() > 5}">
-											${dto.getAnimal_species().substring(0,4)} ..
-										</c:if>
-										
-										<c:if test="${dto.getAnimal_species().length() < 5}">
-											${dto.getAnimal_species()}
-										</c:if></span></a><br />
-				                	<label>성별</label><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span> 
-				                		<c:if test="${dto.getAnimal_gender() eq 'female'}">
-											암컷 (♀)
-										</c:if>
-										
-										<c:if test="${dto.getAnimal_gender() eq 'male'}">
-											수컷 (♂)
-										</c:if></span></a><br />
-				                	<label>나이</label><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span> ${dto.getAnimal_age()}살</span></a><br />
-				                	<label>입양예정일</label><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span> 
-				                		<c:if test="${empty dto.getAdopt_reg_duedate()}">
-											미정
-										</c:if>
-										
-										<c:if test="${!empty dto.getAdopt_reg_duedate() }">
-											${dto.getAdopt_reg_duedate().substring(0, 10)}
-										</c:if></span></a><br />
+                                <div class="animal_detail"
+                                <c:if test="${ fn:length(wList) == 1 }">style="max-width: 50%"</c:if>>
+							        <div>							
+								        <a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><img class="my_cont_img"src="${path}${dto.getAnimal_img1()}"></a>	
+								    </div>
+								    <div class="animal-detail-cont">
+								        <a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">
+										<label>이름</label><span> ${dto.getAnimal_name()}</span><br />
+										<label>종</label><span> 
+											<c:if test="${dto.getAnimal_species().length() > 5}">
+												${dto.getAnimal_species().substring(0,4)} ..
+											</c:if>											
+											<c:if test="${dto.getAnimal_species().length() < 5}">
+												${dto.getAnimal_species()}
+											</c:if></span><br />
+					                	<label>성별</label><span> 
+					                		<c:if test="${dto.getAnimal_gender() eq 'female'}">
+												암컷 (♀)
+											</c:if>											
+											<c:if test="${dto.getAnimal_gender() eq 'male'}">
+												수컷 (♂)
+											</c:if></span><br />
+					                	<label>나이</label><span> ${dto.getAnimal_age()}살</span><br />
+					                	<label>입양예정일</label><span> 
+					                		<c:if test="${empty dto.getAdopt_reg_duedate()}">
+												미정
+											</c:if>											
+											<c:if test="${!empty dto.getAdopt_reg_duedate() }">
+												${dto.getAdopt_reg_duedate().substring(0, 10)}
+											</c:if></span><br />
+										</a>
+								</div>
 								</div>
 							</td>
 							<c:if test="${count % 2 == 0 }">
@@ -109,9 +111,9 @@
 	            	<h1>관심목록이 없습니다!</h1>
 	            </c:if>
 	        </div>
+        <%@ include file="../../include/pagination_update.jsp" %>
 	    </div>
     </div>
-    <%@ include file="../../include/pagination_update.jsp" %>
     <!-- mypage-body end 부분  -->
     <div class="mypage_bottom">
     </div>

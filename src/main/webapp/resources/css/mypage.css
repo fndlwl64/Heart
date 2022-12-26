@@ -55,11 +55,14 @@ body {
     height: 30px;
     
 }
-.btn {
+#adopt_span > .btn {
 	vertical-align: middle;
+    --bs-btn-padding-y: 0rem;
+    --bs-btn-padding-x: 0.6rem;
+    --bs-btn-border-radius: 1rem;
 }
 
-.btn-group-sm>.btn, .btn-sm {
+#adopt_span > .btn-sm {
 	--bs-btn-padding-y: 0rem;
 	--bs-btn-padding-x: 0.6rem;
 	--bs-btn-border-radius: 1rem;
@@ -226,15 +229,14 @@ body {
 }
 
 .mypage_middle .mypage_cont {
-    width: 80%;
+    width: 90%;
     height: auto;
 /*    border: 1px solid black;*/
 }
 
 .mypage_middle .mypage_bottom {
     width: 100%;
-    height: 4rem;
-    background-color: white;
+    height: 1rem;
 }
 
 .mypage_middle .mypage_cont .searched_list {
@@ -242,19 +244,19 @@ body {
 }
 
 
-.mypage_middle .mypage_cont .my_cont_ul .animal_cont{
+.mypage_middle .mypage_cont .my_cont_ul .animal_cont {
     color: gray;
     text-decoration: none;
+}
+
+.mypage_middle .mypage_cont .my_cont_ul .animal_cont > img {
+	
 }
 
 .mypage_middle .mypage_cont .wish_table .animal_cont2{
     color: gray;
     text-decoration: none;
-}
-
-.mypage_middle .mypage_cont .wish_table .animal_cont2{
-    color: gray;
-    text-decoration: none;
+    display: inline-block;
 }
 
 .mypage_middle .mypage_cont .wish_table #sp_name{
@@ -349,42 +351,84 @@ body {
 	font-weight: bold;
 }
 
+/* mypage 공통 */
+.mypage_cont h3 {
+	margin-left: 2rem;
+	margin-bottom: 0;
+	text-align: left;
+}
+
 .mypage_middle .mypage_cont .wish_table {
 	border-collapse: separate;
-	border-spacing: 10px 30px;
+	border-spacing: 10px;
 	margin-bottom: 2%;
-	margin-left: 5%;
 	font-size: 15px;
+	width: 100%;
+	padding: 1rem;
+}
+.mypage_middle .mypage_cont .wish_table tr {
+	margin-bottom: 0;
+	vertical-align: middle;
 }
 
-.mypage_middle .mypage_cont .wish_table .review_write {
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	margin: 5px auto;
-	
+.mypage_middle .mypage_cont .wish_table tr td {
+	width: 50%;
 }
+
 
 .mypage_middle .mypage_cont .wish_table .animal_detail {
-	border: 2px solid #f8f9fa;
-	padding: 10px;
+	border: 1px solid #e9ecef;
+	padding: 1.5rem;
 	border-radius: 10px;
+	display: flex;
+	margin: 0;
+	background-color: #f8f9fa;
+	align-items: center;
 }
 
+.mypage_middle .mypage_cont .wish_table .animal_detail > div {
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	width: 35%;
+}
+
+.wish_table .animal_detail .animal-detail-cont {
+	width: 65% !important;
+}
+
+.animal-detail-cont .review-button{
+	display: flex;
+	justify-content: flex-end;
+	padding-top: 0.5rem;
+}
+
+.animal-detail-cont .animal_cont2 {
+	padding-left: 1rem;
+}
+
+.animal-detail-cont .animal_cont2:hover {
+	color: gray;
+}
+
+.animal-detail-cont .animal_cont2 > span {
+	padding-left: 1rem;
+	color: black;
+}
 .mypage_middle .mypage_cont .wish_table .animal_detail label {
 	padding: 5px 10px;
 	font-weight: bold;
-	background-color: #f8f9fa;
+	background-color: #e9ecef;
 	border-radius: 10px;
 	width: 90px;
 	text-align: center;
 	font-weight: bold;
 	margin-bottom: 5px;
+	color: black;
 }
 
 .mypage_middle .mypage_cont .my_cont_img {
-	width: 180px;
-	height: 180px;
+	width: 150px;
+	height: 150px;
 	border-radius: 50%;
 }
 

@@ -104,23 +104,23 @@
 	                    </tr>
 	                    <tr>
 	                        <th><span class="sp2">반려동물경험</span></th>
-	                        <td>
+	                        <td align="left" class="ps-3">
 	                        	<c:if test="${dto.getUser_animalexp() == 'Y' }">
 	                        	<%-- <input name="user_animalexp" class="form-control" type="text" value="${dto.getUser_animalexp()}"> --%>
-	                  			<label><input type="radio" name="user_animalexp" value="Y" checked="checked"/>Y</label>
-	                  			<label><input type="radio" name="user_animalexp" value="N" />N</label>
+	                  			<label><input type="radio" name="user_animalexp" value="Y" checked="checked"/> 있음</label>
+	                  			<label><input type="radio" name="user_animalexp" value="N" /> 없음</label>
 	                  			</c:if>
 	                        	
 	                        	<c:if test="${dto.getUser_animalexp() == 'N' }">
 	                        	<%-- <input name="user_animalexp" class="form-control" type="text" value="${dto.getUser_animalexp()}"> --%>
-	                  			<label><input type="radio" name="user_animalexp" value="Y" />Y</label>
-	                  			<label><input type="radio" name="user_animalexp" value="N" checked="checked"/>N</label>
+	                  			<label><input type="radio" name="user_animalexp" value="Y" /> 있음</label>
+	                  			<label><input type="radio" name="user_animalexp" value="N" checked="checked"/> 없음</label>
 	                  			</c:if>
 	                        	
 	                        	<c:if test="${empty dto.getUser_animalexp()}">
 	                        	<%-- <input name="user_animalexp" class="form-control" type="text" value="${dto.getUser_animalexp()}"> --%>
-	                  			<label><input type="radio" name="user_animalexp" value="Y" />Y</label>
-	                  			<label><input type="radio" name="user_animalexp" value="N" />N</label>
+	                  			<label><input type="radio" name="user_animalexp" value="Y" /> 있음</label>
+	                  			<label><input type="radio" name="user_animalexp" value="N" /> 없음</label>
 	                        	</c:if>
 	                        </td>
 	                    </tr>

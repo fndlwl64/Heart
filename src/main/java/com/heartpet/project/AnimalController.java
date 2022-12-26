@@ -370,9 +370,13 @@ public class AnimalController {
 		System.out.println("여기22222222222222"+user_id);
 		int check = wishDAO.selectWish(animal_no, user_id);
 		if(check > 0) {
+		      System.out.println("여기\"여기22222222222222\"+check"+check);
+
 			wishDAO.deleteWish(animal_no, user_id);
 			return 0;
 		}else {
+            System.out.println("여기\"여기22222222222222\"+delete"+check);
+
 			wishDAO.insertWish(animal_no, user_id);
 			return 1;
 		}
