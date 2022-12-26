@@ -35,9 +35,6 @@ body {
 	
 }
 
-.mypage_header.mypage_header_mid {
-    display: inline-block;
-}
 .mypage_header .mypage{
     font-size: 24px;
     color: white;
@@ -78,8 +75,8 @@ body {
 }
 
 .mypage_header .mypage_header_mid {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
+	padding-top: 3rem;
+	padding-bottom: 3rem;
 	display: flex;
 	justify-content: space-between;
 }
