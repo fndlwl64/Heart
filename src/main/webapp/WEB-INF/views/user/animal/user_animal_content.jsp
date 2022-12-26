@@ -167,7 +167,18 @@
 				</c:choose>
 			</div>	
 		</c:if>
-		
+		<div>
+			<c:if test="${not empty user_id }">
+				<button class="btn" id="wish">
+					<c:if test="${wishCheck ne 0 }">
+						<i class="bi bi-star-fill text-warning"></i>
+					</c:if>
+					<c:if test="${wishCheck eq 0 }">
+						<i class="bi bi-star"></i>
+					</c:if>
+				</button>
+			</c:if>
+		</div>
 	</div> <%-- div1 end --%>
 	
 	<!-- Modal -->

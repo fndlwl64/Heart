@@ -12,6 +12,18 @@
 <c:set var="animalDTO" value="${ animalDTO }" />
 <c:set var="keyword" value="${keyword }" />
 <c:set var="sort" value="${sort }" />
+
+
+<!-- 좋아요 -->
+<c:set var="wishCheck" value="${wishCheck }" />
+<c:set var="user_id" value='<%=(String) session.getAttribute("session_id")%>' />
+<input type="hidden" value="${user_id }" id="user_id" />
+
+
+<script src="${path}/resources/js/admin_list_view.js"></script>
+
+
+
 <c:if test="${animalDTO.animal_tag eq 'dog'}" >
     <c:set var="animal" value="강아지" />
 </c:if>
@@ -163,7 +175,22 @@
 								class="img-fluid rounded mx-auto img-frame"
 								src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a> --%>
 							<div class="mainContent_mainImgWrapper__DJlMe rounded back_image"
-								style="background-image : url(<%=request.getContextPath()%>${dto.getAnimal_img1()});" data-value = "<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"></div>
+								style="background-image : url(<%=request.getContextPath()%>${dto.getAnimal_img1()});" data-value = "<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}">
+		 					<div>
+								<span>
+								<c:if test="${not empty user_id }">
+									<button class="btn" id="wish" onclick="wishAdd(${ dto.animal_no }, ${ user_id })">
+										<c:if test="${wishCheck ne 0 }">
+											<i class="bi bi-star-fill text-warning"></i>
+										</c:if>
+										<c:if test="${wishCheck eq 0 }">
+											<i class="bi bi-star"></i>
+										</c:if>
+									</button>
+								</c:if>
+								</span>
+							</div>								
+							</div>
 							<div class="mainContent_mainContent__w_Buk">
 								<!-- href=request.getContextPath()h() %>/user_animal_content?no=${dto.getAnimal_no()}" -->
 								<a class="animal-content-a" href="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}">
@@ -175,7 +202,10 @@
 										<c:if test="${ dto.animal_status eq '입양 대기' }">class="badge rounded-pill text-bg-warning"</c:if>
 										<c:if test="${ dto.animal_status eq '입양 완료' }">class="badge rounded-pill text-bg-secondary"</c:if>
 										>${dto.animal_status }</span>
+										<input type="hidden" value="${dto.animal_no }" id="animal_number222"/>
+										<input type="hidden" value="<%=request.getContextPath()%>/wish" id="linkwish222">
 									</div>
+									
 								</a>
 							</div>
 						</div>
@@ -328,6 +358,68 @@
 					$("#size").val("대형").prop("selected", true);
 				}
 			}
+			
+/* 			c
+				$(document).ready(function() {$("#wish").on("click",function() {
+					let wishDTO = {
+						"wish_petno" : $("#animal_number222").val(),
+						"wish_userid" : $("#user_id").val()
+					};
+					console.log($("#animal_number222").val());
+					$.ajax({
+						url : $("#linkwish222").val(),
+						type : 'POST',
+						data : JSON.stringify(wishDTO),
+						contentType : "application/json",
+						success : function(data) {
+							console.log("abc");
+							if (data) {
+								$("#wish").empty();
+								$("#wish").append(
+												'<i class="bi bi-star-fill text-warning"></i>');
+							} else {
+								$("#wish").empty();
+								$("#wish").append('<i class="bi bi-star"></i>');
+							}
+						}
+					})
+					});
+				 }); */
+				
+				function wishAdd(animal_no, user_id) {
+					 	let wishDTO = {
+								"wish_petno" : animal_no,
+								"wish_userid" : user_id
+							};
+						console.log(1, animal_no);
+						console.log(2, user_id);
+							let wishDTO = {
+								"wish_petno" : animal_no,
+								"wish_userid" : user_id
+							};
+							console.log(3, animal_no);
+							console.log(4, user_id);
+							$.ajax({
+								url : $("#linkwish222").val(),
+								type : 'POST',
+								data : JSON.stringify(wishDTO),
+								contentType : "application/json",
+								success : function(data) {
+									console.log("abc");
+									if (data) {
+										$("#wish").empty();
+										$("#wish").append(
+														'<i class="bi bi-star-fill text-warning"></i>');
+									} else {
+										$("#wish").empty();
+										$("#wish").append('<i class="bi bi-star"></i>');
+									}
+								}
+							})
+						 });
+					
+					
+				}
 	</script>
 	
 	<jsp:include page="../../include/user_footer.jsp" />
