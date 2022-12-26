@@ -63,7 +63,7 @@
 						<c:forEach items="${wList }" var="dto">
 						<c:set var="count" value="${count + 1 }"/>
 							<td>
-								<a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><img class="my_cont_img"src="${path}/resources/upload/${dto.getAnimal_img1()}"></a>	
+								<a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><img class="my_cont_img"src="${path}${dto.getAnimal_img1()}"></a>	
 							</td>
 							<td>
 								<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span id="sp_name">이름 : ${dto.getAnimal_name()}</span></a></p>
