@@ -38,7 +38,13 @@
                     <td><a class="table_a" href="${path }/user_mypage_adoptcomplet_list">후기</a></td>
                 </tr>
                 <tr>
-                    <td><a class="table_b" href="${path }/user_mypage_grade_list">${dto.getUser_grade()}등급</a></td>
+                    <td>
+                    	
+                    	<c:if test="${dto.getUser_grade() == 1}"><a class="table_b" href="${path }/user_mypage_grade_list">관리자</a></c:if>
+                    	<c:if test="${dto.getUser_grade() == 2}"><a class="table_b" href="${path }/user_mypage_grade_list">입소가능회원</a></c:if>
+                    	<c:if test="${dto.getUser_grade() == 3}"><a class="table_b" href="${path }/user_mypage_grade_list">일반회원</a></c:if>
+                    	<c:if test="${dto.getUser_grade() == 4}"><a class="table_b" href="${path }/user_mypage_grade_list">블랙리스트회원</a></c:if>
+                    </td>
                     <td><a class="table_b" href="${path }/user_mypage_support_list"><fmt:setLocale value="ko_KR"/><fmt:formatNumber type="currency" value="${Sum}" /></a></td>
                     <td><a class="table_b" href="${path }/user_mypage_adoptcomplet_list">${review_Count }</a></td>
                 </tr>

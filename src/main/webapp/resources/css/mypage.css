@@ -215,9 +215,8 @@ body {
 }
 
 .mypage_middle .mypage_cont {
-    width: 85%;
+    width: 80%;
     height: auto;
-    margin-left: 10%;
 /*    border: 1px solid black;*/
 }
 
@@ -309,3 +308,25 @@ body {
 	height: 200px;
 	border-radius: 50%;
 }
+
+.mypage_middle .mypage_cont .grade_info {
+	display: inline-block;
+	border: solid 1px;
+	width: 400px;
+	height: 200px;
+	
+}
+	
+.flex_div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.arrow {
+	display: inline-block;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+	
