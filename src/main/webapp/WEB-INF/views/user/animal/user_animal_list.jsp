@@ -173,7 +173,7 @@
 										<c:if test="${ dto.animal_gender eq 'female' }"><i class="bi bi-gender-female"></i></c:if>
 										<span class="animal-species">${ dto.animal_species }</span>
 										<span <c:if test="${ dto.animal_status eq '입양 가능' }">class="badge rounded-pill text-bg-primary"</c:if>
-										<c:if test="${ dto.animal_status eq '입양 대기' }">class="badge rounded-pill text-bg-info"</c:if>
+										<c:if test="${ dto.animal_status eq '입양 대기' }">class="badge rounded-pill text-bg-warning"</c:if>
 										<c:if test="${ dto.animal_status eq '입양 완료' }">class="badge rounded-pill text-bg-secondary"</c:if>
 										>${dto.animal_status }</span>
 									</div>
