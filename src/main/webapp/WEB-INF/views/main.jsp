@@ -2,10 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <link rel="stylesheet" href="${path}/resources/css/main.css" />
 <jsp:include page="./include/user_header.jsp" />
 <script src="${path}/resources/js/main.js"></script>
@@ -45,13 +41,11 @@
         <div class="swiper-wrapper">
         	<c:forEach items="${ dList }" var="list">
             	<div class="swiper-slide">
-	            	<a href="${path}/user_animal_content?no=${ list.animal_no }">
-		            	<c:choose>
-			            	<c:when test="${ not empty list.animal_img1 }"><img src="${path}${ list.animal_img1 }" alt="animal_img"></c:when>
-			            	<c:when test="${ not empty list.animal_img2 }"><img src="${path}${ list.animal_img2 }" alt="animal_img"></c:when>
-			            	<c:when test="${ not empty list.animal_img3 }"><img src="${path}${ list.animal_img3 }" alt="animal_img"></c:when>
-		            	</c:choose>
-	            	</a>
+		            <c:choose>
+	            		<c:when test="${ not empty list.animal_img1 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img1 }');"></a></c:when>
+	            		<c:when test="${ not empty list.animal_img2 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img2 }');"></a></c:when>
+	            		<c:when test="${ not empty list.animal_img3 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img3 }');"></a></c:when>
+		            </c:choose>
             	</div>
             </c:forEach>
         </div>

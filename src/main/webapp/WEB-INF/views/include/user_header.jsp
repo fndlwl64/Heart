@@ -11,10 +11,8 @@
 
     <!-- <link rel="short icon" href="temp"> -->
 
-    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-        
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>        
     <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     
     <link rel="shortcut icon" href="${path}/resources/icon/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="${path}/resources/icon/favicon.ico" type="image/x-icon" />
@@ -33,6 +31,12 @@
     <style> @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap'); </style>
         
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    
     <script src="${path}/resources/js/main.js"></script>
 </head>
 <body>
