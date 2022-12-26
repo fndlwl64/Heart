@@ -141,6 +141,7 @@ public class MypageController {
     		sendCheck.add(doubleCheck);
     	}
     	
+    	System.out.println("test"+sendCheck);
     	model.addAttribute("Sum", sum);
     	model.addAttribute("uList", user_list);
     	model.addAttribute("Count", regcount);
