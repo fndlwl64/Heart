@@ -114,7 +114,7 @@ body {
 .mypage_header .profile_text .sp1 a{
     font-size: 13px;
     font-weight: bold;
-    color: gray;
+    color: #e6e6e6;
     text-decoration: none;
 }
 .mypage_header .profile_name #profile_text .sp1:hover{

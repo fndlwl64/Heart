@@ -22,7 +22,7 @@
 	            <img id="profile_dog" src="${path }/resources/image/user_img/${dto.getUser_image()}">
 	        </div>
 	        <div class="profile_text">
-	            <h1>${dto.getUser_name() }<span class="sp1"><a href="${path }/user_mypage_user_update"> 회원정보변경</a></span></h1>
+	            <h1>${dto.getUser_name() }<span class="sp1 btn btn-outline-info btn-sm mx-2"><a href="${path }/user_mypage_user_update"> 회원정보변경</a></span></h1>
 	        </div>
         </div>
         <div class="profile_text2">
