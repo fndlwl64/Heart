@@ -95,14 +95,14 @@
 										Yes</label>
 								</div>
 							</td>
-							<th width="12.5%">삭제 여부</th>
+							<th width="12.5%">등록 취소 여부</th>
 							<td width="10%"><select name="animal_state"
 								class="form-select">
 									<option value=0></option>
-									<option value=2
-										<c:if test="${animalDTO.animal_state eq 2 }">selected</c:if>>O</option>
 									<option value=1
-										<c:if test="${animalDTO.animal_state eq 1 }">selected</c:if>>X</option>
+										<c:if test="${animalDTO.animal_state eq 1 }">selected</c:if>>등록</option>
+									<option value=2
+										<c:if test="${animalDTO.animal_state eq 2 }">selected</c:if>>취소</option>
 							</select></td>
 							<%-- <th>문의글</th>
 	                      <td><input type="text" class="form-control" name="search_content" value="${ search_content }" /></td> --%>
@@ -167,26 +167,30 @@
 			</div> --%>
 			<table class="table table-hover searched_list mb-4">
 				<tr>
-					<th class="table-light col-1">이름</th>
-					<th class="table-light col-1">종</th>
-					<th class="table-light col-1">성별</th>
-					<th class="table-light col-1">크기</th>
-					<th class="table-light col-1">중성화</th>
-					<th class="table-light col-1">예방접종</th>
-					<th class="table-light col-1">입양 상태</th>
+					<th class="table-light" width="15%">종</th>
+					<th class="table-light" width="12.5%">이름</th>
+					<th class="table-light" width="10%">성별</th>
+					<th class="table-light" width="10%">사이즈</th>
+					<th class="table-light" width="10%">중성화</th>
+					<th class="table-light" width="10%">예방접종</th>
+					<th class="table-light" width="15%">입양 상태</th>
 					<!-- <th class="table-secondary">수정/삭제</th> -->
 				</tr>
 				<c:forEach var="dto" items="${animalList }">
 					<c:if test="${dto.animal_state eq 1 }">
 						<tr>
-							<td><a href="${path}/animal_content?no=${dto.animal_no}">${dto.animal_name }</a></td>
 					</c:if>
 					<c:if test="${dto.animal_state eq 0 }">
 						<tr class="table-secondary">
-							<td><a data-bs-toggle="modal" data-bs-target="#lockModal"
-								style="cursor: pointer;">${dto.animal_name }</a></td>
 					</c:if>
 					<td>${dto.animal_species }</td>
+					<c:if test="${dto.animal_state eq 1 }">
+							<td><a href="${path}/animal_content?no=${dto.animal_no}">${dto.animal_name }</a></td>
+					</c:if>
+					<c:if test="${dto.animal_state eq 0 }">
+							<td><a data-bs-toggle="modal" data-bs-target="#lockModal"
+								style="cursor: pointer;">${dto.animal_name }</a></td>
+					</c:if>			
 					<td>${dto.animal_gender }</td>
 					<td>${dto.animal_size }</td>
 					<td>${dto.animal_neutered }</td>

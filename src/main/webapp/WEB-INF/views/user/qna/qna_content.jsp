@@ -51,12 +51,12 @@ $(function() {
                     <div class="content-body">
                         <c:if test="${ !empty list.board_img1 }">
                             <div class="qna-image shadow-sm my-2 bg-body rounded">
-                                 <p class="mt-2"><img src="${ path }${ list.board_img1 }" class="rounded mx-auto d-block" style="max-height: 300px;" alt="board_img" /></p>      
+                                 <p class="mt-2"><img src="${ path }${ list.board_img1 }" class="rounded mx-auto d-block" style="max-height: 400px;" alt="board_img" /></p>      
                             </div>
                         </c:if>  
                         <c:if test="${ !empty list.board_img2 }">
                             <div class="qna-image shadow-sm my-2 bg-body rounded">
-                                 <p class="mt-2"><img src="${ path }${ list.board_img2 }" class="rounded mx-auto d-block" style="max-height: 300px;" alt="board_img" /></p>      
+                                 <p class="mt-2"><img src="${ path }${ list.board_img2 }" class="rounded mx-auto d-block" style="max-height: 400px;" alt="board_img" /></p>      
                             </div>
                         </c:if> 
 						<div class="qna-text mb-3">

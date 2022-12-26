@@ -160,13 +160,13 @@ body {
 .qna-content .content-body {
     display: flex;
     padding: 1rem 2rem;
-    min-height: 400px;
-    justify-content: flex-start;
-    flex-direction: row;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .qna-content .content-body .qna-image {
-    overflow: hidden;
+    overflow: hidden; 
+    text-align: center;
 }
 
 .qna-content .content-body .qna-image > img {
