@@ -7,8 +7,8 @@
 <body>
 <div class="div1">
     <div class="title">
-    	<h3>HeartPet 입소 신청</h3>
-    	<span>유기동물이 가족을 만날 수 있도록 정확한 정보를 기입해주세요.</span>
+    	<span>HeartPet 입소 신청</span>
+    	<p>유기동물이 가족을 만날 수 있도록 정확한 정보를 기입해주세요.</p>
     </div>
     
     <div class="insert-form">

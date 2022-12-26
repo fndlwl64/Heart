@@ -15,6 +15,26 @@ body {
 	margin-bottom: 2%;
 }
 
+
+.div1 .title {
+	width: 70%;
+	text-align: left;
+	font-weight: bold;
+	font-size: 2rem;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 1rem;
+}
+
+.div1 .title > p {
+	font-size: 15px;
+	margin-left: 1rem;
+}
+
+#span_change {
+}
+
+
 /* 검색 form */
 .div1 .form_search {
 	width: 65%;
