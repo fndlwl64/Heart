@@ -54,64 +54,64 @@
         </ul>
     </div> --%>
     <%@ include file="mypage_menu.jsp" %>
-    <div id="my_cont4" class="mypage_cont">
-        <div align="center">
-            <form method="post" action="${path }/user_mypage_user_update2">
-                <h3>회원정보변경</h3>
-                <c:if test="${empty dto.getUser_email() || empty dto.getUser_phone() || empty dto.getUser_addr()}">
-                <span class="not_email">회원 이메일, 연락처, 주소를 등록해야 추후에 비밀번호찾기, 회원탈퇴, 후원하기 등이 가능합니다. </span>
-                </c:if>
-                <table class="table table-hover searched_list">
-                    <tr>
-                        <th class="table-light col">아이디</th>
-                        <td><input name="user_id" class="form-control" type="text" value="${dto.getUser_id()}" readonly></td>
-                    </tr>
-                    <tr>
-                        <th class="table-light col-3"><span class="sp2">이름</span></th>
-                        <td><input name="user_name" class="form-control" type="text" value="${dto.getUser_name()}"></td>
-                    </tr>
-                    <tr>
-                        <th class="table-light col-3"><span class="sp2">이메일</span></th>
-                        <td><input name="user_email" class="form-control" type="text" value="${dto.getUser_email()}"></td>
-                    </tr>
-                    <tr>
-                        <th class="table-light col-3"><span class="sp2">연락처</span></th>
-                        <td><input name="user_phone" class="form-control" type="text" value="${dto.getUser_phone()}"></td>
-                    </tr>
-                    <tr>
-                        <th class="table-light col-3"><span class="sp2">주소</span></th>
-                        <td><input name="user_addr" class="form-control" type="text" value="${dto.getUser_addr()}"></td>
-                    </tr>
-                    <tr>
-                        <th class="table-light col-3"><span class="sp2">반려동물경험</span></th>
-                        <td>
-                        	<c:if test="${dto.getUser_animalexp() == 'N' }">
-                        	<%-- <input name="user_animalexp" class="form-control" type="text" value="${dto.getUser_animalexp()}"> --%>
-                  			<label><input type="radio" name="user_animalexp" value="N" checked="checked"/>N</label>
-                  			<label><input type="radio" name="user_animalexp" value="Y" />Y</label>
-                        	</c:if>
-                        	<c:if test="${dto.getUser_animalexp() == 'Y' }">
-                        	<%-- <input name="user_animalexp" class="form-control" type="text" value="${dto.getUser_animalexp()}"> --%>
-                  			<label><input type="radio" name="user_animalexp" value="N" />N</label>
-                  			<label><input type="radio" name="user_animalexp" value="Y" checked="checked"/>Y</label>
-                        	</c:if>
-                        	<c:if test="${empty dto.getUser_animalexp()}">
-                        	<%-- <input name="user_animalexp" class="form-control" type="text" value="${dto.getUser_animalexp()}"> --%>
-                  			<label><input type="radio" name="user_animalexp" value="N" />N</label>
-                  			<label><input type="radio" name="user_animalexp" value="Y" />Y</label>
-                        	</c:if>
-                        </td>
-                    </tr>
-                </table>
-                <br>
-                <button class="btn btn-dark mx-1" id="update_btn" type="submit"><i class="bi bi-save"></i> 변경</button>
-            </form>
-        </div>
+	    <div id="my_cont4" class="mypage_cont">
+	        <div align="center">
+	            <form method="post" action="${path }/user_mypage_user_update2">
+	                <h3>회원정보변경</h3>
+	                <c:if test="${empty dto.getUser_email() || empty dto.getUser_phone() || empty dto.getUser_addr()}">
+	                <span class="not_email">회원 이메일, 연락처, 주소를 등록해야 추후에 비밀번호찾기, 회원탈퇴, 후원하기 등이 가능합니다. </span>
+	                </c:if>
+	                <table class="table table-hover searched_list">
+	                    <tr>
+	                        <th class="table-light col">아이디</th>
+	                        <td><input name="user_id" class="form-control" type="text" value="${dto.getUser_id()}" readonly></td>
+	                    </tr>
+	                    <tr>
+	                        <th class="table-light col-3"><span class="sp2">이름</span></th>
+	                        <td><input name="user_name" class="form-control" type="text" value="${dto.getUser_name()}"></td>
+	                    </tr>
+	                    <tr>
+	                        <th class="table-light col-3"><span class="sp2">이메일</span></th>
+	                        <td><input name="user_email" class="form-control" type="text" value="${dto.getUser_email()}"></td>
+	                    </tr>
+	                    <tr>
+	                        <th class="table-light col-3"><span class="sp2">연락처</span></th>
+	                        <td><input name="user_phone" class="form-control" type="text" value="${dto.getUser_phone()}"></td>
+	                    </tr>
+	                    <tr>
+	                        <th class="table-light col-3"><span class="sp2">주소</span></th>
+	                        <td><input name="user_addr" class="form-control" type="text" value="${dto.getUser_addr()}"></td>
+	                    </tr>
+	                    <tr>
+	                        <th class="table-light col-3"><span class="sp2">반려동물경험</span></th>
+	                        <td>
+	                        	<c:if test="${dto.getUser_animalexp() == 'N' }">
+	                        	<%-- <input name="user_animalexp" class="form-control" type="text" value="${dto.getUser_animalexp()}"> --%>
+	                  			<label><input type="radio" name="user_animalexp" value="N" checked="checked"/>N</label>
+	                  			<label><input type="radio" name="user_animalexp" value="Y" />Y</label>
+	                        	</c:if>
+	                        	<c:if test="${dto.getUser_animalexp() == 'Y' }">
+	                        	<%-- <input name="user_animalexp" class="form-control" type="text" value="${dto.getUser_animalexp()}"> --%>
+	                  			<label><input type="radio" name="user_animalexp" value="N" />N</label>
+	                  			<label><input type="radio" name="user_animalexp" value="Y" checked="checked"/>Y</label>
+	                        	</c:if>
+	                        	<c:if test="${empty dto.getUser_animalexp()}">
+	                        	<%-- <input name="user_animalexp" class="form-control" type="text" value="${dto.getUser_animalexp()}"> --%>
+	                  			<label><input type="radio" name="user_animalexp" value="N" />N</label>
+	                  			<label><input type="radio" name="user_animalexp" value="Y" />Y</label>
+	                        	</c:if>
+	                        </td>
+	                    </tr>
+	                </table>
+	                <br>
+	                <button class="btn btn-dark mx-1" id="update_btn" type="submit"><i class="bi bi-save"></i> 변경</button>
+	            </form>
+	        </div>
+	    </div>
     </div>
+    <!-- mypage-body end 부분  -->
     <div class="mypage_bottom">
-
     </div>
-
 </div>
 
 <jsp:include page="../../include/user_footer.jsp" />

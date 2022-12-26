@@ -54,42 +54,41 @@
         </ul>
     </div> --%>
     <%@ include file="mypage_menu.jsp" %>
-    <div id="my_cont2" class="mypage_cont">
-        <div align="center">
-            <c:if test="${!empty aList }">
-				<h3>입양대기목록</h3>
-				<table class="wish_table">
-					<tr>
-					<c:forEach items="${aList }" var="dto">
-					<c:set var="count" value="${count + 1 }"/>
-						<td>
-							<a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><img class="my_cont_img"src="${path}/resources/upload/${dto.getAnimal_img1()}"></a>
-						</td>
-						<td>
-							<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span id="sp_name">이름 : ${dto.getAnimal_name()}</span></a></p>
-							<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">종류 : ${dto.getAnimal_species()}</a></p>
-		                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">성별 : ${dto.getAnimal_gender()}</a></p>
-		                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">나이 : ${dto.getAnimal_age()}</a></p>
-		                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">입양 예정일 :<br> ${dto.getAdopt_reg_duedate().substring(0, 10)}</a></p>
-						</td>
-						<c:if test="${count % 2 == 0 }">
-							<tr>
-							</tr>
-						</c:if>
-					</c:forEach>
-					</tr>			
-				</table>
-			</c:if>
-            <c:if test="${empty aList }">
-            	<h1>입양대기 목록이 없습니다!</h1>
-            </c:if>
-        </div>
+	    <div id="my_cont2" class="mypage_cont">
+	        <div align="center">
+	            <c:if test="${!empty aList }">
+					<h3>입양대기목록</h3>
+					<table class="wish_table">
+						<tr>
+						<c:forEach items="${aList }" var="dto">
+						<c:set var="count" value="${count + 1 }"/>
+							<td>
+								<a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><img class="my_cont_img"src="${path}/resources/upload/${dto.getAnimal_img1()}"></a>
+							</td>
+							<td>
+								<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span id="sp_name">이름 : ${dto.getAnimal_name()}</span></a></p>
+								<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">종류 : ${dto.getAnimal_species()}</a></p>
+			                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">성별 : ${dto.getAnimal_gender()}</a></p>
+			                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">나이 : ${dto.getAnimal_age()}</a></p>
+			                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">입양 예정일 :<br> ${dto.getAdopt_reg_duedate().substring(0, 10)}</a></p>
+							</td>
+							<c:if test="${count % 2 == 0 }">
+								<tr>
+								</tr>
+							</c:if>
+						</c:forEach>
+						</tr>			
+					</table>
+				</c:if>
+	            <c:if test="${empty aList }">
+	            	<h1>입양대기 목록이 없습니다!</h1>
+	            </c:if>
+	        </div>
+	    </div>
     </div>
-
+    <!-- mypage-body end 부분  -->
     <div class="mypage_bottom">
-
     </div>
-
 </div>
 
 <jsp:include page="../../include/user_footer.jsp" />

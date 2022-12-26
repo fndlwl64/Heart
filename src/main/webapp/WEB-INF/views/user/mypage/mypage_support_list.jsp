@@ -54,39 +54,39 @@
         </ul>
     </div> --%>
     <%@ include file="mypage_menu.jsp" %>
-    <div id="my_cont2" class="mypage_cont">
-        <div align="center">
-        	
-            <table class="table">
-                <tr>
-                    <th class="table-secondary"><span class="sp2">후원금액</span></th>
-                    <th class="table-secondary"><span class="sp2">후원일자</span></th>
-
-                </tr>
-                <c:if test="${!empty List}">
-                <c:forEach items="${List }" var="dto">
-            <tr>
-                <td>${dto.getSupport_price()}</td>
-                <td>${dto.getSupport_date().substring(0,10) }</td>
-            </tr>
-                </c:forEach>
-            <tr>
-            	<td colspan="2">후원금액 합계 : ${Sum }</td>
-            </tr>
-            </c:if>
-            </table>
-            <c:if test="${empty List}">
-            	<h3>후원내역이 없습니다.</h3>
-      		</c:if>
-        </div>
-        
-        <%-- 페이징처리 --%>
-    	<jsp:include page="../../include/pagination.jsp" />
-    </div>
-    <div class="mypage_bottom">
-
-    </div>
+	    <div id="my_cont2" class="mypage_cont">
+	        <div align="center">
+	        	
+	            <table class="table">
+	                <tr>
+	                    <th class="table-secondary"><span class="sp2">후원금액</span></th>
+	                    <th class="table-secondary"><span class="sp2">후원일자</span></th>
 	
+	                </tr>
+	                <c:if test="${!empty List}">
+	                <c:forEach items="${List }" var="dto">
+	            <tr>
+	                <td>${dto.getSupport_price()}</td>
+	                <td>${dto.getSupport_date().substring(0,10) }</td>
+	            </tr>
+	                </c:forEach>
+	            <tr>
+	            	<td colspan="2">후원금액 합계 : ${Sum }</td>
+	            </tr>
+	            </c:if>
+	            </table>
+	            <c:if test="${empty List}">
+	            	<h3>후원내역이 없습니다.</h3>
+	      		</c:if>
+	        </div>
+	        
+	        <%-- 페이징처리 --%>
+	    	<jsp:include page="../../include/pagination.jsp" />
+	    </div>
+    </div>
+    <!-- mypage-body end 부분  -->
+    <div class="mypage_bottom">
+    </div>	
 </div>
 
 <jsp:include page="../../include/user_footer.jsp" />

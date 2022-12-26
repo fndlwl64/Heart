@@ -76,24 +76,24 @@
         </ul>
     </div> --%>
     <%@ include file="mypage_menu.jsp" %>
-    <div id="my_cont5" class="mypage_cont">
-        <form id="form2" method="post" action="${path }/user_logout_delete">
-			<div class="mb-3">
-	   		<label for="receiver" class="col-form-label">인증번호 확인</label>
-	 		</div>
-	 		
-	 		<div class="mb-3">
-		    <input type="text" id="code" name="code" class="form-control" onkeyup="checkCode()" placeholder="인증번호를 입력하세요."/>
-		    <div id="checkCode"></div>
-		    <input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=request.getAttribute("code")%>" />
-		    <input class="btn btn-primary" id="hiddenbutton" type="hidden" value='인증하기'/>
-		 </div>
-		</form>
+	    <div id="my_cont5" class="mypage_cont">
+	        <form id="form2" method="post" action="${path }/user_logout_delete">
+				<div class="mb-3">
+		   		<label for="receiver" class="col-form-label">인증번호 확인</label>
+		 		</div>
+		 		
+		 		<div class="mb-3">
+			    <input type="text" id="code" name="code" class="form-control" onkeyup="checkCode()" placeholder="인증번호를 입력하세요."/>
+			    <div id="checkCode"></div>
+			    <input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=request.getAttribute("code")%>" />
+			    <input class="btn btn-primary" id="hiddenbutton" type="hidden" value='인증하기'/>
+			 </div>
+			</form>
+	    </div>
     </div>
+    <!-- mypage-body end 부분  -->
     <div class="mypage_bottom">
-
     </div>
-
 </div>
 
 <jsp:include page="../../include/user_footer.jsp" />
