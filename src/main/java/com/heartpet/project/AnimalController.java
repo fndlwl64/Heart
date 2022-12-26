@@ -285,44 +285,44 @@ public class AnimalController {
 		animalDTO.toString();
 		System.out.println(animalDTO.toString());
 		// Adoptreg 추가
-//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//		String strDate = dateFormat.format(Calendar.getInstance().getTime());
-//		
-//		int idx = strDate.indexOf(" ");
-//		
-//		if(strDate.substring(idx+1, idx+3).equals("24")) {
-//			strDate = strDate.substring(0,idx+1)+"0"+strDate.substring(idx+3);
-//		}
-//		
-//
-//		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
-//		//test
-//		
-//		adoptRegDTO.setAdopt_reg_animalno(animalDAO.count(null)+1);
-//		adoptRegDTO.setAdopt_reg_userid(id);
-//		adoptRegDTO.setAdopt_reg_appdate(strDate);
-//
-//		// 동물 입소 신청
-//		// 이미지 업로드 및 animal 데이터 추가
-//		
-//		FileUploadImage upload = new FileUploadImage();
-//		List<String> animalImgs =  upload.uploadFile(request, files, "animal", 3);
-//		
-//		animalDTO.setAnimal_img1(animalImgs.get(0));
-//		animalDTO.setAnimal_img2(animalImgs.get(1));
-//		animalDTO.setAnimal_img3(animalImgs.get(2));
-//		
-//		animalDTO.setAnimal_status("입소 신청");
-//		
-//		try {
-//			animalService.insert(animalDTO, adoptRegDTO);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			upload.deleteFile(request, animalImgs);
-//			request.setAttribute("msg", "insert fail");
-//			request.setAttribute("url", "user_animal_insert");
-//			return "alert";
-//		}
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String strDate = dateFormat.format(Calendar.getInstance().getTime());
+		
+		int idx = strDate.indexOf(" ");
+		
+		if(strDate.substring(idx+1, idx+3).equals("24")) {
+			strDate = strDate.substring(0,idx+1)+"0"+strDate.substring(idx+3);
+		}
+		
+
+		AdoptRegDTO adoptRegDTO = new AdoptRegDTO();
+		//test
+		
+		adoptRegDTO.setAdopt_reg_animalno(animalDAO.count(null)+1);
+		adoptRegDTO.setAdopt_reg_userid(id);
+		adoptRegDTO.setAdopt_reg_appdate(strDate);
+
+		// 동물 입소 신청
+		// 이미지 업로드 및 animal 데이터 추가
+		
+		FileUploadImage upload = new FileUploadImage();
+		List<String> animalImgs =  upload.uploadFile(request, files, "animal", 3);
+		
+		animalDTO.setAnimal_img1(animalImgs.get(0));
+		animalDTO.setAnimal_img2(animalImgs.get(1));
+		animalDTO.setAnimal_img3(animalImgs.get(2));
+		
+		animalDTO.setAnimal_status("입소 신청");
+		
+		try {
+			animalService.insert(animalDTO, adoptRegDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			upload.deleteFile(request, animalImgs);
+			request.setAttribute("msg", "insert fail");
+			request.setAttribute("url", "user_animal_insert");
+			return "alert";
+		}
 		
 
 		return "redirect:/";

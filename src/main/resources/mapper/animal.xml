@@ -36,7 +36,13 @@
 		resultType="int">
 		select count(animal_no) from heartpet_animal
 		where animal_tag =
-		#{animalDTO.animal_tag} and <![CDATA[ animal_state >= #{animalDTO.animal_state}]]>
+		#{animalDTO.animal_tag} <!-- and <![CDATA[ animal_state >= #{animalDTO.animal_state}]]> -->
+		<if test="animalDTO.animal_state == 1">
+			and animal_state = #{animalDTO.animal_state}
+		</if>
+		<if test="animalDTO.animal_state == 2">
+			and animal_state = #{animalDTO.animal_state}-2
+		</if>
 		<if
 			test="animalDTO.animal_size != null and !animalDTO.animal_size.equals('')">
 			and animal_size = #{animalDTO.animal_size }
@@ -135,7 +141,13 @@
 			</otherwise>
 		</choose>
 		from heartpet_animal a
-		where animal_tag = #{animalDTO.animal_tag} and <![CDATA[ animal_state >= #{animalDTO.animal_state}]]>
+		where animal_tag = #{animalDTO.animal_tag}<!--  and <![CDATA[ animal_state >= #{animalDTO.animal_state}]]> -->
+		<if test="animalDTO.animal_state == 1">
+			and animal_state = #{animalDTO.animal_state}
+		</if>
+		<if test="animalDTO.animal_state == 2">
+			and animal_state = #{animalDTO.animal_state}-2
+		</if>
 		<if
 			test="animalDTO.animal_size != null and !animalDTO.animal_size.equals('')">
 			and animal_size = #{animalDTO.animal_size }

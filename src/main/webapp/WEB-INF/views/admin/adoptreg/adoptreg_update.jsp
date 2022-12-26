@@ -63,7 +63,7 @@
 			<br>
 			<div class="buttons">
 				<button type="submit" class="btn btn-success mx-1"><i class="bi bi-save"></i> 수정</button>
-				<a class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }" onclick="changeOption()">입양취소</a>
+				<a class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }" onclick="changeOption()" style="color : white">입양취소</a>
 			</div>
 		</form>
 		<jsp:include page="../../include/deleteModal.jsp" />
