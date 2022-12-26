@@ -72,17 +72,92 @@
 	padding-top: 0 !important;
 }
 
-.div1 .animal_info .table tr th .animal_name {
-	font-size: 16px;
+
+
+.div1 .animal_name {
+	font-weight: bold;
+	text-align: left;
+	width: 70%;
+	margin: auto;
+	width: 70%;
+}
+
+.div1 .animal_name h3 {
 	font-weight: bold;
 }
 
-.div1 .animal_info .table img{
-	width: 400px;
+.div1 .animal_name span{
+	font-size: 14px;
+	color: #808B96;
+}	
+
+.div1 .animal_info {
+	display: flex;
+	justify-content: center;
+	width: 70%;
+	margin: auto;
+}
+
+.div1 .animal_info .animal_img {
+	display: inline-block;
+	margin: 1%;
+}
+
+.div1 .animal_info .info_box {
+	border: 2px solid darkgray;
+	padding: 2%;
+	text-align: left;
+	border-radius: 10px;
+	display: flex;
+}
+
+.div1 .animal_info .info_box div {
+	padding: 2%;
+	justify-content: center;
+}
+
+.div1 .animal_info .info_box label {
+	padding: 2px 10px;
+	border-radius: 5px;
+	background-color: #D5D8DC;
+	border: none;
+	font-weight: bold;
+	text-align: center;
+	margin: 2%;
+}
+
+.div1 .animal_info .info_box .detail {
+	padding: 2% 5%;
+	display: flex;
+}
+
+.div1 .animal_info .info_box textarea {
+	border: none;
+}
+
+.div1 .animal_info .animal_img img{
+	width: 300px;
 	height: 350px;
 	border-radius: 10px;
-	display: block;
-	margin: 1% auto;
+}
+
+
+.div1 .more_images {
+	margin: 2% auto;
+	width: 70%;
+}
+
+.div1 .more_images .img_2 img {
+	width: 350px;
+	height: 450px;
+	border-radius: 10px;
+	margin: 0 1%;
+}
+
+.div1 .more_images .img_1 img {
+	width: 400px;
+	height: 500px;
+	border-radius: 10px;
 }
 
 .div1 .btn_list {
