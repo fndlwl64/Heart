@@ -160,11 +160,19 @@ caption {
 }
 
 .div1 .more_images .img_1 img {
-	width: 400px;
+	width: 600px;
 	height: 500px;
 	border-radius: 10px;
 }
 
 .div1 .btn_list {
 	margin-bottom: 2%;
+}
+
+.div1 .btns {
+	display: flex;
+	justify-content: space-between;
+	width: 70%;
+	margin: 2% auto;
+	
 }
