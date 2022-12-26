@@ -24,13 +24,12 @@
 	value="animal_size=${animalDTO.animal_size }&animal_species=${ animalDTO.animal_species}&animal_age=${animalDTO.animal_age }&animal_gender=${animalDTO.animal_gender }&animal_weight=${animalDTO.animal_weight }&animal_status=${animalDTO.animal_status }&animal_place=${animalDTO.animal_place }&keyword=${keyword }" />
 <%--검색--%>
 <div class="div1">
-
-	<div class="text-center main-title">
-		<label>입양을 기다리는 ${ animal } 
-			<span id="span_change" class="more_info" onclick="search()"></span>
-		</label>
-		<p>당신과 평생 함께 할 ${ animal }를 만나보세요.</p>
-	</div>
+	<div class="title">
+    	<span class="title-header mx-3">
+    		<label>입양을 기다리는 ${ animal } <button id="span_change" class="btn btn-outline-dark btn-sm" onclick="search()"></button></label>
+   		</span>
+    	<p>당신과 평생 함께 할 ${ animal }를 만나보세요.</p>
+    </div>
 	
 	<input type="hidden" id="sortlink"
 		value="<%=request.getContextPath() %>/user_${animalDTO.animal_tag }_list?page=${ paging.page }&${pagingSort}" />
@@ -267,7 +266,7 @@
 				 'display' : 'block'
 			 });
 			
-			$("#span_change").html("접기");
+			$("#span_change").html("<i class='bi bi-folder2''></i> 접기");
 		});
 		
 		//정렬 select
@@ -291,10 +290,10 @@
 			 
 			// display : none가 아닐 경우
 			if($('#form').css("display") == "block"){
-				$("#span_change").html("접기");
+				$("#span_change").html("<i class='bi bi-folder2''></i> 접기");
 			}else if($("#form").css("display") == "none"){
 				// display : none일 경우
-				$("#span_change").html("펼치기");
+				$("#span_change").html("<i class='bi bi-folder2-open'></i> 펼치기");
 			}
 			 
 		 }

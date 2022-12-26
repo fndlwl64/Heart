@@ -7,16 +7,17 @@
 }
 
 .div1 .title {
-	margin-bottom: 3%;
+	width: 70%;
+	text-align: left;
+	font-weight: bold;
+	font-size: 2rem;
+	margin-left: 1rem;
+	margin-bottom: 1rem;
 }
 
-.div1 .title h3{
-	font-weight: bold;
-}
-
-.div1 .title span {
-	font-weight: bold;
+.div1 .title > p {
 	font-size: 15px;
+	
 }
 
 .div1 .insert-form {
@@ -63,6 +64,10 @@
 }
 
 /* 필수 입력 사항 */
+caption {
+	font-size: 13px;
+}
+
 .must-write {
 	color: red;
 }
