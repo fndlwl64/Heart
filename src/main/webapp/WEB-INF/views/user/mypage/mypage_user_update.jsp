@@ -108,7 +108,6 @@
         </div>
     </div>
     <div class="mypage_bottom">
-
     </div>
 
 </div>
