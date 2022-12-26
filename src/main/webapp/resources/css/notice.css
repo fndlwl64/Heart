@@ -65,12 +65,12 @@
 .notice-board #search-table .notice-date > input {
 	margin-right: 0.5rem;
 }
-
+/* 
 .notice-board .notice_content {
     text-decoration: none;
     color: gray;
 }
-
+ */
 .notice-board .notice-main-table {
 	width: 70%;
 }
@@ -88,30 +88,44 @@
 	text-decoration: underline;
 }
 
+.notice-board h2 {
+	text-align: left;
+	width: 70%;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
 
 .notice-board .notice_content {
 	border: solid 1px lightgray;
-	width: 60%;
+	width: 70%;
 	height: auto;
+}
+
+.notice-board .notice_content .notice_title {
+	text-align: left;
+	margin-top: 10px;
 }
 
 .notice-board .notice_content .sp_content1 {
 	font-size: 25px;
 	margin: 30px;
-	float: left;
 	color: black;
 }
 
 .notice-board .notice_content .sp_content2 {
-	float: right;
+	/* float: right;
 	margin: 20px;
-	color: gray;
+	color: gray; */
 }
 
 .notice-board .notice_content .sp_content3 {
-	float: left;
+	/* float: left;
 	margin: 30px;
-	color: black;
+	color: black; */
+}
+
+.notice-board .notice_content textarea {
+	border: none;
 }
 
 .notice-board .table a{
@@ -135,9 +149,9 @@
 }
 
 .notice-section .row .total-data .form-select {
-	float: right;
+	/* float: right;
 	clear: both;
-	width: auto;
+	width: auto; */
 }
 
 .notice-section2 {
@@ -156,8 +170,8 @@ body {
 }
 
 .container .lists #insert_btn {
-	float: right;
-	clear: both;
+	/* float: right;
+	clear: both; */
 }
 
 /* notice content에서 이미지 크기 고정으로 지정 */
@@ -174,8 +188,12 @@ body {
 }
 
 .notice-board .notice_content .notice_img {
-	width: 150px;
-	height: 150px;
+	width: 50%;
+	height: 50%;
+}
+
+.notice-board .btn_list {
+	margin: 2% auto;
 }
 
 #table_font {
