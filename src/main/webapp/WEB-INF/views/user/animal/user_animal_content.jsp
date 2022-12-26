@@ -21,10 +21,15 @@ pageContext.setAttribute("newline", "\n");
 <input type="hidden" value="${user_grade }" id="user_grade" />
 <input type="hidden" value="${dto.animal_no }" id="animal_number"/>
 <script src="${path}/resources/js/admin_list_view.js"></script>
+
 <div class="container">
+	
 	<div class="_container">
+	
 		<div class="wrap">
+			
 			<h3>입양동물</h3>
+			
 			<div class="user_info">
 				<div class="info_title">
 					<ul class="info_border">
@@ -51,11 +56,13 @@ pageContext.setAttribute("newline", "\n");
 					</ul>
 				</div>
 			</div>
-
+			
 		</div>
 
 		<div class="wrap">
+			
 			<h3>상세정보</h3>
+			
 			<div class="user_info">
 				<div class="info_title">
 					<ul>
@@ -72,8 +79,11 @@ pageContext.setAttribute("newline", "\n");
 					</ul>
 				</div>
 			</div>
+			
 		</div>
+		
 	</div>
+	
 	<div class="row">
 		<div class="col-8"></div>
 		<div class="col-1">

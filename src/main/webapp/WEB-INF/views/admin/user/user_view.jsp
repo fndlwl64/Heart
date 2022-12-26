@@ -90,11 +90,16 @@
 			</div>
 			
 		</div>
-	
-		<button class="btn btn-dark" onclick="location.href='${path}/user_list'"><i class="bi bi-card-list"></i> 목록</button>
-		<button class="btn btn-danger" onclick="location.href='${path}/user_delete?user_id=${cont.user_id }'"><i class="bi bi-trash3"></i> 삭제</button>
-		<button class="btn btn-success" onclick="location.href='${path}/user_update?user_id=${cont.user_id }'"><i class="bi bi-eraser"></i> 수정</button>
 		
+		<div class="btns">
+			<div class="btns_1">
+				<button class="btn btn-dark btn_list" onclick="location.href='${path}/user_list'"><i class="bi bi-card-list"></i> 목록</button>
+			</div>
+			<div class="btns_2">
+				<button class="btn btn-danger btn_delete" onclick="location.href='${path}/user_delete?user_id=${cont.user_id }'"><i class="bi bi-trash3"></i> 삭제</button>
+				<button class="btn btn-success btn_update" onclick="location.href='${path}/user_update?user_id=${cont.user_id }'"><i class="bi bi-eraser"></i> 수정</button>
+			</div>
+		</div>
 	
 	</div>
 	

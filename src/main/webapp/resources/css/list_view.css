@@ -285,7 +285,11 @@ body {
 }
 
 /* admin/_view.jsp 목록 버튼 */
-
+.container .btns {
+	display: flex;
+	margin: auto;
+	justify-content: space-between;
+}
 
 /* admin/_list.jsp 검색 결과 테이블 태그 */
 .container .searched_list {

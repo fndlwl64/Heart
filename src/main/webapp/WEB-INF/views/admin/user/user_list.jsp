@@ -54,11 +54,11 @@
                     	<th width="10%">회원 등급</th>
                         <td colspan="3">
                         	<div class="search-checkbox">
-	                        	<label><input type="radio" class="form-check-input" name="user_grade" value="1" ondblclick="this.checked=false"/> 관리자</label>
-					    		<label><input type="radio" class="form-check-input" name="user_grade" value="2" ondblclick="this.checked=false"/> 입소가능회원</label>
-					    		<label><input type="radio" class="form-check-input" name="user_grade" value="3" ondblclick="this.checked=false"/> 일반회원</label>
-					    		<label><input type="radio" class="form-check-input" name="user_grade" value="4" ondblclick="this.checked=false"/> 블랙리스트</label>
-					    		<label><input type="radio" class="form-check-input" name="user_grade" value="5" ondblclick="this.checked=false"/> 탈퇴회원</label>
+	                        	<label><input type="radio" class="form-check-input" name="user_grade" value="1" ondblclick="this.checked=false" <c:if test="${user_grade eq '1' }">checked="checked"</c:if>/> 관리자</label>
+					    		<label><input type="radio" class="form-check-input" name="user_grade" value="2" ondblclick="this.checked=false" <c:if test="${user_grade eq '2' }">checked="checked"</c:if>/> 입소가능회원</label>
+					    		<label><input type="radio" class="form-check-input" name="user_grade" value="3" ondblclick="this.checked=false" <c:if test="${user_grade eq '3' }">checked="checked"</c:if>/> 일반회원</label>
+					    		<label><input type="radio" class="form-check-input" name="user_grade" value="4" ondblclick="this.checked=false" <c:if test="${user_grade eq '4' }">checked="checked"</c:if> /> 블랙리스트</label>
+					    		<label><input type="radio" class="form-check-input" name="user_grade" value="5" ondblclick="this.checked=false" <c:if test="${user_grade eq '5' }">checked="checked"</c:if> /> 탈퇴회원</label>
 				    		</div>
                         </td>
                         <td colspan="2"></td>
@@ -71,8 +71,8 @@
                         <th width="10%">반려동물 경험</th>
                         <td width="15%" class=""> 
                         	<div class="search-checkbox">
-	                        	<label><input type="radio" class="form-check-input" name="user_animalexp" value="Y" ondblclick="this.checked=false"/> 있음</label>
-			    				<label><input type="radio" class="form-check-input" name="user_animalexp" value="N" ondblclick="this.checked=false"/> 없음</label>
+	                        	<label><input type="radio" class="form-check-input" name="user_animalexp" value="Y" ondblclick="this.checked=false" <c:if test="${user_animalexp eq 'Y' }">checked="checked"</c:if> /> 있음</label>
+			    				<label><input type="radio" class="form-check-input" name="user_animalexp" value="N" ondblclick="this.checked=false" <c:if test="${user_animalexp eq 'N' }">checked="checked"</c:if> /> 없음</label>
 		    				</div>
                         </td>                        
                     </tr>                                                           

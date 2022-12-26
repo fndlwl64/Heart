@@ -112,12 +112,13 @@
 	                </td>
 	            </tr>
 	        </table>
-	        
-	        <br>
-	        
-	        <button type="submit" class="btn btn-success"><i class="bi bi-pencil"></i> 변경</button>
-	        <button type="reset" class="btn btn-warning"><i class="bi bi-eraser"></i> 취소</button>
-	        
+	       
+	        <div class="btns">
+	        	<div>
+			        <button type="submit" class="btn btn-success"><i class="bi bi-pencil"></i> 변경</button>
+			        <button type="reset" class="btn btn-warning"><i class="bi bi-eraser"></i> 취소</button>
+		        </div>
+	        </div>
 	    </form>
 	    
 	</div>
