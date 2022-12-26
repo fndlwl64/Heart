@@ -37,6 +37,7 @@
 		<form class="search_form" action="${path}/${animalDTO.animal_tag}_list" method="post">
 			<div class="form_box">
 				<div class="search-semi-title">
+<<<<<<< Updated upstream
                 	<span><i class="bi bi-check2-square"></i> ${ animal }관리 검색</span>
             	</div>
             	<div class="search-table-box">
@@ -46,6 +47,16 @@
 	                      	<td width="20%">
 	                      	  <div class="search-date">
 			                      <c:if test="${animalDTO.animal_tag eq 'dog' }">
+=======
+					<span><i class="bi bi-check2-square"></i> ${ animal }관리 검색</span>
+				</div>
+				<div class="search-table-box">
+					<table class="table table-sm" id="search-table">
+						<tr>
+							<th width="12.5%">${ animal } 종</th>
+							<td width="20%">
+								<div class="search-date">
+>>>>>>> Stashed changes
 									<select class="form-select" id="search_animal" name="animal_species">
 										<option value=""></option>
 										<option value="말티즈" <c:if test="${animalDTO.animal_species eq '말티즈'}">selected</c:if>>말티즈</option>
@@ -58,6 +69,7 @@
 										<option value="진돗개" <c:if test="${animalDTO.animal_species eq '진돗개'}">selected</c:if>>진돗개</option>
 										<option value="기타" <c:if test="${animalDTO.animal_species eq '기타'}">selected</c:if>>기타</option>
 									</select>
+<<<<<<< Updated upstream
 								</c:if>
 								<c:if test="${animalDTO.animal_tag eq 'cat' }">
 									<select name="animal_species" id="search_animal" class="form-select">
@@ -93,6 +105,31 @@
 	                      		<input type="text" class="form-control" name="animal_name" value="${animalDTO.animal_name }"/>
 
 	                      	</td>
+=======
+								</div>
+							</td>
+							<th width="12.5%">${ animal } 크기</th>
+							<td width="20%" colspan="2">
+								<div class="search-checkbox">
+									<label><input type="radio" name="animal_size"
+										value="대형" class="form-check-input"
+										<c:if test="${animalDTO.animal_size eq '대형' }">checked="checked"</c:if> />
+										대형</label> <label><input type="radio" name="animal_size"
+										value="중형" class="form-check-input"
+										<c:if test="${animalDTO.animal_size eq '중형' }">checked="checked"</c:if> />
+										중형</label> <label><input type="radio" name="animal_size"
+										value="소형" class="form-check-input"
+										<c:if test="${animalDTO.animal_size eq '소형' }">checked="checked"</c:if> />
+										소형</label>
+
+								</div>
+							</td>
+							<td colspan="2"></td>
+						<tr>
+							<th width="12.5%">${ animal } 이름</th>
+							<td width="20%"><input type="text" class="form-control"
+								name="animal_name" value="${animalDTO.animal_name }" /></td>
+>>>>>>> Stashed changes
 							<th width="12.5%">중성화 여부</th>
 							<td width="10%">
 								<div class="search-checkbox">
@@ -107,8 +144,21 @@
 									<label><input type="checkbox" class="form-check-input" id="checkYNvaccin" <c:if test="${animalDTO.animal_vaccination eq 'Y' }">checked="checked"</c:if>> Yes</label>
 								</div>
 							</td>
+<<<<<<< Updated upstream
 							<td></td>
 	                      <%-- <th>문의글</th>
+=======
+							<th width="12.5%">등록 취소 여부</th>
+							<td width="10%"><select name="animal_state"
+								class="form-select">
+									<option value=0></option>
+									<option value=1
+										<c:if test="${animalDTO.animal_state eq 1 }">selected</c:if>>등록</option>
+									<option value=2
+										<c:if test="${animalDTO.animal_state eq 2 }">selected</c:if>>취소</option>
+							</select></td>
+							<%-- <th>문의글</th>
+>>>>>>> Stashed changes
 	                      <td><input type="text" class="form-control" name="search_content" value="${ search_content }" /></td> --%>
 	                  	</tr>
 
@@ -163,26 +213,30 @@
 			</div> --%>
 			<table class="table table-hover searched_list mb-4">
 				<tr>
-					<th class="table-light col-1">이름</th>
-					<th class="table-light col-1">종</th>
-					<th class="table-light col-1">성별</th>
-					<th class="table-light col-1">크기</th>
-					<th class="table-light col-1">중성화</th>
-					<th class="table-light col-1">예방접종</th>
-					<th class="table-light col-1">입양 상태</th>
+					<th class="table-light" width="15%">종</th>
+					<th class="table-light" width="12.5%">이름</th>
+					<th class="table-light" width="10%">성별</th>
+					<th class="table-light" width="10%">사이즈</th>
+					<th class="table-light" width="10%">중성화</th>
+					<th class="table-light" width="10%">예방접종</th>
+					<th class="table-light" width="15%">입양 상태</th>
 					<!-- <th class="table-secondary">수정/삭제</th> -->
 				</tr>
 				<c:forEach var="dto" items="${animalList }">
 					<c:if test="${dto.animal_state eq 1 }">
 						<tr>
-							<td><a href="${path}/animal_content?no=${dto.animal_no}">${dto.animal_name }</a></td>
 					</c:if>
 					<c:if test="${dto.animal_state eq 0 }">
 						<tr class="table-secondary">
-							<td><a data-bs-toggle="modal" data-bs-target="#lockModal"
-								style="cursor: pointer;">${dto.animal_name }</a></td>
 					</c:if>
 					<td>${dto.animal_species }</td>
+					<c:if test="${dto.animal_state eq 1 }">
+							<td><a href="${path}/animal_content?no=${dto.animal_no}">${dto.animal_name }</a></td>
+					</c:if>
+					<c:if test="${dto.animal_state eq 0 }">
+							<td><a data-bs-toggle="modal" data-bs-target="#lockModal"
+								style="cursor: pointer;">${dto.animal_name }</a></td>
+					</c:if>			
 					<td>${dto.animal_gender }</td>
 					<td>${dto.animal_size }</td>
 					<td>${dto.animal_neutered }</td>
