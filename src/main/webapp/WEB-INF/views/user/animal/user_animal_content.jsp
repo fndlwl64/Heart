@@ -150,17 +150,23 @@
 								<c:when test="${dto.animal_status eq '입양 가능' and not empty user_id}">
 									<button class="btn btn-primary " data-bs-toggle="modal"
 										data-bs-target="#deleteModal" data-id="${ deleteAddr }"
-										onclick="changeOption()"><i class="bi bi-pencil-square"></i> 입양신청</button>
+										onclick="changeOption()"><i class="bi bi-pencil-square"></i>입양신청</button>
 								</c:when>
 								<c:otherwise>
-									<form action="user_get_animal" method="post"
+									<%-- <form action="user_get_animal" method="post"
 										onsubmit="return submitOption();">
 										<input type="hidden" id="animal_status"
 											value="${dto.animal_status }"> <input type="hidden"
 											name="animal_no" id="animal_no" value="${dto.animal_no }">
 										<button type="submit" class="btn btn-primary"
 											data-bs-toggle="modal" data-bs-target="#cautionModal"><i class="bi bi-pencil-square"></i> 입양신청</button>
-									</form>
+									</form> --%>
+									<c:if test="${dto.animal_status eq '입양 대기' and not empty user_id}">
+										<span class="btn btn-warning">입양대기</span>
+									</c:if>
+									<c:if test="${dto.animal_status eq '입양 완료' and not empty user_id}">
+										<span class="btn btn-secondary">입양완료</span>
+									</c:if>
 								</c:otherwise>
 							</c:choose>
 							<%--  --%>
