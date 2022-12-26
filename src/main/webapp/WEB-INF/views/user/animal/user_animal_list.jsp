@@ -27,7 +27,7 @@
 
 	<div class="text-center main-title">
 		<label>입양을 기다리는 ${ animal } 
-		<span class="more_info" onclick="search()">자세히 찾아보기</span>
+			<span id="span_change" class="more_info" onclick="search()"></span>
 		</label>
 		<p>당신과 평생 함께 할 ${ animal }를 만나보세요.</p>
 	</div>
@@ -255,8 +255,9 @@
 			
 			$("#form").css({
 				 'display' : 'block'
-			 });			
+			 });
 			
+			$("#span_change").html("접기");
 		});
 		
 		//정렬 select
@@ -278,9 +279,14 @@
 			 
 			 $("#form").toggle();
 			 
-			 /* $("#form").css({
-				 'display' : 'block'
-			 }); */
+			// display : none가 아닐 경우
+			if($('#form').css("display") == "block"){
+				$("#span_change").html("접기");
+			}else if($("#form").css("display") == "none"){
+				// display : none일 경우
+				$("#span_change").html("펼치기");
+			}
+			 
 		 }
 		 
 		 /* 사이즈에 따른 무게 범위 */		
