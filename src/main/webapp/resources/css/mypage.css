@@ -433,17 +433,40 @@ body {
 }
 
 .mypage_middle .mypage_cont .grade_info {
-	display: inline-block;
-	border: solid 1px;
-	width: 400px;
-	height: 200px;
-	
+	width: 35%;
+	height: 500px;
+	padding: 1rem;
+	border-radius: 10px;
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: stretch;
+}
+
+.mypage_middle .mypage_cont .grade_info .grade-title {
+	background-color: #e9ecef;
+	width: 100%;
+	padding: 1rem;
+	height: 15%;
+}
+
+.grade-title > h2 {
+	font-weight: bold;
+}
+
+.mypage_middle .mypage_cont .grade_info .grade-text {
+	width: 100%;
+}
+
+.mypage_middle .mypage_cont .grade_info p {
+	font-size: 20px;
 }
 	
 .flex_div {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	margin-bottom: 3rem;
 }
 
 .arrow {
