@@ -42,4 +42,30 @@ public class WishDAOImpl implements WishDAO {
 		return sqlSession.delete("wish_delete",dto);
 	}
 
+	////////////////////////////////////////////////////////
+	
+	@Override
+	public int selectWish(int animal_no, String user_id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("animal_no", animal_no);
+		map.put("user_id", user_id);
+		return this.sqlSession.selectOne("wish_animal_select", map);
+	}
+	
+	@Override
+	public int insertWish(int animal_no, String user_id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("animal_no", animal_no);
+		map.put("user_id", user_id);
+		return this.sqlSession.insert("wish_animal_insert", map);
+	}
+	
+	@Override
+	public int deleteWish(int animal_no, String user_id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("animal_no", animal_no);
+		map.put("user_id", user_id);
+		return this.sqlSession.delete("wish_animal_delete", map);
+	}
+
 }
