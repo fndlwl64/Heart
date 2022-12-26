@@ -58,7 +58,7 @@
 	        <div align="center">
 	            <c:if test="${!empty aList }">
 					<h3>입양대기목록</h3>
-					<table class="wish_table">
+					<%-- <table class="wish_table">
 						<tr>
 						<c:forEach items="${aList }" var="dto">
 						<c:set var="count" value="${count + 1 }"/>
@@ -78,7 +78,64 @@
 							</c:if>
 						</c:forEach>
 						</tr>			
-					</table>
+					</table> --%>
+					
+					<div class="wrapper row">
+						<c:forEach items="${aList }" var="dto">
+						<c:set var="count" value="${count + 1 }"/>
+						
+						<div class="cont col">
+							<div class="cont_1">
+								<a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><img class="my_cont_img"src="${path}${dto.getAnimal_img1()}"></a>
+							</div>
+							<div class="cont_2">
+								<div class="cont_detail">
+									<label>이름</label>
+									<span>${dto.getAnimal_name()}</span><br />
+									
+									<label>종</label>
+									<span> 
+										<c:if test="${dto.getAnimal_species().length() > 5}">
+											${dto.getAnimal_species().substring(0,4)} ..
+										</c:if>
+										
+										<c:if test="${dto.getAnimal_species().length() < 5}">
+											${dto.getAnimal_species()}
+										</c:if>
+									</span><br />
+									
+									<label>성별</label>
+									<span>
+										<c:if test="${dto.getAnimal_gender() eq 'female'}">
+											암컷 (♀)
+										</c:if>
+										
+										<c:if test="${dto.getAnimal_gender() eq 'male'}">
+											수컷 (♂)
+										</c:if>
+									</span><br />
+									
+									<label>나이</label>
+									<span>${dto.getAnimal_age()}살</span><br />
+									
+									<label>입양예정일</label>
+									<span>
+										<c:if test="${empty dto.getAdopt_reg_duedate()}">
+											미정
+										</c:if>
+										
+										<c:if test="${!empty dto.getAdopt_reg_duedate() }">
+											${dto.getAdopt_reg_duedate().substring(0, 10)}
+										</c:if>
+									</span><br />
+									
+								</div>
+							</div>
+						</div>
+						
+						</c:forEach>
+					</div>
+					
 				</c:if>
 	            <c:if test="${empty aList }">
 	            	<h1>입양대기 목록이 없습니다!</h1>

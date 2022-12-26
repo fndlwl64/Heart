@@ -358,8 +358,8 @@ body {
 	border-spacing: 50px; 50px;
 }
 .mypage_middle .mypage_cont .my_cont_img {
-	width: 200px;
-	height: 200px;
+	width: 180px;
+	height: 180px;
 	border-radius: 50%;
 }
 
@@ -383,4 +383,36 @@ body {
 	margin-right: 20px;
 }
 
-	
+/* 마이페이지 - 입양대기목록 */
+.mypage_middle .mypage_cont .wrapper {
+	margin-left: 5%;
+}
+
+.mypage_middle .mypage_cont .wrapper .cont {
+	display: flex;
+	width: 70%;
+	margin-top: 5%;
+	align-item: center;
+	align-content: center;
+}
+
+.mypage_middle .mypage_cont .wrapper .cont .cont_2 {
+	border-radius: 10px;
+	border: 2px solid #f8f9fa;
+	margin-left: 5%;
+	-ms-text-align-last: auto;
+	text-align: left;
+	padding: 3%;
+	width: 50%;
+	font-size: 15px;
+}
+
+.mypage_middle .mypage_cont .wrapper .cont .cont_2 .cont_detail label {
+	background-color: #f8f9fa;
+	border-radius: 10px;
+	padding: 2% 5%;
+	margin: 2% auto;
+	font-weight: bold;
+	width: 85px;
+	text-align: center;
+}
