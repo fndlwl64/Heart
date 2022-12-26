@@ -69,16 +69,40 @@
 								<a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><img class="my_cont_img" src="${path}${dto.getAnimal_img1()}"></a>
 							</td>
 							<td>
-								<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span id="sp_name">이름 : ${dto.getAnimal_name()}</span></a></p>
-			                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">종류 : ${dto.getAnimal_species()}</a></p>
-			                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">성별 : ${dto.getAnimal_gender()}</a></p>
-			                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">나이 : ${dto.getAnimal_age()}</a></p>
-			                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">입양 완료일 :<br> ${dto.getAdopt_reg_adoptdate().substring(0, 10)}</a></p>
+								<div class="animal_detail">
+									<label>이름</label><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span> ${dto.getAnimal_name()}</span></a><br />
+									<label>종</label><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span> 
+										<c:if test="${dto.getAnimal_species().length() > 5}">
+											${dto.getAnimal_species().substring(0,4)} ..
+										</c:if>
+										
+										<c:if test="${dto.getAnimal_species().length() < 5}">
+											${dto.getAnimal_species()}
+										</c:if></span></a><br />
+				                	<label>성별</label><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span> 
+				                		<c:if test="${dto.getAnimal_gender() eq 'female'}">
+											암컷 (♀)
+										</c:if>
+										
+										<c:if test="${dto.getAnimal_gender() eq 'male'}">
+											수컷 (♂)
+										</c:if></span></a><br />
+				                	<label>나이</label><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span> ${dto.getAnimal_age()}살</span></a><br />
+				                	<label>입양예정일</label><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span> 
+				                		<c:if test="${empty dto.getAdopt_reg_duedate()}">
+											미정
+										</c:if>
+										
+										<c:if test="${!empty dto.getAdopt_reg_duedate() }">
+											${dto.getAdopt_reg_duedate().substring(0, 10)}
+										</c:if></span></a><br />
+								</div>
+								
 								<c:if test="${ empty sendCheck[status.index].count }">
-		                			<p><a class="animal_cont" href="${path }/user_review_insert?animal_no=${dto.getAnimal_no()}"><button class="btn btn-dark"><i class="bi bi-pencil-fill"></i> 후기작성</button></a></p>
+		                			<button class="btn btn-dark review_write" onclick="location.href='${path }/user_review_insert?animal_no=${dto.getAnimal_no()}'"><i class="bi bi-pencil-fill"></i> 후기작성</button>
 			                	</c:if>
 			                	<c:if test="${ sendCheck[status.index].count gt 0  }">
-			                		<p><a class="animal_cont" href="${path }/user_review_content?review_no=${ sendCheck[status.index].review_no }"><button class="btn btn-dark"><i class="bi bi-pencil-fill"></i> 내가 쓴 후기</button></a></p>
+			                		<button class="btn btn-dark review_write" onclick="location.href='${path }/user_review_content?review_no=${ sendCheck[status.index].review_no }'"><i class="bi bi-pencil-fill"></i> 내가 쓴 후기</button>
 			                	</c:if>
 							</td>
 							<c:if test="${count % 2 == 0 }">

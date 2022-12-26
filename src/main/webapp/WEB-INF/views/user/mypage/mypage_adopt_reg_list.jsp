@@ -60,7 +60,7 @@
 	        <div align="center">
 	            <c:if test="${!empty aList }">
 					<h3>입양대기목록</h3>
-					<%-- <table class="wish_table">
+					<table class="wish_table">
 						<tr>
 						<c:forEach items="${aList }" var="dto">
 						<c:set var="count" value="${count + 1 }"/>
@@ -68,11 +68,34 @@
 								<a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><img class="my_cont_img"src="${path}${dto.getAnimal_img1()}"></a>
 							</td>
 							<td>
-								<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span id="sp_name">이름 : ${dto.getAnimal_name()}</span></a></p>
-								<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">종류 : ${dto.getAnimal_species()}</a></p>
-			                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">성별 : ${dto.getAnimal_gender()}</a></p>
-			                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">나이 : ${dto.getAnimal_age()}</a></p>
-			                	<p><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}">입양 예정일 :<br> ${dto.getAdopt_reg_duedate().substring(0, 10)}</a></p>
+								<div class="animal_detail">
+									<label>이름</label><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span> ${dto.getAnimal_name()}</span></a><br />
+									<label>종</label><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span> 
+										<c:if test="${dto.getAnimal_species().length() > 5}">
+											${dto.getAnimal_species().substring(0,4)} ..
+										</c:if>
+										
+										<c:if test="${dto.getAnimal_species().length() < 5}">
+											${dto.getAnimal_species()}
+										</c:if></span></a><br />
+				                	<label>성별</label><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span> 
+				                		<c:if test="${dto.getAnimal_gender() eq 'female'}">
+											암컷 (♀)
+										</c:if>
+										
+										<c:if test="${dto.getAnimal_gender() eq 'male'}">
+											수컷 (♂)
+										</c:if></span></a><br />
+				                	<label>나이</label><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span> ${dto.getAnimal_age()}살</span></a><br />
+				                	<label>입양예정일</label><a class="animal_cont2" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><span> 
+				                		<c:if test="${empty dto.getAdopt_reg_duedate()}">
+											미정
+										</c:if>
+										
+										<c:if test="${!empty dto.getAdopt_reg_duedate() }">
+											${dto.getAdopt_reg_duedate().substring(0, 10)}
+										</c:if></span></a><br />
+								</div>
 							</td>
 							<c:if test="${count % 2 == 0 }">
 								<tr>
@@ -80,17 +103,17 @@
 							</c:if>
 						</c:forEach>
 						</tr>			
-					</table> --%>
+					</table>
 					
-					<div class="wrapper row">
+					<%-- <div class="wrapper row">
 						<c:forEach items="${aList }" var="dto">
 						<c:set var="count" value="${count + 1 }"/>
 						
 						<div class="cont col">
-							<div class="cont_1">
+							<div class="cont_1 col">
 								<a class="animal_cont" href="${path }/user_animal_content?no=${dto.getAnimal_no()}"><img class="my_cont_img"src="${path}${dto.getAnimal_img1()}"></a>
 							</div>
-							<div class="cont_2">
+							<div class="cont_2 col">
 								<div class="cont_detail">
 									<label>이름</label>
 									<span>${dto.getAnimal_name()}</span><br />
@@ -136,7 +159,11 @@
 						</div>
 						
 						</c:forEach>
-					</div>
+						
+						<c:if test="${count % 2 == 1 }">
+							<div class="cont"></div>
+						</c:if>
+					</div> --%>
 					
 				</c:if>
 	            <c:if test="${empty aList }">

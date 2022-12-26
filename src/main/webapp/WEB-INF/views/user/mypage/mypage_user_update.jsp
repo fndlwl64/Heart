@@ -126,8 +126,8 @@
 	                    </tr>
 	                </table>
 	                <div class="btn_position">
-	                	<button class="btn btn-success btn_update" id="update_btn" type="submit"><i class="bi bi-pencil"></i> 변경</button>
-	                	<button class="btn btn-warning" type="reset"><i class="bi bi-eraser"></i> 취소</button>
+	                	<button class="btn btn-warning btn_update" id="update_btn" type="reset"><i class="bi bi-pencil"></i> 리셋</button>
+	                	<button class="btn btn-success" type="submit"><i class="bi bi-eraser"></i> 수정</button>
 	                </div>
 	            </form>
 	        </div>
