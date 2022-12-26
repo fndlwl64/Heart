@@ -20,32 +20,28 @@
 	<div class="div1">
 		
 		<div class="animal_name">
-			<h3>${dto.animal_name }</h3>
+			<h3>${ dto.animal_name }</h3>
 			<span>
-				<c:if test="${dto.animal_gender eq 'male'}"> ${dto.animal_species } (수컷 ♂)</c:if>
-				<c:if test="${dto.animal_gender eq 'female'}"> ${dto.animal_species } (암컷 ♀)</c:if>
+				<c:if test="${dto.animal_gender eq 'male'}"> ${dto.animal_species } (수컷 <i class="bi bi-gender-male"></i>)</c:if>
+				<c:if test="${dto.animal_gender eq 'female'}"> ${dto.animal_species } (암컷 <i class="bi bi-gender-female"></i>)</c:if>
 			</span>
 		</div>
 		
-		<div class="animal_info">
-			
-			<div class="animal_img">
-				<img src="<%=request.getContextPath() %>${dto.animal_img1 }" alt="대표 이미지" />	
-			</div>
-			
+		<div class="animal_info">			
+			<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img1 }')"></div>			
 			<div class="info_box">
 				<div class="row">	
 					<div class="col">	
-						<label>중성화</label>
+						<label>중성화 유무</label>
 						<span>
-							<c:if test="${dto.animal_neutered eq 'Y'}"> O</c:if>
-							<c:if test="${dto.animal_neutered eq 'N'}"> X</c:if>
+							<c:if test="${dto.animal_neutered eq 'Y'}"> 유</c:if>
+							<c:if test="${dto.animal_neutered eq 'N'}"> 무</c:if>
 						</span><br />
 						
-						<label>예방접종</label>
+						<label>예방접종 유무</label>
 						<span>
-							<c:if test="${dto.animal_vaccination eq 'Y'}"> O</c:if>
-							<c:if test="${dto.animal_vaccination eq 'N'}"> X</c:if>
+							<c:if test="${dto.animal_vaccination eq 'Y'}"> 유</c:if>
+							<c:if test="${dto.animal_vaccination eq 'N'}"> 무</c:if>
 						</span><br />
 						
 						<label>추정나이</label>
@@ -61,28 +57,26 @@
 						
 						<label>무게</label>
 						<span> ${dto.animal_weight }kg</span><br />
-					</div>
-				
+					</div>				
 					<div class="detail">
-						<textarea cols="40" rows="5">${dto.animal_caution }</textarea>
+						<textarea cols="40" rows="5" class="form-control-plaintext" disabled="disabled" style="resize: none;">${ dto.animal_caution }</textarea>
 					</div>
 				</div>
 			</div>
-
 		</div>
 		
 		<div class="more_images">
 			<c:if test="${!empty dto.animal_img2 && !empty dto.animal_img3}">
-				<div class="img_2">
-					<img src="<%=request.getContextPath() %>${dto.animal_img2 }" alt="상세 이미지 1" />
-					<img src="<%=request.getContextPath() %>${dto.animal_img3 }" alt="상세 이미지 2" />
-				</div>
-			</c:if>
-			
-			<c:if test="${!empty dto.animal_img2 && empty dto.animal_img3}">
-				<div class="img_1">
-					<img src="<%=request.getContextPath() %>${dto.animal_img2 }" alt="상세 이미지 1" />
-				</div>
+				<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img2 }')"></div>
+				<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img3 }')"></div>
+			</c:if>			
+			<c:if test="${(!empty dto.animal_img2 && empty dto.animal_img3) || (empty dto.animal_img2 && !empty dto.animal_img3)}">
+				<c:if test="${ not empty dto.animal_img2 }">
+				<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img2 }')"></div>
+				</c:if>
+				<c:if test="${ not empty dto.animal_img3 }">				
+				<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img3 }')"></div>
+				</c:if>				
 			</c:if>				
 		</div>
 		
@@ -144,8 +138,7 @@
 						<div class="col-1">
 		
 							<button class="btn btn-danger " data-bs-toggle="modal"
-								data-bs-target="#deleteModal" data-id="${ deleteAddr }" onclick="changeOptionCancel()">입양취소</button>
-		
+								data-bs-target="#deleteModal" data-id="${ deleteAddr }" onclick="changeOptionCancel()">입양취소</button>		
 						</div>
 					</c:when>
 					<c:otherwise>

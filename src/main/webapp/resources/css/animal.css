@@ -82,38 +82,47 @@ caption {
 .div1 .animal_name {
 	font-weight: bold;
 	text-align: left;
-	width: 70%;
-	margin: auto;
-	width: 70%;
+	margin: 1rem auto;
+	background-color: #f8f9fa;
+	padding-left: 1rem;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	border-radius: 10px;
 }
 
 .div1 .animal_name h3 {
 	font-weight: bold;
+	text-shadow: 1px 1px 2px #565c64;
 }
 
 .div1 .animal_name span{
 	font-size: 14px;
-	color: #808B96;
+	color: #413F42;
 }	
 
 .div1 .animal_info {
 	display: flex;
-	justify-content: center;
-	width: 70%;
-	margin: auto;
+	justify-content: space-between;
 }
 
-.div1 .animal_info .animal_img {
-	display: inline-block;
-	margin: 1%;
+/* 이미지 */
+.animal_img {
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 50%;
+	background-position: center;
+	border-radius: 10px;	
 }
 
 .div1 .animal_info .info_box {
-	border: 2px solid darkgray;
+	width: 49%;
+	border: 1px solid #dee2e6;
 	padding: 2%;
 	text-align: left;
 	border-radius: 10px;
 	display: flex;
+	background-color: #f8f9fa;	
 }
 
 .div1 .animal_info .info_box div {
@@ -128,7 +137,10 @@ caption {
 	border: none;
 	font-weight: bold;
 	text-align: center;
-	margin: 2%;
+	margin: 0.5rem;
+	width: 45%;
+	height: 2rem;
+	vertical-align: middle;
 }
 
 .div1 .animal_info .info_box .detail {
@@ -138,31 +150,12 @@ caption {
 
 .div1 .animal_info .info_box textarea {
 	border: none;
+	font-size: 17px;
 }
-
-.div1 .animal_info .animal_img img{
-	width: 300px;
-	height: 350px;
-	border-radius: 10px;
-}
-
 
 .div1 .more_images {
 	margin: 2% auto;
 	width: 70%;
-}
-
-.div1 .more_images .img_2 img {
-	width: 350px;
-	height: 450px;
-	border-radius: 10px;
-	margin: 0 1%;
-}
-
-.div1 .more_images .img_1 img {
-	width: 600px;
-	height: 500px;
-	border-radius: 10px;
 }
 
 .div1 .btn_list {
