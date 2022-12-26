@@ -78,6 +78,12 @@ public class AnimalController {
 		//페이징
 		String field = ""; 
 		
+		//좋아요
+		WishDTO wishDTO = new WishDTO();
+		wishDTO.setWish_petno(animalDTO.getAnimal_no());
+		wishDTO.setWish_userid((String)request.getSession().getAttribute("session_id"));
+		model.addAttribute("wishCheck",wishDAO.check(wishDTO));
+		
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
 
@@ -117,6 +123,12 @@ public class AnimalController {
 		//고양이 , 삭제되지 않은 데이터
     	animalDTO.setAnimal_tag("cat");
     	animalDTO.setAnimal_state(1);
+    	
+    	//좋아요
+		WishDTO wishDTO = new WishDTO();
+		wishDTO.setWish_petno(animalDTO.getAnimal_no());
+		wishDTO.setWish_userid((String)request.getSession().getAttribute("session_id"));
+		model.addAttribute("wishCheck",wishDAO.check(wishDTO));
     	
 		//페이징
 		String field = ""; 
@@ -172,7 +184,7 @@ public class AnimalController {
 		AdoptRegDTO adoptRegDTO = adoptRegDAO.content(no);
 		
 		model.addAttribute("adoptRegDTO",adoptRegDTO);
-		model.addAttribute("wishCheck",wishDAO.check(wishDTO) );
+		model.addAttribute("wishCheck",wishDAO.check(wishDTO));
 		model.addAttribute("dto", animalDTO);
 		return "user/animal/user_animal_content";
 	}
