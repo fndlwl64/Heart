@@ -22,7 +22,7 @@
 		</div>
 		<br><br>
 		<div>
-			<button type="button" id="btn_content" class="btn btn-secondary mx-1" onclick="location.href='${path}/user_notice'"><i class="bi bi-card-list"></i> 목록</button>
+			<button style="float: right; clear: both; margin-right: 20%;" type="button" id="btn_content" class="btn btn-dark" onclick="location.href='${path}/user_notice'"><i class="bi bi-card-list"></i> 목록</button>
 		</div>
 	</div>
 </div>
