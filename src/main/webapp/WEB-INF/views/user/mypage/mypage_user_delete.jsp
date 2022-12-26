@@ -49,7 +49,7 @@
 <%@ include file="mypage_top.jsp" %>
 <div class="mypage_middle">
     <div class="mypage_top"></div>
-    <div class="mypage_menu">
+<%--     <div class="mypage_menu">
         <ul class="middle_ul">
             <li><a href="${path }/user_mypage_wish_list" class="my_a">관심목록</a></li><br><br>
             <li><a href="${path }/user_mypage_adoptreg_list" class="my_a">입양대기목록</a></li><br><br>
@@ -57,7 +57,8 @@
             <li><a href="${path }/user_mypage_user_update" class="my_a">회원정보변경</a></li><br><br>
             <li><a href="${path }/user_mypage_user_delete" class="my_a">회원탈퇴</a></li>
         </ul>
-    </div>
+    </div> --%>
+    <%@ include file="mypage_menu.jsp" %>
     <div id="my_cont5" class="mypage_cont" align="center">
         <form method="post" action="${path }/user_mypage_user_deleteCheck">
         <br><br><br>

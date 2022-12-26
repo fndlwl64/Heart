@@ -44,16 +44,16 @@
 <%@ include file="mypage_top.jsp" %>
 <div class="mypage_middle">
     <div class="mypage_top"></div>
-    <div class="mypage_menu">
-<%--         <ul class="middle_ul">
+<%--     <div class="mypage_menu">
+        <ul class="middle_ul">
             <li><a href="${path }/user_mypage_wish_list" class="my_a">관심목록</a></li><br><br>
             <li><a href="${path }/user_mypage_adoptreg_list" class="my_a">입양대기목록</a></li><br><br>
             <li><a href="${path }/user_mypage_adoptcomplet_list" class="my_a">입양완료목록</a></li><br><br>
             <li><a href="${path }/user_mypage_user_update" class="my_a">회원정보변경</a></li><br><br>
             <li><a href="${path }/user_mypage_user_delete" class="my_a">회원탈퇴</a></li>
-        </ul> --%>
-        <jsp:include page="mypage_menu.jsp" />
-    </div>
+        </ul>
+    </div> --%>
+    <%@ include file="mypage_menu.jsp" %>
     <div id="my_cont1" class="mypage_cont" align="center">
         <h3>등급별 안내</h3>
         <div class="accordion accordion-flush" id="accordionFlushExample">
