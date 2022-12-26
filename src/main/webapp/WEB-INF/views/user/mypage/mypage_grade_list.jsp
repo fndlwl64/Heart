@@ -59,17 +59,26 @@
 	        <br>
 	        <div class="flex_div">
 		        <div class="grade_info">
-		        	<h1>일반회원</h1>
-		        	<hr><br>
-		        	<p class="grade_text">검증되지 않은 회원으로 유기동물 입양신청만 가능하다.</p>
+		            <div class="grade-title">
+		        	     <h2>일반회원</h2>
+		        	</div>
+		        	<div class="grade-text">
+		        	     <p class="grade_text">검증되지 않은 회원으로</p>
+		        	     <p class="grade_text"> 유기동물 <strong>입양</strong>만 가능</p>
+		        	</div>
 		        </div>
 		        <div class="arrow">
 		        	<h1><i class="bi bi-arrow-right-circle-fill"></i></h1>
 		        </div>
 		        <div class="grade_info">
-		        	<h1>입소가능회원</h1>
-		        	<hr><br>
-		        	<p class="grade_text">검증 된 회원으로 유기동물을 입소신청할 수 있다.</p>
+		            <div class="grade-title">
+		        	     <h2>입소가능회원</h2>
+		        	</div>
+                    <div class="grade-text">
+		        	     <p class="grade_text">검증 된 회원으로 </p>
+		        	     <p class="grade_text"> 유기동물<strong> 입양 및 입소신청</strong> 가능</p>
+
+		        	</div>
 		        </div>
 	        </div>
 	    </div>
