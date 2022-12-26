@@ -2,11 +2,30 @@ $(document).ready(function() {
     /* swiper */
     // dogSwiper
     const dog_swiper = new Swiper(".dogSwiper", {
-        slidesPerView: 1,
+        slidesPerView: 5,
         spaceBetween: 30,
         centeredSlides: true,
         autoplay: {
-            delay: 4000,
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        loop: true,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+    
+    const cat_swiper = new Swiper(".catSwiper", {
+        slidesPerView: 5,
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+            delay: 7000,
             disableOnInteraction: false,
         },
         loop: true,

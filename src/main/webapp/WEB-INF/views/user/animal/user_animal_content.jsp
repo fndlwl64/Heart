@@ -65,20 +65,22 @@
 			</div>
 		</div>
 		
-		<div class="animal_info">
-			<c:if test="${!empty dto.animal_img2 && !empty dto.animal_img3}">
-				<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img2 }')"></div>
-				<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img3 }')"></div>
-			</c:if>			
-			<c:if test="${(!empty dto.animal_img2 && empty dto.animal_img3) || (empty dto.animal_img2 && !empty dto.animal_img3)}">
-				<c:if test="${ not empty dto.animal_img2 }">
-				<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img2 }')"></div>
-				</c:if>
-				<c:if test="${ not empty dto.animal_img3 }">				
-				<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img3 }')"></div>
+		<c:if test="${ !empty dto.animal_img2 || !empty dto.animal_img3 }">
+			<div class="animal_info">
+				<c:if test="${!empty dto.animal_img2 && !empty dto.animal_img3}">
+					<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img2 }')"></div>
+					<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img3 }')"></div>
+				</c:if>			
+				<c:if test="${(!empty dto.animal_img2 && empty dto.animal_img3) || (empty dto.animal_img2 && !empty dto.animal_img3)}">
+					<c:if test="${ not empty dto.animal_img2 }">
+					<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img2 }')"></div>
+					</c:if>
+					<c:if test="${ not empty dto.animal_img3 }">				
+					<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img3 }')"></div>
+					</c:if>				
 				</c:if>				
-			</c:if>				
-		</div>
+			</div>
+		</c:if>
 		<c:if test="${dto.animal_tag eq 'cat' }">
 			<div class="btns">
 				<div>
@@ -173,7 +175,18 @@
 				</c:choose>
 			</div>	
 		</c:if>
-		
+		<div>
+			<c:if test="${not empty user_id }">
+				<button class="btn" id="wish">
+					<c:if test="${wishCheck ne 0 }">
+						<i class="bi bi-star-fill text-warning"></i>
+					</c:if>
+					<c:if test="${wishCheck eq 0 }">
+						<i class="bi bi-star"></i>
+					</c:if>
+				</button>
+			</c:if>
+		</div>
 	</div> <%-- div1 end --%>
 	
 	<!-- Modal -->

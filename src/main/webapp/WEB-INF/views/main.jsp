@@ -2,10 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 <link rel="stylesheet" href="${path}/resources/css/main.css" />
 <jsp:include page="./include/user_header.jsp" />
 <script src="${path}/resources/js/main.js"></script>
@@ -15,6 +11,8 @@
 <c:set var="cList" value="${ catList }" />
 
 <div id="main-contents" class="main-contents">
+
+	<div class="animal-intro"></div>
 
     <%-- 하트펫 Promotion 문구 --%>
     <div class="promo-title" style="background-image:linear-gradient(45deg, transparent, rgba(76, 40, 24, 0.5), rgba(166, 106, 44, 0.5), rgba(213, 170, 114, 0.5)), url('${path}/resources/image/potter_cute.jpg'); ">
@@ -40,18 +38,22 @@
 	        </div>
 	    </div>
     </div>
+    
+    <div class="animal-intro"></div>
 	    
     <div class="swiper dogSwiper">
         <div class="swiper-wrapper">
         	<c:forEach items="${ dList }" var="list">
             	<div class="swiper-slide">
-	            	<a href="${path}/user_animal_content?no=${ list.animal_no }">
-		            	<c:choose>
-			            	<c:when test="${ not empty list.animal_img1 }"><img src="${path}${ list.animal_img1 }" alt="animal_img"></c:when>
-			            	<c:when test="${ not empty list.animal_img2 }"><img src="${path}${ list.animal_img2 }" alt="animal_img"></c:when>
-			            	<c:when test="${ not empty list.animal_img3 }"><img src="${path}${ list.animal_img3 }" alt="animal_img"></c:when>
-		            	</c:choose>
-	            	</a>
+		            <c:choose>
+	            		<c:when test="${ not empty list.animal_img1 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img1 }');"></c:when>
+	            		<c:when test="${ not empty list.animal_img2 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img2 }');"></c:when>
+	            		<c:when test="${ not empty list.animal_img3 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img3 }');"></c:when>
+		            </c:choose>
+			            <div>
+			            	<span class="swiper-text">${ list.animal_name } <c:if test="${ list.animal_gender eq 'male' }"><i class="bi bi-gender-male"></i></c:if><c:if test="${ list.animal_gender eq 'female' }"><i class="bi bi-gender-female"></i></c:if></span>          
+			            </div>
+		            </a>
             	</div>
             </c:forEach>
         </div>
@@ -60,17 +62,19 @@
         <div class="swiper-pagination"></div>
     </div>
     
-    <div class="swiper dogSwiper">
+    <div class="swiper dogSwiper catSwiper">
         <div class="swiper-wrapper">
         	<c:forEach items="${ cList }" var="list">
             	<div class="swiper-slide">
-	            	<a href="${path}/user_animal_content?no=${ list.animal_no }">
-	            	<c:choose>
-		            	<c:when test="${ not empty list.animal_img1 }"><img src="${path}${ list.animal_img1 }" alt="animal_img"></c:when>
-		            	<c:when test="${ not empty list.animal_img2 }"><img src="${path}${ list.animal_img2 }" alt="animal_img"></c:when>
-		            	<c:when test="${ not empty list.animal_img3 }"><img src="${path}${ list.animal_img3 }" alt="animal_img"></c:when>
-	            	</c:choose>
-	            	</a>
+		            <c:choose>
+	            		<c:when test="${ not empty list.animal_img1 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img1 }');"></c:when>
+	            		<c:when test="${ not empty list.animal_img2 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img2 }');"></c:when>
+	            		<c:when test="${ not empty list.animal_img3 }"><a href="${path}/user_animal_content?no=${ list.animal_no }" style="background-image: url('${path}${ list.animal_img3 }');"></c:when>
+		            </c:choose>
+			            <div>
+			            	<span class="swiper-text">${ list.animal_name } <c:if test="${ list.animal_gender eq 'male' }"><i class="bi bi-gender-male"></i></c:if><c:if test="${ list.animal_gender eq 'female' }"><i class="bi bi-gender-female"></i></c:if></span>          
+			            </div>
+		            </a>
             	</div>
             </c:forEach>
         </div>

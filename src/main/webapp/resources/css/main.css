@@ -11,7 +11,8 @@ body {
     font-size: 35px;
     padding-top: 1.5rem;
     font-weight: bold;
-    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    background-color: #f8f9fa; 
 }
 
 /* promo 이미지 */
@@ -55,16 +56,6 @@ body {
    }
 }
 
-/* heart-pet */
-.main-title #heart-pet {
-    margin-top: 1rem;
-    margin-bottom: 0px;
-}
-
-.main-title > p {
-    margin: 0;
-}
-
 /* main-video */
 .main-video {
     display: grid;
@@ -86,36 +77,50 @@ body {
 
 /* dogSwiper */
 .dogSwiper {
-    width: 70%;
-    height: 70%;
-    margin: 2rem auto;
+    width: 100%;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
 }
 
 .dogSwiper .swiper-slide {
     text-align: center;
     font-size: 18px;
     background: #fff;
-
-    /* Center slide text vertically */
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
+    
     display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
     justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
     align-items: center;
+    overflow: hidden;   
+}
+
+.dogSwiper .swiper-slide > a {
+	height: 300px;
+	width: 300px;
+	background-size: cover;
+	background-position: center;
+	text-decoration: none;
+}
+
+.dogSwiper .swiper-slide .swiper-text {
+	font-size: 20px;
+	color: white;
+	font-weight: bold;
+	position: relative;
+	left: 6rem;
+	top: 16rem;
+	background-color: rgb(65, 63, 66, 0.5);
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+	border-radius: 5px;
 }
 
 .dogSwiper .swiper-slide img {
     display: block;
     width: 100%;
-    height: 100%;
     object-fit: cover;
+    object-position: center center;
 }
 
 .dogSwiper .swiper-button-next, .swiper-button-prev {
@@ -125,20 +130,31 @@ body {
     color: gray;
 }
 
+/* heart-pet */
+.main-title #heart-pet {
+    margin-top: 1rem;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
 /* 더 보러가기 */
 .more {
-    margin-top: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.more > p {
-	margin: 0 !important;
+.more > div > span {
+	font-size: 1.8rem;
 }
 
 .more .btn-light {
 	border: 1px solid black;
+}
+
+.animal-intro {
+	height: 1rem;
+ 	background-color: #f8f9fa;
 }
 
 /* reviewSwiper */

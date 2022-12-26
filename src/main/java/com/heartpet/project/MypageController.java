@@ -31,6 +31,7 @@ import com.heartpet.action.MypageDAO;
 import com.heartpet.action.ReviewDAO;
 import com.heartpet.model.Mypage_SupportDTO;
 import com.heartpet.model.PageDTO;
+import com.heartpet.model.SupportDTO;
 import com.heartpet.model.UserDTO;
 import com.heartpet.model.WishVO;
 
@@ -43,8 +44,8 @@ class MyAuthentication extends Authenticator {
  
     public MyAuthentication(){
          
-        String id = "norangcitron@gmail.com";       // 구글 ID
-        String pw = "pyotpmmypbygihrs";          // 구글 비밀번호
+        String id = "norangcitron@gmail.com";      
+        String pw = "pyotpmmypbygihrs";         
  
         // ID와 비밀번호를 입력한다.
         pa = new PasswordAuthentication(id, pw);
@@ -66,69 +67,118 @@ public class MypageController {
 	private ReviewDAO reviewDAO;
 	
 	// 한 페이지당 보여질 게시물의 수
-    private final int rowsize = 10;
+    private int rowsize = 10;
 
     // 전체 게시물의 수
     private int totalRecord = 0;
 
     @RequestMapping("/user_mypage_wish_list")
-    public String mypage_wish_list(Model model, HttpServletRequest request) {
+    public String mypage_wish_list(@RequestParam(value = "page", defaultValue = "1") int page, Model model, HttpServletRequest request) {
     	//세션정보가져오기
     	HttpSession session = request.getSession();
     	String user_id = (String)session.getAttribute("session_id");
     	
-    	int sum = mypagedao.SumSupport(user_id);
-    	UserDTO user_list = mypagedao.UserInfo(user_id);
-    	int regcount = mypagedao.AnimalRegCount(user_id);
-    	int review_count = mypagedao.ReviewCount(user_id);
-    	List<WishVO> wish_list = mypagedao.getWishList(user_id);
-    	model.addAttribute("Sum", sum);
-    	model.addAttribute("uList", user_list);
-    	model.addAttribute("Count", regcount);
-    	model.addAttribute("review_Count", review_count);
-    	model.addAttribute("wList", wish_list);
-        return "user/mypage/mypage_wish_list";
-    }
-    
-    @RequestMapping("/user_mypage_adoptreg_list")
-    public String mypage_adoptreg_list(Model model, HttpServletRequest request) {
-    	HttpSession session = request.getSession();
-    	String user_id = (String)session.getAttribute("session_id");
+    	int rowsize = 4;
+    	
+    	int currentPage = 1; // 현재 페이지 변수
+        if (page != 1) {
+            currentPage = page;
+        }
+        
+        List<WishVO> wish_List = null;
+        PageDTO paging= null;
+        
+        totalRecord = this.mypagedao.listWishCount(user_id);
+        paging = new PageDTO(currentPage, rowsize, totalRecord);
+        wish_List = this.mypagedao.listWish(paging.getStartNo(), paging.getEndNo(),user_id);
+    	
+
     	
     	int sum = mypagedao.SumSupport(user_id);
     	UserDTO user_list = mypagedao.UserInfo(user_id);
     	int regcount = mypagedao.AnimalRegCount(user_id);
     	int review_count = mypagedao.ReviewCount(user_id);
-    	List<WishVO> wish_list = mypagedao.getAdoptList(user_id);
+//    	List<WishVO> wish_list = mypagedao.getWishList(user_id);
+    	model.addAttribute("Sum", sum);
+    	model.addAttribute("uList", user_list);
+    	model.addAttribute("Count", regcount);
+    	model.addAttribute("review_Count", review_count);
+    	model.addAttribute("wList", wish_List);
+        model.addAttribute("total", totalRecord);
+        model.addAttribute("paging", paging);
+        
+        return "user/mypage/mypage_wish_list";
+    }
+    
+    @RequestMapping("/user_mypage_adoptreg_list")
+    public String mypage_adoptreg_list(@RequestParam(value = "page", defaultValue = "1") int page, Model model, HttpServletRequest request) {
+    	HttpSession session = request.getSession();
+    	String user_id = (String)session.getAttribute("session_id");
+    	
+    	int rowsize = 4;
+    	
+    	int currentPage = 1; // 현재 페이지 변수
+        if (page != 1) {
+            currentPage = page;
+        }
+    	
+        List<WishVO> adopt_List = null;
+        PageDTO paging= null;
+        
+        totalRecord = this.mypagedao.listAdoptCount(user_id);
+        paging = new PageDTO(currentPage, rowsize, totalRecord);
+        adopt_List = this.mypagedao.listAdopt(paging.getStartNo(), paging.getEndNo(),user_id);
+    	
+    	int sum = mypagedao.SumSupport(user_id);
+    	UserDTO user_list = mypagedao.UserInfo(user_id);
+    	int regcount = mypagedao.AnimalRegCount(user_id);
+    	int review_count = mypagedao.ReviewCount(user_id);
+//    	List<WishVO> wish_list = mypagedao.getAdoptList(user_id);
 
     	model.addAttribute("Sum", sum);
     	model.addAttribute("uList", user_list);
     	model.addAttribute("Count", regcount);
     	model.addAttribute("review_Count", review_count);
-    	model.addAttribute("aList", wish_list);
+    	model.addAttribute("aList", adopt_List);
+        model.addAttribute("total", totalRecord);
+        model.addAttribute("paging", paging);
     	
         return "user/mypage/mypage_adopt_reg_list";
     }
     
     @RequestMapping("/user_mypage_adoptcomplet_list")
-    public String mypage_adoptcomplet_list(Model model, HttpServletRequest request) {
+    public String mypage_adoptcomplet_list(@RequestParam(value = "page", defaultValue = "1") int page, Model model, HttpServletRequest request) {
     	HttpSession session = request.getSession();
     	String user_id = (String)session.getAttribute("session_id");
+    	
+    	int rowsize = 4;
+    	
+    	int currentPage = 1; // 현재 페이지 변수
+        if (page != 1) {
+            currentPage = page;
+        }
+    	
+        List<WishVO> adopt_com_List = null;
+        PageDTO paging= null;
+        
+        totalRecord = this.mypagedao.listAdoptComCount(user_id);
+        paging = new PageDTO(currentPage, rowsize, totalRecord);
+        adopt_com_List = this.mypagedao.listAdoptCom(paging.getStartNo(), paging.getEndNo(),user_id);
     	
     	int sum = mypagedao.SumSupport(user_id);
     	UserDTO user_list = mypagedao.UserInfo(user_id);
     	int regcount = mypagedao.AnimalRegCount(user_id);
     	int review_count = mypagedao.ReviewCount(user_id);
-    	List<WishVO> wish_list = mypagedao.getAdoptComList(user_id);
+		/* List<WishVO> wish_list = mypagedao.getAdoptComList(user_id); */
     	List<Integer> animal_no = new ArrayList<Integer>();
     	Map<String, Object> doubleCheck  = new HashMap<String, Object>();
     	List<Map<String, Object>> sendCheck = new ArrayList<Map<String,Object>>();
     	
-    	System.out.println(wish_list.size());
+    	System.out.println(adopt_com_List.size());
     	
-    	for(int i=0; i<wish_list.size(); i++) {
+    	for(int i=0; i<adopt_com_List.size(); i++) {
     		// animal_no 받기
-    		animal_no.add(wish_list.get(i).getAnimal_no());
+    		animal_no.add(adopt_com_List.get(i).getAnimal_no());
     		// doubleCheck - count, review_no 값 넘어옴
     		doubleCheck = reviewDAO.mypageReviewCount(animal_no.get(i));
     		// List 형태로 send
@@ -140,8 +190,10 @@ public class MypageController {
     	model.addAttribute("uList", user_list);
     	model.addAttribute("Count", regcount);
     	model.addAttribute("review_Count", review_count);
-    	model.addAttribute("aList", wish_list);
+    	model.addAttribute("aList", adopt_com_List);
     	model.addAttribute("sendCheck", sendCheck);
+        model.addAttribute("total", totalRecord);
+        model.addAttribute("paging", paging);
 
         return "user/mypage/mypage_adopt_complet_list";
     }
