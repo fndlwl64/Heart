@@ -4,6 +4,7 @@
 		
 <div class="mypage-body">
     <div class="mypage_menu">
+    	<span class="mypage-pin"><i class="bi bi-pin-angle-fill"></i></span>
         <ul class="middle_ul">
             <li><a href="${path }/user_mypage_wish_list" class="my_a">관심목록</a></li>
             <li><a href="${path }/user_mypage_adoptreg_list" class="my_a">입양대기목록</a></li>

@@ -166,22 +166,52 @@ body {
 }
 
 /* mypage_menu */
-.mypage_middle .mypage_menu {
-    width: 15%;
+.mypage-body {
+	width: 70%;
+	display: flex;
+	margin: 0 auto;
+	align-items: center;
 }
 
-.mypage_middle .mypage_menu .middle_ul{
-    padding-top: 20%;
+
+/* mypage_menu */
+.mypage-body .mypage_menu {
+	width: 20%;
+	height: 50%;
+	border-radius: 10px;
+	box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+	background-color: #f8f9fa;
+}
+
+.mypage-body .mypage_menu .mypage-pin {
+	width: 2rem;
+	height: 2rem;
+}
+
+.mypage-body .mypage_menu .middle_ul {
     list-style: none;
-    margin-left: 150px;
-    font-size: 20px;
-    
+    font-size: 17px;
+    vertical-align: middle;
+    padding-left: 3.5rem;
 }
 
-.mypage_middle .mypage_menu .middle_ul .my_a{
-    color: gray;
+.mypage-body .mypage_menu .middle_ul > li {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.mypage-body .mypage_menu .middle_ul > li:first-child {
+	margin-top: 4rem;
+}
+.mypage-body .mypage_menu .middle_ul > li:last-child {
+	margin-bottom: 4rem;
+}
+
+.mypage-body .mypage_menu .middle_ul .my_a {
+	color: black;
     text-decoration: none;
-    margin-top: -60px;
+    font-size: 17px;
+    
 }
 
 .mypage_middle .mypage_cont {
@@ -193,7 +223,7 @@ body {
 
 .mypage_middle .mypage_bottom {
     width: 100%;
-    height: 600px;
+    height: 4rem;
     background-color: white;
 }
 
