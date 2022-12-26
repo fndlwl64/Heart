@@ -117,7 +117,7 @@
                                 <option value=""></option>
                                 <option value="1">1kg ~ 4kg</option>
                                 <option value="2">4kg ~ 10kg</option>
-                                <option value="3">>10kg 이상</option>
+                                <option value="3">10kg 이상</option>
                             </select>     
                         </div>          
                     </td>                                                          
