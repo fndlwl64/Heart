@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="../../include/user_header.jsp" />
 <script src="resources/js/mypage.js"></script>
+<script src="resources/js/signin_up.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="dto" value="${uList }"/>
 <link rel="stylesheet" href="resources/css/mypage.css"/>
@@ -61,50 +62,73 @@
 	                <c:if test="${empty dto.getUser_email() || empty dto.getUser_phone() || empty dto.getUser_addr()}">
 	                <span class="not_email">회원 이메일, 연락처, 주소를 등록해야 추후에 비밀번호찾기, 회원탈퇴, 후원하기 등이 가능합니다. </span>
 	                </c:if>
-	                <table class="table table-hover searched_list">
+	                <table class="table searched_list">
 	                    <tr>
-	                        <th class="table-light col">아이디</th>
+	                        <th>아이디</th>
 	                        <td><input name="user_id" class="form-control" type="text" value="${dto.getUser_id()}" readonly></td>
 	                    </tr>
 	                    <tr>
-	                        <th class="table-light col-3"><span class="sp2">이름</span></th>
+	                        <th><span class="sp2">이름</span></th>
 	                        <td><input name="user_name" class="form-control" type="text" value="${dto.getUser_name()}"></td>
 	                    </tr>
 	                    <tr>
-	                        <th class="table-light col-3"><span class="sp2">이메일</span></th>
+	                        <th><span class="sp2">이메일</span></th>
 	                        <td><input name="user_email" class="form-control" type="text" value="${dto.getUser_email()}"></td>
 	                    </tr>
 	                    <tr>
-	                        <th class="table-light col-3"><span class="sp2">연락처</span></th>
+	                        <th><span class="sp2">연락처</span></th>
 	                        <td><input name="user_phone" class="form-control" type="text" value="${dto.getUser_phone()}"></td>
 	                    </tr>
 	                    <tr>
-	                        <th class="table-light col-3"><span class="sp2">주소</span></th>
-	                        <td><input name="user_addr" class="form-control" type="text" value="${dto.getUser_addr()}"></td>
+	                        <th><span class="sp2">주소</span></th>
+	                        <c:set var="addr" value="${dto.user_addr }"/>
+                        	<c:if test="${empty addr }">
+				                <td class="addr_info">
+					                <input class="form-control-sm zipcode" name="user_addr" type="text" id="sample6_postcode" placeholder="우편번호">
+				                    <input id="zipcode_search" class="search_zipcode" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+				                    <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_address" placeholder="주소"><br>
+				                    <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_detailAddress" placeholder="상세주소">
+				                    <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_extraAddress" placeholder="참고항목">
+				                </td>
+				            </c:if>
+				                
+				            <c:if test="${!empty addr }">
+				                <td class="addr_info">
+					                <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_postcode" value="${fn:split(addr,',')[0]}"  >
+				                    <input id="zipcode_search" class="btn search_zipcode" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+				                    <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_address" value="${fn:split(addr,',')[1]}"  ><br>
+				                    <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_detailAddress" value="${fn:split(addr,',')[2]}"  >
+				                    <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_extraAddress" value="${fn:split(addr,',')[3]}"  >
+				                </td>
+				        	</c:if>
 	                    </tr>
 	                    <tr>
-	                        <th class="table-light col-3"><span class="sp2">반려동물경험</span></th>
+	                        <th><span class="sp2">반려동물경험</span></th>
 	                        <td>
-	                        	<c:if test="${dto.getUser_animalexp() == 'N' }">
-	                        	<%-- <input name="user_animalexp" class="form-control" type="text" value="${dto.getUser_animalexp()}"> --%>
-	                  			<label><input type="radio" name="user_animalexp" value="N" checked="checked"/>N</label>
-	                  			<label><input type="radio" name="user_animalexp" value="Y" />Y</label>
-	                        	</c:if>
 	                        	<c:if test="${dto.getUser_animalexp() == 'Y' }">
 	                        	<%-- <input name="user_animalexp" class="form-control" type="text" value="${dto.getUser_animalexp()}"> --%>
-	                  			<label><input type="radio" name="user_animalexp" value="N" />N</label>
 	                  			<label><input type="radio" name="user_animalexp" value="Y" checked="checked"/>Y</label>
-	                        	</c:if>
+	                  			<label><input type="radio" name="user_animalexp" value="N" />N</label>
+	                  			</c:if>
+	                        	
+	                        	<c:if test="${dto.getUser_animalexp() == 'N' }">
+	                        	<%-- <input name="user_animalexp" class="form-control" type="text" value="${dto.getUser_animalexp()}"> --%>
+	                  			<label><input type="radio" name="user_animalexp" value="Y" />Y</label>
+	                  			<label><input type="radio" name="user_animalexp" value="N" checked="checked"/>N</label>
+	                  			</c:if>
+	                        	
 	                        	<c:if test="${empty dto.getUser_animalexp()}">
 	                        	<%-- <input name="user_animalexp" class="form-control" type="text" value="${dto.getUser_animalexp()}"> --%>
-	                  			<label><input type="radio" name="user_animalexp" value="N" />N</label>
 	                  			<label><input type="radio" name="user_animalexp" value="Y" />Y</label>
+	                  			<label><input type="radio" name="user_animalexp" value="N" />N</label>
 	                        	</c:if>
 	                        </td>
 	                    </tr>
 	                </table>
-	                <br>
-	                <button class="btn btn-dark mx-1" id="update_btn" type="submit"><i class="bi bi-save"></i> 변경</button>
+	                <div class="btn_position">
+	                	<button class="btn btn-success btn_update" id="update_btn" type="submit"><i class="bi bi-pencil"></i> 변경</button>
+	                	<button class="btn btn-warning" type="reset"><i class="bi bi-eraser"></i> 취소</button>
+	                </div>
 	            </form>
 	        </div>
 	    </div>

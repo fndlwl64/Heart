@@ -227,6 +227,10 @@ body {
     background-color: white;
 }
 
+.mypage_middle .mypage_cont .searched_list {
+	
+}
+
 
 .mypage_middle .mypage_cont .my_cont_ul .animal_cont{
     color: gray;
@@ -277,8 +281,44 @@ body {
 }
 
 .mypage_middle .mypage_cont .table {
-    width: 600px;
-    margin-top: 100px;
+    margin-top: 50px;
+    text-align: center;
+    width: 90%;
+}
+
+.mypage_middle .mypage_cont .table th {
+	background-color: #f8f9fa;
+	vertical-align: middle;
+}
+
+.mypage_middle .mypage_cont .table .addr_info {
+	text-align: left;
+}
+
+.mypage_middle .mypage_cont .table .addr_info .addr {
+	border: 1px solid #ced4da;
+	margin: 1%;
+	width: 200px;
+}
+
+.mypage_middle .mypage_cont .table .addr_info .search_zipcode {
+	border: none;
+	background-color: #f8f9fa;
+	border-radius: 5px;
+	padding: 1% 2%;
+	margin-left: 1%;
+	width: 200px;
+}
+
+.mypage_middle .mypage_cont .btn_position {
+	margin-top: 2%;
+	display: flex;
+	justify-content: flex-end;
+	width: 90%;
+}
+
+.mypage_middle .mypage_cont .btn_position .btn_update {
+	margin-right: 1%;
 }
 
 .accordion {
