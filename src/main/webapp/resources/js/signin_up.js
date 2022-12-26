@@ -70,9 +70,6 @@ function sample6_execDaumPostcode() {
     });
 }
 
-
-
-
 $(function() {
 
 	$('.modal').on('hidden.bs.modal', function (e) {
