@@ -19,7 +19,6 @@ public class AnimalServiceImpl implements AnimalService {
 	@Autowired
 	AdoptRegDAO adoptRegDAO;
 
-
 	@Override
 	public void insert(AnimalDTO animalDTO, AdoptRegDTO adoptRegDTO) {
 		if(adoptRegDTO != null) {
