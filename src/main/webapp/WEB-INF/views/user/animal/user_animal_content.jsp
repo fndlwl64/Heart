@@ -1,146 +1,179 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="resources/css/list_view.css">
 <jsp:include page="../../include/user_header.jsp" />
-<%
-pageContext.setAttribute("newline", "\n");
-%>
+<link rel="stylesheet" href="resources/css/animal.css" />
+<% pageContext.setAttribute("newline", "\n"); %>
+
 <c:set var="dto" value="${dto }" />
 <c:set var="wishCheck" value="${wishCheck }" />
 <c:set var="adoptRegDTO" value="${adoptRegDTO }" />
 <c:set var="path" value="<%=request.getContextPath()%>" />
-<c:set var="user_id"
-	value='<%=(String) session.getAttribute("session_id")%>' />
-<c:set var="user_grade"
-	value='<%=(Integer) session.getAttribute("session_grade")%>' />
-<c:set var="deleteAddr" value="${path }/user_cancel_animal?animal_no=${dto.animal_no }"></c:set>	
-<input type="hidden" value="<%=request.getContextPath()%>/wish"
-	id="linkwish">
+<c:set var="user_id" value='<%=(String) session.getAttribute("session_id")%>' />
+<c:set var="user_grade" value='<%=(Integer) session.getAttribute("session_grade")%>' />
+<c:set var="deleteAddr" value="${path }/user_cancel_animal?animal_no=${dto.animal_no }"></c:set>
+<input type="hidden" value="<%=request.getContextPath()%>/wish" id="linkwish">
 <input type="hidden" value="${user_id }" id="user_id" />
 <input type="hidden" value="${user_grade }" id="user_grade" />
 <input type="hidden" value="${dto.animal_no }" id="animal_number"/>
 <script src="${path}/resources/js/admin_list_view.js"></script>
 
-<div class="container">
-	
-	<div class="_container">
-	
-		<div class="wrap">
-			
-			<h3>입양동물</h3>
-			
-			<div class="user_info">
-				<div class="info_title">
-					<ul class="info_border">
-						<%-- <li><img class="user_img"
-							src="<%=request.getContextPath()%>/resources/upload/${dto.animal_img1}"
-							alt="회원 랜덤 이미지" /></li> --%>
-						<li>
-							<div>
-								<label class="title">이름</label> <span class="bold">
-									${dto.animal_name}</span> <br /> <label class="title">입양상태</label> <span>
-									${dto.animal_status}</span>
-							</div>
-						</li>
-					</ul>
-
-					<ul class="">
-						<li class="forMargin">
-							<div>
-								<label class="title">입소날짜</label><span>${adoptRegDTO.adopt_reg_appdate }</span>
-								<br /> <label class="title">백신</label><span>${dto.animal_vaccination }</span>
-								<br /> <label class="title">중성화</label><span>${dto.animal_neutered}</span>
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
-			
-		</div>
-
-		<div class="wrap">
-			
-			<h3>상세정보</h3>
-			
-			<div class="user_info">
-				<div class="info_title">
-					<ul>
-						<li class="forMargin">
-							<div>
-								<label class="title">품종</label><span>
-									${dto.animal_species }</span> <br /> <label class="title">나이</label><span>
-									${dto.animal_age }</span> <br /> <label class="title">성별</label><span>
-									${dto.animal_gender }</span> <br /> <label class="title">크기</label><span>
-									${dto.animal_size }</span> <br /> <label class="title">발견장소</label><span>
-									${dto.animal_place }</span> <br />
-							</div>
-						</li>
-					</ul>
-				</div>
-			</div>
-			
+	<div class="div1">
+		
+		<div class="animal_name">
+			<h3>${ dto.animal_name }</h3>
+			<span>
+				<c:if test="${dto.animal_gender eq 'male'}"> ${dto.animal_species } (수컷 <i class="bi bi-gender-male"></i>)</c:if>
+				<c:if test="${dto.animal_gender eq 'female'}"> ${dto.animal_species } (암컷 <i class="bi bi-gender-female"></i>)</c:if>
+			</span>
 		</div>
 		
-	</div>
-	
-	<div class="row">
-		<div class="col-8"></div>
-		<div class="col-1">
-			<c:if test="${not empty user_id }">
-				<button class="btn" id="wish">
-					<c:if test="${wishCheck ne 0 }">
-						<i class="bi bi-star-fill text-warning"></i>
-					</c:if>
-					<c:if test="${wishCheck eq 0 }">
-						<i class="bi bi-star"></i>
-					</c:if>
-				</button>
-			</c:if>
+		<div class="animal_info">			
+			<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img1 }')"></div>			
+			<div class="info_box">
+				<div class="row">	
+					<div class="col">	
+						<label>중성화 유무</label>
+						<span>
+							<c:if test="${dto.animal_neutered eq 'Y'}"> 유</c:if>
+							<c:if test="${dto.animal_neutered eq 'N'}"> 무</c:if>
+						</span><br />
+						
+						<label>예방접종 유무</label>
+						<span>
+							<c:if test="${dto.animal_vaccination eq 'Y'}"> 유</c:if>
+							<c:if test="${dto.animal_vaccination eq 'N'}"> 무</c:if>
+						</span><br />
+						
+						<label>추정나이</label>
+						<span> ${dto.animal_age }살</span><br />
+					</div>
+					
+					<div class="col">	
+						<label>발견장소</label>
+						<span> ${dto.animal_place }</span><br />
+						
+						<label>크기</label>
+						<span> ${dto.animal_size }</span><br />
+						
+						<label>무게</label>
+						<span> ${dto.animal_weight }kg</span><br />
+					</div>				
+					<div class="detail">
+						<textarea cols="40" rows="5" class="form-control-plaintext" disabled="disabled" style="resize: none;">${ dto.animal_caution }</textarea>
+					</div>
+				</div>
+			</div>
 		</div>
-		<c:choose>
-			<c:when
-				test="${not empty user_id and user_id eq adoptRegDTO.adopt_reg_userid and dto.animal_status eq '입양 대기'}">
-				<c:set var="deleteAddr"
-					value="${path }/user_cancel_animal?animal_no=${dto.animal_no }"></c:set>
-				<div class="col-1">
-
-					<button class="btn btn-danger " data-bs-toggle="modal"
-						data-bs-target="#deleteModal" data-id="${ deleteAddr }" onclick="changeOptionCancel()">입양취소</button>
-
+		
+		<div class="animal_info">
+			<c:if test="${!empty dto.animal_img2 && !empty dto.animal_img3}">
+				<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img2 }')"></div>
+				<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img3 }')"></div>
+			</c:if>			
+			<c:if test="${(!empty dto.animal_img2 && empty dto.animal_img3) || (empty dto.animal_img2 && !empty dto.animal_img3)}">
+				<c:if test="${ not empty dto.animal_img2 }">
+				<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img2 }')"></div>
+				</c:if>
+				<c:if test="${ not empty dto.animal_img3 }">				
+				<div class="animal_img" style="background-image: url('${ path }${ dto.animal_img3 }')"></div>
+				</c:if>				
+			</c:if>				
+		</div>
+		<c:if test="${dto.animal_tag eq 'cat' }">
+			<div class="btns">
+				<div>
+					<button class="btn btn-dark btn_list" onclick="location.href='${path}/user_cat_list'"><i class="bi bi-card-list"></i> 목록</button>
 				</div>
-			</c:when>
-			<c:otherwise>
-				<c:set var="deleteAddr"
-					value="${path }/user_get_animal?animal_no=${dto.animal_no }"></c:set>
-				<div class="col-1">
-					<c:choose>
-						<c:when test="${dto.animal_status eq '입양 가능' and not empty user_id}">
-							<button class="btn btn-primary " data-bs-toggle="modal"
-								data-bs-target="#deleteModal" data-id="${ deleteAddr }"
-								onclick="changeOption()">입양하기</button>
-						</c:when>
-						<c:otherwise>
-							<form action="user_get_animal" method="post"
-								onsubmit="return submitOption();">
-								<input type="hidden" id="animal_status"
-									value="${dto.animal_status }"> <input type="hidden"
-									name="animal_no" id="animal_no" value="${dto.animal_no }">
-								<input type="submit" class="btn btn-primary " value="입양하기"
-									data-bs-toggle="modal" data-bs-target="#cautionModal">
-							</form>
-						</c:otherwise>
-					</c:choose>
-					<%--  --%>
+				
+				<c:choose>
+					<c:when
+						test="${not empty user_id and user_id eq adoptRegDTO.adopt_reg_userid and dto.animal_status eq '입양 대기'}">
+						<c:set var="deleteAddr"
+							value="${path }/user_cancel_animal?animal_no=${dto.animal_no }"></c:set>
+						<div>
+							<button class="btn btn-danger " data-bs-toggle="modal"
+								data-bs-target="#deleteModal" data-id="${ deleteAddr }" onclick="changeOptionCancel()">입양취소</button>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<c:set var="deleteAddr"
+							value="${path }/user_get_animal?animal_no=${dto.animal_no }"></c:set>
+						<div>
+							<c:choose>
+								<c:when test="${dto.animal_status eq '입양 가능' and not empty user_id}">
+									<button class="btn btn-primary " data-bs-toggle="modal"
+										data-bs-target="#deleteModal" data-id="${ deleteAddr }"
+										onclick="changeOption()"><i class="bi bi-pencil-square"></i> 입양등록</button>
+								</c:when>
+								<c:otherwise>
+									<form action="user_get_animal" method="post"
+										onsubmit="return submitOption();">
+										<input type="hidden" id="animal_status"
+											value="${dto.animal_status }"> <input type="hidden"
+											name="animal_no" id="animal_no" value="${dto.animal_no }">
+										<button type="submit" class="btn btn-primary"
+											data-bs-toggle="modal" data-bs-target="#cautionModal"><i class="bi bi-pencil-square"></i> 입양신청</button>
+									</form>
+								</c:otherwise>
+							</c:choose>
+							<%--  --%>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</c:if>
+		
+		<c:if test="${dto.animal_tag eq 'dog' }">
+			<div class="btns">
+				<div>
+					<button class="btn btn-dark btn_list" onclick="location.href='${path}/user_dog_list'"><i class="bi bi-card-list"></i> 목록</button>
 				</div>
-			</c:otherwise>
-		</c:choose>
-	</div>
-
+				
+				<c:choose>
+					<c:when
+						test="${not empty user_id and user_id eq adoptRegDTO.adopt_reg_userid and dto.animal_status eq '입양 대기'}">
+						<c:set var="deleteAddr"
+							value="${path }/user_cancel_animal?animal_no=${dto.animal_no }"></c:set>
+						<div class="col-1">
+		
+							<button class="btn btn-danger " data-bs-toggle="modal"
+								data-bs-target="#deleteModal" data-id="${ deleteAddr }" onclick="changeOptionCancel()"> 입양취소</button>		
+						</div>
+					</c:when>
+					<c:otherwise>
+						<c:set var="deleteAddr"
+							value="${path }/user_get_animal?animal_no=${dto.animal_no }"></c:set>
+						<div class="col-1">
+							<c:choose>
+								<c:when test="${dto.animal_status eq '입양 가능' and not empty user_id}">
+									<button class="btn btn-primary " data-bs-toggle="modal"
+										data-bs-target="#deleteModal" data-id="${ deleteAddr }"
+										onclick="changeOption()"><i class="bi bi-pencil-square"></i> 입양신청</button>
+								</c:when>
+								<c:otherwise>
+									<form action="user_get_animal" method="post"
+										onsubmit="return submitOption();">
+										<input type="hidden" id="animal_status"
+											value="${dto.animal_status }"> <input type="hidden"
+											name="animal_no" id="animal_no" value="${dto.animal_no }">
+										<button type="submit" class="btn btn-primary"
+											data-bs-toggle="modal" data-bs-target="#cautionModal"><i class="bi bi-pencil-square"></i> 입양신청</button>
+									</form>
+								</c:otherwise>
+							</c:choose>
+							<%--  --%>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</div>	
+		</c:if>
+		
+	</div> <%-- div1 end --%>
+	
 	<!-- Modal -->
 	<jsp:include page="../../include/cautionModal.jsp" />
 	<jsp:include page="../../include/deleteModal.jsp" />
-</div>
+	
 <script type="text/javascript">
 	function changeOption() {
 		$('#deleteModalLabel').empty();
@@ -214,5 +247,5 @@ pageContext.setAttribute("newline", "\n");
 	});
 </script>
 
-
 <jsp:include page="../../include/user_footer.jsp" />
+	
