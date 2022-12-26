@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="dto" value="${uList }"/>
 <link rel="stylesheet" href="${path}/resources/css/support.css">
@@ -55,6 +55,11 @@
 	          });
 	  	}
 	}
+/* 	function makeReal(){
+		var abc = document.getElementById('abc');
+		abc.disabled=true;
+		
+	} */
 	
 	function checkCode(){
 		  let v1 = document.getElementById('code_check').value;
@@ -62,23 +67,15 @@
 		  if(v1!=v2){
 			   document.getElementById('checkCode').style.color = "red";
 			   document.getElementById('checkCode').innerHTML = "잘못된인증번호";
-         makeNull();
 		  }else{
 			   document.getElementById('checkCode').style.color = "blue";
-			   document.getElementById('checkCode').innerHTML = "인증되었습니다."; 
-			   makeReal();
+			   document.getElementById('checkCode').innerHTML = "인증되었습니다.";
+			   let abc = document.getElementById('abc');
+			   abc.disabled=false;
+			   /* makeReal(); */
 		  }
 	}
-	function makeReal(){
-		var hiddenbutton = document.getElementById("hiddenbutton");
-		hiddenbutton.type="submit";
-	}
-	
-  	function makeNull(){
-		var hiddenbutton = document.getElementById("hiddenbutton");
-		$("#hiddenbutton").attr("disabled", true);
-	}
-  	
+
   	IMP.init("imp44175061");
   	
   	function requestPay2() {
@@ -123,6 +120,7 @@
 		              });
 		        	  opener.location.href="/project/user_support_finish?name="+name2+"&amount="+amount2;
 		              window.close();
+		              
 		          } else {
 		        	  alert('후원실패');
 		          }
@@ -171,7 +169,7 @@
 						<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=request.getAttribute("code")%>" />
 					</td>
 <!-- 					<td><input class="btn btn-outline-success" id="hiddenbutton" type="hidden" value='후원하기' onclick="requestPay2()"/></td> -->
-					<td><input class="btn btn-outline-success" id="hiddenbutton" type="button" value='후원하기' onclick="requestPay2()" disabled="disabled"/></td>
+					<td><button class="btn btn-outline-success" id="abc" onclick="requestPay2()" disabled> 후원하기</button></td>
 				</tr>
 			</table>
 		</div>

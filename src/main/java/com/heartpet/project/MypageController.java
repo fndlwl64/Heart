@@ -2,6 +2,7 @@ package com.heartpet.project;
 
 import java.io.IOException;
 
+
 import java.io.PrintWriter;
 import javax.mail.PasswordAuthentication;
 
@@ -11,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -22,21 +22,15 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
-
-import com.heartpet.action.AnimalDAO;
 import com.heartpet.action.MypageDAO;
 import com.heartpet.action.ReviewDAO;
 import com.heartpet.model.Mypage_SupportDTO;
 import com.heartpet.model.PageDTO;
-import com.heartpet.model.SupportDTO;
 import com.heartpet.model.UserDTO;
 import com.heartpet.model.WishVO;
 
@@ -49,8 +43,8 @@ class MyAuthentication extends Authenticator {
  
     public MyAuthentication(){
          
-        String id = "soopwe12@gmail.com";       // 구글 ID
-        String pw = "lgezfcfzoabqkbrg";          // 구글 비밀번호
+        String id = "norangcitron@gmail.com";       // 구글 ID
+        String pw = "pyotpmmypbygihrs";          // 구글 비밀번호
  
         // ID와 비밀번호를 입력한다.
         pa = new PasswordAuthentication(id, pw);
