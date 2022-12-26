@@ -54,23 +54,18 @@ public class MypageDAOImpl implements MypageDAO{
 		return this.sqlSession.update("user_update", dto);
 	}
 
-	@Override
-	public List<WishVO> getWishList(String id) {
-		// TODO Auto-generated method stub
-		return this.sqlSession.selectList("wish_list", id);
-	}
-
-	@Override
-	public List<WishVO> getAdoptList(String id) {
-		// TODO Auto-generated method stub
-		return this.sqlSession.selectList("adopt_list", id);
-	}
-
-	@Override
-	public List<WishVO> getAdoptComList(String id) {
-		// TODO Auto-generated method stub
-		return this.sqlSession.selectList("adopt_com_list", id);
-	}
+	/*
+	 * @Override public List<WishVO> getWishList(String id) { // TODO Auto-generated
+	 * method stub return this.sqlSession.selectList("wish_list", id); }
+	 * 
+	 * @Override public List<WishVO> getAdoptList(String id) { // TODO
+	 * Auto-generated method stub return this.sqlSession.selectList("adopt_list",
+	 * id); }
+	 * 
+	 * @Override public List<WishVO> getAdoptComList(String id) { // TODO
+	 * Auto-generated method stub return
+	 * this.sqlSession.selectList("adopt_com_list", id); }
+	 */
 
 	@Override
 	public int UserDelete(String id) {
@@ -101,6 +96,51 @@ public class MypageDAOImpl implements MypageDAO{
         map.put("keyword", keyword);
         map.put("id", id);
         return this.sqlSession.selectOne("support_count", map);
+	}
+
+	@Override
+	public List<WishVO> listWish(int startNo, int endNo, String id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+        map.put("startNo", startNo);
+        map.put("endNo", endNo);
+        map.put("id", id);
+        return this.sqlSession.selectList("wish_list", map);
+	}
+
+	@Override
+	public int listWishCount(String id) {
+		// TODO Auto-generated method stub
+		return this.sqlSession.selectOne("wish_count", id);
+	}
+
+	@Override
+	public List<WishVO> listAdopt(int startNo, int endNo, String id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+        map.put("startNo", startNo);
+        map.put("endNo", endNo);
+        map.put("id", id);
+        return this.sqlSession.selectList("adopt_list", map);
+	}
+
+	@Override
+	public int listAdoptCount(String id) {
+		// TODO Auto-generated method stub
+		return this.sqlSession.selectOne("adopt_count", id);
+	}
+
+	@Override
+	public List<WishVO> listAdoptCom(int startNo, int endNo, String id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+        map.put("startNo", startNo);
+        map.put("endNo", endNo);
+        map.put("id", id);
+        return this.sqlSession.selectList("adopt_com_list", map);
+	}
+
+	@Override
+	public int listAdoptComCount(String id) {
+		// TODO Auto-generated method stub
+		return this.sqlSession.selectOne("adopt_com_count", id);
 	}
 	
 	
