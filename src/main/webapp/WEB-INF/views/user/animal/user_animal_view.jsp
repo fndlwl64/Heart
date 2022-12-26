@@ -18,60 +18,75 @@
 <script src="${path}/resources/js/admin_list_view.js"></script>
 
 	<div class="div1">
-	
+		
+		<div class="animal_name">
+			<h3>${dto.animal_name }</h3>
+			<span>
+				<c:if test="${dto.animal_gender eq 'male'}"> ${dto.animal_species } (수컷 ♂)</c:if>
+				<c:if test="${dto.animal_gender eq 'female'}"> ${dto.animal_species } (암컷 ♀)</c:if>
+			</span>
+		</div>
+		
 		<div class="animal_info">
 			
-			<table class="table">
-				
-				<tr>
-					<th class="table-light">이름</th>
-					<td id="animal_name" colspan="3">${dto.animal_name}</td>
-				</tr>
-				
-				<tr>
-					<th class="table-light">종</th>
-					<td>${dto.animal_species }</td>
-					<th class="table-light">성별</th>
-					<td>
-					<c:if test="${dto.animal_gender eq 'male'}">수컷(♂)</c:if>
-					<c:if test="${dto.animal_gender eq 'female'}">암컷(♀)</c:if>
-					</td>
-				</tr>
-				
-				<tr>
-					<th class="table-light">중성화</th>
-					<td>${dto.animal_neutered }</td>
-					<th class="table-light">예방접종</th>
-					<td>${dto.animal_vaccination}</td>
-				</tr>
-				
-				<tr>
-					<th class="table-light">추정나이</th>
-					<td>${dto.animal_age }살</td>
-					<th class="table-light">발견장소</th>
-					<td>${dto.animal_place}</td>
-				</tr>
-				
-				<tr>
-					<th class="table-light">몸무게</th>
-					<td>${dto.animal_weight }kg</td>
-					<th class="table-light">입양상태</th>
-					<td>${dto.animal_status}</td>
-				</tr>
-				
-				<tr>
-					<td colspan="4">
-						<img src="<%=request.getContextPath() %>${dto.animal_img1 }" alt="이미지" />
-						<c:if test="${!empty dto.animal_img2 }"><img src="<%=request.getContextPath() %>${dto.animal_img2 }" alt="이미지" /></c:if>
-						<c:if test="${!empty dto.animal_img3 }"><img src="<%=request.getContextPath() %>${dto.animal_img3 }" alt="이미지" /></c:if>
-					</td>
-				</tr>
-				
-			</table>
+			<div class="animal_img">
+				<img src="<%=request.getContextPath() %>${dto.animal_img1 }" alt="대표 이미지" />	
+			</div>
 			
-			<button class="btn btn-dark btn_list" onclick="location.href='${path}/user_cat_list'"><i class="bi bi-card-list"></i> 목록</button>
-			
+			<div class="info_box">
+				<div class="row">	
+					<div class="col">	
+						<label>중성화</label>
+						<span>
+							<c:if test="${dto.animal_neutered eq 'Y'}"> O</c:if>
+							<c:if test="${dto.animal_neutered eq 'N'}"> X</c:if>
+						</span><br />
+						
+						<label>예방접종</label>
+						<span>
+							<c:if test="${dto.animal_vaccination eq 'Y'}"> O</c:if>
+							<c:if test="${dto.animal_vaccination eq 'N'}"> X</c:if>
+						</span><br />
+						
+						<label>추정나이</label>
+						<span> ${dto.animal_age }살</span><br />
+					</div>
+					
+					<div class="col">	
+						<label>발견장소</label>
+						<span> ${dto.animal_place }</span><br />
+						
+						<label>크기</label>
+						<span> ${dto.animal_size }</span><br />
+						
+						<label>무게</label>
+						<span> ${dto.animal_weight }kg</span><br />
+					</div>
+				
+					<div class="detail">
+						<textarea cols="40" rows="5">${dto.animal_caution }</textarea>
+					</div>
+				</div>
+			</div>
+
 		</div>
+		
+		<div class="more_images">
+			<c:if test="${!empty dto.animal_img2 && !empty dto.animal_img3}">
+				<div class="img_2">
+					<img src="<%=request.getContextPath() %>${dto.animal_img2 }" alt="상세 이미지 1" />
+					<img src="<%=request.getContextPath() %>${dto.animal_img3 }" alt="상세 이미지 2" />
+				</div>
+			</c:if>
+			
+			<c:if test="${!empty dto.animal_img2 && empty dto.animal_img3}">
+				<div class="img_1">
+					<img src="<%=request.getContextPath() %>${dto.animal_img2 }" alt="상세 이미지 1" />
+				</div>
+			</c:if>				
+		</div>
+		
+		<button class="btn btn-dark btn_list" onclick="location.href='${path}/user_cat_list'"><i class="bi bi-card-list"></i> 목록</button>
 	
 	</div>
 
