@@ -160,8 +160,9 @@ body {
 .qna-content .content-body {
     display: flex;
     padding: 1rem 2rem;
-    justify-content: center;
+    justify-content: flex-start;
     flex-direction: column;
+    min-height: 400px;
 }
 
 .qna-content .content-body .qna-image {
