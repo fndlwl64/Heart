@@ -178,6 +178,12 @@ $(function() {
 				'border-bottom': '1px solid #FB79A0'
 			});
 			$("#join_btn").attr("disabled", true);
+		}else if(id.match("admin")) {
+			$("#join_id").html("<i class='bi bi-exclamation-circle'></i><br><font style='color:#FB79A0; font-size:13px'>  'admin'은 들어갈 수 없습니다. 다른 아이디를 입력해주세요. </font>");
+			$("#input_id").css({
+				'border-bottom': '1px solid #FB79A0'
+			});
+			$("#join_btn").attr("disabled", true);
 		}else {
 			if(id_pattern.test(id)) {
 				$.ajax({			
