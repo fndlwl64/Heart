@@ -21,4 +21,5 @@ public interface AnimalDAO {
     public Map<String, Object> animalName(int animal_no);
     public int count(String animal_tag);
     public int countPaging(AnimalDTO dto, String keyword,int startWeight, int endWeight);
+    
 }
