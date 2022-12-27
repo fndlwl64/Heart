@@ -14,6 +14,7 @@
 <c:set var="sort" value="${sort }" />
 
 
+
 <!-- 좋아요 -->
 <c:set var="wishCheck" value="${wishCheck }" />
 <c:set var="user_id" value='<%=(String) session.getAttribute("session_id")%>' />
@@ -175,11 +176,12 @@
 								class="img-fluid rounded mx-auto img-frame"
 								src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a> --%>
 							<div class="mainContent_mainImgWrapper__DJlMe rounded back_image"
-								style="background-image : url(<%=request.getContextPath()%>${dto.getAnimal_img1()});" data-value = "<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}">
-		 					<div>
+								style="background-image : url(<%=request.getContextPath()%>${dto.getAnimal_img1()});" data-value = "<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}">								
+							</div>
+							<div>
 								<span>
 								<c:if test="${not empty user_id }">
-									<button class="btn" id="wish" onclick="wishAdd(${ dto.animal_no }, '${ user_id }', '${ path }')">
+									<button class="btn" id="${ dto.animal_no }" onclick="wishAdd(${ dto.animal_no }, '${ user_id }', '${ path }')">
 										<c:if test="${wishCheck ne 0 }">
 											<i class="bi bi-star-fill text-warning"></i>
 										</c:if>
@@ -189,7 +191,6 @@
 									</button>
 								</c:if>
 								</span>
-							</div>								
 							</div>
 							<div class="mainContent_mainContent__w_Buk">
 								<!-- href=request.getContextPath()h() %>/user_animal_content?no=${dto.getAnimal_no()}" -->
@@ -388,23 +389,33 @@
 				 }); */
 				
 			function wishAdd(animalNo, userId, path) {
+				let wishDTO = {
+					"wish_petno" : animalNo,
+					"wish_userid" : userId
+				};
 				$.ajax({
 					contentType : "application/x-www-form-urlencoded;charset=UTF-8",
-					url : path + "/wish_insert",
+					url : path + "/wish", /* path + "/wish_insert", */
 					type : "POST",
-					data : {
-						animal_no : animalNo,
-						user_id : userId
-					},
-					dataType: "text",
+					data : /* { */
+						JSON.stringify(wishDTO),
+						/* animal_no : animalNo,
+						user_id : userId */
+					/* }, */
+					contentType : "application/json",
+					/* dataType: "text", */
 					success : function(data) {
-						console.log(3, data);
 						if (data) { 
-							$("#wish").empty();
-							$("#wish").append('<i class="bi bi-star-fill text-warning"></i>');
+							/* $("#wish").empty();
+							$("#wish").append('<i class="bi bi-star-fill text-warning"></i>'); */
+							$('#'+ animalNo).empty();
+							$('#'+ animalNo).append('<i class="bi bi-star-fill text-warning"></i>');
+							
 						} else { 
-							$("#wish").empty();
-							$("#wish").append('<i class="bi bi-star"></i>');
+							/* $("#wish").empty();
+							$("#wish").append('<i class="bi bi-star"></i>'); */
+							$('#'+ animalNo).empty();
+							$('#'+ animalNo).append('<i class="bi bi-star"></i>');
 						}
 					},
 			       error : function(e) {

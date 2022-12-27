@@ -109,6 +109,7 @@ public class AnimalController {
     		endWeight = 40;
     	}
 
+
 		
 		totalRecord = animalDAO.countPaging(animalDTO, keyword,startWeight,endWeight);		
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);    	
@@ -116,7 +117,7 @@ public class AnimalController {
     	
     	List<Integer> wishList = new ArrayList<Integer>();
     	for(int i=0; i<animalList.size(); i++) {
-    		wishList.add(wishDAO.selectWish(animalList.get(i).getAnimal_no(), session_id));
+    	  wishList.add(wishDAO.selectWish(animalList.get(i).getAnimal_no(), session_id));
     	}
 
     	model.addAttribute("total", totalRecord);
@@ -380,12 +381,10 @@ public class AnimalController {
 		System.out.println("여기22222222222222"+user_id);
 		int check = wishDAO.selectWish(animal_no, user_id);
 		if(check > 0) {
-		      System.out.println("여기\"여기22222222222222\"+check"+check);
+
 			wishDAO.deleteWish(animal_no, user_id);
 			return 0;
 		}else {
-            System.out.println("여기\"여기22222222222222\"+delete"+check);
-
 			wishDAO.insertWish(animal_no, user_id);
 			return 1;
 		}
