@@ -17,7 +17,7 @@ $(document).ready(function() {
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
-        }
+        },
     });
     
     const cat_swiper = new Swiper(".catSwiper", {
@@ -36,28 +36,26 @@ $(document).ready(function() {
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
-        }
+        },
     });
 
     // reviewSwiper
     const review_swiper = new Swiper(".reviewSwiper", {
-        effect: "coverflow",
-        grabCursor: true,
+        slidesPerView: 3,
+        spaceBetween: 30,
         centeredSlides: true,
         autoplay: {
-            delay: 3000,
+            delay: 10000,
             disableOnInteraction: false,
         },
-        slidesPerView: "auto",
-        coverflowEffect: {
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows: false,
-        },
+        loop: true,
         pagination: {
             el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
         },
     });
 
