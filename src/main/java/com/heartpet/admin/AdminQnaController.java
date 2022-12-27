@@ -238,7 +238,7 @@ public class AdminQnaController {
             }
         } else {        	
     	    FileUploadImage upload = new FileUploadImage();  
-    	    List<String> boardImgs =  upload.uploadFile(request, board_img, "qna-admin", 2);
+    	    List<String> boardImgs =  upload.uploadFile(request, board_img, "qna-reply", 2);
 
         	qnaDto.setBoard_img1(boardImgs.get(0));
         	qnaDto.setBoard_img2(boardImgs.get(1));
@@ -311,7 +311,7 @@ public class AdminQnaController {
 
             // 파일 업데이트
             FileUploadImage upload = new FileUploadImage();  
-            List<String> updateFile = upload.updateFile(request, board_img, "qna", origin_names, 2);
+            List<String> updateFile = upload.updateFile(request, board_img, "qna-reply", origin_names, 2);
             
             updateDto.setBoard_img1(updateFile.get(0));
             updateDto.setBoard_img2(updateFile.get(1));        	
