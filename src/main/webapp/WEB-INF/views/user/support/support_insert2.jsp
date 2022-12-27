@@ -15,7 +15,9 @@
 <link rel="stylesheet" href="${path}/resources/css/support.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<style> @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap%27); </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<style> @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap'); </style>
 <script type="text/javascript">
 	function checkNumber(event) {
 		  if(event.key >= 0 && event.key <= 9) {
@@ -140,30 +142,36 @@
 <body>
 	<div class="div_sup_insert" align="center">
 		<img class="sup_img" src="resources/image/support2.png">
-		<br><br><br><br>
-		<div>
-		<h2>후원정보 및 금액</h2>
+		<div class="support-title">
+			<h2>HeartPet을 후원해주세요</h2>
+			<p>하트펫은 다양한 방법으로 유기동물을 후원하고 있습니다.</p>
+			<p>하트펫과 함께 유기동물을 후원해주세요.</p>
+			<h6><i class="bi bi-card-checklist"></i> 현재 진행 중인 캠페인 </h6>
 			<ul>
-				<li class="support_li">모금상품</li>
 				<li class="support_li">세계자연기금 후원(유기동물 캠페인)</li>
 			</ul>
 		</div>
-		<div>
+		<div class="support-body">
 			<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>" />
 			<table class="sup_table">
 				<tr>
+					<th>이름</th>
 					<td><input class="form-control" id="sup_name" type="text" placeholder="이름"></td>
+					<th>전화번호</th>
 					<td><input class="form-control" id="sup_phone" type="text" placeholder="010-0000-0000"></td>
 				</tr>
 				<tr>
+					<th>이메일</th>
 					<td><input class="form-control" id="sup_email" name="receiver" type="text" placeholder="이메일입력"></td>
 					<td><button class="btn btn-outline-success" onclick="ajax()">이메일인증</button></td>
 				</tr>
 				<tr>
+					<th>인증번호</th>
 					<td><input class="form-control" type="text" id="code" name="code" onkeyup="checkCode()" placeholder="인증번호를 입력하세요."/></td>
 					<td><div id="checkCode"></div></td>
 				</tr>
 				<tr>
+					<th>후원금액</th>
 					<td>
 						<input class="form-control" id="support" type="text" placeholder="후원금액입력" onkeypress='return checkNumber(event)'>
 						<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=request.getAttribute("code")%>" />

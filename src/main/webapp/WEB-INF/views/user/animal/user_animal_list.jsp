@@ -15,7 +15,6 @@
 <c:set var="wishList" value="${ wishList }" />
 
 
-
 <!-- 좋아요 -->
 <c:set var="wishCheck" value="${wishCheck }" />
 <c:set var="user_id" value='<%=(String) session.getAttribute("session_id")%>' />
@@ -176,22 +175,22 @@
 								href="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}"><img
 								class="img-fluid rounded mx-auto img-frame"
 								src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a> --%>
-							<div class="mainContent_mainImgWrapper__DJlMe rounded back_image"
-								style="background-image : url(<%=request.getContextPath()%>${dto.getAnimal_img1()}); z-index: 2;" data-value = "<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}">								
-								<div style="z-index: 1;">
-									<span>
-									<c:if test="${not empty user_id }">
-										<button class="btn" id="${ dto.animal_no }" onclick="wishAdd(${ dto.animal_no }, '${ user_id }', '${ path }')">
-											<c:if test="${wishList[status.index] != 0 }">
-												<i class="bi bi-star-fill text-warning"></i>
-											</c:if>
-											<c:if test="${wishList[status.index] == 0 }">
-												<i class="bi bi-star"></i>
-											</c:if>
-										</button>
-									</c:if>
-									</span>
-								</div>
+							<div class="mainContent_mainImgWrapper__DJlMe rounded back-image"
+								style="background-image : url(<%=request.getContextPath()%>${dto.getAnimal_img1()});" onclick="location.href='<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}'">								
+							</div>
+							<div class="wish-button">
+								<span>
+								<c:if test="${not empty user_id }">
+									<button class="btn" id="${ dto.animal_no }" onclick="wishAdd(${ dto.animal_no }, '${ user_id }', '${ path }')">
+										<c:if test="${wishList[status.index] != 0 }">
+											<i class="bi bi-star-fill text-warning"></i>
+										</c:if>
+										<c:if test="${wishList[status.index] == 0 }">
+											<i class="bi bi-star"></i>
+										</c:if>
+									</button>
+								</c:if>
+								</span>
 							</div>
 							<div class="mainContent_mainContent__w_Buk">
 								<!-- href=request.getContextPath()h() %>/user_animal_content?no=${dto.getAnimal_no()}" -->
