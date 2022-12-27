@@ -12,6 +12,7 @@
 <c:set var="animalDTO" value="${ animalDTO }" />
 <c:set var="keyword" value="${keyword }" />
 <c:set var="sort" value="${sort }" />
+<c:set var="wishList" value="${ wishList }" />
 
 
 
@@ -165,7 +166,7 @@
 	
 		<div class="main_mainGridContainer__xl9yt">
 			<c:if test="${not empty animalList}">
-				<c:forEach var="dto" items="${animalList}">
+				<c:forEach var="dto" items="${animalList}" varStatus="status">
 					<div class="mainContent_mainContentBox__shdST">
 						<!-- d-flex flex-row text-center  p-2 alert-primary alert alert-primary animal_wrap -->
 						<div class="mainContent_mainImgWrapper__DJlMe">
@@ -176,21 +177,21 @@
 								class="img-fluid rounded mx-auto img-frame"
 								src="<%=request.getContextPath()%>/resources/upload/${dto.getAnimal_img1()}"></a> --%>
 							<div class="mainContent_mainImgWrapper__DJlMe rounded back_image"
-								style="background-image : url(<%=request.getContextPath()%>${dto.getAnimal_img1()});" data-value = "<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}">								
-							</div>
-							<div>
-								<span>
-								<c:if test="${not empty user_id }">
-									<button class="btn" id="${ dto.animal_no }" onclick="wishAdd(${ dto.animal_no }, '${ user_id }', '${ path }')">
-										<c:if test="${wishCheck ne 0 }">
-											<i class="bi bi-star-fill text-warning"></i>
-										</c:if>
-										<c:if test="${wishCheck eq 0 }">
-											<i class="bi bi-star"></i>
-										</c:if>
-									</button>
-								</c:if>
-								</span>
+								style="background-image : url(<%=request.getContextPath()%>${dto.getAnimal_img1()}); z-index: 2;" data-value = "<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}">								
+								<div style="z-index: 1;">
+									<span>
+									<c:if test="${not empty user_id }">
+										<button class="btn" id="${ dto.animal_no }" onclick="wishAdd(${ dto.animal_no }, '${ user_id }', '${ path }')">
+											<c:if test="${wishList[status.index] != 0 }">
+												<i class="bi bi-star-fill text-warning"></i>
+											</c:if>
+											<c:if test="${wishList[status.index] == 0 }">
+												<i class="bi bi-star"></i>
+											</c:if>
+										</button>
+									</c:if>
+									</span>
+								</div>
 							</div>
 							<div class="mainContent_mainContent__w_Buk">
 								<!-- href=request.getContextPath()h() %>/user_animal_content?no=${dto.getAnimal_no()}" -->
@@ -203,8 +204,8 @@
 										<c:if test="${ dto.animal_status eq '입양 대기' }">class="badge rounded-pill text-bg-warning"</c:if>
 										<c:if test="${ dto.animal_status eq '입양 완료' }">class="badge rounded-pill text-bg-secondary"</c:if>
 										>${dto.animal_status }</span>
-										<input type="hidden" value="${dto.animal_no }" id="animal_number222"/>
-										<input type="hidden" value="<%=request.getContextPath()%>/wish" id="linkwish222">
+										<input type="hidden" value="${dto.animal_no }" id="animal_number"/>
+										<input type="hidden" value="<%=request.getContextPath()%>/wish" id="linkwish">
 									</div>
 									
 								</a>
