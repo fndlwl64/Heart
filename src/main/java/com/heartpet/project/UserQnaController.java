@@ -101,10 +101,13 @@ public class UserQnaController {
 
         // session_id
         String session_id = null;
+        int session_grade = 0;
         if (session.getAttribute("session_id") != null) {
             session_id = (String) session.getAttribute("session_id");
+            session_grade = (Integer) session.getAttribute("session_grade");
         } else {
             session_id = (String) session.getAttribute("session_admin_id");
+            session_grade = (Integer) session.getAttribute("session_admin_grade");
         }
 
         QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
@@ -118,9 +121,9 @@ public class UserQnaController {
         System.out.println("번호 " + board_parentNo);
 
         // 유저일 때
-        if (!session_id.equals("admin")) { // 유저일 때
+        if (session_grade != 1) { // 유저일 때
             if (qnaContent.getBoard_secret().equals("Y")) { // 비밀글이고
-                if (qnaContent.getBoard_id().equals("admin")) { // 작성자 아이디가 admin인데
+                if (qnaContent.getBoard_id().contains("admin")) { // 작성자 아이디가 admin 포함이면
                     QnaDTO parentContent = this.qnaDAO.contentQna(board_parentNo);
                     System.out.println("부모글 작성자 : " + parentContent.getBoard_id());
                     System.out.println("session_id : " + session_id);
