@@ -155,34 +155,37 @@
 			<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>" />
 			<table class="sup_table">
 				<tr>
-					<th>이름</th>
-					<td><input class="form-control" id="sup_name" type="text" placeholder="이름"></td>
-					<th>전화번호</th>
-					<td><input class="form-control" id="sup_phone" type="text" placeholder="010-0000-0000"></td>
+					<th width="20%">이름</th>
+					<td width="30%"><input class="form-control" id="sup_name" type="text" placeholder="Name"></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr>					
+					<th width="12.5%">전화번호</th>
+					<td colspan="2" width="37.5%"><input class="form-control" id="sup_phone" type="text" placeholder="010-0000-0000"></td>
+					<td></td>
 				</tr>
 				<tr>
 					<th>이메일</th>
-					<td><input class="form-control" id="sup_email" name="receiver" type="text" placeholder="이메일입력"></td>
-					<td><button class="btn btn-outline-success" onclick="ajax()">이메일인증</button></td>
+					<td colspan="2"><input class="form-control" id="sup_email" name="receiver" type="text" placeholder="E-mail"></td>
+					<td><button class="btn btn-outline-success btn-sm" onclick="ajax()">인증하기</button></td>
 				</tr>
 				<tr>
 					<th>인증번호</th>
-					<td><input class="form-control" type="text" id="code" name="code" onkeyup="checkCode()" placeholder="인증번호를 입력하세요."/></td>
-					<td><div id="checkCode"></div></td>
+					<td><input class="form-control" type="text" id="code" name="code" onkeyup="checkCode()" placeholder="Enter the code"/></td>
+					<td colspan="2"><div id="checkCode"></div></td>
 				</tr>
 				<tr>
 					<th>후원금액</th>
 					<td>
-						<input class="form-control" id="support" type="text" placeholder="후원금액입력" onkeypress='return checkNumber(event)'>
+						<input class="form-control" id="support" type="text" placeholder="Money" onkeypress='return checkNumber(event)'>
 						<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=request.getAttribute("code")%>" />
 					</td>
 <!-- 					<td><input class="btn btn-outline-success" id="hiddenbutton" type="hidden" value='후원하기' onclick="requestPay2()"/></td> -->
-					<td><button class="btn btn-outline-success" id="abc" onclick="requestPay2()" disabled> 후원하기</button></td>
+					<td width="20%"><button class="btn btn-outline-success btn-sm" id="abc" onclick="requestPay2()" disabled> 후원하기</button></td>
+					<td></td>
 				</tr>
 			</table>
 		</div>
-		
 	</div>
-
 </body>
 </html>

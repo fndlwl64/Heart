@@ -102,8 +102,26 @@ body {
 	width: 904px;
 }
 
-.div_sup_insert .sup_table{	
+/* 테이블 */
+.support-body {
+	padding: 1rem;
+	background-color: #f8f9fa;	
+	border-radius: 10px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+
+.div_sup_insert .sup_table {	
 	width: 100%;
+	vertical-align: middle;
+}
+
+.support-body .sup_table tr th, td {
+	padding: 0.2rem;
+}
+
+.support-body .sup_table tr th {
+	padding-left: 1rem;
+	padding-bottom: 0.5rem;
 }
 
 .div_finish {
@@ -132,7 +150,3 @@ body {
 	font-weight: bold;
 }
 
-.div_sup_insert .sup_table {
-	border-collapse: separate;
-	border-spacing: 30px; 50px;
-}
