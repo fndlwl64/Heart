@@ -160,7 +160,7 @@
 					<td colspan="2"></td>
 				</tr>
 				<tr>					
-					<th width="12.5%">전화번호</th>
+					<th>전화번호</th>
 					<td colspan="2" width="37.5%"><input class="form-control" id="sup_phone" type="text" placeholder="010-0000-0000"></td>
 					<td></td>
 				</tr>
@@ -182,7 +182,7 @@
 					</td>
 <!-- 					<td><input class="btn btn-outline-success" id="hiddenbutton" type="hidden" value='후원하기' onclick="requestPay2()"/></td> -->
 					<td width="20%"><button class="btn btn-outline-success btn-sm" id="abc" onclick="requestPay2()" disabled> 후원하기</button></td>
-					<td></td>
+					<td width="20%"></td>
 				</tr>
 			</table>
 		</div>
