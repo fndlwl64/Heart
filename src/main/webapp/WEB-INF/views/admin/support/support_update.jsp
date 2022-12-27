@@ -22,11 +22,19 @@
 				<td><input name="support_date" class="form-control" type="text" value="${dto.getSupport_date().substring(0,10)}"></td>
 			</tr>
 		</table>
-		<br>
+		
 		<input type="hidden" name="support_no" value="${dto.getSupport_no() }">
-		<button type="button" class="btn btn-secondary mx-1" onclick="location.href='${path}/support_list'"><i class="bi bi-card-list"></i> 목록</button>
-        <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
-        <button id="update_btn" type="submit" class="btn btn-dark mx-1"><i class="bi bi-save"></i> 등록</button>
+		
+		<div class="btns">
+			<div>
+				<button type="button" class="btn btn-dark mx-1" onclick="location.href='${path}/support_list'"><i class="bi bi-card-list"></i> 목록</button>
+			</div>
+			
+			<div>
+		        <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
+		        <button id="update_btn" type="submit" class="btn btn-primary mx-1"><i class="bi bi-save"></i> 등록</button>
+	        </div>
+        </div>
 	</form>
 </div>
 </body>

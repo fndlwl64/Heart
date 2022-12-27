@@ -192,6 +192,26 @@
 								</c:if>
 								</span>
 							</div>
+							<c:if test="${empty user_id }">
+							<div class="mainContent_mainContent__w_Buk" style="margin-top: 0.5rem;">
+								<!-- href=request.getContextPath()h() %>/user_animal_content?no=${dto.getAnimal_no()}" -->
+								<a class="animal-content-a" href="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}">
+									<div class="mainContent_mainTitle__8iW62">${dto.getAnimal_name() } 
+										<c:if test="${ dto.animal_gender eq 'male' }"><i class="bi bi-gender-male"></i></c:if>
+										<c:if test="${ dto.animal_gender eq 'female' }"><i class="bi bi-gender-female"></i></c:if>
+										<span class="animal-species">${ dto.animal_species }</span>
+										<span <c:if test="${ dto.animal_status eq '입양 가능' }">class="badge rounded-pill text-bg-primary"</c:if>
+										<c:if test="${ dto.animal_status eq '입양 대기' }">class="badge rounded-pill text-bg-warning"</c:if>
+										<c:if test="${ dto.animal_status eq '입양 완료' }">class="badge rounded-pill text-bg-secondary"</c:if>
+										>${dto.animal_status }</span>
+										<input type="hidden" value="${dto.animal_no }" id="animal_number"/>
+										<input type="hidden" value="<%=request.getContextPath()%>/wish" id="linkwish">
+									</div>
+
+								</a>
+							</div>
+							</c:if>
+							<c:if test="${!empty user_id }">
 							<div class="mainContent_mainContent__w_Buk">
 								<!-- href=request.getContextPath()h() %>/user_animal_content?no=${dto.getAnimal_no()}" -->
 								<a class="animal-content-a" href="<%=request.getContextPath() %>/user_animal_content?no=${dto.getAnimal_no()}">
@@ -206,9 +226,10 @@
 										<input type="hidden" value="${dto.animal_no }" id="animal_number"/>
 										<input type="hidden" value="<%=request.getContextPath()%>/wish" id="linkwish">
 									</div>
-									
+
 								</a>
 							</div>
+							</c:if>
 						</div>
 					</div>
 				</c:forEach>

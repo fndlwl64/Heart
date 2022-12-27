@@ -44,6 +44,8 @@ body {
 .animal_button {
 	margin: 10px;
 	width: 70%;
+	display: flex;
+	justify-content: space-between;
 }
 
 .animal_content {

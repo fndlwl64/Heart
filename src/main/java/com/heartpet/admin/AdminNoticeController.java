@@ -2,14 +2,17 @@ package com.heartpet.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -128,11 +131,41 @@ public class AdminNoticeController {
     }
 	
 	@RequestMapping("/notice_update_ok")
-    public void notice_update_ok(@RequestParam("files") List<MultipartFile> files, NoticeDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void notice_update_ok(@RequestParam("files") List<MultipartFile> notice_img, 
+    		@RequestParam(value = "notice_image1_delete", required = false, defaultValue = "") String notice_image1_delete, 
+            @RequestParam(value = "notice_image2_delete", required = false, defaultValue = "") String notice_image2_delete,
+    		@Valid NoticeDTO dto, HttpServletRequest request, HttpServletResponse response) throws IOException {
         
-		FileUploadImage upload = new FileUploadImage();
-		dto = upload.uploadNoticeImg(request, files, "notice", dto);
-		int check = this.noticedao.noticeupdate(dto);
+		//FileUploadImage upload = new FileUploadImage();
+		//dto = upload.uploadNoticeImg(request, files, "notice", dto);
+		
+		int totalFileCount = 2;
+		NoticeDTO noticeContent = this.noticedao.getNotice(dto.getNotice_no());
+		
+		// 기존 사진 삭제 checkbox 클릭 시 
+        List<String> only_delete = new ArrayList<String>();
+        if(notice_image1_delete.equals("Y")) { 
+            only_delete.add(noticeContent.getNotice_img1()); 
+            noticeContent.setNotice_img1("");
+        }
+        if(notice_image2_delete.equals("Y")) { 
+            only_delete.add(noticeContent.getNotice_img2()); 
+            noticeContent.setNotice_img2("");
+        }         
+        
+     // 기존 이미지 이름   
+        List<String> origin_names = new ArrayList<String>();
+        origin_names.add(noticeContent.getNotice_img1());
+        origin_names.add(noticeContent.getNotice_img2());
+        
+     // 파일 업데이트
+        FileUploadImage upload = new FileUploadImage(); 
+        List<String> updateFile = upload.updateFile(request, notice_img, "notice", origin_names, totalFileCount);
+		
+        dto.setNotice_img1(updateFile.get(0));
+        dto.setNotice_img2(updateFile.get(1));
+        
+        int check = this.noticedao.noticeupdate(dto);
 		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
