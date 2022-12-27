@@ -4,6 +4,7 @@
 <jsp:include page="../../include/user_header.jsp" />
 <script src="resources/js/mypage.js"></script>
 <script src="resources/js/signin_up.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="dto" value="${uList }"/>
 <link rel="stylesheet" href="resources/css/mypage.css"/>
