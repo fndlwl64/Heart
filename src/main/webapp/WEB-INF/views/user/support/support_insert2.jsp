@@ -140,7 +140,7 @@
 	} 
 %>
 <body>
-	<div class="div_sup_insert" align="center">
+	<div class="div_sup_insert">
 		<img class="sup_img" src="resources/image/support2.png">
 		<div class="support-title">
 			<h2>HeartPet을 후원해주세요</h2>

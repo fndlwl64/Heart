@@ -15,7 +15,9 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <c:set var="dto" value="${uList }"/>
-<style> @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap%27); </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<style> @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap'); </style>
 <script type="text/javascript">
 	function checkNumber(event) {
 		  if(event.key >= 0 && event.key <= 9) {
@@ -220,27 +222,34 @@
 <body>
 	<div class="div_sup_insert">
 		<img class="sup_img" src="resources/image/support2.png">
-		<div align="center">
-		<br><br><br><br>
-		<h2>후원금액</h2>
+		<div class="support-title">
+			<h2>HeartPet을 후원해주세요</h2>
+			<p>하트펫은 다양한 방법으로 유기동물을 후원하고 있습니다.</p>
+			<p>하트펫과 함께 유기동물을 후원해주세요.</p>
+			<h6><i class="bi bi-card-checklist"></i> 현재 진행 중인 캠페인 </h6>
 			<ul>
-				<li class="support_li">모금상품</li>
 				<li class="support_li">세계자연기금 후원(유기동물 캠페인)</li>
 			</ul>
 		</div>
-		<div class="btn-group" align="center">
-			<ul class="support_ul">
-				<li class="support_li"><button class="btn btn-outline-success" onclick="requestPay20000()">20,000</button></li>
-				<li class="support_li"><button class="btn btn-outline-success" onclick="requestPay50000()">50,000</button></li>
-				<li class="support_li"><button class="btn btn-outline-success" onclick="requestPay70000()">70,000</button></li>
-				<li class="support_li"><button class="btn btn-outline-success" onclick="requestPay100000()">100,000</button></li>
-			</ul>
-		</div>
-		<div class="btn-group" align="center">
-			<ul class="support_ul">
-				<li class="support_li"><input class="form-control" id="support" type="text" placeholder="후원금액입력" onkeypress='return checkNumber(event)'></li>
-				<li class="support_li"><button class="btn btn-outline-success" onclick="requestPay1()">후원하기</button></li>
-			</ul>
+		<div class="support-body">
+			<div class="btn-group">
+				<h6><i class="bi bi-piggy-bank"></i> 금액 선택하기</h6>
+				<div class="btn-ul">
+					<ul class="support_ul">
+						<li class="support_li"><button class="btn btn-outline-success btn-sm" onclick="requestPay20000()">20,000 원</button></li>
+						<li class="support_li"><button class="btn btn-outline-success btn-sm" onclick="requestPay50000()">50,000 원</button></li>
+						<li class="support_li"><button class="btn btn-outline-success btn-sm" onclick="requestPay70000()">70,000 원</button></li>
+						<li class="support_li"><button class="btn btn-outline-success btn-sm" onclick="requestPay100000()">100,000 원</button></li>
+					</ul>
+				</div>
+			</div>
+			<div class="btn-group">
+				<h6><i class="bi bi-piggy-bank-fill"></i> 금액 입력하기</h6>
+				<ul class="support_ul">
+					<li class="support_li money-input"><input class="form-control form-control-sm" id="support" type="text" placeholder="Money" onkeypress='return checkNumber(event)'>&nbsp;원</li>
+					<li class="support_li"><button class="btn btn-outline-success btn-sm" onclick="requestPay1()">후원하기</button></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </body>

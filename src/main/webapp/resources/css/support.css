@@ -29,6 +29,8 @@ body {
 	width: 70%;
 	margin-top: 2rem;
 	margin-bottom: 1rem;
+	margin-left: auto;
+	margin-right: auto;
 	text-align: left;
 }
 .support-title h2 {
@@ -53,7 +55,45 @@ body {
 }
  
 .div_sup_insert .btn-group {
-	display: block;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	width: 100%;
+	
+}
+
+.btn-group h6 {
+	margin-bottom: 0;
+}
+
+.btn-group .btn-ul {
+	display: flex;
+	width: 100%;
+}
+
+.div_sup_insert .btn-group .support_ul {
+	list-style: none;
+	display: inherit;
+	margin-bottom: 0;
+	padding-left: 1rem;
+	align-items: center;
+}
+
+.div_sup_insert .btn-group .support_ul .support_li {
+	margin-left: 2rem;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+.support_li:first-child {
+	margin-left: 0 !important;
+}
+
+.support_ul .money-input {
+	display: inherit;
+	width: 50%;
+	align-items: center;
 }
 
 .div_sup_insert .support-body {
@@ -98,6 +138,11 @@ body {
  	clear: right;
 }
 
+/* 후원하기 header */
+.div_sup_insert {
+	text-align: center;
+}
+
 .div_sup_insert .sup_img {
 	width: 904px;
 }
@@ -108,11 +153,14 @@ body {
 	background-color: #f8f9fa;	
 	border-radius: 10px;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .div_sup_insert .sup_table {	
 	width: 100%;
 	vertical-align: middle;
+
 }
 
 .support-body .sup_table tr th, td {
