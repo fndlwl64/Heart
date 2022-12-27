@@ -178,13 +178,10 @@ public class UserReviewController {
 		    System.out.println("reviewFiles.size() : " + reviewFiles.size());
 		    
 		    for(int i=0; i<reviewFiles.size(); i++) {
-		        System.out.println("i : " + i);
 		        if(reviewFiles.get(i) != "") {
-		              System.out.println("여기는 몇 번 들어왔나 : " + reviewFiles.get(i));
 		            String mimeType = typeCheck.contentType(reviewFiles.get(i)); 
 		            // null 먼저 골라내기
 		            if(mimeType.contains("video")) {
-		                System.out.println("video type : "+mimeType.contains("video"));
 		                reviewDto.setReview_video(reviewFiles.get(i));		    	    
 		            }else if(mimeType.contains("image")) { 
 		                switch(i) { 
