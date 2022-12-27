@@ -75,6 +75,10 @@
 	width: 70%;
 }
 
+.notice-board .notice-main-table td {
+	text-align: center;
+}
+
 .notice-board .notice-main-table .notice-table-title {
 	text-decoration: none;
 	text-align: left;

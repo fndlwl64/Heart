@@ -326,6 +326,10 @@ body {
 	color: red;
 }
 
+.container .lists .searched_list .notice_title {
+	text-align: left;
+} 
+
 /* admin/ _list.jsp -> 검색 폼 */
 .container .search_form {
 }

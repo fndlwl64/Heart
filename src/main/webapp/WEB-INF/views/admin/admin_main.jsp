@@ -43,7 +43,7 @@
 			<ul>	
 				<li> <a href="${path}/notice_list">공지사항관리</a> </li>
 				<li> <a href="${path}/admin_qna_list">Q&A관리</a> </li>
-				<li> <a href="${path}/admin_fnq_list">FNQ관리</a> </li>
+				<li> <a href="${path}/admin_fnq_list">FAQ관리</a> </li>
 				<li> <a href="${path}/admin_review_list">후기관리</a> </li>
 			</ul>
 			
