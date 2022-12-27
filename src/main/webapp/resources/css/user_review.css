@@ -172,9 +172,10 @@ body {
 
 .review-content .content-body {
     display: flex;
+    flex-wrap: wrap;
     padding: 1rem 2rem;
     min-height: 400px;
-    align-content: center;
+    align-content: flex-start;
     justify-content: center;
     flex-direction: column;
 }
@@ -190,7 +191,7 @@ body {
 .review-content .content-body .review-video {
     overflow: hidden;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .review-content .content-body .review-text {

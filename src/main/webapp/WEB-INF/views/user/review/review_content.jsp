@@ -60,23 +60,23 @@
                 <div id="content-scroll">
                     <div class="content-body">
                         <c:if test="${ !empty list.review_img1 }">
-	                        <div class="review-image shadow-sm my-2 bg-body rounded">
-					             <p class="mt-2"><img src="${ path }${ list.review_img1 }" class="rounded mx-auto d-block" style="max-height: 300px;" alt="review_img" /></p>      
+	                        <div class="review-image my-2 bg-body rounded">
+					             <p class="mt-2"><img src="${ path }${ list.review_img1 }" class="rounded d-block" style="max-width: 60%;" alt="review_img" /></p>      
 							</div>
 						</c:if>  
 						<c:if test="${ !empty list.review_img2 }">
-	                        <div class="review-image shadow-sm my-2 bg-body rounded">						
-					             <p class="mt-2"><img src="${ path }${ list.review_img2 }" class="rounded mx-auto d-block" style="max-height: 300px;" alt="review_img" /></p>      
+	                        <div class="review-image my-2 bg-body rounded">						
+					             <p class="mt-2"><img src="${ path }${ list.review_img2 }" class="rounded d-block" style="max-width: 60%;" alt="review_img" /></p>      
 	                        </div>
 						</c:if>
 						<c:if test="${ !empty list.review_img3 }">
-	                        <div class="review-image shadow-sm my-2 bg-body rounded">   
-					             <p class="mt-2"><img src="${ path }${ list.review_img3 }" class="rounded mx-auto d-block" style="max-height: 300px;" alt="review_img" /></p>      
+	                        <div class="review-image my-2 bg-body rounded">   
+					             <p class="mt-2"><img src="${ path }${ list.review_img3 }" class="rounded d-block" style="max-width: 60%;" alt="review_img" /></p>      
 	                        </div>
 						</c:if>
                         <c:if test="${ !empty list.review_video }">
                             <div class="review-video my-2">
-                                <p class="mt-2"><video src="${ path }${ list.review_video }" height="300px" controls="controls" ></video></p>
+                                <p class="mt-2"><video src="${ path }${ list.review_video }" width="60%" controls="controls" ></video></p>
                             </div>  
                         </c:if> 
                         <div class="review-text mb-3">

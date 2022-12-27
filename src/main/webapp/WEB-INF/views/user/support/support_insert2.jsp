@@ -49,7 +49,7 @@
 	              },
 	              dataType: "text",
 	              success: function(data) {
-	            	  alert("이메일전송완료");
+	            	  alert("이메일 전송이 완료되었습니다.");
 	              },
 	              error: function(e) {
 	                  console.log("후원에러", e);
@@ -68,7 +68,7 @@
 		  let v2 = document.getElementById('code').value;
 		  if(v1!=v2){
 			   document.getElementById('checkCode').style.color = "red";
-			   document.getElementById('checkCode').innerHTML = "잘못된인증번호";
+			   document.getElementById('checkCode').innerHTML = "인증번호를 확인해주세요.";
 		  }else{
 			   document.getElementById('checkCode').style.color = "blue";
 			   document.getElementById('checkCode').innerHTML = "인증되었습니다.";
@@ -155,34 +155,33 @@
 			<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=getRandom()%>" />
 			<table class="sup_table">
 				<tr>
-					<th width="20%">이름</th>
-					<td width="30%"><input class="form-control" id="sup_name" type="text" placeholder="Name"></td>
-					<td colspan="2"></td>
+					<th width="15%">이름</th>
+					<td width="35%"><input class="form-control form-control-sm" id="sup_name" type="text" placeholder="Name"></td>
+					<td></td>
 				</tr>
 				<tr>					
 					<th>전화번호</th>
-					<td colspan="2" width="37.5%"><input class="form-control" id="sup_phone" type="text" placeholder="010-0000-0000"></td>
+					<td width="37.5%"><input class="form-control form-control-sm" id="sup_phone" type="text" placeholder="010-0000-0000"></td>
 					<td></td>
 				</tr>
 				<tr>
 					<th>이메일</th>
-					<td colspan="2"><input class="form-control" id="sup_email" name="receiver" type="text" placeholder="E-mail"></td>
-					<td><button class="btn btn-outline-success btn-sm" onclick="ajax()">인증하기</button></td>
+					<td><input class="form-control form-control-sm" id="sup_email" name="receiver" type="text" placeholder="E-mail"></td>
+					<td class="align-left"><button class="btn btn-outline-success btn-sm" onclick="ajax()">인증하기</button></td>
 				</tr>
 				<tr>
 					<th>인증번호</th>
-					<td><input class="form-control" type="text" id="code" name="code" onkeyup="checkCode()" placeholder="Enter the code"/></td>
-					<td colspan="2"><div id="checkCode"></div></td>
+					<td><input class="form-control form-control-sm" type="text" id="code" name="code" onkeyup="checkCode()" placeholder="Enter the code"/></td>
+					<td class="align-left" colspan="2"><div id="checkCode"></div></td>
 				</tr>
 				<tr>
 					<th>후원금액</th>
 					<td>
-						<input class="form-control" id="support" type="text" placeholder="Money" onkeypress='return checkNumber(event)'>
+						<input class="form-control form-control-sm" id="support" type="text" placeholder="Money" onkeypress='return checkNumber(event)'>
 						<input type="hidden" readonly="readonly" name="code_check" id="code_check" value="<%=request.getAttribute("code")%>" />
 					</td>
 <!-- 					<td><input class="btn btn-outline-success" id="hiddenbutton" type="hidden" value='후원하기' onclick="requestPay2()"/></td> -->
-					<td width="20%"><button class="btn btn-outline-success btn-sm" id="abc" onclick="requestPay2()" disabled> 후원하기</button></td>
-					<td width="20%"></td>
+					<td class="align-left" width="20%"><button class="btn btn-outline-success btn-sm" id="abc" onclick="requestPay2()" disabled> 후원하기</button></td>
 				</tr>
 			</table>
 		</div>

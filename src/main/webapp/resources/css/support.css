@@ -177,7 +177,7 @@ body {
 .div_sup_insert .sup_table {	
 	width: 100%;
 	vertical-align: middle;
-
+    font-size: 15px;
 }
 
 .support-body .sup_table tr th, td {
@@ -215,3 +215,8 @@ body {
 	font-weight: bold;
 }
 
+
+/* align-left */
+.align-left {
+	text-align: left;
+}
