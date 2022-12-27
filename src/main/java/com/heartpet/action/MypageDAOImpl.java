@@ -142,6 +142,16 @@ public class MypageDAOImpl implements MypageDAO{
 		// TODO Auto-generated method stub
 		return this.sqlSession.selectOne("adopt_com_count", id);
 	}
+
+	@Override
+	public int supportdatesum(String search_date_start, String search_date_end, String id) {
+		Map<String, Object> map = new HashMap<String, Object>();
+        map.put("search_date_start", search_date_start);
+        map.put("search_date_end", search_date_end);
+        map.put("id", id);
+		return this.sqlSession.selectOne("support_date_sum", map);
+	}
+	
 	
 	
 	

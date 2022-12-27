@@ -56,7 +56,34 @@
     </div> --%>
     <%@ include file="mypage_menu.jsp" %>
 	    <div id="my_cont2" class="mypage_cont">
-	    	<h3>후원내역</h3>	    	
+	    	<h3>후원내역</h3>	
+	    	<form method="post" action="${path }/user_mypage_support_list">    	
+		    	<div align="center">
+		    		<table style="width: 400px;">
+		    			<tr>
+		    				<td colspan="3">
+		    					<h6 style="display: block;">기간별 총액 확인하기</h6>
+		    				</td>
+		    			</tr>
+		    			<tr>
+		    				<td>
+		    					<input class="form-control" type="date" name="search_date_start" value="${ search_date_start }">
+		    				</td>
+		    				<td>
+		    					<input class="form-control" type="date" name="search_date_end" value="${ search_date_end }">
+		    				</td>
+		    				<td>
+		    					<button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>
+		    				</td>
+		    			</tr>
+		    			<tr>
+		    				<td colspan="3" style="text-align: right;">
+		    					<strong>기간별 후원 금액 합 : <fmt:formatNumber value="${ dateSum }" /> 원</strong>
+		    				</td>
+		    			</tr>
+		    		</table>
+		    	</div>
+	    	</form>
 	        <div class="support-money-div">	   
 	        <c:if test="${!empty List}">     	
 	            <table class="table support-money-table">

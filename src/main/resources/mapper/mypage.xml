@@ -10,6 +10,15 @@
  	<select id="support_sum" parameterType="String" resultType="int">
 		select NVL(sum(support_price), '0') from heartpet_support where support_userid = #{id} and support_status=1
 	</select>
+	<select id="support_date_sum" parameterType="hashMap" resultType="int">
+		select NVL(sum(support_price), '0') from heartpet_support where support_userid = #{id} and support_status=1
+		<if test="search_date_start != null and !search_date_start.equals('')">
+			<![CDATA[and support_date >= #{search_date_start}]]>
+		</if>
+		<if test="search_date_end != null and !search_date_end.equals('')">
+			<![CDATA[and support_date < to_date(#{search_date_end},'YYYY-MM-DD')+1 ]]>
+		</if>
+	</select>
 	<select id="user_info" parameterType="String" resultType="UserDTO">
 		select * from heartpet_user where user_id = #{id}
 	</select>

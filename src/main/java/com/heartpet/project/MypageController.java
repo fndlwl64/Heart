@@ -235,16 +235,17 @@ public class MypageController {
     @RequestMapping("/user_mypage_support_list")
     public String mypage_support_list(@RequestParam(value = "field", required = false) String field,
 			@RequestParam(value = "keyword", required = false) String keyword,
+			@RequestParam(value = "search_date_start", required = false) String search_date_start,
+			@RequestParam(value = "search_date_end", required = false) String search_date_end,
 			@RequestParam(value = "page", defaultValue = "1") int page, Model model, HttpServletRequest request) {
     	
     	// 페이징
-		if (field == null) {
-            field = "";
-        }
-        if (keyword == null) {
-            keyword = "";
-        }
-		
+		/*
+		 * if (field == null) { field = ""; } if (keyword == null) { keyword = ""; }
+		 */
+    	if (search_date_start == null) { search_date_start = ""; }
+        if (search_date_end == null) { search_date_end = ""; }
+    	
 		int currentPage = 1; // 현재 페이지 변수
         if (page != 1) {
             currentPage = page;
@@ -265,12 +266,13 @@ public class MypageController {
     	UserDTO user_list = mypagedao.UserInfo(user_id);
     	int reg_count = mypagedao.AnimalRegCount(user_id);
     	int review_count = mypagedao.ReviewCount(user_id);
+    	int date_sum = mypagedao.supportdatesum(search_date_start, search_date_end, user_id);
+    	model.addAttribute("dateSum", date_sum);
     	model.addAttribute("List", list);
     	model.addAttribute("Sum", sum);
     	model.addAttribute("uList", user_list);
     	model.addAttribute("Count", reg_count);
     	model.addAttribute("review_Count", review_count);
-    	
     	model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);
         model.addAttribute("field", field);
