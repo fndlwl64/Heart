@@ -108,7 +108,10 @@
 					</table>
 				</c:if>
 	            <c:if test="${empty wList }">
-	            	<h1>관심목록이 없습니다!</h1>
+	            	<div class="empty_list">
+	            		<img class="null_image" src="resources/image/null.png" alt="에러 이미지" />
+	            		<p>관심목록에 등록된 동물이 없습니다.</p>
+	            	</div>
 	            </c:if>
 	        </div>
         <%@ include file="../../include/pagination_update.jsp" %>
