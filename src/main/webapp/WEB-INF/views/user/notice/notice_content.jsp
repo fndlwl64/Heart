@@ -14,7 +14,8 @@
 		<div class="notice_content">
 			<div>
 				<div class="notice_title">
-					<span class="sp_content1">${dto.getNotice_title()}</span><span class="sp_content2">게시일 : ${dto.getNotice_date().substring(0,10) }</span><br />
+					<span class="sp_content1">${dto.getNotice_title()}</span>
+					<span class="sp_content2"><small>게시일 : ${dto.getNotice_date().substring(0,10) }</small></span><br />
 				</div>
 				<hr width="95%">
 				<div class="notice_content_mid"> 
@@ -25,7 +26,20 @@
 						<img class="notice_img" alt="" src="resources/upload/${dto.getNotice_img2() }">
 					</c:if>
 				</div>
-				<textarea class="sp_content3" rows="25" cols="100" readonly>${dto.getNotice_content()}</textarea>
+				
+				<c:if test="${!empty dto.notice_content }">
+					<textarea class="sp_content3" cols="100" readonly>${dto.getNotice_content()}</textarea>
+				</c:if>
+				
+				<script>
+					$(document).ready(function() {
+						$('.notice_content').on( 'keyup', 'textarea', function (e){
+							$(this).css('height', 'auto' );
+							$(this).height( this.scrollHeight );
+						});
+						$('.notice_content').find( 'textarea' ).keyup();
+					});
+				</script>
 				
 			</div>
 		</div>

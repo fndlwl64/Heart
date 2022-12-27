@@ -75,6 +75,10 @@
 	width: 70%;
 }
 
+.notice-board .notice-main-table td {
+	text-align: center;
+}
+
 .notice-board .notice-main-table .notice-table-title {
 	text-decoration: none;
 	text-align: left;
@@ -122,10 +126,13 @@
 	/* float: left;
 	margin: 30px;
 	color: black; */
+	resize: none;
+	height: auto;
+	border: none;
 }
 
-.notice-board .notice_content textarea {
-	border: none;
+.notice-board .notice_content .sp_content3:focus {
+	outline: none;
 }
 
 .notice-board .table a{
@@ -189,7 +196,7 @@ body {
 
 .notice-board .notice_content .notice_img {
 	width: 500px;
-	height: 350px;
+	height: 450px;
 }
 
 .notice-board .btn_list {

@@ -15,7 +15,6 @@
 
 <!DOCTYPE html>
 <html>
-<script src="${path}/resources/js/admin_list_view.js"></script>
 <head>
 <jsp:include page="../../include/admin_header.jsp"/>
     <meta charset="UTF-8">
@@ -84,7 +83,7 @@
 					<c:forEach items="${noticeList }" var="dto">
 		                <tr>
 		                    <td>${dto.getNotice_no() }</td>
-		                    <td><a href="${path }/notice_content?no=${dto.getNotice_no()}">${dto.getNotice_title() }</a></td>
+		                    <td class="notice_title"><a href="${path }/notice_content?no=${dto.getNotice_no()}">${dto.getNotice_title() }</a></td>
 		                    <td>${dto.getNotice_hit() }</td>
 		                    <td><small>${dto.getNotice_date().substring(0, 10) }</small></td>
 		                    <td>

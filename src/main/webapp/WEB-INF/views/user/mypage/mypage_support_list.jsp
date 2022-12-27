@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:include page="../../include/user_header.jsp" />
 <script src="resources/js/mypage.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath}" />
@@ -55,30 +56,31 @@
     </div> --%>
     <%@ include file="mypage_menu.jsp" %>
 	    <div id="my_cont2" class="mypage_cont">
-	        <div align="center">
-	        	
-	            <table class="table">
+	    	<h3>후원내역</h3>	    	
+	        <div class="support-money-div">	        	
+	            <table class="table support-money-table">
 	                <tr>
-	                    <th class="table-secondary"><span class="sp2">후원금액</span></th>
-	                    <th class="table-secondary"><span class="sp2">후원일자</span></th>
-	
+	                    <th width="20%" class="table-secondary"><span class="sp2">No</span></th>
+	                    <th width="40%" class="table-secondary"><span class="sp2">후원금액</span></th>
+	                    <th width="30%" class="table-secondary"><span class="sp2">후원일</span></th>	
 	                </tr>
 	                <c:if test="${!empty List}">
 	                <c:forEach items="${List }" var="dto">
-	            <tr>
-	                <td>${dto.getSupport_price()}</td>
-	                <td>${dto.getSupport_date().substring(0,10) }</td>
-	            </tr>
-	                </c:forEach>
-	            <tr>
-	            	<td colspan="2">후원금액 합계 : ${Sum }</td>
-	            </tr>
-	            </c:if>
-	            </table>
-	            <c:if test="${empty List}">
-	            	<h3>후원내역이 없습니다.</h3>
-	      		</c:if>
-	        </div>
+		            <tr>
+		            	<td></td>
+		                <td><fmt:formatNumber value="${dto.getSupport_price()}" /> 원</td>
+		                <td><small>${dto.getSupport_date().substring(0,10) }</small></td>
+		            </tr>
+		                </c:forEach>
+		            <tr>
+		            	<th class="align-right" colspan="3"><strong>후원금액 합계 : <fmt:formatNumber value="${ Sum }" /> 원</strong></th>
+		            </tr>
+		            </c:if>
+		            </table>
+		            <c:if test="${empty List}">
+		            	<h3>후원내역이 없습니다.</h3>
+		      		</c:if>
+	        	</div>
 	        
 	        <%-- 페이징처리 --%>
 	        <c:if test="${!empty List}">

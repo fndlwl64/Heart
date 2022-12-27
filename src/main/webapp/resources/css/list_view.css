@@ -326,6 +326,10 @@ body {
 	color: red;
 }
 
+.container .lists .searched_list .notice_title {
+	text-align: left;
+} 
+
 /* admin/ _list.jsp -> 검색 폼 */
 .container .search_form {
 }
@@ -574,4 +578,14 @@ body {
 /* 정렬 */
 .qna-section .qna_order {
     justify-content: right;
+}
+
+.container .noticeinfo textarea {
+	resize: none;
+	height: auto;
+	border: none;
+}
+
+.container .noticeinfo textarea:focus {
+	outline: none;
 }
