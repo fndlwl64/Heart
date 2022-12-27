@@ -234,6 +234,38 @@ body {
 /*    border: 1px solid black;*/
 }
 
+/* support-money-table */
+.support-money-div {
+	display: flex;
+	width: 70%;
+	justify-content: center;
+	background-color: #f8f9fa;
+	padding: 1rem;
+	border-radius: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 1rem;
+	margin-bottom: 2rem;
+}
+
+
+.mypage_middle .mypage_cont .support-money-table {
+	margin-top: 1rem !important;
+}
+
+.support-money-table tr th {
+	font-size: 16px;
+}
+
+.support-money-table tr td {
+	background-color: white;
+	font-size: 16px;
+}
+
+.support-money-table tr .align-right {
+	text-align: right;
+}
+
 .mypage_middle .mypage_bottom {
     width: 100%;
     height: 1rem;
