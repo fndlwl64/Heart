@@ -3,13 +3,20 @@ $(document).ready(function() {
    if($('select[name=field] option:selected').val() == 'category') {
         $('.search input[type=text]').removeClass('d-inline').addClass('d-none');   
         $('.search select.search-select').removeClass('d-none').addClass('d-inline');
+        console.log(1, "여기111111111111");
     }else {
         $('.search input[type=text]').removeClass('d-none').addClass('d-inline');
         $('.search select.search-select').removeClass('d-inline').addClass('d-none');      
-    }
-                
-	$('select[name=field]').change(function() {
-	let categorySelected = $('select[name=field] option:selected').val();
+    }  
+    if($('.search select.search-select option:selected')) {
+        $('.search input[type=text]').attr("name", "");
+        $('.search select.search-select').attr("name", "keyword");
+        $('.search input[type=text]').val('');
+        console.log(3, "여기");
+    } 
+   
+	$('select[name=field]').on('change', function() {
+	   let categorySelected = $('select[name=field] option:selected').val();
 		if(categorySelected == 'category') {
 			$('.search input[type=text]').removeClass('d-inline').addClass('d-none');	
 	    	$('.search select.search-select').removeClass('d-none').addClass('d-inline');
@@ -22,6 +29,7 @@ $(document).ready(function() {
 	    	$('.search select.search-select').attr("name", "");	    	
 		}
 		$('.search input[type=text]').val('');
+        $('.search select.search-select').prop('selected', false);        
 	});
 });
 

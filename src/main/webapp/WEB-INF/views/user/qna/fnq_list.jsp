@@ -77,7 +77,7 @@
                         <option value="question"<c:if test="${ field eq 'question' }">selected="selected"</c:if>>질문</option>
                         <option value="answer"<c:if test="${ field eq 'answer' }">selected="selected"</c:if>>답변</option>
                     </select>
-                    <input type="text" class="form-control d-inline align-middle search-text" value="${ keyword }" name="keyword" />
+                    <input type="text" class="form-control d-inline align-middle search-text" name="keyword" value="${ keyword }">
                     <select name="" class="form-select d-none align-middle search-select">
                         <option value="입양"<c:if test="${ keyword eq '입양' }">selected="selected"</c:if>>입양</option>
                         <option value="입소"<c:if test="${ keyword eq '입소' }">selected="selected"</c:if>>입소</option>

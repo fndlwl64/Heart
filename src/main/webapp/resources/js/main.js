@@ -17,7 +17,7 @@ $(document).ready(function() {
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
-        },
+        }
     });
     
     const cat_swiper = new Swiper(".catSwiper", {
@@ -36,7 +36,7 @@ $(document).ready(function() {
         navigation: {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
-        },
+        }
     });
 
     // reviewSwiper
