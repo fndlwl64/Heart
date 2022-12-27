@@ -126,6 +126,8 @@
 	/* float: left;
 	margin: 30px;
 	color: black; */
+	resize: none;
+	height: auto;
 }
 
 .notice-board .notice_content textarea {
@@ -193,7 +195,7 @@ body {
 
 .notice-board .notice_content .notice_img {
 	width: 500px;
-	height: 350px;
+	height: 450px;
 }
 
 .notice-board .btn_list {
