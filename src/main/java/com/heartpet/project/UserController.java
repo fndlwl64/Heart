@@ -84,6 +84,7 @@ public class UserController {
     				session.setAttribute("session_admin_id", id);
     				session.setAttribute("session_admin_name", cont.getUser_name());
     				session.setAttribute("session_admin_image", cont.getUser_image());
+    				session.setAttribute("session_admin_grade", cont.getUser_grade());
     				    				    				
     				return "admin/admin_main";
     			}else {
