@@ -36,7 +36,7 @@
 					</c:if>
 				</div>
         		<c:if test="${!empty dto.notice_content }">
-					<textarea style="" class="sp_content3" cols="100" readonly>${dto.getNotice_content()}</textarea>
+					<textarea class="sp_content3" cols="100" readonly>${dto.getNotice_content()}</textarea>
 				</c:if>
 				<script>
 					$(document).ready(function() {

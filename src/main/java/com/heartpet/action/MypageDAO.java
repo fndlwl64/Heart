@@ -59,4 +59,7 @@ public interface MypageDAO {
 	
 	// 마이페이지에서 후원하기 페이징 전체 개수
     public int listSupportCount(String field, String keyword, String id);
+    
+    // 기간별 후원금액 합
+    public int supportdatesum(String search_date_start, String search_date_end, String id);
 }
