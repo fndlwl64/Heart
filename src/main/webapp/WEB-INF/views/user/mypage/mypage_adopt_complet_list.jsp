@@ -117,7 +117,10 @@
 					</table>
 				</c:if>
 	            <c:if test="${empty aList }">
-	            	<h1>입양완료 목록이 없습니다!</h1>
+	            	<div class="empty_list">
+	            		<img class="null_image" src="resources/image/null.png" alt="에러 이미지" />
+	            		<p>입양 완료된 동물이 없습니다.</p>
+	            	</div>
 	            </c:if>
 	        </div>
         <%@ include file="../../include/pagination_update.jsp" %>
