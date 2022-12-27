@@ -86,7 +86,7 @@
 	<!-- review : insert -->
  	<insert id="review_insert" parameterType="ReviewDTO">
         <selectKey resultType="int" keyProperty="review_no" order="BEFORE">
-		SELECT MAX(NVL(review_no, 0))+1 FROM heartpet_review
+		SELECT NVL(MAX(review_no, 0))+1 FROM heartpet_review
         </selectKey>
 		INSERT INTO heartpet_review 
 			VALUES (#{ review_no }, 
