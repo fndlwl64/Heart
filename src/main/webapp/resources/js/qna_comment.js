@@ -90,7 +90,7 @@ function commentTable(userId, boardNo, path) {
               comment += '</tr></thead><tbody>';
               console.log(commentList.length);
               for (let i=0; i<commentList.length; i++) {
-                  if(commentList[i].comment_id == 'admin') {                  
+                  if(commentList[i].comment_id.includes('admin')) {                  
                     comment += '<tr><td style=\"vertical-align:middle; color:red;\"><a>' + commentList[i].comment_id + '</a></td>';
                   }else {
                     comment += '<tr><td style=\"vertical-align:middle;\"><a>' + commentList[i].comment_id + '</a></td>';
@@ -98,7 +98,7 @@ function commentTable(userId, boardNo, path) {
                   comment += '<td class=\"comment-content\"><div style=\"min-height:2rem\">' + commentList[i].comment_content + '</div></td>';
                   comment += '<td><small>' + commentList[i].comment_regdate + '</small></td>';
                   comment += '<td style=\"vertical-align:middle;\">';
-                  if(userId == 'admin') {
+                  if(userId.includes('admin')) {
                        comment += '<button type=\"button\" class=\"btn btn-outline-danger btn-sm\" data-bs-toggle=\"modal\" data-bs-target=\"#deleteCommentModal\" data-no='+commentList[i].comment_commentno+' data-path='+path+' data-user='+commentList[i].comment_id+' data-boardno='+boardNo+'>삭제</button>';
                   }else {
                       if(userId == commentList[i].comment_id) {

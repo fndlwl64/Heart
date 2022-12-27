@@ -211,6 +211,7 @@ body {
     margin-right: auto;
     margin-top: 1rem;
     background-color: #f8f9fa;
+    font-size: 15px;
 }
 
 #comment-table .comment-content {
