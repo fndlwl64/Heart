@@ -128,10 +128,11 @@
 	color: black; */
 	resize: none;
 	height: auto;
+	border: none;
 }
 
-.notice-board .notice_content textarea {
-	border: none;
+.notice-board .notice_content .sp_content3:focus {
+	outline: none;
 }
 
 .notice-board .table a{
