@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
@@ -105,17 +106,23 @@ public class AnimalController {
     		endWeight = 40;
     	}
 
-		
+    	
 		totalRecord = animalDAO.countPaging(animalDTO, keyword,startWeight,endWeight);
-		
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-
+    	List<AnimalDTO> animalList = animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword,sort,startWeight,endWeight);
+    	
+    	List<Integer> wishList = new ArrayList<Integer>();
+    	
+    	for(int i=0; i<animalList.size(); i++) {
+    		wishList.add(animalList.get(i).getAnimal_no());
+    	}
+    	
     	model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
  		model.addAttribute("field", field);
  		model.addAttribute("sort",sort);
  		model.addAttribute("keyword",keyword);
-		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword,sort,startWeight,endWeight));
+		model.addAttribute("animalList", animalList);
 		model.addAttribute("animalDTO",animalDTO);
 		return "user/animal/user_animal_list";
 	}
@@ -370,13 +377,9 @@ public class AnimalController {
 		System.out.println("여기22222222222222"+user_id);
 		int check = wishDAO.selectWish(animal_no, user_id);
 		if(check > 0) {
-		      System.out.println("여기\"여기22222222222222\"+check"+check);
-
 			wishDAO.deleteWish(animal_no, user_id);
 			return 0;
 		}else {
-            System.out.println("여기\"여기22222222222222\"+delete"+check);
-
 			wishDAO.insertWish(animal_no, user_id);
 			return 1;
 		}
