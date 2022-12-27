@@ -41,9 +41,15 @@
 		</table>
 		<br>
 		
-		<button type="button" class="btn btn-secondary mx-1" onclick="location.href='${path}/notice_list'"><i class="bi bi-card-list"></i> 목록</button>
-        <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
-        <button id="insert_btn" type="submit" class="btn btn-dark mx-1"><i class="bi bi-save"></i> 등록</button>
+		<div class="btns">
+			<div>
+				<button type="button" class="btn btn-dark mx-1" onclick="location.href='${path}/notice_list'"><i class="bi bi-card-list"></i> 목록</button>
+			</div>
+			<div>
+	        	<button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
+	        	<button id="insert_btn" type="submit" class="btn btn-primary mx-1"><i class="bi bi-save"></i> 등록</button>
+	        </div>
+		</div>
 	</form>
 </div>
 </body>

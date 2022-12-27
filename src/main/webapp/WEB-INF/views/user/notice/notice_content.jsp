@@ -25,7 +25,20 @@
 						<img class="notice_img" alt="" src="resources/upload/${dto.getNotice_img2() }">
 					</c:if>
 				</div>
-				<textarea class="sp_content3" rows="25" cols="100" readonly>${dto.getNotice_content()}</textarea>
+				
+				<c:if test="${!empty dto.notice_content }">
+					<textarea class="sp_content3" cols="100" readonly>${dto.getNotice_content()}</textarea>
+				</c:if>
+				
+				<script>
+					$(document).ready(function() {
+						$('.notice_content').on( 'keyup', 'textarea', function (e){
+							$(this).css('height', 'auto' );
+							$(this).height( this.scrollHeight );
+						});
+						$('.notice_content').find( 'textarea' ).keyup();
+					});
+				</script>
 				
 			</div>
 		</div>
