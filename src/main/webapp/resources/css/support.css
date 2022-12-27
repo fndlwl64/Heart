@@ -24,17 +24,42 @@ body {
  
  
 /* support_insert.jsp에서 사용하는 css */
+
+.div_sup_insert .support-title {
+	width: 70%;
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+	text-align: left;
+}
+.support-title h2 {
+	font-weight: bold;
+}
+
+.support-title p {
+	margin: 0;
+	font-size: 14px;
+}
+
+.support-title ul {
+	list-style: none;
+	font-size: 14px;
+	margin: 0.5rem;
+	padding-left: 0.5rem;
+}
+
+.support-title h6 {
+	margin-bottom: 0;
+	margin-top: 1rem;
+}
  
 .div_sup_insert .btn-group {
 	display: block;
 }
- 
- .div_sup_insert .support_li {
- 	display: inline-block;
- 	list-style: none;
- 	margin: 15px;
- }
- 
+
+.div_sup_insert .support-body {
+	width: 70%;
+}
+
 /* admin support_list에서 사용하는 css */
 /*  table 폰트 크기 15px */
  .container .lists .table{
@@ -77,9 +102,8 @@ body {
 	width: 904px;
 }
 
-.div_sup_insert .sup_table{
-	
-	width: 500px;
+.div_sup_insert .sup_table{	
+	width: 100%;
 }
 
 .div_finish {

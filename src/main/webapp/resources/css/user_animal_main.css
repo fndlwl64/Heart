@@ -185,10 +185,33 @@ div div .animal-col dl {
 	background-color: $indigo-900;
 }
 
-.back_image {
+.back-image {
+	position: relative;
 	background-size: cover;
 	background-position: 50% 50%;
 	cursor: pointer;
+	z-index: 0;
+}
+
+.mainContent_mainImgWrapper__DJlMe .wish-button {
+	position: relative;
+	z-index: 1;
+	width: 50px;
+	font-size: 20px;
+	top: -3.75rem;
+	left: 31.5rem;
+	margin: 0;
+}
+
+.wish-button i {
+	font-size: 35px;
+	color: #ffc107 !important;
+	border: #ffc107 !important;
+}
+
+.wish-button button {
+	outline: 0 !important;
+	border-color: transparent !important;
 }
 
 .animal_explan {
@@ -247,7 +270,7 @@ div div .animal-col dl {
 	border-radius: 5px;
 	padding: 1rem;
 	margin-bottom: 1.5rem;
-	margin-top: 0.5rem;
+	margin-top: -2.5rem;
 }
 
 .animal-content-a {
