@@ -24,7 +24,11 @@
 	</insert>
 	
 	<update id="notice_update" parameterType="NoticeDTO">
-		update heartpet_notice set notice_title=#{notice_title}, notice_content=#{notice_content}, notice_hit=#{notice_hit}, notice_img1=#{notice_img1}, notice_img2=#{notice_img2}, notice_date = sysdate where notice_no = #{notice_no} 
+		update heartpet_notice set notice_title=#{notice_title}, notice_content=#{notice_content}, notice_hit=#{notice_hit}, notice_date = sysdate 
+		<if test="notice_img1 != null">, notice_img1=#{notice_img1}</if>
+		<if test="notice_img2 != null">, notice_img2=#{notice_img2}</if>
+		where notice_no = #{notice_no}
+		 
 	</update>
 	
 	<update id="notice_delete" parameterType="int">
