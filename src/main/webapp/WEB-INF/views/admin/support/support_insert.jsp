@@ -15,7 +15,7 @@
 	<br><br>
 	<div class="div1" align="center">
 
-	<div class="sub-title"><h4>후원하기 등록하기</h4></div> 
+	<div class="sub-title"><h4>후원 회원 등록하기</h4></div> 
 		<form method="post" action="${path }/support_insert_ok" onsubmit="return submitOption();">
 			<table class="table noticeinfo mt-4">
 				<tr class="border-top">
@@ -28,13 +28,21 @@
 				</tr>
 				<tr>
 					<th class="table-light col-1"><span class="sp2">후원일자</span></th>
-					<td><input id="sup_date" name="support_date" class="form-control" type="text"></td>
+					<td><input id="sup_date" name="support_date" class="form-control" type="date"></td>
 				</tr>
 			</table>
-			<br>
-			 <button type="button" class="btn btn-secondary mx-1" onclick="location.href='${path}/support_list'"><i class="bi bi-card-list"></i> 목록</button>
-	         <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
-	         <button id="update_btn" type="submit" class="btn btn-dark mx-1"><i class="bi bi-save"></i> 등록</button>
+						
+			<div class="btns">
+				<div>
+					<button type="button" class="btn btn-dark mx-1" onclick="location.href='${path}/support_list'"><i class="bi bi-card-list"></i> 목록</button>
+				</div>
+				
+				<div>
+			        <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
+			        <button id="update_btn" type="submit" class="btn btn-primary mx-1"><i class="bi bi-save"></i> 등록</button>
+		        </div>
+	        </div>
+
 		</form>
 
 	</div>
