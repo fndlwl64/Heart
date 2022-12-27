@@ -98,7 +98,7 @@
 	            </c:choose>
                 <div class="review-textarea">
                     <p class="title">
-                        <c:if test="${ list.review_title.length() gt 15 }">${ list.review_title.substring(0,15) }...</c:if>
+                        <c:if test="${ list.review_title.length() ge 15 }">${ list.review_title.substring(0,15) }...</c:if>
                         <c:if test="${ list.review_title.length() lt 15 }">${ list.review_title }</c:if>
                     </p>
                     <p class="content">${ list.animal_name } / 작성자 ${ list.review_id }</p>
@@ -122,7 +122,7 @@
 	            </c:choose>
                 <div class="review-textarea">
                     <p class="title">
-                        <c:if test="${ list.review_title.length() gt 15 }">${ list.review_title.substring(0,15) }...</c:if>
+                        <c:if test="${ list.review_title.length() ge 15 }">${ list.review_title.substring(0,15) }...</c:if>
                         <c:if test="${ list.review_title.length() lt 15 }">${ list.review_title }</c:if>
                     </p>
                     <p class="content">${ list.animal_name } / 작성자 ${ list.review_id }</p>

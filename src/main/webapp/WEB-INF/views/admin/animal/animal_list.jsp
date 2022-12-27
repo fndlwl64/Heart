@@ -65,7 +65,6 @@
 										value="소형" class="form-check-input"
 										<c:if test="${animalDTO.animal_size eq '소형' }">checked="checked"</c:if> />
 										소형</label>
-
 								</div>
 							</td>
 							<td colspan="2"></td>

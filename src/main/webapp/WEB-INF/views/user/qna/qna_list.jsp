@@ -76,17 +76,17 @@
 	                    		<span class="badge rounded-pill text-bg-light"><i class="bi bi-arrow-return-right"></i> Re</span>
 	                    	</c:when>
 	                    </c:choose>
-	                    <c:if test="${ list.board_title.length() gt 20 }">${ list.board_title.substring(0,20) }... </c:if>
-						<c:if test="${ list.board_title.length() lt 20 }">${ list.board_title } </c:if>
-	                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if>
-	                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
-	                    <c:if test="${ list.board_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>	                    
-	                    <c:if test="${ not empty list.board_img1 || not empty list.board_img2 }"><i class="bi bi-paperclip"></i></c:if>
-	                    <c:if test="${ cList[status.index] gt 0 }"><span <c:if test="${ list.board_state eq 'disabled' }">style="color:black;"</c:if> class="comment-count">[${ cList[status.index] }]</span></c:if>	                    
+		                    <c:if test="${ list.board_title.length() ge 20 }">${ list.board_title.substring(0,20) }... </c:if>
+							<c:if test="${ list.board_title.length() lt 20 }">${ list.board_title } </c:if>
+		                    <c:if test="${ list.board_secret eq 'Y' }"><i class="bi bi-lock-fill"></i></c:if>
+		                    <c:if test="${ not empty list.board_update }"><small>(edited)</small></c:if>
+		                    <c:if test="${ list.board_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>	                    
+		                    <c:if test="${ not empty list.board_img1 || not empty list.board_img2 }"><i class="bi bi-paperclip"></i></c:if>
+		                    <c:if test="${ cList[status.index] gt 0 }"><span <c:if test="${ list.board_state eq 'disabled' }">style="color:black;"</c:if> class="comment-count">[${ cList[status.index] }]</span></c:if>	                    
                         </a> 
                     </td>
-                    <td><c:if test="${ list.board_id eq 'admin' }"><span id="admin_id">관리자</span></c:if>
-                    <c:if test="${ list.board_id ne 'admin' }"><span>${ list.board_id }</span></c:if></td>
+                    <td><c:if test="${ list.board_id eq 'admin1' || list.board_id eq 'admin2' || list.board_id eq 'admin3' || list.board_id eq 'admin4' || list.board_id eq 'admin5' }"><span id="admin_id">관리자</span></c:if>
+                    <c:if test="${ list.board_id ne 'admin1' || list.board_id ne 'admin2' || list.board_id ne 'admin3' || list.board_id ne 'admin4' || list.board_id ne 'admin5' }"><span>${ list.board_id }</span></c:if></td>
                     <td><small>${ list.board_regdate.substring(0,10) }</small></td>
                     <td>${ list.board_hit }</td>
                 </tr>
