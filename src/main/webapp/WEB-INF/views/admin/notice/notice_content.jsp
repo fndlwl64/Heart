@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>HeartPet</title>
-    <link rel="stylesheet" href="${path}/resources/css/list_view.css">
+    <%-- <link rel="stylesheet" href="${path}/resources/css/list_view.css"> --%>
     <link rel="stylesheet" href="resources/css/notice.css">
 </head>
 <body>
@@ -29,25 +29,22 @@
                 <textarea cols="60" readonly>${dto.getNotice_content() }</textarea>
             </td>
         </tr>
-       
         <tr>
             <th class="table-light">이미지</th>
-
             <c:if test="${!empty dto.getNotice_img1() }">
-            <td class="col-1" colspan="5"><img src="resources/upload/${dto.getNotice_img1() }" style="max-height: 200px;" alt="notice_img"></td>
+            <td class="col-1" colspan="2"><img src="resources/upload/${dto.getNotice_img1() }" style="max-height: 200px;" alt="notice_img"></td>
             </c:if>
             <c:if test="${!empty dto.getNotice_img2() }">
-            <td class="col-1" colspan="5"><img src="resources/upload/${dto.getNotice_img2() }" style="max-height: 200px;" alt="notcie_img"></td>
+            <td class="col-1" colspan="2"><img src="resources/upload/${dto.getNotice_img2() }" style="max-height: 200px;" alt="notcie_img"></td>
         	</c:if>
-
         </tr>
-
     </table>
 
     <br>
     <%-- 목록 버튼만 : 수정,삭제,등록은 list.jsp에서  --%>
-    <button type="button" id="btn_content" class="btn btn-dark mx-1" onclick="location.href='${path}/notice_list'"><i class="bi bi-card-list"></i> 목록</button>
-
+    <div style="display: flex;">
+			<button style="margin-left: auto;" type="button" id="btn_content" class="btn btn-dark btn_list" onclick="location.href='${path}/notice_list'"><i class="bi bi-card-list"></i> 목록</button>
+	</div>
 </div>
 <script>
 	$(document).ready(function() {
