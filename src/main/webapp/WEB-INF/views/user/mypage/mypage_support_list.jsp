@@ -81,7 +81,9 @@
 	        </div>
 	        
 	        <%-- 페이징처리 --%>
+	        <c:if test="${!empty List}">
 	    	<jsp:include page="../../include/pagination.jsp" />
+	    	</c:if>
 	    </div>
     </div>
     <!-- mypage-body end 부분  -->

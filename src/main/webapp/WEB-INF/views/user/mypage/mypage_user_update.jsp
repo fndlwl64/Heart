@@ -61,6 +61,7 @@
 	            <form method="post" action="${path }/user_mypage_user_update2">
 	                <h3>회원정보변경</h3>
 	                <c:if test="${empty dto.getUser_email() || empty dto.getUser_phone() || empty dto.getUser_addr()}">
+	                <br>
 	                <span class="not_email">회원 이메일, 연락처, 주소를 등록해야 추후에 비밀번호찾기, 회원탈퇴, 후원하기 등이 가능합니다. </span>
 	                </c:if>
 	                <table class="table searched_list">
