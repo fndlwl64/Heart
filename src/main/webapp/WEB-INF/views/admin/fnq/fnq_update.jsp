@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>HeartPet_Admin_FNQ</title>
+    <title>HeartPet_Admin_FAQ</title>
     <link rel="stylesheet" href="${path}/resources/css/list_view.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
 <%-- fnq update --%>
 <div class="container">
 
-	<div class="sub-title"><h4>FNQ 수정하기</h4></div>
+	<div class="sub-title"><h4>FAQ 수정하기</h4></div>
     
     <div>
         <form action="${path}/admin_fnq_update_ok" method="post" enctype="application/x-www-form-urlencoded">

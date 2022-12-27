@@ -10,7 +10,7 @@
     <div class="container">
     
         <div class="title">
-        <h3> HeartPet 회원가입 </h3>
+        	<h3> HeartPet 회원가입 </h3>
         </div>
         <br>
 
@@ -91,11 +91,9 @@
 
                 </table>
                 
-                <br /><br />
-
-                <input id="join_btn" class="btn btn-secondary" type="submit" value="가입">
-                <input class="btn btn-outline-secondary" type="reset" value="취소">
-
+				<button class="btn btn-warning" type="reset"><i class="bi bi-pencil"></i> 리셋</button>
+				<button id="join_btn" class="btn btn-primary" type="submit"><i class="bi bi-upload"></i> 가입</button>
+								
             </form>
 
         </div>
