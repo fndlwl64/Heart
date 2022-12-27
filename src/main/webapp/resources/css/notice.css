@@ -188,8 +188,8 @@ body {
 }
 
 .notice-board .notice_content .notice_img {
-	width: 50%;
-	height: 50%;
+	width: 500px;
+	height: 350px;
 }
 
 .notice-board .btn_list {

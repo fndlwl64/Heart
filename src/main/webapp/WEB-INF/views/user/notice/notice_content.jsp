@@ -18,7 +18,9 @@
 				</div>
 				<hr width="95%">
 				<div class="notice_content_mid"> 
-					<img class="notice_img" alt="" src="resources/upload/${dto.getNotice_img1() }">
+					<c:if test="${!empty dto.getNotice_img1() }">
+						<img class="notice_img" alt="" src="resources/upload/${dto.getNotice_img1() }">
+					</c:if>
 					<c:if test="${!empty dto.getNotice_img2() }">
 						<img class="notice_img" alt="" src="resources/upload/${dto.getNotice_img2() }">
 					</c:if>
