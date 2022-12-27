@@ -91,18 +91,24 @@ pageContext.setAttribute("newline", "\n");
 		</div> --%>
 		<%-- button  --%>
 		<div class="animal_button ">
-			<button class="btn btn-success mx-1 float-right"
-				onclick="location.href='${path}/animal_update?no=${ dto.animal_no }'">
-				<i class="bi bi-pencil-fill"></i> 수정
-			</button>
-			<button class="btn btn-danger mx-1 float-right" data-bs-toggle="modal"
-				data-bs-target="#deleteModal" data-id="${ deleteAddr }">
-				<i class="bi bi-trash3"></i> 삭제
-			</button>
-			<button class="btn btn-dark mx-1 float-right"
-				onclick="location.href='${path}/${dto.animal_tag }_list'">
-				<i class="bi bi-card-list"></i> 목록
-			</button>
+			<div>
+				<button class="btn btn-dark mx-1 float-right"
+					onclick="location.href='${path}/${dto.animal_tag }_list'">
+					<i class="bi bi-card-list"></i> 목록
+				</button>
+			</div>
+			
+			<div>		
+				<button class="btn btn-success mx-1 float-right"
+					onclick="location.href='${path}/animal_update?no=${ dto.animal_no }'">
+					<i class="bi bi-pencil-fill"></i> 수정
+				</button>
+
+				<button class="btn btn-danger mx-1 float-right" data-bs-toggle="modal"
+					data-bs-target="#deleteModal" data-id="${ deleteAddr }">
+					<i class="bi bi-trash3"></i> 삭제
+				</button>
+			</div>
 		</div>
 	</div>
 	<jsp:include page="../../include/deleteModal.jsp" />
