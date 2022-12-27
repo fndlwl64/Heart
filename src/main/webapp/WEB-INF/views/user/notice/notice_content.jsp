@@ -14,7 +14,8 @@
 		<div class="notice_content">
 			<div>
 				<div class="notice_title">
-					<span class="sp_content1">${dto.getNotice_title()}</span><span class="sp_content2">게시일 : ${dto.getNotice_date().substring(0,10) }</span><br />
+					<span class="sp_content1">${dto.getNotice_title()}</span>
+					<span class="sp_content2"><small>게시일 : ${dto.getNotice_date().substring(0,10) }</small></span><br />
 				</div>
 				<hr width="95%">
 				<div class="notice_content_mid"> 
