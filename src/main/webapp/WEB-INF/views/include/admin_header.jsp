@@ -37,7 +37,7 @@
                	<div class="login-section">
 					<ul class="row">
 					   <li class="col-1 login-location"></li>
-					   <li class="col-3 login-location"><a href="${path}/"><i class="bi bi-house-heart"></i> 사이트</a></li>
+					   <li class="col-3 login-location justify-content-center"><a href="${path}/"><i class="bi bi-house-heart"></i> 사이트</a></li>
 					   <li class="col-6 join-location"><a class="login-title" href="${path}/user_logout">로그아웃</a></li>
 					</ul>
                 </div>

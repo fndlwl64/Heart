@@ -41,8 +41,10 @@
                         <option value="후원" <c:if test="${ list.board_category eq '후원' }">selected="selected"</c:if>>후원</option>
                         <option value="기타" <c:if test="${ list.board_category eq '기타' }">selected="selected"</c:if>>기타</option>
                     </select>
-                </td>           
+                </td>
                 <th class="table-light col-1">작성자</th>
+					<td class="col-1"><span>${ list.board_id }</span></td>               
+				<th class="table-light col-1">답변자</th>
                 	<td class="col-1 admin"><span id="admin_id">관리자</span></td>
                 <th class="table-light col-1 secret">
 	                <label><input class="form-check-input" type="checkbox" name="board_secret" value="Y"
@@ -54,13 +56,13 @@
             </tr>
             <tr>
                 <th class="table-light">제목</th>
-                <td colspan="4">                            
+                <td colspan="6">                            
                 <input type="text" class="form-control" name="board_title" value="${ list.board_title }" required="required">
                 </td>
             </tr>
             <tr>
                 <th class="table-light">내용</th>
-                <td colspan="4">
+                <td colspan="6">
                 <textarea name="board_content" class="form-control" cols="30" rows="10">${ list.board_content.replace(newline, '<br/>').replace('<br/>', '') }<c:if test="${ not empty list.board_content }">&#10;=====================================================&#10;</c:if></textarea>
                 </td>
             </tr>
@@ -69,7 +71,7 @@
 				<td class="col-2"><input type="password" class="form-control" name="board_pwd" required="required">
 				</td>
 				<th class="table-light">이미지</th>
-                <td colspan="2">
+                <td colspan="4">
                     <div class="d-flex align-middle">
                         <input type="file" class="form-control" name="board_img" accept="image/gif, image/jpeg, image/png" multiple>
                     </div>
