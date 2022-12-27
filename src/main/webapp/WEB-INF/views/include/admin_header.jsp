@@ -64,7 +64,7 @@
                                 문의관리
                             </a>
 		                    <ul class="dropdown-menu">
-		                        <li><a class="dropdown-item" href="${path}/admin_fnq_list">FNQ관리</a></li>
+		                        <li><a class="dropdown-item" href="${path}/admin_fnq_list">FAQ관리</a></li>
 		                        <li><a class="dropdown-item" href="${path}/admin_qna_list">문의글관리</a></li>
 		                    </ul>
 	                    </li>

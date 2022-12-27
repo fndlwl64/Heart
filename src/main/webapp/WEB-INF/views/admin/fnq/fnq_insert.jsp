@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>HeartPet_Admin_FNQ</title>
+    <title>HeartPet_Admin_FAQ</title>
     <link rel="stylesheet" href="${path}/resources/css/list_view.css">
 </head>
 <body>
@@ -17,7 +17,7 @@
 
 <%-- fnq insert --%>
 <div class="container">
-	<div class="sub-title"><h4>FNQ 등록하기</h4></div>    
+	<div class="sub-title"><h4>FAQ 등록하기</h4></div>    
     <div>
         <form action="${path}/admin_fnq_insert_ok" method="post" enctype="application/x-www-form-urlencoded">
         <table class="table noticeinfo mt-4">

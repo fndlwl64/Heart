@@ -17,7 +17,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>HeartPet_Admin_FNQ</title>
+    <title>HeartPet_Admin_FAQ</title>
     <jsp:include page="../../include/admin_header.jsp" />
 	<link rel="stylesheet" href="${path}/resources/css/list_view.css" />
 	<script src="${path}/resources/js/admin_list_view.js"></script>
@@ -30,7 +30,7 @@
 	<form action="${path}/admin_fnq_list" class="search_form" method="get">
 	<div class="form_box">
 	<div class="search-semi-title">
-	    <span><i class="bi bi-check2-square"></i> FNQ 검색</span>
+	    <span><i class="bi bi-check2-square"></i> FAQ 검색</span>
 	</div>       
 		<div class="search-table-box">
               <table class="table table-sm" id="search-table">

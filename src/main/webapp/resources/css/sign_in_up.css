@@ -7,7 +7,6 @@ body {
 
 .container .title {
     font-weight: bold;
-    border-bottom: 2px solid #545a62;
     width: 30%;
     margin: auto;
     margin-bottom: 1%;
@@ -25,6 +24,7 @@ body {
 
 .container .join_div .join_form .join_table {
     margin: auto;
+    margin-bottom: 1.5rem;
 }
 
 .container .join_div .join_form .join_table th {

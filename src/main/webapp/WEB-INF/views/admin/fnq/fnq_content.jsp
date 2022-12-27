@@ -12,7 +12,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>HeartPet_Admin_FNQ</title>
+    <title>HeartPet_Admin_FAQ</title>
     <link rel="stylesheet" href="${path}/resources/css/list_view.css">
     <script src="${path}/resources/js/admin_list_view.js"></script>
 </head>
@@ -20,7 +20,7 @@
 
 <div class="container">
 
-    <div class="sub-title"><h4>FNQ 상세 내용</h4></div>
+    <div class="sub-title"><h4>FAQ 상세 내용</h4></div>
     
     <table class="table noticeinfo mt-4">
         <tr>
