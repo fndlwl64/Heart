@@ -14,7 +14,6 @@
             <span>문의글 수정하기</span>
         </div>
     </div>
-
     <div>
         <form class="mb-3" action="${ path }/user_qna_update_ok" method="post" enctype="multipart/form-data" >
         	<input type="hidden" name="board_no" value="${ list.board_no }" />
