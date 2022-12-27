@@ -378,9 +378,10 @@ body {
 }
 
 .mypage_middle .mypage_cont .not_email {
-	font-size: 25px;
-	color: red;
+	font-size: 12px;
+	color: gray;
 	font-weight: bold;
+	
 }
 
 /* mypage 공통 */

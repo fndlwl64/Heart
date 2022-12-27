@@ -57,17 +57,18 @@
     <%@ include file="mypage_menu.jsp" %>
 	    <div id="my_cont2" class="mypage_cont">
 	    	<h3>후원내역</h3>	    	
-	        <div class="support-money-div">	        	
+	        <div class="support-money-div">	   
+	        <c:if test="${!empty List}">     	
 	            <table class="table support-money-table">
 	                <tr>
 	                    <th width="20%" class="table-secondary"><span class="sp2">No</span></th>
 	                    <th width="40%" class="table-secondary"><span class="sp2">후원금액</span></th>
 	                    <th width="30%" class="table-secondary"><span class="sp2">후원일</span></th>	
 	                </tr>
-	                <c:if test="${!empty List}">
+	                
 	                <c:forEach items="${List }" var="dto">
 		            <tr>
-		            	<td></td>
+		            	<td>${dto.getSupport_no()}</td>
 		                <td><fmt:formatNumber value="${dto.getSupport_price()}" /> 원</td>
 		                <td><small>${dto.getSupport_date().substring(0,10) }</small></td>
 		            </tr>
@@ -75,13 +76,14 @@
 		            <tr>
 		            	<th class="align-right" colspan="3"><strong>후원금액 합계 : <fmt:formatNumber value="${ Sum }" /> 원</strong></th>
 		            </tr>
-		            </c:if>
+		            
 		            </table>
-		            <c:if test="${empty List}">
-		            	<h3>후원내역이 없습니다.</h3>
-		      		</c:if>
+	            </c:if>
+	            <c:if test="${empty List}">
+	            	<h3>후원내역이 없습니다.</h3>
+	      		</c:if>
 	        	</div>
-	        
+	        	
 	        <%-- 페이징처리 --%>
 	        <c:if test="${!empty List}">
 	    	<jsp:include page="../../include/pagination.jsp" />
