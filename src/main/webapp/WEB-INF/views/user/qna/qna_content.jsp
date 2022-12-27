@@ -49,19 +49,19 @@ $(function() {
             <div class="content" data-bs-spy="scroll" data-bs-target="#content-scroll">
                 <div id="content-scroll">
                     <div class="content-body">
+						<div class="qna-text mb-3">
+						    ${ list.board_content.replace(newline, '<br/>') } 
+						</div>
                         <c:if test="${ !empty list.board_img1 }">
-                            <div class="qna-image shadow-sm my-2 bg-body rounded">
-                                 <p class="mt-2"><img src="${ path }${ list.board_img1 }" class="rounded mx-auto d-block" style="max-height: 400px;" alt="board_img" /></p>      
+                            <div class="qna-image my-2 bg-body rounded">
+                                 <p class="mt-2"><img src="${ path }${ list.board_img1 }" class="rounded d-block" style="max-height: 400px;" alt="board_img" /></p>      
                             </div>
                         </c:if>  
                         <c:if test="${ !empty list.board_img2 }">
                             <div class="qna-image shadow-sm my-2 bg-body rounded">
-                                 <p class="mt-2"><img src="${ path }${ list.board_img2 }" class="rounded mx-auto d-block" style="max-height: 400px;" alt="board_img" /></p>      
+                                 <p class="mt-2"><img src="${ path }${ list.board_img2 }" class="rounded d-block" style="max-height: 400px;" alt="board_img" /></p>      
                             </div>
                         </c:if> 
-						<div class="qna-text mb-3">
-						    ${ list.board_content.replace(newline, '<br/>') } 
-						</div>
                     </div>
                 </div>
             </div>
