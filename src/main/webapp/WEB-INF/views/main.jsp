@@ -19,6 +19,8 @@
         <p><span class="title-effect">유기동물 입양 중개 플랫폼</span><br>
         입양하고 싶은 반려동물 정보, <span class="title-effect">하트펫</span>에서 알아보세요</p>
     </div>
+    
+   	<div class="animal-intro my-3"></div>    
 
     <%-- 동영상 --%>
     <div class="main-video">
@@ -26,7 +28,7 @@
     </div>
 
     <%-- 강아지 list 출력 // swiper --%>
-    <div class="main-title">
+    <div class="main-title mt-5">
         <h1 id="heart-pet">HeartPet, </h1>
         <div class="more">
             <div>
@@ -41,7 +43,7 @@
     
     <div class="animal-intro"></div>
 	    
-    <div class="swiper dogSwiper">
+    <div class="swiper dogSwiper mb-3">
         <div class="swiper-wrapper">
         	<c:forEach items="${ dList }" var="list">
             	<div class="swiper-slide">
@@ -62,7 +64,7 @@
         <div class="swiper-pagination"></div>
     </div>
     
-    <div class="swiper dogSwiper catSwiper">
+    <div class="swiper dogSwiper catSwiper mb-3">
         <div class="swiper-wrapper">
         	<c:forEach items="${ cList }" var="list">
             	<div class="swiper-slide">
@@ -84,54 +86,48 @@
     </div>
     
     <%-- 입양후기 list 출력 --%>
-    <div class="main-title">HeartPet과 함께한 강아지 가족</div>
+    <div class="main-title mt-5">HeartPet과 함께한 강아지 가족의 이야기를 들어보세요.</div>
     <div class="swiper reviewSwiper">
         <div class="swiper-wrapper">
         	<c:forEach items="${ dRList }" var="list">
             <div class="swiper-slide">
-                <a href="${ path }/user_review_content?review_no=${ list.review_no }">
-                <c:choose>
-					<c:when test="${ not empty list.review_img1 }"><img src="${path}${ list.review_img1 }" alt="review_img"></c:when>
-					<c:when test="${ not empty list.review_img2 }"><img src="${path}${ list.review_img2 }" alt="review_img"></c:when>
-					<c:when test="${ not empty list.review_img3 }"><img src="${path}${ list.review_img3 }" alt="review_img"></c:when>
-                </c:choose>
-                </a>
-                <div>
-                    <span class="title">
+               	<c:choose>
+            		<c:when test="${ not empty list.review_img1 }"><a href="${path}/user_review_content?review_no=${ list.review_no }" style="background-image: url('${path}${ list.review_img1 }');"></c:when>
+            		<c:when test="${ not empty list.review_img2 }"><a href="${path}/user_review_content?review_no=${ list.review_no }" style="background-image: url('${path}${ list.review_img2 }');"></c:when>
+            		<c:when test="${ not empty list.review_img3 }"><a href="${path}/user_review_content?review_no=${ list.review_no }" style="background-image: url('${path}${ list.review_img3 }');"></c:when>
+	            </c:choose>
+                <div class="review-textarea">
+                    <p class="title">
                         <c:if test="${ list.review_title.length() gt 15 }">${ list.review_title.substring(0,15) }...</c:if>
                         <c:if test="${ list.review_title.length() lt 15 }">${ list.review_title }</c:if>
-                    </span>
+                    </p>
+                    <p class="content">${ list.animal_name } / 작성자 ${ list.review_id }</p>
                 </div>
-                <div>
-                    <span class="content">등록일 ${ list.review_regdate.substring(0,10) } 조회 ${ list.review_hit }</span>
-                </div>
+                </a>
             </div>
             </c:forEach>
         </div>
         <div class="swiper-pagination"></div>
     </div>
     
-    <div class="main-title">HeartPet과 함께한 고양이 가족</div>
     <div class="swiper reviewSwiper">
         <div class="swiper-wrapper">
         	<c:forEach items="${ cRList }" var="list">
             <div class="swiper-slide">
-                <a href="${ path }/user_review_content?review_no=${ list.review_no }">
-                <c:choose>
-                    <c:when test="${ not empty list.review_img1 }"><img src="${path}${ list.review_img1 }" alt="review_img"></c:when>
-                    <c:when test="${ not empty list.review_img2 }"><img src="${path}${ list.review_img2 }" alt="review_img"></c:when>
-                    <c:when test="${ not empty list.review_img3 }"><img src="${path}${ list.review_img3 }" alt="review_img"></c:when>
-                </c:choose>
+               	<c:choose>
+            		<c:when test="${ not empty list.review_img1 }"><a href="${path}/user_review_content?review_no=${ list.review_no }" style="background-image: url('${path}${ list.review_img1 }');"></c:when>
+            		<c:when test="${ not empty list.review_img2 }"><a href="${path}/user_review_content?review_no=${ list.review_no }" style="background-image: url('${path}${ list.review_img2 }');"></c:when>
+            		<c:when test="${ not empty list.review_img3 }"><a href="${path}/user_review_content?review_no=${ list.review_no }" style="background-image: url('${path}${ list.review_img3 }');"></c:when>
+            		<c:when test="${ empty list.review_img1 || empty list.review_img2 || empty list.review_img3 }"><a href="${path}/user_review_content?review_no=${ list.review_no }" style="background-image: url('${path}${ list.review_img3 }');"></c:when>
+	            </c:choose>
+                <div class="review-textarea">
+                    <p class="title">
+                        <c:if test="${ list.review_title.length() gt 15 }">${ list.review_title.substring(0,15) }...</c:if>
+                        <c:if test="${ list.review_title.length() lt 15 }">${ list.review_title }</c:if>
+                    </p>
+                    <p class="content">${ list.animal_name } / 작성자 ${ list.review_id }</p>
+                </div>
                 </a>
-                <div>
-	                <span class="title">
-	                    <c:if test="${ list.review_title.length() gt 15 }">${ list.review_title.substring(0,15) }...</c:if>
-	                    <c:if test="${ list.review_title.length() lt 15 }">${ list.review_title } </c:if>
-	                </span>
-                </div>
-                <div>
-                    <span class="content">등록일 ${ list.review_regdate.substring(0,10) } 조회 ${ list.review_hit }</span>
-                </div>
             </div>
             </c:forEach>
         </div>
