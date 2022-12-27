@@ -168,7 +168,7 @@
 	<!-- qna : insert -->
 	<insert id="qna_insert" parameterType="QnaDTO">
 		<selectKey resultType="int" keyProperty="board_no" order="BEFORE">
-		SELECT NVL(MAX(board_no, 0))+1 FROM heartpet_board
+		SELECT NVL(MAX(board_no), 0)+1 FROM heartpet_board
 		</selectKey>
 		INSERT INTO heartpet_board 
 			VALUES (#{ board_no },
@@ -363,7 +363,7 @@
 	<!-- fnq : insert -->	
 	<insert id="fnq_insert" parameterType="FnqDTO">
         <selectKey resultType="int" keyProperty="fnq_no" order="BEFORE">
-		SELECT NVL(MAX(fnq_no, 0))+1 
+		SELECT NVL(MAX(fnq_no), 0)+1 
 			FROM heartpet_fnq
         </selectKey>
 		INSERT INTO heartpet_fnq 
