@@ -114,7 +114,9 @@
 	            	</div>
 	            </c:if>
 	        </div>
+	    <c:if test="${!empty wList }">
         <%@ include file="../../include/pagination_update.jsp" %>
+        </c:if>
 	    </div>
     </div>
     <!-- mypage-body end 부분  -->

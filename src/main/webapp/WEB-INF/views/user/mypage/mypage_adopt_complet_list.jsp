@@ -123,7 +123,9 @@
 	            	</div>
 	            </c:if>
 	        </div>
+	    <c:if test="${!empty aList }">
         <%@ include file="../../include/pagination_update.jsp" %>
+        </c:if>
 	    </div>
     </div>
     <!-- mypage-body end 부분  -->
