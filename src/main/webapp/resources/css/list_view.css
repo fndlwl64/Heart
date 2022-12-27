@@ -579,3 +579,13 @@ body {
 .qna-section .qna_order {
     justify-content: right;
 }
+
+.container .noticeinfo textarea {
+	resize: none;
+	height: auto;
+	border: none;
+}
+
+.container .noticeinfo textarea:focus {
+	outline: none;
+}
