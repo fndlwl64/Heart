@@ -85,8 +85,8 @@
 		                    <c:if test="${ cList[status.index] gt 0 }"><span <c:if test="${ list.board_state eq 'disabled' }">style="color:black;"</c:if> class="comment-count">[${ cList[status.index] }]</span></c:if>	                    
                         </a> 
                     </td>
-                    <td><c:if test="${ list.board_id.contains('admin') }"><span id="admin_id">관리자</span></c:if>
-                    <c:if test="${ list.board_id ne 'admin' }"><span>${ list.board_id }</span></c:if></td>
+                    <td><c:if test="${ list.board_id eq 'admin1' || list.board_id eq 'admin2' || list.board_id eq 'admin3' || list.board_id eq 'admin4' || list.board_id eq 'admin5' }"><span id="admin_id">관리자</span></c:if>
+                    <c:if test="${ list.board_id ne 'admin1' || list.board_id ne 'admin2' || list.board_id ne 'admin3' || list.board_id ne 'admin4' || list.board_id ne 'admin5' }"><span>${ list.board_id }</span></c:if></td>
                     <td><small>${ list.board_regdate.substring(0,10) }</small></td>
                     <td>${ list.board_hit }</td>
                 </tr>
