@@ -33,5 +33,5 @@
 		</div>
 	</div>
 </div>
-<br><br><br>
+
 <jsp:include page="../../include/user_footer.jsp" />
