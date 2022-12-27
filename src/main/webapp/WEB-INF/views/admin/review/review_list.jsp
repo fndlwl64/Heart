@@ -86,7 +86,7 @@
                     </td>                
                     <td class="list-title">
 	                    <a href="${ path }/admin_review_content?review_no=${ list.review_no }">
-	                    <c:if test="${ list.review_title.length() gt 30 }">${ list.review_title.substring(0,30) }...</c:if>
+	                    <c:if test="${ list.review_title.length() ge 30 }">${ list.review_title.substring(0,30) }...</c:if>
 	                    <c:if test="${ list.review_title.length() lt 30 }">${ list.review_title }</c:if>
 	                    <c:if test="${ list.review_regdate.substring(0,10) eq today }"><span class="badge rounded-pill text-bg-warning">N</span></c:if>
 	                    <c:if test="${ not empty list.review_img1 || not empty list.review_img2 || not empty list.review_img3 }"><i class="bi bi-paperclip"></i></c:if>
