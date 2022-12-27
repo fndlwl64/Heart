@@ -114,7 +114,7 @@
 											value="${dto.animal_status }"> <input type="hidden"
 											name="animal_no" id="animal_no" value="${dto.animal_no }">
 										<button type="submit" class="btn btn-primary"
-											data-bs-toggle="modal" data-bs-target="#cautionModal"><i class="bi bi-pencil-square"></i> 입양신청</button>
+											data-bs-toggle="modal" data-bs-target="#cautionModal"><i class="bi bi-pencil-square"></i>&nbsp;입양신청</button>
 									</form>
 								</c:otherwise>
 							</c:choose>
@@ -145,12 +145,22 @@
 					<c:otherwise>
 						<c:set var="deleteAddr"
 							value="${path }/user_get_animal?animal_no=${dto.animal_no }"></c:set>
-						<div class="col-1">
+						<div class="col-2 d-flex justify-content-end">
 							<c:choose>
 								<c:when test="${dto.animal_status eq '입양 가능' and not empty user_id}">
+									<c:if test="${not empty user_id }">
+										<button class="btn btn-secondary mx-2" id="wish">
+											<c:if test="${wishCheck ne 0 }">
+												<i class="bi bi-star-fill text-warning"></i>
+											</c:if>
+											<c:if test="${wishCheck eq 0 }">
+												<i class="bi bi-star"></i>
+											</c:if>
+										</button>
+									</c:if>
 									<button class="btn btn-primary " data-bs-toggle="modal"
 										data-bs-target="#deleteModal" data-id="${ deleteAddr }"
-										onclick="changeOption()"><i class="bi bi-pencil-square"></i>입양신청</button>
+										onclick="changeOption()"><i class="bi bi-pencil-square"></i> 입양신청</button>
 								</c:when>
 								<c:otherwise>
 									<%-- <form action="user_get_animal" method="post"
@@ -162,10 +172,10 @@
 											data-bs-toggle="modal" data-bs-target="#cautionModal"><i class="bi bi-pencil-square"></i> 입양신청</button>
 									</form> --%>
 									<c:if test="${dto.animal_status eq '입양 대기' and not empty user_id}">
-										<span class="btn btn-warning">입양대기</span>
+										<span class="btn btn-warning"> 입양대기</span>
 									</c:if>
 									<c:if test="${dto.animal_status eq '입양 완료' and not empty user_id}">
-										<span class="btn btn-secondary">입양완료</span>
+										<span class="btn btn-secondary"> 입양완료</span>
 									</c:if>
 								</c:otherwise>
 							</c:choose>
@@ -175,18 +185,6 @@
 				</c:choose>
 			</div>	
 		</c:if>
-		<div>
-			<c:if test="${not empty user_id }">
-				<button class="btn" id="wish">
-					<c:if test="${wishCheck ne 0 }">
-						<i class="bi bi-star-fill text-warning"></i>
-					</c:if>
-					<c:if test="${wishCheck eq 0 }">
-						<i class="bi bi-star"></i>
-					</c:if>
-				</button>
-			</c:if>
-		</div>
 	</div> <%-- div1 end --%>
 	
 	<!-- Modal -->
