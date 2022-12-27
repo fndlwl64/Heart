@@ -187,7 +187,7 @@ body {
 
 .div1 form {
 	text-align: center;
-	margin-bottom: 5%;
+	margin-bottom: 2%;
 }
 
 .div1 .addUser {
@@ -243,6 +243,16 @@ body {
 	display: none;
 }
 
+.div1 .noticeinfo {
+	margin-bottom: 2%;
+}
 
+.div1 .btns {
+	display: flex;
+	justify-content: space-between;
+	width: 70%;
+	margin-bottom: 2%;
+	margin: auto;
+}
 
 

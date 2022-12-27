@@ -9,7 +9,7 @@
 </head>
 <script src="resources/js/admin.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
-<link rel="stylesheet" href="resources/css/support.css">
+<!-- <link rel="stylesheet" href="resources/css/support.css"> -->
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="dto" value="${Cont }" />
 <body>
@@ -53,12 +53,22 @@
 				</td>
 			</tr>
 		</table>
-		<br>
 		<input type="hidden" name="notice_no" value="${dto.getNotice_no() }">		
-		<button type="button" class="btn btn-secondary mx-1" onclick="location.href='${path}/notice_list'"><i class="bi bi-card-list"></i> 목록</button>
-        <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
-        <button id="update_btn" type="submit" class="btn btn-dark mx-1"><i class="bi bi-save"></i> 변경</button>
+		
+		<div class="btns">
+			<div>
+				<button type="button" class="btn btn-dark mx-1" onclick="location.href='${path}/notice_list'"><i class="bi bi-card-list"></i> 목록</button>
+	        </div>
+	        <div>
+	        	<button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 취소</button>
+	        	<button id="update_btn" type="submit" class="btn btn-success mx-1"><i class="bi bi-eraser"></i> 수정</button>
+	        </div>
+		</div>
+		
 	</form>
+	
+	
+	
 </div>
 </body>
 </html>
