@@ -88,7 +88,7 @@
 				<tr class="animal_content">
 					<th class="table-light col-1"><span class="sp2">유의사항</span></th>
 					<td colspan="3"><textarea rows="2" cols="22"
-							name="animal_caution"><c:out value="${animalDTO.animal_caution }"></c:out></textarea></td>
+							name="animal_caution"></textarea></td>
 				</tr>
 				<tr>
 					<th rowspan="3" class="table-light">이미지</th>

@@ -70,7 +70,7 @@ public class AdminAnimalController {
 	private AnimalService animalService;
 
 	// 한 페이지당 보여질 게시물의 수
-	private final int rowsize = 3;
+	private final int rowsize = 10;
 	// 전체 게시물의 수
 	private int totalRecord = 0;
 

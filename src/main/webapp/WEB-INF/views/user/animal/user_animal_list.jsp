@@ -145,8 +145,9 @@
 	<%--정렬--%>
 	<div class="order">
 		<select class="form-select form-select-sm" name="sort" id="sort">
-			<option selected="selected" value="size" 
-				<c:if test="${sort eq 'size'}">selected</c:if>>최신등록순</option>
+			<option value="">최신등록순</option>
+			<option value="name"
+				<c:if test="${sort eq 'name'}">selected</c:if>>이름</option>
 			<option value="weight"
 				<c:if test="${sort eq 'weight'}">selected</c:if>>무게</option>
 			<option value="age" <c:if test="${sort eq 'age'}">selected</c:if>>나이</option>
