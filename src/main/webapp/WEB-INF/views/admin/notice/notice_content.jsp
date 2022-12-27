@@ -32,10 +32,14 @@
        
         <tr>
             <th class="table-light">이미지</th>
-            <td class="col-1" colspan="2"><img class="list_img" src="resources/upload/${dto.getNotice_img1() }"></td>
-            <c:if test="${!empty dto.notice_img2 }">
-            <td class="col-1" colspan="2"><img class="list_img" src="resources/upload/${dto.getNotice_img2() }"></td>
+
+            <c:if test="${!empty dto.getNotice_img1() }">
+            <td class="col-1" colspan="5"><img src="resources/upload/${dto.getNotice_img1() }" style="max-height: 200px;" alt="notice_img"></td>
             </c:if>
+            <c:if test="${!empty dto.getNotice_img2() }">
+            <td class="col-1" colspan="5"><img src="resources/upload/${dto.getNotice_img2() }" style="max-height: 200px;" alt="notcie_img"></td>
+        	</c:if>
+
         </tr>
 
     </table>

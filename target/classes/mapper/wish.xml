@@ -12,7 +12,7 @@
 	<insert id="wish_insert" parameterType="WishDTO">
 		<selectKey resultType="int" keyProperty="wish_no"
 			order="BEFORE">
-			select max(wish_no) from heartpet_wish
+			select NVL(max(wish_no),0) from heartpet_wish
 		</selectKey>
 		insert into heartpet_wish values(#{wish_no}+1,#{wish_petno},#{wish_userid})
 	</insert>
@@ -22,12 +22,15 @@
 	
 	<!-- ////////////////////////////////////////////// -->
 	<select id="wish_animal_select" parameterType="hashMap" resultType="int">
-		select count(*) from heartpet_wish where wish_petno = ${animal_no} and wish_userid = #{user_id}
+		select count(*) from heartpet_wish where wish_petno = ${animal_no}
+		<if test="user_id != null">
+		 and wish_userid = #{user_id}
+		</if>
 	</select>
 	
 	<insert id="wish_animal_insert" parameterType="hashMap">
 		<selectKey resultType="int" keyProperty="wish_no" order="BEFORE">
-			select max(wish_no) from heartpet_wish
+			select NVL(max(wish_no),0) from heartpet_wish
 		</selectKey>
 		insert into heartpet_wish values(#{ wish_no }+1, #{ animal_no }, #{ user_id })
 	</insert>

@@ -72,10 +72,12 @@ public class AnimalController {
 		String session_id = (String)request.getSession().getAttribute("session_id");
 		
 		//좋아요
-		WishDTO wishDTO = new WishDTO();
-		wishDTO.setWish_petno(animalDTO.getAnimal_no());
-		wishDTO.setWish_userid(session_id);
-		model.addAttribute("wishCheck",wishDAO.check(wishDTO));
+		/*
+		 * WishDTO wishDTO = new WishDTO();
+		 * wishDTO.setWish_petno(animalDTO.getAnimal_no());
+		 * wishDTO.setWish_userid(session_id);
+		 * model.addAttribute("wishCheck",wishDAO.check(wishDTO));
+		 */
 		
 		
 		int currentPage = 1;	// 현재 페이지 변수
@@ -131,13 +133,17 @@ public class AnimalController {
 
     	
     	//좋아요
-		WishDTO wishDTO = new WishDTO();
-		wishDTO.setWish_petno(animalDTO.getAnimal_no());
-		wishDTO.setWish_userid((String)request.getSession().getAttribute("session_id"));
-		model.addAttribute("wishCheck",wishDAO.check(wishDTO));
+		/*
+		 * WishDTO wishDTO = new WishDTO();
+		 * wishDTO.setWish_petno(animalDTO.getAnimal_no());
+		 * wishDTO.setWish_userid((String)request.getSession().getAttribute("session_id"
+		 * )); model.addAttribute("wishCheck",wishDAO.check(wishDTO));
+		 */
 
 		//페이징
 		String field = ""; 
+		
+		String session_id = (String)request.getSession().getAttribute("session_id");
 		
 		int currentPage = 1;	// 현재 페이지 변수
 		if(page != 1) { currentPage = page; }
@@ -163,17 +169,23 @@ public class AnimalController {
 		System.out.println(startWeight);
 		
 		totalRecord = animalDAO.countPaging(animalDTO, keyword,startWeight,endWeight);
-		
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
+    	List<AnimalDTO> animalList = animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword,sort,startWeight , endWeight);
+    	
+    	
+    	List<Integer> wishList = new ArrayList<Integer>();
+    	for(int i=0; i<animalList.size(); i++) {
+    	  wishList.add(wishDAO.selectWish(animalList.get(i).getAnimal_no(), session_id));
+    	}
     	
     	model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
  		model.addAttribute("field", field);
  		model.addAttribute("sort",sort);
  		model.addAttribute("keyword",keyword);
-		model.addAttribute("animalList", animalDAO.listPaging(paging.getStartNo(), paging.getEndNo(),animalDTO,keyword,sort,startWeight , endWeight));
+		model.addAttribute("animalList", animalList);
 		model.addAttribute("animalDTO",animalDTO);
-
+		model.addAttribute("wishList", wishList);
 		return "user/animal/user_animal_list";
 	}
 
