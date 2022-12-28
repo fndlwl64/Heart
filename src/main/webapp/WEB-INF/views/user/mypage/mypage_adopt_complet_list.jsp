@@ -78,7 +78,7 @@
                                             <c:if test="${dto.getAnimal_species().length() > 5}">
                                                 ${dto.getAnimal_species().substring(0,4)} ..
                                             </c:if>                                     
-                                            <c:if test="${dto.getAnimal_species().length() < 5}">
+                                            <c:if test="${dto.getAnimal_species().length() <= 5}">
                                                 ${dto.getAnimal_species()}
                                             </c:if></span><br />
                                         <label>성별</label><span> 
@@ -89,7 +89,7 @@
                                                 수컷 (♂)
                                             </c:if></span><br />
                                         <label>나이</label><span> ${dto.getAnimal_age()}살</span><br />
-                                        <label>입양예정일</label><span> 
+                                        <label>입양완료일</label><span> 
                                             <c:if test="${empty dto.getAdopt_reg_duedate()}">
                                                 미정
                                             </c:if>                                         

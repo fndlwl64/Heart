@@ -77,7 +77,7 @@
 											<c:if test="${dto.getAnimal_species().length() > 5}">
 												${dto.getAnimal_species().substring(0,4)} ..
 											</c:if>											
-											<c:if test="${dto.getAnimal_species().length() < 5}">
+											<c:if test="${dto.getAnimal_species().length() <= 5}">
 												${dto.getAnimal_species()}
 											</c:if></span><br />
 					                	<label>성별</label><span> 
