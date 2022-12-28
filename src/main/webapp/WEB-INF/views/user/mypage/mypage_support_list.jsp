@@ -12,6 +12,20 @@
 <c:set var="search_date_end" value="${ search_date_end }"/>
 <c:set var="url" value="&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }"/>
 <link rel="stylesheet" href="resources/css/mypage.css"/>
+<style>
+	.date_search {
+	    width: 50%;
+	    margin: 0 auto;
+	    margin-top: 2rem;
+	    margin-bottom: 2rem;
+	    padding: 2%;
+	    border-radius: 5px;
+	    justify-content: space-evenly;
+	    align-items: center;
+	    border: 1px solid #545a62;
+	    font-weight: bold;
+	}
+</style>
 <%-- 여기서부터 작성 --%>
 
 <%-- <div class="mypage_header">
@@ -61,9 +75,10 @@
     </div> --%>
     <%@ include file="mypage_menu.jsp" %>
 	    <div id="my_cont2" class="mypage_cont">
-	    	<h3>후원내역</h3>	
+	    	<h3>후원내역</h3>
+	    		
 	    	<form method="post" action="${path }/user_mypage_support_list">    	
-		    	<div align="center">
+		    	<div class="date_search" align="center">
 		    		<table style="width: 400px;">
 		    			<tr>
 		    				<td colspan="3">
@@ -108,7 +123,6 @@
 		            <tr>
 		            	<th class="align-right" colspan="3"><strong>후원금액 합계 : <fmt:formatNumber value="${ Sum }" /> 원</strong></th>
 		            </tr>
-		            
 		            </table>
 	            </c:if>
 	            <c:if test="${empty List}">
