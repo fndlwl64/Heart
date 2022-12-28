@@ -22,7 +22,7 @@
 </style>
 <head>
     <meta charset="UTF-8">
-    <title>HeartPet</title>
+    <title>HeartPet_Admin_Support</title>
     <link rel="stylesheet" href="resources/css/list_view.css">
     <link rel="stylesheet" href="resources/css/support.css">
 	<script src="${path}/resources/js/admin_list_view.js"></script>

@@ -5,7 +5,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>HeartPet_Admin_User</title>
 </head>
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <body>

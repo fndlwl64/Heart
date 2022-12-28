@@ -6,7 +6,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>HeartPet_Admin_Notice</title>
 </head>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script src="${path}/resources/js/notice.js"></script>

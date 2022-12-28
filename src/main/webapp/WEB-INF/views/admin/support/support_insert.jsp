@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>HeartPet_Admin_Support</title>
 </head>
 <script src="${path}/resources/js/support.js"></script>
 <link rel="stylesheet" href="resources/css/support.css">
