@@ -132,8 +132,6 @@ a:hover {
 						<c:if test="${animal_status eq '입양 완료'}">
 							<th class="table-light" width="15%">입양 완료일</th>
 						</c:if>
-
-
 						<!-- 진행 상태 th -->
 						<th class="table-light" width="15%">진행 상태</th>
 
@@ -148,12 +146,12 @@ a:hover {
 							<th class="table-light" width="15%">예정일 / 완료일</th>
 						</c:if>
 					</tr>
-					<c:set var="No" value="${paging.startNo - 1 }"></c:set>
+					<c:set var="No" value="${total - paging.startNo + 2}"></c:set>
 
 					<!-- tr 시작부-->
 
 					<c:forEach var="dto" items="${list }">
-						<c:set var="No" value="${No + 1 }"></c:set>
+						<c:set var="No" value="${No - 1 }"></c:set>
 						<c:if test="${map.get(dto.adopt_reg_animalno).get(2) eq 1}">
 							<tr>
 								<td class="list-title text-center">${No }</td>
