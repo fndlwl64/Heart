@@ -50,10 +50,7 @@
     text-align: center;
 }
 
-.notice-board #search-table {
-}
-
-.notice-board #search-table tr th, td {
+#search-table tr th, td {
 	vertical-align: middle;
 	border: none;
 }

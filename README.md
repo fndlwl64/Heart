@@ -4,9 +4,9 @@
 
 <br/>
 
-### 진행기간 : 2022.11.25 ~ 2022.12.29
-### 팀리더 : 조정수 [fndlwl64](https://github.com/fndlwl64)
-### 팀원 : 남윤지 [YJ-NAM](https://github.com/YJ-NAM), 박유진 [okzln](https://github.com/okzln), 이범용 [LeeBeomYong](https://github.com/LeeBeomYong)
+##### 진행기간 : 2022.11.25 ~ 2022.12.29
+##### 팀리더 : 조정수 [fndlwl64](https://github.com/fndlwl64)
+##### 팀원 : 남윤지 [YJ-NAM](https://github.com/YJ-NAM), 박유진 [okzln](https://github.com/okzln), 이범용 [LeeBeomYong](https://github.com/LeeBeomYong)
 
 <br/>
 
