@@ -132,7 +132,7 @@
 	                	<c:if test="${list.user_grade ne 5 }">
 	                	<c:set value="${ path }/user_delete?user_no=${ list.user_no }" var="deleteAddr" />
 	                    <button class="btn btn-outline-success btn-sm" onclick="location.href='${path}/user_update?user_id=${list.user_id }'">수정</button>
-	                    <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }">삭제</button>
+	                    <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${path}/user_delete?user_id=${list.user_id}">삭제</button>
 	                    </c:if>
 	                    
 	                </td>
