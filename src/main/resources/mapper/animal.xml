@@ -114,14 +114,9 @@
 	<select id="animal_join_status" parameterType="map" resultType="Integer">
 		select animal_no from
 		heartpet_animal
-		<if test="animal_name == null and animal_status != null and !animal_status.equals('')">
 		where animal_status = #{animal_status} 
-		</if>
-		<if test="animal_status == null and animal_name != null and !animal_name.equals('')">
+		<if test="!animal_name.equals('')">
 		and animal_name like '%' || #{animal_name } || '%'
-		</if>
-		<if test="animal_status != null and animal_name != null and !animal_name.equals('') and !animal_status.equals('')">
-		where animal_status = #{animal_status} and animal_name like '%' || #{animal_name } || '%'
 		</if>
 		order by animal_no desc 
 	</select>

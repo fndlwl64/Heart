@@ -284,8 +284,7 @@ public class AdminAnimalController {
 		String field = "";
 		String keyword = "";
 		
-		System.out.println(animal_name == null);
-		System.out.println(animal_status == null);
+		if(animal_name == null) {animal_name = "";}
 		
 		if(animal_status == null) {
 			animal_status = "입양 대기";
