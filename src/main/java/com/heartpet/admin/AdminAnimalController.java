@@ -90,8 +90,6 @@ public class AdminAnimalController {
 		if (page != 1) {
 			currentPage = page;
 		}
-
-
     	int startWeight = 0 ;
     	int endWeight = 0 ;
     	
@@ -277,9 +275,7 @@ public class AdminAnimalController {
 			@RequestParam(value = "page", defaultValue = "1") int page, Model model,
 			@RequestParam(value = "animal_status", required = false) String animal_status,
 			@RequestParam(value = "sort",required = false) String sort,
-			@RequestParam(value = "animal_name",required = false) String animal_name,
-			@RequestParam(value = "animal_no",required = false) int animal_no
-			) {
+			@RequestParam(value = "animal_name",required = false) String animal_name) {
 		// 페이징
 		String field = "";
 		String keyword = "";
@@ -293,6 +289,12 @@ public class AdminAnimalController {
 		}
 		if(animal_status != null && animal_status.equals("possible")) {
 			animal_status = "입양 가능";
+		}
+		if(animal_status != null && animal_status.equals("waiting")) {
+			animal_status = "입양 대기";
+		}
+		if(animal_status != null && animal_status.equals("completion")) {
+			animal_status = "입양 완료";
 		}
 		/*
 		 * if(animal_status != null && animal_status == "입양 완료") { sort =
@@ -371,12 +373,7 @@ public class AdminAnimalController {
 		
 		animalService.adoptRegUpdate(adoptRegDTO);
 		return "redirect:/adoptreg_list";
-//		if(adoptRegDTO.getAdopt_reg_adoptdate() == null || adoptRegDTO.getAdopt_reg_adoptdate().equals("")) {
-//			return "redirect:/adoptreg_list?animal_status=입양 대기";
-//		}else {
-//			return "redirect:/adoptreg_list?animal_status=입양 완료";
-//		}
-//		
+		
 	}
 
 	@RequestMapping(value = "/adoptreg_admission")
