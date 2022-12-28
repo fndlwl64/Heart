@@ -208,9 +208,6 @@ public class AdminAnimalController {
 	@RequestMapping(value = "/animal_insert", method = RequestMethod.POST)
 	public String animal_insert_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO)
 			throws IllegalStateException, IOException {
-		for(MultipartFile file : files) {
-			System.out.println(file.getOriginalFilename());
-		}
 		// Adoptreg 추가
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String strDate = dateFormat.format(Calendar.getInstance().getTime());
@@ -243,7 +240,7 @@ public class AdminAnimalController {
 			return "alert";
 		}
 
-		return "admin/admin_main";
+		return "redirect:/"+animalDTO.getAnimal_tag()+"_list";
 	}
 
 	@RequestMapping("/animal_delete")
