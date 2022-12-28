@@ -28,9 +28,9 @@
 <c:set var="pagingStatus"
 	value="startDate=${ startDate }&endDate=${ endDate }&animal_status=" />
 <c:set var="pagingSort"
-	value="startDate=${ startDate }&endDate=${ endDate }&animal_status=${animal_status }&animal_name=${animal_name }&animal_no=${animal_no }" />
+	value="startDate=${ startDate }&endDate=${ endDate }&animal_status=${animal_status }&animal_name=${animal_name }" />
 <c:set var="pagingTag"
-	value="startDate=${ startDate }&endDate=${ endDate }&animal_status=${animal_status }&animal_name=${animal_name }&animal_no=${animal_no }&sort=${sort }" />
+	value="startDate=${ startDate }&endDate=${ endDate }&animal_status=${animal_status }&sort=${sort }" />
 <input type="hidden" id="sortlink"
 	value="<%=request.getContextPath() %>/adoptreg_list?page=${ paging.page }&${pagingSort}" />
 <!-- 쿼리 조인을 피하기 위한 key, value를 통한 animal테이블 데이터 참조 -->

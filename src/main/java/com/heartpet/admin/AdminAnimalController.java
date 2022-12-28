@@ -420,15 +420,15 @@ public class AdminAnimalController {
 		}else if(animal_status.equals("입양 가능")) {
 			animalDTO.setAnimal_status("입소 신청");
 			path = "possible";
-		}else if(animal_status.equals("입양 완료")) {
-			animalDTO.setAnimal_status("입양 대기");
-			adoptRegDTO = new AdoptRegDTO();
-			adoptRegDTO.setAdopt_reg_animalno(animal_no);
-			adoptRegDTO.setAdopt_reg_adoptdate("");
-			path = "입양 대기";
 		}
-		adoptRegDAO.update(adoptRegDTO);
-		animalDAO.updateStatus(animalDTO);
+//		else if(animal_status.equals("입양 완료")) {
+//			animalDTO.setAnimal_status("입양 대기");
+//			adoptRegDTO = new AdoptRegDTO();
+//			adoptRegDTO.setAdopt_reg_animalno(animal_no);
+//			adoptRegDTO.setAdopt_reg_adoptdate("");
+//			path = "입양 대기";
+//		}
+
 		try {
 			animalService.update(animalDTO, adoptRegDTO);
 		} catch (Exception e) {
