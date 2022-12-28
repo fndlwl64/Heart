@@ -7,7 +7,11 @@
 
 <jsp:include page="../../include/user_header.jsp" />
 <link rel="stylesheet" href="${path}/resources/css/notice.css">
-
+<style>
+	.table-light{
+		vertical-align: middle;
+	}
+</style>
 <div class="container">
 
 	<div class="sub-title"><h4>공지사항</h4></div>

@@ -9,8 +9,8 @@
     <title>HeartPet</title>
     <link rel="stylesheet" href="${path}/resources/css/list_view.css">
     <link rel="stylesheet" href="resources/css/notice.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<!--     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> -->
 </head>
 <style>
 	.buttons{
@@ -24,40 +24,36 @@
 	}
 	
 	.table {
-		width: 70%;
+		width: 80%;
 	}
 </style>
 <body>
 <c:set var="dto" value="${Cont }"/>
-<div class="container" align="center">
-	<div style="width: 70%;" class="sub-title"><h4>공지 상세 내용</h4></div>
-    <br>
-    <br><br>
-
+<div class="container" align="center" style="width: 80%;">
+	<div class="sub-title"><h4>공지 상세 내용</h4></div>
     <table class="table noticeinfo mt-4">
         <tr>
             <th class="table-light col-1">제목</th>
-            <td class="col-1" colspan="5" style="font-weight:bold;">${dto.getNotice_title() }</td>
+            <td class="col-1" style="font-weight:bold;">${dto.getNotice_title() }</td>
         </tr>
 
         <tr>
             <th class="table-light">내용</th>
-            <td class="col-1"colspan="5">
+            <td class="col-1">
                 <textarea class="sp_content3" cols="60" readonly>${dto.getNotice_content() }</textarea>
             </td>
         </tr>
         <tr>
             <th class="table-light">이미지</th>
             <c:if test="${!empty dto.getNotice_img1() }">
-            <td class="col-1" colspan="2"><img src="resources/upload/${dto.getNotice_img1() }" style="max-height: 200px;" alt="notice_img"></td>
+            <td class="col-1"><img src="resources/upload/${dto.getNotice_img1() }" style="max-height: 200px;" alt="notice_img"></td>
             </c:if>
             <c:if test="${!empty dto.getNotice_img2() }">
-            <td class="col-1" colspan="2"><img src="resources/upload/${dto.getNotice_img2() }" style="max-height: 200px;" alt="notcie_img"></td>
+            <td class="col-1"><img src="resources/upload/${dto.getNotice_img2() }" style="max-height: 200px;" alt="notcie_img"></td>
         	</c:if>
         </tr>
     </table>
 
-    <br>
     <%-- 목록 버튼만 : 수정,삭제,등록은 list.jsp에서  --%>
     <div class="buttons">
     	<div>
