@@ -5,11 +5,11 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="dto" value="${Modify}"/>
 <link rel="stylesheet" href="resources/css/support.css">
-<br><br>
+<link rel="stylesheet" href="resources/css/list_view.css">
 <div class="div1" align="center">
 	<form method="post" action="${path }/support_update_ok">
 		
-		<div class="sub-title"><h4>후원 상세 내역</h4></div>
+		<div class="sub-title"><h4>후원 수정하기</h4></div>
 		
 		<table class="table noticeinfo mt-4">
 			<tr class="border-top">

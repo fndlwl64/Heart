@@ -30,7 +30,7 @@
 <body>
 <c:set var="dto" value="${Cont }"/>
 <div class="container" align="center">
-
+	<div class="sub-title"><h4>회원 상세 내용</h4></div>
     <br>
     <br><br>
 

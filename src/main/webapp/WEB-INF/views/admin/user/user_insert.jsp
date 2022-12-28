@@ -14,6 +14,7 @@
 	<br><br>
 	
 	<div class="div1">
+		<div style="width: 98%;" class="sub-title"><h4>회원 상세 내용</h4></div>
 		
 		<form method="post" action="${path }/user_inserted">
 			
