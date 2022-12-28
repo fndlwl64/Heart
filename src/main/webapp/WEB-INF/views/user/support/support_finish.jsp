@@ -17,4 +17,5 @@
 	</div>
 </div>
 
+
 <jsp:include page="../../include/user_footer.jsp" />

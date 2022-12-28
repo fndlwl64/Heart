@@ -56,7 +56,7 @@
             </div>
             <div>
 	            <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
-	            <button type="submit" class="btn btn-success mx-1"><i class="bi bi-save"></i> 수정</button>
+	            <button type="submit" class="btn btn-success mx-1"><i class="bi bi-eraser"></i> 수정</button>
             </div>
 		</div>
         </form>        
