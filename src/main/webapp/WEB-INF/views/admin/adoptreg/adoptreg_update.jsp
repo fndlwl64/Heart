@@ -75,7 +75,7 @@
 				<tr>
 					<th class="table-light" height="50px">입양 완료일</th>
 					<td colspan="5">
-						<input type="datetime-local" name="adopt_reg_adoptdate" class="form-control">
+						<input type="datetime-local" name="adopt_reg_adoptdate" class="form-control" value="${content.adopt_reg_adoptdate }">
 					</td>
 				</tr>
 			</c:if>
@@ -85,8 +85,10 @@
                 <button type="button" class="btn btn-dark mx-1" onclick="location.href='${path}/adoptreg_list'"><i class="bi bi-card-list"></i> 목록</button>
 		    </div>
 		    <div>
-		    	<a class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }" onclick="changeOption()" style="color: white"><i class="bi bi-x-circle"></i> 입양 취소</a>
-			    <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
+		    	<c:if test="${empty content.adopt_reg_adoptdate }">
+		    		<a class="btn btn-danger " data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }" onclick="changeOption()" style="color: white"><i class="bi bi-x-circle"></i> 입양 취소</a>
+		    	</c:if>
+		    	<button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
 			    <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> 등록</button>
 		    </div>
 		</div>

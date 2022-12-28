@@ -34,6 +34,10 @@ a:hover {
 	color: white !important;
 	text-decoration: none !important;
 }
+/* a:hover {
+	color: black !important;
+	text-decoration: none !important;
+} */
 </style>
 <body>
 	<div class="container">
@@ -84,16 +88,16 @@ a:hover {
 			<div class="d-flex justify-content-start my-2">
 				<div class="row">
 					<div class="col">
-						<a class="btn btn-danger btn-sm" style="width: 80px;" href="<%=request.getContextPath() %>/adoptreg_list?page=1&${pagingStatus }입소 신청">입소 신청</a>
+						<a class="btn btn-danger btn-sm" style="width: 80px;" href="<%=request.getContextPath() %>/adoptreg_list?page=1&${pagingStatus }입소 신청&animal_name=${animal_name}">입소 신청</a>
 					</div>
 					<div class="col">
-						<a class="btn btn-primary btn-sm" style="width: 80px;" href="<%=request.getContextPath() %>/adoptreg_list?page=1&${pagingStatus }입양 가능">입양 가능</a>
+						<a class="btn btn-primary btn-sm" style="width: 80px;" href="<%=request.getContextPath() %>/adoptreg_list?page=1&${pagingStatus }입양 가능&animal_name=${animal_name}">입양 가능</a>
 					</div>
 					<div class="col">
-						<a class="btn btn-success btn-sm" style="width: 80px;" href="<%=request.getContextPath() %>/adoptreg_list?page=1&${pagingStatus }입양 대기">입양 대기</a>
+						<a class="btn btn-success btn-sm" style="width: 80px;" href="<%=request.getContextPath() %>/adoptreg_list?page=1&${pagingStatus }입양 대기&animal_name=${animal_name}">입양 대기</a>
 					</div>
 					<div class="col">
-						<a class="btn btn-secondary btn-sm" style="width: 80px;" href="<%=request.getContextPath() %>/adoptreg_list?page=1&${pagingStatus }입양 완료&sort=adopt_reg_adoptdate">입양 완료</a>
+						<a class="btn btn-secondary btn-sm" style="width: 80px;" href="<%=request.getContextPath() %>/adoptreg_list?page=1&${pagingStatus }입양 완료&animal_name=${animal_name}&sort=adopt_reg_adoptdate">입양 완료</a>
 					</div>
 				</div>
 			</div>
@@ -156,7 +160,9 @@ a:hover {
 							<tr>
 								<td class="list-title text-center">${No }</td>
 								<td class="list-title text-center">${dto.adopt_reg_userid }</td>
-								<td class="list-title text-center">${map.get(dto.adopt_reg_animalno).get(0) }</td>
+								<td class="list-title text-center">
+									<a class="" href="animal_content?no=${dto.adopt_reg_animalno }">${map.get(dto.adopt_reg_animalno).get(0) }</a>
+								</td>
 
 								<!-- td : 신청일 -->
 								<c:if test="${animal_status eq '입소 신청' }">
@@ -195,7 +201,9 @@ a:hover {
 									</c:if>
 
 									<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 완료' }">
-										<td>${map.get(dto.adopt_reg_animalno).get(1)}</td>
+										<td>
+											<a class="btn btn-outline-secondary btn-sm" href="adoptreg_update?adopt_reg_regno=${dto.adopt_reg_regno }&status=adoptdate">${map.get(dto.adopt_reg_animalno).get(1)}</a>
+										</td>
 									</c:if>
 								</c:if>
 								<c:if test="${map.get(dto.adopt_reg_animalno).get(2) eq 0}">
