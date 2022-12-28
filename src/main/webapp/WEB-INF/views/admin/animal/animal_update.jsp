@@ -91,7 +91,7 @@
 				</tr>
 				<tr class="animal_content">
 					<th class="table-light col-1"><span class="sp2">유의사항</span></th>
-					<td colspan="3"><textarea rows="2" cols="22"
+					<td colspan="7"><textarea rows="2" cols="22"
 							name="animal_caution"><c:out
 								value="${animalDTO.animal_caution }"></c:out></textarea></td>
 				</tr>
@@ -116,7 +116,7 @@
 							</c:if>
 						</div>
 					</td>
-					<td colspan="2">
+					<td colspan="3">
 						<div class="d-grid align-middle original-image">
 							<input type="file" class="form-control" name="files"
 								accept="image/gif, image/jpeg, image/png"
@@ -156,18 +156,19 @@
 					</td>
 				</tr>
 			</table>
-
+			
 			<div class="btns">
 				<div>
-					<button class="btn btn-dark insertbtn mb-3"><i class="bi bi-card-list"></i> 목록</button>
-				</div>	
+					<button onclick="location.href='${path}/${dto.animal_tag }_list'" class="btn btn-dark insertbtn mb-3"><i class="bi bi-card-list"></i> 목록</button>
+				</div>
 				<div>
-					<button class="btn btn-warning insertbtn mb-3"><i class="bi bi-pencil"></i> 리셋</button>
-					<button class="btn btn-success insertbtn mb-3"><i class="bi bi-eraser"></i> 수정</button>
+					<button type="reset" class="btn btn-warning insertbtn mb-3"><i class="bi bi-pencil"></i> 리셋</button>
+					<button type="submit" class="btn btn-success insertbtn mb-3"><i class="bi bi-eraser"></i> 수정</button>
 				</div>
 			</div>
 		</form>
 	</div>
+	
 	<script type="text/javascript">
 	/*동적 동물 선택 태그*/
 		console.log(dog_select);

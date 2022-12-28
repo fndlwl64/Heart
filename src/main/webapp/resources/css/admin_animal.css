@@ -43,7 +43,6 @@ body {
 
 .animal_button {
 	margin: 10px;
-	width: 70%;
 	display: flex;
 	justify-content: space-between;
 }
@@ -59,4 +58,9 @@ textarea {
 	height: 15em;
 	border: none;
 	resize: none;
+}
+
+.container .btns {
+	display: flex;
+	justify-content: space-between;
 }
