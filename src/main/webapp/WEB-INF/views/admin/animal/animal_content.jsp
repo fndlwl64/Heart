@@ -59,10 +59,10 @@ pageContext.setAttribute("newline", "\n");
 					<span style="color: #0d6efd; font-weight: bold;">${ dto.animal_status }</span>
 				</c:if>				
 	            <c:if test="${ dto.animal_status eq '입양 대기' }">
-					<a style="text-decoration: none;" href="${ path }/adoptreg_list?animal_no=${ dto.animal_no }"><span style="color: #218838; font-weight: bold;">${ dto.animal_status }</span></a>
+					<a style="text-decoration: none;" href="${ path }/adoptreg_list?animal_no=${ dto.animal_no }&animal_status=${dto.animal_status }"><span style="color: #218838; font-weight: bold;">${ dto.animal_status }</span></a>
 				</c:if>
 				<c:if test="${ dto.animal_status eq '입양 완료' }">
-					<a style="text-decoration: none;" href="${ path }/adoptreg_list?animal_no=${ dto.animal_no }"><span style="color: #6c757d; font-weight: bold;">${ dto.animal_status }</span></a>
+					<a style="text-decoration: none;" href="${ path }/adoptreg_list?animal_no=${ dto.animal_no }&animal_status=${dto.animal_status }"><span style="color: #6c757d; font-weight: bold;">${ dto.animal_status }</span></a>
 				</c:if>
 	            </td>
 	            <th class="table-light">발견 장소</th>

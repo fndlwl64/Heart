@@ -25,7 +25,7 @@
                     <tr>
                         <th>아이디</th>
                         <td>
-                            <input id="input_id" class="text" name="user_id" size="40" required>
+                            <input id="input_id" class="form-control" name="user_id" size="40" required>
                             <span id="join_id" class="user_id"></span>
                         </td>
                     </tr>
@@ -33,7 +33,7 @@
                     <tr>
                         <th>비밀번호</th>
                         <td>
-                            <input id="input_pwd" class="text" type="password" name="user_pwd" size="40" required>
+                            <input id="input_pwd" class="form-control" type="password" name="user_pwd" size="40" required>
                             <span id="join_pwd" class="user_pwd"></span>
                         </td>
                     </tr>
@@ -41,7 +41,7 @@
                     <tr>
                         <th>이름</th>
                         <td>
-                            <input id="input_name" class="text" name="user_name" size="40" required>
+                            <input id="input_name" class="form-control" name="user_name" size="40" required>
                             <span id="join_name" class="user_name"></span>
                         </td>
                     </tr>
@@ -56,7 +56,7 @@
                     <tr>
                         <th>이메일</th>
                         <td>
-                            <input id="input_email" class="text" name="user_email" size="40" required>
+                            <input id="input_email" class="form-control" name="user_email" size="40" required>
                             <span id="join_email" class="user_email"></span>
                         </td>
                     </tr>
@@ -64,7 +64,7 @@
                     <tr>
                         <th>연락처</th>
                         <td>
-                            <input id="input_phone" class="text" name="user_phone" size="40" required>
+                            <input id="input_phone" class="form-control" name="user_phone" size="40" required>
                             <span id="join_phone" class="user_phone"></span>
                         </td>
                     </tr>
@@ -72,12 +72,12 @@
                     <tr>
                         <th>주소</th>
                         <td>
-                            <input class="text zipcode" name="user_addr" type="text" id="sample6_postcode" placeholder="우편번호" required>
-                            <input id="zipcode_search" class="search_zipcode" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-                            <input class="text addr" name="user_addr" type="text" id="sample6_address" placeholder="주소" required><br>
-                            <input class="text addr" name="user_addr" type="text" id="sample6_detailAddress" placeholder="상세주소" required>
-                            <input class="text addr" name="user_addr" type="text" id="sample6_extraAddress" placeholder="참고항목" required>
-                        </td>
+			                <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_postcode" placeholder="우편번호">
+		                    <input id="zipcode_search" class="search_zipcode" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+		                    <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_address" placeholder="주소"><br>
+		                    <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_detailAddress" placeholder="상세주소">
+		                    <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_extraAddress" placeholder="참고항목">
+		                </td>
                     </tr>
 
                     <tr>

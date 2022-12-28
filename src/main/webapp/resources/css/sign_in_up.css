@@ -46,4 +46,10 @@ body {
     border-radius: 7px;
     border: none;
     padding: 5px;
+    width: 35%;
+}
+
+.container .join_div .join_form .addr {
+	border: 1px solid lightgray;
+	margin-bottom: 0.3rem;
 }

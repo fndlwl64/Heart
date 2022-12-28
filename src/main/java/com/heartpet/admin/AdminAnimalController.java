@@ -208,7 +208,9 @@ public class AdminAnimalController {
 	@RequestMapping(value = "/animal_insert", method = RequestMethod.POST)
 	public String animal_insert_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO)
 			throws IllegalStateException, IOException {
-
+		for(MultipartFile file : files) {
+			System.out.println(file.getOriginalFilename());
+		}
 		// Adoptreg 추가
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String strDate = dateFormat.format(Calendar.getInstance().getTime());
@@ -275,10 +277,15 @@ public class AdminAnimalController {
 			@RequestParam(value = "page", defaultValue = "1") int page, Model model,
 			@RequestParam(value = "animal_status", required = false) String animal_status,
 			@RequestParam(value = "sort",required = false) String sort,
-			@RequestParam(value = "animal_name",required = false) String animal_name) {
+			@RequestParam(value = "animal_name",required = false) String animal_name,
+			@RequestParam(value = "animal_no",required=true,defaultValue="0") int animal_no
+			) {
 		// 페이징
 		String field = "";
 		String keyword = "";
+		
+		System.out.println(animal_name == null);
+		System.out.println(animal_status == null);
 		
 		if(animal_status == null) {
 			animal_status = "입양 대기";
@@ -314,26 +321,44 @@ public class AdminAnimalController {
 			}
 		}
 		// 페이지
-		totalRecord = adoptRegDAO.countTag(startDate, endDate, adopt_tag, status_no);
+		if(animal_no == 0) {
+			totalRecord = adoptRegDAO.countTag(startDate, endDate, adopt_tag, status_no);	
+		}else {
+			totalRecord = 1;
+		}
 		PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
 
 		// 해시맵으로 조인 유사하게 구현
-		List<AnimalDTO> animalList = animalDAO.list();
+		
+		List<AnimalDTO> animalList = null;
 		Map<Integer, ArrayList<Object>> maps = new HashMap();
-		for (AnimalDTO dto : animalList) {
+		if(animal_no == 0) {
+			animalList = animalDAO.list();
+			for (AnimalDTO dto : animalList) {
+				ArrayList<Object> aList = new ArrayList();
+				aList.add(dto.getAnimal_name());
+				aList.add(dto.getAnimal_status());
+				aList.add(dto.getAnimal_state());
+				maps.put(dto.getAnimal_no(), aList);
+			}
+		}
+		else {
+			AnimalDTO dto = animalDAO.content(animal_no);
 			ArrayList<Object> aList = new ArrayList();
 			aList.add(dto.getAnimal_name());
 			aList.add(dto.getAnimal_status());
 			aList.add(dto.getAnimal_state());
 			maps.put(dto.getAnimal_no(), aList);
 		}
-		
-		System.out.println(maps.get(161).get(0) +" " +maps.get(161).get(1));
-		System.out.println(maps.get(160).get(0) +" " +maps.get(160).get(1));
-		System.out.println(maps.get(159).get(0) +" " +maps.get(159).get(1));
-
-		List<AdoptRegDTO> list = adoptRegDAO.listPaging(paging.getStartNo(), paging.getEndNo(), startDate, endDate,adopt_tag,
-				status_no,sort);	
+		List<AdoptRegDTO> list = null;
+		if(animal_no == 0) {
+			list = adoptRegDAO.listPaging(paging.getStartNo(), paging.getEndNo(), startDate, endDate,adopt_tag,
+					status_no,sort);
+		}else {
+			list = new ArrayList<AdoptRegDTO>();
+			AdoptRegDTO dto = adoptRegDAO.contentAnimal(animal_no);
+			list.add(dto);
+		}
 
 		model.addAttribute("total", totalRecord);
 		model.addAttribute("paging", paging);
@@ -393,15 +418,15 @@ public class AdminAnimalController {
 		}else if(animal_status.equals("입양 가능")) {
 			animalDTO.setAnimal_status("입소 신청");
 			path = "possible";
-		}else if(animal_status.equals("입양 완료")) {
-			animalDTO.setAnimal_status("입양 대기");
-			adoptRegDTO = new AdoptRegDTO();
-			adoptRegDTO.setAdopt_reg_animalno(animal_no);
-			adoptRegDTO.setAdopt_reg_adoptdate("");
-			path = "입양 대기";
 		}
-		adoptRegDAO.update(adoptRegDTO);
-		animalDAO.updateStatus(animalDTO);
+//		else if(animal_status.equals("입양 완료")) {
+//			animalDTO.setAnimal_status("입양 대기");
+//			adoptRegDTO = new AdoptRegDTO();
+//			adoptRegDTO.setAdopt_reg_animalno(animal_no);
+//			adoptRegDTO.setAdopt_reg_adoptdate("");
+//			path = "입양 대기";
+//		}
+
 		try {
 			animalService.update(animalDTO, adoptRegDTO);
 		} catch (Exception e) {

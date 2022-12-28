@@ -14,6 +14,7 @@ public interface AdoptRegDAO {
     public List<AdoptRegDTO> list();
     public List<AdoptRegDTO> listPaging(int startNo, int endNo, String startDate, String endDate, String tag,List<Integer> status_no, String sort);
     public AdoptRegDTO content(int id);
+    public AdoptRegDTO contentAnimal(int animal_no);
     public List<AdoptRegDTO> search();
     public int count();
     public int countTag(String startDate, String endDate, String tag, List<Integer> status_no);
