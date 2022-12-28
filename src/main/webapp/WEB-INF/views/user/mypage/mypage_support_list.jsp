@@ -79,7 +79,7 @@
 	    		
 	    	<form method="post" action="${path }/user_mypage_support_list">    	
 		    	<div class="date_search" align="center">
-		    		<table style="width: 400px;">
+		    		<table style="width: 100%;">
 		    			<tr>
 		    				<td colspan="3">
 		    					<h6 style="display: block;">기간별 총액 확인하기</h6>
@@ -90,10 +90,11 @@
 		    					<input class="form-control" type="date" name="search_date_start" value="${ search_date_start }">
 		    				</td>
 		    				<td>
-		    					<input class="form-control" type="date" name="search_date_end" value="${ search_date_end }">
+		    					<input class="form-control ms-1" type="date" name="search_date_end" value="${ search_date_end }">
 		    				</td>
 		    				<td>
-		    					<button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>
+		    					<button type="submit" class="btn btn-dark mx-1"><i class="bi bi-search"></i> 검색</button>
+		    					<button style="border: solid 1px;" class="btn btn-light" type="button" onclick="location.href='${ path }/user_mypage_support_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
 		    				</td>
 		    			</tr>
 		    			<tr>

@@ -6,6 +6,19 @@
 <c:set var="dto" value="${Modify}"/>
 <link rel="stylesheet" href="resources/css/support.css">
 <link rel="stylesheet" href="resources/css/list_view.css">
+<style>
+
+	.table tr {
+		height: 50px;
+	}
+	.table tr th {
+		text-align: center !important;
+	}	
+	.table tr td {
+		text-align: left !important;
+	}	
+
+</style>
 <div class="div1" align="center">
 	<form method="post" action="${path }/support_update_ok">
 		
@@ -24,7 +37,7 @@
 			</tr>
 			<tr>
 				<th class="table-light col-1"><span class="sp2">후원금액</span></th>
-				<td colspan="3"><input name="support_price" class="form-control" type="number" value="${dto.getSupport_price()}"></td>
+				<td colspan="3"><input style="width: 20%; display: inline-block;" name="support_price" class="form-control" type="number" value="${dto.getSupport_price()}"><span class="ms-2">원</span></td>
 			</tr>
 		</table>
 		
