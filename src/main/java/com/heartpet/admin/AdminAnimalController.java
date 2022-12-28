@@ -402,6 +402,9 @@ public class AdminAnimalController {
 		
 		
 		animalService.adoptRegUpdate(adoptRegDTO,status);
+		if(status.equals("adoptdate")) {
+			return "redirect:/adoptreg_list?page=1&animal_status=completion";
+		}
 		return "redirect:/adoptreg_list";
 		
 	}
