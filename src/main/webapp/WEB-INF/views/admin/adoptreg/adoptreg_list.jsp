@@ -190,7 +190,8 @@ a:hover {
 
 									<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 대기'}">
 										<td>입양 대기</td>
-										<td><a class="btn btn-outline-dark btn-sm" href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }" data-value="${dto.adopt_reg_animalno }">예정일</a> <a class="btn btn-outline-dark btn-sm" href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }" data-value="${dto.adopt_reg_animalno }">완료일</a></td>
+										<td><a class="btn btn-outline-dark btn-sm" href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }&status=duedate" data-value="${dto.adopt_reg_animalno }">예정일</a>
+										 <a class="btn btn-outline-dark btn-sm" href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }&status=adoptdate" data-value="${dto.adopt_reg_animalno }">완료일</a></td>
 									</c:if>
 
 									<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 완료' }">

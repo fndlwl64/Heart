@@ -8,6 +8,6 @@ public interface AnimalService {
 
 	public void insert(AnimalDTO animalDTO, AdoptRegDTO adoptRegDTO);
 	public void update(AnimalDTO animalDTO, AdoptRegDTO adoptRegDTO);
-	public void adoptRegUpdate(AdoptRegDTO adoptRegDTO);
+	public void adoptRegUpdate(AdoptRegDTO adoptRegDTO,String status);
 	public void adoptRegCancel(AnimalDTO animalDTO, int adopt_reg_regno);
 }
