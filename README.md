@@ -4,9 +4,9 @@
 
 <br/>
 
-#### 진행기간 : 2022.11.25 ~ 2022.12.29
-#### 팀리더 : 조정수 [fndlwl64](https://github.com/fndlwl64)
-#### 팀원 : 남윤지 [YJ-NAM](https://github.com/YJ-NAM), 박유진 [okzln](https://github.com/okzln), 이범용 [LeeBeomYong](https://github.com/LeeBeomYong)
+### 진행기간 : 2022.11.25 ~ 2022.12.29
+### 팀리더 : 조정수 [fndlwl64](https://github.com/fndlwl64)
+### 팀원 : 남윤지 [YJ-NAM](https://github.com/YJ-NAM), 박유진 [okzln](https://github.com/okzln), 이범용 [LeeBeomYong](https://github.com/LeeBeomYong)
 
 <br/>
 
@@ -18,19 +18,16 @@ HeartPet에서는 유기동물 입소 및 입양 그리고 후원할 수 있습�
 <br/>
 
 ## :🐶: Environment
-
 - JAVA (jdk-11.0.15.1)
 - Apache Tomcat 9.0.65
 - Oracle Database Express Edition (XE) Release 11.2.0.2.0
 - Oracle SQL Developer - Ver. 22.2.0.173
 - Mybatis 3.4.6
-- STS 3.9.17
-
+- Spring Tool Suite 3 - Ver. 3.9.17
 
 <br/>
 
 ## :🐶: API
-
 - Swiper.js [:link:](https://swiperjs.com/)
 - BootStrap [:link:](https://getbootstrap.com/)
 - BootStrap icons [:link:](https://icons.getbootstrap.com/)
@@ -39,7 +36,6 @@ HeartPet에서는 유기동물 입소 및 입양 그리고 후원할 수 있습�
 <br/>
 
 ## :🐶: Work
-
 - fndlwl64
 
 - YJ-NAM
