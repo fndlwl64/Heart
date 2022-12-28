@@ -10,7 +10,7 @@ public interface AnimalDAO {
     public int update(AnimalDTO dto);
     public int updateStatus(AnimalDTO dto);
     public void delete(int id);
-    public List<Integer> joinStatus(String animal_status);
+    public List<Integer> joinStatus(String animal_status,String animal_name);
     public List<AnimalDTO> list();
     public List<AnimalDTO> listTag(String animal_tag);
     public List<AnimalDTO> mainAnimal(String animal_tag);
