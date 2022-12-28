@@ -3,6 +3,7 @@ package com.heartpet.admin;
 import java.io.File;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -27,6 +28,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 import javax.swing.filechooser.FileSystemView;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -350,14 +352,20 @@ public class AdminAnimalController {
 	}
 
 	@RequestMapping(value = "/adoptreg_update", method = RequestMethod.POST)
-	public String adoptreg_update(AdoptRegDTO adoptRegDTO) {
-		animalService.adoptRegUpdate(adoptRegDTO);
-		if(adoptRegDTO.getAdopt_reg_adoptdate() == null || adoptRegDTO.getAdopt_reg_adoptdate().equals("")) {
-			return "redirect:/adoptreg_list?animal_status=입양 대기";
-		}else {
-			return "redirect:/adoptreg_list?animal_status=입양 완료";
-		}
+	public String adoptreg_update(AdoptRegDTO adoptRegDTO,
+			HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("utf-8");
+    	response.setContentType("text/html; charset=utf-8");
+    	response.setCharacterEncoding("utf-8");
 		
+		animalService.adoptRegUpdate(adoptRegDTO);
+		return "redirect:/adoptreg_list";
+//		if(adoptRegDTO.getAdopt_reg_adoptdate() == null || adoptRegDTO.getAdopt_reg_adoptdate().equals("")) {
+//			return "redirect:/adoptreg_list?animal_status=입양 대기";
+//		}else {
+//			return "redirect:/adoptreg_list?animal_status=입양 완료";
+//		}
+//		
 	}
 
 	@RequestMapping("/adoptreg_admission")
