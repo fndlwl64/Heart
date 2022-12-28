@@ -8,7 +8,6 @@
     <meta charset="UTF-8">
     <title>HeartPet_Admin_User</title>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 </head>
 <link rel="stylesheet" href="resources/css/admin_update.css" />
 <script src="${path}/resources/js/admin_user_update.js"></script>
@@ -111,7 +110,7 @@
 	        </table>
 	        <div class="up_btns">
 				<div>
-					<button type="button" class="btn btn-dark insertbtn mb-3" onclick="location.href='${path}/user_view?user_id=${cont.user_id }'"><i class="bi bi-card-list"></i> 목록</button>
+					<button type="button" class="btn btn-dark insertbtn mb-3" onclick="location.href='${path}/user_list'"><i class="bi bi-card-list"></i> 목록</button>
 				</div>	
 				<div>
 					<button type="reset" class="btn btn-warning insertbtn mb-3"><i class="bi bi-pencil"></i> 리셋</button>
