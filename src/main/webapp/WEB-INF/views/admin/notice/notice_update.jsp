@@ -32,7 +32,7 @@
 			</tr>
 			<tr>
 				<th class="table-light"><span class="sp2">글내용</span></th>
-				<td><textarea rows="8" cols="22" class="form-control" name="notice_content">${dto.getNotice_content() }</textarea> </td>
+				<td><textarea style="resize: none;" rows="8" cols="22" class="form-control" name="notice_content">${dto.getNotice_content() }</textarea> </td>
 			</tr>
 			<tr>
 				<th class="table-light"><span class="sp2">조회수</span></th>
@@ -42,7 +42,7 @@
 				<th class="table-light" rowspan="2"><span class="sp2">이미지</span></th>
 				<td>
 					<div class="d-grid align-middle original-image">
-						<input class="form-control btn" id="file-input2" type="file" name="files" accept="image/gif, image/jpeg, image/png">
+						<input class="form-control" id="file-input2" type="file" name="files" accept="image/gif, image/jpeg, image/png">
 						<c:if test="${!empty dto.getNotice_img1()}">
 						<p class="image-update"><img id="file_change2" class="logo" src="resources/upload/${dto.getNotice_img1() }" style="max-height: 200px;" alt="notice_img"/></p>
 						<p class="delete-checkbox">
@@ -55,7 +55,7 @@
 			<tr>
 				<td>
 					<div class="d-grid align-middle original-image">
-						<input class="form-control btn" id="file-input2" type="file" name="files" accept="image/gif, image/jpeg, image/png">
+						<input class="form-control" id="file-input2" type="file" name="files" accept="image/gif, image/jpeg, image/png">
 						<c:if test="${!empty dto.getNotice_img2()}">
 						<p class="image-update"><img id="file_change2" class="logo" src="resources/upload/${dto.getNotice_img2() }" style="max-height: 200px;" alt="notice_img"/></p>
 						<p class="delete-checkbox">

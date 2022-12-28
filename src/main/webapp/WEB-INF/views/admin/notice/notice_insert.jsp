@@ -19,27 +19,25 @@
 	<form method="post" enctype="multipart/form-data" action="${path }/notice_insert_ok" onsubmit="return submitOption();">
 		<table class="table noticeinfo mt-4">
 			<tr class="border-top">
-				<th class="table-light col-1"><span class="sp2">공지제목</span></th>
+				<th class="table-light col-2"><span class="sp2">공지제목</span></th>
 				<td><input id="notice_title" class="form-control" type="text" name="notice_title"></td>
 			</tr>
 			<tr>
-				<th class="table-light col-1"><span class="sp2">글내용</span></th>
-				<td><textarea id="notice_content" class="form-control" rows="10" cols="22" name="notice_content"></textarea> </td>
+				<th class="table-light"><span class="sp2">글내용</span></th>
+				<td><textarea style="resize: none;" id="notice_content" class="form-control" rows="10" cols="22" name="notice_content"></textarea> </td>
 			</tr>
 			<tr>
-				<th class="table-light col-1"><span class="sp2">조회수</span></th>
+				<th class="table-light"><span class="sp2">조회수</span></th>
 				<td><input id="notice_hit" class="form-control" type="text" name="notice_hit"></td>
 			</tr>
 			<tr>
-				<th class="table-light col-1"><span class="sp2">첨부<br>이미지</span></th>
+				<th class="table-light"><span class="sp2">이미지</span></th>
 				<td>
 					<input type="file" name="files" id="files" class="form-control" 
 					accept="image/gif, image/jpeg, image/png" onchange="fileOption();" multiple>
 				</td>
 			</tr>
-		</table>
-		<br>
-		
+		</table>		
 		<div class="btns">
 			<div>
 				<button type="button" class="btn btn-dark mx-1" onclick="location.href='${path}/notice_list'"><i class="bi bi-card-list"></i> 목록</button>
