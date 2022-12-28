@@ -7,45 +7,52 @@
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <link rel="stylesheet" href="resources/css/list_view.css" />
 <c:set var="tag" value="${tag }"></c:set>
+<c:if test="${ tag eq 'dog' }">
+	<c:set var="animal" value="강아지" />
+</c:if>
+<c:if test="${ tag eq 'cat' }">
+	<c:set var="animal" value="고양이" />
+</c:if>
 <body>
-	<br>
-	<br>
-	<div class="container" align="center">
+	<div class="container">
+	<div class="sub-title"><h4>${ animal } 등록하기</h4></div>	
 		<form action="<%=request.getContextPath()%>/animal_insert"
 			method="post" enctype="multipart/form-data" onsubmit="return submitOption();">
 			<input type="hidden" name="animal_tag" id="animal_tag" value="${tag }">
 			<table class="table noticeinfo mt-4">
 				<tr>
-					<th class="table-light col-1 w-25"><span class="sp2">이름</span></th>
-					<td class="col-11" colspan="8"><input type="text" id="name"
-						name="animal_name" class="form-control text-center">
+					<th class="table-light" width="10%"><span class="sp2">이름</span></th>
+					<td width="90%" colspan="8"><input type="text" id="name" name="animal_name" class="form-control">
 					</td>
 				</tr>
 				<tr>
-					<th class="table-light col-1"><span class="sp2">나이</span></th>
-					<td class="col-2"><input type="number" name="animal_age" id="age" min=0
-						class="form-control text-center"></td>
-					<th class="table-light col-1"><span class="sp2">성별</span></th>
-					<td class="col-2">
+					<th class="table-light" width="10%"><span class="sp2">나이</span></th>
+					<td width="15%">
+						<div class="d-flex align-items-center">
+							<input type="number" name="animal_age" id="age" min="0" max="20" class="form-control">
+		                    <span class="ms-2"><b>살</b></span>
+	                    </div>
+					</td>
+					<th class="table-light" width="10%"><span class="sp2">성별</span></th>
+					<td width="15%">
 					<select name="animal_gender"
-						class="form-control text-center" id="gender">
+						class="form-control" id="gender">
 							<option value=""></option>
 							<option value="male">수컷</option>
 							<option value="female">암컷</option>
 					</select>
 					</td>
-					<th class="table-light col-1"><span class="sp2">중성화</span></th>
-					<td class="col-2">
-					<select name="animal_neutered"
-						class="form-control text-center" id="neutered">
-							<option value=""></option>
-							<option value="Y">Y</option>
-							<option value="N">N</option>
-					</select>
+					<th class="table-light" width="10%"><span class="sp2">중성화</span></th>
+					<td width="15%">
+						<select name="animal_neutered" class="form-control" id="neutered">
+								<option value=""></option>
+								<option value="Y">Y</option>
+								<option value="N">N</option>
+						</select>
 					</td>
-					<th class="table-light col-1"><span class="sp2">예방접종</span></th>
-					<td class="col-2">
-					<select name="animal_vaccination"class="form-control text-center" id="vaccination">
+					<th class="table-light" width="10%"><span class="sp2">예방접종</span></th>
+					<td width="15%">
+					<select name="animal_vaccination"class="form-control" id="vaccination">
 							<option value=""></option>
 							<option value="Y">Y</option>
 							<option value="N">N</option>
@@ -55,11 +62,10 @@
 				<tr>
 					<th class="table-light col-1"><span class="sp2">종류</span></th>
 					<td colspan="3">
-					<select name="animal_species"
-						class="form-control text-center" id="species">
+					<select name="animal_species" class="form-control" id="species">
 					</select></td>
 					<th class="table-light col-1"><span class="sp2" >크기</span></th>
-					<td><select name="animal_size"class="form-control text-center" id="size" onclick="optionChangeSize();">
+					<td><select name="animal_size"class="form-control" id="size" onclick="optionChangeSize();">
 							<option value=""></option>
 							<option value="소형"
 								<c:if test="${animalDTO.animal_size eq '소형'}">selected</c:if>>소형</option>
@@ -69,7 +75,7 @@
 								<c:if test="${animalDTO.animal_size eq '대형'}">selected</c:if>>대형</option>
 					</select></td>
 					<!-- <th class="table-light col-1"><span class="sp2">무게</span></th>
-					<td><input type="number" class="form-control text-center"
+					<td><input type="number" class="form-control"
 						name="animal_weight" type="text" min=0 id="weight"></td> -->
 	                <th>무게 <span class="table-light col-1 must-write"></span></th>
 	                <td colspan="3">
@@ -83,25 +89,20 @@
 					
 					<th class="table-light col-1"><span class="sp2">발견장소</span></th>
 					<td colspan="7"><input type="text" name="animal_place"
-						class="form-control text-center"></td>
+						class="form-control"></td>
 				</tr>
 				<tr class="animal_content">
 					<th class="table-light col-1"><span class="sp2">유의사항</span></th>
-					<td colspan="3"><textarea rows="2" cols="22"
-							name="animal_caution"></textarea></td>
+					<td colspan="7"><textarea class="form-control" rows="6" cols="22" name="animal_caution"></textarea></td>
 				</tr>
 				<tr>
 					<th rowspan="3" class="table-light">이미지</th>
 					<td colspan="7">
 						<div class="d-grid align-middle original-image">
-							 <input type="text" class="form-control-plaintext" value="※ 사진 등록은 필수입니다(최소 1장 ~ 최대 3장)." />
+							 <input type="text" class="form-control-plaintext py-0" style="font-size: 14px;" value="※ 사진 등록은 필수입니다(최소 1장 ~ 최대 3장)." />
 							<input type="file" class="form-control" id="files" name="files"
 								accept="image/gif, image/jpeg, image/png"
 								onchange="readURL4(this);" multiple>						
-							<p class="mt-2">
-								<img id="file_change1" style="max-height: 200px;" src="resources/icon/animal_icon.png"
-									alt="review_img" />
-							</p>
 						</div>
 					</td>
 				</tr>
@@ -109,10 +110,10 @@
 			
 			<div class="btns">
 				<div>
-					<button onclick="location.href='${path}/${dto.animal_tag }_list'" class="btn btn-dark insertbtn mb-3"><i class="bi bi-card-list"></i> 목록</button>
+					<button onclick="location.href='${path}/${ tag }_list'" class="btn btn-dark insertbtn mb-3"><i class="bi bi-card-list"></i> 목록</button>
 				</div>	
 				<div>
-					<button type="submit" class="btn btn-warning insertbtn mb-3"><i class="bi bi-pencil"></i> 리셋</button>
+					<button type="submit" class="btn btn-warning insertbtn mx-1 mb-3"><i class="bi bi-pencil"></i> 리셋</button>
 					<button type="reset" class="btn btn-primary insertbtn mb-3"><i class="bi bi-save"></i> 등록</button>
 				</div>
 			</div>			
