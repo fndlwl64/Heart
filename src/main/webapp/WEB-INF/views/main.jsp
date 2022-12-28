@@ -86,7 +86,7 @@
     </div>
     
     <%-- 입양후기 list 출력 --%>
-    <div class="main-title mt-5">HeartPet과 함께한 강아지 가족의 이야기를 들어보세요.</div>
+    <div class="main-title mt-5">HeartPet을 통해 새로운 가족을 만난 이야기를 들어보세요.</div>
     <div class="swiper reviewSwiper">
         <div class="swiper-wrapper">
         	<c:forEach items="${ dRList }" var="list">
