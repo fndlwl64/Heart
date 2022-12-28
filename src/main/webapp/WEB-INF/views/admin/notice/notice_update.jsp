@@ -42,6 +42,7 @@
 	<form method="post" action="${path }/notice_update_ok" enctype="multipart/form-data">
 		<input type="hidden" name="notice_img1" value="${dto.getNotice_img1() }">
 		<input type="hidden" name="notice_img2" value="${dto.getNotice_img2() }">
+		<input class="form-control" type="hidden" name="notice_hit" value="${dto.getNotice_hit() }">
 		<table class="table noticeinfo mt-4">
 			<tr>
 				<th class="table-light col-2"><span class="sp2">공지제목</span></th>
@@ -51,10 +52,10 @@
 				<th class="table-light"><span class="sp2">글내용</span></th>
 				<td><textarea style="resize: none;" rows="8" cols="22" class="form-control" name="notice_content">${dto.getNotice_content() }</textarea> </td>
 			</tr>
-			<tr>
+<%-- 			<tr>
 				<th class="table-light"><span class="sp2">조회수</span></th>
 				<td><input class="form-control" type="text" name="notice_hit" value="${dto.getNotice_hit() }"></td>
-			</tr>
+			</tr> --%>
 			<tr>
 				<th class="table-light" rowspan="2"><span class="sp2">이미지</span></th>
 				<td>

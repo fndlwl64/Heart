@@ -121,7 +121,7 @@
 	</select>
 	
 	<select id="id_name" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM HEARTPET_USER WHERE USER_NAME=#{name}
+		SELECT COUNT(distinct user_name) FROM HEARTPET_USER WHERE USER_NAME=#{name}
 	</select>
 	
 	<select id="id_email" parameterType="map" resultType="String">
