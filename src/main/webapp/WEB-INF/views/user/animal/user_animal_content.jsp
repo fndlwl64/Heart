@@ -165,7 +165,7 @@
 									</c:if>
 									<button class="btn btn-primary " data-bs-toggle="modal"
 										data-bs-target="#deleteModal" data-id="${ deleteAddr }"
-										onclick="changeOption()"><i class="bi bi-pencil-square"></i>입양신청</button>
+										onclick="changeOption()"><i class="bi bi-pencil-square"></i> 입양 신청</button>
 								</c:when>
 								<c:otherwise>
 									<%-- <form action="user_get_animal" method="post"
@@ -177,10 +177,10 @@
 											data-bs-toggle="modal" data-bs-target="#cautionModal"><i class="bi bi-pencil-square"></i> 입양신청</button>
 									</form> --%>
 									<c:if test="${dto.animal_status eq '입양 대기' and not empty user_id}">
-										<span class="btn btn-warning"> 입양대기</span>
+										<span class="btn btn-warning disabled"> 입양 대기</span>
 									</c:if>
 									<c:if test="${dto.animal_status eq '입양 완료' and not empty user_id}">
-										<span class="btn btn-secondary"> 입양완료</span>
+										<span class="btn btn-secondary disabled"> 입양 완료</span>
 									</c:if>
 								</c:otherwise>
 							</c:choose>
@@ -199,17 +199,17 @@
 <script type="text/javascript">
 	function changeOption() {
 		$('#deleteModalLabel').empty();
-		$('#deleteModalLabel').append('입양신청');
+		$('#deleteModalLabel').append('입양 신청');
 		$('#deleteModalBody').empty();
-		$('#deleteModalBody').append('입양신청을 하시겠습니까?');
+		$('#deleteModalBody').append('입양 신청을 하시겠습니까?');
 		$('#deleteFunction').empty();
 		$('#deleteFunction').append('신청');
 	}
 	function changeOptionCancel() {
 		$('#deleteModalLabel').empty();
-		$('#deleteModalLabel').append('입양취소');
+		$('#deleteModalLabel').append('입양 취소');
 		$('#deleteModalBody').empty();
-		$('#deleteModalBody').append('입양신청을 취소하시겠습니까?');
+		$('#deleteModalBody').append('입양 신청을 취소하시겠습니까?');
 		$('#deleteFunction').empty();
 		$('#deleteFunction').append('취소');
 	}
@@ -221,7 +221,7 @@
 		}
 		if ($('#user_grade').val() > 3) {
 			$('.modal-body-cancel').empty();
-			$('.modal-body-cancel').append('회원의 등급이 낮아 입양 자격이 없습니다.');
+			$('.modal-body-cancel').append('회원 등급이 낮아 입양 자격이 없습니다.');
 			return false;
 		}
 		if ($('#animal_status').val() == '입소 신청') {
