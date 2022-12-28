@@ -73,10 +73,10 @@
         <div class="lists">
             <table class="table table-hover searched_list">
                 <tr>
-                    <th class="table-light" width="10%">번호</th>
+                    <th class="table-light" width="10%">No</th>
                     <th class="table-light" width="50%">제목</th>
                     <th class="table-light" width="10%">조회수</th>
-                    <th class="table-light" width="12.5%">게시일</th>
+                    <th class="table-light" width="12.5%">작성일시</th>
                     <th class="table-light" width="12.5%">수정 / 삭제</th>
                 </tr>
 				<c:if test="${!empty noticeList}">

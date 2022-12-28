@@ -119,7 +119,7 @@ a:hover {
 				<table class="table table-hover searched_list">
 					<tr>
 						<th class="table-light" <c:if test="${animal_status eq '입양 대기'}">width="10%"</c:if> <c:if test="${animal_status ne '입양 대기'}">width="15%"</c:if>>No</th>
-						<th class="table-light" width="15%">회원 아이디</th>
+						<th class="table-light" width="15%">아이디</th>
 						<th class="table-light" width="15%">동물 이름</th>
 
 						<c:if test="${animal_status eq '입소 신청'}">
