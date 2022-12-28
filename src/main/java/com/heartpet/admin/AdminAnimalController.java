@@ -284,6 +284,13 @@ public class AdminAnimalController {
 		if(animal_status == null) {
 			animal_status = "입양 대기";
 		}
+		
+		if(animal_status != null && animal_status.equals("apply")) {
+			animal_status = "입소 신청";
+		}
+		if(animal_status != null && animal_status.equals("possible")) {
+			animal_status = "입양 가능";
+		}
 		/*
 		 * if(animal_status != null && animal_status == "입양 완료") { sort =
 		 * "adopt_reg_adoptdate"; }
@@ -368,7 +375,7 @@ public class AdminAnimalController {
 //		
 	}
 
-	@RequestMapping("/adoptreg_admission")
+	@RequestMapping(value = "/adoptreg_admission")
 	public String adoptreg_admission(@RequestParam("animal_no") int animal_no, @RequestParam("animal_status") String animal_status) {
 		AnimalDTO animalDTO = new AnimalDTO();
 		animalDTO.setAnimal_no(animal_no);
@@ -377,20 +384,23 @@ public class AdminAnimalController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String strDate = dateFormat.format(Calendar.getInstance().getTime());
 		
+		String path = null;
 		//수정
 		if(animal_status.equals("입소 신청")) {
 			animalDTO.setAnimal_status("입양 가능");
+			path = "possible";
 		}else if(animal_status.equals("입양 가능")) {
 			animalDTO.setAnimal_status("입소 신청");
+			path = "apply";
 		}else if(animal_status.equals("입양 완료")) {
 			animalDTO.setAnimal_status("입양 대기");
 			adoptRegDTO = new AdoptRegDTO();
 			adoptRegDTO.setAdopt_reg_animalno(animal_no);
 			adoptRegDTO.setAdopt_reg_adoptdate("");
-			
+			path = "입양 대기";
 		}
-//		adoptRegDAO.update(adoptRegDTO);
-//		animalDAO.updateStatus(animalDTO);
+		adoptRegDAO.update(adoptRegDTO);
+		animalDAO.updateStatus(animalDTO);
 		try {
 			animalService.update(animalDTO, adoptRegDTO);
 		} catch (Exception e) {
@@ -399,7 +409,7 @@ public class AdminAnimalController {
 			request.setAttribute("url", "back");
 			return "alert";
 		}
-		return "redirect:/adoptreg_list";
+		return "redirect:/adoptreg_list?page=1&animal_status="+path;
 	}
 	
 	@RequestMapping("/adoptreg_cancel")
@@ -462,7 +472,7 @@ public class AdminAnimalController {
 	            msg_e.printStackTrace();
 	        }
 		
-		return "redirect:/adoptreg_list";
+        return "redirect:/adoptreg_list?page=1&animal_status=possible";
 	}
 	
 	
