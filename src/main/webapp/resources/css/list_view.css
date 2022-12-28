@@ -216,7 +216,7 @@ body {
 .container .noticeinfo {
 	width: 80%;
 	margin: 0 auto;
-	margin-bottom: 1.25rem;
+	margin-bottom: 1rem;
 }
 
 .container .noticeinfo tr th {
@@ -228,9 +228,7 @@ body {
 }
 
 .container .noticeinfo tr td {
-    text-align: left;
-    padding-left: 1.5rem;
-    
+    text-align: left;    
 }
 
 .container .noticeinfo #admin_id {
@@ -290,6 +288,7 @@ body {
 	display: flex;
 	margin: auto;
 	justify-content: space-between;
+	width: 80%;
 }
 
 /* admin/_list.jsp 검색 결과 테이블 태그 */
@@ -584,7 +583,10 @@ body {
 .container .noticeinfo textarea {
 	resize: none;
 	height: auto;
-	border: none;
+}
+
+.animal-area {
+	border: thin;
 }
 
 .container .noticeinfo textarea:focus {
