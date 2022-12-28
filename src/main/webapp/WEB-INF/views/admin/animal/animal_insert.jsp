@@ -115,8 +115,8 @@
 
 				</div>	
 				<div>
-					<button type="submit" class="btn btn-warning insertbtn mx-1 mb-3"><i class="bi bi-pencil"></i> 리셋</button>
-					<button type="reset" class="btn btn-primary insertbtn mb-3"><i class="bi bi-save"></i> 등록</button>
+					<button type="reset" class="btn btn-warning insertbtn mx-1 mb-3"><i class="bi bi-pencil"></i> 리셋</button>
+					<button type="submit" class="btn btn-primary insertbtn mb-3"><i class="bi bi-save"></i> 등록</button>
 				</div>
 			</div>			
 			

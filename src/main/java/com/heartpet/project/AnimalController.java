@@ -311,8 +311,6 @@ public class AnimalController {
 	public String user_animal_insert_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO,
 			@RequestParam("user_id") String id) throws IllegalStateException, IOException {
 		
-		animalDTO.toString();
-		System.out.println(animalDTO.toString());
 		// Adoptreg 추가
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String strDate = dateFormat.format(Calendar.getInstance().getTime());
