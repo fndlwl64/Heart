@@ -28,9 +28,9 @@
 			</tr>
 		</table>
 		
-		<input type="hidden" value="${dto.support_no }" />
+		<input type="hidden" name="support_no" value="${dto.support_no }" />
 		
-		<input type="hidden" value="${dto.support_userid }" />
+		<input type="hidden" name="support_userid" value="${dto.support_userid }" />
 		
 		<div class="btns">
 			<div>
