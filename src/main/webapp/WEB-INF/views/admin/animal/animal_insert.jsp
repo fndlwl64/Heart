@@ -16,7 +16,7 @@
 <body>
 	<div class="container">
 	<div class="sub-title"><h4>${ animal } 등록하기</h4></div>	
-		<form action="<%=request.getContextPath()%>/animal_insert"
+			<form action="<%=request.getContextPath()%>/animal_insert"
 			method="post" enctype="multipart/form-data" onsubmit="return submitOption();">
 			<input type="hidden" name="animal_tag" id="animal_tag" value="${tag }">
 			<table class="table noticeinfo mt-4">
