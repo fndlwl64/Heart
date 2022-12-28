@@ -27,7 +27,7 @@
 		<input type="hidden" name="notice_img2" value="${dto.getNotice_img2() }">
 		<table class="table noticeinfo mt-4">
 			<tr>
-				<th class="table-light col-1"><span class="sp2">공지제목</span></th>
+				<th class="table-light col-2"><span class="sp2">공지제목</span></th>
 				<td><input class="form-control" type="text" name="notice_title" value="${dto.getNotice_title() }"></td>
 			</tr>
 			<tr>
@@ -42,7 +42,7 @@
 				<th class="table-light" rowspan="2"><span class="sp2">이미지</span></th>
 				<td>
 					<div class="d-grid align-middle original-image">
-						<input class="file_input btn" id="file-input2" type="file" name="files" accept="image/gif, image/jpeg, image/png">
+						<input class="form-control btn" id="file-input2" type="file" name="files" accept="image/gif, image/jpeg, image/png">
 						<c:if test="${!empty dto.getNotice_img1()}">
 						<p class="image-update"><img id="file_change2" class="logo" src="resources/upload/${dto.getNotice_img1() }" style="max-height: 200px;" alt="notice_img"/></p>
 						<p class="delete-checkbox">
@@ -55,9 +55,9 @@
 			<tr>
 				<td>
 					<div class="d-grid align-middle original-image">
-						<input class="file_input btn" id="file-input2" type="file" name="files" accept="image/gif, image/jpeg, image/png">
+						<input class="form-control btn" id="file-input2" type="file" name="files" accept="image/gif, image/jpeg, image/png">
 						<c:if test="${!empty dto.getNotice_img2()}">
-						<p class="image-update"><img id="file_change2" class="logo" src="resources/upload/${dto.getNotice_img2() }" style="max-height: 200px;" alt="notice_img"/></p>
+						<p class="image-update"><img id="file_change2" src="resources/upload/${dto.getNotice_img2() }" style="max-height: 200px;" alt="notice_img"/></p>
 						<p class="delete-checkbox">
                             <label><input type="checkbox" class="form-check-input" name="notice_image2_delete" value="Y" /> 선택한 파일 삭제</label>
                         </p>
