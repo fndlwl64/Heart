@@ -116,7 +116,7 @@
             
             <c:if test="${!empty list}">
             <c:forEach items="${list }" var="list">
-          		<tr>
+          		<tr <c:if test="${ list.user_grade eq 5 }">style="background-color:#A8A8A8;"</c:if>>
 	                <td>${list.user_no}</td>
 	                <td><a href="${path}/user_view?user_id=${list.user_id}">${list.user_id}</a></td>
 	                <td>${list.user_name}</td>
@@ -129,9 +129,12 @@
 	                </td>
 	                <td>${list.user_animalexp}</td>
 	                <td>
+	                	<c:if test="${list.user_grade ne 5 }">
 	                	<c:set value="${ path }/user_delete?user_no=${ list.user_no }" var="deleteAddr" />
 	                    <button class="btn btn-outline-success btn-sm" onclick="location.href='${path}/user_update?user_id=${list.user_id }'">수정</button>
 	                    <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }">삭제</button>
+	                    </c:if>
+	                    
 	                </td>
 	            </tr>
             </c:forEach>            	
