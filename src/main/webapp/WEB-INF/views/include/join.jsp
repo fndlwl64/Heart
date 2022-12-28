@@ -72,11 +72,11 @@
                     <tr>
                         <th>주소</th>
                         <td>
-			                <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_postcode" placeholder="우편번호">
+			                <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_postcode" placeholder="우편번호" required>
 		                    <input id="zipcode_search" class="search_zipcode" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-		                    <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_address" placeholder="주소"><br>
-		                    <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_detailAddress" placeholder="상세주소">
-		                    <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_extraAddress" placeholder="참고항목">
+		                    <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_address" placeholder="주소" required><br>
+		                    <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_detailAddress" placeholder="상세주소" required>
+		                    <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_extraAddress" placeholder="참고항목" required>
 		                </td>
                     </tr>
 
@@ -92,7 +92,7 @@
                 </table>
                 
 				<button class="btn btn-warning" type="reset"><i class="bi bi-pencil"></i> 리셋</button>
-				<button id="join_btn" class="btn btn-primary" type="submit"><i class="bi bi-upload"></i> 가입</button>
+				<button id="join_btn" class="btn btn-primary" type="submit"><i class="bi bi-save"></i> 가입</button>
 								
             </form>
 
