@@ -48,18 +48,29 @@
 	</select>
 	
 	<!-- 페이징 유저별 후원내역 -->
- 	<select id="support_list" parameterType="hashMap" resultType="Mypage_SupportDTO">
-		<![CDATA[		
+ 	<select id="support_list" parameterType="hashMap" resultType="Mypage_SupportDTO">		
 		SELECT * 
 		FROM (SELECT s.*, row_number() over(order by support_no desc) rnum from heartpet_support s 
-		where support_userid = #{id} and support_status=1) 
-		WHERE rnum >= #{startNo} and rnum <= #{endNo}
-		]]>
+		where support_userid = #{id} and support_status=1
+		<if test="search_date_start != null and !search_date_start.equals('')">
+			<![CDATA[and support_date >= #{search_date_start}]]>
+		</if>
+		<if test="search_date_end != null and !search_date_end.equals('')">
+			<![CDATA[and support_date < to_date(#{search_date_end},'YYYY-MM-DD')+1 ]]>
+		</if>
+		<![CDATA[)WHERE rnum >= #{startNo} and rnum <= #{endNo}]]>
+		
 	</select>
 	
 	<!-- 후원 개수 -->
  	<select id="support_count" parameterType="hashMap" resultType="int">
 		select count(*) from heartpet_support where support_status=1 and support_userid = #{id}
+		<if test="search_date_start != null and !search_date_start.equals('')">
+			<![CDATA[and support_date >= #{search_date_start}]]>
+		</if>
+		<if test="search_date_end != null and !search_date_end.equals('')">
+			<![CDATA[and support_date < to_date(#{search_date_end},'YYYY-MM-DD')+1 ]]>
+		</if>
 	</select>
 	
 	

@@ -14,7 +14,7 @@
 <body>
 
 	<div class="container">
-		
+			<div style="width: 98%;" class="sub-title"><h4>회원 상세 내용</h4></div>
 			<div class="_container">
 			
 			<div class="wrap">

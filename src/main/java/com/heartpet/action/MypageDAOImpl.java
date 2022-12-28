@@ -79,21 +79,21 @@ public class MypageDAOImpl implements MypageDAO{
 	}
 
 	@Override
-	public List<Mypage_SupportDTO> getSupportList(int startNo, int endNo, String field, String keyword, String id) {
+	public List<Mypage_SupportDTO> getSupportList(int startNo, int endNo, String search_date_start, String search_date_end, String id) {
 		Map<String, Object> map = new HashMap<String, Object>();
         map.put("startNo", startNo);
         map.put("endNo", endNo);
-        map.put("field", field);
-        map.put("keyword", keyword);
+        map.put("search_date_start", search_date_start);
+        map.put("search_date_end", search_date_end);
         map.put("id", id);
         return this.sqlSession.selectList("support_list", map);
 	}
 
 	@Override
-	public int listSupportCount(String field, String keyword, String id) {
+	public int listSupportCount(String search_date_start, String search_date_end, String id) {
 		Map<String, String> map = new HashMap<String, String>();
-        map.put("field", field);
-        map.put("keyword", keyword);
+		map.put("search_date_start", search_date_start);
+        map.put("search_date_end", search_date_end);
         map.put("id", id);
         return this.sqlSession.selectOne("support_count", map);
 	}

@@ -257,9 +257,9 @@ public class MypageController {
     	List<Mypage_SupportDTO> list = null;
         PageDTO paging= null;
         
-        totalRecord = this.mypagedao.listSupportCount(field, keyword, user_id);
-        paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
-        list = this.mypagedao.getSupportList(paging.getStartNo(), paging.getEndNo(), field, keyword, user_id);
+        totalRecord = this.mypagedao.listSupportCount(search_date_start, search_date_end, user_id);
+        paging = new PageDTO(currentPage, rowsize, totalRecord);
+        list = this.mypagedao.getSupportList(paging.getStartNo(), paging.getEndNo(), search_date_start, search_date_end, user_id);
     	
 		/* List<Mypage_SupportDTO> list = mypagedao.getSupportList(user_id); */
     	int sum = mypagedao.SumSupport(user_id);
@@ -275,8 +275,8 @@ public class MypageController {
     	model.addAttribute("review_Count", review_count);
     	model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);
-        model.addAttribute("field", field);
-        model.addAttribute("keyword", keyword);
+        model.addAttribute("search_date_start", search_date_start);
+        model.addAttribute("search_date_end", search_date_end);
         
         return "user/mypage/mypage_support_list";
     }
