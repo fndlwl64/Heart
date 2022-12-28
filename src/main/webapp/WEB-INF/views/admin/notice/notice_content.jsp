@@ -33,23 +33,23 @@
 	<div class="sub-title"><h4>공지 상세 내용</h4></div>
     <table class="table noticeinfo mt-4">
         <tr>
-            <th class="table-light col-1">제목</th>
-            <td class="col-1" style="font-weight:bold;">${dto.getNotice_title() }</td>
+            <th class="table-light col-2">제목</th>
+            <td style="font-weight:bold;">${dto.getNotice_title() }</td>
         </tr>
 
         <tr>
             <th class="table-light">내용</th>
-            <td class="col-1">
+            <td >
                 <textarea class="sp_content3" cols="60" readonly>${dto.getNotice_content() }</textarea>
             </td>
         </tr>
         <tr>
             <th class="table-light">이미지</th>
             <c:if test="${!empty dto.getNotice_img1() }">
-            <td class="col-1"><img src="resources/upload/${dto.getNotice_img1() }" style="max-height: 200px;" alt="notice_img"></td>
+            <td><img src="resources/upload/${dto.getNotice_img1() }" style="max-height: 200px;" alt="notice_img"></td>
             </c:if>
             <c:if test="${!empty dto.getNotice_img2() }">
-            <td class="col-1"><img src="resources/upload/${dto.getNotice_img2() }" style="max-height: 200px;" alt="notcie_img"></td>
+            <td><img src="resources/upload/${dto.getNotice_img2() }" style="max-height: 200px;" alt="notcie_img"></td>
         	</c:if>
         </tr>
     </table>
@@ -60,8 +60,8 @@
     		<button type="button" id="btn_content" class="btn btn-dark btn_list" onclick="location.href='${path}/notice_list'"><i class="bi bi-card-list"></i> 목록</button>
     	</div>
     	<div>
-    		<button class="btn btn-success mx-1" onclick="location.href='${path}/notice_update?no=${dto.getNotice_no() }'"><i class="bi bi-eraser"></i> 수정</button>
             <button class="btn btn-danger mx-1" onclick="location.href='${path }/notice_delete?no=${dto.getNotice_no()}'"><i class="bi bi-trash3"></i> 삭제</button>
+    		<button class="btn btn-success mx-1" onclick="location.href='${path}/notice_update?no=${dto.getNotice_no() }'"><i class="bi bi-eraser"></i> 수정</button>
     	</div>
 	</div>
 </div>
