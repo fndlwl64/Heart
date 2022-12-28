@@ -13,6 +13,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 <c:set var="animal_status" value="${animal_status }"></c:set>
+<c:set var="animal_name" value="${animal_name }"></c:set>
+<c:set var="animal_no" value="${animal_no }"></c:set>
 <c:set var="qList" value="${ qnaList }" />
 <c:set var="total" value="${ total }" />
 <c:set var="paging" value="${ paging }" />
@@ -26,9 +28,9 @@
 <c:set var="pagingStatus"
 	value="startDate=${ startDate }&endDate=${ endDate }&animal_status=" />
 <c:set var="pagingSort"
-	value="startDate=${ startDate }&endDate=${ endDate }&animal_status=${animal_status }" />
+	value="startDate=${ startDate }&endDate=${ endDate }&animal_status=${animal_status }&animal_name=${animal_name }&animal_no=${animal_no }" />
 <c:set var="pagingTag"
-	value="startDate=${ startDate }&endDate=${ endDate }&animal_status=${animal_status }&sort=${sort }" />
+	value="startDate=${ startDate }&endDate=${ endDate }&animal_status=${animal_status }&animal_name=${animal_name }&animal_no=${animal_no }&sort=${sort }" />
 <input type="hidden" id="sortlink"
 	value="<%=request.getContextPath() %>/adoptreg_list?page=${ paging.page }&${pagingSort}" />
 <!-- 쿼리 조인을 피하기 위한 key, value를 통한 animal테이블 데이터 참조 -->
@@ -43,6 +45,12 @@
 				<div class="search-table-box">
 					<input type="hidden" name="animal_status" value="${animal_status }" />
 					<table class="table table-sm" id="search-table">
+						<tr>
+							<th width="12.5%">동물 이름 검색</th>
+							<td width="20%">
+								<input class="form-control" type="text" name="animal_name" value="${animal_name }"/>
+							</td>
+						</tr>
 						<tr>
 							<th width="12.5%">입양 검색 항목</th>
 							<td><select name="adopt_tag" class="form-select">

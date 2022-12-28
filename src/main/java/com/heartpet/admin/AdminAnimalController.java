@@ -90,8 +90,6 @@ public class AdminAnimalController {
 		if (page != 1) {
 			currentPage = page;
 		}
-
-
     	int startWeight = 0 ;
     	int endWeight = 0 ;
     	
@@ -276,7 +274,8 @@ public class AdminAnimalController {
 			@RequestParam(value = "adopt_tag", required = false) String adopt_tag,
 			@RequestParam(value = "page", defaultValue = "1") int page, Model model,
 			@RequestParam(value = "animal_status", required = false) String animal_status,
-			@RequestParam(value = "sort",required = false) String sort) {
+			@RequestParam(value = "sort",required = false) String sort,
+			@RequestParam(value = "animal_name",required = false) String animal_name) {
 		// 페이징
 		String field = "";
 		String keyword = "";
@@ -291,6 +290,12 @@ public class AdminAnimalController {
 		if(animal_status != null && animal_status.equals("possible")) {
 			animal_status = "입양 가능";
 		}
+		if(animal_status != null && animal_status.equals("waiting")) {
+			animal_status = "입양 대기";
+		}
+		if(animal_status != null && animal_status.equals("completion")) {
+			animal_status = "입양 완료";
+		}
 		/*
 		 * if(animal_status != null && animal_status == "입양 완료") { sort =
 		 * "adopt_reg_adoptdate"; }
@@ -303,7 +308,7 @@ public class AdminAnimalController {
 		//animal_status 조건으로 검색하기 위해 필요한 데이터(adopt_reg_animalno)
 		List<Integer> status_no = null;
 		if(animal_status != null && !animal_status.equals("")) {
-			status_no = animalDAO.joinStatus(animal_status);
+			status_no = animalDAO.joinStatus(animal_status,animal_name);
 			if(status_no.size() == 0) {//조건을 만족하는 데이터가 없을 경우
 				status_no.add(-1);
 			}
@@ -339,6 +344,7 @@ public class AdminAnimalController {
 		model.addAttribute("endDate", endDate);
 		model.addAttribute("animal_status",animal_status);
 		model.addAttribute("sort",sort);
+		model.addAttribute("animal_name",animal_name);
 
 		model.addAttribute("adoptRegList", list);
 		model.addAttribute("animalMap", maps);
@@ -367,12 +373,7 @@ public class AdminAnimalController {
 		
 		animalService.adoptRegUpdate(adoptRegDTO);
 		return "redirect:/adoptreg_list";
-//		if(adoptRegDTO.getAdopt_reg_adoptdate() == null || adoptRegDTO.getAdopt_reg_adoptdate().equals("")) {
-//			return "redirect:/adoptreg_list?animal_status=입양 대기";
-//		}else {
-//			return "redirect:/adoptreg_list?animal_status=입양 완료";
-//		}
-//		
+		
 	}
 
 	@RequestMapping(value = "/adoptreg_admission")
@@ -388,10 +389,10 @@ public class AdminAnimalController {
 		//수정
 		if(animal_status.equals("입소 신청")) {
 			animalDTO.setAnimal_status("입양 가능");
-			path = "possible";
+			path = "apply";
 		}else if(animal_status.equals("입양 가능")) {
 			animalDTO.setAnimal_status("입소 신청");
-			path = "apply";
+			path = "possible";
 		}else if(animal_status.equals("입양 완료")) {
 			animalDTO.setAnimal_status("입양 대기");
 			adoptRegDTO = new AdoptRegDTO();

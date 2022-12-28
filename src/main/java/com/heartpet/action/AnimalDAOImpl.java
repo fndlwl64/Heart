@@ -38,8 +38,11 @@ public class AnimalDAOImpl implements AnimalDAO {
 	}
 
 	@Override
-	public List<Integer> joinStatus(String animal_status) {
-		return sqlSession.selectList("animal_join_status",animal_status);
+	public List<Integer> joinStatus(String animal_status,String animal_name) {
+		Map<String, Object> maps = new HashMap<String, Object>();
+		maps.put("animal_status", animal_status);
+		maps.put("animal_name", animal_name);
+		return sqlSession.selectList("animal_join_status",maps);
 	}
 
 	@Override
