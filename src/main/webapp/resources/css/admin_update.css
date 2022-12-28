@@ -41,16 +41,17 @@ body {
 .container form .table {
 	margin: auto;
 	width: 80%;
-	margin-bottom: 2%;
+	margin-bottom: 1%;
 }
 
 .container .table th {
 	padding: 5px 20px;
+	vertical-align: middle !important;
+	
 }
 
 .container .table td {
 	text-align: left;
-	padding-left: 10%;
 }
 
 .container .table .input1 {
@@ -66,7 +67,6 @@ body {
 }
 
 .container .table select {
-	padding: 0 10%;
 	text-align: left;
 }
 
