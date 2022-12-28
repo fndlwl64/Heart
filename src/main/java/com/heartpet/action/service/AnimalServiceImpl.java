@@ -24,13 +24,19 @@ public class AnimalServiceImpl implements AnimalService {
 		if(adoptRegDTO != null) {
 			adoptRegDAO.insert(adoptRegDTO);
 		}
-		animalDAO.insert(animalDTO);
+		if(animalDTO != null) {
+			animalDAO.insert(animalDTO);
+		}
 	}
 
 	@Override
 	public void update(AnimalDTO animalDTO, AdoptRegDTO adoptRegDTO) {
-		animalDAO.updateStatus(animalDTO);
-		adoptRegDAO.update(adoptRegDTO);
+		if(animalDTO != null) {
+			animalDAO.updateStatus(animalDTO);
+		}
+		if(adoptRegDTO != null) {
+			adoptRegDAO.update(adoptRegDTO);		
+		}
 	}
 
 	@Override
