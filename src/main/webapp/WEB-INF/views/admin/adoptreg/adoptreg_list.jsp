@@ -22,15 +22,15 @@
 <c:set var="tag" value="${tag }"></c:set>
 <c:set var="sort" value="${sort }" />
 <c:set var="path" value="<%=request.getContextPath()%>" />
-
+<c:set var="pagingStatus"
+	value="startDate=${ startDate }&endDate=${ endDate }&animal_status=" />
 <c:set var="pagingSort"
-	value="startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }&animal_status=${animal_status }" />
+	value="startDate=${ startDate }&endDate=${ endDate }&animal_status=${animal_status }" />
 <c:set var="pagingTag"
-	value="startDate=${ startDate }&endDate=${ endDate }&adopt_tag=${tag }&animal_status=${animal_status }&sort=${sort }" />
+	value="startDate=${ startDate }&endDate=${ endDate }&animal_status=${animal_status }&sort=${sort }" />
 <input type="hidden" id="sortlink"
 	value="<%=request.getContextPath() %>/adoptreg_list?page=${ paging.page }&${pagingSort}" />
 <!-- 쿼리 조인을 피하기 위한 key, value를 통한 animal테이블 데이터 참조 -->
-
 <body>
 	<div class="container">
 		<form class="search_form" method="post" action="${path }/adoptreg_list">
@@ -40,23 +40,8 @@
 	           	</div>
 	           
 				<div class="search-table-box">
+					<input type="hidden" name="animal_status" value="${animal_status }"/>
 					<table class="table table-sm" id="search-table">
-						<tr>
-							<th width="12.5%">입양 진행 상태</th>
-							<td width="20%">
-								<select name="animal_status" class="form-select">
-									<option value=""></option>
-									<option value="입소 신청"
-										<c:if test="${animal_status eq '입소 신청'}">selected</c:if>>입소 신청</option>
-									<option value="입양 가능"
-										<c:if test="${animal_status eq '입양 가능'}">selected</c:if>>입양 가능</option>
-									<option value="입양 대기"
-										<c:if test="${animal_status eq '입양 대기'}">selected</c:if>>입양 대기</option>
-									<option value="입양 완료"
-										<c:if test="${animal_status eq '입양 완료'}">selected</c:if>>입양 완료</option>
-								</select>
-							</td>
-						</tr>
 						<tr>
 							<th width="12.5%">입양 검색 항목</th>
 							<td>
@@ -92,29 +77,68 @@
 
 		<%-- 검색 결과 테이블 --%>
 		<div class="lists">
+			<div class="d-flex justify-content-start my-2">
+				<div class="row">
+					<div class="col">
+						<a class="btn btn-secondary" style="color:white; width:100px;" href="<%=request.getContextPath() %>/adoptreg_list?page=${ paging.page }&${pagingStatus }입소 신청">입소신청</a>
+					</div>
+					<div class="col">
+						<a class="btn btn-secondary" style="color:white; width:100px;" href="<%=request.getContextPath() %>/adoptreg_list?page=${ paging.page }&${pagingStatus }입양 가능">입양가능</a>
+					</div>
+					<div class="col">
+						<a class="btn btn-secondary" style="color:white; width:100px;" href="<%=request.getContextPath() %>/adoptreg_list?page=${ paging.page }&${pagingStatus }입양 대기">입양대기</a>
+					</div>
+					<div class="col">
+						<a class="btn btn-secondary" style="color:white; width:100px;" href="<%=request.getContextPath() %>/adoptreg_list?page=${ paging.page }&${pagingStatus }입양 완료&sort=adopt_reg_adoptdate">입양완료</a>
+					</div>
+				</div>
+			</div>
 			<%--정렬--%>
+			<c:if test="${animal_status eq '입양 대기'}">
 			<div class="d-flex justify-content-end my-2">
 				<div class="validation-form mx-2">
 					<select class="form-select form-select-sm" name="sort" id="sort">
-						<option value="adopt_reg_appdate" selected="selected"
-							<c:if test="${sort eq 'adopt_reg_appdate'}">selected</c:if>>입소신청일</option>
 						<option value="adopt_reg_regdate"
 							<c:if test="${sort eq 'adopt_reg_regdate'}">selected</c:if>>입양등록일</option>
 						<option value="adopt_reg_duedate"
 							<c:if test="${sort eq 'adopt_reg_duedate'}">selected</c:if>>입양예정일</option>
-						<option value="adopt_reg_adoptdate"
-							<c:if test="${sort eq 'adopt_reg_adoptdate'}">selected</c:if>>입양완료일</option>
 					</select>
 				</div>
 			</div>
+			</c:if>
 			<table class="table table-hover searched_list">
 				<tr>
 					<th class="table-light col-1">회원 아이디</th>
 					<th class="table-light col-1">동물 이름</th>
-					<th class="table-light col-1">입소 신청일</th>
+					<!-- <th class="table-light col-1">입소 신청일</th>
 					<th class="table-light col-1">입양 등록일</th>
 					<th class="table-light col-1">입양 예정일</th>
-					<th class="table-light col-1">입양 완료일</th>
+					<th class="table-light col-1">입양 완료일</th> -->
+					
+					<c:if test="${animal_status eq '입소 신청'}">
+						<th class="table-light col-3" colspan="3">
+						입소 신청일
+						</th>
+					</c:if>
+					<%-- <c:if test="${animal_status eq '입양 가능'}">
+						<th class="table-light col-3" colspan="3">
+						입양 등록일
+						</th>
+					</c:if> --%>
+					<c:if test="${animal_status eq '입양 대기'}">
+						<th class="table-light col-2" colspan="2">
+						입양 등록일
+						</th>
+						<th class="table-light col-2" colspan="2">
+						입양 예정일
+						</th>
+					</c:if>
+					<c:if test="${animal_status eq '입양 완료'}">
+						<th class="table-light col-3" colspan="3">
+						입양 완료일
+						</th>
+					</c:if>
+					
 					<th class="table-light col-1">입양 상태</th>
 				</tr>
 				<c:forEach var="dto" items="${list }">
@@ -126,10 +150,35 @@
 					</c:if>	
 						<td class="list-title text-center">${dto.adopt_reg_userid }</td>
 						<td class="list-title text-center">${map.get(dto.adopt_reg_animalno).get(0) }</td>
-						<td class="list-title text-center small">${dto.adopt_reg_appdate.substring(0,16) }</td>
+						<%-- <td class="list-title text-center small">${dto.adopt_reg_appdate.substring(0,16) }</td>
 						<td class="list-title text-center small">${dto.adopt_reg_regdate.substring(0,16) }</td>
 						<td class="list-title text-center small">${dto.adopt_reg_duedate.substring(0,16) }</td>
-						<td class="list-title text-center small">${dto.adopt_reg_adoptdate.substring(0,16) }</td>
+						<td class="list-title text-center small">${dto.adopt_reg_adoptdate.substring(0,16) }</td> --%>
+						
+						<c:if test="${animal_status eq '입소 신청' }">
+							<td class="list-title text-center small" colspan="3">
+							${dto.adopt_reg_appdate.substring(0,16) }
+							</td>
+						</c:if>
+						<%-- <c:if test="${animal_status eq '입양 가능' }">
+							<td class="list-title text-center small" colspan="3">
+							${dto.adopt_reg_regdate.substring(0,16) }
+							</td>
+						</c:if> --%>
+						<c:if test="${animal_status eq '입양 대기' }">
+							<td class="list-title text-center small" colspan="2">
+							${dto.adopt_reg_regdate.substring(0,16) }
+							</td>
+							<td class="list-title text-center small" colspan="2">
+							${dto.adopt_reg_duedate.substring(0,16) }
+							</td>
+						</c:if>
+						<c:if test="${animal_status eq '입양 완료' }">
+							<td class="list-title text-center small" colspan="3">
+							${dto.adopt_reg_adoptdate.substring(0,16) }
+							</td>
+						</c:if>
+						
 						<c:if test="${map.get(dto.adopt_reg_animalno).get(2) eq 1 }">
 							<c:if test="${map.get(dto.adopt_reg_animalno).get(1) ne '입양 대기' and map.get(dto.adopt_reg_animalno).get(1) ne '입양 완료'}">
 								<td><a class="text-primary" data-bs-toggle="modal"

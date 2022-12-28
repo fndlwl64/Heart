@@ -233,9 +233,8 @@ public class AnimalController {
 			request.setAttribute("url", "main");
 			return "alert";
 		}
-		
-	
-		return "redirect:/";
+
+		return "redirect:/user_animal_content?no="+animal_no;
 	}
 	
 	// 입양 취소

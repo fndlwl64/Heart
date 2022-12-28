@@ -46,7 +46,6 @@ public class AnimalServiceImpl implements AnimalService {
 			adoptRegDTO.setAdopt_reg_adoptdate(reg_adoptdate);
 			
 			AnimalDTO animalDTO = new AnimalDTO();
-			animalDTO.setAnimal_status("입양 완료");
 			animalDTO.setAnimal_no(adoptRegDTO.getAdopt_reg_animalno());
 			animalDAO.updateStatus(animalDTO);
 			adoptRegDAO.update(adoptRegDTO);
