@@ -157,9 +157,15 @@
 				</tr>
 			</table>
 
-			<button type="submit" class="btn btn-success mx-1">
-				<i class="bi bi-pencil"></i>수정
-			</button>
+			<div class="btns">
+				<div>
+					<button class="btn btn-dark insertbtn mb-3"><i class="bi bi-card-list"></i> 목록</button>
+				</div>	
+				<div>
+					<button class="btn btn-warning insertbtn mb-3"><i class="bi bi-pencil"></i> 리셋</button>
+					<button class="btn btn-success insertbtn mb-3"><i class="bi bi-eraser"></i> 수정</button>
+				</div>
+			</div>
 		</form>
 	</div>
 	<script type="text/javascript">

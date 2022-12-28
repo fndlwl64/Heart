@@ -36,14 +36,12 @@
 						<span>
 							<c:if test="${dto.animal_neutered eq 'Y'}"> 유</c:if>
 							<c:if test="${dto.animal_neutered eq 'N'}"> 무</c:if>
-						</span><br />
-						
+						</span><br/>
 						<label>예방접종 유무</label>
 						<span>
 							<c:if test="${dto.animal_vaccination eq 'Y'}"> 유</c:if>
 							<c:if test="${dto.animal_vaccination eq 'N'}"> 무</c:if>
-						</span><br />
-						
+						</span><br/>
 						<label>추정나이</label>
 						<span> ${dto.animal_age }살</span><br />
 					</div>

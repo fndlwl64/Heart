@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="container">
-
+	
     <br>
     <%-- el태그로 이름 가져와 입력 --%>
     <h2>${cont.user_name} 회원 정보</h2>

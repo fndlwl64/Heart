@@ -6,6 +6,11 @@
 <script src="resources/js/mypage.js"></script>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="dto" value="${uList }"/>
+<c:set var="total" value="${ total }"/>
+<c:set var="paging" value="${ paging }"/>
+<c:set var="search_date_start" value="${ search_date_start }"/>
+<c:set var="search_date_end" value="${ search_date_end }"/>
+<c:set var="url" value="&search_date_start=${ search_date_start }&search_date_end=${ search_date_end }"/>
 <link rel="stylesheet" href="resources/css/mypage.css"/>
 <%-- 여기서부터 작성 --%>
 
@@ -113,7 +118,8 @@
 	        	
 	        <%-- 페이징처리 --%>
 	        <c:if test="${!empty List}">
-	    	<jsp:include page="../../include/pagination.jsp" />
+	    	<%-- <jsp:include page="../../include/pagination.jsp" /> --%>
+	    	<%@ include file="../../include/pagination_update.jsp" %>
 	    	</c:if>
 	    </div>
     </div>
