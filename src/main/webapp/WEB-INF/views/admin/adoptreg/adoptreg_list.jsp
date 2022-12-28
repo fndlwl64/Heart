@@ -126,10 +126,10 @@
 					</c:if>	
 						<td class="list-title text-center">${dto.adopt_reg_userid }</td>
 						<td class="list-title text-center">${map.get(dto.adopt_reg_animalno).get(0) }</td>
-						<td class="list-title text-center small">${dto.adopt_reg_appdate }</td>
-						<td class="list-title text-center small">${dto.adopt_reg_regdate }</td>
-						<td class="list-title text-center small">${dto.adopt_reg_duedate }</td>
-						<td class="list-title text-center small">${dto.adopt_reg_adoptdate }</td>
+						<td class="list-title text-center small">${dto.adopt_reg_appdate.substring(0,16) }</td>
+						<td class="list-title text-center small">${dto.adopt_reg_regdate.substring(0,16) }</td>
+						<td class="list-title text-center small">${dto.adopt_reg_duedate.substring(0,16) }</td>
+						<td class="list-title text-center small">${dto.adopt_reg_adoptdate.substring(0,16) }</td>
 						<c:if test="${map.get(dto.adopt_reg_animalno).get(2) eq 1 }">
 							<c:if test="${map.get(dto.adopt_reg_animalno).get(1) ne '입양 대기' and map.get(dto.adopt_reg_animalno).get(1) ne '입양 완료'}">
 								<td><a class="text-primary" data-bs-toggle="modal"
