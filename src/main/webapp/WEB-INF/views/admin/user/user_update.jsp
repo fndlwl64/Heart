@@ -10,9 +10,7 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 </head>
-<link rel="stylesheet" href="resources/css/admin_include.css">
 <link rel="stylesheet" href="resources/css/admin_update.css" />
-<link rel="stylesheet" href="resources/css/list_view.css">
 <script src="${path}/resources/js/admin_user_update.js"></script>
 <script src="${path }/resources/js/signin_up.js"></script>
     
@@ -21,20 +19,20 @@
 	<jsp:include page="../../include/admin_header.jsp" />
 	
 	<div class="container">
-	    <div style="width: 70%;" class="sub-title"><h4>회원 수정하기</h4></div>
+	    <div class="sub_title"><h4>회원 수정하기</h4></div>
 	    <form method="post" action="${path}/user_updated">
 	        
-	        <table class="table">
+	        <table class="table updatetable">
 	            <tr>
-	                <th class="table-light">아이디</th>
+	                <th class="table-light col-2">아이디</th>
 	                <td><input class ="form-control" name="user_id" type="text" value="${cont.user_id}"   readonly></td>
 	            </tr>
 	            <tr>
-	                <th class="table-light">이름</th>
+	                <th class="table-light col-2">이름</th>
 	                <td><input class ="form-control" name="user_name" type="text" value="${cont.user_name}"   readonly></td>
 	            </tr>
 	            <tr>
-	                <th class="table-light">등급</th>
+	                <th class="table-light col-2">등급</th>
 	                <c:set var="grade" value="${cont.user_grade}" />
 	                <td>
 	                	<select name="user_grade" id="select_value" class="form-control">
@@ -48,7 +46,7 @@
 	                </td>
 	            </tr>
 	            <tr>
-	                <th class="table-light">이메일</th>
+	                <th class="table-light col-2">이메일</th>
 	                <c:if test="${empty cont.user_email }">
 	                	<td><input class ="form-control" name="user_email" type="text" value="${cont.user_email}"   placeholder="카카오 로그인 회원. 이메일 입력 요망"></td>
 	                </c:if>
@@ -57,7 +55,7 @@
 	                </c:if>
 	            </tr>
 	            <tr>
-	                <th class="table-light">연락처</th>
+	                <th class="table-light col-2">연락처</th>
 	                <c:if test="${empty cont.user_phone }">
 	                	<td><input class ="form-control" name="user_phone" type="text" value="${cont.user_phone}"   placeholder="SNS 로그인 회원. 연락처 입력 요망"></td>
 	                </c:if>
@@ -67,33 +65,34 @@
 	            </tr>
 	            <tr>
 	                <c:set var="addr" value="${cont.user_addr }"/>
-	                <th class="table-light">주소</th>
+	                <th class="table-light col-2">주소</th>
 	                <c:if test="${empty addr }">
 	                <td>
-	                	<input id="zipcode_search" class="search_zipcode" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-		                <input class="form-control" name="user_addr" type="text" id="sample6_postcode" placeholder="우편번호" required>
-	                    <input class="form-control" name="user_addr" type="text" id="sample6_address" placeholder="주소" required><br>
-	                    <input class="form-control" name="user_addr" type="text" id="sample6_detailAddress" placeholder="상세주소" required>
-	                    <input class="form-control" name="user_addr" type="text" id="sample6_extraAddress" placeholder="참고항목" required>
+	                	
+		                <input class="form-control addr" name="user_addr" type="text" id="sample6_postcode" placeholder="우편번호" required>
+		                <input id="zipcode_search" class="search_zipcode" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+	                    <input class="form-control addr" name="user_addr" type="text" id="sample6_address" placeholder="주소" required><br>
+	                    <input class="form-control addr" name="user_addr" type="text" id="sample6_detailAddress" placeholder="상세주소" required>
+	                    <input class="form-control addr" name="user_addr" type="text" id="sample6_extraAddress" placeholder="참고항목" required>
 	                </td>
 	                </c:if>
 	                
 	                <c:if test="${!empty addr }">
 	                <td>
-	               	 	<input id="zipcode_search" class="search_zipcode" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-		                <input class="form-control" name="user_addr" type="text" id="sample6_postcode" value="${fn:split(addr,',')[0]}"  >
-	                    <input class="form-control" name="user_addr" type="text" id="sample6_address" value="${fn:split(addr,',')[1]}"  ><br>
-	                    <input class="form-control" name="user_addr" type="text" id="sample6_detailAddress" value="${fn:split(addr,',')[2]}"  >
-	                    <input class="form-control" name="user_addr" type="text" id="sample6_extraAddress" value="${fn:split(addr,',')[3]}"  >
+	               	 	<input class="form-control-sm addr" name="user_addr" type="text" id="sample6_postcode" value="${fn:split(addr,',')[0]}"  >
+		                <input id="zipcode_search" class="search_zipcode" type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+	                    <input class="form-control-sm addr " name="user_addr" type="text" id="sample6_address" value="${fn:split(addr,',')[1]}"  ><br>
+	                    <input class="form-control-sm addr " name="user_addr" type="text" id="sample6_detailAddress" value="${fn:split(addr,',')[2]}"  >
+	                    <input class="form-control-sm addr" name="user_addr" type="text" id="sample6_extraAddress" value="${fn:split(addr,',')[3]}"  >
 	                </td>
 	                </c:if>
 	            </tr>
 	            <tr>
-	                <th class="table-light">후원금액</th>
+	                <th class="table-light col-2">후원금액</th>
 	                <td><input class ="form-control" name="user_totalprice" type="text" value="${cont.user_totalprice}"  ></td>
 	            </tr>
 	            <tr>
-	                <th class="table-light">반려동물경험</th>
+	                <th class="table-light col-2">반려동물경험</th>
 	                <td>
 	                <c:if test="${'Y' eq cont.user_animalexp }">
 	                	<input class ="expcss" name="user_animalexp" type="radio" value="Y" checked> Y
@@ -110,13 +109,13 @@
 	                </td>
 	            </tr>
 	        </table>
-	        <div class="btns" style="width: 70%;">
+	        <div class="up_btns">
 				<div>
-					<button class="btn btn-dark insertbtn mb-3"><i class="bi bi-card-list"></i> 목록</button>
+					<button type="button" class="btn btn-dark insertbtn mb-3" onclick="location.href='${path}/user_view?user_id=${cont.user_id }'"><i class="bi bi-card-list"></i> 목록</button>
 				</div>	
 				<div>
-					<button class="btn btn-warning insertbtn mb-3"><i class="bi bi-pencil"></i> 리셋</button>
-					<button class="btn btn-success insertbtn mb-3"><i class="bi bi-eraser"></i> 수정</button>
+					<button type="reset" class="btn btn-warning insertbtn mb-3"><i class="bi bi-pencil"></i> 리셋</button>
+					<button type="submit" class="btn btn-success insertbtn mb-3"><i class="bi bi-eraser"></i> 수정</button>
 				</div>
 			</div>
 	    </form>

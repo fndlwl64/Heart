@@ -24,9 +24,23 @@ body {
 	width: 70%;
 }
 
+/* sub-title */
+.container .sub_title {
+	display: flex;
+	margin: 1rem auto;
+	background-color: #FDEDEC;
+	border-radius: 10px;
+	width: 80%;
+}
+
+.container .sub_title > h4 {
+	font-weight: bold;
+	margin: 1rem;
+}
+
 .container form .table {
 	margin: auto;
-	width: 70%;
+	width: 80%;
 	margin-bottom: 2%;
 }
 
@@ -65,10 +79,11 @@ body {
 }
 
 .container .table .search_zipcode {
-	font-size: 14px;
+	font-size: 15px;
     border-radius: 7px;
     border: none;
     padding: 5px;
+    width: 200px;
 }
 
 .div1 .table {
@@ -123,10 +138,17 @@ body {
 }
 
 .div1 .table .search_zipcode {
-	font-size: 14px;
+	font-size: 15px;
     border-radius: 7px;
     border: none;
     padding: 5px;
+    width: 200px;
+}
+
+.container .updatetable .addr {
+	border: 1px solid #ced4da;
+	width: 350px;
+	margin-bottom: 0.5rem;
 }
 
 .container .btns {
@@ -134,4 +156,11 @@ body {
 	margin: auto;
 	width: 70%;
 	justify-content: end;
+}
+
+.container .up_btns {
+	display: flex;
+	margin: auto;
+	width: 80%;
+	justify-content: space-between;
 }
