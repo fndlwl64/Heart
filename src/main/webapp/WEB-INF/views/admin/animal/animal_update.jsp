@@ -7,52 +7,64 @@
 <c:set var="path" value="<%=request.getContextPath()%>" />
 <script src="resources/js/admin.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
-<link rel="stylesheet" href="resources/css/admin_animal.css">
+<link rel="stylesheet" href="resources/css/list_view.css" />
 <input type="hidden" id="tag" value="${animalDTO.animal_tag }"/>
 <input type="hidden" id="sp" value="${animalDTO.animal_species }"/>
+<c:if test="${ animalDTO.animal_tag eq 'dog' }">
+	<c:set var="animal" value="강아지" />
+</c:if>
+<c:if test="${ animalDTO.animal_tag eq 'cat' }">
+	<c:set var="animal" value="고양이" />
+</c:if>
 <body>
-	<br>
-	<br>
-	<div class="container" align="center">
+	<div class="container">
+		<div class="sub-title"><h4>${ animal } 수정하기</h4></div>			
 		<form action="<%=request.getContextPath()%>/animal_update"
 			method="post" enctype="multipart/form-data">
 			<input type="hidden" name="animal_no" value="${animalDTO.animal_no }">
 			<input type="hidden" name="animal_tag" value="${animalDTO.animal_tag }">
 			<input type="hidden" name="animal_img1"
-				value="${animalDTO.animal_img1 }"> <input type="hidden"
-				name="animal_img2" value="${animalDTO.animal_img2 }"> <input
+				value="${animalDTO.animal_img1 }"> 
+			<input type="hidden"
+				name="animal_img2" value="${animalDTO.animal_img2 }"> 
+			<input
 				type="hidden" name="animal_img3" value="${animalDTO.animal_img3 }">
+				
 			<table class="table noticeinfo mt-4">
 				<tr>
-					<th class="table-light col-1 w-25"><span class="sp2">이름</span></th>
-					<td class="col-11" colspan="8"><input type="text"
-						name="animal_name" class="form-control text-center"
+					<th class="table-light" width="10%"><span class="sp2">이름</span></th>
+					<td width="90%" colspan="8"><input type="text"
+						name="animal_name" class="form-control"
 						value=${animalDTO.animal_name }></td>
 				</tr>
 				<tr>
-					<th class="table-light col-1"><span class="sp2">나이</span></th>
-					<td class="col-2"><input type="number" name="animal_age"
-						class="form-control text-center" value=${animalDTO.animal_age }></td>
-					<th class="table-light col-1"><span class="sp2">성별</span></th>
-					<td class="col-2"><select name="animal_gender"
-						class="form-control text-center">
+					<th class="table-light" width="10%"><span class="sp2">나이</span></th>
+					<td width="15%">
+						<div class="d-flex align-items-center">
+							<input type="number" name="animal_age" value="${animalDTO.animal_age }" id="age" min="0" max="20" class="form-control">
+		                    <span class="ms-2"><b>살</b></span>
+	                    </div>
+					<th class="table-light" width="10%"><span class="sp2">성별</span></th>
+					<td width="15%">
+					<select name="animal_gender"
+						class="form-control">
 							<option value="male"
 								<c:if test="${animalDTO.animal_gender eq 'male'}">selected</c:if>>수컷</option>
 							<option value="female"
 								<c:if test="${animalDTO.animal_gender eq 'female'}">selected</c:if>>암컷</option>
 					</select></td>
 
-					<th class="table-light col-1"><span class="sp2">중성화</span></th>
-					<td class="col-2"><select name="animal_neutered"
-						class="form-control text-center">
+					<th class="table-light" width="10%"><span class="sp2">중성화</span></th>
+					<td width="15%"><select name="animal_neutered"
+						class="form-control">
 							<option value="Y"
 								<c:if test="${animalDTO.animal_neutered eq 'Y'}">selected</c:if>>Y</option>
 							<option value="N"
 								<c:if test="${animalDTO.animal_neutered eq 'N'}">selected</c:if>>N</option>
 					</select></td>
-					<th class="table-light col-1"><span class="sp2">예방접종</span></th>
-					<td class="col-2"><select name="animal_vaccination"
-						class="form-control text-center">
+					<th class="table-light" width="10%"><span class="sp2">예방접종</span></th>
+					<td width="15%"><select name="animal_vaccination"
+						class="form-control">
 							<option value="Y"
 								<c:if test="${animalDTO.animal_vaccination eq 'Y'}">selected</c:if>>Y</option>
 							<option value="N"
@@ -60,14 +72,14 @@
 					</select></td>
 				</tr>
 				<tr>
-					<th class="table-light col-1"><span class="sp2">종류</span></th>
+					<th class="table-light"><span class="sp2">종류</span></th>
 					<td colspan="3">
 					<select name="animal_species"
-						class="form-control text-center" id="species">
+						class="form-control" id="species">
 					</select></td>
-					<th class="table-light col-1"><span class="sp2">크기</span></th>
+					<th class="table-light"><span class="sp2">크기</span></th>
 					<td><select name="animal_size"
-						class="form-control text-center" id="size">
+						class="form-control" id="size">
 							<option value="소형"
 								<c:if test="${animalDTO.animal_size eq '소형'}">selected</c:if>>소형</option>
 							<option value="중형"
@@ -75,29 +87,31 @@
 							<option value="대형"
 								<c:if test="${animalDTO.animal_size eq '대형'}">selected</c:if>>대형</option>
 					</select></td>
-					<th class="table-light col-1"><span class="sp2">무게</span></th>
-					<td><input type="number" class="form-control text-center"
-						name="animal_weight" type="text"
-						value="${animalDTO.animal_weight }"></td>
+					<th class="table-light"><span class="sp2">무게</span></th>
+					<td>
+						<div class="d-flex align-items-center">
+							<input type="number" name="animal_weight" value="${animalDTO.animal_weight }" id="age" min="0" max="20" class="form-control">
+		                    <span class="ms-2"><b>kg</b></span>
+	                    </div>
+                    </td>
 				</tr>
 				<tr>
-					<th class="table-light col-1"><span class="sp2">입양 상태</span></th>
-					<td class="col-2"><input type="text" name="animal_status"
-						class="form-control text-center"
+					<th class="table-light"><span class="sp2">입양 상태</span></th>
+					<td ><input type="text" name="animal_status"
+						class="form-control"
 						value="${animalDTO.animal_status }"></td>
-					<th class="table-light col-1"><span class="sp2">발견장소</span></th>
+					<th class="table-light"><span class="sp2">발견장소</span></th>
 					<td colspan="5"><input type="text" name="animal_place"
-						class="form-control text-center" value=${animalDTO.animal_place }></td>
+						class="form-control" value=${animalDTO.animal_place }></td>
 				</tr>
 				<tr class="animal_content">
-					<th class="table-light col-1"><span class="sp2">유의사항</span></th>
-					<td colspan="7"><textarea rows="2" cols="22"
-							name="animal_caution"><c:out
-								value="${animalDTO.animal_caution }"></c:out></textarea></td>
+					<th class="table-light"><span class="sp2">유의사항</span></th>
+					<td colspan="7">
+					<textarea rows="6" cols="22" name="animal_caution" class="form-control"> ${animalDTO.animal_caution }</textarea></td>
 				</tr>
 				<tr>
 					<th rowspan="3" class="table-light">이미지</th>
-					<td colspan="2">
+					<td colspan="7">
 						<div class="d-grid align-middle original-image">
 							<input type="file" class="form-control" name="files"
 								accept="image/gif, image/jpeg, image/png"
@@ -116,7 +130,9 @@
 							</c:if>
 						</div>
 					</td>
-					<td colspan="3">
+				</tr>
+				<tr>
+					<td colspan="7">
 						<div class="d-grid align-middle original-image">
 							<input type="file" class="form-control" name="files"
 								accept="image/gif, image/jpeg, image/png"
@@ -135,7 +151,9 @@
 							</c:if>
 						</div>
 					</td>
-					<td colspan="2">
+				</tr>
+				<tr>
+					<td colspan="7">
 						<div class="d-grid align-middle original-image">
 							<input type="file" class="form-control" name="files"
 								accept="image/gif, image/jpeg, image/png"
