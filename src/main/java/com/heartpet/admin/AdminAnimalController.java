@@ -278,6 +278,14 @@ public class AdminAnimalController {
 		// 페이징
 		String field = "";
 		String keyword = "";
+		
+		if(animal_status == null) {
+			animal_status = "입양 대기";
+		}
+		/*
+		 * if(animal_status != null && animal_status == "입양 완료") { sort =
+		 * "adopt_reg_adoptdate"; }
+		 */
 
 		int currentPage = 1; // 현재 페이지 변수
 		if (page != 1) {
@@ -305,6 +313,10 @@ public class AdminAnimalController {
 			aList.add(dto.getAnimal_state());
 			maps.put(dto.getAnimal_no(), aList);
 		}
+		
+		System.out.println(maps.get(161).get(0) +" " +maps.get(161).get(1));
+		System.out.println(maps.get(160).get(0) +" " +maps.get(160).get(1));
+		System.out.println(maps.get(159).get(0) +" " +maps.get(159).get(1));
 
 		List<AdoptRegDTO> list = adoptRegDAO.listPaging(paging.getStartNo(), paging.getEndNo(), startDate, endDate,adopt_tag,
 				status_no,sort);	
@@ -340,7 +352,12 @@ public class AdminAnimalController {
 	@RequestMapping(value = "/adoptreg_update", method = RequestMethod.POST)
 	public String adoptreg_update(AdoptRegDTO adoptRegDTO) {
 		animalService.adoptRegUpdate(adoptRegDTO);
-		return "redirect:/adoptreg_list";
+		if(adoptRegDTO.getAdopt_reg_adoptdate() == null || adoptRegDTO.getAdopt_reg_adoptdate().equals("")) {
+			return "redirect:/adoptreg_list?animal_status=입양 대기";
+		}else {
+			return "redirect:/adoptreg_list?animal_status=입양 완료";
+		}
+		
 	}
 
 	@RequestMapping("/adoptreg_admission")
