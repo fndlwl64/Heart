@@ -208,7 +208,9 @@ public class AdminAnimalController {
 	@RequestMapping(value = "/animal_insert", method = RequestMethod.POST)
 	public String animal_insert_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO)
 			throws IllegalStateException, IOException {
-
+		for(MultipartFile file : files) {
+			System.out.println(file.getOriginalFilename());
+		}
 		// Adoptreg 추가
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String strDate = dateFormat.format(Calendar.getInstance().getTime());
@@ -282,6 +284,9 @@ public class AdminAnimalController {
 		String field = "";
 		String keyword = "";
 		
+		System.out.println(animal_name == null);
+		System.out.println(animal_status == null);
+		
 		if(animal_status == null) {
 			animal_status = "입양 대기";
 		}
@@ -315,7 +320,6 @@ public class AdminAnimalController {
 				status_no.add(-1);
 			}
 		}
-		
 		// 페이지
 		if(animal_no == 0) {
 			totalRecord = adoptRegDAO.countTag(startDate, endDate, adopt_tag, status_no);	
@@ -325,12 +329,6 @@ public class AdminAnimalController {
 		PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
 
 		// 해시맵으로 조인 유사하게 구현
-		System.out.println("=======================");
-		System.out.println("=======================");
-		System.out.println("=======================");
-		System.out.println("=======================");
-		
-		System.out.println("no : "+animal_no);
 		
 		List<AnimalDTO> animalList = null;
 		Map<Integer, ArrayList<Object>> maps = new HashMap();
