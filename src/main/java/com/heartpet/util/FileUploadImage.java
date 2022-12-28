@@ -226,6 +226,13 @@ public class FileUploadImage {
         String subPath = "/resources/upload/"+folderName + "/" + dateString;
         String rootPath = request.getSession().getServletContext().getRealPath(subPath);
         
+        // 폴더 없으면 생성
+        File mkfile = new File(rootPath);
+        // 경로에 해당하는 directory 전체 생성
+        if (!mkfile.exists()) {
+            mkfile.mkdirs();
+        }
+        
         //파일 업로드
         for(int i=0; i<files.size(); i++) {
             String realName = files.get(i).getOriginalFilename();
