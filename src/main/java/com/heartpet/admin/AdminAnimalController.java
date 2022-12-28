@@ -510,8 +510,8 @@ public class AdminAnimalController {
 	class MyAuthentication extends Authenticator {
 	    PasswordAuthentication pa;
 	    public MyAuthentication(){   
-	        String aa = "soopwe12@gmail.com";
-	        String zz = "lgezfcfzoabqkbrg";
+	        String aa = "";
+	        String zz = "";
 
 	        pa = new PasswordAuthentication(aa, zz);
 	}

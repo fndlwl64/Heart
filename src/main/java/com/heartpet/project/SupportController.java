@@ -1,14 +1,12 @@
 package com.heartpet.project;
 
 import java.util.Date;
-
-
-
 import java.util.HashMap;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -25,6 +23,27 @@ import com.heartpet.action.MypageDAO;
 import com.heartpet.action.SupportDAO;
 import com.heartpet.model.UserDTO;
 
+//메일보내기위해서 구글 이메일 등록해놓는 클래스
+class MyAuthentication extends Authenticator {
+	
+  
+  PasswordAuthentication pa;
+  
+
+  public MyAuthentication(){
+       
+      String id = "";      
+      String pw = "";         
+
+      // ID와 비밀번호를 입력한다.
+      pa = new PasswordAuthentication(id, pw);
+    
+}
+  	// 시스템에서 사용하는 인증정보
+	    public PasswordAuthentication getPasswordAuthentication() {
+	        return pa;
+	    }
+}
 @Controller
 public class SupportController {
 	
@@ -104,8 +123,9 @@ public class SupportController {
 		props.put("mail.smtp.socketFactory.fallback", "true");
 		props.put("mail.smtp.ssl.protocols", "TLSv1.2");
 		
+		/* Authenticator auth = new MyAuthentication(); */
 		Authenticator auth = new MyAuthentication();
-
+		
 		//session 생성 및  MimeMessage생성
         Session session = Session.getDefaultInstance(props, auth);
         MimeMessage msg = new MimeMessage(session);
