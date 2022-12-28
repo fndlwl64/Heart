@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>HeartPet</title>
- <link rel="stylesheet" href="resources/css/list_view.css">
+<link rel="stylesheet" href="resources/css/list_view.css">
 </head>
 <body>
 

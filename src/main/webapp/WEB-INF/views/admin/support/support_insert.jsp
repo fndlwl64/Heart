@@ -12,10 +12,9 @@
 <script src="${path}/resources/js/support.js"></script>
 <link rel="stylesheet" href="resources/css/support.css">
 <body>
-	<br><br>
 	<div class="div1" align="center">
 
-	<div class="sub-title"><h4>후원 회원 등록하기</h4></div> 
+	<div class="sub-title"><h4>후원 등록하기</h4></div> 
 		<form method="post" action="${path }/support_insert_ok" onsubmit="return submitOption();">
 			<table class="table noticeinfo mt-4">
 				<tr class="border-top">

@@ -13,14 +13,14 @@
 	}
 </style>
 <script src="resources/js/admin.js"></script>
+<link rel="stylesheet" href="resources/css/support.css">
 <link rel="stylesheet" href="resources/css/admin_include.css">
-<!-- <link rel="stylesheet" href="resources/css/support.css"> -->
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <c:set var="dto" value="${Cont }" />
 <body>
 <jsp:include page="../../include/admin_header.jsp" />
-<br><br>
 <div class="div1" align="center">
+	<div class="sub-title"><h4>공지사항 수정하기</h4></div>
 
 	<form method="post" action="${path }/notice_update_ok" enctype="multipart/form-data">
 		<input type="hidden" name="notice_img1" value="${dto.getNotice_img1() }">

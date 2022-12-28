@@ -90,11 +90,11 @@
                                             </c:if></span><br />
                                         <label>나이</label><span> ${dto.getAnimal_age()}살</span><br />
                                         <label>입양완료일</label><span> 
-                                            <c:if test="${empty dto.getAdopt_reg_duedate()}">
+                                            <c:if test="${empty dto.getAdopt_reg_adoptdate()}">
                                                 미정
                                             </c:if>                                         
-                                            <c:if test="${!empty dto.getAdopt_reg_duedate() }">
-                                                ${dto.getAdopt_reg_duedate().substring(0, 10)}
+                                            <c:if test="${!empty dto.getAdopt_reg_adoptdate()}">
+                                                ${dto.getAdopt_reg_adoptdate().substring(0, 10)}
                                             </c:if></span><br />
                                             </a>
                                         <div class="review-button">

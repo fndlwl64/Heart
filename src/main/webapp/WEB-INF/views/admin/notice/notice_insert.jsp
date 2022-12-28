@@ -11,12 +11,11 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script src="${path}/resources/js/notice.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
-<c:set var="path" value="${pageContext.request.contextPath}" />
+<link rel="stylesheet" href="resources/css/support.css">
 <body>
 <jsp:include page="../../include/admin_header.jsp" />
-<br><br>
 <div class="div1" align="center">
-	<div class="sub-title"><h4>공지사항 등록하기</h4></div> 
+	<div class="sub-title"><h4>공지사항 등록하기</h4></div>
 	<form method="post" enctype="multipart/form-data" action="${path }/notice_insert_ok" onsubmit="return submitOption();">
 		<table class="table noticeinfo mt-4">
 			<tr class="border-top">

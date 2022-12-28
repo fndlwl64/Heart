@@ -12,6 +12,7 @@
 </head>
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <link rel="stylesheet" href="resources/css/admin_update.css" />
+<link rel="stylesheet" href="resources/css/list_view.css">
 <script src="${path}/resources/js/admin_user_update.js"></script>
 <script src="${path }/resources/js/signin_up.js"></script>
     
@@ -19,10 +20,8 @@
 	
 	<jsp:include page="../../include/admin_header.jsp" />
 	
-	<br><br>
-	
 	<div class="container">
-	    
+	    <div style="width: 70%;" class="sub-title"><h4>회원 수정하기</h4></div>
 	    <form method="post" action="${path}/user_updated">
 	        
 	        <table class="table">
