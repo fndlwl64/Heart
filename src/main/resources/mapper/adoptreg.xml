@@ -40,6 +40,11 @@
 		select * from heartpet_adopt_reg where adopt_reg_regno =
 		#{adopt_reg_regno}
 	</select>
+	<select id="adoptreg_animalOne" parameterType="int"
+		resultType="AdoptRegDTO">
+		select * from heartpet_adopt_reg where adopt_reg_animalno =
+		#{adopt_reg_animalno}
+	</select>
 	<select id="adoptreg_list" resultType="AdoptRegDTO">
 		select * from
 		heartpet_adopt_reg order by adopt_reg_regno desc

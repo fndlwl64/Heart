@@ -63,6 +63,11 @@ public class AdoptRegDAOImpl implements AdoptRegDAO{
 	}
 
 	@Override
+	public AdoptRegDTO contentAnimal(int animal_no) {
+		return sqlSession.selectOne("adoptreg_animalOne",animal_no);
+	}
+
+	@Override
 	public List<AdoptRegDTO> search() {
 		// TODO Auto-generated method stub
 		return null;
