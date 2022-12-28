@@ -48,7 +48,9 @@
 					
 					<div class="col">	
 						<label>발견장소</label>
-						<span> ${dto.animal_place }</span><br />
+						<c:if test="${dto.animal_place.length() ge 8 }"><span> ${dto.animal_place.substring(0,8)}...</span><br/></c:if>
+						<c:if test="${dto.animal_place.length() lt 8 }"><span> ${dto.animal_place}</span><br/></c:if>
+						
 						
 						<label>크기</label>
 						<span> ${dto.animal_size }</span><br />
