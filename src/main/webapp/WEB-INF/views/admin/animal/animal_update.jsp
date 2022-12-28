@@ -7,7 +7,6 @@
 <c:set var="path" value="<%=request.getContextPath()%>" />
 <script src="resources/js/admin.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
-<link rel="stylesheet" href="resources/css/admin_animal.css">
 <input type="hidden" id="tag" value="${animalDTO.animal_tag }"/>
 <input type="hidden" id="sp" value="${animalDTO.animal_species }"/>
 <body>
