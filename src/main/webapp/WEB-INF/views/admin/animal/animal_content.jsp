@@ -101,7 +101,7 @@ pageContext.setAttribute("newline", "\n");
 			<div>		
 				<button class="btn btn-success mx-1 float-right"
 					onclick="location.href='${path}/animal_update?no=${ dto.animal_no }'">
-					<i class="bi bi-pencil-fill"></i> 수정
+					<i class="bi bi-eraser"></i> 수정
 				</button>
 
 				<button class="btn btn-danger mx-1 float-right" data-bs-toggle="modal"

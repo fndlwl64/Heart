@@ -114,11 +114,14 @@
 	        </table>
 	       
 	        <div class="btns">
-	        	<div>
-			        <button type="submit" class="btn btn-success"><i class="bi bi-eraser"></i> 수정</button>
-			        <button type="reset" class="btn btn-warning"><i class="bi bi-pencil"></i> 취소</button>
-		        </div>
-	        </div>
+				<div>
+					<button class="btn btn-dark insertbtn mb-3"><i class="bi bi-card-list"></i> 목록</button>
+				</div>	
+				<div>
+					<button class="btn btn-warning insertbtn mb-3"><i class="bi bi-pencil"></i> 리셋</button>
+					<button class="btn btn-success insertbtn mb-3"><i class="bi bi-eraser"></i> 수정</button>
+				</div>
+			</div>
 	    </form>
 	    
 	</div>
