@@ -18,7 +18,7 @@
 <head>
 <jsp:include page="../../include/admin_header.jsp"/>
     <meta charset="UTF-8">
-    <title>HeartPet</title>
+    <title>HeartPet_Admin_Notice</title>
     <link rel="stylesheet" href="resources/css/list_view.css">
     <link rel="stylesheet" href="resources/css/notice.css">
     <script src="${path}/resources/js/admin_list_view.js"></script>

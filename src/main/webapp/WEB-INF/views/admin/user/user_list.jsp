@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>HeartPet</title>
+    <title>HeartPet_Admin_User</title>
     <script src="${path }/resources/js/admin_list_view.js"></script>
     <link rel="stylesheet" href="${path }/resources/css/list_view.css">
 </head>

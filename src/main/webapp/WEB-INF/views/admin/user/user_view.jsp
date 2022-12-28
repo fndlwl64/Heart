@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HeartPet</title>
+<title>HeartPet_Admin_User</title>
 <link rel="stylesheet" href="resources/css/list_view.css">
 </head>
 <body>

@@ -5,11 +5,28 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>HeartPet_Admin_Notice</title>
 </head>
 <style>
 	.table-light {
 		vertical-align: middle;
+	}
+	
+	.image-update {
+	   margin-top: 0.5rem;
+	   text-align: left;
+	   margin-bottom: 0;;
+	}
+	 
+	.delete-checkbox {
+	   margin-left: 1.5rem; 
+	   margin-top: 0.5rem;
+       margin-bottom: 0;
+       text-align: left;
+	}
+	
+	.delete-checkbox > label {
+	   margin: 0;
 	}
 </style>
 <script src="resources/js/admin.js"></script>
@@ -44,7 +61,7 @@
 					<div class="d-grid align-middle original-image">
 						<input class="form-control" id="file-input2" type="file" name="files" accept="image/gif, image/jpeg, image/png">
 						<c:if test="${!empty dto.getNotice_img1()}">
-						<p class="image-update"><img id="file_change2" class="logo" src="resources/upload/${dto.getNotice_img1() }" style="max-height: 200px;" alt="notice_img"/></p>
+						<p class="image-update"><img id="file_change2" src="resources/upload/${dto.getNotice_img1() }" style="max-height: 200px;" alt="notice_img"/></p>
 						<p class="delete-checkbox">
                             <label><input type="checkbox" class="form-check-input" name="notice_image1_delete" value="Y" /> 선택한 파일 삭제</label>
                         </p>
@@ -57,7 +74,7 @@
 					<div class="d-grid align-middle original-image">
 						<input class="form-control" id="file-input2" type="file" name="files" accept="image/gif, image/jpeg, image/png">
 						<c:if test="${!empty dto.getNotice_img2()}">
-						<p class="image-update"><img id="file_change2" class="logo" src="resources/upload/${dto.getNotice_img2() }" style="max-height: 200px;" alt="notice_img"/></p>
+						<p class="image-update"><img id="file_change2" src="resources/upload/${dto.getNotice_img2() }" style="max-height: 200px;" alt="notice_img"/></p>
 						<p class="delete-checkbox">
                             <label><input type="checkbox" class="form-check-input" name="notice_image2_delete" value="Y" /> 선택한 파일 삭제</label>
                         </p>
@@ -67,17 +84,16 @@
 			</tr>
 		</table>
 		<input type="hidden" name="notice_no" value="${dto.getNotice_no() }">
-		<div class="btns">
+		<div class="btns mb-5">
 			<div>
 				<button type="button" class="btn btn-dark mx-1" onclick="location.href='${path}/notice_list'"><i class="bi bi-card-list"></i> 목록</button>
 	        </div>
 	        <div>
-	        	<button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 취소</button>
+	        	<button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
 	        	<button id="update_btn" type="submit" class="btn btn-success mx-1"><i class="bi bi-eraser"></i> 수정</button>
 	        </div>
 		</div>		
 	</form>
-	
 </div>
 </body>
 </html>

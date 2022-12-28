@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HeartPet_Admin_Adopt_Reg</title>
+<title>HeartPet_Admin_AdoptReg</title>
 <link rel="stylesheet" href="${path }/resources/css/list_view.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
