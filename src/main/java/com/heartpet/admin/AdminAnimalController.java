@@ -378,24 +378,30 @@ public class AdminAnimalController {
 
 	/* 관리자 리스트에서 수정하기 */
 	@RequestMapping(value = "/adoptreg_update", method = RequestMethod.GET)
-	public String adoptreg_update(@RequestParam("adopt_reg_regno") int adopt_reg_regno, Model model) {
+	public String adoptreg_update(@RequestParam("adopt_reg_regno") int adopt_reg_regno,
+			@RequestParam("status") String status, Model model) {
 
 		AdoptRegDTO adoptRegDTO = adoptRegDAO.content(adopt_reg_regno);
 		AnimalDTO animalDTO = animalDAO.content(adoptRegDTO.getAdopt_reg_animalno());
+		
+		//입양 예정일 아직 수정하지 않았을 때 완료일 선택 했을 때
+		if(adoptRegDTO.getAdopt_reg_duedate()==null && status.equals("adoptdate")) {
+			request.setAttribute("msg", "입양 예정일을 먼저 정해주세요");
+			request.setAttribute("url", "back");
+			return "alert";
+		}
 
+		model.addAttribute("status",status);
 		model.addAttribute("content", adoptRegDTO);
 		model.addAttribute("foreign", animalDTO);
 		return "admin/adoptreg/adoptreg_update";
 	}
 
 	@RequestMapping(value = "/adoptreg_update", method = RequestMethod.POST)
-	public String adoptreg_update(AdoptRegDTO adoptRegDTO,
-			HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
-		request.setCharacterEncoding("utf-8");
-    	response.setContentType("text/html; charset=utf-8");
-    	response.setCharacterEncoding("utf-8");
+	public String adoptreg_update(AdoptRegDTO adoptRegDTO, @RequestParam("status") String status) throws UnsupportedEncodingException {
 		
-		animalService.adoptRegUpdate(adoptRegDTO);
+		
+		animalService.adoptRegUpdate(adoptRegDTO,status);
 		return "redirect:/adoptreg_list";
 		
 	}

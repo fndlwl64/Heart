@@ -5,10 +5,11 @@
 <c:set var="content" value="${content }"></c:set>
 <c:set var="foreign" value="${foreign }"></c:set>
 <c:set var="deleteAddr" value="${path }/adoptreg_cancel?animal_no=${content.adopt_reg_animalno }&adopt_reg_regno=${content.adopt_reg_regno }&user_id=${content.adopt_reg_userid }"></c:set>
-<c:if test="${ empty content.adopt_reg_duedate }">
+<c:set var="status" value="${status }"/>
+<c:if test="${status eq 'duedate'}">
 	<c:set var="semiTitle" value="입양 예정일" />
 </c:if>
-<c:if test="${not empty content.adopt_reg_duedate }">
+<c:if test="${status eq 'adoptdate' }">
 	<c:set var="semiTitle" value="입양 완료일" />
 </c:if>
 <!DOCTYPE html>
@@ -38,6 +39,7 @@
 
     <div>
         <form action="${path}/adoptreg_update" method="post">
+        <input type="hidden" name="status" value="${status }"/>
         <input type="hidden" name="adopt_reg_animalno" value="${content.adopt_reg_animalno }" />
         <table class="table noticeinfo mt-4">
             <tr class="border-top">
@@ -61,15 +63,15 @@
             <tr>
                 <th class="table-light" height="50px">입양 예정일</th>
 				<td colspan="5">
-				<c:if test="${ empty content.adopt_reg_duedate }">
+				<c:if test="${ status eq 'duedate' }">
 					<input type="datetime-local" class="form-control" name="adopt_reg_duedate" value="${content.adopt_reg_duedate }" required="required">
 				</c:if>
-				<c:if test="${ not empty content.adopt_reg_duedate }">
+				<c:if test="${ status eq 'adoptdate' }">
 					${content.adopt_reg_duedate.substring(0,16) }
 				</c:if>
 				</td>
 			</tr>
-			<c:if test="${not empty content.adopt_reg_duedate }">
+			<c:if test="${status eq 'adoptdate' }">
 				<tr>
 					<th class="table-light" height="50px">입양 완료일</th>
 					<td colspan="5">
