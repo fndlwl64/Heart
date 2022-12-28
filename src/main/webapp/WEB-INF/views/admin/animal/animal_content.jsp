@@ -10,6 +10,12 @@ pageContext.setAttribute("newline", "\n");
 <script src="${path}/resources/js/admin_list_view.js"></script>
 <c:set var="deleteAddr"
 	value="${ path }/animal_delete?no=${dto.animal_no }&animal_tag=${dto.animal_tag }" />
+<c:if test="${dto.animal_tag eq 'dog' }">
+	<c:set var="animal" value="강아지" />
+</c:if>
+<c:if test="${dto.animal_tag eq 'cat' }">
+	<c:set var="animal" value="고양이" />
+</c:if>
 <script src="resources/js/admin.js"></script>
 <link rel="stylesheet" href="resources/css/admin_include.css">
 <link rel="stylesheet" href="resources/css/admin_animal.css">
@@ -17,15 +23,50 @@ pageContext.setAttribute("newline", "\n");
 <body>
 
 	<div class="container">
-
-	    <div class="sub-title" style="width:100%;"><h4>『${dto.animal_name }』 상세 정보</h4></div>
-	
+	    <div class="sub-title"><h4>${ animal } 상세 정보</h4></div>	
 	    <table class="table noticeinfo mt-4">
 	        <tr>
-	            <th class="table-light">동물번호</th>
-	            <td colspan="2" class="">${ dto.animal_no } <span class="badge text-bg-primary" id="comment-count"></span></td>
+	            <th class="table-light" width="10%">${ animal } 이름</th>
+	            <td class="user" width="20%">${dto.animal_name }</td>
+	            <th class="table-light" width="10%">종</th>
+	            <td class="user" width="25%">
+	            	${ animal } [${dto.animal_species }]</td>
+	        	<th class="table-light" width="10%">성별</th>
+	            <td width="20%">
+		            <c:if test="${ dto.animal_gender eq 'male' }">
+		            	수컷 (♂)
+		            </c:if>
+		            <c:if test="${ dto.animal_gender eq 'female' }">
+		            	암컷 (♀)
+		            </c:if>
+	            </td>
+	        </tr>
+	        <tr>
+	            <th class="table-light">나이</th>
+	            <td class="user">${dto.animal_age }살</td>
+	            <th class="table-light">크기</th>
+	            <td>${ dto.animal_size }</td>
+	            <th class="table-light">무게</th>
+	            <td>${ dto.animal_weight }kg</td>
+	        </tr>
+	        <tr>
 	            <th class="table-light">입양 상태</th>
-	            <td colspan="2" class="">${ dto.animal_status } <span class="badge text-bg-primary" id="comment-count"></span></td>
+	            <td>
+				<c:if test="${ dto.animal_status eq '입소 신청' }">
+					<span style="color: #c82333; font-weight: bold;">${ dto.animal_status }</span>
+				</c:if>
+				<c:if test="${ dto.animal_status eq '입양 가능' }">
+					<span style="color: #0d6efd; font-weight: bold;">${ dto.animal_status }</span>
+				</c:if>				
+	            <c:if test="${ dto.animal_status eq '입양 대기' }">
+					<a style="text-decoration: none;" href="${ path }/adoptreg_list?animal_no=${ dto.animal_no }"><span style="color: #218838; font-weight: bold;">${ dto.animal_status }</span></a>
+				</c:if>
+				<c:if test="${ dto.animal_status eq '입양 완료' }">
+					<a style="text-decoration: none;" href="${ path }/adoptreg_list?animal_no=${ dto.animal_no }"><span style="color: #6c757d; font-weight: bold;">${ dto.animal_status }</span></a>
+				</c:if>
+	            </td>
+	            <th class="table-light">발견 장소</th>
+	            <td class="user" colspan="4">${dto.animal_place }</td>
 	        </tr>
 	        <tr>
 	            <th class="table-light">중성화 여부</th>
@@ -38,34 +79,17 @@ pageContext.setAttribute("newline", "\n");
 	            <c:if test="${ dto.animal_vaccination eq 'Y' }">유</c:if>
 	            <c:if test="${ dto.animal_vaccination eq 'N' }">무</c:if>
 	            </td>
-	            <th class="table-light">성별</th>
-	            <td colspan="2" class="">
-	            <c:if test="${ dto.animal_gender eq 'male' }">
-	            	수컷 (♂)
-	            </c:if>
-	            <c:if test="${ dto.animal_gender eq 'female' }">
-	            	암컷 (♀)
-	            </c:if>
+	            <th class="table-light">정보 수정일</th>
+	            <td><small>
+		            <c:if test="${empty dto.getAnimal_update() }"> - </c:if>
+		            <c:if test="${!empty dto.getAnimal_update() }">${dto.getAnimal_update().substring(0,10) }</c:if>
+		            </small>
 	            </td>
-	        </tr>
-	        <tr>
-	            <th class="table-light">이름</th>
-	            <td class="user" colspan="2">${dto.animal_name }</td>
-	            <th class="table-light">발견 장소</th>
-	            <td class="user" colspan="2">${dto.animal_place }</td>
-	        </tr>
-	        <tr>
-	            <th class="table-light">나이</th>
-	            <td class="user">${dto.animal_age }살</td>
-	            <th class="table-light">크기</th>
-	            <td colspan="2" class="">${ dto.animal_size }</td>
-	            <th class="table-light">무게</th>
-	            <td class="">${ dto.animal_weight }kg</td>
 	        </tr>
 			<tr>
 			   <th class="table-light">비고</th>
 			   <td class="user" colspan="5">
-			   	<textarea class="form-control-plaintext mx-3" cols="60" rows="10" readonly>${dto.animal_caution }</textarea>
+			   	<textarea class="form-control-plaintext" cols="60" rows="10" readonly>${dto.animal_caution }</textarea>
 			   </td>
 			</tr>
 	        <tr>
@@ -89,18 +113,9 @@ pageContext.setAttribute("newline", "\n");
 					</c:if>
 	            </td>
 	        </tr>
-	        <tr>
-	            <th class="table-light">입소 신청일</th>
-	            <td colspan="3" class="user">${dto.getAnimal_regdate().substring(0,10) }</td>
-	            <th class="table-light">정보 수정일</th>
-	            <td colspan="3" class="">
-	            <c:if test="${empty dto.getAnimal_update() }"> - </c:if>
-	            <c:if test="${!empty dto.getAnimal_update() }">${dto.getAnimal_update().substring(0,10) }</c:if>
-	            </td>
-	        </tr>
 	    </table>    
 	    
-	    <div class="animal_button ">
+	    <div class="animal_button">
 			<div>
 				<button class="btn btn-dark mx-1 float-right"
 					onclick="location.href='${path}/${dto.animal_tag }_list'">

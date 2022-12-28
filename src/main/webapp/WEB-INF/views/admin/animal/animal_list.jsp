@@ -44,7 +44,7 @@
 				<div class="search-table-box">
 					<table class="table table-sm" id="search-table">
 						<tr>
-							<th width="12.5%">${ animal }종</th>
+							<th width="12.5%">${ animal } 종</th>
 							<td width="20%">
 								<div class="search-date">
 									<select class="form-select" id="search_animal" name="animal_species">
@@ -52,7 +52,7 @@
 									</select>
 								</div>
 							</td>
-							<th width="12.5%">${ animal }크기</th>
+							<th width="12.5%">${ animal } 크기</th>
 							<td width="20%" colspan="2">
 								<div class="search-checkbox">
 									<label><input type="radio" name="animal_size"
@@ -69,7 +69,7 @@
 							</td>
 							<td colspan="2"></td>
 						<tr>
-							<th width="12.5%">${ animal }이름</th>
+							<th width="12.5%">${ animal } 이름</th>
 							<td width="20%"><input type="text" class="form-control"
 								name="animal_name" value="${animalDTO.animal_name }" /></td>
 							<th width="12.5%">중성화 여부</th>

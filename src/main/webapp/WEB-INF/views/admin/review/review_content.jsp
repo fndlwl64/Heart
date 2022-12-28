@@ -54,7 +54,7 @@
         <tr>
             <th class="table-light">내용</th>
             <td colspan="6" class="col-6">
-                <textarea class="form-control-plaintext mx-3" cols="60" rows="10" readonly>${ list.review_content }</textarea>
+                <textarea class="form-control-plaintext" cols="60" rows="10" readonly>${ list.review_content }</textarea>
             </td>
         </tr>
         <tr>
