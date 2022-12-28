@@ -109,7 +109,7 @@
 			
 			<div class="btns">
 				<div>
-					<button onclick="location.href='${path}/${dto.animal_tag }_list'" class="btn btn-dark insertbtn mb-3"><i class="bi bi-card-list"></i> 목록</button>
+					<a onclick="location.href='${tag }_list'" class="btn btn-dark insertbtn mb-3" style="color:white"><i class="bi bi-card-list"></i> 목록</a>
 				</div>	
 				<div>
 					<button type="submit" class="btn btn-warning insertbtn mb-3"><i class="bi bi-pencil"></i> 리셋</button>
