@@ -11,9 +11,8 @@
 <input type="hidden" id="tag" value="${animalDTO.animal_tag }"/>
 <input type="hidden" id="sp" value="${animalDTO.animal_species }"/>
 <body>
-	<br>
-	<br>
-	<div class="container" align="center">
+	<div class="container">
+		<div class="sub-title"><h4>${ animal } 수정하기</h4></div>			
 		<form action="<%=request.getContextPath()%>/animal_update"
 			method="post" enctype="multipart/form-data">
 			<input type="hidden" name="animal_no" value="${animalDTO.animal_no }">
