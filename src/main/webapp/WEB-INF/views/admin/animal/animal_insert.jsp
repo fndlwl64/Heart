@@ -109,11 +109,11 @@
 			
 			<div class="btns">
 				<div>
-					<button class="btn btn-dark insertbtn mb-3"><i class="bi bi-card-list"></i> 목록</button>
+					<button onclick="location.href='${path}/${dto.animal_tag }_list'" class="btn btn-dark insertbtn mb-3"><i class="bi bi-card-list"></i> 목록</button>
 				</div>	
 				<div>
-					<button class="btn btn-warning insertbtn mb-3"><i class="bi bi-pencil"></i> 리셋</button>
-					<button class="btn btn-primary insertbtn mb-3"><i class="bi bi-save"></i> 등록</button>
+					<button type="submit" class="btn btn-warning insertbtn mb-3"><i class="bi bi-pencil"></i> 리셋</button>
+					<button type="reset" class="btn btn-primary insertbtn mb-3"><i class="bi bi-save"></i> 등록</button>
 				</div>
 			</div>			
 			

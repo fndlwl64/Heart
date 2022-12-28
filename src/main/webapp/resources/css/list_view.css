@@ -117,7 +117,7 @@ body {
 	margin: 1rem auto;
 	background-color: #FDEDEC;
 	border-radius: 10px;
-	width: 80%;
+	
 }
 
 .container .sub-title > h4 {
@@ -214,8 +214,8 @@ body {
 /* 등록하기 form 수정하는 css */
 /* admin/notice_content.jsp  */
 .container .noticeinfo {
-	width: 80%;
 	margin: 0 auto;
+	margin-bottom: 1.5rem;
 }
 
 .container .noticeinfo tr th {
