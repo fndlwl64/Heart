@@ -57,7 +57,7 @@
 					<div class="d-grid align-middle original-image">
 						<input class="form-control btn" id="file-input2" type="file" name="files" accept="image/gif, image/jpeg, image/png">
 						<c:if test="${!empty dto.getNotice_img2()}">
-						<p class="image-update"><img id="file_change2" src="resources/upload/${dto.getNotice_img2() }" style="max-height: 200px;" alt="notice_img"/></p>
+						<p class="image-update"><img id="file_change2" class="logo" src="resources/upload/${dto.getNotice_img2() }" style="max-height: 200px;" alt="notice_img"/></p>
 						<p class="delete-checkbox">
                             <label><input type="checkbox" class="form-check-input" name="notice_image2_delete" value="Y" /> 선택한 파일 삭제</label>
                         </p>

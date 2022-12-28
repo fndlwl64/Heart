@@ -211,10 +211,10 @@ body {
 	border: 0px;
 }
 
-.div1 .table .logo:hover {
+/* .div1 .table .logo:hover {
 	cursor: pointer;
 	opacity: 80%;
-}
+} */
 
 .div1 .div2 .image-upload{
 	display: inline-block;
