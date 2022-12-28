@@ -56,7 +56,7 @@
                     <tr>
                         <th>이메일</th>
                         <td>
-                            <input id="input_email" class="form-control" name="user_email" size="40" required>
+                            <input id="input_email" class="form-control" name="user_email" size="40" placeholder="email@gmail.com" required>
                             <span id="join_email" class="user_email"></span>
                         </td>
                     </tr>
@@ -64,7 +64,7 @@
                     <tr>
                         <th>연락처</th>
                         <td>
-                            <input id="input_phone" class="form-control" name="user_phone" size="40" required>
+                            <input id="input_phone" class="form-control" name="user_phone" size="40" placeholder="010-0000-000" required>
                             <span id="join_phone" class="user_phone"></span>
                         </td>
                     </tr>
