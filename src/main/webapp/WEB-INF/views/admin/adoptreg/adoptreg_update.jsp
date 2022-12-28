@@ -30,44 +30,46 @@
 		}
 	</script>
 </head>
-<link rel="stylesheet" href="resources/css/admin_include.css">
-<link rel="stylesheet" href="resources/css/list_view.css">
-<c:set var="content" value="${content }"></c:set>
-<c:set var="foreign" value="${foreign }"></c:set>
-<c:set var="deleteAddr" value="${path }/adoptreg_cancel?animal_no=${content.adopt_reg_animalno }&adopt_reg_regno=${content.adopt_reg_regno }&user_id=${content.adopt_reg_userid }"></c:set>
-<body>
-	<jsp:include page="../../include/admin_header.jsp" />
-	<script src="resources/js/admin_list_view.js"></script>
-	<input type="hidden" id="user_id" value="${content.adopt_reg_userid }"/>
-	<input type="hidden" id="animal_name" value="${foreign.animal_name }"/>
-	<div class="container" align="center">
-		<div style="width: 100%;"class="sub-title"><h4>입양 상세 내용</h4></div>
-		<form action="<%=request.getContextPath()%>/adoptreg_update" method="post">
-			<input type="hidden" name="adopt_reg_animalno"
-				value="${content.adopt_reg_animalno }" />
-			<table class="table table-hover searched_list">
-				<tr>
-					<th class="table-light w-25"><span class="sp2">입양회원</span></th>
-					<td>${content.adopt_reg_userid }</td>
-					<!-- class ="input1" -->
-				</tr>
-				<tr>
-					<th class="table-light "><span class="sp2">동물이름</span></th>
-					<td>${foreign.animal_name }</td>
-				</tr>
-				<tr>
-					<th class="table-light "><span class="sp2">입양 상태</span></th>
-					<td>${foreign.animal_status }</td>
-				</tr>
-				<tr>
-					<th class="table-light "><span class="sp2">입소신청일</span></th>
-					<td>${content.adopt_reg_appdate }</td>
-				</tr>
-				<tr>
-					<th class="table-light "><span class="sp2">입양등록일</span></th>
-					<td>${content.adopt_reg_regdate }</td>
-				</tr>
 
+<%-- 글쓰기 --%>
+<div class="container">
+
+    <div class="sub-title"><h4>${ semiTitle } 등록하기</h4></div>
+
+    <div>
+        <form action="${path}/adoptreg_update" method="post">
+        <input type="hidden" name="adopt_reg_animalno" value="${content.adopt_reg_animalno }" />
+        <table class="table noticeinfo mt-4">
+            <tr class="border-top">
+                <th class="table-light col-1" height="50px">회원 아이디</th>
+                <td class="col-2"><a style="text-decoration: none; color: black; font-weight: bold;" href="${ path }/user_view?user_id=${ content.adopt_reg_userid }"><span style="font-weight: bold;">${content.adopt_reg_userid }</span></a></td>           
+                <th class="table-light col-1">입양 예정 동물</th>
+                <td class="col-2"><a style="text-decoration: none; color: black; font-weight: bold;" href="${ path }/animal_content?no=${ foreign.animal_no }">[<c:if test="${ foreign.animal_tag eq 'dog' }">강아지</c:if><c:if test="${ foreign.animal_tag eq 'cat' }">고양이</c:if>] ${foreign.animal_name }</a></td>
+                <th class="table-light col-1">입양 상태</th>
+                <td class="col-2">
+                <span 
+                <c:if test="${foreign.animal_status eq '입양 대기' }">
+                	style="color: green; font-weight: bold;"
+                </c:if>
+                >${foreign.animal_status }</span>
+                </td>
+            </tr>
+            <tr>
+                <th class="table-light" height="50px">입양 등록일</th>
+                <td colspan="5">${content.adopt_reg_regdate.substring(0,16) }</td>
+            </tr>
+            <tr>
+                <th class="table-light" height="50px">입양 예정일</th>
+				<td colspan="5">
+				<c:if test="${ empty content.adopt_reg_duedate }">
+					<input type="datetime-local" class="form-control" name="adopt_reg_duedate" value="${content.adopt_reg_duedate }" required="required">
+				</c:if>
+				<c:if test="${ not empty content.adopt_reg_duedate }">
+					${content.adopt_reg_duedate.substring(0,16) }
+				</c:if>
+				</td>
+			</tr>
+			<c:if test="${not empty content.adopt_reg_duedate }">
 				<tr>
 					<th class="table-light" height="50px">입양 완료일</th>
 					<td colspan="5">
