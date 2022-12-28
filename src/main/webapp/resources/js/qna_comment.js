@@ -18,6 +18,7 @@ $(function() {
 
 //comment delete
 function commentDelete(commentNo, path, userId, boardNo) {  
+    console.log(2, userId);
   $.ajax({
       contentType : "application/x-www-form-urlencoded;charset=UTF-8",
       type: "post",
