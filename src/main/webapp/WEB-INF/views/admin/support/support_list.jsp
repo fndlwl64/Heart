@@ -86,11 +86,11 @@
 		
         <table class="table table-hover searched_list">
             <tr>
-                <th class="table-light col-1">후원번호</th>
-                <th class="table-light col-1">회원아이디</th>
+                <th class="table-light col-1">No</th>
+                <th class="table-light col-1">아이디</th>
                 <th class="table-light col-1">후원금액</th>
                 <th class="table-light col-1">후원날짜</th>
-                <th class="table-light col-1">수정/삭제</th>
+                <th class="table-light col-1">수정 / 삭제</th>
             </tr>
             <c:if test="${!empty supportList }">
 				<c:forEach items="${supportList }" var="dto">

@@ -106,7 +106,7 @@
 	   
         <table class="table searched_list mb-4">
             <tr>
-                <th class="table-light col-1">번호</th>
+                <th class="table-light col-1">No</th>
                 <th class="table-light col-1">아이디</th>
                 <th class="table-light col-1">이름</th>
                 <th class="table-light col-1">등급</th>
