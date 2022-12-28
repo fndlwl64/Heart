@@ -91,7 +91,7 @@
 			
 		</div>
 		
-		<div class="btns">
+		<div class="btns" style="width: 98%;">
 			<div class="btns_1">
 				<button class="btn btn-dark btn_list" onclick="location.href='${path}/user_list'"><i class="bi bi-card-list"></i> 목록</button>
 			</div>
