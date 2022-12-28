@@ -55,10 +55,10 @@ public interface MypageDAO {
 	public int review_count_check(HashMap<String, Object> map);
 	
 	// 마이페이지에서 후원내역 페이징까지
-	public List<Mypage_SupportDTO> getSupportList(int startNo, int endNo, String field, String keyword, String id);
+	public List<Mypage_SupportDTO> getSupportList(int startNo, int endNo, String search_date_start, String search_date_end, String id);
 	
 	// 마이페이지에서 후원하기 페이징 전체 개수
-    public int listSupportCount(String field, String keyword, String id);
+    public int listSupportCount(String search_date_start, String search_date_end, String id);
     
     // 기간별 후원금액 합
     public int supportdatesum(String search_date_start, String search_date_end, String id);
