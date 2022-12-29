@@ -148,7 +148,7 @@
 					<c:set var="No" value="${total - paging.startNo + 2}"></c:set>
 
 					<!-- tr 시작부-->
-
+					<c:if test="${total eq 0 }"><tr><td colspan="8" class="text-center">해당 데이터가 없습니다.</td></tr></c:if>
 					<c:forEach var="dto" items="${list }">
 						<c:set var="No" value="${No - 1 }"></c:set>
 						<tr>

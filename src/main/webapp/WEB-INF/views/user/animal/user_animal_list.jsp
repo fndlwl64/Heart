@@ -236,7 +236,7 @@
 			</c:if>
 		</div>
 		<c:if test="${empty animalList}">
-			<h3>해당 내용이 없습니다.</h3>
+			<h3 class="text-center">해당 내용이 없습니다.</h3>
 		</c:if>
 	
 	</div>

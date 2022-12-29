@@ -126,6 +126,7 @@
 					<th class="table-light" width="15%">입양 상태</th>
 					<!-- <th class="table-secondary">수정/삭제</th> -->
 				</tr>
+				<c:if test="${total eq 0 }"><tr><td colspan="8" class="text-center">해당 데이터가 없습니다.</td></tr></c:if>
 				<c:forEach var="dto" items="${animalList }">
 					<c:set var="No" value="${No - 1 }" />
 					<c:if test="${dto.animal_state eq 1 }">
