@@ -370,7 +370,7 @@ public class UserController {
     	
     	String pwd = userDAO.find_pwd(map);
     	
-    	String addr = "norangcitron@gmail.com";
+    	String addr = "heartpetofficial@gmail.com";
 		
 		String subject = "[😀😀] HEARTPET 계정의 비밀번호입니다.";
 		

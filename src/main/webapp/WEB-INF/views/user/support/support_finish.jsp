@@ -6,14 +6,33 @@
 <link rel="stylesheet" href="${path}/resources/css/support.css">
 <script src="${path}/resources/js/support.js"></script>
 <%-- 여기서부터 작성 --%>
-<div class="div_finish" align="center">
+<style>
+	.div_finish {
+		background-image: url("resources/image/sup_finish.png");
+		height: 600px;
+		width: 500px;
+		background-repeat: none;
+		background-position: center;
+		background-size: cover;
+		margin: 0 auto;
+	}
+	
+	.sup_text {
+	}
+</style>
+<div align="center">
+<h1>후원해주셔서 감사합니다!</h1>
+</div>
+<div class="div_finish">
 	<div align="center">
-		<h1>후원해주셔서 감사합니다!</h1>
-		<img id="sup_finish" src="resources/image/sup_finish.png">
+		
+		<!-- <img id="sup_finish" src="resources/image/sup_finish.png"> -->
 	</div>
 	<div class="sup_text">
-		<h1 id="text_id">${name}</h1>
-		<h1 id="text_amount">${amount}</h1>
+		<h1 id="text_id">뽀로로</h1><br>
+		<h1 id="text_amount">&nbsp;100</h1>
+<%-- 		<h1 id="text_id">${name}</h1>
+		<h1 id="text_amount">${amount}</h1> --%>
 	</div>
 </div>
 

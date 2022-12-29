@@ -199,18 +199,19 @@ body {
 	width: 600px;
 }
 
+.div_finish .sup_text {
+	position: relative;
+	top: 38%;
+	left: 40%;
+	
+}
+
 .div_finish .sup_text #text_id {
-	position: absolute;
-	top: 48%;
-	left: 47%;
 	color: #1D5454;
 	font-weight: bold;
 }
  
 .div_finish .sup_text #text_amount {
-	position: absolute;
-	top: 56%;
-	left: 48%;
 	color: #1D5454;
 	font-weight: bold;
 }
