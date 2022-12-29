@@ -149,67 +149,65 @@
 					<!-- tr 시작부-->
 
 					<c:forEach var="dto" items="${list }">
-						<c:if test="${map.get(dto.adopt_reg_animalno).get(2) eq 1}">
-							<c:set var="No" value="${No - 1 }"></c:set>
-							<tr>
-								<td class="list-title text-center">${No }</td>
-								<td class="list-title text-center">${dto.adopt_reg_userid }</td>
-								<td class="list-title text-center">
-									<a class="" href="animal_content?no=${dto.adopt_reg_animalno }">${map.get(dto.adopt_reg_animalno).get(0) }</a>
-								</td>
+						<c:set var="No" value="${No - 1 }"></c:set>
+						<tr>
+							<td class="list-title text-center">${No }</td>
+							<td class="list-title text-center">${dto.adopt_reg_userid }</td>
+							<td class="list-title text-center">
+								<a class="" href="animal_content?no=${dto.adopt_reg_animalno }">${map.get(dto.adopt_reg_animalno).get(0) }</a>
+							</td>
 
-								<!-- td : 신청일 -->
-								<c:if test="${animal_status eq '입소 신청' }">
-									<td class="list-title text-center small">${dto.adopt_reg_appdate.substring(0,16) }</td>
-								</c:if>
-								<c:if test="${animal_status eq '입양 대기' }">
-									<td class="list-title text-center small">${dto.adopt_reg_regdate.substring(0,16) }</td>
-									<td class="list-title text-center small">${dto.adopt_reg_duedate.substring(0,16) }</td>
-								</c:if>
-								<c:if test="${animal_status eq '입양 완료' }">
-									<td class="list-title text-center small">${dto.adopt_reg_adoptdate.substring(0,16) }</td>
+							<!-- td : 신청일 -->
+							<c:if test="${animal_status eq '입소 신청' }">
+								<td class="list-title text-center small">${dto.adopt_reg_appdate.substring(0,16) }</td>
+							</c:if>
+							<c:if test="${animal_status eq '입양 대기' }">
+								<td class="list-title text-center small">${dto.adopt_reg_regdate.substring(0,16) }</td>
+								<td class="list-title text-center small">${dto.adopt_reg_duedate.substring(0,16) }</td>
+							</c:if>
+							<c:if test="${animal_status eq '입양 완료' }">
+								<td class="list-title text-center small">${dto.adopt_reg_adoptdate.substring(0,16) }</td>
+							</c:if>
+
+							<c:if test="${map.get(dto.adopt_reg_animalno).get(2) eq 1 }">
+								<c:if test="${map.get(dto.adopt_reg_animalno).get(1) ne '입양 대기' and map.get(dto.adopt_reg_animalno).get(1) ne '입양 완료'}">
+									<c:if test="${animal_status eq '입소 신청'}">
+										<td width="15%">입소 신청 완료</td>
+									</c:if>
+									<c:if test="${animal_status eq '입양 가능'}">
+										<td width="15%">입양 가능</td>
+									</c:if>
+									<td><a class="animal-btn" <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입소 신청'}">
+									class="btn btn-outline-primary btn-sm" style="color: #007bff;"
+									</c:if> <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 가능'}">
+									class="btn btn-outline-danger btn-sm" style="color: #dc3545;"
+									</c:if> style="text-decoration: none; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#admissionModal" data-id="${path }/adoptreg_admission?animal_no=${dto.adopt_reg_animalno}&animal_status=${map.get(dto.adopt_reg_animalno).get(1)}" data-value="${map.get(dto.adopt_reg_animalno).get(1)}" onclick="onclickOption(this);"> <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입소 신청'}">등록
+									</c:if> <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 가능'}">취소
+									</c:if>
+									</a></td>
 								</c:if>
 
-								<c:if test="${map.get(dto.adopt_reg_animalno).get(2) eq 1 }">
-									<c:if test="${map.get(dto.adopt_reg_animalno).get(1) ne '입양 대기' and map.get(dto.adopt_reg_animalno).get(1) ne '입양 완료'}">
-										<c:if test="${animal_status eq '입소 신청'}">
-											<td width="15%">입소 신청 완료</td>
-										</c:if>
-										<c:if test="${animal_status eq '입양 가능'}">
-											<td width="15%">입양 가능</td>
-										</c:if>
-										<td><a class="animal-btn" <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입소 신청'}">
-										class="btn btn-outline-primary btn-sm" style="color: #007bff;"
-										</c:if> <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 가능'}">
-										class="btn btn-outline-danger btn-sm" style="color: #dc3545;"
-										</c:if> style="text-decoration: none; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#admissionModal" data-id="${path }/adoptreg_admission?animal_no=${dto.adopt_reg_animalno}&animal_status=${map.get(dto.adopt_reg_animalno).get(1)}" data-value="${map.get(dto.adopt_reg_animalno).get(1)}" onclick="onclickOption(this);"> <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입소 신청'}">등록
-										</c:if> <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 가능'}">취소
-										</c:if>
-										</a></td>
-									</c:if>
-
-									<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 대기'}">
-										<td>입양 대기</td>
-										<td><a class="btn btn-outline-dark btn-sm animal-btn" href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }&status=duedate" data-value="${dto.adopt_reg_animalno }">예정일</a>
-										 <a class="btn btn-outline-dark btn-sm animal-btn" href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }&status=adoptdate" data-value="${dto.adopt_reg_animalno }">완료일</a></td>
-									</c:if>
-
-									<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 완료' }">
-										<td>
-											입양 완료
-										</td>
-									</c:if>
-									<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 완료' }">
-										<td>
-											<a class="btn btn-outline-success btn-sm animal-btn" href="adoptreg_update?adopt_reg_regno=${dto.adopt_reg_regno }&status=adoptdate" style="color:green">수정</a>
-										</td>
-									</c:if>
+								<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 대기'}">
+									<td>입양 대기</td>
+									<td><a class="btn btn-outline-dark btn-sm animal-btn" href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }&status=duedate" data-value="${dto.adopt_reg_animalno }">예정일</a>
+									 <a class="btn btn-outline-dark btn-sm animal-btn" href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }&status=adoptdate" data-value="${dto.adopt_reg_animalno }">완료일</a></td>
 								</c:if>
-								<c:if test="${map.get(dto.adopt_reg_animalno).get(2) eq 0}">
-									<td>${map.get(dto.adopt_reg_animalno).get(1)}</td>
+
+								<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 완료' }">
+									<td>
+										입양 완료
+									</td>
 								</c:if>
-							</tr>
-						</c:if>
+								<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 완료' }">
+									<td>
+										<a class="btn btn-outline-success btn-sm animal-btn" href="adoptreg_update?adopt_reg_regno=${dto.adopt_reg_regno }&status=adoptdate" style="color:green">수정</a>
+									</td>
+								</c:if>
+							</c:if>
+							<c:if test="${map.get(dto.adopt_reg_animalno).get(2) eq 0}">
+								<td>${map.get(dto.adopt_reg_animalno).get(1)}</td>
+							</c:if>
+						</tr>
 					</c:forEach>
 				</table>
 
