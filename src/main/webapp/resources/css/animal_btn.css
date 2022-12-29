@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+.container .table-hover .animal-btn:hover {
+	color: white !important;
+	text-decoration: none !important;
+}

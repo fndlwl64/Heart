@@ -171,8 +171,19 @@ public class AdminAnimalController {
 	}
 
 	@RequestMapping(value = "/animal_update", method = RequestMethod.POST)
-	public String animal_update_ok(@RequestParam("files") List<MultipartFile> files, AnimalDTO animalDTO) {
-		System.out.println(files.size());
+	public String animal_update_ok(@RequestParam("files") List<MultipartFile> files,
+			@RequestParam(value = "img2_delete",required = false) String img2_delete, 
+			@RequestParam(value = "img3_delete",required = false) String img3_delete, 
+			AnimalDTO animalDTO) {
+
+//		//파일 삭제 대상
+		if(img2_delete != null && img2_delete.equals("Y")) {
+			animalDTO.setAnimal_img2("");
+		}
+		if(img2_delete != null && img2_delete.equals("Y")) {
+			animalDTO.setAnimal_img3("");
+		}
+		
 		List<String> originImgs = new ArrayList<String>();
 		originImgs.add(animalDTO.getAnimal_img1());
 		originImgs.add(animalDTO.getAnimal_img2());
