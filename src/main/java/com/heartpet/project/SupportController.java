@@ -32,8 +32,8 @@ class MyAuthentication extends Authenticator {
 
   public MyAuthentication(){
        
-      String id = "heartpetofficial@gmail.com";      
-      String pw = "ytlyzdvbierurclh";         
+      String id = "";      
+      String pw = "";         
 
       // ID와 비밀번호를 입력한다.
       pa = new PasswordAuthentication(id, pw);

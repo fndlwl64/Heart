@@ -47,7 +47,10 @@
                     </div>
                 </div>
             </div>
-	</div>
+            <div style="display: flex;">
+					<button style="margin-top:3%; margin-bottom:3%; margin-left: auto;" type="button" id="btn_content" class="btn btn-dark btn_list" onclick="location.href='${path}/user_notice'"><i class="bi bi-card-list"></i> 목록</button>
+			</div>
+		</div>
 </div>
 <%-- <div class="container">
 
