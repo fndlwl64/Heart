@@ -249,7 +249,7 @@ div div .animal-col dl {
 .main_mainContents__GXYBn .main_mainGridContainer__xl9yt {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	grid-template-rows: repeat(4, 370px);
+/* 	grid-template-rows: repeat(4, 370px); */
 	grid-row-gap: 7rem;
 	grid-column-gap: 30px;
 	-webkit-column-gap: 30px;
