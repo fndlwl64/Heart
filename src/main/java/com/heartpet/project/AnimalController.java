@@ -231,7 +231,7 @@ public class AnimalController {
 			e.printStackTrace();
 			request.setAttribute("msg", "입양 신청이 실패했습니다.");
 			request.setAttribute("url", "main");
-			return "alert";
+			return "include/alert";
 		}
 
 		return "redirect:/user_animal_content?no="+animal_no;
@@ -254,28 +254,12 @@ public class AnimalController {
 			e.printStackTrace();
 			request.setAttribute("msg", "입양 취소가 실패했습니다.");
 			request.setAttribute("url", "main");
-			return "alert";
+			return "include/alert";
 		}
 		return "redirect:/user_mypage_adoptreg_list";
 	}
 
 
-	// 입소 신청
-//	@RequestMapping(value = "/user_animal_insert", method = RequestMethod.GET)
-//	public String user_animal_insert(Model model){
-//		
-//		//로그인을 하지 않았거나 자격이 없을 경우
-//		if(request.getSession().getAttribute("session_grade") == null && (String)request.getSession().getAttribute("session_admin_id") == null) {
-//			model.addAttribute("msg", "로그인이 필요합니다.");
-//			model.addAttribute("url", "main");
-//			return "alert";
-//		}else if (request.getSession().getAttribute("session_grade") != null && (Integer) request.getSession().getAttribute("session_grade") > 2 ){
-//			model.addAttribute("msg", "회원 등급이 낮습니다.");
-//			model.addAttribute("url", "main");
-//			return "alert";
-//		}
-//		return "user/animal/user_animal_insert";
-//	}
 
     // 입소 신청
     @RequestMapping(value = "/user_animal_insert", method = RequestMethod.GET)
@@ -348,7 +332,7 @@ public class AnimalController {
 			upload.deleteFile(request, animalImgs);
 			request.setAttribute("msg", "insert fail");
 			request.setAttribute("url", "user_animal_insert");
-			return "alert";
+			return "include/alert";
 		}
 		
 
