@@ -99,7 +99,7 @@
 		                  <button type="button" class="btn btn-outline-primary btn-sm" onclick="commentSave('${ session_id }', ${ list.review_no }, '${ path }');"><i class="bi bi-reply"></i> 댓글등록</button>
 		                </c:if>
 		                <c:if test="${ empty session_id }">
-		                  <a class="btn btn-outline-dark btn-sm" href="#goto-login"><i class="bi bi-box-arrow-in-right"></i> 로그인</a>
+		                  <a class="btn btn-outline-dark mt-2 btn-sm" href="#goto-login"><i class="bi bi-box-arrow-in-right"></i> 로그인</a>
 		                </c:if>
 		            </td>
 		        </tr>
