@@ -158,10 +158,10 @@ public class SupportController {
 	}
 	
 	@RequestMapping("/user_support_finish")
-    public String user_support_finish(/*@RequestParam("name") String name, @RequestParam("amount") String amount*/ Model model) {
+    public String user_support_finish(@RequestParam("name") String name, @RequestParam("amount") String amount, Model model) {
 		
-		/*model.addAttribute("name", name); 
-    	model.addAttribute("amount", amount);*/
+		model.addAttribute("name", name); 
+    	model.addAttribute("amount", amount);
 		
         return "user/support/support_finish";
     }
