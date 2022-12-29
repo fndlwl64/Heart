@@ -3,7 +3,6 @@ $(document).ready(function() {
    if($('select[name=field] option:selected').val() == 'category') {
         $('.search input[type=text]').removeClass('d-inline').addClass('d-none');   
         $('.search select.search-select').removeClass('d-none').addClass('d-inline');
-        console.log(1, "여기111111111111");
     }else {
         $('.search input[type=text]').removeClass('d-none').addClass('d-inline');
         $('.search select.search-select').removeClass('d-inline').addClass('d-none');      
@@ -12,7 +11,6 @@ $(document).ready(function() {
         $('.search input[type=text]').attr("name", "");
         $('.search select.search-select').attr("name", "keyword");
         $('.search input[type=text]').val('');
-        console.log(3, "여기");
     } 
    
 	$('select[name=field]').on('change', function() {

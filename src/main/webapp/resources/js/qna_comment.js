@@ -18,7 +18,6 @@ $(function() {
 
 //comment delete
 function commentDelete(commentNo, path, userId, boardNo) {  
-    console.log(2, userId);
   $.ajax({
       contentType : "application/x-www-form-urlencoded;charset=UTF-8",
       type: "post",
@@ -28,7 +27,6 @@ function commentDelete(commentNo, path, userId, boardNo) {
       },
       dataType : "text",
       success : function(check) {
-          console.log(check);
           if(check > 0){
               commentTable(userId, boardNo, path);
               commentCount(boardNo, path);
@@ -53,7 +51,6 @@ function commentCount(boardNo, path) {
       },
       dataType : "text",
       success : function(commentCount) {
-          console.log(commentCount);
           $("#comment-count").text(commentCount);
       },
       error : function(e) {
@@ -89,7 +86,6 @@ function commentTable(userId, boardNo, path) {
               comment += '<th class="col-2">작성시간</th>';
               comment += '<th class="col-1">삭제</th>';
               comment += '</tr></thead><tbody>';
-              console.log(commentList.length);
               for (let i=0; i<commentList.length; i++) {
                   if(commentList[i].comment_id.includes('admin')) {                  
                     comment += '<tr><td style=\"vertical-align:middle; color:red;\"><a>' + commentList[i].comment_id + '</a></td>';
@@ -131,7 +127,6 @@ function commentSave(userId, boardNo, path) {
       },
       dataType : "text",
       success : function(check) {
-          console.log(check);   
           if(check > 0){
               alert('댓글이 성공적으로 등록되었습니다.');            
               commentTable(userId, boardNo, path);
