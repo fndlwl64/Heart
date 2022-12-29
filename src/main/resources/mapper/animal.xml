@@ -114,7 +114,7 @@
 	<select id="animal_join_status" parameterType="map" resultType="Integer">
 		select animal_no from
 		heartpet_animal
-		where animal_status = #{animal_status} 
+		where animal_status = #{animal_status} and animal_state = 1
 		<if test="!animal_name.equals('')">
 		and animal_name like '%' || #{animal_name } || '%'
 		</if>

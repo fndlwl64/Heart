@@ -282,11 +282,11 @@ public class AdminAnimalController {
 		String keyword = "";
 		
 		if(animal_name == null) {animal_name = "";}
-		
+		//처음 들어올 때 animal_status 고정
 		if(animal_status == null) {
 			animal_status = "입양 대기";
 		}
-		
+		//다른 컨트롤러에서 리다이렉트 할 때 한글 입력 오류로 인한 임시 대응책
 		if(animal_status != null && animal_status.equals("apply")) {
 			animal_status = "입소 신청";
 		}
@@ -299,10 +299,6 @@ public class AdminAnimalController {
 		if(animal_status != null && animal_status.equals("completion")) {
 			animal_status = "입양 완료";
 		}
-		/*
-		 * if(animal_status != null && animal_status == "입양 완료") { sort =
-		 * "adopt_reg_adoptdate"; }
-		 */
 
 		int currentPage = 1; // 현재 페이지 변수
 		if (page != 1) {
@@ -338,7 +334,7 @@ public class AdminAnimalController {
 				maps.put(dto.getAnimal_no(), aList);
 			}
 		}
-		else {
+		else {//상세페이지에서 넘어올 때 쓰는 기능
 			AnimalDTO dto = animalDAO.content(animal_no);
 			ArrayList<Object> aList = new ArrayList();
 			aList.add(dto.getAnimal_name());
@@ -350,7 +346,7 @@ public class AdminAnimalController {
 		if(animal_no == 0) {
 			list = adoptRegDAO.listPaging(paging.getStartNo(), paging.getEndNo(), startDate, endDate,adopt_tag,
 					status_no,sort);
-		}else {
+		}else {//상세페이지에서 넘어올 때 쓰는 기능
 			list = new ArrayList<AdoptRegDTO>();
 			AdoptRegDTO dto = adoptRegDAO.contentAnimal(animal_no);
 			list.add(dto);
