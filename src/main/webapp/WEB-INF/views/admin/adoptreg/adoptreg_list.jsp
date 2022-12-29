@@ -149,8 +149,8 @@
 					<!-- tr 시작부-->
 
 					<c:forEach var="dto" items="${list }">
-						<c:set var="No" value="${No - 1 }"></c:set>
 						<c:if test="${map.get(dto.adopt_reg_animalno).get(2) eq 1}">
+							<c:set var="No" value="${No - 1 }"></c:set>
 							<tr>
 								<td class="list-title text-center">${No }</td>
 								<td class="list-title text-center">${dto.adopt_reg_userid }</td>
