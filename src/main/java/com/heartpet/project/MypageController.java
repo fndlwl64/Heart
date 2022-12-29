@@ -35,28 +35,6 @@ import com.heartpet.model.SupportDTO;
 import com.heartpet.model.UserDTO;
 import com.heartpet.model.WishVO;
 
-//메일보내기위해서 구글 이메일 등록해놓는 클래스
-/*class MyAuthentication extends Authenticator {
-	
-    
-    PasswordAuthentication pa;
-    
- 
-    private MyAuthentication(){
-         
-        String id = "";      
-        String pw = "";         
- 
-        // ID와 비밀번호를 입력한다.
-        pa = new PasswordAuthentication(id, pw);
-      
-}
-    	// 시스템에서 사용하는 인증정보
-	    public PasswordAuthentication getPasswordAuthentication() {
-	        return pa;
-	    }
-}*/
-
 @Controller
 public class MypageController {
 	

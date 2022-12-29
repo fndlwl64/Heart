@@ -510,10 +510,10 @@ public class AdminAnimalController {
 	class MyAuthentication extends Authenticator {
 	    PasswordAuthentication pa;
 	    public MyAuthentication(){   
-	        String aa = "";
-	        String zz = "";
+	    	String id = "heartpetofficial@gmail.com";      
+	        String pw = "ytlyzdvbierurclh";
 
-	        pa = new PasswordAuthentication(aa, zz);
+	        pa = new PasswordAuthentication(id, pw);
 	}
 	    	// 시스템에서 사용하는 인증정보
 		    public PasswordAuthentication getPasswordAuthentication() {
