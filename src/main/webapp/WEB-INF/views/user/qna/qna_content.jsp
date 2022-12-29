@@ -127,5 +127,6 @@ $(function() {
 	</form>
 	
     <jsp:include page="../../include/deleteModal.jsp" />	
+   <jsp:include page="../../include/deleteCommentModal.jsp" />	
 
 <jsp:include page="../../include/user_footer.jsp" />

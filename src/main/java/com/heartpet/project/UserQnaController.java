@@ -92,52 +92,47 @@ public class UserQnaController {
         response.setContentType("text/html; charset=UTF-8");
         HttpSession session = request.getSession();
         PrintWriter out = response.getWriter();
-
-        // 로그인 여부 체크
-        if ((session.getAttribute("session_id") == null || session.getAttribute("session_id") == "")
-                && (session.getAttribute("session_admin_id") == null || session.getAttribute("session_admin_id") == "")) {
-            out.println("<script> alert('로그인이 필요합니다.'); location.href='" + request.getContextPath() + "/'; </script>");
-        }
-
-        // session_id
-        String session_id = null;
-        int session_grade = 0;
-        if (session.getAttribute("session_id") != null) {
-            session_id = (String) session.getAttribute("session_id");
-            session_grade = (Integer) session.getAttribute("session_grade");
-        } else {
-            session_id = (String) session.getAttribute("session_admin_id");
-            session_grade = (Integer) session.getAttribute("session_admin_grade");
-        }
-
         QnaDTO qnaContent = this.qnaDAO.contentQna(board_no);
-
-        // 비밀글 여부 체크
-        // 비밀글 Y -> 아이디 체크
-        // 비밀글 N -> 접근 O
-        // 비밀글이거나 session_id = admin
-        System.out.println("번호출력 " + qnaContent.getBoard_parentNo());
-        System.out.println("번호 " + board_no);
-        System.out.println("번호 " + board_parentNo);
-
-        // 유저일 때
-        if (session_grade != 1) { // 유저일 때
-            if (qnaContent.getBoard_secret().equals("Y")) { // 비밀글이고
-                if (qnaContent.getBoard_id().contains("admin")) { // 작성자 아이디가 admin 포함이면
-                    QnaDTO parentContent = this.qnaDAO.contentQna(board_parentNo);
-                    System.out.println("부모글 작성자 : " + parentContent.getBoard_id());
-                    System.out.println("session_id : " + session_id);
-                    if (!parentContent.getBoard_id().equals(session_id)) { // 부모글의 작성자가 내가 아니면
-                        out.println("<script> alert('비밀글입니다.'); history.back(); </script>");
-                        out.flush();
-                    }
-                } else if (!qnaContent.getBoard_id().equals(session_id)) { // 작성자가 같지 않거나 작성자가 admin이 아니면
-                    out.println("<script> alert('비밀글입니다.'); history.back(); </script>");
-                    out.flush();
-                }
-            }
-        }
-
+        
+        // 비밀글이면
+        if(qnaContent.getBoard_secret().equals("Y")) {    		
+	        // 로그인 여부 체크
+	        if ((session.getAttribute("session_id") == null || session.getAttribute("session_id") == "")
+	                && (session.getAttribute("session_admin_id") == null || session.getAttribute("session_admin_id") == "")) {
+        		out.println("<script> alert('로그인이 필요합니다.'); location.href='" + request.getContextPath() + "/'; </script>");
+        	}
+	        
+	        // session_id
+	        String session_id = null;
+	        int session_grade = 0;
+	        if (session.getAttribute("session_id") != null) {
+	        	session_id = (String) session.getAttribute("session_id");
+	        	session_grade = (Integer) session.getAttribute("session_grade");
+	        } else if(session.getAttribute("session_admin_id") != null) {
+	        	session_id = (String) session.getAttribute("session_admin_id");
+	        	session_grade = (Integer) session.getAttribute("session_admin_grade");
+	        }
+	        
+	        // 비밀글 여부 체크
+	        // 비밀글 Y -> 아이디 체크
+	        // 비밀글 N -> 접근 O
+	        // 비밀글이거나 session_id = admin	        
+	        // 유저일 때
+	        if (session_grade != 1) { // 유저일 때
+        		if (qnaContent.getBoard_id().contains("admin")) { // 작성자 아이디가 admin 포함이면
+        			QnaDTO parentContent = this.qnaDAO.contentQna(board_parentNo);
+        			if (!parentContent.getBoard_id().equals(session_id)) { // 부모글의 작성자가 내가 아니면
+        				out.println("<script> alert('비밀글입니다.'); history.back(); </script>");
+        				out.flush();
+        			}
+        		} else if (!qnaContent.getBoard_id().equals(session_id)) { // 작성자가 같지 않거나 작성자가 admin이 아니면
+        			out.println("<script> alert('비밀글입니다.'); history.back(); </script>");
+        			out.flush();
+        		}
+        	}
+        }	       
+        
+        // 비밀글이 아니면
         this.qnaDAO.hitQna(board_no);        
         // 작성자 정보 함께 send
         UserDTO userContent = this.userDAO.getUserInfo(qnaContent.getBoard_id());
