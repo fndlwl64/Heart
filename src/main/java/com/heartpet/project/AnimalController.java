@@ -32,7 +32,6 @@ import com.heartpet.model.UserDTO;
 import com.heartpet.model.WishDTO;
 import com.heartpet.util.FileUploadImage;
 
-@Transactional
 @Controller
 public class AnimalController {
 
@@ -70,14 +69,6 @@ public class AnimalController {
 		String field = ""; 
 		
 		String session_id = (String)request.getSession().getAttribute("session_id");
-		
-		//좋아요
-		/*
-		 * WishDTO wishDTO = new WishDTO();
-		 * wishDTO.setWish_petno(animalDTO.getAnimal_no());
-		 * wishDTO.setWish_userid(session_id);
-		 * model.addAttribute("wishCheck",wishDAO.check(wishDTO));
-		 */
 		
 		
 		int currentPage = 1;	// 현재 페이지 변수
@@ -131,15 +122,6 @@ public class AnimalController {
     		animalDTO.setAnimal_status("not 입소 신청");
     	}
 
-    	
-    	//좋아요
-		/*
-		 * WishDTO wishDTO = new WishDTO();
-		 * wishDTO.setWish_petno(animalDTO.getAnimal_no());
-		 * wishDTO.setWish_userid((String)request.getSession().getAttribute("session_id"
-		 * )); model.addAttribute("wishCheck",wishDAO.check(wishDTO));
-		 */
-
 		//페이징
 		String field = ""; 
 		
@@ -162,11 +144,6 @@ public class AnimalController {
     		startWeight = 10;
     		endWeight = 40;
     	}
-
-    	System.out.println("========================");
-    	System.out.println("========================");
-    	System.out.println("========================");
-		System.out.println(startWeight);
 		
 		totalRecord = animalDAO.countPaging(animalDTO, keyword,startWeight,endWeight);
     	PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
@@ -178,6 +155,9 @@ public class AnimalController {
     	  wishList.add(wishDAO.selectWish(animalList.get(i).getAnimal_no(), session_id));
     	}
     	
+    	int pagerow = animalList.size()/2;
+    	
+    	model.addAttribute("pagerow",pagerow);
     	model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
  		model.addAttribute("field", field);

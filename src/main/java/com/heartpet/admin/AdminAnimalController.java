@@ -57,7 +57,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Transactional
 @Controller
 public class AdminAnimalController {
 	@Autowired
@@ -105,8 +104,6 @@ public class AdminAnimalController {
     		endWeight = 40;
     	}
 
-		
-		
 		totalRecord = animalDAO.countPaging(animalDTO, keyword,startWeight,endWeight);
 		PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
 
@@ -119,7 +116,6 @@ public class AdminAnimalController {
 		return "admin/animal/animal_list";
 	}
 
-// @RequestParam(value = "adopt_tag" , required = false) String adopt_tag 
 	@RequestMapping("/cat_list")
 	public String cat_list(@RequestParam(value = "page", defaultValue = "1") int page, Model model,
 			AnimalDTO animalDTO, @RequestParam(value = "sort", required = false) String sort) {
@@ -150,8 +146,6 @@ public class AdminAnimalController {
     		endWeight = 40;
     	}
 
-		
-		
 		totalRecord = animalDAO.countPaging(animalDTO, keyword,startWeight,endWeight);
 		PageDTO paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
 
@@ -176,7 +170,7 @@ public class AdminAnimalController {
 			@RequestParam(value = "img3_delete",required = false) String img3_delete, 
 			AnimalDTO animalDTO) {
 
-//		//파일 삭제 대상
+		//파일 삭제 대상
 		if(img2_delete != null && img2_delete.equals("Y")) {
 			animalDTO.setAnimal_img2("");
 		}
@@ -191,8 +185,6 @@ public class AdminAnimalController {
 		
 		
 		FileUploadImage upload = new FileUploadImage();
-		//animalDTO = upload.uploadAnimalImg(request, files, "animal", animalDTO);
-		
 		try {
 			List<String> newImgs = upload.updateFile(request, files, "animal", originImgs, 3);
 			animalDTO.setAnimal_img1(newImgs.get(0));

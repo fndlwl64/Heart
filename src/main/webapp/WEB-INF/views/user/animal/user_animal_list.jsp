@@ -13,7 +13,7 @@
 <c:set var="keyword" value="${keyword }" />
 <c:set var="sort" value="${sort }" />
 <c:set var="wishList" value="${ wishList }" />
-
+<c:set var="pagerow" value="${pagerow }"/>
 
 <!-- 좋아요 -->
 <c:set var="wishCheck" value="${wishCheck }" />
@@ -84,7 +84,6 @@
                     <td>
                         <select name="animal_status" class="form-select">
                             <option value=""></option>
-                            <%-- <option value="입소 신청" <c:if test="${animalDTO.animal_status eq '입소 신청'}">selected</c:if>>입소 신청</option> --%>
                             <option value="입양 가능" <c:if test="${animalDTO.animal_status eq '입양 가능'}">selected</c:if>>입양 가능</option>
                             <option value="입양 대기" <c:if test="${animalDTO.animal_status eq '입양 대기'}">selected</c:if>>입양 대기</option>
                             <option value="입양 완료" <c:if test="${animalDTO.animal_status eq '입양 완료'}">selected</c:if>>입양 완료</option>
@@ -127,9 +126,9 @@
 	                        </select>             
 	                        <select name="animal_weight_temp" class="form-select animal-weight" id="weight" onclick="optionChangeWeight()">
                                 <option value=""></option>
-                                <option value="1">1kg ~ 4kg</option>
-                                <option value="2">4kg ~ 10kg</option>
-                                <option value="3">10kg 이상</option>
+                                <option value="1" <c:if test="${animalDTO.animal_size eq '소형'}">selected</c:if>>1kg ~ 4kg</option>
+                                <option value="2" <c:if test="${animalDTO.animal_size eq '중형'}">selected</c:if>>4kg ~ 10kg</option>
+                                <option value="3" <c:if test="${animalDTO.animal_size eq '대형'}">selected</c:if>>10kg 이상</option>
                             </select>     
                         </div>          
                     </td>                                                          
@@ -164,7 +163,7 @@
 	<div class="main_mainContents__GXYBn">
 		<%--강아지 정보 폼--%>
 	
-		<div class="main_mainGridContainer__xl9yt">
+		<div class="main_mainGridContainer__xl9yt" id="animal_list" data-value="${pagerow }">
 			<c:if test="${not empty animalList}">
 				<c:forEach var="dto" items="${animalList}" varStatus="status">
 					<div class="mainContent_mainContentBox__shdST">
@@ -312,7 +311,12 @@
 			</li>
 		</ul>
 	</nav>
+	<!-- grid-template-rows: repeat(4, 370px);
+	 -->
 	<script type="text/javascript">
+		console.log($('#animal_list').data('value'));
+		let st = 'repeat('+$('#animal_list').data('value')+', 370px)';
+		$('#animal_list').css('grid-template-rows',st);
 		$(function() {
 			
 			$("#form").css({
