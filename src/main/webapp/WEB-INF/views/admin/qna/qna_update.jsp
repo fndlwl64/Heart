@@ -46,13 +46,13 @@
             <tr>
                 <th class="table-light">제목</th>
                 <td colspan="4">                            
-                <input type="text" class="form-control" name="board_title" value="${ list.board_title }" required="required">
+                	<input type="text" class="form-control" name="board_title" value="${ list.board_title }" required="required">
                 </td>
             </tr>
             <tr>
                 <th class="table-light">내용</th>
                 <td colspan="4">
-                <textarea name="board_content" class="form-control" cols="30" rows="10">${ list.board_content }</textarea>
+                	<textarea name="board_content" class="form-control" cols="30" rows="10">${ list.board_content }</textarea>
                 </td>
             </tr>
             <tr>

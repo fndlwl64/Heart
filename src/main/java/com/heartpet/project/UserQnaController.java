@@ -317,7 +317,7 @@ public class UserQnaController {
         
         // 코멘트도 같이 지우는 메서드... 안 지우기로 함
         // this.qnaDAO.deleteAllComment(board_no);
-
+        
         int check = this.qnaDAO.deleteQna(board_no);
         if (check > 0) {
             out.println("<script>alert('성공적으로 글이 삭제되었습니다.'); location.href='" + request.getContextPath() + "/user_qna_list'; </script>");
@@ -368,7 +368,6 @@ public class UserQnaController {
     @RequestMapping("/qna_comment_delete")
     public @ResponseBody int qna_comment_delete(@RequestParam("comment_commentno") int comment_commentno) {
         int deleteComment = this.qnaDAO.deleteComment(comment_commentno);
-        System.out.println(deleteComment);
         return deleteComment;
     }
 

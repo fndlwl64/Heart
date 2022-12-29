@@ -176,11 +176,10 @@ public class FileUploadImage {
         String dateString = String.format("%04d-%02d-%02d", cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH));
         String subPath = "/resources/upload/"+folderName + "/" + dateString;
         String rootPath = request.getSession().getServletContext().getRealPath(subPath);
-        
-        System.out.println("rootPath : "+rootPath);
-        
+                
         // 폴더 없으면 생성
         File mkfile = new File(rootPath);
+        
         // 경로에 해당하는 directory 전체 생성
         if (!mkfile.exists()) {
             mkfile.mkdirs();
@@ -192,18 +191,14 @@ public class FileUploadImage {
             if(realName.equals("")) { // img 하나도 안 들어오는 경우
                 folderFiles.add("");
             }else {
-                System.out.println("realName : " + realName);    
                 // .부터 확장자 분리
-                String fileExt = realName.substring(realName.lastIndexOf("."), realName.length()); 
-                System.out.println("fileExt : " + fileExt);
-    
+                String fileExt = realName.substring(realName.lastIndexOf("."), realName.length());   
                 // insert : reviewImg_insert_1_숫자.확장자 // update : reviewImg_update_1_숫자.확장자
                 String fileRename = folderName + "_insert_" + (i+1) + "_" + System.currentTimeMillis() + fileExt;
-                System.out.println("fileRename : " + fileRename);            
                 // 파일 이름 DB 저장 
-                folderFiles.add(subPath + "/" + fileRename);            
+                folderFiles.add(subPath + "/" + fileRename);       
                 // 실제 파일 이동
-            files.get(i).transferTo(new File(rootPath + "/" + fileRename));
+                files.get(i).transferTo(new File(rootPath + "/" + fileRename));
             }
         }
         
@@ -228,6 +223,7 @@ public class FileUploadImage {
         
         // 폴더 없으면 생성
         File mkfile = new File(rootPath);
+        
         // 경로에 해당하는 directory 전체 생성
         if (!mkfile.exists()) {
             mkfile.mkdirs();
@@ -236,8 +232,6 @@ public class FileUploadImage {
         //파일 업로드
         for(int i=0; i<files.size(); i++) {
             String realName = files.get(i).getOriginalFilename();
-            System.out.println("realName : " + realName);
-            System.out.println("origin_files.get : " + i + ":" + origin_files.get(i));
             
             // 업로드할 파일 없으면 원래 값 추가
             if(realName.equals("")) {               
@@ -256,12 +250,9 @@ public class FileUploadImage {
                 
                 // Rename 과정
                 // .부터 확장자 분리
-                String fileExt = realName.substring(realName.lastIndexOf("."), realName.length()); 
-                System.out.println("fileExt : " + fileExt);
-                
+                String fileExt = realName.substring(realName.lastIndexOf("."), realName.length());                 
                 // update : 폴더명_update_1_숫자.확장자
                 String fileRename = folderName + "_update_" + (i+1) + "_" + System.currentTimeMillis() + fileExt;
-                System.out.println("fileRename : " + fileRename);            
                 // 파일 이름 DB 저장 
                 folderFiles.add(subPath + "/" + fileRename);            
                 // 실제 파일 이동
