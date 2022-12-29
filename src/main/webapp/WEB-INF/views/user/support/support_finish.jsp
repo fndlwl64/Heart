@@ -29,7 +29,7 @@
 		<!-- <img id="sup_finish" src="resources/image/sup_finish.png"> -->
 	</div>
 	<div class="sup_text">
- 		<h1 id="text_id">${name}</h1>
+ 		<h1 id="text_id">${name}</h1><br>
 		<h1 id="text_amount">&nbsp;${amount}</h1>
 	</div>
 </div>
