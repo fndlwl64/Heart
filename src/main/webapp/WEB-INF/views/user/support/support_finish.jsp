@@ -29,10 +29,8 @@
 		<!-- <img id="sup_finish" src="resources/image/sup_finish.png"> -->
 	</div>
 	<div class="sup_text">
-		<h1 id="text_id">뽀로로</h1><br>
-		<h1 id="text_amount">&nbsp;100</h1>
-<%-- 		<h1 id="text_id">${name}</h1>
-		<h1 id="text_amount">${amount}</h1> --%>
+ 		<h1 id="text_id">${name}</h1>
+		<h1 id="text_amount">&nbsp;${amount}</h1>
 	</div>
 </div>
 
