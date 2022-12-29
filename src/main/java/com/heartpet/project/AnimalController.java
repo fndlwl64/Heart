@@ -100,6 +100,9 @@ public class AnimalController {
     	  wishList.add(wishDAO.selectWish(animalList.get(i).getAnimal_no(), session_id));
     	}
 
+    	int pagerow = animalList.size()/2;
+    	
+    	model.addAttribute("pagerow",pagerow);
     	model.addAttribute("total", totalRecord);
         model.addAttribute("paging", paging);		
  		model.addAttribute("field", field);
