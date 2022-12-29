@@ -29,16 +29,7 @@
 <c:set var="pagingTag" value="startDate=${ startDate }&endDate=${ endDate }&animal_status=${animal_status }&sort=${sort }" />
 <input type="hidden" id="sortlink" value="<%=request.getContextPath() %>/adoptreg_list?page=${ paging.page }&${pagingSort}" />
 <!-- 쿼리 조인을 피하기 위한 key, value를 통한 animal테이블 데이터 참조 -->
-<style>
-a:hover {
-	color: white !important;
-	text-decoration: none !important;
-}
-/* a:hover {
-	color: black !important;
-	text-decoration: none !important;
-} */
-</style>
+
 <body>
 	<div class="container">
 		<form class="search_form" method="post" action="${path }/adoptreg_list">
@@ -88,16 +79,16 @@ a:hover {
 			<div class="d-flex justify-content-start my-2">
 				<div class="row">
 					<div class="col">
-						<a class="btn btn-danger btn-sm" style="width: 80px;" href="<%=request.getContextPath() %>/adoptreg_list?page=1&${pagingStatus }입소 신청&animal_name=${animal_name}">입소 신청</a>
+						<a class="btn btn-danger btn-sm animal-btn" style="width: 80px;" href="<%=request.getContextPath() %>/adoptreg_list?page=1&${pagingStatus }입소 신청&animal_name=${animal_name}">입소 신청</a>
 					</div>
 					<div class="col">
-						<a class="btn btn-primary btn-sm" style="width: 80px;" href="<%=request.getContextPath() %>/adoptreg_list?page=1&${pagingStatus }입양 가능&animal_name=${animal_name}">입양 가능</a>
+						<a class="btn btn-primary btn-sm animal-btn" style="width: 80px;" href="<%=request.getContextPath() %>/adoptreg_list?page=1&${pagingStatus }입양 가능&animal_name=${animal_name}">입양 가능</a>
 					</div>
 					<div class="col">
-						<a class="btn btn-success btn-sm" style="width: 80px;" href="<%=request.getContextPath() %>/adoptreg_list?page=1&${pagingStatus }입양 대기&animal_name=${animal_name}">입양 대기</a>
+						<a class="btn btn-success btn-sm animal-btn" style="width: 80px;" href="<%=request.getContextPath() %>/adoptreg_list?page=1&${pagingStatus }입양 대기&animal_name=${animal_name}">입양 대기</a>
 					</div>
 					<div class="col">
-						<a class="btn btn-secondary btn-sm" style="width: 80px;" href="<%=request.getContextPath() %>/adoptreg_list?page=1&${pagingStatus }입양 완료&animal_name=${animal_name}&sort=adopt_reg_adoptdate">입양 완료</a>
+						<a class="btn btn-secondary btn-sm animal-btn" style="width: 80px;" href="<%=request.getContextPath() %>/adoptreg_list?page=1&${pagingStatus }입양 완료&animal_name=${animal_name}&sort=adopt_reg_adoptdate">입양 완료</a>
 					</div>
 				</div>
 			</div>
@@ -149,6 +140,9 @@ a:hover {
 						<c:if test="${animal_status eq '입양 대기'}">
 							<th class="table-light" width="15%">예정일 / 완료일</th>
 						</c:if>
+						<c:if test="${animal_status eq '입양 완료'}">
+							<th class="table-light" width="15%">완료일</th>
+						</c:if>
 					</tr>
 					<c:set var="No" value="${total - paging.startNo + 2}"></c:set>
 
@@ -184,7 +178,7 @@ a:hover {
 										<c:if test="${animal_status eq '입양 가능'}">
 											<td width="15%">입양 가능</td>
 										</c:if>
-										<td><a <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입소 신청'}">
+										<td><a class="animal-btn" <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입소 신청'}">
 										class="btn btn-outline-primary btn-sm" style="color: #007bff;"
 										</c:if> <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 가능'}">
 										class="btn btn-outline-danger btn-sm" style="color: #dc3545;"
@@ -196,13 +190,18 @@ a:hover {
 
 									<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 대기'}">
 										<td>입양 대기</td>
-										<td><a class="btn btn-outline-dark btn-sm" href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }&status=duedate" data-value="${dto.adopt_reg_animalno }">예정일</a>
-										 <a class="btn btn-outline-dark btn-sm" href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }&status=adoptdate" data-value="${dto.adopt_reg_animalno }">완료일</a></td>
+										<td><a class="btn btn-outline-dark btn-sm animal-btn" href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }&status=duedate" data-value="${dto.adopt_reg_animalno }">예정일</a>
+										 <a class="btn btn-outline-dark btn-sm animal-btn" href="<%=request.getContextPath() %>/adoptreg_update?adopt_reg_regno=${dto.getAdopt_reg_regno() }&status=adoptdate" data-value="${dto.adopt_reg_animalno }">완료일</a></td>
 									</c:if>
 
 									<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 완료' }">
 										<td>
-											<a class="btn btn-outline-secondary btn-sm" href="adoptreg_update?adopt_reg_regno=${dto.adopt_reg_regno }&status=adoptdate">${map.get(dto.adopt_reg_animalno).get(1)}</a>
+											입양 완료
+										</td>
+									</c:if>
+									<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 완료' }">
+										<td>
+											<a class="btn btn-outline-success btn-sm animal-btn" href="adoptreg_update?adopt_reg_regno=${dto.adopt_reg_regno }&status=adoptdate" style="color:green">수정</a>
 										</td>
 									</c:if>
 								</c:if>
