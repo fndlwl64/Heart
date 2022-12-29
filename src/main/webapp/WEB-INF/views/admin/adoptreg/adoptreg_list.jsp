@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <title>HeartPet_Admin_AdoptReg</title>
 <link rel="stylesheet" href="${path }/resources/css/list_view.css">
+<link rel="stylesheet" href="${path }/resources/css/animal_btn.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 </head>
 <c:set var="animal_status" value="${animal_status }"></c:set>
@@ -177,10 +178,10 @@
 									<c:if test="${animal_status eq '입양 가능'}">
 										<td width="15%">입양 가능</td>
 									</c:if>
-									<td><a class="animal-btn" <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입소 신청'}">
-									class="btn btn-outline-primary btn-sm" style="color: #007bff;"
+									<td><a <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입소 신청'}">
+									class="btn btn-outline-primary btn-sm animal-btn" style="color: #007bff;"
 									</c:if> <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 가능'}">
-									class="btn btn-outline-danger btn-sm" style="color: #dc3545;"
+									class="btn btn-outline-danger btn-sm animal-btn" style="color: #dc3545;"
 									</c:if> style="text-decoration: none; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#admissionModal" data-id="${path }/adoptreg_admission?animal_no=${dto.adopt_reg_animalno}&animal_status=${map.get(dto.adopt_reg_animalno).get(1)}" data-value="${map.get(dto.adopt_reg_animalno).get(1)}" onclick="onclickOption(this);"> <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입소 신청'}">등록
 									</c:if> <c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 가능'}">취소
 									</c:if>
