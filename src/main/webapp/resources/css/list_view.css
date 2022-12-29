@@ -592,3 +592,8 @@ body {
 .container .noticeinfo textarea:focus {
 	outline: none;
 }
+
+.container .table-hover .animal-btn:hover {
+	color: white !important;
+	text-decoration: none !important;
+}
