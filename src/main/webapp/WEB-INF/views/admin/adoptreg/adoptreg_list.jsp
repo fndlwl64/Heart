@@ -201,7 +201,7 @@
 									</c:if>
 									<c:if test="${map.get(dto.adopt_reg_animalno).get(1) eq '입양 완료' }">
 										<td>
-											<a class="btn btn-outline-success btn-sm animal-btn" href="adoptreg_update?adopt_reg_regno=${dto.adopt_reg_regno }&status=adoptdate">수정</a>
+											<a class="btn btn-outline-success btn-sm animal-btn" href="adoptreg_update?adopt_reg_regno=${dto.adopt_reg_regno }&status=adoptdate" style="color:green">수정</a>
 										</td>
 									</c:if>
 								</c:if>
