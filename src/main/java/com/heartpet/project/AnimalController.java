@@ -100,7 +100,7 @@ public class AnimalController {
     	  wishList.add(wishDAO.selectWish(animalList.get(i).getAnimal_no(), session_id));
     	}
 
-    	int pagerow = animalList.size()/2;
+    	int pagerow = animalList.size()/2 + animalList.size()%2;
     	
     	model.addAttribute("pagerow",pagerow);
     	model.addAttribute("total", totalRecord);
@@ -158,7 +158,7 @@ public class AnimalController {
     	  wishList.add(wishDAO.selectWish(animalList.get(i).getAnimal_no(), session_id));
     	}
     	
-    	int pagerow = animalList.size()/2;
+    	int pagerow = animalList.size()/2 + animalList.size()%2;
     	
     	model.addAttribute("pagerow",pagerow);
     	model.addAttribute("total", totalRecord);
