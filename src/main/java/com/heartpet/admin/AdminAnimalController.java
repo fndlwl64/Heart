@@ -193,7 +193,7 @@ public class AdminAnimalController {
 			e.printStackTrace();
 			request.setAttribute("msg", "업데이트를 실패했습니다.");
 			request.setAttribute("url", "back");
-			return "alert";
+			return "include/alert";
 		}
 		String animal_tag = animalDTO.getAnimal_tag();
 		return "redirect:/"+animal_tag+"_list";
@@ -237,7 +237,7 @@ public class AdminAnimalController {
 			upload.deleteFile(request, animalImgs);
 			request.setAttribute("msg", "insert fail");
 			request.setAttribute("url", "back");
-			return "alert";
+			return "include/alert";
 		}
 
 		return "redirect:/"+animalDTO.getAnimal_tag()+"_list";
@@ -254,7 +254,7 @@ public class AdminAnimalController {
 			e.printStackTrace();
 			request.setAttribute("msg", "delete fail");
 			request.setAttribute("url", "back");
-			return "alert";
+			return "include/alert";
 		}
 		return "redirect:/"+animal_tag+"_list";
 	}
@@ -381,7 +381,7 @@ public class AdminAnimalController {
 		if(adoptRegDTO.getAdopt_reg_duedate()==null && status.equals("adoptdate")) {
 			request.setAttribute("msg", "입양 예정일을 먼저 정해주세요");
 			request.setAttribute("url", "back");
-			return "alert";
+			return "include/alert";
 		}
 
 		model.addAttribute("status",status);
@@ -434,7 +434,7 @@ public class AdminAnimalController {
 			e.printStackTrace();
 			request.setAttribute("msg", "update fail");
 			request.setAttribute("url", "back");
-			return "alert";
+			return "include/alert";
 		}
 		return "redirect:/adoptreg_list?page=1&animal_status="+path;
 	}
@@ -451,7 +451,7 @@ public class AdminAnimalController {
 			e.printStackTrace();
 			request.setAttribute("msg", "cancel fail");
 			request.setAttribute("url", "back");
-			return "alert";
+			return "include/alert";
 		}
 		
 		UserDTO userinfo = userdao.getUserInfo(user_id);
