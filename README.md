@@ -44,7 +44,3 @@ HeartPet에서는 유기동물 입소 및 입양 그리고 후원할 수 있습�
 
 - LeeBeomYong
 
-
-<br/>
-
-## :🐶: Problem and Solution[ - View Details](https://github.com/fndlwl64/Heart/blob/JungSoo/DETAILS.md)
