@@ -1,81 +1,109 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <jsp:include page="../../include/admin_header.jsp"/>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>HeartPet_Admin_User</title>
-    <link rel="stylesheet" href="resources/css/list_view.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<title>HeartPet_Admin_User</title>
+<link rel="stylesheet" href="resources/css/list_view.css">
 </head>
 <body>
-<div class="container">
+
+	<div class="container">
+			<div style="width: 98%;" class="sub-title"><h4>회원 상세 내용</h4></div>
+			<div class="_container">
+			
+			<div class="wrap">
+				
+				<h3>기본정보</h3>
+				
+				<div class="user_info">
+					
+					<div class="info_title">
+						<ul class="info_border">
+							<li><img class="user_img" src="${path }/resources/image/user_img/${cont.user_image}" alt="회원 랜덤 이미지" /></li>
+							<li>
+								<div>
+									<label class="title">이름</label> <span class="bold"> ${cont.user_name}</span> <br />
+									<label class="title">아이디</label> <span> ${cont.user_id}</span>
+								</div>
+							</li>
+						</ul>
+						
+						<ul class="info_border">
+							<li class="forMargin">
+								<div>
+									<label class="title">등급</label>
+									<c:if test="${cont.user_grade == 1 }">
+										<span> ${cont.user_grade } [관리자]</span> <br />
+									</c:if>
+									<c:if test="${cont.user_grade == 2 }">
+										<span> ${cont.user_grade } [입소가능회원]</span> <br />
+									</c:if>
+									<c:if test="${cont.user_grade == 3 }">
+										<span> ${cont.user_grade } [일반회원]</span> <br />
+									</c:if>
+									<c:if test="${cont.user_grade == 4 }">
+										<span> ${cont.user_grade } [블랙리스트]</span> <br />
+									</c:if>
+									<c:if test="${cont.user_grade == 5 }">
+										<span> ${cont.user_grade } [탈퇴회원]</span> <br />
+									</c:if>
+									
+									<label class="title">이메일</label> <span> ${cont.user_email}</span>
+								</div>
+							</li>
+						</ul>
+					</div>	
+				</div>
+				
+			</div>
+			
+			<div class="wrap">
+			
+				<h3>상세정보</h3>
+			
+				<div class="user_info">
+					<c:set var="addrlength" value="${cont.user_addr }"/>
+					<c:set var="length" value="${fn:length(addrlength)}"/>
+					<c:set var="addr" value = "${fn:substring(addrlength, 6, length-7)}" />
+					<div class="info_title">
+						<ul>
+							<li class="forMargin">
+								<div>
+									<label class="title">회원번호</label><span> ${cont.user_no }</span> <br />
+									<label class="title">연락처</label> <span> <c:if test="${empty cont.user_phone }">-</c:if>
+							<c:if test="${!empty cont.user_phone }">${cont.user_phone }</c:if> </span> <br />
+									<label class="title">주소</label> <span> <c:if test="${empty cont.user_addr }">-</c:if>
+							<c:if test="${!empty cont.user_addr }">${addr}</c:if> </span> <br />
+									<label class="title">후원금액</label> <span> <fmt:formatNumber>${cont.user_totalprice}</fmt:formatNumber>원 </span> <br />
+									<label class="title">반려동물경험</label> <span> <c:if test="${empty cont.user_animalexp }">-</c:if> ${cont.user_animalexp } </span>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="btns" style="width: 98%;">
+			<div class="btns_1">
+				<button class="btn btn-dark btn_list" onclick="location.href='${path}/user_list'"><i class="bi bi-card-list"></i> 목록</button>
+			</div>
+			<div class="btns_2">
+				<button class="btn btn-danger btn_delete" onclick="location.href='${path}/user_delete?user_id=${cont.user_id }'"><i class="bi bi-trash3"></i> 삭제</button>
+				<button class="btn btn-success btn_update" onclick="location.href='${path}/user_update?user_id=${cont.user_id }'"><i class="bi bi-eraser"></i> 수정</button>
+			</div>
+		</div>
 	
-    <br>
-    <%-- el태그로 이름 가져와 입력 --%>
-    <h2>${cont.user_name} 회원 정보</h2>
-    <br><br>
-
-    <table class="table userinfo">
-        <tr>
-            <th class="table-secondary">회원번호</th>
-            <td>${cont.user_no}</td>
-        </tr>
-
-        <tr>
-            <th class="table-secondary">아이디</th>
-            <td>${cont.user_id}</td>
-        </tr>
-
-        <tr>
-            <th class="table-secondary">이름</th>
-            <td>${cont.user_name}</td>
-        </tr>
-
-        <tr>
-            <th class="table-secondary">회원등급</th>
-            <td title="1등급 : 관리자 &#10;2등급 : 입양 등록 회원 &#10;3등급 : 일반 회원 &#10;4등급 : 블랙리스트 &#10;5등급 : 탈퇴회원">${cont.user_grade}등급</td>
-        </tr>
-
-        <tr>
-            <th class="table-secondary">이메일</th>
-            <td>${cont.user_email}</td>
-        </tr>
-
-        <tr>
-            <th class="table-secondary">연락처</th>
-            <td>${cont.user_phone}</td>
-        </tr>
-
-        <tr>
-            <th class="table-secondary">주소</th>
-            <td>${cont.user_addr}</td>
-        </tr>
-
-        <tr>
-            <th class="table-secondary">후원총액</th>
-            <td>
-            	<fmt:formatNumber>${cont.user_totalprice}</fmt:formatNumber>원
-            </td>
-        </tr>
-
-        <tr>
-            <th class="table-secondary">반려동물경험</th>
-            <td>${cont.user_animalexp }</td>
-        </tr>
-    </table>
-
-    <br>
-    
-    <button class="listbtn" onclick="location.href='${path}/user_list'"><i class="bi bi-card-list"></i> 목록</button>
-	<button class="listbtn" onclick="location.href='${path}/user_update?user_id=${cont.user_id }'"><i class="bi bi-eraser"></i> 수정</button>
-	<button class="listbtn" onclick="location.href='${path}/user_delete?user_id=${cont.user_id }'"><i class="bi bi-trash3"></i> 삭제</button>
-
-</div>
+	</div>
+	
+	
 
 </body>
 </html>
