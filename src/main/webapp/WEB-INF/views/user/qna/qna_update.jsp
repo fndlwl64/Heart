@@ -79,16 +79,16 @@
             <div class="qna-section">
                 <div class="row">
                     <div class="col btn-insert d-flex justify-content-between">
-                    <div>
-                        <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
-                    </div>
-                    <div>
-                        <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
-                        <button type="submit" class="btn btn-success"><i class="bi bi-eraser"></i> 수정</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+	                    <div>
+	                        <button type="button" class="btn btn-dark" onclick="location.href='${path}/user_qna_list'"><i class="bi bi-card-list"></i> 목록</button>
+	                    </div>
+	                    <div>
+	                        <button type="reset" class="btn btn-warning mx-1"><i class="bi bi-pencil"></i> 리셋</button>
+	                        <button type="submit" class="btn btn-success"><i class="bi bi-eraser"></i> 수정</button>
+	                    </div>
+                	</div>
+            	</div>
+        	</div>
         </form>
     </div>
 </div>

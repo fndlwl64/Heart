@@ -27,7 +27,7 @@
 		<iframe id="video" width="100%" height="315" src="https://www.youtube.com/embed/1mjamoOVzo4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
-    <%-- 강아지 list 출력 // swiper --%>
+    <%-- 강아지/고양이 list 출력 // swiper --%>
     <div class="main-title mt-5">
         <h1 id="heart-pet">HeartPet, </h1>
         <div class="more">

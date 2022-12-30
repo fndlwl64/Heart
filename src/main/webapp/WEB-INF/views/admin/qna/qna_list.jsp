@@ -37,9 +37,9 @@
     <%-- 검색 폼 --%>
 	<form action="${path}/admin_qna_list" class="search_form" method="get">
 	<div class="form_box">
-	<div class="search-semi-title">
-	    <span><i class="bi bi-check2-square"></i> 문의글관리 검색</span>
-	</div>       
+		<div class="search-semi-title">
+		    <span><i class="bi bi-check2-square"></i> 문의글관리 검색</span>
+		</div>       
 		<div class="search-table-box">
               <table class="table table-sm" id="search-table">
                   <tr>
@@ -70,8 +70,8 @@
               </table>
 		</div>
 		<div class="search-buttons">
-		<button class="btn btn-light" type="button" onclick="location.href='${ path }/admin_qna_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
-		<button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
+			<button class="btn btn-light" type="button" onclick="location.href='${ path }/admin_qna_list'"><i class="bi bi-arrow-counterclockwise"></i> 리셋</button>
+			<button type="submit" class="btn btn-dark"><i class="bi bi-search"></i> 검색</button>            
 		</div>
 	</div>
 	</form>
@@ -125,15 +125,17 @@
 		                    <c:if test="${ cList[status.index] gt 0 }"><span <c:if test="${ list.board_state eq 'disabled' }">style="color:black;"</c:if> class="comment-count">[${ cList[status.index] }]</span></c:if>
                         </a>
                     </td>
-                    <td><c:if test="${ list.board_id eq 'admin' }"><span id="admin_id">관리자</span></c:if>
-                    <c:if test="${ list.board_id ne 'admin' }"><span>${ list.board_id }</span></c:if></td>
+                    <td>
+	                    <c:if test="${ list.board_id eq 'admin' }"><span id="admin_id">관리자</span></c:if>
+	                    <c:if test="${ list.board_id ne 'admin' }"><span>${ list.board_id }</span></c:if>
+                    </td>
                     <td>${ list.board_hit }</td>
                     <td><small>${ list.board_regdate.substring(0,10) }</small></td>
                     <td>
                     	<c:set var="deleteAddr" value="${ path }/admin_qna_delete?board_no=${ list.board_no }"/>
                     	<c:if test="${ list.board_state eq 'abled' }">
-                        <button class="btn btn-outline-primary btn-sm" onclick="location.href='${path}/admin_qna_reply_insert?board_parentNo=${ list.board_no }&board_group=${ list.board_group }'">답변</button>
-                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }">삭제</button>
+	                        <button class="btn btn-outline-primary btn-sm" onclick="location.href='${path}/admin_qna_reply_insert?board_parentNo=${ list.board_no }&board_group=${ list.board_group }'">답변</button>
+	                        <button class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="${ deleteAddr }">삭제</button>
                         </c:if>
                     </td>
                 </tr>

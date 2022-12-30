@@ -81,7 +81,6 @@ public class UserReviewController {
             reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), field, keyword, order);
 
         } else { // dog/cat 선택
-            System.out.println("animal_tag >>>>>>> " + animal_tag);
             totalRecord = this.reviewDAO.listReviewCount(animal_tag);
             paging = new PageDTO(currentPage, rowsize, totalRecord, field, keyword);
             reviewList = this.reviewDAO.listReview(paging.getStartNo(), paging.getEndNo(), animal_tag, order);
@@ -175,7 +174,6 @@ public class UserReviewController {
 		    
 		    // video 타입인지 check
 		    CheckMimeType typeCheck = new CheckMimeType();
-		    System.out.println("reviewFiles.size() : " + reviewFiles.size());
 		    
 		    for(int i=0; i<reviewFiles.size(); i++) {
 		        if(reviewFiles.get(i) != "") {
@@ -203,7 +201,6 @@ public class UserReviewController {
 		    	}
 	    	}	   		    
 		    
-            System.out.println("reviewDto : "+reviewDto.toString());
             int check = this.reviewDAO.insertReview(reviewDto);
             if (check > 0) {
                 out.println("<script>alert('후기글이 성공적으로 등록되었습니다.'); location.href='" + request.getContextPath() + "/user_review_list'; </script>");
@@ -391,7 +388,6 @@ public class UserReviewController {
     @RequestMapping("/review_comment_delete")
     public @ResponseBody int review_comment_delete(@RequestParam("comment_commentno") int comment_commentno) {
         int deleteComment = this.reviewDAO.deleteComment(comment_commentno);
-        System.out.println(deleteComment);
         return deleteComment;
     }
 
