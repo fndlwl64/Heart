@@ -27,7 +27,6 @@ function commentDelete(commentNo, path, userId, reviewNo) {
       },
       dataType : "text",
       success : function(check) {
-          console.log(check);
           if(check > 0){
               commentTable(userId, reviewNo, path);
               commentCount(reviewNo, path);
@@ -52,7 +51,6 @@ function commentCount(reviewNo, path) {
       },
       dataType : "text",
       success : function(commentCount) {
-          console.log(commentCount);
           $("#comment-count").text(commentCount);
       },
       error : function(e) {
@@ -89,7 +87,6 @@ function commentTable(userId, reviewNo, path) {
               comment += '<th class="col-2">작성시간</th>';
               comment += '<th class="col-1">삭제</th>';
               comment += '</tr></thead><tbody>';
-              console.log(commentList.length);
               for (let i=0; i<commentList.length; i++) {
                   if(commentList[i].comment_id.includes('admin')) {                  
                     comment += '<tr><td style=\"vertical-align:middle; color:red;\"><a>' + commentList[i].comment_id + '</a></td>';

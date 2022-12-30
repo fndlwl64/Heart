@@ -70,13 +70,9 @@ public class UserController {
     	UserDTO cont = userDAO.getUserInfo(id);
     	String check_pwd = userDAO.login(id);
     	
-    	System.out.println(check+"/"+admin_check+"/"+check_pwd);
-    	
     	PrintWriter out = response.getWriter();
     	
     	if(check == 1) {
-    		    		
-    		System.out.println(admin_check+"관리자인지 체크 / id :"+id);
     		if(admin_check == 1) {
     			// 관리자 아이디 로그인 => 관리자 페이지로 이동
     			if(pwd.equals(check_pwd)) {
@@ -111,8 +107,6 @@ public class UserController {
     				out.println("location.href='"+request.getContextPath()+"'");
     				out.println("</script>");
     				out.flush();
-    				
-    				System.out.println("세션id: "+id);
     	    	}else {
     	    		out.println("<script>");
     				out.println("alert('비밀번호가 틀렸습니다!!');");
@@ -160,9 +154,6 @@ public class UserController {
 			out.println("location.href='"+request.getContextPath()+"'");
 			out.println("</script>");
 			out.flush();
-			
-			System.out.println("아이디 존재 => 카카오 로그인 성공");
-			System.out.println("세션id: "+id);
     	}else {
     		
     		Map<String, Object> map = new HashMap<String, Object>();
@@ -186,9 +177,6 @@ public class UserController {
 				out.println("location.href='"+request.getContextPath()+"'");
 				out.println("</script>");
 				out.flush();
-        		
-        		System.out.println("아이디 없음 => 카카오 계정 가입 성공");
-        		System.out.println("세션id: "+id);
     		}else {
     			out.println("<script>");
     			out.println("alert('가입 실패ㅠ');");
@@ -201,8 +189,6 @@ public class UserController {
     
     @RequestMapping("/naver_logined")
     public void naver(@RequestParam("id")String id, @RequestParam("name")String name, @RequestParam("email")String email, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
-    	
-    	System.out.println("/naver_logined : "+id+" /name : "+name+"/email : "+email);
     	
     	String img = java.lang.Math.round(java.lang.Math.random() * 10) + ".png";
     	
@@ -222,9 +208,6 @@ public class UserController {
 			out.println("location.href='"+request.getContextPath()+"'");
 			out.println("</script>");
 			out.flush();
-			
-			System.out.println("아이디 존재 => 네이버 로그인 성공");
-			System.out.println("세션id: "+id);
     	}else {
     		
     		Map<String, Object> map = new HashMap<String, Object>();
@@ -248,9 +231,6 @@ public class UserController {
 				out.println("location.href='"+request.getContextPath()+"'");
 				out.println("</script>");
 				out.flush();
-        		
-        		System.out.println("아이디 없음 => 네이버 계정 가입 성공");
-        		System.out.println("세션id: "+id);
     		}else {
     			out.println("<script>");
     			out.println("alert('가입 실패ㅠ');");
@@ -280,9 +260,6 @@ public class UserController {
 		out.println("alert('로그아웃 되었습니다!');");
 		out.println("location.href='"+request.getContextPath()+"'");
 		out.println("</script>");
-		
-		System.out.println("로그아웃 완료");
-		 
     }
     
     @RequestMapping("/join")
@@ -306,14 +283,12 @@ public class UserController {
     		out.println("location.href='"+request.getContextPath()+"'");
     		out.println("</script>");
     		out.flush();
-    		System.out.println("회원가입 완료");
     	}else {
     		out.println("<script>");
     		out.println("alert('회원가입에 실패했습니다');");
     		out.println("history.back()");
     		out.println("</script>");
     		out.flush();
-    		System.out.println("회원가입 실패");
     	}
     }
     
@@ -349,7 +324,6 @@ public class UserController {
     
     @RequestMapping("/user_find_id")
     public @ResponseBody String findid(@RequestParam("name")String name, @RequestParam("email")String email) {
-    	System.out.println("아이디 찾기 시작");
     	
     	Map<String, String> map = new HashMap<String, String>();
     	map.put("name", name);

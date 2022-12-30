@@ -149,14 +149,12 @@ public class AdminController {
     	int res = userDAO.updateuser(dto);
     	
     	if(res>0) {
-    		System.out.println("회원 정보 수정 ㄱ");
     		out.println("<script>");
     		out.println("alert('회원 정보 수정 완료');");
-    		out.println("location.href='"+request.getContextPath()+"/user_view?user_id="+dto.getUser_id()+"'");
+    		out.println("location.href='"+request.getContextPath()+"/user_content?user_id="+dto.getUser_id()+"'");
     		out.println("</script>");
     		out.flush();
     	}else {
-    		System.out.println("회원 정보 수정 실패");
     		out.println("<script>");
     		out.println("alert('회원 정보 수정 실패');");
     		out.println("history.back();");
@@ -190,14 +188,14 @@ public class AdminController {
 
     /*관리자 리스트에서 상세정보보기*/
     
-    @RequestMapping("/user_view")
+    @RequestMapping("/user_content")
     public String user_view(@RequestParam("user_id")String id, Model model) {
     	
     	UserDTO dto =userDAO.getUserInfo(id);
     	
     	model.addAttribute("cont", dto);
     	
-        return "admin/user/user_view";
+        return "admin/user/user_content";
     }
     
     // 관리자 리스트에서 삭제하기
@@ -209,11 +207,9 @@ public class AdminController {
     	int res = userDAO.deleteuser(id);
     	
     	if(res>0) {
-    		
-    		System.out.println("회원 정보 변경 ㄱ");
     		out.println("<script>");
     		out.println("alert('회원 정보 수정 완료');");
-    		out.println("location.href='"+request.getContextPath()+"/user_view?user_id="+id+"'");
+    		out.println("location.href='"+request.getContextPath()+"/user_content?user_id="+id+"'");
     		out.println("</script>");
     		out.flush();
     	}else {
