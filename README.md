@@ -46,5 +46,7 @@ HeartPet에서는 유기동물 입소 및 입양 그리고 후원할 수 있습�
 
 <br/>
 
+## :🐶: Languages
 
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=fndlwl64)](https://github.com/anuraghazra/github-readme-stats)
 
