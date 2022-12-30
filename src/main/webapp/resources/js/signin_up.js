@@ -79,7 +79,6 @@ $(function() {
 	// 카카오 api 사용
 	Kakao.init('b6f75c3aa40a005f012dbe14f5ac031e');
 	Kakao.isInitialized();
-	console.log(Kakao.isInitialized());
 	
 	// 카카오 로그인 api
 	Kakao.Auth.createLoginButton({
@@ -105,7 +104,6 @@ $(function() {
 	                    dataType: "text",
 	                    success: function(data) {
 	                    	if(data != null) {
-	                    		console.log("카카오 로그인 성공");
 	                        	alert('로그인 되었습니다!');
 	                        	window.location.reload();
 	                    		
@@ -172,7 +170,6 @@ $(function() {
 		let id_pattern = /^[a-z]+[a-zA-Z0-9]{4,20}$/;
 		
 		if(id == '') {
-			console.log('아이디 공란');
 			$("#join_id").html("<font style='color:#FB79A0; font-size:13px'><i class='bi bi-exclamation-circle'></i> 아이디 : 5자 이상 20자 이내 대소문자, 숫자 </font>");
 			$("#input_id").css({
 				'border': '1px solid #FB79A0'
@@ -193,7 +190,6 @@ $(function() {
 		            data: {paramId : id},
 		            success: function(res) {
 		            	if(res == 1) {  // DB에 아이디가 존재하는 경우
-		            		console.log('DB 존재 아이디');
 							$("#join_id").html("<font style='color:#FB79A0; font-size:13px;'><i class='bi bi-exclamation-circle'></i> 이미 존재하는 아이디입니다. 다른 아이디를 입력하세요. </font>");
 							$("#input_id").css({
 								'border': '1px solid #FB79A0'
@@ -212,7 +208,6 @@ $(function() {
 		            }
 		       	});
 			}else {
-				console.log('정규식 조건 위배 아이디');
 				$("#join_id").html("<font style='color:#FB79A0; font-size:13px'><i class='bi bi-exclamation-circle'></i> 아이디 : 5자 이상 20자 이내 대소문자, 숫자 </font>");
 				$("#input_id").css({
 					'border': '1px solid #FB79A0'
@@ -229,7 +224,6 @@ $(function() {
 		let pwd_pattern = /^[a-zA-z0-9]{5,20}$/;
 		
 		if(pwd == '') {
-			console.log('비밀번호 공란');
 			$("#join_pwd").html("<font style='color:#FB79A0; font-size:13px'><i class='bi bi-exclamation-circle'></i> 비밀번호 : 5자 이상 20자 이내  </font>");
 			$("#input_pwd").css({
 				'border': '1px solid #FB79A0'
@@ -243,7 +237,6 @@ $(function() {
 					'border': '1px solid #ced4da'
 				});
 			}else {
-				console.log('조건 위배 비밀번호');
 				$("#join_pwd").html("<font style='color:#FB79A0; font-size:13px'><i class='bi bi-exclamation-circle'></i> 비밀번호 : 5자 이상 20자 이내 </font>");
 				$("#input_pwd").css({
 					'border': '1px solid #FB79A0'
@@ -274,7 +267,6 @@ $(function() {
 		            data: {email : email},
 		            success: function(res) {
 		            	if(res == 1) {  // DB에 이메일이 존재하는 경우
-		            		console.log('DB 존재 이메일');
 							$("#join_email").html("<font style='color:#FB79A0; font-size:13px;'><i class='bi bi-exclamation-circle'></i> 이미 사용하는 이메일입니다.</font>");
 							$("#input_email").css({
 								'border': '1px solid #FB79A0'
@@ -293,7 +285,6 @@ $(function() {
 		            }
 		       	});
 			}else {
-				console.log('조건 위배 이메일');
 				$("#join_email").html("<font style='color:#FB79A0; font-size:13px'><i class='bi bi-exclamation-circle'></i> 이메일 형식에 맞게 입력해주세요.</font>");
 				$("#input_email").css({
 					'border': '1px solid #FB79A0'
@@ -492,10 +483,4 @@ function idfind() {
 	naver_id_login.setState(state);
 	naver_id_login.setPopup();
 	naver_id_login.init_naver_id_login();
-	
-	console.log('네이버 버튼 생성');
-	
-	
-
-
 

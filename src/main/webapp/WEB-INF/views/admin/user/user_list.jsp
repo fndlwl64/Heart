@@ -118,7 +118,7 @@
             <c:forEach items="${list }" var="list">
           		<tr <c:if test="${ list.user_grade eq 5 }">style="background-color:#A8A8A8;"</c:if>>
 	                <td>${list.user_no}</td>
-	                <td><a href="${path}/user_view?user_id=${list.user_id}">${list.user_id}</a></td>
+	                <td><a href="${path}/user_content?user_id=${list.user_id}">${list.user_id}</a></td>
 	                <td>${list.user_name}</td>
 	                <td id="user_list_grade">
 	                	<c:if test="${list.user_grade == 1}">관리자</c:if>
