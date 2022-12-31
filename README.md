@@ -33,6 +33,9 @@ HeartPet에서는 유기동물 입소 및 입양 그리고 후원할 수 있습�
 - BootStrap icons [:link:](https://icons.getbootstrap.com/)
 - Google Fonts [:link:](https://fonts.google.com/)
 - iamport [:link:](https://www.iamport.kr/)
+- Kakao PostCode [:link:](https://postcode.map.daum.net/guide)
+- Kakao Login [:link:](https://developers.kakao.com/docs/latest/ko/kakaologin/js)
+- Naver Login [:link:](https://developers.naver.com/products/login/api/api.md)
 
 <br/>
 
