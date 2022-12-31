@@ -32,6 +32,7 @@ HeartPet에서는 유기동물 입소 및 입양 그리고 후원할 수 있습�
 - BootStrap [:link:](https://getbootstrap.com/)
 - BootStrap icons [:link:](https://icons.getbootstrap.com/)
 - Google Fonts [:link:](https://fonts.google.com/)
+- iamport [:link:](https://www.iamport.kr/)
 
 <br/>
 
@@ -46,8 +47,6 @@ HeartPet에서는 유기동물 입소 및 입양 그리고 후원할 수 있습�
   - 관리자 화면 : FAQ관리, 문의글관리, 후기관리
   
 - okzln
-  - 사용자 화면 : 로그인, 회원가입
-  - 관리자 화면 : 회원관리 
 
 - LeeBeomYong
   - 사용자 화면 : 공지사항, 후원하기, 마이페이지
