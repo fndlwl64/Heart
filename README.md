@@ -22,7 +22,7 @@ HeartPet에서는 유기동물 입소 및 입양 그리고 후원할 수 있습�
 - Apache Tomcat 9.0.65
 - Oracle Database Express Edition (XE) Release 11.2.0.2.0
 - Oracle SQL Developer - Ver. 22.2.0.173
-- Mybatis 3.4.6
+- Mybatis - Ver. 3.4.6
 - Spring Tool Suite 3 - Ver. 3.9.17
 
 <br/>
