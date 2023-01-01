@@ -10,14 +10,14 @@
 
 <br/>
 
-## :🐶: Description
+## 🐶: Description
 하루 평균 약 300마리의 동물이 버려지고 있습니다. <br/>
 도움의 손길이 필요한 유기동물이 새로운 삶 그리고 새로운 가족을 찾을 수 있도록 도와주는 '유기동물 매칭 플랫폼, HeartPet(하트펫)'입니다. <br/>
 HeartPet에서는 유기동물 입소 및 입양, 그리고 후원이 가능합니다.
 
 <br/>
 
-## :🐶: Environment
+## 🐶: Environment
 - JAVA (jdk-11.0.15.1)
 - Apache Tomcat 9.0.65
 - Oracle Database Express Edition (XE) Release 11.2.0.2.0
@@ -27,7 +27,7 @@ HeartPet에서는 유기동물 입소 및 입양, 그리고 후원이 가능합�
 
 <br/>
 
-## :🐶: API
+## 🐶: API
 - Swiper.js [:link:](https://swiperjs.com/)
 - BootStrap [:link:](https://getbootstrap.com/)
 - BootStrap icons [:link:](https://icons.getbootstrap.com/)
@@ -39,7 +39,7 @@ HeartPet에서는 유기동물 입소 및 입양, 그리고 후원이 가능합�
 
 <br/>
 
-## :🐶: Work
+## 🐶: Work
 - 공통 
   - DB 설계, 프로젝트 기획
   
@@ -55,6 +55,7 @@ HeartPet에서는 유기동물 입소 및 입양, 그리고 후원이 가능합�
 - okzln  
   - 사용자 화면 : 로그인, 회원관리
   - 관리자 화면 : 회원관리
+  
 - LeeBeomYong
   - 사용자 화면 : 공지사항, 후원하기, 마이페이지
   - 관리자 화면 : 공지관리, 후원관리
