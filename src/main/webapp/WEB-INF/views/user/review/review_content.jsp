@@ -49,7 +49,7 @@
                         </li>
                         <li class="d-inline">
                             <a href="${path}/user_mypage_wish_list"><span id="id">${ list.review_id }</span></a>
-                            <a id="reply" href=".reply-table"><i class="bi bi-card-list"></i> 댓글 <span id="comment-count">0</span></a>
+                            <a id="reply" href="#comment-table"><i class="bi bi-card-list"></i> 댓글 <span id="comment-count">0</span></a>
                         </li>
                         <li class="d-block">${ list.review_regdate } 조회 ${ list.review_hit }</li>
                     </ul>

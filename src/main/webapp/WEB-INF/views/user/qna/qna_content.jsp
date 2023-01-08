@@ -39,7 +39,7 @@ $(function() {
                                <c:if test="${ list.board_id ne session_id && not empty session_admin_id }">href="${path}/user_view?user_id=${ uList.user_id }"</c:if>
                                <c:if test="${ list.board_id ne session_id && empty session_admin_id }"></c:if>>
                                <span id="id">${ list.board_id }</span></a>
-                            <a id="reply" href=".reply-table"><i class="bi bi-card-list"></i> 댓글 <span id="comment-count">0</span></a>
+                            <a id="reply" href="#comment-table"><i class="bi bi-card-list"></i> 댓글 <span id="comment-count">0</span></a>
                         </li>
                         <li class="d-block">${ list.board_regdate.substring(0,10) } 조회 ${ list.board_hit }</li>
                     </ul>
@@ -79,7 +79,7 @@ $(function() {
                             <button type="button" class="btn btn-outline-primary btn-sm" onclick="commentSave('${ session_id }', ${ list.board_no }, '${ path }');"><i class="bi bi-reply"></i> 댓글등록</button>
                         </c:if>
                         <c:if test="${ empty session_id }">
-                          <a class="btn btn-outline-dark btn-sm" href="#goto-login"><i class="bi bi-box-arrow-in-right"></i> 로그인</a>
+                          <a class="btn btn-outline-dark btn-sm mt-2" href="#goto-login"><i class="bi bi-box-arrow-in-right"></i> 로그인</a>
                         </c:if>
 			        </td>
 			    </tr>
