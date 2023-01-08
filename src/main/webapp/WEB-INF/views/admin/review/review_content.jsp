@@ -38,7 +38,7 @@
         </tr>
         <tr>
             <th class="table-light">작성자</th>
-            <td class="user col-1"><a href="${ path }/user_view?user_id=${ list.review_id }">${ list.review_id }</a></td>
+            <td class="user col-1"><a href="${ path }/user_content?user_id=${ list.review_id }">${ list.review_id }</a></td>
             <th class="table-light col-1">조회수</th>
             <td class="col-1">${ list.review_hit }</td>
             <th class="col-1">등록일시</th>
