@@ -36,7 +36,7 @@ $(function() {
                         <li class="d-inline"><img src="${path}/resources/image/user_img/${ uList.user_image }" alt="user_image"></li>
                         <li class="d-inline">
                             <a <c:if test="${ list.board_id eq session_id }">href="${path}/user_mypage_wish_list"</c:if>
-                               <c:if test="${ list.board_id ne session_id && not empty session_admin_id }">href="${path}/user_view?user_id=${ uList.user_id }"</c:if>
+                               <c:if test="${ list.board_id ne session_id && not empty session_admin_id }">href="${path}/user_content?user_id=${ uList.user_id }"</c:if>
                                <c:if test="${ list.board_id ne session_id && empty session_admin_id }"></c:if>>
                                <span id="id">${ list.board_id }</span></a>
                             <a id="reply" href="#comment-table"><i class="bi bi-card-list"></i> 댓글 <span id="comment-count">0</span></a>
